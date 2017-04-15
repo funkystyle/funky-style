@@ -1,0 +1,7 @@
+db.createUser({
+ user: "t",
+  pwd: "t",
+  roles: [
+    { role: "dbAdmin", db: "fab_db" }
+  ]
+})
