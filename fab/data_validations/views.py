@@ -1,5 +1,5 @@
 from cerberus import Validator
-from constants import SCHEMAS
+from settings import *
 import logging, re
 
 
@@ -17,6 +17,28 @@ class FabDataValidator(Validator):
         print field, value, '================'
         if value and not re.match('[a-f0-9]{24}', value):
             self._error(field, "Must be in mongodb objectId format")
+
+def convert_object_dates_to_string(item, lst_keys):
+    for k in lst_keys:
+        try:
+            item[k] = str(item[k])
+        except KeyError:
+            pass
+    for v in item.values():
+        if isinstance(v, dict):
+            convert_object_dates_to_string(v, lst_keys)
+    return item
+
+def delete_some_keys_from_dict(item, delete_keys):
+    for k in delete_keys:
+        try:
+            del item[k]
+        except KeyError:
+            pass
+    for v in item.values():
+        if isinstance(v, dict):
+            convert_object_dates_to_string(v, delete_keys)
+    return item
 
 class Validations(object):
 
@@ -67,19 +89,3 @@ class Validations(object):
         self.v.validate(item)
         self.logger.info("{0} schema validation errors:{1}".format(self.schema_name, self.v.errors))
         return self.v.errors
-
-
-if __name__ == '__main__':
-    validations = Validations("persons")
-    schema = {
-         "first_name": "first name",
-         "last_name": "last name",
-         "email": "satya@example.com",
-         "mobile_number": "mobile number",
-         "password": "passowrd",
-         "city": "coity",
-         "age": 1,
-         "status": "active",
-         "user_level":["editor"]
-    }
-    validations.validate_schema(schema, ['default'])

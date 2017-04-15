@@ -1,0 +1,4 @@
+local_conf.json
+local_ru.sh
+*.pyc
+access_logs/*
