@@ -161,7 +161,7 @@ SCHEMAS = {
         },
         'user_level': {
             'type': 'list',
-            'allowed': ["submitter", "editor", "admin"],
+            'allowed': ["submitter", "editor", "admin", "user"],
             'required': True
         },
         'created_date': {

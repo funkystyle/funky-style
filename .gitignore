@@ -1,4 +1,6 @@
 local_conf.json
-local_ru.sh
+local_run.sh
 *.pyc
 access_logs/*
+*.log
+fab_key.pem

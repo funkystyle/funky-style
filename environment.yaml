@@ -1,0 +1,8 @@
+name: stats2
+dependencies:
+  - python=2.7.13
+  - Eve==0.7.2
+  - Flask-Mail==0.9.1
+  - PyJWT==1.4.2
+  - simple-crypt==4.1.7
+  - gunicorn==19.7.1
