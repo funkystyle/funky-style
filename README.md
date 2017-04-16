@@ -145,10 +145,10 @@
 
    * writing UpStart Script:
 
-        * create file in /etc/init/ccl.conf
-        * insert folowing lines into ccl.conf file:
+        * create file in /etc/init/name.conf
+        * insert folowing lines into name.conf file:
 
-            description "Gunicorn application server running ccl project"
+            description "Gunicorn application server running fab project"
 
             start on runlevel [2345]
             stop on runlevel [!2345]
@@ -156,19 +156,15 @@
             respawn
             setuid user
             setgid www-data
-
-            chdir /local/mnt/projects/ccl
-            source ccl-commandline-api-env/bin/activate
-            cd ccl-commandline-api
             exec gunicorn --bind 0:8001 --workers 3 --timeout 1000 runserver:app --env env_name=tst
 
    * Starting and Stoping project:
 
-        sudo service ccl start
+        sudo service fab start
                 or
-        sudo service ccl stop
+        sudo service fab stop
                 or
-        sudo service ccl restart
+        sudo service fab restart
 
 Note: if web server not serving static data we dnt need to configure Proxy server.
        otherwise recomanded Proxy is NGINx. If you choose another proxy server you need to make sure that it buffers slow clients
