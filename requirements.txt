@@ -2,7 +2,7 @@ Cerberus==0.9.2
 Eve==0.7.2
 Events==0.2.2
 Flask==0.12
-Flask-Mail==0.9.1
+
 Flask-PyMongo==0.4.1
 Jinja2==2.9.6
 MarkupSafe==0.23

@@ -1,5 +1,4 @@
-cd /home/satya/Desktop/fab_promo_codes
-source env/bin/activate
-cd fab_promo_codes_api
-#python server.py
+cd /home/ubuntu
+source miniconda2/bin/activate
+cd fab
 gunicorn --bind 0:8000 --timeout 1000 server:app --env env_name=local
