@@ -34,14 +34,16 @@ if os.environ.get('env_name'):
     if env in accepted_env:
         # read configuration file
         config_file_path = os.path.join(BASE_DIR, 'conf', str(env)+'_conf.json')
+        LOGGER.info("configuration file path:{0}".format(config_file_path))
         CONFIG_DATA = read_configuration_file(config_file_path)
+        LOGGER.info("configuration data is:{0}".format(CONFIG_DATA))
     else:
         LOGGER.error("environment variable must be in "+str(accepted_env)+ ". quitting...")
         exit()
     if env not in ['dev', 'local']:
         DEBUG=False
 else:
-    print("no environment name specified. taking default env local...")
+    LOGGER.warn("no environment name specified. taking default env local...")
     #exit()
     config_file_path = os.path.join(BASE_DIR, 'conf', 'local_conf.json')
     CONFIG_DATA = read_configuration_file(config_file_path)
