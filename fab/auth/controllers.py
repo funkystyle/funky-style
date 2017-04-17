@@ -5,10 +5,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from flask_mail import Mail, Message
 from fab import *
-from settings import *
-from bson.objectid import ObjectId
 
-LOGGER = logging.getLogger(__name__)
+from bson.objectid import ObjectId
+from settings import *
 
 # commonly used code
 def create_token(user_id, days=60):
@@ -165,6 +164,7 @@ def change_password():
 
 @app.route('/api/1.0/auth/me', methods=['GET'])
 def me():
+    LOGGER.info("called api/1.0/auth/me endpoint ...")
     if 'user_id' in session:
         accounts = app.data.driver.db['persons']
         try:
@@ -300,5 +300,6 @@ def signup():
 
 @app.route('/')
 def index():
+    LOGGER.info("called index point")
     return make_response(open('static/app/index.html').read())
 

@@ -2,15 +2,13 @@
 from eve import Eve
 from flask import jsonify
 from flask_mail import Mail
-
-
+from flask_cors import CORS
 from binascii import unhexlify, hexlify
 from simplecrypt import encrypt, decrypt
 from settings import *
-import logging
 
-LOGGER = logging.getLogger(__name__)
 class EncrptDecrpt:
+
     '''
     encrption and decrption of passwords based on secret key
     '''
@@ -31,25 +29,28 @@ class EncrptDecrpt:
         :param password:
         :return:
         '''
+        LOGGER.info("decrypting password...")
         unhexlify_password = unhexlify(str(encrpted_password))
         raw_password = decrypt(str(PASSWORD_CRYPTION_TOKEN), unhexlify_password)
-        LOGGER.info("decrypted raw password:{0}".format(raw_password))
         return raw_password
 
 encrypt_decrypt = EncrptDecrpt()
-app = Eve(static_url_path='/static')
 
+app = Eve(__name__, static_url_path='/static')
 app.config.update(
-	DEBUG=DEBUG,
+	DEBUG=False,
     #EMAIL SETTINGS
 	MAIL_SERVER=MAIL_SERVER,
 	MAIL_PORT=MAIL_PORT,
 	MAIL_USE_SSL=MAIL_USE_SSL,
 	MAIL_USERNAME = MAIL_USERNAME,
 	MAIL_PASSWORD = encrypt_decrypt.decryption(MAIL_PASSWORD),
-    SECRET_KEY = TOKEN_SECRET
+    SECRET_KEY = TOKEN_SECRET,
 )
+
+
 mail=Mail(app)
+CORS(app)
 
 class ReturnException(Exception):
 

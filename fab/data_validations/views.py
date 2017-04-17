@@ -48,12 +48,11 @@ class Validations(object):
         :param schema_name:
         '''
         self.schema = SCHEMAS[schema_name]
-        self.logger = logging.getLogger(__name__)
-        self.logger.info("initated schema is:{0}".format(schema_name))
+        LOGGER.info("initated schema is:{0}".format(schema_name))
         self.ignore_keys = ["default", "unique"]
         self.schema = self.delete_keys_from_dict(self.schema, self.ignore_keys)
         self.schema_name = schema_name
-        self.logger.info("validating schema:{0}".format(self.schema))
+        LOGGER.info("validating schema:{0}".format(self.schema))
         self.v = FabDataValidator(self.schema)
 
 
@@ -85,7 +84,7 @@ class Validations(object):
          ignore_keys: keys to delete from payload to validate payload with schema
         :return:
         '''
-        self.logger.info("ignoring keys are:{0}".format(ignore_keys))
+        LOGGER.info("ignoring keys are:{0}".format(ignore_keys))
         self.v.validate(item)
-        self.logger.info("{0} schema validation errors:{1}".format(self.schema_name, self.v.errors))
+        LOGGER.info("{0} schema validation errors:{1}".format(self.schema_name, self.v.errors))
         return self.v.errors

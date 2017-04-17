@@ -1,0 +1,11 @@
+pip packages
+----------------------
+Eve==0.7.2
+Flask-Mail==0.9.1
+gunicorn==19.7.1
+Flask-Cors==3.0.2
+
+system packages
+-----------------------
+sudo apt-get install gcc
+sudo apt-get install nginx

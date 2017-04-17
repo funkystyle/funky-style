@@ -4,3 +4,4 @@ local_run.sh
 access_logs/*
 *.log
 fab_key.pem
+nohup.out

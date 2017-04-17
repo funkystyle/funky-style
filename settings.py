@@ -3,6 +3,7 @@ from logging.config import dictConfig
 from datetime import datetime
 import os, json, sys
 
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # setting logger configuration
 LOG_JSON_FILE_PATH = os.path.join(BASE_DIR, 'conf', 'logging.json')
