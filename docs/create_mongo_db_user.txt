@@ -5,3 +5,37 @@ db.createUser({
     { role: "dbAdmin", db: "fab_db" }
   ]
 })
+
+
+
+db.createUser({
+ user: "fab_admin",
+  pwd: "fab_password",
+  roles: [
+    { role: "dbAdmin", db: "fab_db" }
+  ]
+})
+
+use admin
+db.createUser(
+  {
+    user: "user_fab",
+    pwd: "password_fab",
+    roles: [ { role: "dbAdmin", db: "fab_db" } ]
+  }
+)
+
+
+db.createUser({
+  user: "u1",
+  pwd: "p1",
+  roles: [ { role: "userAdminAnyDatabase", db: "fab_db" } ]
+})
+
+db.createUser(
+   {
+     user: "tt",
+     pwd: "tt",
+     roles: [ "readWrite", "dbAdmin" ]
+   }
+)
