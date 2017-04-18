@@ -293,8 +293,8 @@ def signup():
             LOGGER.error("got exception in signup:{0}".format(e))
             raise Exception(e.message, 400)
     except Exception as e:
-        LOGGER.error("got exception in signup last try block:{0}".format(e.message))
-        response = jsonify(errors=e[0], data=[])
+        LOGGER.error("got exception in signup last try block:{0}".format(e))
+        response = jsonify(errors=e, data=[])
         response.status_code = e[1]
         return response
 

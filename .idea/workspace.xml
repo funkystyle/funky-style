@@ -26,8 +26,8 @@
       <file leaf-file-name="controllers.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="43" column="30" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="30" />
+            <state relative-caret-position="281">
+              <caret line="295" column="74" selection-start-line="295" selection-start-column="74" selection-end-line="295" selection-end-column="74" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -880,8 +880,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="43" column="30" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="30" />
+        <state relative-caret-position="281">
+          <caret line="295" column="74" selection-start-line="295" selection-start-column="74" selection-end-line="295" selection-end-column="74" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
