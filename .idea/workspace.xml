@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6814b6c-5b6e-431d-9a55-3fcab51062ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/tst_conf.json" afterPath="$PROJECT_DIR$/conf/tst_conf.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/create_mongo_db_user.txt" afterPath="$PROJECT_DIR$/docs/create_mongo_db_user.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/auth/controllers.py" afterPath="$PROJECT_DIR$/fab/auth/controllers.py" />
     </list>
     <ignored path="fab_promo_codes_api.iws" />
@@ -25,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="controllers.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="controllers.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="296" column="40" selection-start-line="296" selection-start-column="40" selection-end-line="296" selection-end-column="40" />
+            <state relative-caret-position="226">
+              <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -113,7 +111,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tst_conf.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tst_conf.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/conf/tst_conf.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
@@ -183,9 +181,9 @@
         <option value="$PROJECT_DIR$/req.txt" />
         <option value="$PROJECT_DIR$/docs/installations.txt" />
         <option value="$PROJECT_DIR$/settings.py" />
-        <option value="$PROJECT_DIR$/fab/auth/controllers.py" />
         <option value="$PROJECT_DIR$/conf/tst_conf.json" />
         <option value="$PROJECT_DIR$/docs/create_mongo_db_user.txt" />
+        <option value="$PROJECT_DIR$/fab/auth/controllers.py" />
       </list>
     </option>
   </component>
@@ -283,20 +281,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fab_promo_codes_api" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fab_promo_codes_api" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -846,24 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/req.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="296" column="40" selection-start-line="296" selection-start-column="40" selection-end-line="296" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/create_mongo_db_user.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -887,6 +853,24 @@
         <state relative-caret-position="210">
           <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/req.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

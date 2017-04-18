@@ -55,7 +55,7 @@ def send_email(**kwargs):
         return True
     else:
         LOGGER.info("email sent failed with token:{0}".format(kwargs['token']))
-        return False
+        raise Exception("email sent failed.")
 
 @app.route('/api/1.0/auth/send-forgot-password-link', methods=['POST'])
 def forgotpassword():
@@ -225,77 +225,93 @@ def login():
 def signup():
     try:
 
-        payload = request.json
-        LOGGER.info("signup payload request:{0}".format(payload))
-        if 'password' not in payload:
-            raise Exception('{0} field not found in input payload'.format('password', payload), 400)
-        payload['password'] = {
-                'password':str(generate_password_hash(request.json['password'])),
-                'password_raw':str(request.json['password']),
-                'last_password_updated_date':datetime.now()
-        }
-        payload['tokens'] = {
-            'registration': '',
-            'login': '',
-            'forgot_password':''
-        }
-        payload['created_date'] = datetime.now()
-        payload['email_confirmed'] = False
-        payload['pictures'] = {
-            'thumbnail': '',
-            'large': '',
-            'medium': ''
-        }
-        payload['modified_date'] = datetime.now()
-        payload['status'] = 'active'
-        # check logged user can assign role or not otherwise default role will be 'user'
-        can_assign = False
-        if 'user_level' in payload and 'user_level' in session:
-            for user_level in session['user_level']:
-                if user_level in CONFIG_DATA['CREATE_USER_ROLES']:
-                    can_assign = True
-        if not can_assign:
-            payload['user_level'] = ["user"]
-        else:
-            payload['status'] = request.json['status']
+        items = request.json
+        if not isinstance(items, list):
+            raise Exception('payload should be list', 400)
+        for payload in items:
+            LOGGER.info("signup payload request:{0}".format(payload))
+            if 'password' not in payload:
+                raise Exception('{0} field not found in input payload'.format('password', payload), 400)
 
-        # initiated persons collections to create new user
-        validation = Validations('persons')
-        violations = validation.validate_schema(payload, ['default', 'unique'])
-        if violations:
-            raise Exception(violations, 400)
-        accounts = app.data.driver.db['persons']
-        user = accounts.find_one({'email': request.json['email']})
-        if user:
-            raise Exception("email:{0} already exists.".format(user['email']), 400)
-        user = accounts.find_one({'mobile_number': request.json['mobile_number']})
-        if user:
-            raise Exception("mobile_number:{0} already exists.".format(user['mobile_number']), 400)
-        try:
-            user_id = str(accounts.insert(payload))
-            LOGGER.info("user successfully created:{0}".format(user_id))
-            registration_token = str(uuid.uuid4())
-            LOGGER.info("updating registration token:{0} for user id:{1}".format(registration_token, user_id))
-            accounts.update({'_id': ObjectId(user_id)}, {'$set': {'tokens.registration': registration_token}})
-            # registration email code.
-            send_email(title=CONFIG_DATA['REGISTRATION_TITLE'],
-                       recipients = [request.json['email']],
-                       sender=CONFIG_DATA['FAB_SUPPORT_TEAM'],
-                       user_id=user_id,
-                       token=registration_token,
-                       server_url=HOST+':'+str(PORT),
-                       template=CONFIG_DATA['REGISTRATION_EMAIL_TEMPLATE'])
-            payload['_id'] = user_id
-            response = jsonify(errors=[], data=payload)
-            response.status_code = 201
-            return response
-        except Exception as e:
-            LOGGER.error("got exception in signup:{0}".format(e))
-            raise Exception(e.message, 400)
+
+            payload['password'] = {
+                    'password':str(generate_password_hash(payload['password'])),
+                    'password_raw':str(payload['password']),
+                    'last_password_updated_date':datetime.now()
+            }
+
+
+            payload['tokens'] = {
+                'registration': '',
+                'login': '',
+                'forgot_password':''
+            }
+            payload['created_date'] = datetime.now()
+            payload['email_confirmed'] = False
+            payload['pictures'] = {
+                'thumbnail': '',
+                'large': '',
+                'medium': ''
+            }
+            payload['modified_date'] = datetime.now()
+            payload['status'] = 'active'
+            # check logged user can assign role or not otherwise default role will be 'user'
+            can_assign = False
+            if 'user_level' in payload and 'user_level' in session:
+                for user_level in session['user_level']:
+                    if user_level in CONFIG_DATA['CREATE_USER_ROLES']:
+                        can_assign = True
+            if not can_assign:
+                payload['user_level'] = ["user"]
+
+            # initiated persons collections to create new user
+
+            validation = Validations('persons')
+            violations = validation.validate_schema(payload, ['default', 'unique'])
+            if violations:
+                raise Exception(violations, 400)
+            accounts = app.data.driver.db['persons']
+            user = accounts.find_one({'email': payload['email']})
+            if user:
+                raise Exception("email:{0} already exists.".format(user['email']), 400)
+            user = accounts.find_one({'mobile_number': payload['mobile_number']})
+            if user:
+                raise Exception("mobile_number:{0} already exists.".format(user['mobile_number']), 400)
+            try:
+                user_id = str(accounts.insert(payload))
+                LOGGER.info("user successfully created:{0}".format(user_id))
+                registration_token = str(uuid.uuid4())
+                LOGGER.info("updating registration token:{0} for user id:{1}".format(registration_token, user_id))
+                accounts.update({'_id': ObjectId(user_id)}, {'$set': {'tokens.registration': registration_token}})
+                # registration email code.
+                try:
+                    send_email(title=CONFIG_DATA['REGISTRATION_TITLE'],
+                               recipients = [payload['email']],
+                               sender=CONFIG_DATA['FAB_SUPPORT_TEAM'],
+                               user_id=user_id,
+                               token=registration_token,
+                               server_url=HOST+':'+str(PORT),
+                               template=CONFIG_DATA['REGISTRATION_EMAIL_TEMPLATE'])
+                    payload['mail_sent'] = True
+                    payload['main_sent_error'] = ''
+                except Exception as e:
+                    LOGGER.error("mail sent failed:{0}".format(e))
+                    payload['mail_sent'] = False
+                    payload['main_sent_error'] = str(e)
+                payload['_id'] = user_id
+                payload['is_created'] = True
+                payload['error'] = ''
+            except Exception as e:
+                LOGGER.error("got exception in signup:{0}".format(e))
+                payload['is_created'] = False
+                payload['error'] = str(e)
+        response = jsonify(errors=[], data=items)
+        response.status_code = 201
+        return response
     except Exception as e:
         LOGGER.error("got exception in signup last try block:{0}".format(e))
         response = jsonify(errors=str(e), data=[])
-        response.status_code = e[1]
+        response.status_code = 400
         return response
 
 @app.route('/')
