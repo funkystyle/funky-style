@@ -290,7 +290,7 @@ def signup():
             response.status_code = 201
             return response
         except Exception as e:
-            LOGGER.error("got exception in signup:{0}".format(e.message))
+            LOGGER.error("got exception in signup:{0}".format(e))
             raise Exception(e.message, 400)
     except Exception as e:
         LOGGER.error("got exception in signup last try block:{0}".format(e.message))
