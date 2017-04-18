@@ -54,7 +54,7 @@
 
 
             ```
-            {
+            [{
                  "first_name": "first name",
                  "last_name": "last name",
                  "email": "satya@example.com",
@@ -65,7 +65,7 @@
                  "gender": "female",
                  "status": "active",
                  "user_level":["editor"]
-            }
+            }]
             ```
             Note: user_level should be in ["user", "admin", "editor", "submitter"]
                   gender should be male or female
