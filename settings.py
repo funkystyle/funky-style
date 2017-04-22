@@ -220,6 +220,9 @@ SCHEMAS = {
                     'field': '_id'
                 }
             }
+        },
+        'picture':{
+            'type': 'media'
         }
     }
 }
