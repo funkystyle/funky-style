@@ -138,7 +138,20 @@
         *Desc: finding person or filtering person. we can apply any mongo db get query to where statement.
         * Method: GET
 
-    *
+    * /api/1.0/delete-documents
+        * Desc: delete multiple documents from given collection.
+        * Method: POST
+        * payload: [{"resource_name": "<name of resources>", "ids":[1,2,3]}]
+    * /api/1.0/persons/<id of document>:
+        * Desc: updating specific document.
+        * Method: PATCH
+        * Payload: key value fields of persons collections.
+
+    * Comman:
+        1. for update or delete documents and fetching documents we need role based permissions
+        2. should provide access_token in headers in following format:
+            {"authorization":"<login token>"}
+
 
 ## Gunicorn: Gunicorn 'Green Unicorn' is a Python WSGI HTTP Server for UNIX.
 
