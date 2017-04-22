@@ -1,3 +1,5 @@
+db.persons.update({"_id" : ObjectId("58fb1e1b1d41c84079ba5655")},{"$set":{"user_level":["admin"]}})
+
 db.createUser({
  user: "t",
   pwd: "t",

@@ -166,7 +166,7 @@ SCHEMAS = {
         },
         'user_level': {
             'type': 'list',
-            'allowed': ["submitter", "editor", "admin", "user"],
+            'allowed': CONFIG_DATA['APPLICATION_ROLES'],
             'required': True
         },
         'created_date': {

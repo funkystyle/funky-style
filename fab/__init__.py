@@ -74,6 +74,22 @@ def handle_invalid_usage(error):
     response.status_code = error.status_code
     return response
 
+
+from common_features import *
+
+# persons schema can be assessable and editable by admin only
+app.on_fetched_resource_persons += before_returning_persons
+app.on_fetched_item_persons += before_returning_persons
+
+app.on_update_resource_persons += before_returning_persons
+app.on_update_item_persons += before_returning_persons
+
+app.on_delete_resource_persons += before_returning_persons
+app.on_delete_item_persons += before_returning_persons
+
+
+
+
+
 from data_validations import *
-from auth.views import *
-from auth.controllers import *
+from auth import *

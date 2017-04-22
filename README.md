@@ -134,6 +134,12 @@
             ```
            Note: token will sent to user email id while doing registration operation.
 
+    * /api/1.0/persons?where={"field_name":"value"}&?sort=field_name,-field_name:
+        *Desc: finding person or filtering person. we can apply any mongo db get query to where statement.
+        * Method: GET
+
+    *
+
 ## Gunicorn: Gunicorn 'Green Unicorn' is a Python WSGI HTTP Server for UNIX.
 
    * Setup gunicorn with python application:
