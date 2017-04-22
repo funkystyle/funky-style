@@ -23,5 +23,11 @@
   "REGISTRATION_TITLE": "thanks for registration with fab",
   "FORGOT_PASSWORD_TITLE": "sent forgot password",
 
-  "CREATE_USER_ROLES": ["admin"]
+  "CREATE_USER_ROLES": ["admin"],
+  "FIND_USER_ROLES": ["admin"],
+  "APPLICATION_ROLES":["submitter", "editor", "admin", "user"],
+  "ADMIN_ROLES":["admin"],
+  "SUBMITTER_ROLES":["submitter"],
+  "EDITOR_ROLES":["editor"],
+  "USER_ROLES":["user"]
 }
