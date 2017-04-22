@@ -203,22 +203,45 @@ SCHEMAS = {
                 'forgot_password': {'type': 'string', 'empty': True}
             },
         },
+    },
+    'stores':{
+        'name': {
+            'type': 'string',
+            'required': True,
+            'unique': True
+        },
+        'related_stores':{
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'stores',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        }
     }
 }
 
 PERSONS_SCHEMA = SCHEMAS['persons']
+STORES_SCHEMA = SCHEMAS['stores']
 
 PERSONS = {
     'item_title': 'persons',
     'schema': PERSONS_SCHEMA,
-    'url': 'persons',
-    'authentication': None
+    'url': 'persons'
 }
 
+STORES = {
+    'item_title': 'stores',
+    'schema': STORES_SCHEMA
+}
 # The DOMAIN dict explains which resources will be available and how they will
 # be accessible to the API consumer.
 DOMAIN = {
-    'persons': PERSONS
+    'persons': PERSONS,
+    'stores':  STORES
 }
 
 COLLECTION_NAMES = DOMAIN.keys()
