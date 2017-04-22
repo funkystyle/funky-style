@@ -71,6 +71,8 @@ def email_activation():
 @app.route('/api/1.0/auth/logout', methods=['GET'])
 def logout():
     try:
+        if 'user_id' not in session:
+            abort(400, "user not logged in.")
         accounts = app.data.driver.db['persons']
         accounts.update({'_id': ObjectId(str(session['user_id']))},{"$set": {'tokens.login': ""}})
         session.clear()

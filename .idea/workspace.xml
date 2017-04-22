@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/fab/auth/controllers.py" line="256" />
+    <bookmark url="file://$PROJECT_DIR$/fab/auth/controllers.py" line="258" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6814b6c-5b6e-431d-9a55-3fcab51062ce" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/fab/features_common/__init__.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/fab/features_common/views.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/__init__.py" afterPath="$PROJECT_DIR$/fab/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/auth/controllers.py" afterPath="$PROJECT_DIR$/fab/auth/controllers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/common_features/hooks.py" afterPath="$PROJECT_DIR$/fab/common_features/hooks.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/common_features/login_decorators.py" afterPath="$PROJECT_DIR$/fab/common_features/login_decorators.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/users/__init__.py" afterPath="$PROJECT_DIR$/fab/users/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/users/controllers.py" afterPath="$PROJECT_DIR$/fab/users/controllers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.py" afterPath="$PROJECT_DIR$/settings.py" />
     </list>
     <ignored path="fab_promo_codes_api.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,7 +28,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fab/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="555">
@@ -104,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controllers.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="controllers.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="267" column="8" selection-start-line="266" selection-start-column="4" selection-end-line="268" selection-end-column="19" />
+            <state relative-caret-position="321">
+              <caret line="74" column="43" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -176,10 +170,10 @@
         <option value="$PROJECT_DIR$/fab/common_features/login_decorators.py" />
         <option value="$PROJECT_DIR$/fab/common_features/hooks.py" />
         <option value="$PROJECT_DIR$/settings.py" />
-        <option value="$PROJECT_DIR$/fab/auth/controllers.py" />
         <option value="$PROJECT_DIR$/fab/users/__init__.py" />
         <option value="$PROJECT_DIR$/fab/users/controllers.py" />
         <option value="$PROJECT_DIR$/fab/__init__.py" />
+        <option value="$PROJECT_DIR$/fab/auth/controllers.py" />
       </list>
     </option>
   </component>
@@ -845,16 +839,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="267" column="8" selection-start-line="266" selection-start-column="4" selection-end-line="268" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fab/users/controllers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="693">
@@ -881,6 +865,16 @@
           <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
           <folding>
             <element signature="e#31#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="74" column="43" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
