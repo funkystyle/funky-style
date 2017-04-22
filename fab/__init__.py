@@ -80,16 +80,10 @@ from common_features import *
 # persons schema can be assessable and editable by admin only
 app.on_fetched_resource_persons += before_returning_persons
 app.on_fetched_item_persons += before_returning_persons
-
 app.on_update_resource_persons += before_returning_persons
 app.on_update_item_persons += before_returning_persons
-
-app.on_delete_resource_persons += before_returning_persons
-app.on_delete_item_persons += before_returning_persons
-
-
-
-
+app.on_delete_item_persons += before_delete_persons_item
 
 from data_validations import *
 from auth import *
+from  users import *

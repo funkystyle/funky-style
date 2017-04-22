@@ -273,3 +273,4 @@ def index():
     LOGGER.info("called index point")
     return make_response(open('static/app/index.html').read())
 
+

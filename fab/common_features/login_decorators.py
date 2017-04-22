@@ -167,3 +167,12 @@ def admin_login_required(f):
 
         return f(*args, **kwargs)
     return decorated_function
+
+# admin logging to application
+def abort_resource_deletion(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        error = 'you should not delete complete collection'
+        abort(401, error)
+        return f(*args, **kwargs)
+    return decorated_function
