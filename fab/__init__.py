@@ -36,7 +36,8 @@ class EncrptDecrpt:
 
 encrypt_decrypt = EncrptDecrpt()
 
-app = Eve(__name__, static_folder='static')
+app = Eve(__name__)
+app._static_folder = os.path.abspath("static/")
 app.config.update(
 	DEBUG=False,
     #EMAIL SETTINGS
