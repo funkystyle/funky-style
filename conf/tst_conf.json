@@ -1,4 +1,6 @@
 {
+
+
   "LOGGER_JSON_FILE": "logging.json",
   "PASSWORD_CRYPTION_TOKEN": "j++^1k=*raynr-mw(9ux=j#omk@=05p4g=-eg3&hwx5y7#cpo7",
   "HOST": "127.0.0.1",
@@ -6,7 +8,7 @@
   "DEBUG": true,
   "URL_PREFIX": "api",
   "API_VERSION": "1.0",
-  "MONGO_HOST": "localhost",
+  "MONGO_HOST": "127.0.0.1",
   "MONGO_PORT": 27017,
   "MONGO_USERNAME": "t",
   "MONGO_PASSWORD": "t",
@@ -29,5 +31,8 @@
   "ADMIN_ROLES":["admin"],
   "SUBMITTER_ROLES":["submitter"],
   "EDITOR_ROLES":["editor"],
-  "USER_ROLES":["user"]
+  "USER_ROLES":["user"],
+  "UPLOAD_FOLDER": "/static/images/",
+  "ALLOWED_EXTENSIONS":["png","jpg", "jpeg", "bmp"],
+  "IMAGE_FIELDS": ["image","side_banner","top_banner","all_tag_image", "alt_image", "images"]
 }
