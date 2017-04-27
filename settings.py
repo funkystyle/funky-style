@@ -208,7 +208,7 @@ SCHEMAS = {
         'name': {
             'type': 'string',
             'required': True,
-            'unique': False
+            'unique': 'unique'
         },
         'related_stores':{
             'type': 'list',
@@ -222,7 +222,129 @@ SCHEMAS = {
             }
         },
         'image':{
-            'type': 'list'
+            'type': 'string'
+        },
+        'top_description':{
+            'type': 'string'
+        },
+        'footer_description': {
+            'type': 'string'
+        },
+        'h1': {
+            'type': 'string'
+        },
+        'h2': {
+            'type': 'string'
+        },
+        'top_stores': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'stores',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'featured_store': {
+            'type': 'boolean'
+        },
+        'rating':{
+            'type': 'float'
+        },
+        'side_banner': {
+            'type': 'string'
+        },
+        'top_banner': {
+            'type': 'string'
+        },
+        'meta_title':{
+            'type': 'string'
+        },
+        'meta_description': {
+            'type': 'string'
+        },
+        'top_catagory_store': {
+          'type': 'list',
+          'schema': {
+              'type': 'objectid',
+              'data_relation': {
+                  'resource': 'categories',
+                  'embeddable': True,
+                  'field': '_id'
+              }
+          }
+        },
+        'all_tag_image': {
+            'type': 'string'
+        },
+        'image_text':{
+            'type': 'string'
+        },
+        'twitter_id':{
+            'type': 'string'
+        },
+        'braedcumbs':{
+            'type': 'string'
+        },
+        'number_of_deals': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'deals',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'twitter_url': {
+            'type': 'string'
+        },
+        'facebook_url': {
+            'type': 'string'
+        },
+        'google_plus_url': {
+            'type': 'string'
+        },
+        'pintrest_url': {
+            'type': 'string'
+        },
+        'youtube_url': {
+            'type': 'string'
+        },
+        'store_address': {
+            'type': 'string'
+        },
+        'store_email_id': {
+            'type': 'string'
+        },
+        'contact_number': {
+            'type': 'string'
+        },
+        'store_url': {
+            'type': 'string'
+        },
+        'status': {
+            'type': 'boolean'
+        },
+        'number_of_coupons': {
+            'type': 'string'
+        },
+        'menu': {
+            'type': 'string'
+        },
+        'last_modified_by': {
+            'type': 'objectid',
+            'default': None,
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'persons',
+                    'embeddable': True
+                }
+            }
         }
     }
 }

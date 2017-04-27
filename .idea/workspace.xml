@@ -5,15 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6814b6c-5b6e-431d-9a55-3fcab51062ce" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fab/common_features/controllers.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fab/stores/__init__.py" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/fab/features_common/__init__.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/fab/features_common/views.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/0dd9eb03_fe30_42aa_80fd_185e9ec82c11.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/1e1f6703_4f14_4db4_978d_95455c56425d.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/276b148a_89c9_4371_875e_7e4ce6b3ae0d.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/429ecdc5_6f24_4492_8809_09bfae9b12ba.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/651a8529_4cf2_402f_ad16_155cff4a22ff.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/799f1858_0fcc_4ff2_a004_21c228f0de0d.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/a745b660_171d_4e89_9676_66d011b6426c.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/c191eb50_7b02_4f78_8317_6b03d3962515.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/c37e206e_0cd4_455a_8030_baef11eb7856.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/d460c1e0_85c1_4e4c_a877_3a1bd31fd4bd.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/fc2af819_ed0c_4b63_a8a4_4e3df0607714.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/__init__.py" afterPath="$PROJECT_DIR$/fab/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/auth/controllers.py" afterPath="$PROJECT_DIR$/fab/auth/controllers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/common_features/__init__.py" afterPath="$PROJECT_DIR$/fab/common_features/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fab/common_features/hooks.py" afterPath="$PROJECT_DIR$/fab/common_features/hooks.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.py" afterPath="$PROJECT_DIR$/settings.py" />
     </list>
     <ignored path="fab_promo_codes_api.iws" />
@@ -38,14 +44,14 @@
       <file leaf-file-name="local_conf.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/conf/local_conf.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="542">
+            <state relative-caret-position="353">
               <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hooks.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hooks.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fab/common_features/hooks.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="239">
@@ -57,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="224" column="25" selection-start-line="224" selection-start-column="25" selection-end-line="224" selection-end-column="25" />
+            <state relative-caret-position="470">
+              <caret line="347" column="9" selection-start-line="347" selection-start-column="9" selection-end-line="347" selection-end-column="9" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -157,8 +163,8 @@
         <option value="$PROJECT_DIR$/fab/common_features/controllers.py" />
         <option value="$PROJECT_DIR$/conf/local_conf.json" />
         <option value="$PROJECT_DIR$/fab/__init__.py" />
-        <option value="$PROJECT_DIR$/settings.py" />
         <option value="$PROJECT_DIR$/fab/common_features/hooks.py" />
+        <option value="$PROJECT_DIR$/settings.py" />
       </list>
     </option>
   </component>
@@ -225,6 +231,10 @@
               <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -237,10 +247,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -509,27 +515,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/conf/prd_conf.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf/dev_conf.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/email_templates/forgot_password_link.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="61" selection-start-line="0" selection-start-column="54" selection-end-line="0" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/email_templates/registration_mail_link.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -796,14 +781,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/local_conf.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fab/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
@@ -812,6 +789,27 @@
             <element signature="e#31#50#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/local_conf.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/images/329ba024_1746_4756_ad31_07b2c99d3f91.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fab/common_features/controllers.py">
@@ -824,22 +822,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="224" column="25" selection-start-line="224" selection-start-column="25" selection-end-line="224" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fab/common_features/hooks.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="82" column="66" selection-start-line="82" selection-start-column="66" selection-end-line="82" selection-end-column="66" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/images/ac2aa8a3_c3de_435d_afe3_f81ec7ef04b7.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="347" column="9" selection-start-line="347" selection-start-column="9" selection-end-line="347" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
