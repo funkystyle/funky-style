@@ -208,7 +208,7 @@ SCHEMAS = {
         'name': {
             'type': 'string',
             'required': True,
-            'unique': True
+            'unique': False
         },
         'related_stores':{
             'type': 'list',
@@ -221,8 +221,8 @@ SCHEMAS = {
                 }
             }
         },
-        'picture':{
-            'type': 'media'
+        'image':{
+            'type': 'list'
         }
     }
 }

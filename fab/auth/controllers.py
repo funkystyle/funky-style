@@ -142,6 +142,8 @@ def me():
         response = jsonify(error='', data = del_some_keys)
         response.status_code = 200
         return response
+
+
     message = "user not logged in."
     abort(401, message)
 
