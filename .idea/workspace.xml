@@ -7,18 +7,6 @@
     <list default="true" id="a6814b6c-5b6e-431d-9a55-3fcab51062ce" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/fab/features_common/__init__.py" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/fab/features_common/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/0dd9eb03_fe30_42aa_80fd_185e9ec82c11.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/1e1f6703_4f14_4db4_978d_95455c56425d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/276b148a_89c9_4371_875e_7e4ce6b3ae0d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/429ecdc5_6f24_4492_8809_09bfae9b12ba.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/651a8529_4cf2_402f_ad16_155cff4a22ff.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/799f1858_0fcc_4ff2_a004_21c228f0de0d.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/a745b660_171d_4e89_9676_66d011b6426c.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/c191eb50_7b02_4f78_8317_6b03d3962515.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/c37e206e_0cd4_455a_8030_baef11eb7856.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/d460c1e0_85c1_4e4c_a877_3a1bd31fd4bd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/static/images/fc2af819_ed0c_4b63_a8a4_4e3df0607714.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.py" afterPath="$PROJECT_DIR$/settings.py" />
     </list>
@@ -44,8 +32,8 @@
       <file leaf-file-name="local_conf.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/conf/local_conf.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+            <state relative-caret-position="756">
+              <caret line="36" column="52" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -54,7 +42,7 @@
       <file leaf-file-name="hooks.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fab/common_features/hooks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
+            <state relative-caret-position="575">
               <caret line="82" column="66" selection-start-line="82" selection-start-column="66" selection-end-line="82" selection-end-column="66" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
@@ -66,8 +54,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="347" column="9" selection-start-line="347" selection-start-column="9" selection-end-line="347" selection-end-column="9" />
+            <state relative-caret-position="2300">
+              <caret line="907" column="16" selection-start-line="907" selection-start-column="16" selection-end-line="907" selection-end-column="16" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -78,7 +66,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fab/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
+            <state relative-caret-position="2730">
               <caret line="137" column="30" selection-start-line="137" selection-start-column="17" selection-end-line="137" selection-end-column="30" />
               <folding>
                 <element signature="e#31#50#0" expanded="true" />
@@ -90,7 +78,7 @@
       <file leaf-file-name="controllers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fab/common_features/controllers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
+            <state relative-caret-position="294">
               <caret line="19" column="33" selection-start-line="18" selection-start-column="12" selection-end-line="20" selection-end-column="46" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -161,9 +149,9 @@
         <option value="$PROJECT_DIR$/fab/auth/controllers.py" />
         <option value="$PROJECT_DIR$/fab/common_features/__init__.py" />
         <option value="$PROJECT_DIR$/fab/common_features/controllers.py" />
-        <option value="$PROJECT_DIR$/conf/local_conf.json" />
         <option value="$PROJECT_DIR$/fab/__init__.py" />
         <option value="$PROJECT_DIR$/fab/common_features/hooks.py" />
+        <option value="$PROJECT_DIR$/conf/local_conf.json" />
         <option value="$PROJECT_DIR$/settings.py" />
       </list>
     </option>
@@ -171,8 +159,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
     <option name="y" value="24" />
-    <option name="width" value="1535" />
-    <option name="height" value="780" />
+    <option name="width" value="1855" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -199,7 +187,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -231,10 +219,6 @@
               <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -246,39 +230,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fab_promo_codes_api" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fab_promo_codes_api" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fab_promo_codes_api" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fab_promo_codes_api" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fab" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common_features" />
+              <option name="myItemId" value="deployment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -298,7 +250,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -475,10 +427,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1535" height="780" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37003258" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17304583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -714,7 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -722,9 +673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -742,7 +690,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -750,40 +697,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
           <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/7ffc7ae0_7de5_4a07_a9bb_dbd1170450b7.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/05c4618f_4a47_4f8a_a143_0cf77b36bc88.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/fd2d9ec4_3d70_47b5_b532_246a643c5cc9.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/429ecdc5_6f24_4492_8809_09bfae9b12ba.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/a745b660_171d_4e89_9676_66d011b6426c.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/static/images/7ffc7ae0_7de5_4a07_a9bb_dbd1170450b7.png" />
+    <entry file="file://$PROJECT_DIR$/static/images/05c4618f_4a47_4f8a_a143_0cf77b36bc88.png" />
+    <entry file="file://$PROJECT_DIR$/static/images/fd2d9ec4_3d70_47b5_b532_246a643c5cc9.png" />
+    <entry file="file://$PROJECT_DIR$/static/images/429ecdc5_6f24_4492_8809_09bfae9b12ba.png" />
+    <entry file="file://$PROJECT_DIR$/static/images/a745b660_171d_4e89_9676_66d011b6426c.png" />
     <entry file="file://$PROJECT_DIR$/fab/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
+        <state relative-caret-position="2730">
           <caret line="137" column="30" selection-start-line="137" selection-start-column="17" selection-end-line="137" selection-end-column="30" />
           <folding>
             <element signature="e#31#50#0" expanded="true" />
@@ -791,43 +715,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/local_conf.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/images/329ba024_1746_4756_ad31_07b2c99d3f91.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/static/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/static/images/329ba024_1746_4756_ad31_07b2c99d3f91.png" />
     <entry file="file://$PROJECT_DIR$/fab/common_features/controllers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
+        <state relative-caret-position="294">
           <caret line="19" column="33" selection-start-line="18" selection-start-column="12" selection-end-line="20" selection-end-column="46" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fab/common_features/hooks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="82" column="66" selection-start-line="82" selection-start-column="66" selection-end-line="82" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -837,10 +732,28 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/fab/common_features/hooks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="82" column="66" selection-start-line="82" selection-start-column="66" selection-end-line="82" selection-end-column="66" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/local_conf.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="36" column="52" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="347" column="9" selection-start-line="347" selection-start-column="9" selection-end-line="347" selection-end-column="9" />
+        <state relative-caret-position="2300">
+          <caret line="907" column="16" selection-start-line="907" selection-start-column="16" selection-end-line="907" selection-end-column="16" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
