@@ -633,7 +633,7 @@ SCHEMAS = {
         'status': {
             "type": "list"
         },
-        'last_modifed_by':{
+        'last_modified_by':{
             'type': 'objectid',
             'default': None,
             'schema': {
@@ -659,7 +659,7 @@ SCHEMAS = {
         'status': {
             "type": "boolean"
         },
-        'last_modifed_by': {
+        'last_modified_by': {
             'type': 'objectid',
             'default': None,
             'schema': {
@@ -698,7 +698,7 @@ SCHEMAS = {
         'side_banner':{
           'type': 'list'
         },
-        'last_modifed_by': {
+        'last_modified_by': {
             'type': 'objectid',
             'default': None,
             'schema': {
@@ -736,7 +736,7 @@ SCHEMAS = {
         'status': {
             'type': 'boolean'
         },
-        'last_modifed_by': {
+        'last_modified_by': {
             'type': 'objectid',
             'default': None,
             'schema': {
@@ -748,7 +748,7 @@ SCHEMAS = {
             }
         }
     },
-    'deal_categories': {
+    'deal_categories_collection': {
         'name': {
             "type": "string",
             "unique": True,
@@ -789,7 +789,7 @@ SCHEMAS = {
         'rating': {
             'type': 'float'
         },
-        'last_modifed_by': {
+        'last_modified_by': {
             'type': 'objectid',
             'default': None,
             'schema': {
@@ -840,7 +840,7 @@ SCHEMAS = {
         'rating': {
             'type': 'float'
         },
-        'last_modifed_by': {
+        'last_modified_by': {
             'type': 'objectid',
             'default': None,
             'schema': {
@@ -910,11 +910,98 @@ SCHEMAS = {
         }
 
     },
+    'blog': {
+        'title': {
+            "type": "string",
+            "unique": True,
+            "required": True
+        },
+        'url': {
+            "type": "string",
+            "unique": True,
+            "required": True
+        },
+        'related_categories': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'stores',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'related_blogs': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'blog',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'description': {
+            "type": "string"
+        },
+        'featured_image': {
+            "type": "string"
+        },
+        'h1': {
+            "type": "string"
+        },
+        'h2': {
+            "type": "string"
+        },
+        'seo_title': {
+            "type": "string"
+        },
+        'seo_description': {
+            "type": "string"
+        },
+        'status': {
+            'type': 'boolean'
+        },
+        'rating': {
+            'type': 'float'
+        },
+        'last_modified_by': {
+            'type': 'objectid',
+            'default': None,
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'persons',
+                    'embeddable': True
+                }
+            }
+        },
+        'breadcrumb': {
+            'type': 'list',
+            'required': True
+        }
+    }
 
 }
 
 PERSONS_SCHEMA = SCHEMAS['persons']
 STORES_SCHEMA = SCHEMAS['stores']
+
+DEALS_SCHEMA = SCHEMAS['deals']
+CATEGORIES_SCHEMA = SCHEMAS['categories']
+COUPONS_SCHEMA = SCHEMAS['coupons']
+CMS_PAGES_SCHEMA = SCHEMAS['cms_pages']
+DEAL_CATEGORIES_SCHEMA = SCHEMAS['deal_categories_collection']
+DEAL_BRANDS_SCHEMA = SCHEMAS['deal_brands']
+BANNER_SCHEMA = SCHEMAS['banner']
+MASTER_SEO_SCHEMA = SCHEMAS['master_seo']
+COUPON_REPORTS_SCHEMA = SCHEMAS['coupon_reports']
+COUPONS_COMMENTS_SCHEMA = SCHEMAS['coupon_comments']
+BLOG_SCHEMA = SCHEMAS['blog']
+
+
 
 PERSONS = {
     'item_title': 'persons',
@@ -926,11 +1013,82 @@ STORES = {
     'item_title': 'stores',
     'schema': STORES_SCHEMA
 }
+
+DEALS = {
+    'item_title': 'deals',
+    'schema': DEALS_SCHEMA
+}
+
+CATEGORIES = {
+    'item_title': 'categories',
+    'schema': CATEGORIES_SCHEMA
+}
+
+CMS_PAGES = {
+    'item_title': 'cms_pages',
+    'schema': CMS_PAGES_SCHEMA
+}
+
+COUPONS = {
+    'item_title': 'coupons',
+    'schema': COUPONS_SCHEMA
+}
+
+DEAL_CATEGORIES = {
+    'item_title': 'deal_categories',
+    'schema': DEAL_CATEGORIES_SCHEMA
+}
+
+DEAL_BRANDS = {
+    'item_title': 'deal_brands',
+    'schema': DEAL_BRANDS_SCHEMA
+}
+
+BANNER = {
+    'item_title': 'banner',
+    'schema': BANNER_SCHEMA
+}
+
+MASTER_SEO = {
+    'item_title': 'master_seo',
+    'schema': MASTER_SEO_SCHEMA
+}
+
+COUPON_REPORTS ={
+    'item_title': 'coupon_reports',
+    'schema': COUPON_REPORTS_SCHEMA
+}
+
+COUPONS_COMMENTS = {
+    'item_title': 'coupon_comments',
+    'schema': COUPONS_COMMENTS_SCHEMA
+}
+
+BLOG = {
+    'item_title': 'blog',
+    'schema': BLOG_SCHEMA
+}
+
+
+
 # The DOMAIN dict explains which resources will be available and how they will
 # be accessible to the API consumer.
 DOMAIN = {
     'persons': PERSONS,
-    'stores':  STORES
+    'stores':  STORES,
+    'deals': DEALS,
+    'categories': CATEGORIES,
+    'coupons':  COUPONS,
+    'cms_pages': CMS_PAGES,
+    'deal_brands': DEAL_BRANDS,
+    'deal_categories': DEAL_CATEGORIES,
+    'banner': BANNER,
+    'master_seo': MASTER_SEO,
+    'coupons_comments': COUPONS_COMMENTS,
+    'coupons_reports': COUPON_REPORTS,
+    'blog': BLOG
+
+
 }
 
 COLLECTION_NAMES = DOMAIN.keys()

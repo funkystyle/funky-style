@@ -147,6 +147,40 @@
         * Method: PATCH
         * Payload: key value fields of persons collections.
 
+    *  common CRUD operation for all following collections:
+        * stores
+        * deals
+        * categories
+        * coupons
+        * cms_pages
+        * deal_brands
+        * deal_categories
+        * banner
+        * master_seo
+        * coupons_comments
+        * coupons_reports
+        * blog
+        ** OPERATIONS:
+            * INSERT: /api/1.0/<name of collection from above list>
+              Method: post
+              payload: json format.
+            * UPDATE: /api/1.0/<name of collection>/<id of document>
+              Method: PATCH
+              payload: json format
+            * DELETE: /api/1.0/<name of collection>/<id of document>
+              METHOD: DELETE
+              payload: json format
+            * FETCH: /api/1.0/<name of collection>/?where=<required json query>&<sort-option>&<pagination>&<count of documents>&
+                                                          &<projection fields>
+              METHOD: GET
+        * getting all collect names:
+            * FETCH: /api/1.0/get-collections
+              METHOD: GET
+        * getting all field names of specific collection:
+            * FETCH: /api/1.0/get-fields-info
+            * METHOD: post
+            *payload:{'collection_name': <name of collection>}
+
     * Comman:
         1. for update or delete documents and fetching documents we need role based permissions
         2. should provide access_token in headers in following format:

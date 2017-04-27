@@ -7,7 +7,26 @@ from bson.objectid import ObjectId
 from fab import ReturnException, app, convert_object_dates_to_string, delete_some_keys_from_dict, Validations
 from fab import send_fab_emails,parse_token
 
-from settings import LOGGER, CONFIG_DATA, HOST, PORT
+from settings import LOGGER, CONFIG_DATA, HOST, PORT,DOMAIN, SCHEMAS
+
+@app.route('/api/1.0/get-fields-info', methods=['POST'])
+def get_fields_info():
+    if 'collection_name' not in request.json:
+        raise ReturnException(message="collection name not found in payload", status_code=400)
+    if request.json['collection_name'] not in DOMAIN:
+        raise ReturnException(message="collection name:{0} not found in databse"
+                              .format(request.json['collection_name']), status_code=400)
+    response = jsonify(error='', data={"fields_info": SCHEMAS[request.json['collection_name']]})
+    response.status_code = 200
+    return response
+
+@app.route('/api/1.0/get-collections', methods=['GET'])
+def get_collections():
+    response = jsonify(error='', data={"collections": DOMAIN.keys()})
+    response.status_code = 200
+    return response
+
+
 
 @app.route('/api/1.0/auth/send-forgot-password-link', methods=['POST'])
 def forgotpassword():
