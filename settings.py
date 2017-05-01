@@ -182,12 +182,9 @@ SCHEMAS = {
         'last_modified_by': {
             'type': 'objectid',
             'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         },
         'status': {
@@ -337,14 +334,12 @@ SCHEMAS = {
         },
         'last_modified_by': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True,
+                'field': '_id'
             }
+
         }
     },
     'categories':{
@@ -441,13 +436,9 @@ SCHEMAS = {
             },
             'last_modified_by': {
                 'type': 'objectid',
-                'default': None,
-                'schema': {
-                    'type': 'objectid',
-                    'data_relation': {
-                        'resource': 'persons',
-                        'embeddable': True
-                    }
+                'data_relation': {
+                    'resource': 'persons',
+                    'embeddable': True
                 }
             }
     },
@@ -509,13 +500,9 @@ SCHEMAS = {
         },
         'store': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'stores',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'stores',
+                'embeddable': True
             }
         },
         'featured_deal': {
@@ -635,13 +622,9 @@ SCHEMAS = {
         },
         'last_modified_by':{
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         }
     },
@@ -661,13 +644,9 @@ SCHEMAS = {
         },
         'last_modified_by': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         }
     },
@@ -700,13 +679,9 @@ SCHEMAS = {
         },
         'last_modified_by': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         }
     },
@@ -738,13 +713,9 @@ SCHEMAS = {
         },
         'last_modified_by': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         }
     },
@@ -791,13 +762,9 @@ SCHEMAS = {
         },
         'last_modified_by': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         }
 
@@ -842,37 +809,25 @@ SCHEMAS = {
         },
         'last_modified_by': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         }
     },
     'coupon_reports': {
         'user': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         },
         'store': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'stores',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'stores',
+                'embeddable': True
             }
         },
         'working': {
@@ -882,24 +837,16 @@ SCHEMAS = {
     'coupon_comments': {
         'user': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         },
         'store': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'stores',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'stores',
+                'embeddable': True
             }
         },
         'status': {
@@ -969,13 +916,9 @@ SCHEMAS = {
         },
         'last_modified_by': {
             'type': 'objectid',
-            'default': None,
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
-                }
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
             }
         },
         'breadcrumb': {
