@@ -207,6 +207,11 @@ SCHEMAS = {
             'required': True,
             'unique': True
         },
+        'url': {
+            'type': 'string',
+            'required': True,
+            'unique': True
+        },
         'related_stores':{
             'type': 'list',
             'schema': {

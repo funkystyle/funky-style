@@ -42,7 +42,7 @@
       <file leaf-file-name="hooks.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fab/common_features/hooks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
+            <state relative-caret-position="1722">
               <caret line="82" column="66" selection-start-line="82" selection-start-column="66" selection-end-line="82" selection-end-column="66" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
@@ -54,8 +54,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="916" column="29" selection-start-line="916" selection-start-column="29" selection-end-line="916" selection-end-column="29" />
+            <state relative-caret-position="331">
+              <caret line="209" column="12" selection-start-line="209" selection-start-column="12" selection-end-line="209" selection-end-column="12" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -76,7 +76,7 @@
       <file leaf-file-name="controllers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
+            <state relative-caret-position="462">
               <caret line="22" column="36" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="36" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
@@ -88,7 +88,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fab/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2730">
+            <state relative-caret-position="2877">
               <caret line="137" column="30" selection-start-line="137" selection-start-column="17" selection-end-line="137" selection-end-column="30" />
               <folding>
                 <element signature="e#31#50#0" expanded="true" />
@@ -665,7 +665,7 @@
     <entry file="file://$PROJECT_DIR$/static/images/a745b660_171d_4e89_9676_66d011b6426c.png" />
     <entry file="file://$PROJECT_DIR$/fab/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2730">
+        <state relative-caret-position="2877">
           <caret line="137" column="30" selection-start-line="137" selection-start-column="17" selection-end-line="137" selection-end-column="30" />
           <folding>
             <element signature="e#31#50#0" expanded="true" />
@@ -690,7 +690,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fab/auth/controllers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
+        <state relative-caret-position="462">
           <caret line="22" column="36" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="36" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
@@ -708,7 +708,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fab/common_features/hooks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
+        <state relative-caret-position="1722">
           <caret line="82" column="66" selection-start-line="82" selection-start-column="66" selection-end-line="82" selection-end-column="66" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
@@ -736,8 +736,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="916" column="29" selection-start-line="916" selection-start-column="29" selection-end-line="916" selection-end-column="29" />
+        <state relative-caret-position="331">
+          <caret line="209" column="12" selection-start-line="209" selection-start-column="12" selection-end-line="209" selection-end-column="12" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
