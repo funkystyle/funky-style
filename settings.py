@@ -5,8 +5,10 @@ import os, json, sys
 
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
 # setting logger configuration
 LOG_JSON_FILE_PATH = os.path.join(BASE_DIR, 'conf', 'logging.json')
+
 if os.path.isfile(LOG_JSON_FILE_PATH):
     with open(LOG_JSON_FILE_PATH, 'r') as _logconf:
         print("new logger initiated...")
@@ -181,7 +183,6 @@ SCHEMAS = {
         },
         'last_modified_by': {
             'type': 'objectid',
-            'default': None,
             'data_relation': {
                 'resource': 'persons',
                 'embeddable': True
@@ -416,10 +417,10 @@ SCHEMAS = {
                 'type': 'boolean'
             },
             'seo_title':{
-                'type': 'boolean'
+                'type': 'string'
             },
             'seo_description':{
-                'type': 'boolean'
+                'type': 'string'
             },
             'alt_image':{
                 'type': 'string'
@@ -439,6 +440,9 @@ SCHEMAS = {
             'category_type':{
                 'type': 'string'
             },
+            'menu': {
+                'type': 'string'
+            },
             'last_modified_by': {
                 'type': 'objectid',
                 'data_relation': {
@@ -447,8 +451,8 @@ SCHEMAS = {
                 }
             }
     },
-    "deals":{
-        "name":{
+    "deals": {
+        "name": {
             "unique":True,
             "required": True,
             "type": "string",
@@ -562,23 +566,19 @@ SCHEMAS = {
             "type": "string"
         },
         'coupon_type': {
-            "required": True,
-            "unique": True,
             "type": "string"
         },
         'coupon_code': {
-            "type": "string",
-            "required": True,
             "type": "string"
         },
         'destination_url': {
             "type": "string"
         },
         'discount_type': {
-            "type": "list"
+            "type": "string"
         },
         'discount': {
-            "type": "list"
+            "type": "string"
         },
         'expire_date': {
             "type": "datetime"
@@ -623,7 +623,7 @@ SCHEMAS = {
             "type": "boolean"
         },
         'status': {
-            "type": "list"
+            "type": "string"
         },
         'last_modified_by':{
             'type': 'objectid',
@@ -791,6 +791,9 @@ SCHEMAS = {
         'footer_description': {
             "type": "string"
         },
+        'image': {
+            "type": "string"
+        },
         'alt_image': {
             "type": "string"
         },
@@ -878,7 +881,7 @@ SCHEMAS = {
             'schema': {
                 'type': 'objectid',
                 'data_relation': {
-                    'resource': 'stores',
+                    'resource': 'categories',
                     'embeddable': True,
                     'field': '_id'
                 }
@@ -914,7 +917,7 @@ SCHEMAS = {
             "type": "string"
         },
         'status': {
-            'type': 'boolean'
+            'type': 'string'
         },
         'rating': {
             'type': 'float'
@@ -1035,8 +1038,6 @@ DOMAIN = {
     'coupons_comments': COUPONS_COMMENTS,
     'coupons_reports': COUPON_REPORTS,
     'blog': BLOG
-
-
 }
 
 COLLECTION_NAMES = DOMAIN.keys()

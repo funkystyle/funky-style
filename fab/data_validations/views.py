@@ -48,7 +48,7 @@ class Validations(object):
         '''
         self.schema = SCHEMAS[schema_name]
         LOGGER.info("initated schema is:{0}".format(schema_name))
-        self.ignore_keys = ["default", "unique"]
+        self.ignore_keys = ["default", "unique", "data_relation"]
         self.schema = self.delete_keys_from_dict(self.schema, self.ignore_keys)
         self.schema_name = schema_name
         LOGGER.info("validating schema:{0}".format(self.schema))
@@ -83,7 +83,7 @@ class Validations(object):
          ignore_keys: keys to delete from payload to validate payload with schema
         :return:
         '''
-        LOGGER.info("ignoring keys are:{0}".format(ignore_keys))
+        LOGGER.info("------------->ignoring keys are:{0}".format(ignore_keys))
         self.v.validate(item)
         LOGGER.info("{0} schema validation errors:{1}".format(self.schema_name, self.v.errors))
         return self.v.errors
