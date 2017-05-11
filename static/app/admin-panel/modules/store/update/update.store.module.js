@@ -58,6 +58,21 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
 
         // update store now
         $scope.updateStore = function (store) {
+            if(typeof store.image === 'object') {
+                store.image = "data:image/jpeg;base64,"+store.image.base64;
+            }
+            if(typeof store.top_banner === 'object') {
+                store.top_banner = "data:image/jpeg;base64,"+store.top_banner.base64;
+            }
+            if(typeof store.side_banner === 'object') {
+                store.side_banner = "data:image/jpeg;base64,"+store.side_banner.base64;
+            }
+            if(typeof store.all_tag_image === 'object') {
+                store.all_tag_image = "data:image/jpeg;base64,"+store.all_tag_image.base64;
+            }
+
+            console.log(store);
+
             delete $scope.store._created;
             delete $scope.store._updated;
             delete $scope.store._links;

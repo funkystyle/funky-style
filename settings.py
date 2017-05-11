@@ -333,7 +333,7 @@ SCHEMAS = {
             'type': 'boolean'
         },
         'number_of_coupons': {
-            'type': 'string'
+            'type': 'integer'
         },
         'menu': {
             'type': 'string'

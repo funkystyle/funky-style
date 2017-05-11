@@ -57,7 +57,8 @@ def delete_image(path):
     :param path:
     :return:
     """
-    os.remove(path)
+    full_path = os.path.join(BASE_DIR, path)
+    os.remove(full_path)
 
 def process_images(requests):
     for request in  requests:

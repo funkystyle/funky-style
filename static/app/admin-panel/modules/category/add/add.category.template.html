@@ -107,10 +107,22 @@
                         <input type="file" id="side_banner" ng-model="category.side_banner" base-sixty-four-input />
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
+                    <div class="form-group" ng-if="category.side_banner.base64">
+                        <label for="displayImage">Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-src="data:image/jpeg;base64,{{ category.side_banner.base64 }}" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="top_banner">Top Banner</label>
                         <input type="file" id="top_banner" ng-model="category.top_banner" base-sixty-four-input />
                         <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="category.top_banner.base64">
+                        <label for="displayImage">Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-src="data:image/jpeg;base64,{{ category.top_banner.base64 }}" />
+                        </div>
                     </div>
                     <div class="form-group" ng-init="category.featured_category = true">
                         <label>Featured Category</label> <br />
@@ -136,6 +148,12 @@
                     <div class="form-group">
                         <label for="alt_image">Alt Image</label>
                         <input type="file" ng-model="category.alt_image" class="form-control" base-sixty-four-input id="alt_image" />
+                    </div>
+                    <div class="form-group" ng-if="category.alt_image.base64">
+                        <label for="displayImage">Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-src="data:image/jpeg;base64,{{ category.alt_image.base64 }}" />
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="image_text">Image Text</label>

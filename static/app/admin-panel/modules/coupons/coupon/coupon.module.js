@@ -43,6 +43,7 @@ angular.module("couponModule", ['angular-table', 'constantModule',
                     console.log(destArray);
                     $scope.statusOptions = destArray;
                     angular.forEach($scope.coupons, function(item) {
+                        console.log(item);
                         $scope.check.check[item._id] = false;
                     })
                 }
@@ -71,13 +72,6 @@ angular.module("couponModule", ['angular-table', 'constantModule',
             $scope.check.count = count;
         };
 
-        // update user
-        $scope.viewStore = function (obj) {
-            console.log(obj);
-            $scope.u_user = obj;
-            var f = $filter('filter')($scope.userLevels, {level: obj.user_level[0]});
-            $scope.u_user.level = (f.length) ? f[0]: $scope.userLevels[0];
-        };
         // delete selected check boxes
         $scope.deleteSelected = function() {
             var deletedArray = [];

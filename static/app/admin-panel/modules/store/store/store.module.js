@@ -37,6 +37,7 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                             $scope.stores = data._items;
                             $scope.filterStores = data._items;
                             angular.forEach($scope.stores, function(item) {
+                                console.log(item)
                                 $scope.check.check[item._id] = false;
                             });
                         }

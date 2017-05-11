@@ -30,6 +30,13 @@
                         <input type="file" id="image" ng-model="store.image" base-sixty-four-input>
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
+                    <div class="form-group" ng-if="store.image">
+                        <label>Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-if="!store.image['base64']" ng-src="{{ store.image }}" />
+                            <img ng-if="store.image['base64']" ng-src="data:image/jpeg;base64,{{ store.image.base64 }}" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="top_desc">Top Description</label>
                         <textarea ng-click="textEditor($event)" class="form-control input-sm" id="top_desc"
@@ -105,10 +112,24 @@
                         <input type="file" id="side_banner" ng-model="store.side_banner" base-sixty-four-input>
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
+                    <div class="form-group" ng-if="store.top_banner">
+                        <label>Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-if="!store.side_banner['base64']" ng-src="{{ store.side_banner }}" />
+                            <img ng-if="store.side_banner['base64']" ng-src="data:image/jpeg;base64,{{ store.side_banner.base64 }}" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="top_banner">Top Banner</label>
                         <input type="file" id="top_banner" ng-model="store.top_banner" base-sixty-four-input>
                         <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="store.top_banner">
+                        <label>Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-if="!store.top_banner['base64']" ng-src="{{ store.top_banner }}" />
+                            <img ng-if="store.top_banner['base64']" ng-src="data:image/jpeg;base64,{{ store.top_banner.base64 }}" />
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>
@@ -149,6 +170,13 @@
                         <label for="all_tag_image">All Tag Image</label>
                         <input type="file" id="all_tag_image" ng-model="store.all_tag_image" base-sixty-four-input>
                         <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="store.all_tag_image">
+                        <label>Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-if="!store.all_tag_image['base64']" ng-src="{{ store.all_tag_image }}" />
+                            <img ng-if="store.all_tag_image['base64']" ng-src="data:image/jpeg;base64,{{ store.all_tag_image.base64 }}" />
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="image_text">Image Text</label>

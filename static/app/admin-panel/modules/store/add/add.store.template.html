@@ -41,6 +41,9 @@
                         <textarea ng-click="textEditor($event)" class="form-control input-sm" id="top_desc"
                                   placeholder="Top Description" ng-model="store.top_description"></textarea>
                     </div>
+                    <div class="form-group" ng-if="store.top_description">
+                        <div class="thumbnail" ng-bind-html="store.top_description"></div>
+                    </div>
                     <div class="form-group">
                         <label for="footer_desc">Footer Description</label>
                         <textarea ng-click="textEditor($event)" class="form-control input-sm" id="footer_desc"

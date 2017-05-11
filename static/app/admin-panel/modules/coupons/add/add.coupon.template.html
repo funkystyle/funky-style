@@ -74,8 +74,9 @@
                         <input type="text" class="form-control input-sm" id="discount" placeholder="Discount" ng-model="coupon.discount">
                     </div>
                     <div class="form-group">
+                        <label>Expiry Date</label>
                         <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
+                            <input required type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -93,7 +94,7 @@
                     <div class="form-group">
                         <label>Store</label>
                         <ui-select multiple ng-model="coupon.related_stores" theme="bootstrap" close-on-select="false" title="Related Stores">
-                            <ui-select-match placeholder="Select Related Stores">{{$item.name}}</ui-select-match>
+                            <ui-select-match placeholder="Select Store">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="store._id as store in stores | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="store.name | highlight: $select.search"></div>
                                 <small>

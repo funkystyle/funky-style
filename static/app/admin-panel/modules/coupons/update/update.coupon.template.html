@@ -3,10 +3,10 @@
 <div class="panel panel-default" style="margin-top: 90px;">
     <div class="panel-heading">
         <div class="row">
-            <div class="col-lg-6">
-                <h1 style="margin-top: 10px;">
+            <div class="col-lg-12">
+                <h3 style="margin-top: 10px;">
                     <b style="text-transform: capitalize;">{{ coupon.title }}</b> Coupon!
-                </h1>
+                </h3>
             </div>
             <!-- end col -->
         </div>
@@ -93,7 +93,7 @@
                     <div class="form-group">
                         <label>Store</label>
                         <ui-select multiple ng-model="coupon.related_stores" theme="bootstrap" close-on-select="false" title="Related Stores">
-                            <ui-select-match placeholder="Select Related Stores">{{$item.name}}</ui-select-match>
+                            <ui-select-match placeholder="Select Store">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="store._id as store in stores | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="store.name | highlight: $select.search"></div>
                                 <small>

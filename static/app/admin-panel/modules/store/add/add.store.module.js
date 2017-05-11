@@ -1,7 +1,9 @@
 angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "naif.base64", "categoryFactoryModule"])
     .controller("addStoreCtrl", function($scope, $state, $timeout, toastr, storeFactory, $auth, personFactory, categoryFactory) {
-        $scope.store = {};
+        $scope.store = {
+            number_of_coupons: 0
+        };
         $scope.selected_user = {}; $scope.persons = [];
         $scope.categories = [];
         $scope.breadcrumbs = [];

@@ -1,8 +1,8 @@
 angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy",
-    "couponFactoryModule", "categoryFactoryModule", "constantModule"])
-    .controller("addCouponCtrl", function($scope, $timeout, toastr, storeFactory,
-                                          $auth, personFactory, $log, couponFactory, categoryFactory, URL) {
+    "couponFactoryModule", "categoryFactoryModule", "constantModule", "storeFactoryModule"])
+    .controller("addCouponCtrl", function($scope, $timeout, toastr, storeFactory, $state,
+                                          $auth, personFactory, $log, couponFactory, categoryFactory, URL, storeFactory) {
         $scope.persons = [];
         $scope.categories = [];
         $scope.selected_user = {
@@ -68,12 +68,33 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
 
         // add coupon
         $scope.addCoupon = function (coupon) {
-            coupon.expire_date = new Date($("#datetimepicker1").find("input").val());
-
+            coupon.expire_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
             console.log(coupon.expire_date);
             couponFactory.post(coupon).then(function (data) {
                 console.log(data);
                 toastr.success(coupon.title+" Created", "Success!");
+
+                // update the coupon count in particular selected store
+                angular.forEach($scope.stores, function (item) {
+                    if(item._id == coupon.related_stores[0]) {
+                        var store = item;
+                        store.number_of_coupons = store.number_of_coupons + 1;
+
+                        delete store._created;
+                        delete store._updated;
+                        delete store._links;
+                        console.log(store);
+                        storeFactory.update(store, $auth.getToken()).then(function (store_data) {
+                            console.log(store_data);
+                            if(data.data) {
+                                $state.go("header.update-coupon", {couponId: data.data._id});
+                            }
+                        }, function (error) {
+                            console.log(error);
+                            toastr.error(error.data._error.message, error.data._error.code);
+                        });
+                    }
+                });
             }, function (error) {
                 console.log(error);
                 toastr.error(error.data._issues, error.data._error.code);
