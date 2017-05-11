@@ -51,6 +51,7 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
         }
 
         $scope.addStore = function(store) {
+            console.log(store)
             if(store.image && Object.keys(store.image).length) {
                 store.image = "data:image/jpeg;base64,"+store.image.base64;
             } else {
@@ -76,7 +77,6 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
                 return false;
             }
 
-            console.log(store, $auth.getToken());
             storeFactory.insert(store, $auth.getToken()).then(function (data) {
                 console.log(data);
 
