@@ -1,0 +1,9 @@
+.coupon-options {
+    display: none;
+}
+.coupon-name:hover .coupon-options {
+    display: block;
+}
+td {
+    max-width: 100px !important;
+}

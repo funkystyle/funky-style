@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/settings/settings/settings.css">
+<link rel="stylesheet" href="" />
+
+<div class="panel panel-default" style="margin-top: 90px;">
+    <div class="panel-heading">
+        <h1>Settings</h1>
+    </div>
+    <!-- end panel-heading -->
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Nav tabs -->
+                <div class="card">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" ui-sref-active="active">
+                            <a ui-sref="header.settings.profile">Profile</a>
+                        </li>
+                        <li role="presentation" ui-sref-active="active"><a ui-sref="header.settings.change-password">Change Password</a></li>
+                        <li role="presentation" ui-sref-active="active"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                        <li role="presentation" ui-sref-active="active"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                    </ul>
+
+                    <ui-view></ui-view>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end panel-body -->
+</div>
+<!-- end panel -->

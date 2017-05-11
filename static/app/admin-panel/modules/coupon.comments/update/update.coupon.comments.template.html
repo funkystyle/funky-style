@@ -1,0 +1,166 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/cms/add/add.cms.css" />
+
+<div class="panel panel-default" style="margin-top: 90px;">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 style="margin-top: 10px;">
+                    Update CMS Page
+                </h1>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+    </div>
+    <div class="panel-body">
+        <form ng-submit="update Cms(cms)">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="cms_name">Name</label>
+                        <input type="text" class="form-control input-sm" id="cms_name"
+                               placeholder="cms Name" ng-model="cms.name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">cms URL</label>
+                        <input type="text" class="form-control input-sm" id="url"
+                               placeholder="URL" ng-model="cms.url" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea ng-click="textEditor()"
+                                  data-toggle="modal" data-target="#editorModal" rows="3"
+                                  ng-model="cms.description" class="form-control input-sm" id="description"
+                                  placeholder="Description"></textarea>
+                    </div>
+
+                </div><!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="footer_description">SEO Title</label>
+                        <input type="text" ng-model="cms.seo_title" class="form-control input-sm" id="footer_description"
+                               placeholder="SEO Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="seo_description">SEO Description</label>
+                        <textarea ng-model="cms.seo_description" class="form-control input-sm" id="seo_description"
+                                  placeholder="SEO Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="h1">H1</label>
+                        <input type="text" class="form-control input-sm" id="h1" placeholder="H1"
+                               ng-model="cms.h1">
+                    </div>
+                </div> <!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group" ng-init="cms.status = true">
+                        <label>Status</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="true" name="cms.status" data-ng-model="cms.status">Active
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="false" name="cms.status" data-ng-model="cms.status">Pending
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Modified By</label>
+                        <ui-select ng-model="selected_user.user" theme="bootstrap">
+                            <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
+                            <ui-select-choices repeat="person._id as person in persons | filter: $select.search">
+                                <small>
+                                    <span ng-bind-html="''+person.first_name | highlight: $select.search"></span>
+                                    <span ng-bind-html="''+person.last_name | highlight: $select.search"></span>
+                                </small>
+                                <div ng-bind-html="person.email | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+            <button type="submit" class="btn btn-info btn-md">Add Update</button>
+        </form>
+        <br><br><br><br><br><br><link rel="stylesheet" href="/static/app/admin-panel/modules/cms/add/add.cms.css" />
+
+        <div class="panel panel-default" style="margin-top: 90px;">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1 style="margin-top: 10px;">
+                            Add CMS Page
+                        </h1>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+            </div>
+            <div class="panel-body">
+                <form ng-submit="addCms(cms)">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="form-group">
+                                <label for="cms_name">Name</label>
+                                <input type="text" class="form-control input-sm" id="cms_name"
+                                       placeholder="cms Name" ng-model="cms.name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="url">cms URL</label>
+                                <input type="text" class="form-control input-sm" id="url"
+                                       placeholder="URL" ng-model="cms.url" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea ng-click="textEditor()"
+                                          data-toggle="modal" data-target="#editorModal" rows="3"
+                                          ng-model="cms.description" class="form-control input-sm" id="description"
+                                          placeholder="Description"></textarea>
+                            </div>
+
+                        </div><!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="form-group">
+                                <label for="footer_description">SEO Title</label>
+                                <input type="text" ng-model="cms.seo_title" class="form-control input-sm" id="footer_description"
+                                       placeholder="SEO Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="seo_description">SEO Description</label>
+                                <textarea ng-model="cms.seo_description" class="form-control input-sm" id="seo_description"
+                                          placeholder="SEO Description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="h1">H1</label>
+                                <input type="text" class="form-control input-sm" id="h1" placeholder="H1"
+                                       ng-model="cms.h1">
+                            </div>
+                        </div> <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="form-group" ng-init="cms.status = true">
+                                <label>Status</label> <br />
+                                <label class="radio-inline">
+                                    <input type="radio" data-ng-value="true" name="cms.status" data-ng-model="cms.status">Active
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" data-ng-value="false" name="cms.status" data-ng-model="cms.status">Pending
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Modified By</label>
+                                <ui-select ng-model="selected_user.user" theme="bootstrap">
+                                    <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
+                                    <ui-select-choices repeat="person._id as person in persons | filter: $select.search">
+                                        <small>
+                                            <span ng-bind-html="''+person.first_name | highlight: $select.search"></span>
+                                            <span ng-bind-html="''+person.last_name | highlight: $select.search"></span>
+                                        </small>
+                                        <div ng-bind-html="person.email | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
+
+                    <button type="submit" class="btn btn-info btn-md">Add cms Category</button>
+                </form>
+                <br><br><br><br><br><br>
+                <pre>{{ cms | json }}</pre>
+            </div> <!-- end panel-body -->
+        </div>
+    </div> <!-- end panel-body -->
+</div>

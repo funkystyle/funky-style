@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/users/add/add.users.css" />
+<link rel="stylesheet" href="/static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h1 style="margin-bottom: 40px;">Add User</h1>
+
+
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 pad-0">
+                        <form name="signup" ng-submit="createNow(user)" cg-busy="load">
+                            <div class="form-group col-md-6">
+                                <label for="first_name">FIRST NAME</label>
+                                <input required type="text" class="form-control" ng-model="user.first_name" placeholder="FIRST NAME" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="first_name">LAST NAME</label>
+                                <input required type="text" class="form-control" ng-model="user.last_name" placeholder="LAST NAME" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="email">Email address</label>
+                                <input required type="email" class="form-control" id="email" ng-model="user.email" placeholder="Email" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="mobile_number">MOBILE NUMBER</label>
+                                <input required type="text" only-digits class="form-control" id="mobile_number" ng-model="user.mobile_number" placeholder="MOBILE NUMBER" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="password">Password</label>
+                                <input required type="password" ng-model="user.password" class="form-control" id="password" placeholder="Password">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="city">City</label>
+                                <input required type="text" class="form-control" ng-model="user.city" placeholder="CITY" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="age">Age</label>
+                                <input required type="number" class="form-control" ng-model="user.age" placeholder="AGE" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="gender">Gender</label>
+                                <ui-select required ng-model="user.gender" theme="bootstrap">
+                                    <ui-select-match placeholder="GENDER">{{ $select.selected.text }}</ui-select-match>
+                                    <ui-select-choices repeat="item.code as item in genders | filter: $select.search">
+                                        <div ng-bind-html="item.text | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="user_level">User Level</label>
+                                <ui-select required ng-model="user.user_level" theme="bootstrap">
+                                    <ui-select-match placeholder="Select User Level">{{ $select.selected.text }}</ui-select-match>
+                                    <ui-select-choices repeat="item.level as item in userLevels | filter: $select.search">
+                                        <div ng-bind-html="item.text | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-md btn-info">Create now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

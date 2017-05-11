@@ -1,0 +1,85 @@
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+div.login-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    min-height: 500px;
+    background-color: #FFFFFF;
+}
+
+.form-horizontal .control-label {
+    margin-bottom: 10px;
+    padding-top: 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.account-box {
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -o-border-radius: 2px;
+    z-index: 3;
+    font-size: 13px !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.logo h1 {
+    margin-bottom: 30px;
+}
+
+.forgotLnk {
+    margin-top: 10px;
+    display: block;
+}
+
+.or-box {
+    position: relative;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.or {
+    color: #666666;
+    background-color: #ffffff;
+    position: absolute;
+    text-align: center;
+    top: 65px;
+    width: 40px;
+    left: 45%;
+}
+
+.account-box .btn:hover {
+    color: #fff;
+}
+
+.btn-facebook {
+    background-color: #3F639E;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-google {
+    background-color: #d34836;
+    color: #fff;
+    font-weight: bold;
+}
+
+.row-block a i.fa {
+    padding-top: 3px;
+}
+
+.border-col {
+    border: 1px solid #DDDDDD;
+    margin-top: 40px;
+}

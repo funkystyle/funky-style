@@ -1,0 +1,9 @@
+ul.collapse li.active,
+.sidebar-li {
+    background-color: #323e4b !important;
+}
+
+.navbar-inverse {
+    background-color: #222222;
+    border: 1px solid #222222;
+}

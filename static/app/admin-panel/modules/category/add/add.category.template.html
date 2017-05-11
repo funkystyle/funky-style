@@ -1,0 +1,198 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/category/add/add.category.css" />
+
+<div class="panel panel-default" style="margin-top: 90px;">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 style="margin-top: 10px;">
+                    Add Category!
+                </h1>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+    </div>
+
+    <div class="panel-body" cg-busy="load">
+        <form ng-submit="addCategory(category)">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control input-sm" id="name"
+                               placeholder="category Name" ng-model="category.name" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">URL</label>
+                        <input type="text" class="form-control input-sm" id="url"
+                               placeholder="URL" ng-model="category.url" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" id="image" ng-model="category.image" base-sixty-four-input>
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="category.image.base64">
+                        <label for="displayImage">Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-src="data:image/jpeg;base64,{{ category.image.base64 }}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="top_desc">Top Description</label>
+                        <textarea ng-click="textEditor($event)"
+                                  class="form-control input-sm" id="top_desc"
+                                  placeholder="Top Description" ng-model="category.top_description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="footer_desc">Footer Description</label>
+                        <textarea ng-click="textEditor($event)" class="form-control input-sm" id="footer_desc"
+                                  placeholder="Footer Description" ng-model="category.footer_description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="h1">H1</label>
+                        <input type="text" class="form-control input-sm" ng-model="category.h1" id="h1" placeholder="category H1">
+                    </div>
+                    <div class="form-group">
+                        <label for="h2">H2</label>
+                        <input type="text" class="form-control input-sm" id="h2" ng-model="category.h2" placeholder="category H2">
+                    </div>
+                    <div class="form-group" ng-init="category.menu = undefined">
+                        <label>Menu</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" value="top menu" name="category.menu" ng-model="category.menu">Top Menu
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="bottom menu" name="category.menu" ng-model="category.menu">Bottom Menu
+                        </label>
+                    </div>
+                </div><!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>Related Categories</label>
+                        <ui-select multiple ng-model="category.related_categories" theme="bootstrap" close-on-select="false" title="Related Categories">
+                            <ui-select-match placeholder="Select Related Categories">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="category._id as category in categories | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="category.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+category.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label>Top Stores</label>
+                        <ui-select multiple ng-model="category.top_stores" theme="bootstrap" close-on-select="false"  title="Related top stores">
+                            <ui-select-match placeholder="Select Top Stores">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="category._id as category in stores | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="category.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+category.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label>Top Categories</label>
+                        <ui-select multiple ng-model="category.top_categories" theme="bootstrap" close-on-select="false"  title="Related categorys">
+                            <ui-select-match placeholder="Top Categories">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="category._id as category in categories | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="category.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+category.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="side_banner">Side Banner</label>
+                        <input type="file" id="side_banner" ng-model="category.side_banner" base-sixty-four-input />
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="top_banner">Top Banner</label>
+                        <input type="file" id="top_banner" ng-model="category.top_banner" base-sixty-four-input />
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-init="category.featured_category = true">
+                        <label>Featured Category</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="true" name="category.featured_category" data-ng-model="category.featured_category">Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="false" name="category.featured_category" data-ng-model="category.featured_category">No
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="seo_title">SEO title</label>
+                        <input type="text" class="form-control input-sm" id="seo_title" placeholder="SEO Title"
+                               ng-model="category.seo_title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="meta_title">SEO Description</label>
+                        <textarea ng-click="textEditor($event)" class="form-control input-sm" id="meta_title"
+                                  placeholder="SEO Description" ng-model="category.seo_description"></textarea>
+                    </div>
+                </div> <!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="alt_image">Alt Image</label>
+                        <input type="file" ng-model="category.alt_image" class="form-control" base-sixty-four-input id="alt_image" />
+                    </div>
+                    <div class="form-group">
+                        <label for="image_text">Image Text</label>
+                        <input type="text" class="form-control" ng-model="category.image_text" placeholder="Image Text" id="image_text">
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <input type="number" class="form-control" ng-model="category.rating" id="rating" placeholder="Rating">
+                    </div>
+                    <div class="form-group">
+                        <label for="breadcrumbs">BreadCrumbs</label>
+                        <ui-select multiple ng-model="category.breadcrumb" theme="bootstrap"
+                                   close-on-select="false" title="Related Categories" id="breadcrumbs">
+                            <ui-select-match placeholder="Select Breadcrumb">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="item in breadcrumbs | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="item.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group" ng-init="category.status = true">
+                        <label>Status</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="true" name="category.status" data-ng-model="category.status">Active
+                        </label>
+                        <!--<label class="radio-inline">
+                            <input type="radio" data-ng-value="false" name="category.status" data-ng-model="category.status">Pending
+                        </label>-->
+                    </div>
+                </div> <!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>Last Modified By</label>
+                        <ui-select ng-model="selected_user.user" theme="bootstrap">
+                            <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
+                            <ui-select-choices repeat="person._id as person in persons | filter: $select.search">
+                                <small>
+                                    <span ng-bind-html="''+person.first_name | highlight: $select.search"></span>
+                                    <span ng-bind-html="''+person.last_name | highlight: $select.search"></span>
+                                </small>
+                                <div ng-bind-html="person.email | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label>Category Type</label>
+                        <ui-select ng-model="category.category_type" theme="bootstrap">
+                            <ui-select-match placeholder="Select modified user">{{ $select.selected.name }}</ui-select-match>
+                            <ui-select-choices repeat="cat.name as cat in category_type | filter: $select.search">
+                                <div ng-bind-html="cat.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+            <button type="submit" class="btn btn-md btn-info">Add category</button>
+        </form>
+        <br><br><br><br><br><br>
+    </div> <!-- end panel-body -->
+</div>

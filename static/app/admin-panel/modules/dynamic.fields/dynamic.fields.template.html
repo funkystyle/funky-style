@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/dynamic.fields/dynamic.fields.css" />
+
+<div class="panel panel-default" style="margin-top: 90px;">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 style="margin-top: 10px;">
+                   Add Dynamic Fields!
+                </h1>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+    </div>
+
+    <div class="panel-body" cg-busy="load">
+        <form ng-submit="addStore(store)">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="fields_name">Fields Name</label>
+                        <input type="text" id="fields_name" class="form-control input-sm"
+                               placeholder="Fields Name" ng-model="dynamic.fields_name">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="fields_type">Fields Type</label>
+                        <input type="text" id="fields_type" class="form-control input-sm"
+                               placeholder="Fields Name" ng-model="dynamic.fields_type">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Required</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="dynamic.required" ng-model="dynamic.required">Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="dynamic.required" ng-model="dynamic.required">No
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="deal_category">Deal Category</label>
+                        <ui-select id="deal_category" multiple ng-model="dynamic.deal_category" theme="bootstrap"
+                                   close-on-select="false"  title="Select Deal Category">
+                            <ui-select-match placeholder="Deal Category">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="person.email as person in people | propsFilter: {name: $select.search, age: $select.search}">
+                                <div ng-bind-html="person.name | highlight: $select.search"></div>
+                                <small>
+                                    email: {{person.email}}
+                                    age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-md btn-info">Add Store</button>
+        </form>
+        <br><br><br><br><br><br>
+    </div> <!-- end panel-body -->
+</div>
