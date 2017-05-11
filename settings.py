@@ -613,7 +613,7 @@ SCHEMAS = {
             'schema': {
                 'type': 'objectid',
                 'data_relation': {
-                    'resource': 'stores',
+                    'resource': 'categories',
                     'embeddable': True,
                     'field': '_id'
                 }
