@@ -1,0 +1,172 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/coupons/update/update.coupon.css" />
+
+<div class="panel panel-default" style="margin-top: 90px;">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 style="margin-top: 10px;">
+                    <b style="text-transform: capitalize;">{{ coupon.title }}</b> Coupon!
+                </h1>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+
+    <div class="panel-body">
+        <form ng-submit="updateCoupon(coupon)">
+            <div class="row">
+                <div class="col-lg-9 col-md-9">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control input-md" id="title" placeholder="Title" ng-model="coupon.title">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea ng-click="textEditor($event)" class="form-control input-sm" id="description" placeholder="Description" ng-model="coupon.description"></textarea>
+                    </div>
+                    <div class="form-group" ng-init="coupon.coupon_type = 'coupon'">
+                        <label>Coupon Type</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" name="coupon.coupon_type"
+                                   value="coupon" ng-model="coupon.coupon_type">Coupon
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="coupon.coupon_type"
+                                   value="offer" ng-model="coupon.coupon_type">Offer
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="coupon_code">Coupon Code</label>
+                        <input ng-disabled="coupon.coupon_type == 'offer'" type="text" class="form-control input-sm"
+                               id="coupon_code" placeholder="Coupon Code" ng-model="coupon.coupon_code">
+                    </div>
+                    <div class="form-group">
+                        <label for="destination_url">Destination URL</label>
+                        <input type="text" id="destination_url" class="form-control input-sm" ng-model="coupon.destination_url" placeholder="Destination URL" />
+                    </div>
+
+                </div>
+                <!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group" ng-init="coupon.discount_type = 'flat'">
+                        <label>Discount Type</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" value="flat" name="coupon.discount_type" ng-model="coupon.discount_type">Flat
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="upto" name="coupon.discount_type" ng-model="coupon.discount_type">Upto
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="starts" name="coupon.discount_type" ng-model="coupon.discount_type">Starts
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="cashback" name="coupon.discount_type" ng-model="coupon.discount_type">
+                            Cashback
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="discount">Discount</label>
+                        <input type="text" class="form-control input-sm" id="discount" placeholder="Discount" ng-model="coupon.discount">
+                    </div>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-init="coupon.featured_coupon = false">
+                        <label>Featured Coupon</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="true" name="coupon.featured_coupon" data-ng-model="coupon.featured_coupon">Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="false" name="coupon.featured_coupon" data-ng-model="coupon.featured_coupon">No
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Store</label>
+                        <ui-select multiple ng-model="coupon.related_stores" theme="bootstrap" close-on-select="false" title="Related Stores">
+                            <ui-select-match placeholder="Select Related Stores">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="store._id as store in stores | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="store.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+store.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>Related Categories</label>
+                        <ui-select multiple ng-model="coupon.related_categories" theme="bootstrap" close-on-select="false" title="Related Categories">
+                            <ui-select-match placeholder="Select Related Categories">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="store._id as store in categories | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="store.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+store.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label>Deal of the day</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="true" name="coupon.deal_of_the_day" data-ng-model="coupon.deal_of_the_day">Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="false" name="coupon.deal_of_the_day" data-ng-model="coupon.deal_of_the_day">No
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <ui-select ng-model="coupon.status" theme="bootstrap">
+                            <ui-select-match placeholder="Select User Level">{{ $select.selected }}</ui-select-match>
+                            <ui-select-choices repeat="st in status | filter: $select.search">
+                                <div ng-bind-html="st | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Modified By</label>
+                        <ui-select ng-model="selected_user.user" theme="bootstrap">
+                            <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
+                            <ui-select-choices repeat="person._id as person in persons | filter: $select.search">
+                                <small>
+                                    <span ng-bind-html="''+person.first_name | highlight: $select.search"></span>
+                                    <span ng-bind-html="''+person.last_name | highlight: $select.search"></span>
+                                </small>
+                                <div ng-bind-html="person.email | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label>Recommended Store</label>
+                        <ui-select multiple ng-model="coupon.recommended_stores" theme="bootstrap" close-on-select="false" title="Recommended Stores">
+                            <ui-select-match placeholder="Select Recommended Stores">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="store._id as store in stores | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="store.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+store.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+            <button type="submit" class="btn btn-md btn-info">Update Coupon</button>
+        </form>
+        <br><br><br><br><br><br>
+    </div>
+    <!-- end panel-body -->
+</div>

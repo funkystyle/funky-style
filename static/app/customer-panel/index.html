@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="APP">
+
+<head>
+    <title>Fab PromoCodes - Discount Coupons, Offers, Coupon Codes March 2017</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="static/app/customer-panel/modules/assets/css/style.css" />
+</head>
+
+<body>
+    <ui-view autoscroll="true">
+        <div class="loading">
+            <div class="spinner"></div>
+        </div>
+    </ui-view>
+    <!-- footer -->
+    <div ng-include="'static/app/customer-panel/modules/footer/footer.template.html'"></div>
+    <!-- end footer -->
+    <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="static/bower_components/angular/angular.min.js"></script>
+    <script src="static/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="static/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="static/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="static/app/customer-panel/modules/app.js"></script>
+</body>
+
+</html>
