@@ -44,7 +44,7 @@ def save_image_from_base64(image_base64_data):
               .format(image_extension, CONFIG_DATA['ALLOWED_EXTENSIONS']))
     unique_name = str(uuid.uuid4()).replace("-", "_")
     file_name = unique_name+"."+image_extension
-    full_file_name = BASE_DIR+CONFIG_DATA['UPLOAD_FOLDER']+file_name
+    full_file_name = CONFIG_DATA['UPLOAD_FOLDER']+file_name
 
     import base64
     with open(full_file_name, "wb") as fh:
