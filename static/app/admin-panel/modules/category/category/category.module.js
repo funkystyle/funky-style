@@ -24,7 +24,7 @@ angular.module("categoryModule", ['angular-table', 'constantModule', 'toastr', '
         };
 
         $scope.updateFilteredList = function() {
-            $scope.filterStores = $filter("filter")($scope.stores, $scope.search.search);
+            $scope.filterCategories = $filter("filter")($scope.categories, $scope.search.search);
         };
 
         if ($auth.isAuthenticated()) {

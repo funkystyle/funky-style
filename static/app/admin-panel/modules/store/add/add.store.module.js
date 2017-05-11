@@ -51,22 +51,28 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
         }
 
         $scope.addStore = function(store) {
-            if(Object.keys(store.image).length) {
+            if(store.image && Object.keys(store.image).length) {
                 store.image = "data:image/jpeg;base64,"+store.image.base64;
             } else {
                 toastr.error("Please select store Image", "Error!");
                 return false;
             }
-            if(Object.keys(store.top_banner).length) {
+            if(store.top_banner && Object.keys(store.top_banner).length) {
                 store.top_banner = "data:image/jpeg;base64,"+store.top_banner.base64;
             } else {
                 toastr.error("Please select Top banner Image", "Error!");
                 return false;
             }
-            if(Object.keys(store.side_banner).length) {
+            if(store.side_banner && Object.keys(store.side_banner).length) {
                 store.side_banner = "data:image/jpeg;base64,"+store.side_banner.base64;
             } else {
                 toastr.error("Please select Side banner Image", "Error!");
+                return false;
+            }
+            if(store.all_tag_image && Object.keys(store.all_tag_image).length) {
+                store.all_tag_image = "data:image/jpeg;base64,"+store.all_tag_image.base64;
+            } else {
+                toastr.error("Please select Alt tag Image", "Error!");
                 return false;
             }
 
