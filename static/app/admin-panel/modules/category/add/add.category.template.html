@@ -16,17 +16,17 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">Name*</label>
                         <input type="text" class="form-control input-sm" id="name"
                                placeholder="category Name" ng-model="category.name" autocomplete="off" required>
                     </div>
                     <div class="form-group">
-                        <label for="url">URL</label>
+                        <label for="url">URL*</label>
                         <input type="text" class="form-control input-sm" id="url"
                                placeholder="URL" ng-model="category.url" required>
                     </div>
                     <div class="form-group">
-                        <label for="image">Image</label>
+                        <label for="image">Image*</label>
                         <input type="file" id="image" ng-model="category.image" base-sixty-four-input>
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
@@ -48,12 +48,12 @@
                                   placeholder="Footer Description" ng-model="category.footer_description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="h1">H1</label>
-                        <input type="text" class="form-control input-sm" ng-model="category.h1" id="h1" placeholder="category H1">
+                        <label for="h1">H1*</label>
+                        <input type="text" required class="form-control input-sm" ng-model="category.h1" id="h1" placeholder="category H1">
                     </div>
                     <div class="form-group">
-                        <label for="h2">H2</label>
-                        <input type="text" class="form-control input-sm" id="h2" ng-model="category.h2" placeholder="category H2">
+                        <label for="h2">H2*</label>
+                        <input type="text" required class="form-control input-sm" id="h2" ng-model="category.h2" placeholder="category H2">
                     </div>
                     <div class="form-group" ng-init="category.menu = undefined">
                         <label>Menu</label> <br />
@@ -124,7 +124,7 @@
                             <img ng-src="data:image/jpeg;base64,{{ category.top_banner.base64 }}" />
                         </div>
                     </div>
-                    <div class="form-group" ng-init="category.featured_category = true">
+                    <div class="form-group" ng-init="category.featured_category = undefined">
                         <label>Featured Category</label> <br />
                         <label class="radio-inline">
                             <input type="radio" data-ng-value="true" name="category.featured_category" data-ng-model="category.featured_category">Yes
@@ -136,7 +136,7 @@
                     <div class="form-group">
                         <label for="seo_title">SEO title</label>
                         <input type="text" class="form-control input-sm" id="seo_title" placeholder="SEO Title"
-                               ng-model="category.seo_title" required>
+                               ng-model="category.seo_title">
                     </div>
                     <div class="form-group">
                         <label for="meta_title">SEO Description</label>
@@ -160,8 +160,8 @@
                         <input type="text" class="form-control" ng-model="category.image_text" placeholder="Image Text" id="image_text">
                     </div>
                     <div class="form-group">
-                        <label for="rating">Rating</label>
-                        <input type="number" class="form-control" ng-model="category.rating" id="rating" placeholder="Rating">
+                        <label for="rating">Rating*</label>
+                        <input required type="number" class="form-control" ng-model="category.rating" id="rating" placeholder="Rating">
                     </div>
                     <div class="form-group">
                         <label for="breadcrumbs">BreadCrumbs</label>
@@ -174,7 +174,7 @@
                         </ui-select>
                     </div>
                     <div class="form-group" ng-init="category.status = true">
-                        <label>Status</label> <br />
+                        <label>Status*</label> <br />
                         <label class="radio-inline">
                             <input type="radio" data-ng-value="true" name="category.status" data-ng-model="category.status">Active
                         </label>

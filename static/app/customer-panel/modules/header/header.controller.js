@@ -1,8 +1,14 @@
-angular.module("headerModule", ["ui.bootstrap", "APP", "constantModule"])
-    .controller("headerCtrl", function ($scope, auth, $state, $http, URL) {
+angular.module("headerModule", ["ui.bootstrap", "APP",
+    "constantModule", "storeServiceModule", "categoryFactoryModule", "couponFactoryModule"])
+    .controller("headerCtrl", function ($scope, auth, $state, $http, URL, $http,
+                                        categoryFactory, storeFactory, couponFactory) {
         console.log("header controller!");
     	// declaring the scope variables
     	$scope.user = {};
+    	$scope.categories = [];
+    	$scope.stores = [];
+    	$scope.coupons = [];
+    	$scope.totalItems = [];
     	
     	if(localStorage.getItem('satellizer_token')) {
             // getting the current user information
@@ -12,6 +18,47 @@ angular.module("headerModule", ["ui.bootstrap", "APP", "constantModule"])
                 console.log(error);
             });
         }
+
+        // get the list of coupons or categories or stores
+        $scope.searchQuery = function (val) {
+    	    console.log(val)
+            $scope.totalItems = [];
+            getStoreByParam('name', val);
+            // get list of matched coupons based on query
+            var obj = {};
+            obj['title'] = true;
+            $http({
+                url: "/api/1.0/coupons/?where="+JSON.stringify(obj),
+                mathod: "GET"
+            }).then(function (data) {
+                console.log(data);
+                if(data['data']) {
+                    $scope.coupons = data.data._items;
+                }
+            }, function (error) {
+                console.log(error);
+            });
+        };
+
+        function getStoreByParam(param, value) {
+            var sto = {};
+            value = (param == 'featured_store') ? true: value;
+            sto[param] = value;
+            $http({
+                url: "/api/1.0/stores/?where="+JSON.stringify(sto),
+                mathod: "GET"
+            }).then(function (data) {
+                console.log(data);
+                if(data['data']['_items']) {
+                    console.log(data.data._items);
+                    $scope.stores = data.data._items;
+                    $scope.totalItems.push($scope.stores);
+                }
+            }, function (error) {
+                console.log(error);
+            });
+        }
+        getStoreByParam('featured_store', true);
 
     	// logout
         $scope.logout = function () {

@@ -1,7 +1,7 @@
 angular
     .module("storeinfoModule", ["footerModule", "storeServiceModule", "couponFactoryModule", "categoryFactoryModule"])
     .controller("storeinfoController", function ($scope, $stateParams, $state, storeFactory, couponFactory,
-                                                 categoryFactory, $filter) {
+                                                 categoryFactory, $filter, $sce) {
         $scope.favorite = {
             favorite: false
         };
@@ -18,6 +18,11 @@ angular
         $scope.filterCoupons = [];
         $scope.categories = [];
 
+        $scope.trustAsHtml = function(string, length) {
+            if(string) {
+                return $sce.trustAsHtml(string.substring(1, length));
+            }
+        };
         // manageFavorite function
         $scope.manageFavorite = function () {
             $scope.favorite.favorite = !$scope.favorite.favorite;
@@ -33,6 +38,7 @@ angular
             storeFactory.getStore({field: 'url', query: $stateParams.url}).then(function (store) {
                 if(store.data) {
                     $scope.store = store.data._items[0];
+                    $scope.store.toDayDate = new Date();
                 }
                 // get all the coupons related to this store
                 couponFactory.get().then(function (data) {

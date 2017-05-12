@@ -86,21 +86,12 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
             }
             if(typeof category.top_banner === 'object') {
                 category.top_banner = "data:image/jpeg;base64,"+category.top_banner.base64;
-            } else {
-                toastr.error("Please select Top banner Image", "Error!");
-                return false;
             }
             if(typeof category.side_banner === 'object') {
                 category.side_banner = "data:image/jpeg;base64,"+category.side_banner.base64;
-            } else {
-                toastr.error("Please select Side banner Image", "Error!");
-                return false;
             }
             if(typeof category.alt_image === 'object') {
                 category.alt_image = "data:image/jpeg;base64,"+category.alt_image.base64;
-            } else {
-                toastr.error("Please select Alt tag Image", "Error!");
-                return false;
             }
             console.log(category);
             categoryFactory.post(category).then(function (data) {

@@ -31,11 +31,16 @@
                         </ol>
                     </div> <!-- end div -->
                     <h1 class="margin-top-0 h3-heading">{{ store.h1 }}</h1>
-                    <p class="para_small">
-                        {{ store.top_description }}
+                    <p class="para_small" data-ng-bind-html="trustAsHtml(store.top_description, 400)"></p>
+                    <p style="min-height: 10px;">
+                        <a href="" class="pull-right"
+                           ng-click="moreOrLess()">
+                            Show {{ (store.top_description.substring(1, 400).length == 399) ? 'More': 'Less' }}
+                        </a>
                     </p>
                     <p class="para_small">
-                        {{ store.no_of_coupons }} Verified Coupons - {{ store.modified_date | date: "dd MMM yyyy" }}
+                        {{ store.number_of_coupons }} Verified Coupons -
+                        <time datetime="{{ store.toDayDate | date: 'dd MMM yyyy hh:mm' }}">{{ store.toDayDate | date: "dd MMM yyyy hh:mm a" }}</time>
                     </p>
                     <p>
                         <a href="{{ store.store_url }}" target="_blank" class="btn btn-md pull-right btn-info visit_store">

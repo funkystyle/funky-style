@@ -82,7 +82,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group" ng-init="coupon.featured_coupon = false">
+                    <div class="form-group" ng-init="coupon.featured_coupon = undefined">
                         <label>Featured Coupon</label> <br />
                         <label class="radio-inline">
                             <input type="radio" data-ng-value="true" name="coupon.featured_coupon" data-ng-model="coupon.featured_coupon">Yes
@@ -127,7 +127,7 @@
                             <input type="radio" data-ng-value="false" name="coupon.deal_of_the_day" data-ng-model="coupon.deal_of_the_day">No
                         </label>
                     </div>
-                    <div class="form-group" ng-init="coupon.status = status[0]">
+                    <div class="form-group">
                         <label>Status</label>
                         <ui-select ng-model="coupon.status" theme="bootstrap">
                             <ui-select-match placeholder="Select User Level">{{ $select.selected }}</ui-select-match>

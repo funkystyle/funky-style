@@ -75,6 +75,12 @@ angular.module("categoryModule", ['angular-table', 'constantModule', 'toastr', '
                 items.push(categoryFactory.delete(item._id).then(function(data) {
                     console.log(data);
                     toastr.success("Deleted "+item.name, 200);
+                    angular.forEach($scope.categories, function (cat, index) {
+                        if(item._id == cat._id) {
+                            $scope.categories.splice(index, 1);
+                            $scope.filterCategories.splice(index, 1);
+                        }
+                    });
                 }, function (error) {
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);

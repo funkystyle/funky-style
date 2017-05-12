@@ -28,7 +28,7 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
 
         $scope.status = ["Pending", "Draft", "Trash", "Verified", "Publish"];
         $scope.coupon = {
-            status: $scope.status[0].type,
+            status: $scope.status[4],
             expire_date: new Date()
         };
         $scope.mytime = new Date();
