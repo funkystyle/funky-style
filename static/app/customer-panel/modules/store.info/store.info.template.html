@@ -31,11 +31,10 @@
                         </ol>
                     </div> <!-- end div -->
                     <h1 class="margin-top-0 h3-heading">{{ store.h1 }}</h1>
-                    <p class="para_small" data-ng-bind-html="trustAsHtml(store.top_description, 400)"></p>
+                    <p class="para_small top-desc" ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(store.top_description)"></p>
                     <p style="min-height: 10px;">
-                        <a href="" class="pull-right"
-                           ng-click="moreOrLess()">
-                            Show {{ (store.top_description.substring(1, 400).length == 399) ? 'More': 'Less' }}
+                        <a ng-click="show = !show" href="" class="pull-right btn btn-link">
+                            Show {{ (show) ? "Less": "More" }}
                         </a>
                     </p>
                     <p class="para_small">
@@ -69,18 +68,18 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active col-lg-4 col-xs-4 pad-0 text-center pad_nav_right">
                             <a href="" data-target="#all-tab" aria-controls="home" role="tab" data-toggle="tab">All &nbsp;
-                                <span class="label label-info">{{ coupons.length }}</span>
+                                <span class="label label-info">{{ filterCoupons.length }}</span>
                             </a>
                         </li>
                         <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_right pad_nav_left">
                             <a href="" data-target="#deals-tab" aria-controls="profile" role="tab" data-toggle="tab">Deals&nbsp;
-                                <span class="label label-primary">30</span>
+                                <span class="label label-primary">{{ dealsLength.length }}</span>
                             </a>
                         </li>
                         <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_left">
                             <a href="" data-target="#coupons-tab" aria-controls="messages" role="tab" data-toggle="tab">
                                 Coupons&nbsp;
-                                <span class="label label-success">20</span>
+                                <span class="label label-success">{{ couponsLength.length }}</span>
                             </a>
                         </li>
                     </ul>
@@ -321,9 +320,12 @@
                                         <i class="fa fa-share-alt"></i>
                                     </span>
                                     <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        {{ item.description }}
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                              data-ng-bind-html="trustAsHtml(item.description)"></p>
                                         <span class="pull-right">
-											<a href="">Show More</a>
+											<a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                            </a>
 										</span>
                                     </p>
                                     <p>
@@ -393,11 +395,12 @@
 											<i class="fa fa-share-alt"></i>
 										</span>
                                     <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                        standard dummy text ever since the 1500s,
-                                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
                                         <span class="pull-right">
-											<a href="">Show More</a>
+											<a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                            </a>
 										</span>
                                     </p>
                                     <p>
@@ -705,9 +708,14 @@
                                         <i class="fa fa-share-alt"></i>
                                     </span>
                                     <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        {{ item.description }}
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.deals[item._id]}"
+                                           data-ng-bind-html="trustAsHtml(item.description)">
+
+                                        </p>
                                         <span class="pull-right">
-											<a href="">Show More</a>
+											<a ng-click="showMore.deals[item._id] = !showMore.deals[item._id]" href="" class="btn btn-link">
+                                                Show {{ (showMore.deals[item._id]) ? "Less": "More" }}
+                                            </a>
 										</span>
                                     </p>
                                     <p>
@@ -779,9 +787,12 @@
                                         <i class="fa fa-share-alt"></i>
                                     </span>
                                     <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        {{ item.description }}
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.coupons[item._id]}"
+                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
                                         <span class="pull-right">
-											<a href="">Show More</a>
+                                                <a ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]" href="" class="btn btn-link">
+                                                Show {{ (showMore.coupons[item._id]) ? "Less": "More" }}
+                                            </a>
 										</span>
                                     </p>
                                     <p>
@@ -857,12 +868,13 @@
 											<i class="fa fa-share-alt"></i>
 										</span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s,
-                                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                            <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                               data-ng-bind-html="trustAsHtml(item.description)"></p>
                                             <span class="pull-right">
-											<a href="">Show More</a>
-										</span>
+                                                <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                    Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                                </a>
+                                            </span>
                                         </p>
                                         <p>
                                             <a href="">See all Mobile Recharge Coupons</a>
@@ -936,12 +948,13 @@
 											<i class="fa fa-share-alt"></i>
 										</span>
                                 <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s,
-                                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                    <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                       data-ng-bind-html="trustAsHtml(item.description)"></p>
                                     <span class="pull-right">
-											<a href="">Show More</a>
-										</span>
+                                        <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                            Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                        </a>
+                                    </span>
                                 </p>
                                 <p>
                                     <a href="">See all Mobile Recharge Coupons</a>
@@ -1013,12 +1026,13 @@
 											<i class="fa fa-share-alt"></i>
 										</span>
                                 <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                    standard dummy text ever since the 1500s,
-                                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                    <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                       data-ng-bind-html="trustAsHtml(item.description)"></p>
                                     <span class="pull-right">
-											<a href="">Show More</a>
-										</span>
+                                        <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                            Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                        </a>
+                                    </span>
                                 </p>
                                 <p>
                                     <a href="">See all Mobile Recharge Coupons</a>

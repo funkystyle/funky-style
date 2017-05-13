@@ -13,14 +13,19 @@ angular
             category: undefined,
             wallet: undefined
         };
+        $scope.showMore = {
+            all: {},
+            deals: {},
+            coupons: {}
+        };
         $scope.store = undefined;
         $scope.coupons = [];
         $scope.filterCoupons = [];
         $scope.categories = [];
 
-        $scope.trustAsHtml = function(string, length) {
+        $scope.trustAsHtml = function(string) {
             if(string) {
-                return $sce.trustAsHtml(string.substring(1, length));
+                return $sce.trustAsHtml(string);
             }
         };
         // manageFavorite function
@@ -31,6 +36,8 @@ angular
         // apply filter for coupons array
         $scope.applyFilter = function () {
             $scope.filterCoupons = $filter("couponFilter")($scope.coupons, $scope.filter);
+            $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
+            $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
         };
 
         if($stateParams['url']) {
@@ -51,6 +58,8 @@ angular
                             if(rel_stores.length && !items.length) {
                                 $scope.coupons.push(item);
                                 $scope.filterCoupons.push(item);
+                                $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
+                                $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
                             }
 
                             angular.forEach(item.related_categories, function (category) {
