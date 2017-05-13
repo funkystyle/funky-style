@@ -39,6 +39,14 @@ body {
     margin: 0 auto !important;
     overflow-x: hidden;
 }
+.top-desc {
+    height: 47px;
+    overflow: hidden;
+}
+.show-desc {
+    overflow: visible;
+    height: auto;
+}
 
 h2,
 h3,

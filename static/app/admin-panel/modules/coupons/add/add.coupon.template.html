@@ -74,14 +74,15 @@
                         <input type="text" class="form-control input-sm" id="discount" placeholder="Discount" ng-model="coupon.discount">
                     </div>
                     <div class="form-group">
+                        <label>Expiry Date</label>
                         <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
+                            <input required type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
                     </div>
-                    <div class="form-group" ng-init="coupon.featured_coupon = false">
+                    <div class="form-group" ng-init="coupon.featured_coupon = undefined">
                         <label>Featured Coupon</label> <br />
                         <label class="radio-inline">
                             <input type="radio" data-ng-value="true" name="coupon.featured_coupon" data-ng-model="coupon.featured_coupon">Yes
@@ -93,7 +94,7 @@
                     <div class="form-group">
                         <label>Store</label>
                         <ui-select multiple ng-model="coupon.related_stores" theme="bootstrap" close-on-select="false" title="Related Stores">
-                            <ui-select-match placeholder="Select Related Stores">{{$item.name}}</ui-select-match>
+                            <ui-select-match placeholder="Select Store">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="store._id as store in stores | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="store.name | highlight: $select.search"></div>
                                 <small>
@@ -126,7 +127,7 @@
                             <input type="radio" data-ng-value="false" name="coupon.deal_of_the_day" data-ng-model="coupon.deal_of_the_day">No
                         </label>
                     </div>
-                    <div class="form-group" ng-init="coupon.status = status[0]">
+                    <div class="form-group">
                         <label>Status</label>
                         <ui-select ng-model="coupon.status" theme="bootstrap">
                             <ui-select-match placeholder="Select User Level">{{ $select.selected }}</ui-select-match>

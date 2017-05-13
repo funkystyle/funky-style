@@ -1,7 +1,7 @@
 angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "naif.base64", "categoryFactoryModule",
     "constantModule"])
-    .controller("addCategoryCtrl", function($scope, $timeout, toastr, storeFactory,
+    .controller("addCategoryCtrl", function($scope, $timeout, toastr, storeFactory, $state, $stateParams,
                                             $auth, personFactory, categoryFactory, URL) {
         $scope.category = {};
         $scope.persons = [];
@@ -78,19 +78,36 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
 
         // add category
         $scope.addCategory = function (category) {
-            if(Object.keys(category.image).length) {
-                category.image = "data:image/jpeg;base64,"+$scope.category.image.base64;
+            if(typeof category.image === 'object') {
+                category.image = "data:image/jpeg;base64,"+category.image.base64;
             } else {
-                return true;
-                toastr.error("Please select an Image", "Error!");
+                toastr.error("Please select category Image", "Error!");
+                return false;
+            }
+            if(typeof category.top_banner === 'object') {
+                category.top_banner = "data:image/jpeg;base64,"+category.top_banner.base64;
+            }
+            if(typeof category.side_banner === 'object') {
+                category.side_banner = "data:image/jpeg;base64,"+category.side_banner.base64;
+            }
+            if(typeof category.alt_image === 'object') {
+                category.alt_image = "data:image/jpeg;base64,"+category.alt_image.base64;
             }
             console.log(category);
             categoryFactory.post(category).then(function (data) {
                 console.log(data);
                 toastr.success(category.name+' Created', "Success!");
+                $state.go('header.category');
             }, function (error) {
                 console.log(error);
-                toastr.error(error._error.message, error._error.code);
+                if(error.data) {
+                    toastr.error(error.data['_error'], "Error");
+                    if(error.data['_issues']) {
+                        angular.forEach(error.data['_issues'], function (val, key) {
+                            toastr.error(val, key);
+                        });
+                    }
+                }
             });
         };
     });

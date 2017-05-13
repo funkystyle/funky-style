@@ -16,19 +16,26 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">Name*</label>
                         <input type="text" class="form-control input-sm" id="name"
                                placeholder="category Name" ng-model="category.name" required>
                     </div>
                     <div class="form-group">
-                        <label for="url">URL</label>
+                        <label for="url">URL*</label>
                         <input type="text" class="form-control input-sm" id="url"
                                placeholder="URL" ng-model="category.url" required>
                     </div>
                     <div class="form-group">
-                        <label for="image">Image</label>
+                        <label for="image">Image*<label>
                         <input type="file" id="image" ng-model="category.image" base-sixty-four-input>
                         <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="category.image">
+                        <label>Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-if="!category.image['base64']" ng-src="{{ category.image }}" />
+                            <img ng-if="category.image['base64']" ng-src="data:image/jpeg;base64,{{ category.image.base64 }}" />
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="top_desc">Top Description</label>
@@ -42,18 +49,18 @@
                                   placeholder="Footer Description" ng-model="category.footer_description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="h1">H1</label>
-                        <input type="text" class="form-control input-sm" ng-model="category.h1" id="h1" placeholder="category H1">
+                        <label for="h1">H1*</label>
+                        <input type="text" required class="form-control input-sm" ng-model="category.h1" id="h1" placeholder="category H1">
                     </div>
                     <div class="form-group">
-                        <label for="h2">H2</label>
-                        <input type="text" class="form-control input-sm" id="h2" ng-model="category.h2" placeholder="category H2">
+                        <label for="h2">H2*</label>
+                        <input type="text" required class="form-control input-sm" id="h2" ng-model="category.h2" placeholder="category H2">
                     </div>
-                    <div class="form-group">
-                        <label for="no_of_coupons">No Of Coupons</label>
-                        <input readonly type="text" class="form-control input-sm" id="no_of_coupons" placeholder="No Of Coupons"
-                               ng-model="category.number_of_coupons">
-                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label for="no_of_coupons">No Of Coupons</label>-->
+                        <!--<input readonly type="text" class="form-control input-sm" id="no_of_coupons" placeholder="No Of Coupons"-->
+                               <!--ng-model="category.number_of_coupons">-->
+                    <!--</div>-->
                     <div class="form-group">
                         <label>Menu</label> <br />
                         <label class="radio-inline">
@@ -106,10 +113,24 @@
                         <input type="file" id="side_banner" ng-model="category.side_banner" base-sixty-four-input />
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
+                    <div class="form-group" ng-if="category.side_banner">
+                        <label>Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-if="!category.side_banner['base64']" ng-src="{{ category.side_banner }}" />
+                            <img ng-if="category.side_banner['base64']" ng-src="data:image/jpeg;base64,{{ category.side_banner.base64 }}" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="top_banner">Top Banner</label>
                         <input type="file" id="top_banner" ng-model="category.top_banner" base-sixty-four-input />
                         <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="category.top_banner">
+                        <label>Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-if="!category.top_banner['base64']" ng-src="{{ category.top_banner }}" />
+                            <img ng-if="category.top_banner['base64']" ng-src="data:image/jpeg;base64,{{ category.top_banner.base64 }}" />
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Featured Category</label> <br />
@@ -136,13 +157,20 @@
                         <label for="alt_image">Alt Image</label>
                         <input type="file" ng-model="category.alt_image" class="form-control" base-sixty-four-input id="alt_image" />
                     </div>
+                    <div class="form-group" ng-if="category.alt_image">
+                        <label>Image Display</label>
+                        <div class="thumbnail">
+                            <img ng-if="!category.alt_image['base64']" ng-src="{{ category.alt_image }}" />
+                            <img ng-if="category.alt_image['base64']" ng-src="data:image/jpeg;base64,{{ category.alt_image.base64 }}" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="image_text">Image Text</label>
                         <input type="text" class="form-control" ng-model="category.image_text" placeholder="Image Text" id="image_text">
                     </div>
                     <div class="form-group">
-                        <label for="rating">Rating</label>
-                        <input type="number" class="form-control" ng-model="category.rating" id="rating" placeholder="Rating">
+                        <label for="rating">Rating*</label>
+                        <input type="number" required class="form-control" ng-model="category.rating" id="rating" placeholder="Rating">
                     </div>
                     <div class="form-group">
                         <label for="breadcrumbs">BreadCrumbs</label>
@@ -155,7 +183,7 @@
                         </ui-select>
                     </div>
                     <div class="form-group">
-                        <label>Status</label> <br />
+                        <label>Status*</label> <br />
                         <label class="radio-inline">
                             <input type="radio" data-ng-value="true" name="category.status" data-ng-model="category.status">Active
                         </label>

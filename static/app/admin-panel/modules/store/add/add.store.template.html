@@ -16,17 +16,17 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="form-group">
-                        <label for="name">Store Name</label>
+                        <label for="name">Store Name*</label>
                         <input type="text" class="form-control input-sm" id="name"
                                placeholder="Store Name" ng-model="store.name" required>
                     </div>
                     <div class="form-group">
-                        <label for="url">Store URL</label>
+                        <label for="url">Store URL*</label>
                         <input type="text" class="form-control input-sm" id="url"
                                placeholder="URL" ng-model="store.url" required>
                     </div>
                     <div class="form-group">
-                        <label for="image">Store Image</label>
+                        <label for="image">Store Image*</label>
                         <input type="file" id="image" ng-model="store.image" base-sixty-four-input>
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
@@ -41,17 +41,20 @@
                         <textarea ng-click="textEditor($event)" class="form-control input-sm" id="top_desc"
                                   placeholder="Top Description" ng-model="store.top_description"></textarea>
                     </div>
+                    <div class="form-group" ng-if="store.top_description">
+                        <div class="thumbnail" ng-bind-html="store.top_description"></div>
+                    </div>
                     <div class="form-group">
                         <label for="footer_desc">Footer Description</label>
                         <textarea ng-click="textEditor($event)" class="form-control input-sm" id="footer_desc"
                                   placeholder="Footer Description" ng-model="store.footer_description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="h1">Store H1</label>
+                        <label for="h1">Store H1*</label>
                         <input type="text" class="form-control input-sm" ng-model="store.h1" id="h1" placeholder="Store H1">
                     </div>
                     <div class="form-group">
-                        <label for="h2">Store H2</label>
+                        <label for="h2">Store H2*</label>
                         <input type="text" class="form-control input-sm" id="h2" ng-model="store.h2" placeholder="Store H2">
                     </div>
                     <div class="form-group" ng-init="store.menu = undefined">
@@ -87,7 +90,7 @@
                             </ui-select-choices>
                         </ui-select>
                     </div>
-                    <div class="form-group" ng-init="store.featured_store = true">
+                    <div class="form-group" ng-init="store.featured_store = undefined">
                         <label>Featured Store</label> <br />
                         <label class="radio-inline">
                             <input type="radio" data-ng-value="true" name="store.rating" data-ng-model="store.featured_store">Yes
@@ -97,7 +100,7 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <label for="rating">Rating</label>
+                        <label for="rating">Rating*</label>
                         <input type="number" class="form-control input-sm" id="rating" placeholder="Store Rating"
                                ng-model="store.rating" required>
                     </div>
@@ -129,9 +132,10 @@
                                   ng-model="store.meta_title"></textarea>
                     </div>
                     <div class="form-group" ng-init="store.status = true">
-                        <label>Status</label> <br />
+                        <label>Status*</label> <br />
                         <label class="radio-inline">
-                            <input type="radio" data-ng-value="true" name="store.status" data-ng-model="store.status">Active
+                            <input type="radio" data-ng-value="true" name="store.status"
+                                   data-ng-model="store.status">Active
                         </label>
                         <label class="radio-inline">
                             <input type="radio" data-ng-value="false" name="store.status" data-ng-model="store.status">Pending
@@ -208,7 +212,7 @@
                                ng-model="store.contact_number">
                     </div>
                     <div class="form-group">
-                        <label for="store_url">Store URL</label>
+                        <label for="store_url">Store URL*</label>
                         <input type="text" class="form-control input-sm" ng-model="store.store_url" placeholder="Store URL" required id="store_url" />
                     </div>
 
@@ -269,5 +273,7 @@
             <button type="submit" class="btn btn-md btn-info">Add Store</button>
         </form>
         <br><br><br><br><br><br>
+
+        <pre>{{ store | json }}</pre>
     </div> <!-- end panel-body -->
 </div>

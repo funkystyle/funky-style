@@ -322,6 +322,7 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
                     url: '/coupons',
                     templateUrl: '/static/app/admin-panel/modules/coupons/coupon/coupon.template.html',
                     controller: "couponCtrl",
+                    cache: false,
                     resolve: {
                         coupon: function($ocLazyLoad) {
                             return $ocLazyLoad.load({

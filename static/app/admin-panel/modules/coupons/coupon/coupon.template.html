@@ -16,7 +16,7 @@
     </div>
 
     <div class="panel-body" cg-busy="load">
-        <div class="row">
+        <div class="row" style="margin-bottom: 30px;">
             <div class="col-lg-6 col-md-6">
                 <span ng-click="filterByStatus(val)" ng-repeat="(key, val) in statusOptions">
                     <a class="btn btn-sm btn-default" href="">
@@ -25,7 +25,48 @@
                 </span>
             </div>
         </div>
-        <div class="row" style="margin-top: 30px;">
+        <div class="row" style="margin-bottom: 30px;">
+            <div class="col-md-2 col-sm-2">
+                <label>By Store</label>
+                <ui-select on-select="applyTypeFilter()" ng-model="filter.related_stores" theme="bootstrap">
+                    <ui-select-match placeholder="Select store">{{ $select.selected.name }}</ui-select-match>
+                    <ui-select-choices repeat="item._id as item in stores | filter: $select.search">
+                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <label>By Category</label>
+                <ui-select on-select="applyTypeFilter()" ng-model="filter.related_categories" theme="bootstrap">
+                    <ui-select-match placeholder="Select Category">{{ $select.selected.name }}</ui-select-match>
+                    <ui-select-choices repeat="item._id as item in categories | filter: $select.search">
+                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <label>By User</label>
+                <ui-select on-select="applyTypeFilter()" ng-model="filter.last_modified_by" theme="bootstrap">
+                    <ui-select-match placeholder="Select User">{{ $select.selected.first_name }}</ui-select-match>
+                    <ui-select-choices repeat="item._id as item in persons | filter: $select.search">
+                        <div ng-bind-html="item.first_name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <label>By Coupon types</label>
+                <ui-select on-select="applyTypeFilter()" ng-model="filter.coupon_type" theme="bootstrap">
+                    <ui-select-match placeholder="Select Coupon type">{{ $select.selected }}</ui-select-match>
+                    <ui-select-choices repeat="item in coupon_type | filter: $select.search">
+                        <div ng-bind-html="item | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a ng-click="clearAll()">Clear All</a>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-xs-12 third-controller">
                 <div class="row">
                     <div class="col-lg-2 col-xs-2 col-md-2 col-sm-2" ng-if="show && coupons.length">
@@ -66,14 +107,14 @@
                             <p>{{ item.title }}</p>
                             <p class="coupon-options">
                                 <span><a href="">View</a></span> &nbsp;&nbsp;
-                                <span><a ui-sref="header.update-coupon({couponId: item._id})">Edit</a></span>
+                                <span><a target="_blank" ui-sref="header.update-coupon({couponId: item._id})">Edit</a></span>
                             </p>
                         </td>
                         <td at-title="Submitted By" width="100">
                             {{ item.last_modified_by.first_name }} {{ item.last_modified_by.last_name }}
                         </td>
                         <td at-title="Store Name" width="100">
-                            {{ item.recommended_stores[0].name }}
+                            {{ item.related_stores[0].name }}
                         </td>
                         <td at-title="Related Categories" width="100">
                             <span ng-repeat="i in item.related_categories">

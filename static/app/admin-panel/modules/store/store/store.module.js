@@ -37,6 +37,7 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                             $scope.stores = data._items;
                             $scope.filterStores = data._items;
                             angular.forEach($scope.stores, function(item) {
+                                console.log(item)
                                 $scope.check.check[item._id] = false;
                             });
                         }
@@ -78,8 +79,14 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
             var items = [];
             angular.forEach(deletedArray, function (item) {
                 items.push(storeFactory.delete(item._id).then(function(data) {
-                    console.log(data);
+                    console.log(data, item._id);
                     toastr.success("Deleted "+item.name, 200);
+                    angular.forEach($scope.stores, function (store, index) {
+                        if(item._id == store._id) {
+                            $scope.stores.splice(index, 1);
+                            $scope.filterStores.splice(index, 1);
+                        }
+                    });
                 }, function (error) {
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);

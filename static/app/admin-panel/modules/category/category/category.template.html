@@ -43,7 +43,7 @@
                     <thead></thead>
                     <tbody>
                         <tr>
-                            <td style="max-width: 50px;" at-title="Select" width="10">
+                            <td style="max-width: 50px;" at-title="#" width="10">
                                 <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;">
                                     <label for="check_box_store_{{ item._id }}" style="font-weight: 500;">
                                         <input id="check_box_store_{{ item._id }}" type="checkbox"
@@ -53,12 +53,25 @@
                                     </label>
                                 </div>
                             </td>
-                            <td ui-sref="header.update-category({categoryId: item._id})"
-                                style="color: #2780e3; text-decoration: underline; cursor: pointer;"
-                                at-title="Name" at-implicit at-sortable at-initial-sorting="asc"
-                                at-attribute="name" width="250"></td>
-                            <td at-title="URL" at-implicit at-sortable at-attribute="url" width="250"></td>
-                            <td at-title="Coupons" at-implicit at-sortable at-attribute="no_of_coupons" width="250"></td>
+                            <td style="color: #2780e3; text-decoration: underline; cursor: pointer;" at-title="Name" width="250">
+                                <a ui-sref="header.update-category({ categoryId: item._id })" target="_blank">{{ item.name }}</a>
+                            </td>
+                            <td at-title="Image">
+                                <img ng-if="item.image" height="60" ng-src="{{ item.image }}" />
+                                <span ng-if="!item.image">No Image found</span>
+                            </td>
+                            <td at-title="Description">
+                                <span ng-bind-html="item.top_description" ng-if="item.top_description"></span>
+                                <span ng-if="!item.top_description">No</span>
+                            </td>
+                            <td at-title="Featured">
+                                <span ng-if="item.featured_category == true">Yes</span>
+                                <span ng-if="item.featured_category == false">No</span>
+                            </td>
+                            <td at-title="No.of Coupons">
+                                <span ng-if="item.number_of_coupons">{{ item.number_of_coupons }}</span>
+                                <span ng-if="!item.number_of_coupons">0</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

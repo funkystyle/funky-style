@@ -83,7 +83,8 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
 
         // add coupon
         $scope.updateCoupon = function (coupon) {
-            coupon.expire_date = $("#datetimepicker1").find("input").val();
+            // coupon.expire_date = new Date($("#datetimepicker1").find("input").val());
+            coupon.expire_date = "Tue, 02 Apr 2013 10:29:13 GMT";
             delete coupon._created;
             delete coupon._updated;
             delete coupon._links;

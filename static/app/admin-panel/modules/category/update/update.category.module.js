@@ -1,5 +1,5 @@
 angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr", "constantModule",
-    "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "categoryFactoryModule"])
+    "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "categoryFactoryModule", "naif.base64"])
     .controller("updateCategoryCtrl", function ($scope, $state, $stateParams, $timeout,
                                                 toastr, storeFactory, $auth, personFactory,
                                                 categoryFactory, URL) {
@@ -83,6 +83,19 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
 
         // update category
         $scope.updateCategory = function (category) {
+            if(typeof category.image === 'object') {
+                category.image = "data:image/jpeg;base64,"+category.image.base64;
+            }
+            if(typeof category.top_banner === 'object') {
+                category.top_banner = "data:image/jpeg;base64,"+category.top_banner.base64;
+            }
+            if(typeof category.side_banner === 'object') {
+                category.side_banner = "data:image/jpeg;base64,"+category.side_banner.base64;
+            }
+            if(typeof category.alt_image === 'object') {
+                category.alt_image = "data:image/jpeg;base64,"+category.alt_image.base64;
+            }
+
             delete category._created;
             delete category._updated;
             delete category._links;
@@ -92,6 +105,7 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
             // updating the category
             categoryFactory.update(category, $auth.getToken()).then(function (data) {
                 toastr.success(category.name, "Updated!");
+                $state.go("header.category");
             }, function (error) {
                 console.log(error);
                 toastr.error(error._error.message, error._error.code);
