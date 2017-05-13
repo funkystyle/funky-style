@@ -7,17 +7,20 @@ angular.module('couponFactoryModule', ['constantModule'])
 .factory("couponFactory", function ($http, $q, URL) {
 	return {
 		get: function (obj) {
+		    var url = undefined;
 			if(typeof obj == 'object') {
                 var temp = {};
                 temp[obj.type] = {
                     "$in": [obj.id]
                 };
-			    URL.coupons = URL.coupons+"&where="+JSON.stringify(temp);
+			    url = URL.coupons+"&where="+JSON.stringify(temp);
+            } else {
+			    url = URL.coupons
             }
-			var def = $q.defer();
+            var def = $q.defer();
 
 			$http({
-				url: URL.coupons,
+				url: url,
 				method: "GET"
 			}).then(function (data) {
 				def.resolve(data);
@@ -31,7 +34,7 @@ angular.module('couponFactoryModule', ['constantModule'])
         getCoupon: function (query) {
             var def = $q.defer();
             $http({
-                url: "/api/1.0/coupons/?where="+query,
+                url: URL.coupons+"&where="+query,
                 method: "GET"
             }).then(function (data) {
                 console.log(data);

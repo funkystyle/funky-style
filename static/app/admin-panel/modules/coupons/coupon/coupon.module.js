@@ -142,23 +142,24 @@ angular.module("couponModule", ['angular-table', 'constantModule',
     })
     .filter("typeCouponFilter", function ($filter) {
         return function (items, filter) {
+            console.log(items, filter);
             var list = [];
             if(!Object.keys(filter).length) {
                 return items;
             }
-            angular.forEach(items, function (item) {
-                if(filter['related_stores']) {
-                    angular.forEach(item.related_stores, function (sub_item) {
-                        if(sub_item._id == filter.related_stores && list.indexOf(item) == -1) {
-                            if(filter['related_categories']) {
-
-                            } else {
-
+            angular.forEach(filter, function (val, key) {
+                angular.forEach(items, function (item) {
+                    console.log(item[key], typeof item[key]);
+                    if(typeof item[key] == 'array') {
+                        angular.forEach(item[key], function (type) {
+                            if(type._id == val) {
+                                console.log("----------", item);
                             }
-                        }
-                    });
-                }
+
+                        });
+                    }
+                })
             });
-            return list;
+            return items;
         }
     });

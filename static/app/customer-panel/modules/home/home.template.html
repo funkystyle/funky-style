@@ -1,243 +1,363 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/home/home.css" />
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
+<span ng-if="!params">
+    <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel" data-slide-to="1"></li>
+            <li data-target="#carousel" data-slide-to="2"></li>
+        </ol>
+        <!-- Carousel items -->
+        <div class="carousel-inner carousel-zoom">
+            <div class="active item"><img class="img-responsive" src="http://talcolighting.com/contents/wp-content/uploads/2013/05/6.Crane-set-and-match.jpg">
+                <div class="carousel-caption">
+                    <!--<h2>Title</h2>
+                    <p>Description</p>-->
+                </div>
+            </div>
+            <div class="item"><img class="img-responsive" src="https://www.etaaustraliavisa.com/slider/csss_images1/4.jpg">
+                <div class="carousel-caption">
+                    <!--<h2>Title</h2>
+                    <p>Description</p>-->
+                </div>
+            </div>
+            <div class="item"><img class="img-responsive" src="http://loquecomemos.com/wp-content/uploads/2011/07/comino-hd.jpg">
+                <div class="carousel-caption">
+                    <!--<h2>Title</h2>
+                    <p>Description</p>-->
+                </div>
+            </div>
+        </div>
+        <!-- Carousel nav -->
+        <a class="left carousel-control" data-target="#carousel" data-slide="prev">
+            <span class="fa fa-angle-left"></span>
+        </a>
+        <a class="right carousel-control" data-target="#carousel" data-slide="next">
+            <span class="fa fa-angle-right"></span>
+        </a>
+    </div>
 
-<div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel" data-slide-to="1"></li>
-        <li data-target="#carousel" data-slide-to="2"></li>
-    </ol>
-    <!-- Carousel items -->
-    <div class="carousel-inner carousel-zoom">
-        <div class="active item"><img class="img-responsive" src="http://talcolighting.com/contents/wp-content/uploads/2013/05/6.Crane-set-and-match.jpg">
-            <div class="carousel-caption">
-                <!--<h2>Title</h2>
-                <p>Description</p>-->
+        <!-- popular stores -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 margin-20">
+                <h3 class="store-heading">Popular Stores</h3>
             </div>
         </div>
-        <div class="item"><img class="img-responsive" src="https://www.etaaustraliavisa.com/slider/csss_images1/4.jpg">
-            <div class="carousel-caption">
-                <!--<h2>Title</h2>
-                <p>Description</p>-->
-            </div>
-        </div>
-        <div class="item"><img class="img-responsive" src="http://loquecomemos.com/wp-content/uploads/2011/07/comino-hd.jpg">
-            <div class="carousel-caption">
-                <!--<h2>Title</h2>
-                <p>Description</p>-->
+        <div class="row" ng-if="stores.length">
+            <div class="col-lg-2 col-xs-4" ng-if="item.featured_store == true" ng-repeat="item in stores | limitTo: 24">
+                <div class="thumbnail store-thumbnail">
+                    <a ui-sref="main.store-info({url: item.url})" title="{{ item.title }}">
+                        <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Carousel nav -->
-    <a class="left carousel-control" data-target="#carousel" data-slide="prev">
-        <span class="fa fa-angle-left"></span>
-    </a>
-    <a class="right carousel-control" data-target="#carousel" data-slide="next">
-        <span class="fa fa-angle-right"></span>
-    </a>
-</div>
+        <!-- end ofpopular stores -->
 
-<!-- popular stores -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 margin-20">
-            <h3 class="store-heading">Popular Stores</h3>
+
+
+        <!-- popular Categories -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 margin-20">
+                <h3 class="store-heading">Popular Categories</h3>
+            </div>
+        </div>
+        <div class="row" ng-if="categories.length">
+            <div class="col-lg-2 col-xs-4" ng-if="item.featured_category == true" ng-repeat="item in categories | limitTo: 24">
+                <div class="thumbnail store-thumbnail">
+                    <a ui-sref="main.categoryinfo({url: item.url})" title="{{ item.title }}">
+                        <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row" ng-if="stores.length">
-        <div class="col-lg-2 col-xs-4" ng-if="item.featured_store == true" ng-repeat="item in stores | limitTo: 24">
-            <div class="thumbnail store-thumbnail">
-                <a ui-sref="main.store-info({url: item.url})" title="{{ item.title }}">
-                    <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
+        <!-- end of popular Categories -->
+
+        <!-- coupons by category wise -->
+    <div class="container category-wise-home">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-md-12">
+                <div class="panel panel-default panel_deft">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="update-nag">
+                                    <div class="update-split update-success"><i class="glyphicon glyphicon-folder-open"></i></div>
+                                    <div class="update-text">Top coupons</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-lg-3">
+                                <div class="update-nag">
+                                    <div class="update-split"><i class="glyphicon glyphicon-folder-open"></i></div>
+                                    <div class="update-text">Most Used Coupons</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-lg-3">
+                                <div class="update-nag">
+                                    <div class="update-split update-info"><i class="glyphicon glyphicon-folder-open"></i></div>
+                                    <div class="update-text">Recently Used Coupons</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-lg-3">
+                                <div class="update-nag">
+                                    <div class="update-split update-danger"><i class="glyphicon glyphicon-folder-open"></i></div>
+                                    <div class="update-text">Last Minute Deals</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- end of coupons by category wise -->
+
+        <!-- coupons and offers -->
+    <div class="container">
+        <!-- coupons div starts here -->
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12" ng-if="item.featured_coupon == true"
+                 ng-repeat="item in coupons | limitTo: 10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-5 col-sm-5 pull-left">
+                                <img style="max-height: 50px;" ng-src="{{ item.related_stores[0]['image'] }}" alt="">
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 pull-right">
+                                <h4 style="font-weight: bold;" class="text-right rupee">
+                                    {{ item.discount_type }} {{ item.discount }}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p style="min-height: 40px;">{{ item.title }}</p>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-md-6 pull-right">
+                                <a class="desc-p pull-right"
+                                   ui-sref="main.store-info({url: item.related_stores[0]['url']})">
+                                    Show All {{ item.related_stores[0]['name'] }} Offers
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 text-left col-xs-8 txt_small">
+                                <a href="">Show Description</a>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 txt_small text-right">
+                                <a href=""><span class="glyphicon glyphicon-ok-sign gly"></span>Verified</a>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 pad-right-0 col-xs-12 btn_mobile">
+                                <button class="btn btn-md btn-info btn-block" ui-sref="main.home({cc: item._id})">
+                                    SHOW COUPON CODE
+                                    <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of coupons div -->
+    </div>
+        <!-- End of coupons and offers -->
+
+        <!-- Top deal of the week start Here -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12   text-center">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="txt_h3">Top Deal of the Week</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-12 col-md-3" ng-repeat="item in deals | limitTo: 8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4><b>{{ item.name }}</b></h4>
+
+                        <div class="thumbnail border-0">
+                            <img class="top-deal-img" src="http://heels.jp/pic/louboutin/256_christianlouboutin-ladypeep-1120200_M196_1_1200x1200.jpg" alt="">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 pad-right-0 col-xs-7">
+                                <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
+                                <a href="">Rs. {{ item.discount_price }}</a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6   text-right col-xs-5">
+                                View Offers
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="padding: 0;">
+                        <button class="btn btn-md btn-info btn-block">
+                            GET DEAL
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Top deal of the week End Here  -->
+
+        <!-- more top stores starts here -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>More Top Stores</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-12 col-md-3"
+                 ng-if="item.menu == 'bottom menu'" ng-repeat="item in stores">
+                <ul class="unstyled">
+                    <li><a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <!-- end of more top stores -->
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ================ showing coupon popup ================= -->
+<span ng-if="params">
+    <div class="container-fluid hs-sc-top">
+        <span ui-sref="main.store-info({url: store.url, cc: undefined})" class="pull-left hs-go-back">
+            <i class="fa fa-arrow-left"></i> Go Back
+        </span>
+        <span ui-sref="main.store-info({url: store.url, cc: undefined})" class="pull-right hs-go-close">
+            Close
+            <i class="fa fa-times"></i>
+        </span>
+    </div>
+
+    <div class="container bg-w">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                <a href="" title="" class="hs-sc-img center-block">
+                    <img ng-src="{{ store.image }}" alt="{{ store.name }} Logo">
                 </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end ofpopular stores -->
-
-
-
-<!-- popular Categories -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 margin-20">
-            <h3 class="store-heading">Popular Categories</h3>
-        </div>
-    </div>
-    <div class="row" ng-if="categories.length">
-        <div class="col-lg-2 col-xs-4" ng-if="item.featured_category == true" ng-repeat="item in categories | limitTo: 24">
-            <div class="thumbnail store-thumbnail">
-                <a ui-sref="main.categoryinfo({url: item.url})" title="{{ item.title }}">
-                    <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end of popular Categories -->
-
-<!-- coupons by category wise -->
-<div class="container category-wise-home">
-    <div class="row">
-        <div class="col-lg-12 col-sm-12 col-md-12">
-            <div class="panel panel-default panel_deft">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3 col-lg-3">
-                            <div class="update-nag">
-                                <div class="update-split update-success"><i class="glyphicon glyphicon-folder-open"></i></div>
-                                <div class="update-text">Top coupons</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-lg-3">
-                            <div class="update-nag">
-                                <div class="update-split"><i class="glyphicon glyphicon-folder-open"></i></div>
-                                <div class="update-text">Most Used Coupons</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-lg-3">
-                            <div class="update-nag">
-                                <div class="update-split update-info"><i class="glyphicon glyphicon-folder-open"></i></div>
-                                <div class="update-text">Recently Used Coupons</div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-lg-3">
-                            <div class="update-nag">
-                                <div class="update-split update-danger"><i class="glyphicon glyphicon-folder-open"></i></div>
-                                <div class="update-text">Last Minute Deals</div>
-                            </div>
-                        </div>
-                    </div>
+                <p class="text-center">{{ couponInfo.title }}</p>
+                <div class="hs-code" ng-if="couponInfo.coupon_type == 'offer'">
+                    <span class="hs-sc-offer text-center">Offer Activated</span>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end of coupons by category wise -->
 
-<!-- coupons and offers -->
-<div class="container">
-    <!-- coupons div starts here -->
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12" ng-if="item.featured_coupon == true"
-             ng-repeat="item in coupons | limitTo: 10">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-5 pull-left">
-                            <img style="max-height: 50px;" ng-src="{{ item.related_stores[0]['image'] }}" alt="">
-                        </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3 pull-right">
-                            <h4 style="font-weight: bold;" class="text-right rupee">
-                                {{ item.discount_type }} {{ item.discount }}
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <p style="min-height: 40px;">{{ item.title }}</p>
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-md-6 pull-right">
-                            <a class="desc-p pull-right"
-                               ui-sref="main.store-info({url: item.related_stores[0]['url']})">
-                                Show All {{ item.related_stores[0]['name'] }} Offers
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 text-left col-xs-8 txt_small">
-                            <a href="">Show Description</a>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 txt_small text-right">
-                            <a href=""><span class="glyphicon glyphicon-ok-sign gly"></span>Verified</a>
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 pad-right-0 col-xs-12 btn_mobile">
-                            <button ui-sref="main.categoryinfo({url: item.related_categories[0].url, cc: item.coupon_code})" class="btn btn-md btn-info btn-block">
-                                SHOW COUPON CODE
-                                <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
-                            </button>
-                        </div>
-                    </div>
+                <div ng-if="couponInfo.coupon_type == 'coupon'">
+                    <!-- Target -->
+                    <div id="foo">{{ couponInfo.coupon_code }}</div>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end of coupons div -->
-</div>
-<!-- End of coupons and offers -->
-
-<!-- Top deal of the week start Here -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12   text-center">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3 class="txt_h3">Top Deal of the Week</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-sm-12 col-md-3" ng-repeat="item in deals | limitTo: 8">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h4><b>{{ item.name }}</b></h4>
-
-                    <div class="thumbnail border-0">
-                        <img class="top-deal-img" src="http://heels.jp/pic/louboutin/256_christianlouboutin-ladypeep-1120200_M196_1_1200x1200.jpg" alt="">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 pad-right-0 col-xs-7">
-                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                            <a href="">Rs. {{ item.discount_price }}</a>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6   text-right col-xs-5">
-                            View Offers
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-footer" style="padding: 0;">
-                    <button class="btn btn-md btn-info btn-block">
-                        GET DEAL
+                    <!-- Trigger -->
+                    <button class="btn" data-clipboard-target="#foo">
+                        <img src="assets/clippy.svg" alt="Copy to clipboard">
                     </button>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Top deal of the week End Here  -->
+                <a class="hs-goto-mrcht text-center" target="_blank"
+                   title="{{ couponInfo.related_stores[0].name }}" href="{{ couponInfo.related_stores[0].store_url }}">
+                    <i class="fa fa-arrow-circle-o-right"></i>
+                    {{ couponInfo.related_stores[0].name }}
+                </a>
+                <div class="hs-sc-c-det">
+                    <p class="hs-scd-desp" ng-bind-html="trustAsHtml(couponInfo.related_stores[0].top_description)"></p>
+                </div>
 
-<!-- more top stores starts here -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>More Top Stores</h3>
+                <div class="hs-scd-social text-center">
+                    <a ui-sref="main.store-info({url: couponInfo.related_stores[0].store_url})" title="{{ couponInfo.related_stores[0].name }}">
+                        Check Out All {{ couponInfo.related_stores[0].name }} Coupons
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-sm-12 col-md-3"
-             ng-if="item.menu == 'bottom menu'" ng-repeat="item in stores">
-            <ul class="unstyled">
-                <li><a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a></li>
-            </ul>
+    <!--<div class="hs-suggested-coupons">
+        <h1 class="text-center page_h1">Recommended Coupons</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center pad">
+                            <a href="" title="Paytm Coupons">
+                                <img src="https://happysale.in/hs/img/m/flipkart-1447769846055.jpeg"
+                                     alt="Flipkart" class="img img-responsive" >
+                            </a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="coupon-type">
+                                <span class="text-center">Upto 80% OFF</span>
+                            </div>
+                            <div class="coupon-title">
+                                <span class="text-center">Flipkart Electronics Sale: Upto 80% OFF</span>
+                            </div>
+                            <div class="btn btn-md btn-block btn-info">Activate Offer</div>
+                            <a href="https://happysale.in/flipkart/" title="See all Flipkart Coupons" class="coupon-all" class="link">Flipkart Coupons</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="hs-foot">
+        <div class="container">
+            <div class="row row_1">
+                <div class="col-md-7 col-md-offset-2 col-xs-12 col-sm-12">
+                    <div class="hsf-top">
+                        <ul class="list-inline hs-social">
+                            <li class="col-xs-6 col-lg-3 col-md-3">
+                                <a href=""
+                                   target="_blank" class="hs-f-facebook">
+                                    <i class="fa fa-facebook-official right_border"></i>
+                                    <span class="left_border">Facebook</span>
+                                </a>
+                            </li>
+                            <li class="col-xs-6 col-lg-3 col-md-3">
+                                <a href="https://plus.google.com/+HappySaleIn/posts"
+                                   target="_blank" class="hs-f-google">
+                                    <i class="fa fa-google-plus right_border ga"></i>
+                                    <span  class="left_border">  Google+ </span>
+                                </a>
+                            </li>
+                            <li class="col-xs-6 col-lg-3 col-md-3"><a href="https://twitter.com/HappySaleIn" target="_blank" class="hs-f-twitter"><i class="fa fa-twitter right_border tw"></i><span class="left_border">   Twitter </span></a></li>
+                            <li class="col-xs-6 col-lg-3 col-md-3"><a href="https://www.pinterest.com/happysale/" target="_blank" class="hs-f-pinterest"><i class="fa fa-pinterest right_border"></i><span class="left_border">Pinterest</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<!-- end of more top stores -->
+</span>
+<!-- ================ end                  ================= -->

@@ -95,7 +95,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     }
                 })
                 .state('main.home', {
-                    url: '/',
+                    url: '/?cc',
                     templateUrl: 'static/app/customer-panel/modules/home/home.template.html',
                     controller: "homeCtrl",
                     resolve: {
