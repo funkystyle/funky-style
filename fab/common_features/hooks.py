@@ -57,7 +57,8 @@ def delete_image(path):
     :param path:
     :return:
     """
-    os.remove(path)
+    if os.path.exists(path):
+        os.remove(path)
 
 def process_images(requests):
     for request in  requests:
@@ -76,19 +77,76 @@ def before_create(resource, request):
     process_images(request)
 
 def before_update(resource, update, original):
+    # getting all image fields of all tables from config file
     for image_field in CONFIG_DATA['IMAGE_FIELDS']:
+        # checking image field of conf in update payload
         if image_field in update:
+            # if image field of update payload is list
             if isinstance(update[image_field], list):
+
+                # if given payload images empty list remove all previous images
+                if not len(update[image_field]):
+                    if image_field in original:
+                        for index, payload_image in enumerate(original[image_field]):
+                            delete_image(payload_image)
+                        update[image_field] = []
+
+                # getting index and image data from payload image
                 for index, payload_image in enumerate(update[image_field]):
+                    # checking payload of given image data is in original
                     if payload_image not in original[image_field]:
+                        # not found in database save image
                         update[image_field][index] = save_image_from_base64(payload_image)
+
+            elif not update[image_field]:
+                if image_field in original:
+                    delete_image(original[image_field])
+                    update[image_field] = ""
+
             elif update[image_field] != original[image_field]:
+                # replace if image field string with path after save
                 path = save_image_from_base64(update[image_field])
                 delete_image(original[image_field])
                 update[image_field] = path
 
+        # if image field in original
         if image_field in original:
+            # whether image field of original list or not
             if isinstance(original[image_field], list):
                 for index, original_image in enumerate(original[image_field]):
+                    # if original image not in update payload delete from original data
                     if original_image not in update[image_field]:
                         delete_image(original_image)
+
+
+def after_deleted_item(resource_name, item):
+    for image_field in CONFIG_DATA['IMAGE_FIELDS']:
+        if image_field in item:
+            # if image field of update payload is list
+            if isinstance(item[image_field], list):
+                for index, payload_image in enumerate(item[image_field]):
+                        delete_image(payload_image)
+
+            elif isinstance(item[image_field], str):
+                delete_image(item[image_field])
+
+    return_data = {
+        "data": str(item['_id']),
+        "status": 200,
+        "config": {
+            "method": "DELETE",
+            "transformRequest": [
+
+            ],
+            "transformResponse": [
+
+            ],
+            "jsonpCallbackParam": "callback",
+            "url": "/api/1.0/coupons/59169ac01d41c811b5ccdb72",
+            "headers": {
+                "Accept": "application/json, text/plain, */*"
+            }
+        },
+        "statusText": "NO CONTENT"
+    }
+    #return return_data

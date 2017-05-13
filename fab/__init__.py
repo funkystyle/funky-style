@@ -137,6 +137,8 @@ app.on_delete_item_persons += before_delete_persons_item
 app.on_insert += before_create
 app.on_update += before_update
 
+app.on_deleted_item += after_deleted_item
+
 from data_validations import *
 from auth import *
 from users import *
