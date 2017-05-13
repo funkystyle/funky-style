@@ -125,6 +125,7 @@ angular.module("couponModule", ['angular-table', 'constantModule',
             angular.forEach(deletedArray, function (item) {
                 items.push(couponFactory.delete(item._id).then(function(data) {
                     console.log(data);
+                    console.log(JSON.stringify(data));
                     toastr.success("Deleted ", 200);
                     angular.forEach($scope.coupons, function (coupon, index) {
                         if(item._id == coupon._id) {

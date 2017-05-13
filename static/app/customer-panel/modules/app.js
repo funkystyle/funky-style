@@ -183,7 +183,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // Store Info
                 .state('main.store-info', {
-                    url: '/store/:url',
+                    url: '/store/:url?cc',
                     templateUrl: 'static/app/customer-panel/modules/store.info/store.info.template.html',
                     controller: "storeinfoController",
                     resolve: {

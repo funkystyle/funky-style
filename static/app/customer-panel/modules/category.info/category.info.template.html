@@ -34,10 +34,16 @@
 						</ol>
 					</div> <!-- end div -->
 					<h3 class="margin-top-0 h3-heading" title="{{ category.h1 }}">{{ category.h1 }}</h3>
-					<p data-ng-bind-html="trustAsHtml(category.top_description)" class="para_small"></p>
+                    <p class="para_small top-desc" ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(category.top_description)"></p>
+                    <p style="min-height: 10px;">
+                        <a ng-click="show = !show" href="" class="pull-right btn btn-link">
+                            Show {{ (show) ? "Less": "More" }}
+                        </a>
+                    </p>
                     <p class="para_small">
-						{{ category.number_of_coupons | limitTo: 3 }} Verified Coupons - {{ category._updated | date: "dd MMM yyyy" }}
-					</p>
+                        {{ category.number_of_coupons }} Verified Coupons -
+                        <time datetime="{{ category.toDayDate | date: 'dd MMM yyyy hh:mm' }}">{{ category.toDayDate | date: "dd MMM yyyy hh:mm a" }}</time>
+                    </p>
 				</div>
 			</div>
 		</div> <!-- end panel body -->
@@ -219,12 +225,13 @@
                                         <i class="fa fa-star"></i>&nbsp;
                                         <i class="fa fa-share-alt"></i>
                                     </span>
-                                    <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        {{ item.description }}
-                                        <span class="pull-right">
-											<a href="">Show More</a>
-										</span>
-                                    </p>
+                                    <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                       data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                    <span class="pull-right">
+                                        <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                            Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                        </a>
+                                    </span>
                                     <p>
                                         <a href="">See all {{ item.category[0].name }} Coupons</a>
                                     </p>
@@ -319,14 +326,15 @@
 											<i class="fa fa-star"></i>&nbsp;
 											<i class="fa fa-share-alt"></i>
 										</span>
-									<p style="opacity: 0.6; line-height: 25px;" class="para_small">
-										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-										standard dummy text ever since the 1500s,
-										when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-										<span class="pull-right">
-											<a href="">Show More</a>
-										</span>
-									</p>
+                                    <p style="opacity: 0.6; line-height: 25px;" class="para_small">
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                        <span class="pull-right">
+                                            <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                            </a>
+                                        </span>
+                                    </p>
 									<p>
 										<a href="">See all Mobile Recharge Coupons</a>
 									</p>
@@ -398,10 +406,13 @@
                                         <i class="fa fa-share-alt"></i>
                                     </span>
                                     <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        {{ item.description }}
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.deals[item._id]}"
+                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
                                         <span class="pull-right">
-											<a href="">Show More</a>
-										</span>
+                                            <a ng-click="showMore.deals[item._id] = !showMore.deals[item._id]" href="" class="btn btn-link">
+                                                Show {{ (showMore.deals[item._id]) ? "Less": "More" }}
+                                            </a>
+                                        </span>
                                     </p>
                                     <p>
                                         <a href="">See all {{ item.category[0].name }} Coupons</a>
@@ -472,10 +483,13 @@
                                         <i class="fa fa-share-alt"></i>
                                     </span>
                                     <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        {{ item.description }}
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.coupons[item._id]}"
+                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
                                         <span class="pull-right">
-											<a href="">Show More</a>
-										</span>
+                                            <a ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]" href="" class="btn btn-link">
+                                                Show {{ (showMore.coupons[item._id]) ? "Less": "More" }}
+                                            </a>
+                                        </span>
                                     </p>
                                     <p>
                                         <a href="">See all {{ item.category[0].name }} Coupons</a>

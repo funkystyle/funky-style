@@ -6,7 +6,14 @@
 angular.module('couponFactoryModule', ['constantModule'])
 .factory("couponFactory", function ($http, $q, URL) {
 	return {
-		get: function () {
+		get: function (obj) {
+			if(typeof obj == 'object') {
+                var temp = {};
+                temp[obj.type] = {
+                    "$in": [obj.id]
+                };
+			    URL.coupons = URL.coupons+"&where="+JSON.stringify(temp);
+            }
 			var def = $q.defer();
 
 			$http({

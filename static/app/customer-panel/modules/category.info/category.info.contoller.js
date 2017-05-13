@@ -2,13 +2,18 @@ angular
     .module("categoryinfoModule", ["categoryFactoryModule",
         "storeServiceModule", "couponFactoryModule"])
     .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce,
-                                              $stateParams, categoryFactory, storeFactory, couponFactory) {
+                                              $stateParams, $http, categoryFactory, storeFactory, couponFactory) {
         $scope.favorite = {
             favorite: false
         };
         $scope.filter = {
             store: {},
             wallet: {}
+        };
+        $scope.showMore = {
+            all: {},
+            deals: {},
+            coupons: {}
         };
         $scope.params = undefined;
         $scope.search = {
@@ -31,6 +36,8 @@ angular
         // apply filter for coupons array
         $scope.applyFilter = function () {
             $scope.filterCoupons = $filter("couponFilter")($scope.coupons, $scope.filter);
+            $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
+            $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
         };
 
         if($stateParams['url']) {
@@ -41,33 +48,36 @@ angular
                 if(category['data']) {
                     if(category.data._items.length) {
                         $scope.category = category.data._items[0];
-                    }
-                }
-                // get all the coupons related to this category
-                couponFactory.get().then(function (data) {
-                    if(data['data']) {
-                        $scope.coupons = data.data._items;
-                        $scope.filterCoupons = data.data._items;
-
-                        angular.forEach($scope.coupons, function (item) {
-                            angular.forEach(item.related_stores, function (rel) {
-                                var rel_store = $filter('filter')($scope.stores, {_id: rel._id});
-                                if(rel_store.length == 0) {
-                                    $scope.stores.push(rel);
-                                }
-                            });
-                            angular.forEach(item.related_categories, function (cat) {
-                                var rel_cat = $filter('filter')($scope.categories, {_id: cat._id});
-                                if(rel_cat.length == 0) {
-                                    $scope.categories.push(cat);
-                                }
-                            })
+                        $scope.category.toDayDate = new Date();
+                        // get all the coupons related to this category
+                        couponFactory.get({type: "related_categories", id: $scope.category._id}).then(function (data) {
+                            console.log(data);
+                            if(data['data']) {
+                                $scope.coupons = data.data._items;
+                                $scope.filterCoupons = data.data._items;
+                                $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
+                                $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
+                                angular.forEach($scope.coupons, function (item) {
+                                    angular.forEach(item.related_categories, function (category) {
+                                        var items = $filter('filter')($scope.categories, {_id: category._id});
+                                        if(!items.length) {
+                                            $scope.categories.push(category);
+                                        }
+                                    });
+                                    angular.forEach(item.related_stores, function (rel) {
+                                        var rel_store = $filter('filter')($scope.stores, {_id: rel._id});
+                                        if(rel_store.length == 0) {
+                                            $scope.stores.push(rel);
+                                        }
+                                    });
+                                });
+                            }
+                            console.log($scope.coupons, $scope.category, $scope.stores, $scope.categories);
+                        }, function (error) {
+                            console.log(error);
                         });
                     }
-                    console.log($scope.coupons, $scope.category, $scope.stores, $scope.categories);
-                }, function (error) {
-                    console.log(error);
-                });
+                }
             }, function (error) {
                 console.log(error);
             });

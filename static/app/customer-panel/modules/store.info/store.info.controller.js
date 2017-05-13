@@ -1,7 +1,7 @@
 angular
     .module("storeinfoModule", ["footerModule", "storeServiceModule", "couponFactoryModule", "categoryFactoryModule"])
     .controller("storeinfoController", function ($scope, $stateParams, $state, storeFactory, couponFactory,
-                                                 categoryFactory, $filter, $sce) {
+                                                 categoryFactory, $filter, $sce, $ocLazyLoad) {
         $scope.favorite = {
             favorite: false
         };
@@ -48,7 +48,7 @@ angular
                     $scope.store.toDayDate = new Date();
                 }
                 // get all the coupons related to this store
-                couponFactory.get().then(function (data) {
+                couponFactory.get({type: "related_stores", id: $scope.store._id}).then(function (data) {
                     if(data.data) {
                         var coupons = data.data._items;
                         // get only this store relates coupons
@@ -80,6 +80,36 @@ angular
             });
         } else {
             $state.go('main.home');
+        }
+
+        //  ======== if stateParams having the coupon code
+        if($stateParams['cc']) {
+            $scope.params = $stateParams.cc;
+            $ocLazyLoad.load("static/bower_components/clipboard/dist/clipboard.min.js").then(function (data) {
+                var clipboard = new Clipboard('.btn');
+
+                clipboard.on('success', function(e) {
+                    console.info('Action:', e.action);
+                    console.info('Text:', e.text);
+                    console.info('Trigger:', e.trigger);
+
+                    e.clearSelection();
+                });
+                $scope.$watch('coupons', function (newVal, oldVal) {
+                    console.log(newVal, oldVal);
+                    if(newVal) {
+                        angular.forEach(newVal, function (item) {
+                            if(item._id == $stateParams.cc) {
+                                $scope.couponInfo = item;
+                            }
+                        });
+                    }
+                }, true);
+                clipboard.on('error', function(e) {
+                    console.error('Action:', e.action);
+                    console.error('Trigger:', e.trigger);
+                });
+            });
         }
     })
 
