@@ -261,7 +261,6 @@
 
                     <div class="form-group">
                         <label>Last Modified By</label>
-                        <pre>{{ store.last_modified_by | json }}</pre>
                         <ui-select ng-model="selected_user.user" theme="bootstrap">
                             <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
                             <ui-select-choices repeat="person._id as person in persons | filter: $select.search">

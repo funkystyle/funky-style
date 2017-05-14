@@ -7,6 +7,7 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
         $scope.stores = [];
         $scope.breadcrumbs = [];
         $scope.categories = [];
+        $scope.selected_user = {};
 
         $scope.$watch('store.name', function(newVal, oldVal) {
             $scope.store.url = (newVal) ? newVal+"-coupons" : undefined;
@@ -21,6 +22,11 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
                     angular.forEach($scope.stores, function (item) {
                         if(item._id == $stateParams.storeId) {
                             $scope.store = item;
+                            personFactory.getPerson($scope.store.last_modified_by, $auth.getToken()).then(function (data) {
+                                $scope.persons.push(data.data);
+                                $scope.selected_user.user = $scope.persons[0];
+                            });
+                            console.log("selected store ------- ", $scope.store);
                         }
                     });
                 }
@@ -45,15 +51,6 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
                 console.log(error);
                 toastr.error(error.data._error.message, "Error!");
             });
-
-            // get all persons from collection
-            personFactory.getAll($auth.getToken()).then(function (data) {
-                $scope.persons = data.data._items;
-            }, function (error) {
-                console.log(error);
-
-                toastr.error(error.data._error.message, "Error!");
-            })
         }
 
         // update store now

@@ -2,6 +2,7 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
     .controller("headerCtrl", function($scope, $state, mainURL, URL, $state, $auth, $http, toastr, personFactory) {
         $scope.state = $state;
         $scope.user = {};
+        $scope.selected_user = {};
         $scope.status = ["Pending", "Draft", "Trash", "Verified", "Publish"];
         if ($auth.isAuthenticated()) {
             personFactory.me().then(function(data) {

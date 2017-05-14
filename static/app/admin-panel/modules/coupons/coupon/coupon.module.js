@@ -125,19 +125,17 @@ angular.module("couponModule", ['angular-table', 'constantModule',
             angular.forEach(deletedArray, function (item) {
                 items.push(couponFactory.delete(item._id).then(function(data) {
                     console.log(data);
-                    console.log(JSON.stringify(data));
-                    toastr.success("Deleted ", 200);
-                    angular.forEach($scope.coupons, function (coupon, index) {
-                        if(item._id == coupon._id) {
-                            $scope.coupons.splice(index, 1);
-                            $scope.filterCoupons.splice(index, 1);
-                        }
-                    });
+                    return data;
                 }, function (error) {
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);
                 }));
             });
+
+            $q.all(items).then(function (data) {
+                toastr.success("Deleted selected items", 200);
+                $state.reload();
+            })
         };
     })
     .filter("typeCouponFilter", function ($filter) {

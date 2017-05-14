@@ -19,6 +19,24 @@ angular.module("personFactoryModule", ['constantModule'])
 
             return d.promise;
         },
+        getPerson: function (id, token) {
+            var d = $q.defer();
+            $http({
+                url: URL.persons+'/'+id,
+                headers: {
+                    authorization: token
+                },
+                method: "GET"
+            }).then(function (data) {
+                console.log(data);
+                d.resolve(data);
+            }, function (error) {
+                console.log(error);
+                d.reject(error);
+            });
+
+            return d.promise;
+        },
         me: function () {
             var d = $q.defer();
             $http({
