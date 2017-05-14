@@ -14,7 +14,7 @@ angular.module("constantModule", [])
         deals: "/api/1.0/deals",
         categories: '/api/1.0/categories?embedded={"related_categories":1, "top_categories":1, "top_stores":1}&rand_number='+Math.random(),
         coupons: '/api/1.0/coupons?embedded={"recommended_stores":1, "related_categories":1, "related_stores":1}&rand_number='+Math.random(),
-        stores: '/api/1.0/stores?embedded={"recommended_stores":1, "related_categories":1, "related_stores":1}&rand_number='+Math.random(),
+        stores: '/api/1.0/stores?embedded={"recommended_stores":1, "related_categories":1, "related_stores":1, "top_stores":1}&rand_number='+Math.random(),
         cms_pages: "/api/1.0/cms_pages",
         deal_brands: "/api/1.0//deal_brands",
         deal_categories: "/api/1.0//deal_categories",

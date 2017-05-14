@@ -16,28 +16,26 @@
                         Rate this store
                     </p>
                     <p class="text-center rating-stars">
-                        <i class="fa fa-star" ng-repeat="item in [1,2,3,4,5]"></i>
+                        <div class="text-center" star-rating rating-value="store.rating" max="5"></div>
                     </p>
                     <p class="text-center">
-                        {{ store.rating }}/5 Based on 100 Votes
+                        {{ store.rating }}/5 Based on {{ store.voting }} Votes
                     </p>
                 </div>
                 <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
                     <div style="width: 100%; min-height: 20px;">
                         <ol class="breadcrumb pull-right">
                             <li><a href="/">Home</a></li>
-                            <li><a href="/store">Stores</a></li>
-                            <li><a href="">Recharge</a></li>
-                            <li class="active">Mobikwik Coupons</li>
+                            <li><a href="#/stores">Stores</a></li>
+                            <li ng-repeat="item in store.breadcrumb">
+                                <a ui-sref="main.categoryinfo({url: item.url})">{{ item.name }}</a>
+                            </li>
+                            <li class="active">{{ store.url }}</li>
                         </ol>
                     </div> <!-- end div -->
                     <h1 class="margin-top-0 h3-heading">{{ store.h1 }}</h1>
-                    <p class="para_small top-desc" ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(store.top_description)"></p>
-                    <p style="min-height: 10px;">
-                        <a ng-click="show = !show" href="" class="pull-right btn btn-link">
-                            Show {{ (show) ? "Less": "More" }}
-                        </a>
-                    </p>
+                    <p ng-click="show = !show" class="para_small top-desc"
+                       ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(store.top_description)"></p>
                     <p class="para_small">
                         {{ store.number_of_coupons }} Verified Coupons -
                         <time datetime="{{ store.toDayDate | date: 'dd MMM yyyy hh:mm' }}">{{ store.toDayDate | date: "dd MMM yyyy hh:mm a" }}</time>
@@ -55,10 +53,18 @@
         <div class="col-lg-3 col-sm-12 col-md-3 pad-right-0 col-xs-12">
             <div class="well social-well">
                 <p class="social-icons text-center">
-                    <i class="fa fa-facebook"></i>
-                    <i class="fa fa-google-plus"></i>
-                    <i class="fa fa-twitter"></i>
-                    <i class="fa fa-pinterest"></i>
+                    <a target="_blank" href="https://www.facebook.com/FabPromoCodes/">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a target="_blank" href="https://plus.google.com/113116676582324316660/about?gmbpt=true&_ga=1.176672103.352270514.1467899366">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/FabPromocodes">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a target="_blank" href="https://www.pinterest.com/fabpromocodes/">
+                        <i class="fa fa-pinterest"></i>
+                    </a>
                 </p>
             </div>
         </div> <!-- end col-lg-3 -->
@@ -108,7 +114,8 @@
                     </div>
                     <div class="check-box-filter-area">
                         <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.category" ng-if="item.category_type != 'wallet'">
+                             ng-repeat="item in categories | filter: search.category"
+                             ng-if="item.category_type == 'Regular'">
                             <label for="{{ item._id }}_category_filter" style="font-weight: 500;">
                                 <input id="{{ item._id }}_category_filter" type="checkbox"
                                        ng-model="filter['category'][item._id]" ng-change="applyFilter()" />
@@ -139,11 +146,144 @@
                     </div>
                     <div class="check-box-filter-area">
                         <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.wallet" ng-if="item.category_type == 'Wallet'">
+                             ng-repeat="item in categories | filter: search.wallet"
+                             ng-if="item.category_type == 'Wallet'">
                             <label for="{{ item._id }}_wallet_filter" style="font-weight: 500;">
                                 <input id="{{ item._id }}_wallet_filter" type="checkbox"
                                        ng-model="filter['wallet'][item._id]" ng-change="applyFilter()" />
                                 <span id="span_wallet_{{ item._id }}" class="cr">
+                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
+                                </span>
+                                <span>{{ item.name }}</span>
+                            </label>
+                        </div> <!-- end check box -->
+                    </div>
+                </div>
+                <!--end panel body-->
+            </div>
+            <!--end panel-->
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="font-bold">Bank Filters</h5>
+                </div>
+                <!--panel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="icon-addon addon-sm">
+                            <input type="text" placeholder="Search" class="form-control input-sm"
+                                   autocomplete="off" id="search_bank" ng-model="search.bank">
+                            <label for="email" class="fa fa-search" rel="tooltip"
+                                   title="Search for Banks"></label>
+                        </div>
+                    </div>
+                    <div class="check-box-filter-area">
+                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
+                             ng-repeat="item in categories | filter: search.bank"
+                             ng-if="item.category_type == 'Bank'">
+                            <label for="{{ item._id }}_bank_filter" style="font-weight: 500;">
+                                <input id="{{ item._id }}_bank_filter" type="checkbox"
+                                       ng-model="filter['bank'][item._id]" ng-change="applyFilter()" />
+                                <span id="span_bank_{{ item._id }}" class="cr">
+                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
+                                </span>
+                                <span>{{ item.name }}</span>
+                            </label>
+                        </div> <!-- end check box -->
+                    </div>
+                </div>
+                <!--end panel body-->
+            </div>
+            <!--end panel-->
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="font-bold">City Filters</h5>
+                </div>
+                <!--panel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="icon-addon addon-sm">
+                            <input type="text" placeholder="Search" class="form-control input-sm"
+                                   autocomplete="off" id="search_city" ng-model="search.city">
+                            <label for="email" class="fa fa-search" rel="tooltip"
+                                   title="Search for City"></label>
+                        </div>
+                    </div>
+                    <div class="check-box-filter-area">
+                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
+                             ng-repeat="item in categories | filter: search.city"
+                             ng-if="item.category_type == 'City'">
+                            <label for="{{ item._id }}_city_filter" style="font-weight: 500;">
+                                <input id="{{ item._id }}_city_filter" type="checkbox"
+                                       ng-model="filter['city'][item._id]" ng-change="applyFilter()" />
+                                <span id="span_city_{{ item._id }}" class="cr">
+                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
+                                </span>
+                                <span>{{ item.name }}</span>
+                            </label>
+                        </div> <!-- end check box -->
+                    </div>
+                </div>
+                <!--end panel body-->
+            </div>
+            <!--end panel-->
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="font-bold">Brands Filters</h5>
+                </div>
+                <!--panel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="icon-addon addon-sm">
+                            <input type="text" placeholder="Search" class="form-control input-sm"
+                                   autocomplete="off" id="search_brands" ng-model="search.brands">
+                            <label for="email" class="fa fa-search" rel="tooltip"
+                                   title="Search for Brands"></label>
+                        </div>
+                    </div>
+                    <div class="check-box-filter-area">
+                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
+                             ng-repeat="item in categories | filter: search.brands"
+                             ng-if="item.category_type == 'Brands'">
+                            <label for="{{ item._id }}_Brands_filter" style="font-weight: 500;">
+                                <input id="{{ item._id }}_Brands_filter" type="checkbox"
+                                       ng-model="filter['brands'][item._id]" ng-change="applyFilter()" />
+                                <span id="span_Brands_{{ item._id }}" class="cr">
+                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
+                                </span>
+                                <span>{{ item.name }}</span>
+                            </label>
+                        </div> <!-- end check box -->
+                    </div>
+                </div>
+                <!--end panel body-->
+            </div>
+            <!--end panel-->
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="font-bold">Festival Filters</h5>
+                </div>
+                <!--panel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="icon-addon addon-sm">
+                            <input type="text" placeholder="Search" class="form-control input-sm"
+                                   autocomplete="off" id="search_festival" ng-model="search.festivals">
+                            <label for="email" class="fa fa-search" rel="tooltip"
+                                   title="Search for Banks"></label>
+                        </div>
+                    </div>
+                    <div class="check-box-filter-area">
+                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
+                             ng-repeat="item in categories | filter: search.festivals"
+                             ng-if="item.category_type == 'Festivals'">
+                            <label for="{{ item._id }}_festival_filter" style="font-weight: 500;">
+                                <input id="{{ item._id }}_festival_filter" type="checkbox"
+                                       ng-model="filter['festivals'][item._id]" ng-change="applyFilter()" />
+                                <span id="span_festivals_{{ item._id }}" class="cr">
                                     <i class="cr-icon glyphicon glyphicon-ok"></i>
                                 </span>
                                 <span>{{ item.name }}</span>
@@ -181,7 +321,7 @@
                 <div class="panel-body">
                     <div class="check-box-filter-area">
                         <p ng-repeat="item in store.top_stores">
-                            <a ui-sref="main.store-info({url: item.url})" style="color: #666; text-decoration: underline;">
+                            <a ui-sref="main.store-info({url: item.url, cc: undefined})" style="color: #666; text-decoration: underline;">
                                 {{ item.name }}
                             </a>
                         </p>
@@ -218,22 +358,30 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Ola Cabs Social</h5>
+                    <h5 class="font-bold">{{ store.name }} Social Links</h5>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body panel-body_fa">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pad-right-0" style="margin-bottom: 20px;">
-                            <img src="static/app/customer-panel/modules/assets/images/facebook.png" style="width: 90%;" />
+                            <a target="_blank" href="{{ store.facebook_url }}">
+                                <img src="static/app/customer-panel/modules/assets/images/facebook.png" style="width: 90%;" />
+                            </a>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pad-right-0" style="margin-bottom: 20px;">
-                            <img src="static/app/customer-panel/modules/assets/images/google-plus.png" style="width: 90%;" />
+                            <a target="_blank" href="{{ store.google_plus_url }}">
+                                <img src="static/app/customer-panel/modules/assets/images/google-plus.png" style="width: 90%;" />
+                            </a>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pad-right-0" style="margin-bottom: 20px;">
-                            <img src="static/app/customer-panel/modules/assets/images/linkedin.png" style="width: 90%;" />
+                            <a target="_blank" href="{{ store.twitter_url }}">
+                                <img src="static/app/customer-panel/modules/assets/images/twitter.png" style="width: 90%;" />
+                            </a>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3  col-xs-3 pad-right-0" style="margin-bottom: 20px;">
-                            <img src="static/app/customer-panel/modules/assets/images/twitter.png" style="width: 90%;" />
+                            <a target="_blank" href="{{ store.youtube_url }}">
+                                <img src="static/app/customer-panel/modules/assets/images/youtube.png" style="width: 90%;" />
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -244,12 +392,11 @@
             <!-- ola cab address start here -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Ola Cabs Address</h5>
+                    <h5 class="font-bold">{{ store.name }} Address</h5>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
-                    <p class="mar con-para">Maruthi Infotech Center, 100 Feet Rd, Embassy Golf Links Bussiness Park Domlur</p>
-                    <p class="con-para">Bangaluru - 560071, Karnataka India</p>
+                    <p class="mar con-para">{{ store.store_address }}</p>
                 </div>
                 <!--end panel body-->
             </div>
@@ -259,7 +406,11 @@
             <!-- latest tweets start here -->
             <div class="panel panel-default">
                 <div class="panel-heading" style="border-bottom: 2px dotted #9954bb;">
-                    <h5 class="font-bold latest-tweet">Latest Tweets From @Swiggy_in</h5>
+                    <h5 class="font-bold latest-tweet">Latest Tweets From {{ store.twitter_id }}</h5>
+                    <a class="twitter-timeline" href="https://twitter.com/{{ store.twitter_id }}">
+                        Tweets by {{ store.twitter_id }}
+                    </a>
+                    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -331,7 +482,9 @@
                                             </span>
                                         </p>
                                         <p>
-                                            <a href="">See all {{ item.category[0].name }} Coupons</a>
+                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                                See all {{ item.related_categories[0].name }} Coupons
+                                            </a>
                                         </p>
                                     </div>
                                 </div> <!-- end row -->
@@ -353,7 +506,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
                                         <a target="_blank" ui-sref="main.store-info({url: store.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                            <span>SHOW COUPON CODE</span>
+                                            <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>
                                     </div>
@@ -373,7 +526,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <h3  class="ola_mar">
-                                Ola Deals
+                                {{ store.name }} Deals
                             </h3>
                         </div><!-- end col -->
                     </div><!-- end row -->
@@ -653,7 +806,9 @@
                                             </span>
                                         </p>
                                         <p>
-                                            <a href="">See all {{ item.category[0].name }} Coupons</a>
+                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                                See all {{ item.related_categories[0].name }} Coupons
+                                            </a>
                                         </p>
                                     </div>
                                 </div> <!-- end row -->
@@ -675,7 +830,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
                                         <a target="_blank" ui-sref="main.store-info({url: store.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                            <span>Show Coupon Code</span>
+                                            <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>
                                     </div>
@@ -726,13 +881,15 @@
                                             <p class="top-desc" ng-class="{'show-desc': showMore.coupons[item._id]}"
                                                data-ng-bind-html="trustAsHtml(item.description)"></p>
                                             <span class="pull-right">
-                                                    <a ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]" href="" class="btn btn-link">
+                                                <a ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]" href="" class="btn btn-link">
                                                     Show {{ (showMore.coupons[item._id]) ? "Less": "More" }}
                                                 </a>
                                             </span>
                                         </p>
                                         <p>
-                                            <a href="">See all {{ item.category[0].name }} Coupons</a>
+                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                                See all {{ item.related_categories[0].name }} Coupons
+                                            </a>
                                         </p>
                                     </div>
                                 </div> <!-- end row -->
@@ -754,7 +911,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
                                         <a target="_blank" ui-sref="main.store-info({url: store.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                            <span>Show Coupon Code</span>
+                                            <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>
                                     </div>
@@ -775,75 +932,60 @@
                 </div><!-- end row -->
 
                 <div class="row">
-                    <div class="col-lg-6 col-md-6" ng-repeat="suggested in [1,2]">
-                        <div class="panel panel-default" ng-repeat="item in [1,2]">
+                    <div class="col-lg-6 col-md-6" ng-repeat="item in suggestedCoupons | limitTo: 2">
+                        <div class="panel panel-default coupon all">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
                                             <h4>
-                                                Rs. 1000
-                                                <br />
-                                                OFF
+                                                {{ item.discount_type }} {{ item.discount }}
                                             </h4>
-                                            <div class="deal">Deal</div>
+                                            <div class="deal">
+                                                <span ng-if="item.coupon_type == 'coupon'">
+                                                    COUPON
+                                                </span>
+                                                <span ng-if="item.coupon_type == 'offer'">
+                                                    DEAL
+                                                </span>
+                                            </div>
                                         </div> <!-- end deal-price -->
                                         <div class="col-xs-12 hidden-lg hidden-md">
-                                            <p class="fifty_cashback">50% Cashback</p>
+                                            <p class="fifty_cashback">
+                                                {{ item.discount_type }} {{ item.discount }}
+                                            </p>
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                         <h3 class="margin-top-0 coupon-heading">
-                                            Upto Rs. 30 Supercash everyday on Recharge
+                                            {{ item.title }}
                                             <span class="pull-right hidden-xs">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
+                                                <i class="fa fa-star"></i>&nbsp;
+                                                <i class="fa fa-share-alt"></i>
+                                            </span>
                                         </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
+                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                            <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
-                                               data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                            <span class="pull-right">
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                        <span class="pull-right">
                                                 <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
                                                     Show {{ (showMore.all[item._id]) ? "Less": "More" }}
                                                 </a>
                                             </span>
                                         </p>
                                         <p>
-                                            <a href="">See all Mobile Recharge Coupons</a>
+                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                                See all {{ item.related_categories[0].name }} Coupons
+                                            </a>
                                         </p>
                                     </div>
                                 </div> <!-- end row -->
                             </div> <!-- end panel body -->
-                            <!--panel footer-->
-                            <div class="panel-footer coupon-footer">
-                                <div class="row vari_pad">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
-                                        <i class="fa fa-heart-o"></i> &nbsp;
-                                        Verified
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
-                                        <i class="fa fa-comment-o"></i> &nbsp;
-                                        Comment
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
-                                        <i class="fa fa-bug"></i> &nbsp;
-                                        Report
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
-                                        <a target="_blank" ui-sref="main.store-info({url: store.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                            <span>Show Coupon Code</span>
-                                            <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end panel footer -->
-                        </div>
+                        </div> <!-- end panel -->
                     </div>
                 </div>
                 <!-- suggested coupons end here -->
@@ -916,7 +1058,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
                                 <a target="_blank" ui-sref="main.store-info({url: store.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                    <span>Show Coupon Code</span>
+                                    <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                     <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                 </a>
                             </div>
@@ -994,7 +1136,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
                                 <a target="_blank" ui-sref="main.store-info({url: store.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                    <span>Show Coupon Code</span>
+                                    <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                     <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                 </a>
                             </div>
@@ -1062,8 +1204,8 @@
                 </div>
 
                 <div class="hs-scd-social text-center">
-                    <a ui-sref="main.store-info({url: couponInfo.related_stores[0].store_url, cc: undefined})" title="{{ couponInfo.related_stores[0].name }}">
-                        Check Out All {{ couponInfo.related_stores[0].name }} Coupons
+                    <a ui-sref="main.categoryinfo({url: couponInfo.related_categories[0].url, cc: undefined})" title="{{ couponInfo.related_stores[0].name }}">
+                        Check Out All {{ couponInfo.related_categories[0].name }} Coupons
                     </a>
                 </div>
             </div>

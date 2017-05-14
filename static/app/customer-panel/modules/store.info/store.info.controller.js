@@ -7,11 +7,19 @@ angular
         };
         $scope.filter = {
             category: {},
-            wallet: {}
+            wallet: {},
+            bank: {},
+            city: {},
+            brands: {},
+            festivals: {}
         };
         $scope.search = {
             category: undefined,
-            wallet: undefined
+            wallet: undefined,
+            bank: undefined,
+            city: undefined,
+            brands: undefined,
+            festivals: undefined
         };
         $scope.showMore = {
             all: {},
@@ -20,6 +28,8 @@ angular
         };
         $scope.store = undefined;
         $scope.coupons = [];
+        $scope.suggestedCoupons = [];
+        $scope.relatedCoupons = [];
         $scope.filterCoupons = [];
         $scope.categories = [];
 
@@ -46,6 +56,8 @@ angular
                 if(store.data) {
                     $scope.store = store.data._items[0];
                     $scope.store.toDayDate = new Date();
+                    $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
+                    console.log($scope.store);
                 }
                 // get all the coupons related to this store
                 couponFactory.get({type: "related_stores", id: $scope.store._id}).then(function (data) {
@@ -72,6 +84,27 @@ angular
                     }
 
                     console.log($scope.coupons, $scope.categories);
+                }, function (error) {
+                    console.log(error);
+                });
+
+                couponFactory.get({type: "recommended_stores", id: $scope.store._id}).then(function (data) {
+                    if(data.data) {
+                        $scope.suggestedCoupons = data.data._items;
+                        console.log("Suggested coupons are --- ", $scope.suggestedCoupons);
+                    }
+                }, function (error) {
+                    console.log(error);
+                });
+                var rel_stores_array = [];
+                angular.forEach($scope.store.related_stores, function (item) {
+                    rel_stores_array.push(item._id);
+                });
+                couponFactory.get({type: "related_stores", id: $scope.store._id}, rel_stores_array).then(function (data) {
+                    if(data.data) {
+                        $scope.relatedCoupons = data.data._items;
+                        console.log("Related stores coupons are --- ", $scope.relatedCoupons);
+                    }
                 }, function (error) {
                     console.log(error);
                 });
@@ -117,7 +150,9 @@ angular
     .filter('couponFilter', function () {
         return function (items, filter) {
             var list = [];
-            if(!Object.keys(filter.category).length && !Object.keys(filter.wallet).length) {
+            if(!Object.keys(filter.category).length && !Object.keys(filter.wallet).length &&
+                !Object.keys(filter.bank).length && !Object.keys(filter.city).length &&
+                !Object.keys(filter.brands).length && !Object.keys(filter.festivals).length) {
                 return items;
             }
             // return all items if all items of object is false

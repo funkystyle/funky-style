@@ -6,12 +6,12 @@
 angular.module('couponFactoryModule', ['constantModule'])
 .factory("couponFactory", function ($http, $q, URL) {
 	return {
-		get: function (obj) {
+		get: function (obj, array) {
 		    var url = undefined;
 			if(typeof obj == 'object') {
                 var temp = {};
                 temp[obj.type] = {
-                    "$in": [obj.id]
+                    "$in": (array)? array: [obj.id]
                 };
 			    url = URL.coupons+"&where="+JSON.stringify(temp);
             } else {
