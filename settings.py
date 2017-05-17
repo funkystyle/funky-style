@@ -5,7 +5,6 @@ import os, json, sys
 
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-
 # setting logger configuration
 LOG_JSON_FILE_PATH = os.path.join(BASE_DIR, 'conf', 'logging.json')
 
@@ -224,6 +223,28 @@ SCHEMAS = {
                 }
             }
         },
+        'related_coupons': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'coupons',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'related_deals': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'deals',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
         'image':{
             'type': 'string'
         },
@@ -383,6 +404,28 @@ SCHEMAS = {
                     'type': 'objectid',
                     'data_relation': {
                         'resource': 'categories',
+                        'embeddable': True,
+                        'field': '_id'
+                    }
+                }
+            },
+            'related_coupons': {
+                'type': 'list',
+                'schema': {
+                    'type': 'objectid',
+                    'data_relation': {
+                        'resource': 'coupons',
+                        'embeddable': True,
+                        'field': '_id'
+                    }
+                }
+            },
+            'related_deals': {
+                'type': 'list',
+                'schema': {
+                    'type': 'objectid',
+                    'data_relation': {
+                        'resource': 'deals',
                         'embeddable': True,
                         'field': '_id'
                     }
