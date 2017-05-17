@@ -49,6 +49,7 @@ angular
                     if(category.data._items.length) {
                         $scope.category = category.data._items[0];
                         $scope.category.toDayDate = new Date();
+                        $scope.category.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                         // get all the coupons related to this category
                         couponFactory.get({type: "related_categories", id: $scope.category._id}).then(function (data) {
                             console.log(data);

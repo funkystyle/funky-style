@@ -15,11 +15,11 @@
 					<p class="text-center font-bold">
 						Rate this category
 					</p>
-					<p class="text-center rating-stars">
-						<i class="fa fa-star" ng-repeat="item in [1,2,3,4,5]"></i>
-					</p>
+                    <p class="text-center rating-stars">
+                        <div class="text-center" star-rating rating-value="category.rating" max="5"></div>
+                    </p>
 					<p class="text-center">
-						{{ category.rating }}/5 Based on 100 Votes
+						{{ category.rating }}/5 Based on {{ category.voting }} Votes
 					</p>
 				</div>
 				<div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
@@ -27,19 +27,16 @@
 						<ol class="breadcrumb pull-right">
 							<li><a href="#/">Home</a></li>
 							<li><a href="#/category">categories</a></li>
-							<li ng-class="{'active': $last}" ng-repeat="item in category.breadcrumb">
+							<li ng-repeat="item in category.breadcrumb">
                                 <a ng-if="!$last" ui-sref="main.categoryinfo({url: item.url})">{{ item.name }}</a>
                                 <span ng-if="$last">{{ item.name }}</span>
                             </li>
+                            <li class="active">{{ category.url }}</li>
 						</ol>
 					</div> <!-- end div -->
-					<h3 class="margin-top-0 h3-heading" title="{{ category.h1 }}">{{ category.h1 }}</h3>
-                    <p class="para_small top-desc" ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(category.top_description)"></p>
-                    <p style="min-height: 10px;">
-                        <a ng-click="show = !show" href="" class="pull-right btn btn-link">
-                            Show {{ (show) ? "Less": "More" }}
-                        </a>
-                    </p>
+					<h3 class="margin-top-0 h3-heading">{{ category.h1 }}</h3>
+                    <p ng-click="show = !show" class="para_small top-desc"
+                       ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(category.top_description)"></p>
                     <p class="para_small">
                         {{ category.number_of_coupons }} Verified Coupons -
                         <time datetime="{{ category.toDayDate | date: 'dd MMM yyyy hh:mm' }}">{{ category.toDayDate | date: "dd MMM yyyy hh:mm a" }}</time>

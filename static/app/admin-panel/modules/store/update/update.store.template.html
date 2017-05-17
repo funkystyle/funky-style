@@ -33,6 +33,7 @@
                     <div class="form-group" ng-if="store.image">
                         <label>Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.image = ''"></i>
                             <img ng-if="!store.image['base64']" ng-src="{{ store.image }}" />
                             <img ng-if="store.image['base64']" ng-src="data:image/jpeg;base64,{{ store.image.base64 }}" />
                         </div>
@@ -115,6 +116,7 @@
                     <div class="form-group" ng-if="store.top_banner">
                         <label>Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.side_banner = ''"></i>
                             <img ng-if="!store.side_banner['base64']" ng-src="{{ store.side_banner }}" />
                             <img ng-if="store.side_banner['base64']" ng-src="data:image/jpeg;base64,{{ store.side_banner.base64 }}" />
                         </div>
@@ -127,6 +129,7 @@
                     <div class="form-group" ng-if="store.top_banner">
                         <label>Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.top_banner = ''"></i>
                             <img ng-if="!store.top_banner['base64']" ng-src="{{ store.top_banner }}" />
                             <img ng-if="store.top_banner['base64']" ng-src="data:image/jpeg;base64,{{ store.top_banner.base64 }}" />
                         </div>
@@ -174,6 +177,7 @@
                     <div class="form-group" ng-if="store.all_tag_image">
                         <label>Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.all_tag_image = ''"></i>
                             <img ng-if="!store.all_tag_image['base64']" ng-src="{{ store.all_tag_image }}" />
                             <img ng-if="store.all_tag_image['base64']" ng-src="data:image/jpeg;base64,{{ store.all_tag_image.base64 }}" />
                         </div>

@@ -354,6 +354,9 @@ SCHEMAS = {
                 'required': True,
                 'unique': True
             },
+            'number_of_coupons': {
+                'type': 'integer'
+            },
             'url': {
                 'type': 'string',
                 'required': True,

@@ -33,6 +33,7 @@
                     <div class="form-group" ng-if="store.image.base64">
                         <label for="displayImage">Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.image = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ store.image.base64 }}" />
                         </div>
                     </div>
@@ -112,6 +113,7 @@
                     <div class="form-group" ng-if="store.side_banner.base64">
                         <label for="displayImage">Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.side_banner = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ store.side_banner.base64 }}" />
                         </div>
                     </div>
@@ -123,6 +125,7 @@
                     <div class="form-group" ng-if="store.top_banner.base64">
                         <label for="displayImage">Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.top_banner = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ store.top_banner.base64 }}" />
                         </div>
                     </div>
@@ -168,8 +171,9 @@
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
                     <div class="form-group" ng-if="store.all_tag_image.base64">
-                        <label for="displayImage">Image Display</label>
+                        <label for="all_tag_image">Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.all_tag_image = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ store.all_tag_image.base64 }}" />
                         </div>
                     </div>

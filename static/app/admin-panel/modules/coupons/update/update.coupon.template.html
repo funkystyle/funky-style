@@ -92,7 +92,7 @@
                     </div>
                     <div class="form-group">
                         <label>Store</label>
-                        <ui-select multiple ng-model="coupon.related_stores" theme="bootstrap" close-on-select="false" title="Related Stores">
+                        <ui-select on-select="addStore($item, $model)" on-remove="removeStore($item, $model)" multiple ng-model="coupon.related_stores" theme="bootstrap" close-on-select="false" title="Related Stores">
                             <ui-select-match placeholder="Select Store">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="store._id as store in stores | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="store.name | highlight: $select.search"></div>
@@ -107,7 +107,8 @@
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="form-group">
                         <label>Related Categories</label>
-                        <ui-select multiple ng-model="coupon.related_categories" theme="bootstrap" close-on-select="false" title="Related Categories">
+                        <ui-select on-select="addCategory($item, $model)" on-remove="removeCategory($item, $model)" multiple ng-model="coupon.related_categories"
+                                   theme="bootstrap" close-on-select="false" title="Related Categories">
                             <ui-select-match placeholder="Select Related Categories">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="store._id as store in categories | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="store.name | highlight: $select.search"></div>
