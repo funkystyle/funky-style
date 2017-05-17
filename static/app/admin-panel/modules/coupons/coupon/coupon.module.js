@@ -1,4 +1,3 @@
-/* store module */
 angular.module("couponModule", ['angular-table', 'constantModule',
     'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule',
     'storeFactoryModule', 'categoryFactoryModule', 'personFactoryModule'])
@@ -119,69 +118,21 @@ angular.module("couponModule", ['angular-table', 'constantModule',
                     }
                 });
             });
-            var finalItems = [];
-            function updateStore (store) {
-                store.number_of_coupons = store.number_of_coupons - 1;
-                delete store._created;
-                delete store._updated;
-                delete store._links;
-                console.log(store);
-                finalItems.push(storeFactory.update(store, $auth.getToken()).then(function (store_data) {
-                    console.log(store_data);
-                    return store_data;
-                }, function (error) {
-                    console.log(error);
-                    toastr.error(error.data._error.message, error.data._error.code);
-                }));
-            }
-
-            function updateCategory (category) {
-                category.number_of_coupons = category.number_of_coupons - 1;
-                delete category._created;
-                delete category._updated;
-                delete category._links;
-                console.log(category);
-                finalItems.push(categoryFactory.update(category, $auth.getToken()).then(function (category_data) {
-                    console.log(category_data);
-                    return category_data;
-                }, function (error) {
-                    console.log(error);
-                    toastr.error(error.data._error.message, error.data._error.code);
-                }));
-            }
 
             var items = [];
             angular.forEach(deletedArray, function (item) {
-                // remove count from the related stores
-                if(item.related_stores.length) {
-                    angular.forEach(item.related_stores, function (store) {
-                        updateStore(store);
-                    });
-                }
-                // remove count from the related categories
-                if(item.related_categories.length) {
-                    angular.forEach(item.related_categories, function (category) {
-                        updateCategory(category);
-                    });
-                }
+                items.push(couponFactory.delete(item._id).then(function(data) {
+                    console.log(data);
+                    return data;
+                }, function (error) {
+                    console.log(error);
+                    toastr.error(error.data._error.message, error.data._error.code);
+                }));
             });
-
-            $q.all(finalItems).then(function (data) {
-                angular.forEach(deletedArray, function (item) {
-                    items.push(couponFactory.delete(item._id).then(function(data) {
-                        console.log(data);
-                        return data;
-                    }, function (error) {
-                        console.log(error);
-                        toastr.error(error.data._error.message, error.data._error.code);
-                    }));
-                });
-
-                $q.all(items).then(function (finalData) {
-                    toastr.success("Deleted selected items", 200);
-                    // $state.reload();
-                });
-            })
+            $q.all(items).then(function (finalData) {
+                toastr.success("Deleted selected items", 200);
+                // $state.reload();
+            });
         };
     })
     .filter("typeCouponFilter", function ($filter) {

@@ -30,6 +30,20 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
                 name: "Festivals"
             }
         ];
+        $scope.menuTypes = [
+            {
+                text: "None",
+                code: "none"
+            },
+            {
+                text: "Top Menu",
+                code: 'top'
+            },
+            {
+                text: "Bottom Menu",
+                code: 'bottom'
+            }
+        ];
 
         $scope.$watch('category.name', function(newVal, oldVal) {
             $scope.category.url = (newVal) ? newVal+"-coupons" : undefined;

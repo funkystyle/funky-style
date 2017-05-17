@@ -185,6 +185,13 @@
 		</div>
 		<!--end col-->
 		<div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="row">
+                <div ng-repeat="item in category.top_stores | limitTo: 6" class="col-md-2 col-sm-2">
+                    <div class="thumbnail">
+                        <img ng-src="{{ item.image }}" alt="">
+                    </div>
+                </div>
+            </div>
 			<div class="tab-content">
 				<div class="tab-pane active" id="all-tab">
                     <div class="panel panel-default coupon" ng-repeat="item in filterCoupons">

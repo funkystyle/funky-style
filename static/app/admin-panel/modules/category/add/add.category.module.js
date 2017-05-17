@@ -3,7 +3,10 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
     "constantModule"])
     .controller("addCategoryCtrl", function($scope, $timeout, toastr, storeFactory, $state, $stateParams,
                                             $auth, personFactory, categoryFactory, URL) {
-        $scope.category = {};
+        $scope.category = {
+            related_coupons: [],
+            related_deals: []
+        };
         $scope.persons = [];
         $scope.categories = [];
         $scope.breadcrumbs = [];
@@ -30,6 +33,23 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
                 name: "Festivals"
             }
         ];
+        $scope.menuTypes = [
+            {
+                text: "None",
+                code: "none"
+            },
+            {
+                text: "Top Menu",
+                code: 'top'
+            },
+            {
+                text: "Bottom Menu",
+                code: 'bottom'
+            }
+        ];
+        $scope.category.menu = $scope.menuTypes[0];
+
+        $scope.category.category_type = $scope.category_type[0];
 
         // get all stores into the array
         if($auth.isAuthenticated()) {

@@ -72,10 +72,10 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
             coupon.expire_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
             console.log(coupon.expire_date);
             couponFactory.post(coupon).then(function (data) {
-                console.log(data);
+                console.log("Added coupon response data ---- ", data);
+                var responseCouponId = data.data._id;
                 function updateStore (store) {
-                    store.number_of_coupons = (store.number_of_coupons)?store.number_of_coupons + 1: 1;
-
+                    store.related_coupons.push(responseCouponId);
                     delete store._created;
                     delete store._updated;
                     delete store._links;
@@ -90,7 +90,7 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
                 }
 
                 function updateCategory (category) {
-                    category.number_of_coupons = (category.number_of_coupons) ? category.number_of_coupons + 1 : 1;
+                    category.related_coupons.push(responseCouponId);
                     delete category._created;
                     delete category._updated;
                     delete category._links;

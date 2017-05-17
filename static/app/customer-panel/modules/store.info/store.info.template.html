@@ -322,6 +322,7 @@
                     <div class="check-box-filter-area">
                         <p ng-repeat="item in store.top_stores">
                             <a ui-sref="main.store-info({url: item.url, cc: undefined})" style="color: #666; text-decoration: underline;">
+                                <img ng-src="{{ item.image }}" height="50" width="50" style="float: left;">
                                 {{ item.name }}
                             </a>
                         </p>
@@ -998,45 +999,54 @@
                         </h3>
                     </div><!-- end col -->
                 </div><!-- end row -->
-                <div class="panel panel-default" ng-repeat="item in [1,2]">
+                <div class="panel panel-default" ng-repeat="item in relatedCoupons | limitTo: 2">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
                                     <h4>
-                                        Rs. 1000
-                                        <br />
-                                        OFF
+                                        {{ item.discount_type }} {{ item.discount }}
                                     </h4>
-                                    <div class="deal">Deal</div>
+                                    <div class="deal">
+                                            <span ng-if="item.coupon_type == 'coupon'">
+                                                COUPON
+                                            </span>
+                                        <span ng-if="item.coupon_type == 'offer'">
+                                                DEAL
+                                            </span>
+                                    </div>
                                 </div> <!-- end deal-price -->
                                 <div class="col-xs-12 hidden-lg hidden-md">
-                                    <p class="fifty_cashback">50% Cashback</p>
+                                    <p class="fifty_cashback">
+                                        {{ item.discount_type }} {{ item.discount }}
+                                    </p>
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <h3 class="margin-top-0 coupon-heading">
-                                    Upto Rs. 30 Supercash everyday on Recharge
+                                    {{ item.title }}
                                     <span class="pull-right hidden-xs">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
+                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
                                 </h3>
                                 <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
-                                <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                    <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
-                                       data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                    <span class="pull-right">
-                                        <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
-                                            Show {{ (showMore.all[item._id]) ? "Less": "More" }}
-                                        </a>
+                                        <i class="fa fa-star"></i>&nbsp;
+                                        <i class="fa fa-share-alt"></i>
                                     </span>
+                                <p style="opacity: 0.6; line-height: 25px;" class="para_small">
+                                <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                   data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                <span class="pull-right">
+                                            <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                            </a>
+                                        </span>
                                 </p>
                                 <p>
-                                    <a href="">See all Mobile Recharge Coupons</a>
+                                    <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                        See all {{ item.related_categories[0].name }} Coupons
+                                    </a>
                                 </p>
                             </div>
                         </div> <!-- end row -->
@@ -1045,8 +1055,8 @@
                     <div class="panel-footer coupon-footer">
                         <div class="row vari_pad">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
-                                <i class="fa fa-heart-o"></i> &nbsp;
-                                Verified
+                                <i class="fa fa-heart-o"></i>
+                                {{ item.status }}
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
@@ -1076,45 +1086,54 @@
                         </h3>
                     </div><!-- end col -->
                 </div><!-- end row -->
-                <div class="panel panel-default" ng-repeat="item in [1,2]">
+                <div class="panel panel-default coupon all" ng-repeat="item in expiredCoupons">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
                                     <h4>
-                                        Rs. 1000
-                                        <br />
-                                        OFF
+                                        {{ item.discount_type }} {{ item.discount }}
                                     </h4>
-                                    <div class="deal">Deal</div>
+                                    <div class="deal">
+                                                <span ng-if="item.coupon_type == 'coupon'">
+                                                    COUPON
+                                                </span>
+                                        <span ng-if="item.coupon_type == 'offer'">
+                                                    DEAL
+                                                </span>
+                                    </div>
                                 </div> <!-- end deal-price -->
                                 <div class="col-xs-12 hidden-lg hidden-md">
-                                    <p class="fifty_cashback">50% Cashback</p>
+                                    <p class="fifty_cashback">
+                                        {{ item.discount_type }} {{ item.discount }}
+                                    </p>
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <h3 class="margin-top-0 coupon-heading">
-                                    Upto Rs. 30 Supercash everyday on Recharge
+                                    {{ item.title }}
                                     <span class="pull-right hidden-xs">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
+                                                <i class="fa fa-star"></i>&nbsp;
+                                                <i class="fa fa-share-alt"></i>
+                                            </span>
                                 </h3>
                                 <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
+                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
                                 <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                    <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
-                                       data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                    <span class="pull-right">
-                                        <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
-                                            Show {{ (showMore.all[item._id]) ? "Less": "More" }}
-                                        </a>
-                                    </span>
+                                <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                   data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                <span class="pull-right">
+                                                <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                    Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                                </a>
+                                            </span>
                                 </p>
                                 <p>
-                                    <a href="">See all Mobile Recharge Coupons</a>
+                                    <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                        See all {{ item.related_categories[0].name }} Coupons
+                                    </a>
                                 </p>
                             </div>
                         </div> <!-- end row -->
@@ -1123,8 +1142,8 @@
                     <div class="panel-footer coupon-footer">
                         <div class="row vari_pad">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
-                                <i class="fa fa-heart-o"></i> &nbsp;
-                                Verified
+                                <i class="fa fa-heart-o"></i>
+                                {{ item.status }}
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
@@ -1143,7 +1162,7 @@
                         </div>
                     </div>
                     <!--end panel footer -->
-                </div>
+                </div> <!-- end panel -->
                 <!-- Related Coupons ends here -->
 
                 <!-- about description start here -->

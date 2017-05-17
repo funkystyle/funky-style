@@ -2,8 +2,24 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "naif.base64", "categoryFactoryModule"])
     .controller("addStoreCtrl", function($scope, $state, $timeout, toastr, storeFactory, $auth, personFactory, categoryFactory) {
         $scope.store = {
-            number_of_coupons: 0
+            related_coupons: [],
+            related_deals: []
         };
+        $scope.menuTypes = [
+            {
+                text: "None",
+                code: "none"
+            },
+            {
+                text: "Top Menu",
+                code: 'top'
+            },
+            {
+                text: "Bottom Menu",
+                code: 'bottom'
+            }
+        ];
+        $scope.store.menu = $scope.menuTypes[0];
         $scope.selected_user = {}; $scope.persons = [];
         $scope.categories = [];
         $scope.breadcrumbs = [];
@@ -69,7 +85,6 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
             if(store.all_tag_image && Object.keys(store.all_tag_image).length) {
                 store.all_tag_image = "data:image/jpeg;base64,"+store.all_tag_image.base64;
             }
-            console.log(JSON.stringify(store));
             storeFactory.insert(store, $auth.getToken()).then(function (data) {
                 console.log(data);
 

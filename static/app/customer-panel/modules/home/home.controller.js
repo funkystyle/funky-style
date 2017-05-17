@@ -18,7 +18,14 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
         couponFactory.getCoupon(JSON.stringify(obj)).then(function (data) {
             console.log(data);
             if(data['data']) {
-                $scope.coupons = data.data._items;
+                var coupons = data.data._items;
+                angular.forEach(coupons, function (item) {
+                    if(new Date(item.expire_date) > new Date()) {
+                        if($scope.coupons.indexOf(item) == -1) {
+                            $scope.coupons.push(item);
+                        }
+                    }
+                });
             }
         }, function (error) {
             console.log(error);

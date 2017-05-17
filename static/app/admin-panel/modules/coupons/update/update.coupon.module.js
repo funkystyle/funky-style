@@ -116,7 +116,7 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             var finalItems = [];
 
             // coupon.expire_date = new Date($("#datetimepicker1").find("input").val());
-            coupon.expire_date = "Tue, 02 Apr 2013 10:29:13 GMT";
+            coupon.expire_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
             delete coupon._created;
             delete coupon._updated;
             delete coupon._links;
@@ -124,13 +124,11 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             console.log(coupon);
             couponFactory.update(coupon, $auth.getToken()).then(function (data) {
                 console.log(data);
-                function updateStore (item, fromRemove) {
-                    var store = item;
-
+                function updateStore (store, fromRemove) {
                     if(!fromRemove) {
-                        store.number_of_coupons = (store.number_of_coupons)?store.number_of_coupons + 1: 1;
+                        store.related_coupons.push(coupon._id);
                     } else if (fromRemove) {
-                        store.number_of_coupons = (store.number_of_coupons > 0)?store.number_of_coupons - 1: 0;
+                        store.related_coupons.splice(store.related_coupons.indexOf(coupon._id), 1);
                     }
 
                     delete store._created;
@@ -146,12 +144,11 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                     }));
                 }
 
-                function updateCategory (item, fromRemove) {
-                    var category = item;
+                function updateCategory (category, fromRemove) {
                     if(!fromRemove) {
-                        category.number_of_coupons = (category.number_of_coupons) ? category.number_of_coupons + 1 : 1;
+                        category.related_coupons.push(coupon._id);
                     } else if (fromRemove) {
-                        category.number_of_coupons = (category.number_of_coupons > 0)?category.number_of_coupons - 1: 0;
+                        category.related_coupons.splice(category.related_coupons.indexOf(coupon._id), 1);
                     }
                     delete category._created;
                     delete category._updated;

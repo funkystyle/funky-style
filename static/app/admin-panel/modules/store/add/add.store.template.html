@@ -58,12 +58,14 @@
                         <label for="h2">Store H2*</label>
                         <input type="text" class="form-control input-sm" id="h2" ng-model="store.h2" placeholder="Store H2">
                     </div>
-                    <div class="form-group" ng-init="store.menu = undefined">
+                    <div class="form-group">
                         <label>Menu</label> <br />
-                        <label class="radio-inline"><input type="radio" name="store.menu"
-                                                           ng-model="store.menu" value="top menu">Top Menu</label>
-                        <label class="radio-inline"><input type="radio" name="store.menu"
-                                                           ng-model="store.menu" value="bottom menu">Bottom Menu</label>
+                        <ui-select ng-model="store.menu" theme="bootstrap">
+                            <ui-select-match placeholder="Select Menu type">{{ $select.selected.text }}</ui-select-match>
+                            <ui-select-choices repeat="item.code as item in menuTypes | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div><!-- end col -->
                 <div class="col-lg-3 col-md-3 col-sm-12">
@@ -277,7 +279,5 @@
             <button type="submit" class="btn btn-md btn-info">Add Store</button>
         </form>
         <br><br><br><br><br><br>
-
-        <pre>{{ store | json }}</pre>
     </div> <!-- end panel-body -->
 </div>
