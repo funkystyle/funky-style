@@ -47,9 +47,9 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
                 code: 'bottom'
             }
         ];
-        $scope.category.menu = $scope.menuTypes[0];
+        $scope.category.menu = $scope.menuTypes[0]['code'];
 
-        $scope.category.category_type = $scope.category_type[0];
+        $scope.category.category_type = $scope.category_type[0]['name'];
 
         // get all stores into the array
         if($auth.isAuthenticated()) {

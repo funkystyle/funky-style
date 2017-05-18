@@ -53,12 +53,21 @@ angular
 
         if($stateParams['url']) {
             // get store information
-            var url = '/api/1.0/stores?embedded={"recommended_stores":1, ' +
-                '"related_categories":1, "related_coupons": 1, "related_stores.related_coupons": 1, ' +
-                '"related_coupons.related_categories": 1, ' +
-                '"related_coupons.recommended_stores": 1, "related_coupons.recommended_stores.related_coupons": 1, ' +
-                '"related_stores":1, ' +
-                '"top_stores":1}&rand_number='+Math.random();
+            var where = {};
+            where['url'] = $stateParams.url;
+
+            var embedded = {};
+            embedded['recommended_stores'] = 1;
+            embedded['related_categories'] = 1;
+            embedded['top_stores'] = 1;
+            embedded['related_stores'] = 1;
+            embedded['related_stores.related_coupons'] = 1;
+            embedded['related_coupons'] = 1;
+            embedded['related_coupons.related_categories'] = 1;
+            embedded['related_coupons.recommended_stores'] = 1;
+            embedded['related_coupons.recommended_stores.related_coupons'] = 1;
+        
+            var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded);
             $http({
                 url: url,
                 method: "GET"

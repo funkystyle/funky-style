@@ -2,7 +2,7 @@ angular
     .module("categoryinfoModule", ["categoryFactoryModule",
         "storeServiceModule", "couponFactoryModule"])
     .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce,
-                                              $stateParams, $http, categoryFactory, storeFactory, couponFactory) {
+                                              $stateParams, $http) {
         $scope.favorite = {
             favorite: false
         };
@@ -23,6 +23,7 @@ angular
         $scope.category = undefined;
         $scope.coupons = [];
         $scope.filterCoupons = [];
+        $scope.expiredCoupons = [];
         $scope.categories = [];
         $scope.stores = [];
         // manageFavorite function
@@ -42,41 +43,60 @@ angular
 
         if($stateParams['url']) {
             // get category information
-            categoryFactory.getcategory($stateParams.url).then(function (category) {
-                console.log(category);
+            var url = '/api/1.0/categories/'+$stateParams.url+'?embedded={"related_categories":1,"related_coupons": 1,"related_coupons.related_categories": 1,"top_stores":1}&rand_number='+Math.random();
 
+            var where = {};
+            where['url'] = $stateParams.url;
+
+            var embedded = {};
+            embedded['related_categories'] = 1;
+            embedded['top_stores'] = 1;
+            embedded['related_coupons'] = 1;
+            embedded['related_coupons.related_categories'] = 1;
+            embedded['related_coupons.related_stores'] = 1;
+            
+            var url = '/api/1.0/categories/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded);
+            $http({
+                url: url,
+                method: "GET"
+            }).then(function (category) {
+                console.log(category);
                 if(category['data']) {
                     if(category.data._items.length) {
                         $scope.category = category.data._items[0];
                         $scope.category.toDayDate = new Date();
                         $scope.category.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
-                        // get all the coupons related to this category
-                        couponFactory.get({type: "related_categories", id: $scope.category._id}).then(function (data) {
-                            console.log(data);
-                            if(data['data']) {
-                                $scope.coupons = data.data._items;
-                                $scope.filterCoupons = data.data._items;
-                                $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
-                                $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
-                                angular.forEach($scope.coupons, function (item) {
-                                    angular.forEach(item.related_categories, function (category) {
-                                        var items = $filter('filter')($scope.categories, {_id: category._id});
-                                        if(!items.length) {
-                                            $scope.categories.push(category);
-                                        }
-                                    });
-                                    angular.forEach(item.related_stores, function (rel) {
-                                        var rel_store = $filter('filter')($scope.stores, {_id: rel._id});
-                                        if(rel_store.length == 0) {
-                                            $scope.stores.push(rel);
-                                        }
-                                    });
-                                });
+                        
+                        angular.forEach($scope.category.related_coupons, function (item) {
+                            if(new Date(item.expire_date) > new Date()) {
+                                if($scope.coupons.indexOf(item) == -1) {
+                                    $scope.coupons.push(item);
+                                    $scope.filterCoupons.push(item);
+                                    $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
+                                    $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
+                                }
                             }
-                            console.log($scope.coupons, $scope.category, $scope.stores, $scope.categories);
-                        }, function (error) {
-                            console.log(error);
                         });
+
+                        angular.forEach($scope.coupons, function (item) {
+                            // get the list of categories under particular coupons
+                            angular.forEach(item.related_categories, function (category) {
+                                var items = $filter('filter')($scope.categories, {_id: category._id});
+                                if(!items.length) {
+                                    $scope.categories.push(category);
+                                }
+                            });
+                            // get the list of stores from the coupon store
+                            angular.forEach(item.related_stores, function(rel_store) {
+                                var items = $filter('filter')($scope.stores, {_id: rel_store._id});
+                                if(!items.length) {
+                                    $scope.stores.push(rel_store);
+                                }
+                            });
+                        });
+
+
+                        console.log($scope.stores, $scope.coupons, "categories", $scope.categories);
                     }
                 }
             }, function (error) {

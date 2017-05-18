@@ -38,7 +38,7 @@
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(category.top_description)"></p>
                     <p class="para_small">
-                        {{ category.number_of_coupons }} Verified Coupons -
+                        {{ category.related_coupons.length }} Verified Coupons -
                         <time datetime="{{ category.toDayDate | date: 'dd MMM yyyy hh:mm' }}">{{ category.toDayDate | date: "dd MMM yyyy hh:mm a" }}</time>
                     </p>
 				</div>
@@ -49,11 +49,19 @@
 		<div class="col-lg-3 col-sm-12 col-md-3 pad-right-0 col-xs-12">
 			<div class="well social-well">
 				<p class="social-icons text-center">
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-google-plus"></i>
-					<i class="fa fa-twitter"></i>
-					<i class="fa fa-pinterest"></i>
-				</p>
+                    <a target="_blank" href="https://www.facebook.com/FabPromoCodes/">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a target="_blank" href="https://plus.google.com/113116676582324316660/about?gmbpt=true&_ga=1.176672103.352270514.1467899366">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/FabPromocodes">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a target="_blank" href="https://www.pinterest.com/fabpromocodes/">
+                        <i class="fa fa-pinterest"></i>
+                    </a>
+                </p>
 			</div>
 		</div> <!-- end col-lg-3 -->
 		<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 mar_top">
@@ -62,21 +70,21 @@
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation" class="active col-lg-4 col-xs-4 pad-0 text-center pad_nav_right">
-							<a href="" data-target="#all-tab" aria-controls="home" role="tab" data-toggle="tab">All &nbsp;
-								<span class="label label-info">{{ filterCoupons.length }}</span>
-							</a>
-						</li>
-						<li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_right pad_nav_left">
-							<a href="" data-target="#deals-tab" aria-controls="profile" role="tab" data-toggle="tab">Deals&nbsp;
-								<span class="label label-primary">30</span>
-							</a>
-						</li>
-						<li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_left">
-							<a href="" data-target="#coupons-tab" aria-controls="messages" role="tab" data-toggle="tab">
-								Coupons&nbsp;
-								<span class="label label-success">20</span>
-							</a>
-						</li>
+                            <a href="" data-target="#all-tab" aria-controls="home" role="tab" data-toggle="tab">All &nbsp;
+                                <span class="label label-info">{{ filterCoupons.length }}</span>
+                            </a>
+                        </li>
+                        <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_right pad_nav_left">
+                            <a href="" data-target="#deals-tab" aria-controls="profile" role="tab" data-toggle="tab">Deals&nbsp;
+                                <span class="label label-primary">{{ dealsLength.length }}</span>
+                            </a>
+                        </li>
+                        <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_left">
+                            <a href="" data-target="#coupons-tab" aria-controls="messages" role="tab" data-toggle="tab">
+                                Coupons&nbsp;
+                                <span class="label label-success">{{ couponsLength.length }}</span>
+                            </a>
+                        </li>
 					</ul>
 				</div>
 			</div>
@@ -116,6 +124,39 @@
 				<!--end panel body-->
 			</div>
 			<!--end panel-->
+
+			<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="font-bold">Bank Filters</h5>
+                </div>
+                <!--panel heading-->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="icon-addon addon-sm">
+                            <input type="text" placeholder="Search" class="form-control input-sm"
+                                   autocomplete="off" id="search_bank" ng-model="search.bank">
+                            <label for="email" class="fa fa-search" rel="tooltip"
+                                   title="Search for Banks"></label>
+                        </div>
+                    </div>
+                    <div class="check-box-filter-area">
+                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
+                             ng-repeat="item in categories | filter: search.bank"
+                             ng-if="item.category_type == 'Bank'">
+                            <label for="{{ item._id }}_bank_filter" style="font-weight: 500;">
+                                <input id="{{ item._id }}_bank_filter" type="checkbox"
+                                       ng-model="filter['bank'][item._id]" ng-change="applyFilter()" />
+                                <span id="span_bank_{{ item._id }}" class="cr">
+                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
+                                </span>
+                                <span>{{ item.name }}</span>
+                            </label>
+                        </div> <!-- end check box -->
+                    </div>
+                </div>
+                <!--end panel body-->
+            </div>
+            <!--end panel-->
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -175,7 +216,10 @@
 				<div class="panel-body">
 					<div class="check-box-filter-area">
 						<p ng-repeat="item in category.top_stores">
-							<a ui-sref="main.store-info({url: item.url})" style="color: #666; text-decoration: underline;">{{ item.name }}</a>
+							<<a ui-sref="main.store-info({url: item.url, cc: undefined})" style="color: #666; text-decoration: underline;">
+                                <img ng-src="{{ item.image }}" height="50" width="50" style="float: left;">
+                                {{ item.name }}
+                            </a>
 						</p>
 					</div>
 				</div>
@@ -185,400 +229,257 @@
 		</div>
 		<!--end col-->
 		<div class="col-lg-9 col-md-9 col-sm-12">
-            <div class="row">
+            <div class="row" style="margin-bottom: 20px;">
                 <div ng-repeat="item in category.top_stores | limitTo: 6" class="col-md-2 col-sm-2">
-                    <div class="thumbnail">
-                        <img ng-src="{{ item.image }}" alt="">
+                    <div class="thumbnail" ui-sref="main.store-info({url: item.url})">
+                        <img ng-src="{{ item.image }}" alt="" height="50" width="100">
                     </div>
                 </div>
             </div>
 			<div class="tab-content">
 				<div class="tab-pane active" id="all-tab">
-                    <div class="panel panel-default coupon" ng-repeat="item in filterCoupons">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2">
-                                    <div class="deal-price text-center hidden-xs">
-                                        <h4>
-                                            {{ item.discount_type }} {{ item.discount }}
-                                        </h4>
-                                        <div class="deal">
-                                            <span ng-if="item.coupon_type == 'coupon'">
-                                                COUPON
-                                            </span>
-                                            <span ng-if="item.coupon_type == 'offer'">
-                                                DEAL
-                                            </span>
+                    <span ng-repeat="item in filterCoupons">
+                        <div class="panel panel-default coupon all">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                        <div class="deal-price text-center hidden-xs">
+                                            <h4>
+                                                {{ item.discount_type }} {{ item.discount }}
+                                            </h4>
+                                            <div class="deal">
+                                                <img ng-src="{{ item.related_stores[0].image }}">
+                                            </div>
+                                        </div> <!-- end deal-price -->
+                                        <div class="col-xs-12 hidden-lg hidden-md">
+                                            <p class="fifty_cashback">
+                                                {{ item.discount_type }} {{ item.discount }}
+                                            </p>
                                         </div>
-                                    </div> <!-- end deal-price -->
-                                    <div class="col-xs-12 hidden-lg hidden-md">
-                                        <p class="fifty_cashback">
-                                            {{ item.discount_type }} {{ item.discount }}
+                                    </div> <!-- end col -->
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <h3 class="margin-top-0 coupon-heading">
+                                            {{ item.title }}
+                                            <span class="pull-right hidden-xs">
+                                                <i class="fa fa-star"></i>&nbsp;
+                                                <i class="fa fa-share-alt"></i>
+                                            </span>
+                                        </h3>
+                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
+                                        <p style="opacity: 0.6; line-height: 25px;" class="para_small">
+                                            <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                                  data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                            <span class="pull-right">
+                                                <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                    Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                                </a>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <a ui-sref="main.store-info({url: item.related_stores[0].url})">
+                                                See all {{ item.related_stores[0].name }} Coupons
+                                            </a>
                                         </p>
                                     </div>
-                                </div> <!-- end col -->
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <h3 class="margin-top-0 coupon-heading">
-                                        {{ item.title }}
-                                        <span class="pull-right hidden-xs">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
-                                    </h3>
-                                    <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-                                        <i class="fa fa-star"></i>&nbsp;
-                                        <i class="fa fa-share-alt"></i>
-                                    </span>
-                                    <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
-                                       data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                    <span class="pull-right">
-                                        <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
-                                            Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                </div> <!-- end row -->
+                            </div> <!-- end panel body -->
+                            <!--panel footer-->
+                            <div class="panel-footer coupon-footer">
+                                <div class="row vari_pad">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                                        <i class="fa fa-heart-o"></i>
+                                        {{ item.status }}
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                        <i class="fa fa-comment-o"></i> &nbsp;
+                                        Comment
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                                        <i class="fa fa-bug"></i> &nbsp;
+                                        Report
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                        <a target="_blank" ui-sref="main.store-info({url: store.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
+                                            <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
+                                            <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>
-                                    </span>
-                                    <p>
-                                        <a href="">See all {{ item.category[0].name }} Coupons</a>
-                                    </p>
-                                </div>
-                            </div> <!-- end row -->
-                        </div> <!-- end panel body -->
-                        <!--panel footer-->
-                        <div class="panel-footer coupon-footer">
-                            <div class="row vari_pad">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
-                                    <i class="fa fa-heart-o"></i>
-                                    {{ item.status }}
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
-                                    <i class="fa fa-comment-o"></i> &nbsp;
-                                    Comment
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
-                                    <i class="fa fa-bug"></i> &nbsp;
-                                    Report
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
-                                    <a target="_blank" ui-sref="main.categoryinfo({url: category.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                        <span>SHOW COUPON CODE</span>
-                                        <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end panel footer -->
-                        <div class="panel-footer">
-                            <div class="comments-list">
-                                <div class="media">
-                                    <p class="pull-right"><small>5 days ago</small></p>
-                                    <a class="media-left" href="#">
-                                        <img src="http://lorempixel.com/40/40/people/1/">
-                                    </a>
-                                    <div class="media-body">
-
-                                        <h4 class="media-heading user_name">Baltej Singh</h4>
-                                        Wow! this is really great.
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <p class="pull-right"><small>5 days ago</small></p>
-                                    <a class="media-left" href="#">
-                                        <img src="http://lorempixel.com/40/40/people/2/">
-                                    </a>
-                                    <div class="media-body">
-
-                                        <h4 class="media-heading user_name">Baltej Singh</h4>
-                                        Wow! this is really great.
-                                        <p></p>
                                     </div>
                                 </div>
                             </div>
+                            <!--end panel footer -->
+                        </div> <!-- end panel -->
+                        <!-- promo codes starts here --> <!-- panel -->
+                        <div class="row" ng-if="$index == 2">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h3 class="ola_mar">{{ category.h2 }}</h3>
+                            </div>
                         </div>
-                    </div> <!-- end panel -->
-
-					<!-- promo codes starts here --> <!-- panel -->
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h3 class="ola_mar">Ola Promo Codes</h3>
-						</div>
-					</div>
-					<div class="panel panel-default" ng-repeat="item in [1,2]">
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-lg-2 col-md-2 col-sm-2">
-									<div class="deal-price text-center hidden-xs">
-										<h4>
-											Rs. 1000
-											<br />
-											OFF
-										</h4>
-										<div class="deal">Deal</div>
-									</div> <!-- end deal-price -->
-									<div class="col-xs-12 hidden-lg hidden-md">
-										<p class="fifty_cashback">50% Cashback</p>
-									</div>
-								</div> <!-- end col -->
-								<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-									<h3 class="margin-top-0 coupon-heading">
-										Upto Rs. 30 Supercash everyday on Recharge
-										<span class="pull-right hidden-xs">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
-									</h3>
-									<span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
-                                    <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
-                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                        <span class="pull-right">
-                                            <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
-                                                Show {{ (showMore.all[item._id]) ? "Less": "More" }}
-                                            </a>
-                                        </span>
-                                    </p>
-									<p>
-										<a href="">See all Mobile Recharge Coupons</a>
-									</p>
-								</div>
-							</div> <!-- end row -->
-						</div> <!-- end panel body -->
-						<!--panel footer-->
-						<div class="panel-footer coupon-footer">
-							<div class="row vari_pad">
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
-									<i class="fa fa-heart-o"></i> &nbsp;
-									Verified
-								</div>
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
-									<i class="fa fa-comment-o"></i> &nbsp;
-									Comment
-								</div>
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
-									<i class="fa fa-bug"></i> &nbsp;
-									Report
-								</div>
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
-                                    <a target="_blank" ui-sref="main.categoryinfo({url: category.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                        <span>SHOW COUPON CODE</span>
-                                        <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
-                                    </a>
-								</div>
-							</div>
-						</div>
-						<!--end panel footer -->
-					</div><!-- end panel -->
-					<!-- end upto promo codes -->
+                    </span>
 				</div> <!-- tab-1 -->
 
 				<div class="tab-pane" id="deals-tab">
-                    <div class="panel panel-default" ng-if="item.coupon_type == 'offer'" ng-repeat="item in filterCoupons">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2">
-                                    <div class="deal-price text-center hidden-xs">
-                                        <h4>
-                                            {{ item.discount_type }} {{ item.discount }}
-                                        </h4>
-                                        <div class="deal">
-                                            <span ng-if="item.coupon_type == 'coupon'">
-                                                COUPON
-                                            </span>
-                                            <span ng-if="item.coupon_type == 'offer'">
-                                                DEAL
-                                            </span>
+                    <span ng-if="item.coupon_type == 'offer'" ng-repeat="item in filterCoupons">
+                        <div class="panel panel-default coupon deals">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                        <div class="deal-price text-center hidden-xs">
+                                            <h4>
+                                                {{ item.discount_type }} {{ item.discount }}
+                                            </h4>
+                                            <div class="deal">
+                                                <img ng-src="{{ item.related_stores[0].image }}">
+                                            </div>
+                                        </div> <!-- end deal-price -->
+                                        <div class="col-xs-12 hidden-lg hidden-md">
+                                            <p class="fifty_cashback">
+                                                {{ item.discount_type }} {{ item.discount }}
+                                            </p>
                                         </div>
-                                    </div> <!-- end deal-price -->
-                                    <div class="col-xs-12 hidden-lg hidden-md">
-                                        <p class="fifty_cashback">
-                                            {{ item.discount_type }} {{ item.discount }}
+                                    </div> <!-- end col -->
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <h3 class="margin-top-0 coupon-heading">
+                                            {{ item.title }}
+                                            <span class="pull-right hidden-xs">
+                                                <i class="fa fa-star"></i>&nbsp;
+                                                <i class="fa fa-share-alt"></i>
+                                            </span>
+                                        </h3>
+                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
+                                        <p style="opacity: 0.6; line-height: 25px;" class="para_small">
+                                            <p class="top-desc" ng-class="{'show-desc': showMore.deals[item._id]}"
+                                               data-ng-bind-html="trustAsHtml(item.description)">
+
+                                            </p>
+                                            <span class="pull-right">
+                                                <a ng-click="showMore.deals[item._id] = !showMore.deals[item._id]" href="" class="btn btn-link">
+                                                    Show {{ (showMore.deals[item._id]) ? "Less": "More" }}
+                                                </a>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                                See all {{ item.related_categories[0].name }} Coupons
+                                            </a>
                                         </p>
                                     </div>
-                                </div> <!-- end col -->
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <h3 class="margin-top-0 coupon-heading">
-                                        {{ item.title }}
-                                        <span class="pull-right hidden-xs">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
-                                    </h3>
-                                    <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-                                        <i class="fa fa-star"></i>&nbsp;
-                                        <i class="fa fa-share-alt"></i>
-                                    </span>
-                                    <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        <p class="top-desc" ng-class="{'show-desc': showMore.deals[item._id]}"
-                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                        <span class="pull-right">
-                                            <a ng-click="showMore.deals[item._id] = !showMore.deals[item._id]" href="" class="btn btn-link">
-                                                Show {{ (showMore.deals[item._id]) ? "Less": "More" }}
-                                            </a>
-                                        </span>
-                                    </p>
-                                    <p>
-                                        <a href="">See all {{ item.category[0].name }} Coupons</a>
-                                    </p>
-                                </div>
-                            </div> <!-- end row -->
-                        </div> <!-- end panel body -->
-                        <!--panel footer-->
-                        <div class="panel-footer coupon-footer">
-                            <div class="row vari_pad">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
-                                    <i class="fa fa-heart-o"></i>
-                                    {{ item.status }}
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
-                                    <i class="fa fa-comment-o"></i> &nbsp;
-                                    Comment
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
-                                    <i class="fa fa-bug"></i> &nbsp;
-                                    Report
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
-                                    <a target="_blank" ui-sref="main.categoryinfo({url: category.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                        <span>SHOW COUPON CODE</span>
-                                        <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
-                                    </a>
+                                </div> <!-- end row -->
+                            </div> <!-- end panel body -->
+                            <!--panel footer-->
+                            <div class="panel-footer coupon-footer">
+                                <div class="row vari_pad">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                                        <i class="fa fa-heart-o"></i>
+                                        {{ item.status }}
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                        <i class="fa fa-comment-o"></i> &nbsp;
+                                        Comment
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                                        <i class="fa fa-bug"></i> &nbsp;
+                                        Report
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                        <a target="_blank" ui-sref="main.store-info({url: store.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
+                                            <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
+                                            <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--end panel footer -->
-                    </div> <!-- end panel -->
+                            <!--end panel footer -->
+                        </div> <!-- end panel -->
+                    </span>
 				</div> <!-- tab-2 -->
 				<div class="tab-pane" id="coupons-tab">
-                    <div class="panel panel-default" ng-if="item.coupon_type == 'coupon'" ng-repeat="item in filterCoupons">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2">
-                                    <div class="deal-price text-center hidden-xs">
-                                        <h4>
-                                            {{ item.discount_type }} {{ item.discount }}
-                                        </h4>
-                                        <div class="deal">
-                                            <span ng-if="item.coupon_type == 'coupon'">
-                                                COUPON
-                                            </span>
-                                            <span ng-if="item.coupon_type == 'offer'">
-                                                DEAL
-                                            </span>
+                    <span ng-if="item.coupon_type == 'coupon'" ng-repeat="item in filterCoupons">
+                        <div class="panel panel-default coupon coupons">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                        <div class="deal-price text-center hidden-xs">
+                                            <h4>
+                                                {{ item.discount_type }} {{ item.discount }}
+                                            </h4>
+                                            <div class="deal">
+                                                <img ng-src="{{ item.related_stores[0].image }}">
+                                            </div>
+                                        </div> <!-- end deal-price -->
+                                        <div class="col-xs-12 hidden-lg hidden-md">
+                                            <p class="fifty_cashback">
+                                                {{ item.discount_type }} {{ item.discount }}
+                                            </p>
                                         </div>
-                                    </div> <!-- end deal-price -->
-                                    <div class="col-xs-12 hidden-lg hidden-md">
-                                        <p class="fifty_cashback">
-                                            {{ item.discount_type }} {{ item.discount }}
+                                    </div> <!-- end col -->
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <h3 class="margin-top-0 coupon-heading">
+                                            {{ item.title }}
+                                            <span class="pull-right hidden-xs">
+                                                <i class="fa fa-star"></i>&nbsp;
+                                                <i class="fa fa-share-alt"></i>
+                                            </span>
+                                        </h3>
+                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
+                                        <p style="opacity: 0.6; line-height: 25px;" class="para_small">
+                                            <p class="top-desc" ng-class="{'show-desc': showMore.coupons[item._id]}"
+                                               data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                            <span class="pull-right">
+                                                <a ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]" href="" class="btn btn-link">
+                                                    Show {{ (showMore.coupons[item._id]) ? "Less": "More" }}
+                                                </a>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                                See all {{ item.related_categories[0].name }} Coupons
+                                            </a>
                                         </p>
                                     </div>
-                                </div> <!-- end col -->
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <h3 class="margin-top-0 coupon-heading">
-                                        {{ item.title }}
-                                        <span class="pull-right hidden-xs">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
-                                    </h3>
-                                    <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-                                        <i class="fa fa-star"></i>&nbsp;
-                                        <i class="fa fa-share-alt"></i>
-                                    </span>
-                                    <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                        <p class="top-desc" ng-class="{'show-desc': showMore.coupons[item._id]}"
-                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                        <span class="pull-right">
-                                            <a ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]" href="" class="btn btn-link">
-                                                Show {{ (showMore.coupons[item._id]) ? "Less": "More" }}
-                                            </a>
-                                        </span>
-                                    </p>
-                                    <p>
-                                        <a href="">See all {{ item.category[0].name }} Coupons</a>
-                                    </p>
-                                </div>
-                            </div> <!-- end row -->
-                        </div> <!-- end panel body -->
-                        <!--panel footer-->
-                        <div class="panel-footer coupon-footer">
-                            <div class="row vari_pad">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
-                                    <i class="fa fa-heart-o"></i>
-                                    {{ item.status }}
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
-                                    <i class="fa fa-comment-o"></i> &nbsp;
-                                    Comment
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
-                                    <i class="fa fa-bug"></i> &nbsp;
-                                    Report
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
-                                    <a target="_blank" ui-sref="main.categoryinfo({url: category.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
-                                        <span>SHOW COUPON CODE</span>
-                                        <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
-                                    </a>
+                                </div> <!-- end row -->
+                            </div> <!-- end panel body -->
+                                <!--panel footer-->
+                            <div class="panel-footer coupon-footer">
+                                <div class="row vari_pad">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                                        <i class="fa fa-heart-o"></i>
+                                        {{ item.status }}
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                        <i class="fa fa-comment-o"></i> &nbsp;
+                                        Comment
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                                        <i class="fa fa-bug"></i> &nbsp;
+                                        Report
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                        <a target="_blank" ui-sref="main.store-info({url: store.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
+                                            <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
+                                            <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--end panel footer -->
-                    </div> <!-- end panel -->
+                                <!--end panel footer -->
+                        </div> <!-- end panel -->
+                    </span>
 				</div> <!-- tab-3 -->
 
 				<!-- about description start here -->
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12 col-md-12">
-								<h4>About Swiggy</h4>
-								<h4>Save Big Money with Swiggy Coupons Rs.150 for New/Old Users, Paytm, mobikwik, Freecharge Offers</h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-12 col-md-12 col-xs-12">
-								<div class="table-responsive">
-									<table class="table table-bordered">
-										<thead>
-										<tr>
-											<th>Swiggy Coupons for New/Old Users</th>
-											<th>Offer</th>
-										</tr>
-										</thead>
-										<tbody>
-										<tr>
-											<td>Swiggy New User Offer</td>
-											<td>Upto Rs.150 Cashback</td>
-										</tr>
-										<tr>
-											<td>Swiggy Paytm Offer</td>
-											<td>Upto Rs.75 Cashback</td>
-										</tr>
-										<tr>
-											<td>Swiggy Freecharge Offer</td>
-											<td>Upto Rs.150 Cashback</td>
-										</tr>
-										<tr>
-											<td>Banglore,Hyderabad,Mumbai,Pune,Delhi,Gurgoan,Kolkata & Chennai</td>
-											<td>Upto Rs.150 Discount</td>
-										</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-12 col-md-12">
-								<h4>Temptatious Menu at Swiggy</h4>
-								<p class="con-para para_small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Why do we use it?It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- about description end here -->
+                <div class="panel panel-default">
+                    <div class="panel-body" ng-bind-html="trustAsHtml(category.footer_description)"></div>
+                </div>
+                <!-- about description end here -->
 			</div>
 		</div>
 		<!-- end col -->
