@@ -121,13 +121,15 @@ angular.module("couponModule", ['angular-table', 'constantModule',
 
             var items = [];
             angular.forEach(deletedArray, function (item) {
-                items.push(couponFactory.delete(item._id).then(function(data) {
+                /*items.push(couponFactory.delete(item._id).then(function(data) {
                     console.log(data);
                     return data;
                 }, function (error) {
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);
-                }));
+                }));*/
+
+                console.log(item);
             });
             $q.all(items).then(function (finalData) {
                 toastr.success("Deleted selected items", 200);

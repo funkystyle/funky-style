@@ -31,11 +31,39 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
             console.log(error);
         });
 
+
+        // get the list of featured stores
+        var store = {};
+        store['featured_store'] = true;
+
+        var projection = {};
+        projection['name'] = 1;
+        projection['url'] = 1;
+        projection['image'] = 1;
+        projection['menu'] = 1;
+        $http({
+            url: "/api/1.0/stores/?where="+JSON.stringify(store)+"&max_results="+24+"&projection="+JSON.stringify(projection),
+            mathod: "GET"
+        }).then(function (data) {
+            console.log(data);
+            if(data['data']) {
+                $scope.stores = data.data._items;
+            }
+        }, function (error) {
+            console.log(error);
+        });
+
+
         // get the list of Categories
         var cat = {};
         cat['featured_category'] = true;
+
+        var projection = {};
+        projection['name'] = 1;
+        projection['url'] = 1;
+        projection['image'] = 1;
         $http({
-            url: "/api/1.0/categories/?where="+JSON.stringify(cat),
+            url: "/api/1.0/categories/?where="+JSON.stringify(cat)+"&max_results="+24+"&projection="+JSON.stringify(projection),
             mathod: "GET"
         }).then(function (data) {
             console.log(data);

@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="row" ng-if="stores.length">
-            <div class="col-lg-2 col-xs-4" ng-if="item.featured_store == true" ng-repeat="item in stores | limitTo: 24">
+            <div class="col-lg-2 col-xs-4" ng-repeat="item in stores | limitTo: 24">
                 <div class="thumbnail store-thumbnail">
                     <a ui-sref="main.store-info({url: item.url})" title="{{ item.title }}">
                         <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="row" ng-if="categories.length">
-            <div class="col-lg-2 col-xs-4" ng-if="item.featured_category == true" ng-repeat="item in categories | limitTo: 24">
+            <div class="col-lg-2 col-xs-4" ng-repeat="item in categories | limitTo: 24">
                 <div class="thumbnail store-thumbnail">
                     <a ui-sref="main.categoryinfo({url: item.url})" title="{{ item.title }}">
                         <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
