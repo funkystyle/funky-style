@@ -141,7 +141,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
 
                 // activate email link
                 .state('main.activate', {
-                    url: '/email/activate/:user_id/confirm/:token',
+                    url: '/confirm_account/users/:user_id/confirm/:token',
                     templateUrl: 'static/app/customer-panel/modules/activate.email/activate.email.template.html',
                     controller: "activateEmailCtrl",
                     resolve: {

@@ -2,7 +2,7 @@
 angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'personFactoryModule',
     'storeFactoryModule', 'cgBusy', 'satellizer', 'ui.select'])
     .controller("storeCtrl", function($scope, $filter, toastr, mainURL, URL, $state, $stateParams,
-                                      personFactory, $auth, storeFactory, $q) {
+                                      personFactory, $auth, storeFactory, $q, $http) {
         console.log("store controller!");
 
         $scope.stores = [];
@@ -77,12 +77,37 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                 });
             });
             var items = [];
+            var deleteCoupons = [];
+            var deleteStores = [];
+            var deleteCouponSuccess = [];
             angular.forEach(deletedArray, function (item) {
-                items.push(storeFactory.delete(item._id).then(function(data) {
+                deleteStores.push(item._id);
+                // collect coupons from related_coupons of store
+                angular.forEach(item.related_coupons, function (coupon) {
+                    if(deleteCoupons.indexOf(coupon) == -1) {
+                        deleteCoupons.push(coupon);
+                    }
+                });
+            });
+
+            console.log("list of deleted coupons", deleteCoupons);
+            $http({
+                url: URL.deleteDocuments,
+                method: "POST",
+                data: [{"resource_name": "coupons", "ids":deleteCoupons}]
+            }).then(function (couponsDeleted) {
+                console.log(couponsDeleted);
+                toastr.success("Coupons deleted from selected Stores!", "Success");
+                // call this http service after deleting the coupons from the table
+                $http({
+                    url: URL.deleteDocuments,
+                    method: "POST",
+                    data: [{"resource_name": "stores", "ids":deleteStores}]
+                }).then(function(data) {
                     console.log(data, item._id);
-                    toastr.success("Deleted "+item.name, 200);
+                    toastr.success("Selected Stores Deleted", 200);
                     angular.forEach($scope.stores, function (store, index) {
-                        if(item._id == store._id) {
+                        if(deleteStores.indexOf(store._id) > -1) {
                             $scope.stores.splice(index, 1);
                             $scope.filterStores.splice(index, 1);
                         }
@@ -90,14 +115,10 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                 }, function (error) {
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);
-                }));
-            });
-
-            $q.all(items).then(function (data) {
-                toastr.success("Deleted all selected records!", "SUCCESS!");
+                })
             }, function (error) {
                 console.log(error);
-            });
+            })
         };
 
         $scope.toggleSidebar = function(id) {

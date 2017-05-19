@@ -36,14 +36,13 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="user_level">User Level</label>
-                                <ui-select on-select="change_user_level()" ng-model="u_user.level" theme="bootstrap">
+                                <ui-select on-select="change_user_level()" ng-model="userLevel.level" theme="bootstrap">
                                     <ui-select-match placeholder="Select User Level">{{ $select.selected.text }}</ui-select-match>
-                                    <ui-select-choices repeat="item in userLevels | filter: $select.search">
+                                    <ui-select-choices repeat="item.level as item in userLevels | filter: $select.search | orderBy: 'level'">
                                         <div ng-bind-html="item.text | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
-
                             <div class="form-group col-md-12">
                                 <button type="submit" class="btn btn-md btn-info">Update</button>
                             </div>

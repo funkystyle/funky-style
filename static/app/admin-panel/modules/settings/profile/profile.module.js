@@ -14,17 +14,26 @@ angular.module("profileModule", ["constantModule", "ui.select", "personFactoryMo
             {
                 level: "admin",
                 text: "Admin"
+            },
+            {
+                level: "user",
+                text: "User"
             }
         ];
         $scope.u_user = {};
+        $scope.userLevel = {};
+        $scope.userLevel.level = undefined;
 
         if ($auth.isAuthenticated()) {
             personFactory.me().then(function(data) {
                 if(data['data']['data']) {
                     $scope.u_user = data.data.data;
                     console.log($scope.u_user, $scope.u_user.tokens.login);
-                    var f = $filter('filter')($scope.userLevels, {level: $scope.u_user.user_level[0]});
-                    $scope.u_user.level = (f.length) ? f[0]: $scope.userLevels[0];
+                    
+                    $scope.userLevel.level = $scope.u_user.user_level[0];
+
+
+                    console.log($scope.userLevel)
                 }
             }, function (error) {
                 console.log(error);
@@ -34,17 +43,19 @@ angular.module("profileModule", ["constantModule", "ui.select", "personFactoryMo
 
         // updateUser
         $scope.updateUser = function () {
-            console.log($scope.u_user);
-            delete $scope.u_user._created;
-            delete $scope.u_user._links;
-            delete $scope.u_user._updated;
-            delete $scope.u_user.level;
             delete $scope.u_user.created_date;
             delete $scope.u_user.modified_date;
+            delete $scope.u_user._updated;
 
+            $scope.u_user.user_level = [$scope.userLevel.level];
+            console.log($scope.u_user);
             personFactory.update($scope.u_user, $scope.u_user.tokens.token).then(function (data) {
                 console.log(data);
                 toastr.success("Updated!", "Success!");
+
+               setTimeout(function () {
+                    $state.reload();
+               }, 1000);
             }, function (error) {
                 console.log(error);
                 toastr.error(error.data._error.message, "Error!");

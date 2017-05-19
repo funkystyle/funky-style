@@ -20,6 +20,20 @@ angular.module("addDealCategoriesModule", ["ui.select", "ngSanitize", "ui.bootst
         $state.go("login");
     }
 
+    $scope.removeImage = function (item) {
+        if($scope.deal.image.length) {
+            angular.forEach($scope.deal.image, function(image, index) {
+                if(image.base64 == item.base64) {
+                    $scope.deal.image.splice(index, 1);
+                }
+            })
+        }
+    }
+
+    $scope.$watch('deal.name', function(newVal, oldVal) {
+        $scope.deal.url = (newVal) ? newVal+"-coupons" : undefined;
+    }, true);
+
     // addDealBrands function
     $scope.addDealCategory = function (deal) {
         //deal.alt_image = "data:image/jpeg;base64,"+deal.image[0].base64

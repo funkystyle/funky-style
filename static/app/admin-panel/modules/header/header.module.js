@@ -4,6 +4,8 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
         $scope.user = {};
         $scope.selected_user = {};
         $scope.status = ["Pending", "Draft", "Trash", "Verified", "Publish"];
+
+
         if ($auth.isAuthenticated()) {
             personFactory.me().then(function(data) {
                 if(data['data']['data']) {
@@ -16,6 +18,8 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
                 $auth.removeToken();
                 $state.go('login');
             });
+
+            
         }
 
         $scope.logout = function () {

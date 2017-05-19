@@ -13,9 +13,15 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
         $scope.categories = [];
 
         // get the list of coupons
-        var obj = {};
-        obj['featured_coupon'] = true;
-        couponFactory.getCoupon(JSON.stringify(obj)).then(function (data) {
+        var embedded = {};
+        embedded['related_categories'] = 1;
+        embedded['related_stores'] = 1;
+        
+        var url = '/api/1.0/coupons/'+'?sort=-_created&embedded='+JSON.stringify(embedded);
+        $http({
+            url: url,
+            method: "GET"
+        }).then(function (data) {
             console.log(data);
             if(data['data']) {
                 var coupons = data.data._items;

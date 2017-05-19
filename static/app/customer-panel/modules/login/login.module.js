@@ -28,7 +28,7 @@ angular.module("loginModule", ["constantModule", "satellizer", "toastr"])
 
         $scope.registerNow = function(register) {
             register.city = "s";
-            register.age = 45;
+            register.age = 25;
             register.gender = "male";
             $http({
                 url: mainURL + URL.register,
@@ -36,9 +36,10 @@ angular.module("loginModule", ["constantModule", "satellizer", "toastr"])
                 data: [register]
             }).then(function(data) {
                 console.log("asdasdasdass", data);
+                toastr.success("Please check your E-Mail!", "Successfully Registered!");
                 setTimeout(function () {
                     $state.go('main.home')
-                }, 2000)
+                }, 500)
             }, function(error) {
                 console.log("error", error);
                 toastr.error(error.data._error.message, "Error!");
