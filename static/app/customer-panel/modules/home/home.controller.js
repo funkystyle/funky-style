@@ -17,7 +17,7 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
         embedded['related_categories'] = 1;
         embedded['related_stores'] = 1;
         
-        var url = '/api/1.0/coupons/'+'?sort=-_created&embedded='+JSON.stringify(embedded);
+        var url = '/api/1.0/coupons'+'?sort=-_created&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
         $http({
             url: url,
             method: "GET"
@@ -48,7 +48,7 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
         projection['image'] = 1;
         projection['menu'] = 1;
         $http({
-            url: "/api/1.0/stores/?where="+JSON.stringify(store)+"&max_results="+24+"&projection="+JSON.stringify(projection),
+            url: "/api/1.0/stores/?where="+JSON.stringify(store)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
             mathod: "GET"
         }).then(function (data) {
             console.log(data);
@@ -69,7 +69,7 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
         projection['url'] = 1;
         projection['image'] = 1;
         $http({
-            url: "/api/1.0/categories/?where="+JSON.stringify(cat)+"&max_results="+24+"&projection="+JSON.stringify(projection),
+            url: "/api/1.0/categories/?where="+JSON.stringify(cat)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
             mathod: "GET"
         }).then(function (data) {
             console.log(data);
@@ -80,8 +80,12 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
             console.log(error);
         });
 
-        dealFactory.get().then(function (data) {
-            console.log("Deal factory ---", data);
+        // get the list of featured stores
+        $http({
+            url: "/api/1.0/deals?max_results=24&rand_number" + new Date().getTime(),
+            mathod: "GET"
+        }).then(function (data) {
+            console.log(data);
             if(data['data']) {
                 $scope.deals = data.data._items;
             }

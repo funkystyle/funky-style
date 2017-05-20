@@ -9,14 +9,11 @@ angular.module("DashboardModule", ["constantModule", "satellizer", "toastr", "pe
 
 	if($auth.isAuthenticated()) {
 		// get the list of coupons
-	    var embedded = {};
-	    embedded['related_categories'] = 1;
-	    embedded['related_stores'] = 1;
-	    
-	    var url = '/api/1.0/coupons/'+'?sort=-_created&embedded='+JSON.stringify(embedded);
+	    var projection = {};
+	    projection['name'] = 1;
 	    $http({
-	        url: url,
-	        method: "GET"
+	        url: "/api/1.0/coupons?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
+	        mathod: "GET"
 	    }).then(function (data) {
 	        console.log(data);
 	        if(data['data']) {
@@ -26,18 +23,45 @@ angular.module("DashboardModule", ["constantModule", "satellizer", "toastr", "pe
 	        console.log(error);
 	    });
 
-
-	    // get the list of featured stores
-	    var store = {};
-	    store['featured_store'] = true;
-
+	    // get list of persons
 	    var projection = {};
 	    projection['name'] = 1;
-	    projection['url'] = 1;
-	    projection['image'] = 1;
-	    projection['menu'] = 1;
 	    $http({
-	        url: "/api/1.0/stores/?where="+JSON.stringify(store)+"&max_results="+24+"&projection="+JSON.stringify(projection),
+	        url: "/api/1.0/persons?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
+	        mathod: "GET",
+	        headers: {
+                authorization: $auth.getToken()
+            }
+	    }).then(function (data) {
+	        console.log(data);
+	        if(data['data']) {
+	            $scope.persons = data.data._items;
+	        }
+	    }, function (error) {
+	        console.log(error);
+	    });
+
+	    // get list of persons
+	    var projection = {};
+	    projection['name'] = 1;
+	    $http({
+	        url: "/api/1.0/deals?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
+	        mathod: "GET"
+	    }).then(function (data) {
+	        console.log(data);
+	        if(data['data']) {
+	            $scope.deals = data.data._items;
+	        }
+	    }, function (error) {
+	        console.log(error);
+	    });
+
+
+	    // get the list of featured stores
+	    var projection = {};
+	    projection['name'] = 1;
+	    $http({
+	        url: "/api/1.0/stores?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
 	        mathod: "GET"
 	    }).then(function (data) {
 	        console.log(data);
@@ -50,15 +74,10 @@ angular.module("DashboardModule", ["constantModule", "satellizer", "toastr", "pe
 
 
 	    // get the list of Categories
-	    var cat = {};
-	    cat['featured_category'] = true;
-
 	    var projection = {};
 	    projection['name'] = 1;
-	    projection['url'] = 1;
-	    projection['image'] = 1;
 	    $http({
-	        url: "/api/1.0/categories/?where="+JSON.stringify(cat)+"&max_results="+24+"&projection="+JSON.stringify(projection),
+	        url: "/api/1.0/categories?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
 	        mathod: "GET"
 	    }).then(function (data) {
 	        console.log(data);

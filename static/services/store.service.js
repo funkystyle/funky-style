@@ -5,7 +5,7 @@ angular.module("storeFactoryModule", ["constantModule"])
             get: function (token) {
                 var def = $q.defer();
                 $http({
-                    url: URL.stores,
+                    url: URL.stores+'?rand_number' + new Date().getTime(),
                     method: "GET",
                     headers: {
                         authorization: token
@@ -22,7 +22,7 @@ angular.module("storeFactoryModule", ["constantModule"])
                 obj['url'] = query.query;
                 var def = $q.defer();
                 $http({
-                    url: URL.stores+"&where="+JSON.stringify(obj),
+                    url: URL.stores+"?where="+JSON.stringify(obj)+'&rand_number='+Math.random(),
                     method: "GET"
                 }).then(function (data) {
                     console.log(data);
@@ -35,7 +35,7 @@ angular.module("storeFactoryModule", ["constantModule"])
             insert: function (obj, token) {
                 var def = $q.defer();
                 $http({
-                    url: URL.stores,
+                    url: URL.stores+'?rand_number='+Math.random(),
                     method: "POST",
                     data: obj,
                     headers: {
@@ -51,7 +51,7 @@ angular.module("storeFactoryModule", ["constantModule"])
             update: function (obj, token) {
                 var def = $q.defer();
                 $http({
-                    url: URL.stores+'/'+obj._id,
+                    url: URL.stores+'/'+obj._id+'?rand_number='+Math.random(),
                     method: "PATCH",
                     headers: {
                         authorization: token
@@ -67,7 +67,7 @@ angular.module("storeFactoryModule", ["constantModule"])
             delete: function (id) {
                 var d = $q.defer();
                 $http({
-                    url: URL.stores+'/'+id,
+                    url: URL.stores+'/'+id+'?rand_number='+Math.random(),
                     method: "DELETE"
                 }).then(function (data) {
                     console.log(data);

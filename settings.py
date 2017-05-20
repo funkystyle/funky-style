@@ -516,9 +516,7 @@ SCHEMAS = {
         'description': {
             "type": "string"
         },
-        'images': {
-            "type": "list"
-        },
+        
         'breadcrumb': {
             "type": "list"
         },
@@ -584,12 +582,7 @@ SCHEMAS = {
         'upcoming': {
             "type": "boolean"
         },
-        'top_banner': {
-            "type": "string"
-        },
-        'side_banner': {
-            "type": "string"
-        },
+        
         'related_deals': {
             'type': 'list',
             'schema': {

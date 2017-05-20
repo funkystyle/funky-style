@@ -1,8 +1,8 @@
 /* store module */
 angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'personFactoryModule',
-    'storeFactoryModule', 'cgBusy', 'satellizer', 'ui.select'])
+    'storeFactoryModule', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule'])
     .controller("storeCtrl", function($scope, $filter, toastr, mainURL, URL, $state, $stateParams,
-                                      personFactory, $auth, storeFactory, $q, $http) {
+                                      personFactory, $auth, storeFactory, $q, $http, couponFactory) {
         console.log("store controller!");
 
         $scope.stores = [];
@@ -30,14 +30,12 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
             personFactory.me().then(function(data) {
                 if(data['data']['data']) {
                     var user = data.data.data;
-                    console.log(user, user.tokens.login);
                     $scope.load = storeFactory.get(user.tokens.login).then(function (data) {
                         console.log(data);
                         if(data) {
                             $scope.stores = data._items;
                             $scope.filterStores = data._items;
                             angular.forEach($scope.stores, function(item) {
-                                console.log(item)
                                 $scope.check.check[item._id] = false;
                             });
                         }
@@ -69,56 +67,54 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
         // delete selected check boxes
         $scope.deleteSelected = function() {
             var deletedArray = [];
+            var deleteCoupons = [];
+            var deleteStores = [];
+            var couponsPromise = [];
+
             angular.forEach($scope.check.check, function(val, key) {
                 angular.forEach($scope.stores, function(item, i) {
                     if (item._id == key && val && deletedArray.indexOf(item._id) == -1) {
                         deletedArray.push(item);
+                        deleteStores.push(item._id);
+                        // collect coupons from related_coupons of store
+                        angular.forEach(item.related_coupons, function (coupon) {
+                            if(deleteCoupons.indexOf(coupon) == -1) {
+                                deleteCoupons.push(coupon);
+                            }
+                        });
                     }
                 });
             });
-            var items = [];
-            var deleteCoupons = [];
-            var deleteStores = [];
-            var deleteCouponSuccess = [];
-            angular.forEach(deletedArray, function (item) {
-                deleteStores.push(item._id);
-                // collect coupons from related_coupons of store
-                angular.forEach(item.related_coupons, function (coupon) {
-                    if(deleteCoupons.indexOf(coupon) == -1) {
-                        deleteCoupons.push(coupon);
-                    }
+            
+            
+            angular.forEach(deleteCoupons, function (coupon) {
+                couponsPromise.push(
+                    couponFactory.delete(coupon).then(function (data) {
+                        console.log(data);
+                        return data;
+                    })
+                )
+            });
+
+            // delete all stores after success delete of coupons from table
+            var storePromise = [];
+            $q.all(couponsPromise).then(function(data) {
+                angular.forEach(deleteStores, function (id) {
+                    storePromise.push(
+                        storeFactory.delete(id).then(function (storeDelete) {
+                            console.log("stores deleted!", storeDelete);
+                            return storeDelete;
+                        })
+                    )
                 });
             });
 
-            console.log("list of deleted coupons", deleteCoupons);
-            $http({
-                url: URL.deleteDocuments,
-                method: "POST",
-                data: [{"resource_name": "coupons", "ids":deleteCoupons}]
-            }).then(function (couponsDeleted) {
-                console.log(couponsDeleted);
-                toastr.success("Coupons deleted from selected Stores!", "Success");
-                // call this http service after deleting the coupons from the table
-                $http({
-                    url: URL.deleteDocuments,
-                    method: "POST",
-                    data: [{"resource_name": "stores", "ids":deleteStores}]
-                }).then(function(data) {
-                    console.log(data, item._id);
-                    toastr.success("Selected Stores Deleted", 200);
-                    angular.forEach($scope.stores, function (store, index) {
-                        if(deleteStores.indexOf(store._id) > -1) {
-                            $scope.stores.splice(index, 1);
-                            $scope.filterStores.splice(index, 1);
-                        }
-                    });
-                }, function (error) {
-                    console.log(error);
-                    toastr.error(error.data._error.message, error.data._error.code);
-                })
-            }, function (error) {
-                console.log(error);
+            // show success message after deleting all the stores
+            $q.all(storePromise).then(function (data) {
+                toastr.success("Selected Stores Deleted", "Success!");
+                $state.reload();
             })
+            
         };
 
         $scope.toggleSidebar = function(id) {

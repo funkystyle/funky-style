@@ -9,7 +9,7 @@ angular.module('categoryServiceModule', ['constantModule'])
 		get: function (url) {
 			var def = $q.defer();
 			$http({
-				url: URL.categories,
+				url: URL.categories+'?rand_number' + new Date().getTime(),
 				method: "GET"
 			}).then(function (data) {
 				def.resolve(data);
@@ -24,7 +24,7 @@ angular.module('categoryServiceModule', ['constantModule'])
 		getcategory: function (url) {
             var obj = {};
             obj['url'] = url;
-            var query = URL.categories+"&where="+JSON.stringify(obj);
+            var query = URL.categories+"&where="+JSON.stringify(obj)+'?'+Math.random();
 
             var def = $q.defer();
 
@@ -45,7 +45,7 @@ angular.module('categoryServiceModule', ['constantModule'])
 			var def = $q.defer();
 
 			$http({
-				url: URL.categories,
+				url: URL.categories+'?'+Math.random(),
 				method: "POST",
 				data: data
 			}).then(function (data) {
@@ -61,7 +61,7 @@ angular.module('categoryServiceModule', ['constantModule'])
 		update: function (obj, token) {
 			var def = $q.defer();
             $http({
-                url: URL.categories+'/'+obj._id,
+                url: URL.categories+'/'+obj._id+'?'+Math.random(),
                 method: "PATCH",
                 headers: {
                     authorization: token

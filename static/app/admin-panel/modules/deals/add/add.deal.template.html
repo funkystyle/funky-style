@@ -42,11 +42,17 @@
                     </div>
                     <div class="form-group">
                         <label for="breadcrumbs">BreadCrumbs</label>
-                        <input type="text" class="form-control input-sm" id="breadcrumbs" placeholder="BreadCrumbs">
+                        <ui-select multiple ng-model="deal.breadcrumb" theme="bootstrap"
+                                   close-on-select="false" title="Related Categories" id="breadcrumbs">
+                            <ui-select-match placeholder="Select Breadcrumb">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="item in breadcrumbs | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="item.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                     <div class="form-group">
                         <label for="actual_price">Actual Price</label>
-                        <input type="text" class="form-control input-sm" id="actual_price" placeholder="Actual Price">
+                        <input type="text" class="form-control input-sm" id="actual_price" placeholder="Actual Price" ng-model="deal.actual_price">
                     </div>
                     <div class="form-group">
                         <label for="discounted_price">Discounted Price</label>
@@ -99,16 +105,12 @@
                     </div>
                     <div class="form-group">
                         <label for="expiry_date">Expiry Date</label>
-                        <p class="input-group">
-                            <input type="text" class="form-control input-sm"
-                                   uib-datepicker-popup ng-model="deal.expired_date"
-                                   is-open="popup2.expiry_date" ng-required="true"
-                                   close-text="Close" id="expiry_date" />
-                            <span class="input-group-btn">
-                            <button type="button" class="btn btn-default btn-sm"
-                                    ng-click="popup2.expiry_date = !popup2.expiry_date"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
-                        </p>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input required type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="h1">H1</label>
@@ -172,6 +174,16 @@
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
                 </div> <!-- end col -->
+
+                <div class="col-lg-3 col-md-3">
+                    <div class="form-group" ng-if="deal.image.length" ng-repeat="item in deal.image">
+                        <label for="displayImage">Image Display</label>
+                        <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="removeImage(item)"></i>
+                            <img ng-src="data:image/jpeg;base64,{{ item.base64 }}" />
+                        </div>
+                    </div>
+                </div>
             </div> <!-- end row -->
 
             <button type="submit" class="btn btn-info btn-md">Add deal</button>

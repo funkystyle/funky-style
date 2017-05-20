@@ -19,7 +19,7 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
                 code: 'bottom'
             }
         ];
-        $scope.store.menu = $scope.menuTypes[0];
+        $scope.store.menu = $scope.menuTypes[0].code;
         $scope.selected_user = {}; $scope.persons = [];
         $scope.categories = [];
         $scope.breadcrumbs = [];
