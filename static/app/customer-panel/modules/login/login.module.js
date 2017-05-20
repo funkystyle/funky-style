@@ -18,6 +18,7 @@ angular.module("loginModule", ["constantModule", "satellizer", "toastr"])
             }).then(function(data) {
                 if(data.data) {
                     $auth.setToken(data.data.data.login_token);
+                    toastr.success("Logged in!", "Success!");
                     $state.go("main.dashboard", $stateParams, {reload: true});
                 }
             }, function(error) {

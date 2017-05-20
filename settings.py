@@ -787,12 +787,6 @@ SCHEMAS = {
         'footer_description': {
             "type": "string"
         },
-        'alt_image': {
-            "type": "string"
-        },
-        'image': {
-            "type": "string"
-        },
         'h1': {
             "type": "string"
         },
@@ -835,12 +829,6 @@ SCHEMAS = {
             "type": "string"
         },
         'footer_description': {
-            "type": "string"
-        },
-        'image': {
-            "type": "string"
-        },
-        'alt_image': {
             "type": "string"
         },
         'h1': {

@@ -1,11 +1,15 @@
 angular.module("updateDealCategoriesModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "naif.base64", "dealFactoryModule"])
-    .controller("updateDealCategoriesCtrl", function ($scope, $stateParams, $timeout, toastr,
+    .controller("updateDealCategoriesCtrl", function ($scope, $stateParams, $timeout, toastr, $state,
                                                    storeFactory, $auth, personFactory, dealFactory) {
 
         $scope.selected_user = {};
         $scope.deal = {};
         $scope.persons = [];
+
+        $scope.$watch('deal.name', function(newVal, oldVal) {
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
+        }, true);
 
         if($auth.isAuthenticated() && $stateParams['id']) {
             $scope.load = dealFactory.get_deal_categories().then(function (data) {
@@ -43,12 +47,15 @@ angular.module("updateDealCategoriesModule", ["ui.select", "ngSanitize", "ui.boo
             delete deal._created;
             delete deal._updated;
             delete deal._links;
+            delete deal.image;
+            delete deal.alt_image;
 
             console.log(deal);
 
             dealFactory.update_deal_categories(deal, $auth.getToken()).then(function (data) {
                 console.log(data);
                 toastr.success(deal.name+" Updated", "Success!");
+                $state.go("header.deal-categories");
             }, function (error) {
                 console.log(error);
 

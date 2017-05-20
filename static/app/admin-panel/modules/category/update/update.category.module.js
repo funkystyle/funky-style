@@ -46,7 +46,7 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
         ];
 
         $scope.$watch('category.name', function(newVal, oldVal) {
-            $scope.category.url = (newVal) ? newVal+"-coupons" : undefined;
+            $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
         }, true);
 
         // get all stores into the array

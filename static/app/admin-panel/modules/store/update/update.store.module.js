@@ -24,7 +24,7 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
         ];
 
         $scope.$watch('store.name', function(newVal, oldVal) {
-            $scope.store.url = (newVal) ? newVal+"-coupons" : undefined;
+            $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
         }, true);
 
         // get all stores into the array

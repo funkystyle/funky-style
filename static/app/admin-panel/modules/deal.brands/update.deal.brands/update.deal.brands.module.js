@@ -8,6 +8,10 @@ angular.module("updateDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstr
         $scope.stores = [];
         $scope.persons = [];
 
+        $scope.$watch('deal.name', function(newVal, oldVal) {
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
+        }, true);
+
         if($auth.isAuthenticated() && $stateParams['id']) {
             $scope.load = dealFactory.get_deal_brands().then(function (data) {
                 console.log(data);
@@ -44,12 +48,15 @@ angular.module("updateDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstr
             delete deal._created;
             delete deal._updated;
             delete deal._links;
+            delete deal.image;
+            delete deal.alt_image;
 
             console.log(deal);
 
             dealFactory.update_deal_brands(deal, $auth.getToken()).then(function (data) {
                 console.log(data);
                 toastr.success(deal.name+" Updated", "Success!");
+                $state.go("header.deal-brands");
             }, function (error) {
                 console.log(error);
 

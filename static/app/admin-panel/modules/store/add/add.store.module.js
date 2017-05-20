@@ -27,7 +27,7 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
             $scope.store.relatedStore = undefined;
         };
         $scope.$watch('store.name', function(newVal, oldVal) {
-            $scope.store.url = (newVal) ? newVal+"-coupons" : undefined;
+            $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-") +"-coupons" : undefined;
         }, true);
 
         // get all stores into the array
