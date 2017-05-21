@@ -223,6 +223,20 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })
+                // deals brand page
+                .state('main.deal_post_details', {
+                    url: '/deals/:id',
+                    templateUrl: 'static/app/customer-panel/modules/deal.details/deal.details.template.html',
+                    controller: "dealDetailsCtrl",
+                    resolve: {
+                        home: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'dealDetailsModule',
+                                files: ['static/app/customer-panel/modules/deal.details/deal.details.module.js']
+                            })
+                        }
+                    }
+                })
                 // Dashboard
                 .state('main.dashboard', {
                     url: '/dashboard',
