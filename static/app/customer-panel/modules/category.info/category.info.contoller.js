@@ -24,7 +24,7 @@ angular
         $scope.coupons = [];
         $scope.filterCoupons = [];
         $scope.expiredCoupons = [];
-        $scope.categories = [];
+        $scope.categories = {};
         $scope.stores = [];
         // manageFavorite function
         $scope.manageFavorite = function () {
@@ -81,9 +81,14 @@ angular
                         angular.forEach($scope.coupons, function (item) {
                             // get the list of categories under particular coupons
                             angular.forEach(item.related_categories, function (category) {
-                                var items = $filter('filter')($scope.categories, {_id: category._id});
-                                if(!items.length) {
-                                    $scope.categories.push(category);
+                                if(!$scope.categories[category.category_type]) {
+                                    $scope.categories[category.category_type] = [];
+                                    $scope.categories[category.category_type].push(category);
+                                } else {
+                                    var items = $filter('filter')($scope.categories[category.category_type], {_id: category._id});
+                                    if(!items.length) {
+                                        $scope.categories[category.category_type].push(category);
+                                    }
                                 }
                             });
                             // get the list of stores from the coupon store

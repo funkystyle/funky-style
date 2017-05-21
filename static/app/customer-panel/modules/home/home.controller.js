@@ -4,10 +4,6 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
                                       categoryFactory, $ocLazyLoad, $stateParams) {
         console.log("home controller");
         $scope.params = undefined;
-        $('.carousel').carousel({
-            interval: 4000,
-            pause: true
-        });
         $scope.deals = [];
         $scope.coupons = [];
         $scope.categories = [];

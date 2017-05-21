@@ -47,7 +47,7 @@ angular.module("couponModule", ['angular-table', 'constantModule',
 
         if ($auth.isAuthenticated()) {
             $scope.load = $http({
-                url: '/api/1.0/coupons?embedded={"recommended_stores":1, "related_categories":1, "related_stores":1, "last_modified_by": 1}',
+                url: '/api/1.0/coupons?embedded={"recommended_stores":1, "related_categories":1, "related_stores":1, "last_modified_by": 1}'+'&rand_number=' + new Date().getTime(),
                 method: "GET"
             }).then(function (data) {
                 // console.log(data);

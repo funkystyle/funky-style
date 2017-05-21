@@ -125,59 +125,26 @@
 			</div>
 			<!--end panel-->
 
-			<div class="panel panel-default">
+			<div class="panel panel-default" ng-repeat="(key, items) in categories">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Bank Filters</h5>
+                    <h5 class="font-bold">{{ (key == 'Regular'? 'Category': key) }} Filters ({{ items.length }})</h5>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
                     <div class="form-group">
-                        <div class="icon-addon addon-sm">
+                        <div class="icon-addon addon-sm" title="Search for Category filters">
                             <input type="text" placeholder="Search" class="form-control input-sm"
-                                   autocomplete="off" id="search_bank" ng-model="search.bank">
-                            <label for="email" class="fa fa-search" rel="tooltip"
-                                   title="Search for Banks"></label>
+                                   autocomplete="off" id="category_filter" ng-model="search[key]">
+                            <label for="category_filter" class="fa fa-search" rel="tooltip"></label>
                         </div>
                     </div>
                     <div class="check-box-filter-area">
                         <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.bank"
-                             ng-if="item.category_type == 'Bank'">
-                            <label for="{{ item._id }}_bank_filter" style="font-weight: 500;">
-                                <input id="{{ item._id }}_bank_filter" type="checkbox"
-                                       ng-model="filter['bank'][item._id]" ng-change="applyFilter()" />
-                                <span id="span_bank_{{ item._id }}" class="cr">
-                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
-                                </span>
-                                <span>{{ item.name }}</span>
-                            </label>
-                        </div> <!-- end check box -->
-                    </div>
-                </div>
-                <!--end panel body-->
-            </div>
-            <!--end panel-->
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h5 class="font-bold">Wallet Filters</h5>
-                </div>
-                <!--panel heading-->
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="icon-addon addon-sm">
-                            <input type="text" placeholder="Search" class="form-control input-sm"
-                                   autocomplete="off" id="email" ng-model="search.wallet">
-                            <label for="email" class="fa fa-search" rel="tooltip" title="Search for Wallet filters"></label>
-                        </div>
-                    </div>
-                    <div class="check-box-filter-area">
-                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.wallet" ng-if="item.category_type == 'Wallet'">
-                            <label for="{{ item._id }}_wallet_filter" style="font-weight: 500;">
-                                <input id="{{ item._id }}_wallet_filter" type="checkbox"
-                                       ng-model="filter['wallet'][item._id]" ng-change="applyFilter()" />
-                                <span id="span_wallet_{{ item._id }}" class="cr">
+                             ng-repeat="item in items | filter: search[key]">
+                            <label for="{{ item._id }}_category_filter" style="font-weight: 500;">
+                                <input id="{{ item._id }}_category_filter" type="checkbox"
+                                       ng-model="filter['category'][item._id]" ng-change="applyFilter()" />
+                                <span id="span_category_{{ item._id }}" class="cr">
                                     <i class="cr-icon glyphicon glyphicon-ok"></i>
                                 </span>
                                 <span>{{ item.name }}</span>

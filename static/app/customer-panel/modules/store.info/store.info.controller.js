@@ -32,7 +32,7 @@ angular
         $scope.suggestedCoupons = [];
         $scope.relatedCoupons = [];
         $scope.filterCoupons = [];
-        $scope.categories = [];
+        $scope.categories = {};
 
         $scope.trustAsHtml = function(string) {
             if(string) {
@@ -62,12 +62,15 @@ angular
             embedded['top_stores'] = 1;
             embedded['related_stores'] = 1;
             embedded['related_stores.related_coupons'] = 1;
+            embedded['related_stores.related_coupons.related_categories'] = 1;
+            embedded['related_deals'] = 1;
             embedded['related_coupons'] = 1;
             embedded['related_coupons.related_categories'] = 1;
             embedded['related_coupons.recommended_stores'] = 1;
             embedded['related_coupons.recommended_stores.related_coupons'] = 1;
+            embedded['related_coupons.recommended_stores.related_coupons.related_categories'] = 1;
         
-            var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded);
+            var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + new Date().getTime();
             $http({
                 url: url,
                 method: "GET"
@@ -77,7 +80,13 @@ angular
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     console.log($scope.store);
-
+                    
+                    // applying carousel after dom prepared
+                    $('.carousel').carousel({
+                        interval: 4000,
+                        pause: true
+                    });
+                    
                     angular.forEach($scope.store.related_coupons, function (item) {
                         if(new Date(item.expire_date) > new Date()) {
                             if($scope.coupons.indexOf(item) == -1) {
@@ -118,36 +127,44 @@ angular
                             console.log(error);
                         })
                     }
-
+                    
                     angular.forEach($scope.coupons, function (item) {
                         angular.forEach(item.related_categories, function (category) {
-                            var items = $filter('filter')($scope.categories, {_id: category._id});
-                            if(!items.length) {
-                                $scope.categories.push(category);
+                            if(!$scope.categories[category.category_type]) {
+                                $scope.categories[category.category_type] = [];
+                                $scope.categories[category.category_type].push(category);
+                            } else {
+                                var items = $filter('filter')($scope.categories[category.category_type], {_id: category._id});
+                                if(!items.length) {
+                                    $scope.categories[category.category_type].push(category);
+                                }
                             }
                         });
 
                         // getting suggested coupons from the rescommended stores
                         angular.forEach(item.recommended_stores, function (store) {
                              angular.forEach(store.related_coupons, function (r_coupon) {
-                                 if($scope.suggestedCoupons.indexOf(r_coupon) == -1) {
-                                     $scope.suggestedCoupons.push(r_coupon);
-                                 }
+                                var items = $filter('filter')($scope.suggestedCoupons, {_id: r_coupon._id});
+                                if(!items.length) {
+                                    $scope.suggestedCoupons.push(r_coupon);
+                                }
                              })
                         });
                     });
-
+                    console.log("Final categories are ", $scope.categories)
                     // getting related coupons from the related stores
                     angular.forEach($scope.store.related_stores, function (item) {
                         angular.forEach(item.related_coupons, function (r_coupon, index) {
-                            if(index < 2 && $scope.relatedCoupons.indexOf(r_coupon) == -1) {
+                            console.log(r_coupon)
+                            var items = $filter('filter')($scope.relatedCoupons, {_id: r_coupon._id});
+                            if(!items.length) {
                                 $scope.relatedCoupons.push(r_coupon);
                             }
                         }) ;
                     });
 
 
-                    console.log($scope.expiredCoupons, $scope.coupons);
+                    console.log($scope.expiredCoupons, $scope.coupons, "suggested coupons ", $scope.suggestedCoupons, "Related coupons ", $scope.relatedCoupons);
                 }
             }, function (error) {
                 console.log(error);
