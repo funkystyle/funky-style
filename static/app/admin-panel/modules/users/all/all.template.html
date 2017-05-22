@@ -71,11 +71,11 @@
             <form name="signup" ng-submit="updateUser(u_user, u_user.tokens.login)">
                 <div class="form-group col-md-6">
                     <label for="first_name">FIRST NAME</label>
-                    <input type="text" class="form-control" ng-model="u_user.first_name" placeholder="FIRST NAME" />
+                    <input id="first_name" type="text" class="form-control" ng-model="u_user.first_name" placeholder="FIRST NAME" />
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="first_name">LAST NAME</label>
-                    <input type="text" class="form-control" ng-model="u_user.last_name" placeholder="LAST NAME" />
+                    <label for="last_name">LAST NAME</label>
+                    <input id="last_name" type="text" class="form-control" ng-model="u_user.last_name" placeholder="LAST NAME" />
                 </div>
                 <div class="form-group col-md-12">
                     <label for="email">Email address</label>
@@ -87,15 +87,15 @@
                     <input type="text" only-digits class="form-control" id="mobile_number" ng-model="u_user.mobile_number" placeholder="MOBILE NUMBER" autocomplete="off">
                 </div>
                 <div class="form-group col-md-12">
-                    <label style="width: 100%;" for="status">Status</label>
+                    <label style="width: 100%;">Status</label>
                     <label class="radio-inline"><input type="radio" name="status" value="active" ng-model="u_user.status">Active</label>
                     <label class="radio-inline"><input type="radio" name="status" value="inactive" ng-model="u_user.status">Inactive</label>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="user_level">User Level</label>
-                    <ui-select on-select="change_user_level()" ng-model="u_user.level" theme="bootstrap">
-                        <ui-select-match placeholder="Select User Level">{{ $select.selected.text }}</ui-select-match>
-                        <ui-select-choices repeat="item in userLevels | filter: $select.search">
+                    <ui-select multiple ng-model="u_user.user_level" theme="bootstrap" id="user_level">
+                        <ui-select-match placeholder="Select user levels">{{$item.text}}</ui-select-match>
+                        <ui-select-choices repeat="item.level as item in userLevels | propsFilter: {level: $select.search}">
                             <div ng-bind-html="item.text | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>

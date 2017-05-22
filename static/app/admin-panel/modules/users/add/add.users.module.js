@@ -14,25 +14,24 @@ angular.module("addUsersModule", ['constantModule', 'toastr', 'ui.select', 'pers
 
         $scope.userLevels = [
             {
+                level: "admin",
+                text: "Admin"
+            },
+            {
                 level: "submitter",
                 text: "Submitter"
             },
             {
                 level: "editor",
                 text: "Editor"
-            },
-            {
-                level: "admin",
-                text: "Admin"
             }
         ];
         $scope.user = {
-            user_level: $scope.userLevels[0]['level'],
+            user_level: [$scope.userLevels[0].level],
             gender: $scope.genders[0]['code']
         };
 
         $scope.createNow = function () {
-            $scope.user.user_level = [$scope.user.user_level];
             $scope.load = personFactory.create([$scope.user]).then(function (data) {
                 console.log(data);
                 toastr.success(data.statusText, "Success!");
@@ -42,4 +41,21 @@ angular.module("addUsersModule", ['constantModule', 'toastr', 'ui.select', 'pers
                 toastr.error(error.data._error.message, "Error!");
             });
         }
+    })
+    .directive('onlyDigits', function() {
+        return {
+            restrict: 'A',
+            require: '?ngModel',
+            link: function(scope, element, attrs, modelCtrl) {
+                modelCtrl.$parsers.push(function(inputValue) {
+                    if (inputValue == undefined) return '';
+                    var transformedInput = inputValue.replace(/[^0-9]/g, '');
+                    if (transformedInput !== inputValue) {
+                        modelCtrl.$setViewValue(transformedInput);
+                        modelCtrl.$render();
+                    }
+                    return transformedInput;
+                });
+            }
+        };
     });
