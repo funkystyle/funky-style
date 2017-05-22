@@ -5,17 +5,24 @@
     <div class="row">
         <div class="pagenation-main col-md-12 col-xs-12 col-sm-12">
             <div class="pagenation-text col-md-8 col-xs-7 col-sm-7">
-                <p><a href="#">Home</a> > <a href="#">Mobile Prices</a> > <a href="#">Xiomi Mobile Price List</a> > <a href="#">Xiomi Redmi Note 4 32GB with 3GB RAM</a></p>
+                <ol class="breadcrumb">
+                    <li><a ui-sref="main.home">Home</a></li>
+                    <li><a ui-sref="main.category">Mobile prices</a></li>
+                    <li ng-repeat="item in deal.breadcrumb">
+                        <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
+                    </li>
+                    <li class="active">{{ deal.url }}</li>
+                </ol>
             </div>
             <div class="updated-text text-right col-md-4 col-xs-5 col-sm-5">
-                <p>Updated on: 16th April 2017</p>
+                <p>{{ deal.expired_date | date: 'dd MMM yyyy hh:mm a' }}</p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="mobileprice-text-main col-md-12 col-xs-12 col-sm-12">
             <div class="mobileprice-text text-left">
-                <h3>Xiomi Redmi Note 4 Price in India</h3>
+                <h1>{{ deal.name }}</h1>
             </div>
         </div>
     </div>
@@ -72,11 +79,11 @@
                                 </div>
                             </div>
                             <div class="amazonactualprice col-md-2 text-center col-xs-6">
-                                <h4>Rs 18,000</h4>
+                                <h4>Rs {{ deal.actual_price }}</h4>
                                 <h5>Actual Price</h5>
                             </div>
                             <div class="amazonactualprice col-md-3 text-center col-xs-6">
-                                <h4>Rs 14,999</h4>
+                                <h4>Rs {{ deal.discount_price }}</h4>
                                 <h5>Discounted Price</h5>
                             </div>
                             <div class="amazonstore-head col-md-3 text-center">

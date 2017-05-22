@@ -225,7 +225,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // deals brand page
                 .state('main.deal_post_details', {
-                    url: '/deals/:id',
+                    url: '/deals/:url',
                     templateUrl: 'static/app/customer-panel/modules/deal.details/deal.details.template.html',
                     controller: "dealDetailsCtrl",
                     resolve: {
