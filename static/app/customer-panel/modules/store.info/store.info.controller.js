@@ -5,6 +5,7 @@ angular
         $scope.favorite = {
             favorite: false
         };
+        $scope.comment = {};
         $scope.filter = {
             category: {},
             wallet: {},
@@ -39,6 +40,12 @@ angular
                 return $sce.trustAsHtml(string);
             }
         };
+
+        // comment now
+        $scope.commentNow = function (item) {
+            $scope.comment.store = item.related_stores[0];
+        };
+
         // manageFavorite function
         $scope.manageFavorite = function () {
             $scope.favorite.favorite = !$scope.favorite.favorite;
