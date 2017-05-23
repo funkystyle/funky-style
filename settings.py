@@ -495,10 +495,22 @@ SCHEMAS = {
             }
     },
     "deals": {
+        'dynamic_fields': {
+            'type': 'dict',
+            'schema': {
+                'type': 'dict'
+            }
+        },
         "name": {
             "unique":True,
             "required": True,
             "type": "string",
+        },
+        'deal_type': {
+            "type": "string"
+        },
+        'deal_video': {
+            "type": "string"
         },
         'url': {
             "unique":True,
@@ -547,6 +559,24 @@ SCHEMAS = {
                     'resource': 'deal_categories',
                     'embeddable': True,
                     'field': '_id'
+                }
+            }
+        },
+        'stores': {
+            'type': 'list',
+            'schema': {
+                'type': 'dict',
+                'schema': {
+                    'store' : {
+                        'type': 'objectid',
+                        'data_relation': {
+                            'resource': 'stores',
+                            'embeddable': True
+                        }
+                    },
+                    'actual_price': {'type': 'float'},
+                    'discount_price': {'type': 'float'},
+                    'landing_page': {'type': 'string'}
                 }
             }
         },
@@ -776,6 +806,7 @@ SCHEMAS = {
         }
     },
     'deal_categories_collection': {
+
         'name': {
             "type": "string",
             "unique": True,
@@ -821,6 +852,16 @@ SCHEMAS = {
             'data_relation': {
                 'resource': 'persons',
                 'embeddable': True
+            }
+        },
+        'fields': {
+            'type': 'list',
+            'schema': {
+                'type': 'dict',
+                'schema': {
+                    'field_name': {'type': 'string'},
+                    'field_type': {'type': 'string'}
+                }
             }
         }
 
@@ -984,35 +1025,13 @@ SCHEMAS = {
             'type': 'list',
             'required': True
         }
-    },
-
-    'dynamic_fields_collection': {
-        'deal_category': {
-            'type': 'objectid',
-            'unique': True,
-            'data_relation': {
-                'resource': 'deal_categories',
-                'embeddable': True
-            }
-        },
-        'field_names': {
-            'type': 'list',
-            'schema': {
-                'type': 'dict',
-                'schema': {
-                    'name': {'type': 'string'},
-                    'type': {'type': 'string'},
-                    'required': {'type': 'boolean'}
-                }
-            }
-        }
     }
+
 
 }
 
 PERSONS_SCHEMA = SCHEMAS['persons']
 STORES_SCHEMA = SCHEMAS['stores']
-DYNAMIC_FIELDS_SCHEMA = SCHEMAS['dynamic_fields_collection']
 
 DEALS_SCHEMA = SCHEMAS['deals']
 CATEGORIES_SCHEMA = SCHEMAS['categories']
@@ -1095,10 +1114,7 @@ BLOG = {
     'schema': BLOG_SCHEMA
 }
 
-DYNAMIC_FIELDS = {
-    'item_title': 'dynamic_title',
-    'schema': DYNAMIC_FIELDS_SCHEMA
-}
+
 
 # The DOMAIN dict explains which resources will be available and how they will
 # be accessible to the API consumer.
@@ -1115,8 +1131,7 @@ DOMAIN = {
     'master_seo': MASTER_SEO,
     'coupons_comments': COUPONS_COMMENTS,
     'coupons_reports': COUPON_REPORTS,
-    'blog': BLOG,
-    'dynamic_fields': DYNAMIC_FIELDS
+    'blog': BLOG
 }
 
 COLLECTION_NAMES = DOMAIN.keys()
