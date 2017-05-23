@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="row" ng-if="stores.length">
-            <div class="col-lg-2 col-xs-4" ng-if="item.featured_store == true" ng-repeat="item in stores | limitTo: 24">
+            <div class="col-lg-2 col-xs-4" ng-repeat="item in stores | limitTo: 24">
                 <div class="thumbnail store-thumbnail">
                     <a ui-sref="main.store-info({url: item.url})" title="{{ item.title }}">
                         <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="row" ng-if="categories.length">
-            <div class="col-lg-2 col-xs-4" ng-if="item.featured_category == true" ng-repeat="item in categories | limitTo: 24">
+            <div class="col-lg-2 col-xs-4" ng-repeat="item in categories | limitTo: 24">
                 <div class="thumbnail store-thumbnail">
                     <a ui-sref="main.categoryinfo({url: item.url})" title="{{ item.title }}">
                         <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
@@ -199,7 +199,7 @@
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 pad-right-0 col-xs-7">
-                                <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
+                                <strike>Rs. {{ item.actual_price }}</strike> &nbsp; &nbsp;
                                 <a href="">Rs. {{ item.discount_price }}</a>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6   text-right col-xs-5">
@@ -208,9 +208,9 @@
                         </div>
                     </div>
                     <div class="panel-footer" style="padding: 0;">
-                        <button class="btn btn-md btn-info btn-block">
+                        <a ui-sref="main.deal_post_details({url: item.url})" class="btn btn-md btn-info btn-block">
                             GET DEAL
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -234,7 +234,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-sm-12 col-md-3"
-                 ng-if="item.menu == 'bottom menu'" ng-repeat="item in stores">
+                 ng-if="item.menu == 'bottom'" ng-repeat="item in stores">
                 <ul class="unstyled">
                     <li><a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a></li>
                 </ul>

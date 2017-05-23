@@ -1,0 +1,869 @@
+<link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.css" />
+<link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
+
+<div class="container">
+    <div class="row">
+        <div class="pagenation-main col-md-12 col-xs-12 col-sm-12">
+            <div class="pagenation-text col-md-8 col-xs-7 col-sm-7">
+                <ol class="breadcrumb">
+                    <li><a ui-sref="main.home">Home</a></li>
+                    <li><a ui-sref="main.category">Mobile prices</a></li>
+                    <li ng-repeat="item in deal.breadcrumb">
+                        <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
+                    </li>
+                    <li class="active">{{ deal.url }}</li>
+                </ol>
+            </div>
+            <div class="updated-text text-right col-md-4 col-xs-5 col-sm-5">
+                <p>{{ deal.expired_date | date: 'dd MMM yyyy hh:mm a' }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mobileprice-text-main col-md-12 col-xs-12 col-sm-12">
+            <div class="mobileprice-text text-left">
+                <h1>{{ deal.name }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mobileprice-body-main col-md-12 col-xs-12 col-sm-12">
+            <div class="mobileprice-logo col-md-3 col-xs-4 col-sm-4">
+                <div><img src="modules/assets/images/mobile.png"></div>
+                <p class="rollover text-center" >(Roll over to zoom in)</p>
+                <div class="rolloverimage">
+                    <img src="modules/assets/images/mobile.png">
+                </div>
+            </div>
+
+            <div class="mobileprice-text col-md-9 col-xs-8 col-sm-8">
+                <div class="col-md-12 ratethisproduct-main">
+                    <div class="row ratethisproduct-row">
+                        <div class="ratethisproduct-head col-md-5 col-xs-12 col-sm-12">
+                            <h4>Rate this Product : </h4>
+                            <div class="product-stars ratethisproduct-stars">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ratethisproduct-ratingshead col-xs-6 col-sm-6">
+                            <h4><a href="#">133095 ratings &nbsp;<i class="fa fa-caret-right" aria-hidden="true"></i></a></h4>
+                        </div>
+                        <div class="col-md-4 ratethisproduct-reviewshead col-xs-6 col-sm-6">
+                            <h4><a href="#">29435 Reviews</a></h4>
+                        </div>
+                    </div>
+                    <div class="bestpricehead-main row">
+                        <div class="bestprice-head col-md-7">
+                            <h2>Best Price in India</h2>
+                        </div>
+                    </div>
+                    <div class="amazonstore-main row">
+                        <div class="amazonstore-store-main col-md-12 col-xs-12 col-sm-12">
+                            <div class="col-md-2 amazonimage">
+                                <div class="amazon-logo">
+                                    <img src="http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg">
+                                </div>
+                                <div class="amazon-moredetails text-center">
+                                    <a href="#">More Details <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                </div>
+                            </div>
+                            <div class="amazonactualprice col-md-2 text-center col-xs-6">
+                                <h4>Rs {{ deal.actual_price }}</h4>
+                                <h5>Actual Price</h5>
+                            </div>
+                            <div class="amazonactualprice col-md-3 text-center col-xs-6">
+                                <h4>Rs {{ deal.discount_price }}</h4>
+                                <h5>Discounted Price</h5>
+                            </div>
+                            <div class="amazonstore-head col-md-3 text-center">
+                                <button class="btn btn-primary col-xs-9">GO TO STORE <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i></button>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                    </div>
+                    <div class="quickspecifications-main col-md-12">
+                        <div class="row quickspecifications-head col-xs-12">
+                            <h3>QUICK SPECIFICATIONS <small>SEE FULL SPECIFICATIONS</small></h3>
+                        </div>
+                        <div class="row general-head-main">
+                            <div class="general-head col-md-12">
+                                <div class="col-md-2 general-text">
+                                    <strong>General : </strong>
+                                </div>
+                                <div class="col-md-10 general-specifications-text">
+                                    <span class="general-specifications">Dual Sim (Hybrid)</span>
+                                    <span class="general-specifications">Android, v7.11</span>
+                                    <span class="general-specifications">Slim</span>
+                                    <span class="general-specifications">3000 mAH Non-Rem. Battery</span>
+                                </div>
+                            </div>
+                            <div class="general-head col-md-12">
+                                <div class="col-md-2 general-text">
+                                    <strong>Display : </strong>
+                                </div>
+                                <div class="col-md-10 general-specifications-text">
+                                    <span class="general-specifications">Touch</span>
+                                    <span class="general-specifications">5.5 inches</span>
+                                    <span class="general-specifications">1080 * 1920 Pixels</span>
+                                    <span class="general-specifications">Auto Focus</span>
+                                </div>
+                            </div>
+                            <div class="general-head col-md-12">
+                                <div class="col-md-2 general-text">
+                                    <strong>Camera : </strong>
+                                </div>
+                                <div class="col-md-10 general-specifications-text">
+                                    <span class="general-specifications">Dual Sim (Hybrid)</span>
+                                    <span class="general-specifications">Android, v7.11</span>
+                                    <span class="general-specifications">Slim</span>
+                                    <span class="general-specifications">3000 mAH Non-Rem. Battery</span>
+                                </div>
+                            </div>
+                            <div class="general-head col-md-12">
+                                <div class="col-md-2 general-text">
+                                    <strong>Technical : </strong>
+                                </div>
+                                <div class="col-md-10 general-specifications-text">
+                                    <span class="general-specifications">Touch</span>
+                                    <span class="general-specifications">5.5 inches</span>
+                                    <span class="general-specifications">1080 * 1920 Pixels</span>
+                                    <span class="general-specifications">Auto Focus</span>
+                                </div>
+                            </div>
+                            <div class="general-head col-md-12">
+                                <div class="col-md-2 general-text">
+                                    <strong>Connectivity : </strong>
+                                </div>
+                                <div class="col-md-10 general-specifications-text">
+                                    <span class="general-specifications">Dual Sim (Hybrid)</span>
+                                    <span class="general-specifications">Android, v7.11</span>
+                                    <span class="general-specifications">Slim</span>
+                                    <span class="general-specifications">3000 mAH Non-Rem. Battery</span>
+                                </div>
+                            </div>
+                            <div class="general-head col-md-12">
+                                <div class="col-md-2 general-text">
+                                    <strong>Extra : </strong>
+                                </div>
+                                <div class="col-md-10 general-specifications-text">
+                                    <span class="general-specifications">Touch</span>
+                                    <span class="general-specifications">5.5 inches</span>
+                                    <span class="general-specifications">1080 * 1920 Pixels</span>
+                                    <span class="general-specifications">Auto Focus</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row specifications-main">
+        <div class="col-md-2 specifications-text col-xs-6">
+            <button class="specifications-btn">Specifications</button>
+        </div>
+        <div class="col-md-2 specifications-text col-xs-6">
+            <button class="specifications-btn">Overview</button>
+        </div>
+        <div class="col-md-2 specifications-text col-xs-6">
+            <button class="specifications-btn">Best Price</button>
+        </div>
+        <div class="col-md-2 specifications-text col-xs-6">
+            <button class="specifications-btn">Video</button>
+        </div>
+        <div class="col-md-4 specifications-text col-xs-6">
+            <button class="specifications-btn">Best Selling Mobiles</button>
+        </div>
+    </div>
+    <div class="row pricelisttable-main col-md-12">
+        <div class="discounttext-main">
+            <div class="col-md-6">
+                <h3>Xiomi Redmi Note 4 <small>Price in Amazon, Flipkart, Snapdeal</small></h3>
+            </div>
+            <div class="col-md-6 text-right">
+                <h3>50% Off Discount Coupons</h3>
+            </div>
+        </div>
+        <div class="table-main table-responsive">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td class="tableimg"><img src="http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"></td>
+                    <td>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> 2 - 4 Days Delivery
+                        </div>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> EMI Available
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tabledelivery">
+                            27,999
+                        </div>
+                        <div class="tabledelivery">
+                            <strong>FREE</strong> Shipping
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">GO TO STORE <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i></button>
+                    </td>
+                    <td>
+                        <h4><a href="#">Amazon Coupons</a></h4>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning"><strong>Get Coupons</strong></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableimg"><img src="http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"></td>
+                    <td>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> 2 - 4 Days Delivery
+                        </div>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> EMI Available
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tabledelivery">
+                            27,999
+                        </div>
+                        <div class="tabledelivery">
+                            <strong>FREE</strong> Shipping
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">GO TO STORE <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i></button>
+                    </td>
+                    <td>
+                        <h4><a href="#">Amazon Coupons</a></h4>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning"><strong>Get Coupons</strong></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableimg"><img src="http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"></td>
+                    <td>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> 2 - 4 Days Delivery
+                        </div>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> EMI Available
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tabledelivery">
+                            27,999
+                        </div>
+                        <div class="tabledelivery">
+                            <strong>FREE</strong> Shipping
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">GO TO STORE <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i></button>
+                    </td>
+                    <td>
+                        <h4><a href="#">Amazon Coupons</a></h4>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning"><strong>Get Coupons</strong></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableimg"><img src="http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"></td>
+                    <td>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> 2 - 4 Days Delivery
+                        </div>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> EMI Available
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tabledelivery">
+                            27,999
+                        </div>
+                        <div class="tabledelivery">
+                            <strong>FREE</strong> Shipping
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">GO TO STORE <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i></button>
+                    </td>
+                    <td>
+                        <h4><a href="#">Amazon Coupons</a></h4>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning"><strong>Get Coupons</strong></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableimg"><img src="http://media.corporate-ir.net/media_files/IROL/17/176060/img/logos/amazon_logo_RGB.jpg"></td>
+                    <td>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> 2 - 4 Days Delivery
+                        </div>
+                        <div class="tabledelivery">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> EMI Available
+                        </div>
+                    </td>
+                    <td>
+                        <div class="tabledelivery">
+                            27,999
+                        </div>
+                        <div class="tabledelivery">
+                            <strong>FREE</strong> Shipping
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">GO TO STORE <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i></button>
+                    </td>
+                    <td>
+                        <h4><a href="#">Amazon Coupons</a></h4>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning"><strong>Get Coupons</strong></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="mobilespecifications-main row col-md-12">
+        <div class="col-md-9 mobilespecifications-left">
+            <div class="row mobilespecifications-head">
+                <h3><strong>Samsung Galaxy S8 Specifications</strong></h3>
+            </div>
+            <div class="mobilespecifications-body">
+                <div class="features-mobilespecifications">
+                    <h3><i class="fa fa-times-circle-o" aria-hidden="true"></i> &nbsp;&nbsp; General Features</h3>
+                </div>
+                <div class="features-mobilespecifications-text">
+                    <table class="table">
+                        <tbody>
+                        <tr class="active">
+                            <td class="brandtext">Brand</td>
+                            <td class="samsungtext">Samsung</td>
+                        </tr>
+                        <tr class="warning">
+                            <td class="brandtext">Network Type</td>
+                            <td colspan="2">CDMA + GSM</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="mobilespecifications-body">
+                <div class="features-mobilespecifications">
+                    <h3><i class="fa fa-times-circle-o" aria-hidden="true"></i> &nbsp;&nbsp; Display</h3>
+                </div>
+                <div class="features-mobilespecifications-text">
+                    <table class="table">
+                        <tbody>
+                        <tr class="active">
+                            <td class="brandtext">Display Size</td>
+                            <td class="samsungtext">5.2 inches</td>
+                        </tr>
+                        <tr class="warning">
+                            <td class="brandtext">Display Type</td>
+                            <td>Super AMOLED Capacitive Touchscreen</td>
+                        </tr>
+                        <tr class="active">
+                            <td class="brandtext">Resolution</td>
+                            <td>4096 * 2160 Pixels</td>
+                        </tr>
+                        <tr class="warning">
+                            <td class="brandtext">Display Color</td>
+                            <td>16M</td>
+                        </tr>
+                        <tr class="active">
+                            <td class="brandtext">Horizontal Pixel</td>
+                            <td>4096</td>
+                        </tr>
+                        <tr class="warning">
+                            <td class="brandtext">Vertical Pixel</td>
+                            <td>2160</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="mobilespecifications-body">
+                <div class="features-mobilespecifications">
+                    <h3><i class="fa fa-times-circle-o" aria-hidden="true"></i> &nbsp;&nbsp; Camera</h3>
+                </div>
+                <div class="features-mobilespecifications-text">
+                    <table class="table">
+                        <tbody>
+                        <tr class="active">
+                            <td class="brandtext">Rear Camera</td>
+                            <td class="samsungtext">30 MP</td>
+                        </tr>
+                        <tr class="warning">
+                            <td class="brandtext">Front Camera</td>
+                            <td>9 MP</td>
+                        </tr>
+                        <tr class="active">
+                            <td class="brandtext">Flash</td>
+                            <td class="samsungtext">Yes</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="whatsnot-main col-md-12">
+                    <strong>What is Lorem Ipsum?</strong>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <strong>What is Lorem Ipsum?</strong>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <strong>What is Lorem Ipsum?</strong>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <strong>What is Lorem Ipsum?</strong>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mobilespecifications-right">
+            <div class="similarmobile-main">
+                <div class="similarmobile-head">
+                    <h3>Similar Price range Mobiles</h3>
+                </div>
+                <div class="similarmobile-body">
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                </div>
+            </div><br><br>
+            <div class="similarmobile-main col-xs-12 pad">
+                <div class="similarmobile-head">
+                    <h3>Popular Mobile Prices List</h3>
+                </div>
+                <div class="similarmobile-body">
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                    <div class="similarmobile-text col-xs-6 col-sm-6">
+                        <div class="similarmobile-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="similarmobile-imgtext">
+                            <h4>Xiomi Mi S</h4>
+                            <h4>Rs 13,999</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="pricerange-sidebar-main productlist col-md-12 col-xs-12 col-sm-12">
+            <div class="products-row-main">
+                <div class="products-list col-md-3 col-xs-6 col-sm-6">
+                    <div class="product-border-main">
+                        <div class="product-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="product-title text-center">
+                            <h4>Apple Iphone 5S Price</h4>
+                            <div class="product-stars">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        <h4 class="text-center">$ 47, 499</h4>
+                    </div>
+                    <div class="product-specifications">
+                        <ul>
+                            <li>OS Android</li>
+                            <li>Screen Size 5.0 inch</li>
+                            <li>Ram : 2GB</li>
+                            <li>Primary Camera : 8MP</li>
+                        </ul>
+                    </div>
+                    <div class="product-buynow">
+                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                    </div>
+                </div>
+                <div class="products-list col-md-3 col-xs-6 col-sm-6">
+                    <div class="product-border-main">
+                        <div class="product-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="product-title text-center">
+                            <h4>Apple Iphone 5S Price</h4>
+                            <div class="product-stars">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        <h4 class="text-center">$ 47, 499</h4>
+                    </div>
+                    <div class="product-specifications">
+                        <ul>
+                            <li>OS Android</li>
+                            <li>Screen Size 5.0 inch</li>
+                            <li>Ram : 2GB</li>
+                            <li>Primary Camera : 8MP</li>
+                        </ul>
+                    </div>
+                    <div class="product-buynow">
+                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                    </div>
+                </div>
+                <div class="products-list col-md-3 col-xs-6 col-sm-6">
+                    <div class="product-border-main">
+                        <div class="product-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="product-title text-center">
+                            <h4>Apple Iphone 5S Price</h4>
+                            <div class="product-stars">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        <h4 class="text-center">$ 47, 499</h4>
+                    </div>
+                    <div class="product-specifications">
+                        <ul>
+                            <li>OS Android</li>
+                            <li>Screen Size 5.0 inch</li>
+                            <li>Ram : 2GB</li>
+                            <li>Primary Camera : 8MP</li>
+                        </ul>
+                    </div>
+                    <div class="product-buynow">
+                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                    </div>
+                </div>
+                <div class="products-list col-md-3 col-xs-6 col-sm-6">
+                    <div class="product-border-main">
+                        <div class="product-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="product-title text-center">
+                            <h4>Apple Iphone 5S Price</h4>
+                            <div class="product-stars">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        <h4 class="text-center">$ 47, 499</h4>
+                    </div>
+                    <div class="product-specifications">
+                        <ul>
+                            <li>OS Android</li>
+                            <li>Screen Size 5.0 inch</li>
+                            <li>Ram : 2GB</li>
+                            <li>Primary Camera : 8MP</li>
+                        </ul>
+                    </div>
+                    <div class="product-buynow">
+                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row last_row">
+        <div class="pricerange-sidebar-main productlist col-md-12">
+            <div class="products-row-main">
+                <div class="products-list col-md-3 col-xs-6 col-sm-6">
+                    <div class="product-border-main">
+                        <div class="product-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="product-title text-center">
+                            <h4>Apple Iphone 5S Price</h4>
+                            <div class="product-stars">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        <h4 class="text-center">$ 47, 499</h4>
+                    </div>
+                    <div class="product-specifications">
+                        <ul>
+                            <li>OS Android</li>
+                            <li>Screen Size 5.0 inch</li>
+                            <li>Ram : 2GB</li>
+                            <li>Primary Camera : 8MP</li>
+                        </ul>
+                    </div>
+                    <div class="product-buynow">
+                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                    </div>
+                </div>
+                <div class="products-list col-md-3 col-xs-6 col-sm-6">
+                    <div class="product-border-main">
+                        <div class="product-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="product-title text-center">
+                            <h4>Apple Iphone 5S Price</h4>
+                            <div class="product-stars">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        <h4 class="text-center">$ 47, 499</h4>
+                    </div>
+                    <div class="product-specifications">
+                        <ul>
+                            <li>OS Android</li>
+                            <li>Screen Size 5.0 inch</li>
+                            <li>Ram : 2GB</li>
+                            <li>Primary Camera : 8MP</li>
+                        </ul>
+                    </div>
+                    <div class="product-buynow">
+                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                    </div>
+                </div>
+                <div class="products-list col-md-3 col-xs-6 col-sm-6">
+                    <div class="product-border-main">
+                        <div class="product-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="product-title text-center">
+                            <h4>Apple Iphone 5S Price</h4>
+                            <div class="product-stars">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        <h4 class="text-center">$ 47, 499</h4>
+                    </div>
+                    <div class="product-specifications">
+                        <ul>
+                            <li>OS Android</li>
+                            <li>Screen Size 5.0 inch</li>
+                            <li>Ram : 2GB</li>
+                            <li>Primary Camera : 8MP</li>
+                        </ul>
+                    </div>
+                    <div class="product-buynow">
+                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                    </div>
+                </div>
+                <div class="products-list col-md-3 col-xs-6 col-sm-6">
+                    <div class="product-border-main">
+                        <div class="product-img">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                        <div class="product-title text-center">
+                            <h4>Apple Iphone 5S Price</h4>
+                            <div class="product-stars">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        <h4 class="text-center">$ 47, 499</h4>
+                    </div>
+                    <div class="product-specifications">
+                        <ul>
+                            <li>OS Android</li>
+                            <li>Screen Size 5.0 inch</li>
+                            <li>Ram : 2GB</li>
+                            <li>Primary Camera : 8MP</li>
+                        </ul>
+                    </div>
+                    <div class="product-buynow">
+                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

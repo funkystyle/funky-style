@@ -1,7 +1,7 @@
 angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "constantModule",
     "personFactoryModule", "cgBusy", "couponFactoryModule", "categoryFactoryModule"])
-    .controller("updateCouponCtrl", function($scope, $timeout, toastr, storeFactory,
+    .controller("updateCouponCtrl", function($scope, $timeout, toastr, storeFactory, $q,
                                              $auth, personFactory, $log, couponFactory,
                                              $state, $stateParams, categoryFactory, URL) {
         $scope.persons = [];
@@ -80,11 +80,43 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 });
             })
         }
+        $scope.removedCategories = [];
+        $scope.removedStores = [];
+        $scope.addedStores = [];
+        $scope.addedCategories = [];
+        $scope.removeCategory = function (item, model) {
+            console.log(item, model);
+            if($scope.removedCategories.indexOf(item) == -1) {
+                $scope.removedCategories.push(item);
+            }
+        };
+
+        $scope.removeStore = function (item, model) {
+            console.log(item, model);
+            if($scope.removedStores.indexOf(item) == -1) {
+                $scope.removedStores.push(item);
+            }
+        };
+        $scope.addCategory = function (item, model) {
+            console.log(item, model);
+            if($scope.addedCategories.indexOf(item) == -1) {
+                $scope.addedCategories.push(item);
+            }
+        };
+
+        $scope.addStore = function (item, model) {
+            console.log(item, model);
+            if($scope.addedStores.indexOf(item) == -1) {
+                $scope.addedStores.push(item);
+            }
+        };
 
         // add coupon
         $scope.updateCoupon = function (coupon) {
+            var finalItems = [];
+
             // coupon.expire_date = new Date($("#datetimepicker1").find("input").val());
-            coupon.expire_date = "Tue, 02 Apr 2013 10:29:13 GMT";
+            coupon.expire_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
             delete coupon._created;
             delete coupon._updated;
             delete coupon._links;
@@ -92,7 +124,80 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             console.log(coupon);
             couponFactory.update(coupon, $auth.getToken()).then(function (data) {
                 console.log(data);
-                toastr.success(coupon.title+" Created", "Success!");
+                function updateStore (store, fromRemove) {
+                    if(!fromRemove) {
+                        store.related_coupons.push(coupon._id);
+                    } else if (fromRemove) {
+                        store.related_coupons.splice(store.related_coupons.indexOf(coupon._id), 1);
+                    }
+
+                    delete store._created;
+                    delete store._updated;
+                    delete store._links;
+                    console.log(store);
+                    finalItems.push(storeFactory.update(store, $auth.getToken()).then(function (store_data) {
+                        console.log(store_data);
+                        return store_data;
+                    }, function (error) {
+                        console.log(error);
+                        toastr.error(error.data._error.message, error.data._error.code);
+                    }));
+                }
+
+                function updateCategory (category, fromRemove) {
+                    if(!fromRemove) {
+                        category.related_coupons.push(coupon._id);
+                    } else if (fromRemove) {
+                        category.related_coupons.splice(category.related_coupons.indexOf(coupon._id), 1);
+                    }
+                    delete category._created;
+                    delete category._updated;
+                    delete category._links;
+                    console.log(category);
+                    finalItems.push(categoryFactory.update(category, $auth.getToken()).then(function (category_data) {
+                        console.log(category_data);
+                        return category_data;
+                    }, function (error) {
+                        console.log(error);
+                        toastr.error(error.data._error.message, error.data._error.code);
+                    }));
+                }
+
+                // update the coupon count in particular selected store
+                if($scope.addedStores.length) {
+                    angular.forEach($scope.addedStores, function (item) {
+                        updateStore(item);
+                    });
+                }
+
+                if($scope.removedStores.length) {
+                    angular.forEach($scope.removedStores, function (item) {
+                        updateStore(item, true);
+                    });
+                }
+
+                // update the coupon count if we have any related categories to this one
+                if($scope.addedCategories.length) {
+                    angular.forEach($scope.addedCategories, function (item) {
+                        updateCategory(item);
+                    })
+                }
+                // if any item removed from the related categories
+                console.log($scope.removedCategories);
+                if($scope.removedCategories.length) {
+                    angular.forEach($scope.removedCategories, function (item) {
+                        updateCategory(item, true);
+                    })
+                }
+
+
+                $q.all(finalItems).then(function (finalExecute) {
+                    $scope.removedCategories = [];
+                    $scope.removedStores = [];
+                    $scope.addedStores = [];
+                    $scope.addedCategories = [];
+                    toastr.success(coupon.title+" Updated", "Success!");
+                });
             }, function (error) {
                 console.log(error);
                 toastr.error(error.data._issues, error.data._error.code);

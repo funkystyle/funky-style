@@ -33,6 +33,7 @@
                     <div class="form-group" ng-if="category.image">
                         <label>Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="category.image = ''"></i>
                             <img ng-if="!category.image['base64']" ng-src="{{ category.image }}" />
                             <img ng-if="category.image['base64']" ng-src="data:image/jpeg;base64,{{ category.image.base64 }}" />
                         </div>
@@ -63,12 +64,12 @@
                     <!--</div>-->
                     <div class="form-group">
                         <label>Menu</label> <br />
-                        <label class="radio-inline">
-                            <input type="radio" value="top menu" name="category.menu" ng-model="category.menu">Top Menu
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="bottom menu" name="category.menu" ng-model="category.menu">Bottom Menu
-                        </label>
+                        <ui-select ng-model="category.menu" theme="bootstrap">
+                            <ui-select-match placeholder="Select Menu type">{{ $select.selected.text }}</ui-select-match>
+                            <ui-select-choices repeat="item.code as item in menuTypes | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div><!-- end col -->
                 <div class="col-lg-3 col-md-3 col-sm-12">
@@ -116,6 +117,7 @@
                     <div class="form-group" ng-if="category.side_banner">
                         <label>Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="category.side_banner = ''"></i>
                             <img ng-if="!category.side_banner['base64']" ng-src="{{ category.side_banner }}" />
                             <img ng-if="category.side_banner['base64']" ng-src="data:image/jpeg;base64,{{ category.side_banner.base64 }}" />
                         </div>
@@ -128,6 +130,7 @@
                     <div class="form-group" ng-if="category.top_banner">
                         <label>Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="category.top_banner = ''"></i>
                             <img ng-if="!category.top_banner['base64']" ng-src="{{ category.top_banner }}" />
                             <img ng-if="category.top_banner['base64']" ng-src="data:image/jpeg;base64,{{ category.top_banner.base64 }}" />
                         </div>
@@ -160,6 +163,7 @@
                     <div class="form-group" ng-if="category.alt_image">
                         <label>Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="category.alt_image = ''"></i>
                             <img ng-if="!category.alt_image['base64']" ng-src="{{ category.alt_image }}" />
                             <img ng-if="category.alt_image['base64']" ng-src="data:image/jpeg;base64,{{ category.alt_image.base64 }}" />
                         </div>
@@ -175,7 +179,7 @@
                     <div class="form-group">
                         <label for="breadcrumbs">BreadCrumbs</label>
                         <ui-select multiple ng-model="category.breadcrumb" theme="bootstrap"
-                                   close-on-select="false" title="Related Categories" id="breadcrumbs">
+                                   close-on-select="false" title="Breadcrumbs" id="breadcrumbs">
                             <ui-select-match placeholder="Select Breadcrumb">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="item in breadcrumbs | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="item.name | highlight: $select.search"></div>
@@ -221,5 +225,7 @@
             <button type="submit" class="btn btn-md btn-info">Update <b>{{ category.name }} Category</b></button>
         </form>
         <br><br><br><br><br><br>
+
+        <pre>{{ category | json }}</pre>
     </div> <!-- end panel-body -->
 </div>

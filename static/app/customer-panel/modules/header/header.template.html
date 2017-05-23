@@ -82,7 +82,7 @@
                     </a>
                     <ul class="dropdown-menu top-store-ul">
                         <div class="row">
-                            <div class="col-lg-4" ng-if="item.menu == 'top menu'" ng-repeat="item in stores | limitTo: 15">
+                            <div class="col-lg-4" ng-if="item.menu == 'top'" ng-repeat="item in stores | limitTo: 15">
                                 <li><a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a></li>
                             </div>
                         </div>

@@ -1,4 +1,3 @@
-/* store module */
 angular.module("couponModule", ['angular-table', 'constantModule',
     'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule',
     'storeFactoryModule', 'categoryFactoryModule', 'personFactoryModule'])
@@ -48,7 +47,7 @@ angular.module("couponModule", ['angular-table', 'constantModule',
 
         if ($auth.isAuthenticated()) {
             $scope.load = $http({
-                url: '/api/1.0/coupons?embedded={"recommended_stores":1, "related_categories":1, "related_stores":1, "last_modified_by": 1}',
+                url: '/api/1.0/coupons?embedded={"recommended_stores":1, "related_categories":1, "related_stores":1, "last_modified_by": 1}'+'&rand_number=' + new Date().getTime(),
                 method: "GET"
             }).then(function (data) {
                 // console.log(data);
@@ -57,12 +56,10 @@ angular.module("couponModule", ['angular-table', 'constantModule',
                     $scope.filterCoupons = data.data._items;
                     var destArray = _.groupBy(data.data._items, 'status');
                     destArray['All'] = $scope.coupons;
-                    console.log(destArray);
                     $scope.statusOptions = destArray;
                     angular.forEach($scope.coupons, function(item) {
-                        console.log(item);
                         $scope.check.check[item._id] = false;
-                    })
+                    });
                 }
             }, function (error) {
                 console.log(error);
@@ -121,21 +118,23 @@ angular.module("couponModule", ['angular-table', 'constantModule',
                     }
                 });
             });
+
             var items = [];
             angular.forEach(deletedArray, function (item) {
-                items.push(couponFactory.delete(item._id).then(function(data) {
+                /*items.push(couponFactory.delete(item._id).then(function(data) {
                     console.log(data);
                     return data;
                 }, function (error) {
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);
-                }));
-            });
+                }));*/
 
-            $q.all(items).then(function (data) {
+                console.log(item);
+            });
+            $q.all(items).then(function (finalData) {
                 toastr.success("Deleted selected items", 200);
-                $state.reload();
-            })
+                // $state.reload();
+            });
         };
     })
     .filter("typeCouponFilter", function ($filter) {

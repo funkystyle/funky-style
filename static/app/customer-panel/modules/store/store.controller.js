@@ -44,7 +44,8 @@ angular
         };
 
         // get all the stores
-        storeFactory.get().then(function (data) {
+        var url = "/api/1.0/stores";
+        storeFactory.get(url, undefined).then(function (data) {
             console.log(data);
             if(data['_items']) {
                 $scope.stores = data._items;

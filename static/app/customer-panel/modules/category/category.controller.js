@@ -1,5 +1,5 @@
 angular.module("categoryModule", ["categoryFactoryModule"])
-    .controller("categoryCtrl", function($scope, categoryFactory) {
+    .controller("categoryCtrl", function($scope, $http) {
         console.log("category controller");
 
         $scope.sorting = {
@@ -45,7 +45,11 @@ angular.module("categoryModule", ["categoryFactoryModule"])
         };
 
         // get all categories
-        categoryFactory.get().then(function (data) {
+        var url = '/api/1.0/categories';
+        $http({
+            url: url,
+            method: "GET"
+        }).then(function (data) {
             console.log(data);
             if(data['data']) {
                 $scope.categories = data.data._items;

@@ -3,7 +3,10 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
     "constantModule"])
     .controller("addCategoryCtrl", function($scope, $timeout, toastr, storeFactory, $state, $stateParams,
                                             $auth, personFactory, categoryFactory, URL) {
-        $scope.category = {};
+        $scope.category = {
+            related_coupons: [],
+            related_deals: []
+        };
         $scope.persons = [];
         $scope.categories = [];
         $scope.breadcrumbs = [];
@@ -30,6 +33,23 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
                 name: "Festivals"
             }
         ];
+        $scope.menuTypes = [
+            {
+                text: "None",
+                code: "none"
+            },
+            {
+                text: "Top Menu",
+                code: 'top'
+            },
+            {
+                text: "Bottom Menu",
+                code: 'bottom'
+            }
+        ];
+        $scope.category.menu = $scope.menuTypes[0]['code'];
+
+        $scope.category.category_type = $scope.category_type[0]['name'];
 
         // get all stores into the array
         if($auth.isAuthenticated()) {
@@ -73,7 +93,7 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
         }
 
         $scope.$watch('category.name', function(newVal, oldVal) {
-            $scope.category.url = (newVal) ? newVal+"-coupons" : undefined;
+            $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
         }, true);
 
         // add category

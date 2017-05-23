@@ -1,7 +1,7 @@
 angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy",
     "couponFactoryModule", "categoryFactoryModule", "constantModule", "storeFactoryModule"])
-    .controller("addCouponCtrl", function($scope, $timeout, toastr, storeFactory, $state,
+    .controller("addCouponCtrl", function($scope, $timeout, toastr, storeFactory, $state, $q,
                                           $auth, personFactory, $log, couponFactory, categoryFactory, URL, storeFactory) {
         $scope.persons = [];
         $scope.categories = [];
@@ -29,7 +29,8 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
         $scope.status = ["Pending", "Draft", "Trash", "Verified", "Publish"];
         $scope.coupon = {
             status: $scope.status[4],
-            expire_date: new Date()
+            expire_date: new Date(),
+            related_categories: []
         };
         $scope.mytime = new Date();
 
@@ -68,32 +69,64 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
 
         // add coupon
         $scope.addCoupon = function (coupon) {
+            var finalItems = [];
             coupon.expire_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
             console.log(coupon.expire_date);
             couponFactory.post(coupon).then(function (data) {
-                console.log(data);
-                toastr.success(coupon.title+" Created", "Success!");
+                console.log("Added coupon response data ---- ", data);
+                var responseCouponId = data.data._id;
+                function updateStore (store) {
+                    store.related_coupons.push(responseCouponId);
+                    delete store._created;
+                    delete store._updated;
+                    delete store._links;
+                    console.log(store);
+                    finalItems.push(storeFactory.update(store, $auth.getToken()).then(function (store_data) {
+                        console.log(store_data);
+                        return store_data;
+                    }, function (error) {
+                        console.log(error);
+                        toastr.error(error.data._error.message, error.data._error.code);
+                    }));
+                }
+
+                function updateCategory (category) {
+                    category.related_coupons.push(responseCouponId);
+                    delete category._created;
+                    delete category._updated;
+                    delete category._links;
+                    console.log(category);
+                    finalItems.push(categoryFactory.update(category, $auth.getToken()).then(function (category_data) {
+                        console.log(category_data);
+                        return category_data;
+                    }, function (error) {
+                        console.log(error);
+                        toastr.error(error.data._error.message, error.data._error.code);
+                    }));
+                }
 
                 // update the coupon count in particular selected store
-                angular.forEach($scope.stores, function (item) {
-                    if(item._id == coupon.related_stores[0]) {
-                        var store = item;
-                        store.number_of_coupons = store.number_of_coupons + 1;
+                if(coupon.related_stores.length) {
+                    angular.forEach($scope.stores, function (item) {
+                        if(coupon.related_stores.indexOf(item._id) > -1) {
+                            updateStore(item);
+                        }
+                    });
+                }
 
-                        delete store._created;
-                        delete store._updated;
-                        delete store._links;
-                        console.log(store);
-                        storeFactory.update(store, $auth.getToken()).then(function (store_data) {
-                            console.log(store_data);
-                            if(data.data) {
-                                $state.go("header.update-coupon", {couponId: data.data._id});
-                            }
-                        }, function (error) {
-                            console.log(error);
-                            toastr.error(error.data._error.message, error.data._error.code);
-                        });
-                    }
+                // update the coupon count if we have any related categories to this one
+                if(coupon.related_categories.length) {
+                    angular.forEach($scope.categories, function (item) {
+                        if(coupon.related_categories.indexOf(item._id) > -1) {
+                            updateCategory(item);
+                        }
+                    });
+                }
+
+
+                $q.all(finalItems).then(function (finalExecute) {
+                    toastr.success(coupon.title+" Created", "Success!");
+                    $state.go("header.update-coupon", {couponId: data.data._id});
                 });
             }, function (error) {
                 console.log(error);

@@ -99,191 +99,26 @@
     <div class="row">
         <!--col-->
         <div class="col-lg-3 col-md-3 col-sm-3 pad-right-0">
-            <div class="panel panel-default">
+            <div class="panel panel-default" ng-repeat="(key, items) in categories">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Category Filters</h5>
+                    <h5 class="font-bold">{{ (key == 'Regular'? 'Category': key) }} Filters ({{ items.length }})</h5>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
                     <div class="form-group">
                         <div class="icon-addon addon-sm" title="Search for Category filters">
                             <input type="text" placeholder="Search" class="form-control input-sm"
-                                   autocomplete="off" id="category_filter" ng-model="search.category">
+                                   autocomplete="off" id="category_filter" ng-model="search[key]">
                             <label for="category_filter" class="fa fa-search" rel="tooltip"></label>
                         </div>
                     </div>
                     <div class="check-box-filter-area">
                         <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.category"
-                             ng-if="item.category_type == 'Regular'">
+                             ng-repeat="item in items | filter: search[key]">
                             <label for="{{ item._id }}_category_filter" style="font-weight: 500;">
                                 <input id="{{ item._id }}_category_filter" type="checkbox"
                                        ng-model="filter['category'][item._id]" ng-change="applyFilter()" />
                                 <span id="span_category_{{ item._id }}" class="cr">
-                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
-                                </span>
-                                <span>{{ item.name }}</span>
-                            </label>
-                        </div> <!-- end check box -->
-                    </div>
-                </div>
-                <!--end panel body-->
-            </div>
-            <!--end panel-->
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h5 class="font-bold">Wallet Filters</h5>
-                </div>
-                <!--panel heading-->
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="icon-addon addon-sm">
-                            <input type="text" placeholder="Search" class="form-control input-sm"
-                                   autocomplete="off" id="email" ng-model="search.wallet">
-                            <label for="email" class="fa fa-search" rel="tooltip" title="Search for Wallet filters"></label>
-                        </div>
-                    </div>
-                    <div class="check-box-filter-area">
-                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.wallet"
-                             ng-if="item.category_type == 'Wallet'">
-                            <label for="{{ item._id }}_wallet_filter" style="font-weight: 500;">
-                                <input id="{{ item._id }}_wallet_filter" type="checkbox"
-                                       ng-model="filter['wallet'][item._id]" ng-change="applyFilter()" />
-                                <span id="span_wallet_{{ item._id }}" class="cr">
-                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
-                                </span>
-                                <span>{{ item.name }}</span>
-                            </label>
-                        </div> <!-- end check box -->
-                    </div>
-                </div>
-                <!--end panel body-->
-            </div>
-            <!--end panel-->
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h5 class="font-bold">Bank Filters</h5>
-                </div>
-                <!--panel heading-->
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="icon-addon addon-sm">
-                            <input type="text" placeholder="Search" class="form-control input-sm"
-                                   autocomplete="off" id="search_bank" ng-model="search.bank">
-                            <label for="email" class="fa fa-search" rel="tooltip"
-                                   title="Search for Banks"></label>
-                        </div>
-                    </div>
-                    <div class="check-box-filter-area">
-                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.bank"
-                             ng-if="item.category_type == 'Bank'">
-                            <label for="{{ item._id }}_bank_filter" style="font-weight: 500;">
-                                <input id="{{ item._id }}_bank_filter" type="checkbox"
-                                       ng-model="filter['bank'][item._id]" ng-change="applyFilter()" />
-                                <span id="span_bank_{{ item._id }}" class="cr">
-                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
-                                </span>
-                                <span>{{ item.name }}</span>
-                            </label>
-                        </div> <!-- end check box -->
-                    </div>
-                </div>
-                <!--end panel body-->
-            </div>
-            <!--end panel-->
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h5 class="font-bold">City Filters</h5>
-                </div>
-                <!--panel heading-->
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="icon-addon addon-sm">
-                            <input type="text" placeholder="Search" class="form-control input-sm"
-                                   autocomplete="off" id="search_city" ng-model="search.city">
-                            <label for="email" class="fa fa-search" rel="tooltip"
-                                   title="Search for City"></label>
-                        </div>
-                    </div>
-                    <div class="check-box-filter-area">
-                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.city"
-                             ng-if="item.category_type == 'City'">
-                            <label for="{{ item._id }}_city_filter" style="font-weight: 500;">
-                                <input id="{{ item._id }}_city_filter" type="checkbox"
-                                       ng-model="filter['city'][item._id]" ng-change="applyFilter()" />
-                                <span id="span_city_{{ item._id }}" class="cr">
-                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
-                                </span>
-                                <span>{{ item.name }}</span>
-                            </label>
-                        </div> <!-- end check box -->
-                    </div>
-                </div>
-                <!--end panel body-->
-            </div>
-            <!--end panel-->
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h5 class="font-bold">Brands Filters</h5>
-                </div>
-                <!--panel heading-->
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="icon-addon addon-sm">
-                            <input type="text" placeholder="Search" class="form-control input-sm"
-                                   autocomplete="off" id="search_brands" ng-model="search.brands">
-                            <label for="email" class="fa fa-search" rel="tooltip"
-                                   title="Search for Brands"></label>
-                        </div>
-                    </div>
-                    <div class="check-box-filter-area">
-                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.brands"
-                             ng-if="item.category_type == 'Brands'">
-                            <label for="{{ item._id }}_Brands_filter" style="font-weight: 500;">
-                                <input id="{{ item._id }}_Brands_filter" type="checkbox"
-                                       ng-model="filter['brands'][item._id]" ng-change="applyFilter()" />
-                                <span id="span_Brands_{{ item._id }}" class="cr">
-                                    <i class="cr-icon glyphicon glyphicon-ok"></i>
-                                </span>
-                                <span>{{ item.name }}</span>
-                            </label>
-                        </div> <!-- end check box -->
-                    </div>
-                </div>
-                <!--end panel body-->
-            </div>
-            <!--end panel-->
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h5 class="font-bold">Festival Filters</h5>
-                </div>
-                <!--panel heading-->
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="icon-addon addon-sm">
-                            <input type="text" placeholder="Search" class="form-control input-sm"
-                                   autocomplete="off" id="search_festival" ng-model="search.festivals">
-                            <label for="email" class="fa fa-search" rel="tooltip"
-                                   title="Search for Banks"></label>
-                        </div>
-                    </div>
-                    <div class="check-box-filter-area">
-                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                             ng-repeat="item in categories | filter: search.festivals"
-                             ng-if="item.category_type == 'Festivals'">
-                            <label for="{{ item._id }}_festival_filter" style="font-weight: 500;">
-                                <input id="{{ item._id }}_festival_filter" type="checkbox"
-                                       ng-model="filter['festivals'][item._id]" ng-change="applyFilter()" />
-                                <span id="span_festivals_{{ item._id }}" class="cr">
                                     <i class="cr-icon glyphicon glyphicon-ok"></i>
                                 </span>
                                 <span>{{ item.name }}</span>
@@ -322,6 +157,7 @@
                     <div class="check-box-filter-area">
                         <p ng-repeat="item in store.top_stores">
                             <a ui-sref="main.store-info({url: item.url, cc: undefined})" style="color: #666; text-decoration: underline;">
+                                <img ng-src="{{ item.image }}" height="50" width="50" style="float: left;">
                                 {{ item.name }}
                             </a>
                         </p>
@@ -407,27 +243,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading" style="border-bottom: 2px dotted #9954bb;">
                     <h5 class="font-bold latest-tweet">Latest Tweets From {{ store.twitter_id }}</h5>
-                    <a class="twitter-timeline" href="https://twitter.com/{{ store.twitter_id }}">
+                    <a class="twitter-timeline" href="https://twitter.com/{{ store.twitter_id }}" data-tweet-limit="3">
                         Tweets by {{ store.twitter_id }}
                     </a>
                     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
                 <!--panel heading-->
-                <div class="panel-body">
-                    <div class="tweets-div">
-                        <p class="tweets-para">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                        <p class="tweets-date">Mar29, 2017</p>
-                    </div>
-                    <div class="tweets-div">
-                        <p class="tweets-para">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                        <p class="tweets-date">Mar29, 2017</p>
-                    </div>
-                    <div class="tweets-div">
-                        <p class="tweets-para">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                        <p class="tweets-date">Mar29, 2017</p>
-                    </div>
-                </div>
-                <!--end panel body-->
             </div>
             <!--end panel-->
             <!-- latest tweets end here -->
@@ -496,7 +317,7 @@
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                    <div ng-click="commentNow(item)" data-toggle="modal" data-target="#contact" data-original-titl class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
@@ -531,230 +352,29 @@
                         </div><!-- end col -->
                     </div><!-- end row -->
                     <div class="row">
-                        <div class="col-md-12">
-                            <div id="Carousel" class="carousel slide">
-                                <!-- Carousel items -->
-                                <div class="carousel-inner">
-
-                                    <div class="item active">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div href="#" class="thumbnail image-height">
-                                                    <h4 class="deals-upto">Deals upto 50% OFF</h4>
-                                                    <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                                                            <a href="">Rs. {{($index + 1) * 150}}</a>
-                                                        </div>
-                                                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                                            View Offers
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12">
-                                                            <button class="btn btn-md btn-info btn-block">
-                                                                GET DEAL
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div href="#" class="thumbnail image-height">
-                                                    <h4 class="deals-upto">Deals upto 50% OFF</h4>
-                                                    <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                                                            <a href="">Rs. {{($index + 1) * 150}}</a>
-                                                        </div>
-                                                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                                            View Offers
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12">
-                                                            <button class="btn btn-md btn-info btn-block">
-                                                                GET DEAL
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div href="#" class="thumbnail image-height">
-                                                    <h4 class="deals-upto">Deals upto 50% OFF</h4>
-                                                    <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                                                            <a href="">Rs. {{($index + 1) * 150}}</a>
-                                                        </div>
-                                                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                                            View Offers
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12">
-                                                            <button class="btn btn-md btn-info btn-block">
-                                                                GET DEAL
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!--.row-->
-                                    </div><!--.item-->
-
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div href="#" class="thumbnail image-height">
-                                                    <h4 class="deals-upto">Deals upto 50% OFF</h4>
-                                                    <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                                                            <a href="">Rs. {{($index + 1) * 150}}</a>
-                                                        </div>
-                                                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                                            View Offers
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12">
-                                                            <button class="btn btn-md btn-info btn-block">
-                                                                GET DEAL
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div href="#" class="thumbnail image-height">
-                                                    <h4 class="deals-upto">Deals upto 50% OFF</h4>
-                                                    <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                                                            <a href="">Rs. {{($index + 1) * 150}}</a>
-                                                        </div>
-                                                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                                            View Offers
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12">
-                                                            <button class="btn btn-md btn-info btn-block">
-                                                                GET DEAL
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div href="#" class="thumbnail image-height">
-                                                    <h4 class="deals-upto">Deals upto 50% OFF</h4>
-                                                    <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                                                            <a href="">Rs. {{($index + 1) * 150}}</a>
-                                                        </div>
-                                                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                                            View Offers
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12">
-                                                            <button class="btn btn-md btn-info btn-block">
-                                                                GET DEAL
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!--.row-->
-                                    </div><!--.item-->
-
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div href="#" class="thumbnail image-height">
-                                                    <h4 class="deals-upto">Deals upto 50% OFF</h4>
-                                                    <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                                                            <a href="">Rs. {{($index + 1) * 150}}</a>
-                                                        </div>
-                                                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                                            View Offers
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12">
-                                                            <button class="btn btn-md btn-info btn-block">
-                                                                GET DEAL
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div href="#" class="thumbnail image-height">
-                                                    <h4 class="deals-upto">Deals upto 50% OFF</h4>
-                                                    <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                                                            <a href="">Rs. {{($index + 1) * 150}}</a>
-                                                        </div>
-                                                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                                            View Offers
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12">
-                                                            <button class="btn btn-md btn-info btn-block">
-                                                                GET DEAL
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div href="#" class="thumbnail image-height">
-                                                    <h4 class="deals-upto">Deals upto 50% OFF</h4>
-                                                    <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                                            <strike>Rs. {{ ($index + 2) * 200 }}</strike> &nbsp; &nbsp;
-                                                            <a href="">Rs. {{($index + 1) * 150}}</a>
-                                                        </div>
-                                                        <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                                            View Offers
-                                                        </div> -->
-                                                    </div>
-                                                    <div class="row" style="margin-top: 20px;">
-                                                        <div class="col-lg-12">
-                                                            <button class="btn btn-md btn-info btn-block">
-                                                                GET DEAL
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!--.row-->
-                                    </div><!--.item-->
-
-                                </div><!--.carousel-inner-->
-                                <a data-slide="prev" data-target="#Carousel" class="left carousel-control">‹</a>
-                                <a data-slide="next" data-target="#Carousel" class="right carousel-control">›</a>
-                            </div><!--.Carousel-->
-                        </div> <!-- end of col-lg-12 -->
-                    </div> <!-- end of deals carousel --> <!-- end of row -->
+                        <div class="col-md-4" ng-repeat="item in store.related_deals">
+                            <div href="#" class="thumbnail image-height">
+                                <h4 class="deals-upto">{{ item.name }}</h4>
+                                <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
+                                        <strike>Rs. {{ item.actual_price }}</strike> &nbsp; &nbsp;
+                                        <a href="">Rs. {{ item.discount_price }}</a>
+                                    </div>
+                                    <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
+                                        View Offers
+                                    </div> -->
+                                </div>
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col-lg-12">
+                                        <a ui-sref="main.deal_post_details({url: item.url})" class="btn btn-md btn-info btn-block">
+                                            GET DEAL
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--.row-->
                 </div> <!-- tab-1 -->
 
                 <div class="tab-pane" id="deals-tab">
@@ -820,7 +440,7 @@
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                    <div ng-click="commentNow(item)" data-toggle="modal" data-target="#contact" data-original-titl class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
@@ -901,7 +521,7 @@
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                    <div ng-click="commentNow(item)" data-toggle="modal" data-target="#contact" data-original-titl class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
@@ -998,45 +618,54 @@
                         </h3>
                     </div><!-- end col -->
                 </div><!-- end row -->
-                <div class="panel panel-default" ng-repeat="item in [1,2]">
+                <div class="panel panel-default" ng-repeat="item in relatedCoupons | limitTo: 2">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
                                     <h4>
-                                        Rs. 1000
-                                        <br />
-                                        OFF
+                                        {{ item.discount_type }} {{ item.discount }}
                                     </h4>
-                                    <div class="deal">Deal</div>
+                                    <div class="deal">
+                                            <span ng-if="item.coupon_type == 'coupon'">
+                                                COUPON
+                                            </span>
+                                        <span ng-if="item.coupon_type == 'offer'">
+                                                DEAL
+                                            </span>
+                                    </div>
                                 </div> <!-- end deal-price -->
                                 <div class="col-xs-12 hidden-lg hidden-md">
-                                    <p class="fifty_cashback">50% Cashback</p>
+                                    <p class="fifty_cashback">
+                                        {{ item.discount_type }} {{ item.discount }}
+                                    </p>
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <h3 class="margin-top-0 coupon-heading">
-                                    Upto Rs. 30 Supercash everyday on Recharge
+                                    {{ item.title }}
                                     <span class="pull-right hidden-xs">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
+                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
                                 </h3>
                                 <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
-                                <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                    <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
-                                       data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                    <span class="pull-right">
-                                        <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
-                                            Show {{ (showMore.all[item._id]) ? "Less": "More" }}
-                                        </a>
+                                        <i class="fa fa-star"></i>&nbsp;
+                                        <i class="fa fa-share-alt"></i>
                                     </span>
+                                <p style="opacity: 0.6; line-height: 25px;" class="para_small">
+                                <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                   data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                <span class="pull-right">
+                                            <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                            </a>
+                                        </span>
                                 </p>
                                 <p>
-                                    <a href="">See all Mobile Recharge Coupons</a>
+                                    <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                        See all {{ item.related_categories[0].name }} Coupons
+                                    </a>
                                 </p>
                             </div>
                         </div> <!-- end row -->
@@ -1045,8 +674,8 @@
                     <div class="panel-footer coupon-footer">
                         <div class="row vari_pad">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
-                                <i class="fa fa-heart-o"></i> &nbsp;
-                                Verified
+                                <i class="fa fa-heart-o"></i>
+                                {{ item.status }}
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
@@ -1076,45 +705,54 @@
                         </h3>
                     </div><!-- end col -->
                 </div><!-- end row -->
-                <div class="panel panel-default" ng-repeat="item in [1,2]">
+                <div class="panel panel-default coupon all" ng-repeat="item in expiredCoupons">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
                                     <h4>
-                                        Rs. 1000
-                                        <br />
-                                        OFF
+                                        {{ item.discount_type }} {{ item.discount }}
                                     </h4>
-                                    <div class="deal">Deal</div>
+                                    <div class="deal">
+                                                <span ng-if="item.coupon_type == 'coupon'">
+                                                    COUPON
+                                                </span>
+                                        <span ng-if="item.coupon_type == 'offer'">
+                                                    DEAL
+                                                </span>
+                                    </div>
                                 </div> <!-- end deal-price -->
                                 <div class="col-xs-12 hidden-lg hidden-md">
-                                    <p class="fifty_cashback">50% Cashback</p>
+                                    <p class="fifty_cashback">
+                                        {{ item.discount_type }} {{ item.discount }}
+                                    </p>
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <h3 class="margin-top-0 coupon-heading">
-                                    Upto Rs. 30 Supercash everyday on Recharge
+                                    {{ item.title }}
                                     <span class="pull-right hidden-xs">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
+                                                <i class="fa fa-star"></i>&nbsp;
+                                                <i class="fa fa-share-alt"></i>
+                                            </span>
                                 </h3>
                                 <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-											<i class="fa fa-star"></i>&nbsp;
-											<i class="fa fa-share-alt"></i>
-										</span>
+                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
                                 <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                    <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
-                                       data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                    <span class="pull-right">
-                                        <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
-                                            Show {{ (showMore.all[item._id]) ? "Less": "More" }}
-                                        </a>
-                                    </span>
+                                <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                   data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                <span class="pull-right">
+                                                <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                    Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                                </a>
+                                            </span>
                                 </p>
                                 <p>
-                                    <a href="">See all Mobile Recharge Coupons</a>
+                                    <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                        See all {{ item.related_categories[0].name }} Coupons
+                                    </a>
                                 </p>
                             </div>
                         </div> <!-- end row -->
@@ -1123,8 +761,8 @@
                     <div class="panel-footer coupon-footer">
                         <div class="row vari_pad">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
-                                <i class="fa fa-heart-o"></i> &nbsp;
-                                Verified
+                                <i class="fa fa-heart-o"></i>
+                                {{ item.status }}
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
@@ -1143,7 +781,7 @@
                         </div>
                     </div>
                     <!--end panel footer -->
-                </div>
+                </div> <!-- end panel -->
                 <!-- Related Coupons ends here -->
 
                 <!-- about description start here -->
@@ -1268,3 +906,33 @@
     </div>
 </span>
 <!-- ================ end                  ================= -->
+
+
+
+
+
+<!-- comments section -->
+<div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span>Commenting on {{ comment.store.name }}</h4>
+            </div>
+            <form action="#" method="post" accept-charset="utf-8">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <textarea style="resize:vertical;" class="form-control"
+                                      placeholder="Comment..." rows="6" name="comment" ng-model="comment.comment" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default btn-sm btn-close" data-dismiss="modal">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end of comments -->

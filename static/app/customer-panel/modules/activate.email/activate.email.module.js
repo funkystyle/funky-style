@@ -1,5 +1,5 @@
-angular.module("activateEmailModule", ["constantModule"])
-    .controller("activateEmailCtrl", function($scope, $http, URL, mainURL, $stateParams, $state) {
+angular.module("activateEmailModule", ["constantModule", "satellizer", "toastr"])
+    .controller("activateEmailCtrl", function($scope, $http, URL, mainURL, $state, $stateParams, $auth, toastr) {
         
         console.log($stateParams);
         $scope.message = {

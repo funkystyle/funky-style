@@ -83,20 +83,9 @@ angular.module("allUsersModule", ['constantModule', 'toastr', 'personFactoryModu
         $scope.show = (count == 0) ? false : true;
     };
 
-    // update user
+    // view user
     $scope.viewUser = function (obj) {
-        console.log(obj);
         $scope.u_user = obj;
-        var f = $filter('filter')($scope.userLevels, {level: obj.user_level[0]});
-        $scope.u_user.level = (f.length) ? f[0]: $scope.userLevels[0];
-    };
-
-    $scope.change_user_level = function () {
-        angular.forEach($scope.userLevels, function (item, index) {
-            if(item.level = $scope.u_user.level.level) {
-                $scope.u_user.user_level = [item.level];
-            }
-        });
     };
 
     // updateUser
@@ -105,11 +94,11 @@ angular.module("allUsersModule", ['constantModule', 'toastr', 'personFactoryModu
         delete $scope.u_user._created;
         delete $scope.u_user._links;
         delete $scope.u_user._updated;
-        delete $scope.u_user.level;
         personFactory.update($scope.u_user, $scope.u_user.tokens.token).then(function (data) {
             console.log(data);
             toastr.success("Updated!", "Success!");
             $scope.toggleSidebar('sidebar-affix');
+            $state.reload();
         }, function (error) {
             console.log(error);
             toastr.error(error.data._error.message, "Error!");

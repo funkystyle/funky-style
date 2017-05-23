@@ -8,7 +8,9 @@
         margin: 30px auto;
     }
 }
-
+.fa-close {
+    cursor: pointer;
+}
 .uib-datepicker .uib-title {
     margin-top: -6px;
 }

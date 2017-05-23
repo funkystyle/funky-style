@@ -7,6 +7,10 @@ angular.module("addDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
         $scope.stores = [];
         $scope.persons = [];
 
+        $scope.$watch('deal.name', function(newVal, oldVal) {
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
+        }, true);
+
         if($auth.isAuthenticated()) {
             $scope.load = storeFactory.get($auth.getToken()).then(function (data) {
                 console.log(data);
@@ -33,13 +37,28 @@ angular.module("addDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
 
         // addDealBrands function
         $scope.addDealBrands = function (deal) {
-            // deal.alt_image = "data:image/jpeg;base64,"+deal.image[0].base64
-            deal.image = "";
+            if(Array.isArray(deal.image)) {
+                var images = [];
+                angular.forEach(deal.image, function (item) {
+                    images.push("data:image/jpeg;base64,"+item.base64);
+                });
+
+                console.log(images);
+                deal.image = images;
+
+                $scope.images = images;
+            } else {
+                toastr.error("Please select Deal Image", "Error!");
+                // return false;
+            }
+            delete deal.image;
+            delete deal.alt_image;
             console.log(deal);
 
             dealFactory.post_deal_brands(deal).then(function (data) {
                 console.log(data);
                 toastr.success(deal.name+" Created", "Success!");
+                $state.go("header.deal-brands");
             }, function (error) {
                 console.log(error);
 

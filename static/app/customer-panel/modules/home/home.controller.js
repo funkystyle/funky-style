@@ -4,31 +4,68 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
                                       categoryFactory, $ocLazyLoad, $stateParams) {
         console.log("home controller");
         $scope.params = undefined;
-        $('.carousel').carousel({
-            interval: 4000,
-            pause: true
-        });
         $scope.deals = [];
         $scope.coupons = [];
         $scope.categories = [];
 
         // get the list of coupons
-        var obj = {};
-        obj['featured_coupon'] = true;
-        couponFactory.getCoupon(JSON.stringify(obj)).then(function (data) {
+        var embedded = {};
+        embedded['related_categories'] = 1;
+        embedded['related_stores'] = 1;
+        
+        var url = '/api/1.0/coupons'+'?sort=-_created&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
+        $http({
+            url: url,
+            method: "GET"
+        }).then(function (data) {
             console.log(data);
             if(data['data']) {
-                $scope.coupons = data.data._items;
+                var coupons = data.data._items;
+                angular.forEach(coupons, function (item) {
+                    if(new Date(item.expire_date) > new Date()) {
+                        if($scope.coupons.indexOf(item) == -1) {
+                            $scope.coupons.push(item);
+                        }
+                    }
+                });
             }
         }, function (error) {
             console.log(error);
         });
 
+
+        // get the list of featured stores
+        var store = {};
+        store['featured_store'] = true;
+
+        var projection = {};
+        projection['name'] = 1;
+        projection['url'] = 1;
+        projection['image'] = 1;
+        projection['menu'] = 1;
+        $http({
+            url: "/api/1.0/stores/?where="+JSON.stringify(store)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
+            mathod: "GET"
+        }).then(function (data) {
+            console.log(data);
+            if(data['data']) {
+                $scope.stores = data.data._items;
+            }
+        }, function (error) {
+            console.log(error);
+        });
+
+
         // get the list of Categories
         var cat = {};
         cat['featured_category'] = true;
+
+        var projection = {};
+        projection['name'] = 1;
+        projection['url'] = 1;
+        projection['image'] = 1;
         $http({
-            url: "/api/1.0/categories/?where="+JSON.stringify(cat),
+            url: "/api/1.0/categories/?where="+JSON.stringify(cat)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
             mathod: "GET"
         }).then(function (data) {
             console.log(data);
@@ -39,8 +76,12 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
             console.log(error);
         });
 
-        dealFactory.get().then(function (data) {
-            console.log("Deal factory ---", data);
+        // get the list of featured stores
+        $http({
+            url: "/api/1.0/deals?max_results=24&rand_number" + new Date().getTime(),
+            mathod: "GET"
+        }).then(function (data) {
+            console.log(data);
             if(data['data']) {
                 $scope.deals = data.data._items;
             }

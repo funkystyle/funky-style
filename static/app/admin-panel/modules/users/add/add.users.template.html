@@ -7,26 +7,26 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <h1 style="margin-bottom: 40px;">Add User</h1>
-
-
-                <div class="row">
+                <div class="row" ng-if="user.user_level.indexOf('admin') > -1">
                     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 pad-0">
                         <form name="signup" ng-submit="createNow(user)" cg-busy="load">
-                            <div class="form-group col-md-6">
-                                <label for="first_name">FIRST NAME</label>
-                                <input required type="text" class="form-control" ng-model="user.first_name" placeholder="FIRST NAME" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="first_name">LAST NAME</label>
-                                <input required type="text" class="form-control" ng-model="user.last_name" placeholder="LAST NAME" />
-                            </div>
                             <div class="form-group col-md-12">
                                 <label for="email">Email address</label>
-                                <input required type="email" class="form-control" id="email" ng-model="user.email" placeholder="Email" autocomplete="off">
+                                <input required type="email" class="form-control" id="email" ng-model="user.email"
+                                       placeholder="Email" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="first_name">FIRST NAME</label>
+                                <input id="first_name" required type="text" class="form-control" ng-model="user.first_name" placeholder="FIRST NAME" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="last_name">LAST NAME</label>
+                                <input id="last_name" required type="text" class="form-control" ng-model="user.last_name" placeholder="LAST NAME" />
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="mobile_number">MOBILE NUMBER</label>
-                                <input required type="text" only-digits class="form-control" id="mobile_number" ng-model="user.mobile_number" placeholder="MOBILE NUMBER" autocomplete="off">
+                                <input required type="text" only-digits class="form-control" id="mobile_number"
+                                       ng-model="user.mobile_number" placeholder="MOBILE NUMBER" autocomplete="off">
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="password">Password</label>
@@ -34,15 +34,15 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="city">City</label>
-                                <input required type="text" class="form-control" ng-model="user.city" placeholder="CITY" />
+                                <input id="city" required type="text" class="form-control" ng-model="user.city" placeholder="CITY" />
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="age">Age</label>
-                                <input required type="number" class="form-control" ng-model="user.age" placeholder="AGE" />
+                                <input id="age" required type="number" class="form-control" ng-model="user.age" placeholder="AGE" />
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="gender">Gender</label>
-                                <ui-select required ng-model="user.gender" theme="bootstrap">
+                                <ui-select required ng-model="user.gender" theme="bootstrap" id="gender">
                                     <ui-select-match placeholder="GENDER">{{ $select.selected.text }}</ui-select-match>
                                     <ui-select-choices repeat="item.code as item in genders | filter: $select.search">
                                         <div ng-bind-html="item.text | highlight: $select.search"></div>
@@ -51,9 +51,9 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="user_level">User Level</label>
-                                <ui-select required ng-model="user.user_level" theme="bootstrap">
-                                    <ui-select-match placeholder="Select User Level">{{ $select.selected.text }}</ui-select-match>
-                                    <ui-select-choices repeat="item.level as item in userLevels | filter: $select.search">
+                                <ui-select multiple ng-model="user.user_level" theme="bootstrap" id="user_level">
+                                    <ui-select-match placeholder="Select user levels">{{$item.text}}</ui-select-match>
+                                    <ui-select-choices repeat="item.level as item in userLevels | propsFilter: {level: $select.search}">
                                         <div ng-bind-html="item.text | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
@@ -62,6 +62,11 @@
                                 <button type="submit" class="btn btn-md btn-info">Create now</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+                <div class="row" ng-if="user.user_level.indexOf('admin') == -1">
+                    <div class="col-lg-12 col-md-12">
+                        <h1>You don't have access to view this page!</h1>
                     </div>
                 </div>
             </div>

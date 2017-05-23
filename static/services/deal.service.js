@@ -10,7 +10,7 @@ angular.module('dealFactoryModule', ['constantModule'])
                 var def = $q.defer();
 
                 $http({
-                    url: URL.deals,
+                    url: URL.deals+'?rand_number' + new Date().getTime(),
                     method: "GET"
                 }).then(function (data) {
                     def.resolve(data);
@@ -95,7 +95,7 @@ angular.module('dealFactoryModule', ['constantModule'])
                 var def = $q.defer();
 
                 $http({
-                    url: URL.deal_brands,
+                    url: URL.deal_brands+'?rand_number' + new Date().getTime(),
                     method: "GET"
                 }).then(function (data) {
                     def.resolve(data);
@@ -158,7 +158,7 @@ angular.module('dealFactoryModule', ['constantModule'])
                 var def = $q.defer();
 
                 $http({
-                    url: URL.deal_categories,
+                    url: URL.deal_categories+'?rand_number' + new Date().getTime(),
                     method: "GET"
                 }).then(function (data) {
                     def.resolve(data);

@@ -33,6 +33,7 @@
                     <div class="form-group" ng-if="category.image.base64">
                         <label for="displayImage">Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="category.image = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ category.image.base64 }}" />
                         </div>
                     </div>
@@ -55,14 +56,14 @@
                         <label for="h2">H2*</label>
                         <input type="text" required class="form-control input-sm" id="h2" ng-model="category.h2" placeholder="category H2">
                     </div>
-                    <div class="form-group" ng-init="category.menu = undefined">
+                    <div class="form-group">
                         <label>Menu</label> <br />
-                        <label class="radio-inline">
-                            <input type="radio" value="top menu" name="category.menu" ng-model="category.menu">Top Menu
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="bottom menu" name="category.menu" ng-model="category.menu">Bottom Menu
-                        </label>
+                        <ui-select ng-model="category.menu" theme="bootstrap">
+                            <ui-select-match placeholder="Select Menu type">{{ $select.selected.text }}</ui-select-match>
+                            <ui-select-choices repeat="item.code as item in menuTypes | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div><!-- end col -->
                 <div class="col-lg-3 col-md-3 col-sm-12">
@@ -110,6 +111,7 @@
                     <div class="form-group" ng-if="category.side_banner.base64">
                         <label for="displayImage">Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="category.side_banner = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ category.side_banner.base64 }}" />
                         </div>
                     </div>
@@ -121,6 +123,7 @@
                     <div class="form-group" ng-if="category.top_banner.base64">
                         <label for="displayImage">Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="category.top_banner = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ category.top_banner.base64 }}" />
                         </div>
                     </div>
@@ -152,6 +155,7 @@
                     <div class="form-group" ng-if="category.alt_image.base64">
                         <label for="displayImage">Image Display</label>
                         <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="category.alt_image = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ category.alt_image.base64 }}" />
                         </div>
                     </div>
@@ -200,7 +204,7 @@
                     <div class="form-group">
                         <label>Category Type</label>
                         <ui-select ng-model="category.category_type" theme="bootstrap">
-                            <ui-select-match placeholder="Select modified user">{{ $select.selected.name }}</ui-select-match>
+                            <ui-select-match placeholder="Select Category type">{{ $select.selected.name }}</ui-select-match>
                             <ui-select-choices repeat="cat.name as cat in category_type | filter: $select.search">
                                 <div ng-bind-html="cat.name | highlight: $select.search"></div>
                             </ui-select-choices>

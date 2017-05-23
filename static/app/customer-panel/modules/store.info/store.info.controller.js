@@ -1,10 +1,11 @@
 angular
-    .module("storeinfoModule", ["footerModule", "storeServiceModule", "couponFactoryModule", "categoryFactoryModule"])
-    .controller("storeinfoController", function ($scope, $stateParams, $state, storeFactory, couponFactory,
+    .module("storeinfoModule", ["footerModule", "categoryFactoryModule"])
+    .controller("storeinfoController", function ($scope, $stateParams, $http, $state,
                                                  categoryFactory, $filter, $sce, $ocLazyLoad) {
         $scope.favorite = {
             favorite: false
         };
+        $scope.comment = {};
         $scope.filter = {
             category: {},
             wallet: {},
@@ -28,16 +29,23 @@ angular
         };
         $scope.store = undefined;
         $scope.coupons = [];
+        $scope.expiredCoupons = [];
         $scope.suggestedCoupons = [];
         $scope.relatedCoupons = [];
         $scope.filterCoupons = [];
-        $scope.categories = [];
+        $scope.categories = {};
 
         $scope.trustAsHtml = function(string) {
             if(string) {
                 return $sce.trustAsHtml(string);
             }
         };
+
+        // comment now
+        $scope.commentNow = function (item) {
+            $scope.comment.store = item.related_stores[0];
+        };
+
         // manageFavorite function
         $scope.manageFavorite = function () {
             $scope.favorite.favorite = !$scope.favorite.favorite;
@@ -52,62 +60,119 @@ angular
 
         if($stateParams['url']) {
             // get store information
-            storeFactory.getStore({field: 'url', query: $stateParams.url}).then(function (store) {
+            var where = {};
+            where['url'] = $stateParams.url;
+
+            var embedded = {};
+            embedded['recommended_stores'] = 1;
+            embedded['related_categories'] = 1;
+            embedded['top_stores'] = 1;
+            embedded['related_stores'] = 1;
+            embedded['related_stores.related_coupons'] = 1;
+            embedded['related_stores.related_coupons.related_categories'] = 1;
+            embedded['related_deals'] = 1;
+            embedded['related_coupons'] = 1;
+            embedded['related_coupons.related_categories'] = 1;
+            embedded['related_coupons.recommended_stores'] = 1;
+            embedded['related_coupons.recommended_stores.related_coupons'] = 1;
+            embedded['related_coupons.recommended_stores.related_coupons.related_categories'] = 1;
+        
+            var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + new Date().getTime();
+            $http({
+                url: url,
+                method: "GET"
+            }).then(function (store) {
                 if(store.data) {
                     $scope.store = store.data._items[0];
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     console.log($scope.store);
-                }
-                // get all the coupons related to this store
-                couponFactory.get({type: "related_stores", id: $scope.store._id}).then(function (data) {
-                    if(data.data) {
-                        var coupons = data.data._items;
-                        // get only this store relates coupons
-                        angular.forEach(coupons, function (item) {
-                            var rel_stores = $filter('filter')(item.related_stores, {_id: $scope.store._id});
-                            var items = $filter('filter')($scope.coupons, {_id: item._id});
-                            if(rel_stores.length && !items.length) {
+                    
+                    // applying carousel after dom prepared
+                    $('.carousel').carousel({
+                        interval: 4000,
+                        pause: true
+                    });
+                    
+                    angular.forEach($scope.store.related_coupons, function (item) {
+                        if(new Date(item.expire_date) > new Date()) {
+                            if($scope.coupons.indexOf(item) == -1) {
                                 $scope.coupons.push(item);
                                 $scope.filterCoupons.push(item);
                                 $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
                                 $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
                             }
+                        } else {
+                           if($scope.expiredCoupons.indexOf(item) == -1) {
+                               $scope.expiredCoupons.push(item);
+                           }
+                        }
+                    });
 
-                            angular.forEach(item.related_categories, function (category) {
-                                var items = $filter('filter')($scope.categories, {_id: category._id});
+                    // if top stores length is zero query to stores for fetching featured stores
+                    if($scope.store.top_stores.length == 0) {
+                        var top_store_url = '/api/1.0/stores?where={"featured_store": true}&max_results=24&rand_number='+Math.random();
+                        var cat = {};
+                        cat['featured_category'] = true;
+                        $http({
+                            url: top_store_url,
+                            mathod: "GET"
+                        }).then(function (top_stores) {
+                            console.log(top_stores);
+                            if(top_stores.data['_items']) {
+                                $scope.store.top_stores = top_stores.data._items;
+
+                                angular.forEach($scope.store.related_stores, function (related_store) {
+                                    angular.forEach($scope.store.top_stores, function (item, index) {
+                                        if(item._id == related_store._id) {
+                                            $scope.store.top_stores.splice(index, 1);
+                                        }
+                                    })
+                                });
+                            }
+                        }, function (error) {
+                            console.log(error);
+                        })
+                    }
+                    
+                    angular.forEach($scope.coupons, function (item) {
+                        angular.forEach(item.related_categories, function (category) {
+                            if(!$scope.categories[category.category_type]) {
+                                $scope.categories[category.category_type] = [];
+                                $scope.categories[category.category_type].push(category);
+                            } else {
+                                var items = $filter('filter')($scope.categories[category.category_type], {_id: category._id});
                                 if(!items.length) {
-                                    $scope.categories.push(category);
+                                    $scope.categories[category.category_type].push(category);
                                 }
-                            });
+                            }
                         });
-                    }
 
-                    console.log($scope.coupons, $scope.categories);
-                }, function (error) {
-                    console.log(error);
-                });
+                        // getting suggested coupons from the rescommended stores
+                        angular.forEach(item.recommended_stores, function (store) {
+                             angular.forEach(store.related_coupons, function (r_coupon) {
+                                var items = $filter('filter')($scope.suggestedCoupons, {_id: r_coupon._id});
+                                if(!items.length) {
+                                    $scope.suggestedCoupons.push(r_coupon);
+                                }
+                             })
+                        });
+                    });
+                    console.log("Final categories are ", $scope.categories)
+                    // getting related coupons from the related stores
+                    angular.forEach($scope.store.related_stores, function (item) {
+                        angular.forEach(item.related_coupons, function (r_coupon, index) {
+                            console.log(r_coupon)
+                            var items = $filter('filter')($scope.relatedCoupons, {_id: r_coupon._id});
+                            if(!items.length) {
+                                $scope.relatedCoupons.push(r_coupon);
+                            }
+                        }) ;
+                    });
 
-                couponFactory.get({type: "recommended_stores", id: $scope.store._id}).then(function (data) {
-                    if(data.data) {
-                        $scope.suggestedCoupons = data.data._items;
-                        console.log("Suggested coupons are --- ", $scope.suggestedCoupons);
-                    }
-                }, function (error) {
-                    console.log(error);
-                });
-                var rel_stores_array = [];
-                angular.forEach($scope.store.related_stores, function (item) {
-                    rel_stores_array.push(item._id);
-                });
-                couponFactory.get({type: "related_stores", id: $scope.store._id}, rel_stores_array).then(function (data) {
-                    if(data.data) {
-                        $scope.relatedCoupons = data.data._items;
-                        console.log("Related stores coupons are --- ", $scope.relatedCoupons);
-                    }
-                }, function (error) {
-                    console.log(error);
-                });
+
+                    console.log($scope.expiredCoupons, $scope.coupons, "suggested coupons ", $scope.suggestedCoupons, "Related coupons ", $scope.relatedCoupons);
+                }
             }, function (error) {
                 console.log(error);
             });

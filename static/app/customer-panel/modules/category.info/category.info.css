@@ -88,12 +88,18 @@ div.thumb .thumbnail {
 }
 .deal-price .deal {
 	position: absolute;
-	bottom: 0;
-	background-color: #9954bb;
-	min-height: 25px;
-	width: 100%;
-	color: #FFFFFF;
-	line-height: 25px;
+    bottom: -20px;
+    background-color: #9954bb;
+    min-height: 55px;
+    width: 140%;
+    color: #FFFFFF;
+    line-height: 25px;
+    left: -16px;
+}
+.deal-price .deal img {
+	height: 55px;
+    width: 100%;
+    border: 1px solid #ddd;
 }
 .coupon-heading span i {
 	color: #898989;

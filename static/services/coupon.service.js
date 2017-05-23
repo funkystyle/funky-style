@@ -20,7 +20,7 @@ angular.module('couponFactoryModule', ['constantModule'])
             var def = $q.defer();
 
 			$http({
-				url: url,
+				url: url+'?rand_number' + new Date().getTime(),
 				method: "GET"
 			}).then(function (data) {
 				def.resolve(data);

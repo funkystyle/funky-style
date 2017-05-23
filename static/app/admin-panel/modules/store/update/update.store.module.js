@@ -8,9 +8,23 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
         $scope.breadcrumbs = [];
         $scope.categories = [];
         $scope.selected_user = {};
+        $scope.menuTypes = [
+            {
+                text: "None",
+                code: 'none'
+            },
+            {
+                text: "Top Menu",
+                code: 'top'
+            },
+            {
+                text: "Bottom Menu",
+                code: 'bottom'
+            }
+        ];
 
         $scope.$watch('store.name', function(newVal, oldVal) {
-            $scope.store.url = (newVal) ? newVal+"-coupons" : undefined;
+            $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
         }, true);
 
         // get all stores into the array
