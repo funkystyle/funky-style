@@ -375,9 +375,6 @@ SCHEMAS = {
                 'required': True,
                 'unique': True
             },
-            'number_of_coupons': {
-                'type': 'integer'
-            },
             'url': {
                 'type': 'string',
                 'required': True,
@@ -516,7 +513,9 @@ SCHEMAS = {
         'description': {
             "type": "string"
         },
-        
+        'images': {
+            "type": "list"
+        },
         'breadcrumb': {
             "type": "list"
         },
@@ -582,7 +581,12 @@ SCHEMAS = {
         'upcoming': {
             "type": "boolean"
         },
-        
+        'top_banner': {
+            "type": "string"
+        },
+        'side_banner': {
+            "type": "string"
+        },
         'related_deals': {
             'type': 'list',
             'schema': {
@@ -788,6 +792,12 @@ SCHEMAS = {
         'footer_description': {
             "type": "string"
         },
+        'alt_image': {
+            "type": "string"
+        },
+        'image': {
+            "type": "string"
+        },
         'h1': {
             "type": "string"
         },
@@ -830,6 +840,12 @@ SCHEMAS = {
             "type": "string"
         },
         'footer_description': {
+            "type": "string"
+        },
+        'image': {
+            "type": "string"
+        },
+        'alt_image': {
             "type": "string"
         },
         'h1': {
