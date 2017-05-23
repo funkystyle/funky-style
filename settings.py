@@ -614,6 +614,14 @@ SCHEMAS = {
         'coupon_code': {
             "type": "string"
         },
+
+        'number_of_clicks': {
+            'type': 'integer'
+        },
+        'number_of_views': {
+            'type': 'integer'
+        },
+
         'destination_url': {
             "type": "string"
         },
@@ -976,12 +984,35 @@ SCHEMAS = {
             'type': 'list',
             'required': True
         }
+    },
+
+    'dynamic_fields_collection': {
+        'deal_category': {
+            'type': 'objectid',
+            'unique': True,
+            'data_relation': {
+                'resource': 'deal_categories',
+                'embeddable': True
+            }
+        },
+        'field_names': {
+            'type': 'list',
+            'schema': {
+                'type': 'dict',
+                'schema': {
+                    'name': {'type': 'string'},
+                    'type': {'type': 'string'},
+                    'required': {'type': 'boolean'}
+                }
+            }
+        }
     }
 
 }
 
 PERSONS_SCHEMA = SCHEMAS['persons']
 STORES_SCHEMA = SCHEMAS['stores']
+DYNAMIC_FIELDS_SCHEMA = SCHEMAS['dynamic_fields_collection']
 
 DEALS_SCHEMA = SCHEMAS['deals']
 CATEGORIES_SCHEMA = SCHEMAS['categories']
@@ -1010,6 +1041,7 @@ STORES = {
 
 DEALS = {
     'item_title': 'deals',
+    'allow_unknown': True,
     'schema': DEALS_SCHEMA
 }
 
@@ -1063,7 +1095,10 @@ BLOG = {
     'schema': BLOG_SCHEMA
 }
 
-
+DYNAMIC_FIELDS = {
+    'item_title': 'dynamic_title',
+    'schema': DYNAMIC_FIELDS_SCHEMA
+}
 
 # The DOMAIN dict explains which resources will be available and how they will
 # be accessible to the API consumer.
@@ -1080,7 +1115,8 @@ DOMAIN = {
     'master_seo': MASTER_SEO,
     'coupons_comments': COUPONS_COMMENTS,
     'coupons_reports': COUPON_REPORTS,
-    'blog': BLOG
+    'blog': BLOG,
+    'dynamic_fields': DYNAMIC_FIELDS
 }
 
 COLLECTION_NAMES = DOMAIN.keys()
