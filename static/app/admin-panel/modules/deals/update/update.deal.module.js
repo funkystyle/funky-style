@@ -48,7 +48,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                             _id: item._id
                         });
                         if(item._id == $stateParams.id) {
-                            console.log(item.name, item._id);
+                            console.log(item);
                             $scope.deal = item;
                             
                             $("#datetimepicker1").find("input").val(item.expired_date);
