@@ -12,54 +12,62 @@
     </div>
 
     <div class="panel-body" cg-busy="load">
-        <form ng-submit="addStore(store)">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="fields_name">Fields Name</label>
-                        <input type="text" id="fields_name" class="form-control input-sm"
-                               placeholder="Fields Name" ng-model="dynamic.fields_name">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="fields_type">Fields Type</label>
-                        <input type="text" id="fields_type" class="form-control input-sm"
-                               placeholder="Fields Name" ng-model="dynamic.fields_type">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label>Required</label>
-                        <label class="radio-inline">
-                            <input type="radio" name="dynamic.required" ng-model="dynamic.required">Yes
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="dynamic.required" ng-model="dynamic.required">No
-                        </label>
-                    </div>
-                </div>
-            </div>
+        <form ng-submit="addDynamicField(fields)">
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="deal_category">Deal Category</label>
-                        <ui-select id="deal_category" multiple ng-model="dynamic.deal_category" theme="bootstrap"
-                                   close-on-select="false"  title="Select Deal Category">
-                            <ui-select-match placeholder="Deal Category">{{$item.name}}</ui-select-match>
-                            <ui-select-choices repeat="person.email as person in people | propsFilter: {name: $select.search, age: $select.search}">
-                                <div ng-bind-html="person.name | highlight: $select.search"></div>
-                                <small>
-                                    email: {{person.email}}
-                                    age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
-                                </small>
+                        <ui-select ng-model="fields.deal_category" theme="bootstrap" id="deal_category">
+                            <ui-select-match placeholder="Select Deal Category">{{ $select.selected.name }}</ui-select-match>
+                            <ui-select-choices repeat="item._id as item in categories | filter: $select.search">
+                                <div ng-bind-html="item.name | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
 
                     </div>
+                </div>
+            </div>
+            <div class="row" ng-repeat="item in repeatItems">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="fields_name">Field Name</label>
+                        <input type="text" id="fields_name" class="form-control input-md"
+                               placeholder="Fields Name" ng-model="item.name" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="fields_type">Field Type</label>
+                        <ui-select ng-model="item.type" theme="bootstrap" id="fields_type">
+                            <ui-select-match placeholder="Select Field type">{{ $select.selected.text }}</ui-select-match>
+                            <ui-select-choices repeat="item.code as item in types | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="required">Required</label>
+                        <ui-select ng-model="item.required" theme="bootstrap" id="required">
+                            <ui-select-match placeholder="Required">{{ $select.selected.text }}</ui-select-match>
+                            <ui-select-choices repeat="item.code as item in required | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button style="margin-top: 25px;" ng-click="removeField($index)" class="btn btn-link">
+                        Remove this Item
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <button ng-click="addOneMoreField()" class="btn btn-link text-left">
+                        Add One more field
+                    </button>
                 </div>
             </div>
 
