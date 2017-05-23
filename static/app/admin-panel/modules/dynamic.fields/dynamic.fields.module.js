@@ -1,6 +1,6 @@
 angular.module("dynamicFieldsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "naif.base64", "dealFactoryModule"])
-    .controller("dynamicFieldsCtrl", function ($scope, $state, $stateParams, dealFactory, $auth) {
+    .controller("dynamicFieldsCtrl", function ($scope, $state, $stateParams, dealFactory, $auth, $http) {
         console.log("dynamic field controller!");
 
         $scope.fields = {
@@ -44,9 +44,24 @@ angular.module("dynamicFieldsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
         };
 
         $scope.removeField = function (index) {
-            if(index > 0) {
+            if($scope.repeatItems.length > 1) {
                 $scope.repeatItems.splice(index, 1);
             }
+        };
+
+        // store this dynamic fields into the table
+        $scope.storeDynamicFilelds = function (object) {
+            console.log(object);
+
+            $http({
+                url: "",
+                method: "POST",
+                data: object
+            }).then(function (data) {
+                console.log(data);
+            }, function (error) {
+                console.log(error);
+            });
         };
 
         if($auth.isAuthenticated()) {

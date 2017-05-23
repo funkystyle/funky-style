@@ -9,6 +9,16 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         $scope.clear = function() {
             $scope.store.relatedStore = undefined;
         };
+        $scope.dealTypes = [
+            {
+                text:"Product",
+                code: "product"
+            },
+            {
+                text: "Store",
+                code: "store"
+            }
+        ];
         $scope.$watch('deal.name', function(newVal, oldVal) {
             $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deal" : undefined;
         }, true);
