@@ -13,6 +13,9 @@ angular.module("dealDetailsModule", ["footerModule"])
             embedded['related_deals'] = 1;
             embedded['deal_brands'] = 1;
             embedded['deal_category'] = 1;
+            embedded['stores.store'] = 1;
+
+
 
             var url = '/api/1.0/deals'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
             $http({

@@ -15,7 +15,7 @@ angular.module("dealModule", ['angular-table', 'constantModule', 'toastr', 'cgBu
         };
 
         $scope.config = {
-            itemsPerPage: 5,
+            itemsPerPage: 20,
             maxPages: 20,
             fillLastPage: "no"
         };
