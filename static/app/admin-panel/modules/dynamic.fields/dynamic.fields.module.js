@@ -50,17 +50,17 @@ angular.module("dynamicFieldsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
         };
 
         // store this dynamic fields into the table
-        $scope.storeDynamicFilelds = function (object) {
-            console.log(object);
+        $scope.storeDynamicFilelds = function (deal) {
+            console.log("deal is ", deal, "Repeated Items for fields --- ", $scope.repeatItems);
 
-            $http({
-                url: "",
-                method: "POST",
-                data: object
-            }).then(function (data) {
+            dealFactory.update_deal_categories({fields: $scope.repeatItems}, $auth.getToken()).then(function (data) {
                 console.log(data);
+                toastr.success(deal.name+" Updated", "Success!");
+                $state.go("header.deal-categories");
             }, function (error) {
                 console.log(error);
+
+                toastr.error(error.data._error.message, error.data._error.code);
             });
         };
 
