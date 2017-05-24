@@ -496,10 +496,7 @@ SCHEMAS = {
     },
     "deals": {
         'dynamic_fields': {
-            'type': 'dict',
-            'schema': {
-                'type': 'dict'
-            }
+            'type': 'dict'
         },
         "name": {
             "unique":True,
