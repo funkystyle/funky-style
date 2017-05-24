@@ -11,6 +11,18 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         $scope.clear = function() {
             $scope.store.relatedStore = undefined;
         };
+        $scope.dealTypes = [
+            {
+                text:"Product",
+                code: "product"
+            },
+            {
+                text: "Store",
+                code: "store"
+            }
+        ];
+        $scope.deal.deal_type = $scope.dealTypes[1].code;
+
         $scope.$watch('deal.name', function(newVal, oldVal) {
             $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deal" : undefined;
         }, true);
@@ -64,8 +76,36 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             });
         }
 
+        $scope.productLists = [
+            {
+                store: undefined,
+                actual_price: undefined,
+                discount_price: undefined
+            }
+        ];
+
+        $scope.addOneMore = function () {
+            $scope.productLists.push({
+                store: undefined,
+                actual_price: undefined,
+                discount_price: undefined
+            });
+        };
+
+        $scope.removeImage = function (item) {
+            var index = $scope.deal.images.indexOf(item);
+            if(index > -1) {
+                $scope.deal.images.splice(index, 1);
+            }
+        };
+
         // addDealBrands function
         $scope.addDeal = function (deal) {
+            // if product selected as deal_type
+            if(deal.deal_type == 'product') {
+                deal.stores = $scope.productLists;
+            }
+
             deal.expired_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
             
             if(Array.isArray(deal.images)) {
@@ -78,16 +118,15 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 deal.images = images;
             } else {
                 toastr.error("Please select Deal Image", "Error!");
-                // return false;
+                return false;
             }
 
             deal.top_banner = "";
             deal.side_banner = "";
-            delete deal.images;
             delete deal.top_banner;
             delete deal.side_banner;
             console.log(deal);
-            
+            return true;
             // save this deal into table
             dealFactory.post(deal).then(function (data) {
                 console.log(data);
