@@ -125,12 +125,18 @@
                     </div>
                     <div class="form-group">
                         <label>Deal Category</label>
-                        <ui-select multiple ng-model="deal.deal_category" theme="bootstrap" close-on-select="false"  title="Category">
+                        <ui-select on-select="getDynamicFields($item, $model)" multiple limit="1"
+                                   ng-model="deal.deal_category" theme="bootstrap" close-on-select="false"  title="Category">
                             <ui-select-match placeholder="Category">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="item._id as item in categories | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="item.name | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
+                    </div>
+                    <div class="form-group" ng-if="deal.deal_category.length" ng-repeat="item in dynamicFields">
+                        <label for="{{ item.field_name }}">{{ item.field_name }}</label>
+                        <input id="{{ item.field_name }}" type="{{ item.field_type }}" ng-model="deal.dynamic_fields[item.field_name]"
+                               placeholder="{{ item.field_name }}" class="form-control" />
                     </div>
                     <div class="form-group" ng-init="store.featured_deal = true">
                         <label>Featured Deal</label> <br>
@@ -143,7 +149,11 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <label for="expiry_date">Expiry Date</label>
+                        <label for="deal_video">Deal Video</label>
+                        <input type="text" ng-model="deal.deal_video" class="form-control" placeholder="Deal Video" id="deal_video" />
+                    </div>
+                    <div class="form-group">
+                        <label for="datetimepicker1">Expiry Date</label>
                         <div class='input-group date' id='datetimepicker1'>
                             <input required type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
                             <span class="input-group-addon">

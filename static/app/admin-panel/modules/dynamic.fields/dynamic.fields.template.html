@@ -32,13 +32,13 @@
                     <div class="form-group">
                         <label for="fields_name">Field Name</label>
                         <input type="text" id="fields_name" class="form-control input-md"
-                               placeholder="Fields Name" ng-model="item.name" autocomplete="off">
+                               placeholder="Fields Name" ng-model="item.field_name" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="fields_type">Field Type</label>
-                        <ui-select ng-model="item.type" theme="bootstrap" id="fields_type">
+                        <ui-select ng-model="item.field_type" theme="bootstrap" id="fields_type">
                             <ui-select-match placeholder="Select Field type">{{ $select.selected.text }}</ui-select-match>
                             <ui-select-choices repeat="item.code as item in types | filter: $select.search">
                                 <div ng-bind-html="item.text | highlight: $select.search"></div>
@@ -46,28 +46,17 @@
                         </ui-select>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="required">Required</label>
-                        <ui-select ng-model="item.required" theme="bootstrap" id="required">
-                            <ui-select-match placeholder="Required">{{ $select.selected.text }}</ui-select-match>
-                            <ui-select-choices repeat="item.code as item in required | filter: $select.search">
-                                <div ng-bind-html="item.text | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
                 <div class="col-md-1">
-                    <button style="margin-top: 25px;" ng-click="removeField($index)" class="btn btn-link">
+                    <a style="margin-top: 25px;" ng-click="removeField($index)" class="btn btn-link">
                         Remove this Item
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 col-sm-12">
-                    <button ng-click="addOneMoreField()" class="btn btn-link text-left">
+                    <a ng-click="addOneMoreField()" class="btn btn-link text-left">
                         Add One more field
-                    </button>
+                    </a>
                 </div>
             </div>
 
