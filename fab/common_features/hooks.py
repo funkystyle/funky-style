@@ -2,6 +2,7 @@ from flask import abort
 import uuid, os
 import base64
 import binascii
+from bson.objectid import ObjectId
 from settings import CONFIG_DATA, BASE_DIR, LOGGER
 from fab import app
 
@@ -130,24 +131,10 @@ def after_deleted_item(resource_name, item):
 
             elif isinstance(item[image_field], str):
                 delete_image(item[image_field])
-
-    return_data = {
-        "data": str(item['_id']),
-        "status": 200,
-        "config": {
-            "method": "DELETE",
-            "transformRequest": [
-
-            ],
-            "transformResponse": [
-
-            ],
-            "jsonpCallbackParam": "callback",
-            "url": "/api/1.0/coupons/59169ac01d41c811b5ccdb72",
-            "headers": {
-                "Accept": "application/json, text/plain, */*"
-            }
-        },
-        "statusText": "NO CONTENT"
-    }
-    #return return_data
+    # clearn related fields
+    if resource_name in CONFIG_DATA['FIELD_CLEAR_COLLECTIONS_AFTER_DELETE'].keys():
+        # c_f collection field
+        for c_f in CONFIG_DATA['FIELD_CLEAR_COLLECTIONS_AFTER_DELETE'][resource_name]:
+            accounts = app.data.driver.db[c_f['collection_name']]
+            for delete_id in item[c_f['field_name']]:
+                accounts.remove({'_id': ObjectId(str(delete_id))})

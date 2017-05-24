@@ -131,6 +131,7 @@ app.on_fetched_resource_persons += before_returning_persons
 app.on_fetched_item_persons += before_returning_persons
 app.on_update_resource_persons += before_returning_persons
 app.on_update_item_persons += before_returning_persons
+
 app.on_delete_item_persons += before_delete_persons_item
 
 # stores schema request accessablity and processing some fields
