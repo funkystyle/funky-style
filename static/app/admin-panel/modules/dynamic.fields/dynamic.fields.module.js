@@ -47,6 +47,24 @@ angular.module("dynamicFieldsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
             }
         };
 
+        // selected category
+        $scope.selectedCategory = function (item, model) {
+            angular.forEach($scope.categories, function (category) {
+               if(category._id == item._id) {
+                   if(category['fields']) {
+                       $scope.repeatItems = category.fields;
+                   } else {
+                       $scope.repeatItems = [
+                           {
+                               field_name: undefined,
+                               field_type: undefined
+                           }
+                       ];
+                   }
+               }
+            });
+        };
+
         // store this dynamic fields into the table
         $scope.storeDynamicFilelds = function (deal) {
             console.log("deal is ", deal, "Repeated Items for fields --- ", $scope.repeatItems);

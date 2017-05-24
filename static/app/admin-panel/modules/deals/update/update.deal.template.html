@@ -222,19 +222,17 @@
                     </div>
                 </div> <!-- end col -->
                 <div class="col-lg-3 col-md-3">
+                    <label>Selected Images</label>
                     <div class="form-group" ng-if="deal.images.length" ng-repeat="item in deal.images">
-                        <label for="deal.images">Image Display</label>
                         <div class="thumbnail" id="deal.images">
                             <i class="fa fa-close" ng-click="removeDealImage(item)"></i>
-                            <img ng-src="data:image/jpeg;base64,{{ item.base64 }}" />
+                            <img style="max-height: 100px;" ng-src="data:image/jpeg;base64,{{ item.base64 }}" />
                         </div>
                     </div>
-
                     <div class="form-group" ng-if="deal_images.length" ng-repeat="item in deal_images">
-                        <label for="displayImage">Image Display</label>
                         <div class="thumbnail" id="displayImage">
                             <i class="fa fa-close" ng-click="removeImage(item)"></i>
-                            <img ng-src="{{ item }}" />
+                            <img style="max-height: 100px;" ng-src="{{ item }}" />
                         </div>
                     </div>
                 </div>

@@ -80,12 +80,15 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
 
                             // get the selected deal for an update/view
                             if(item._id == $stateParams.id) {
-                                console.log(item);
+                                console.log("selected deal: ", item);
                                 $scope.deal = item;
                                 $scope.getDynamicFields({_id: item.deal_category}, undefined);
-                                $scope.productLists = $scope.deal.stores;
+                                $scope.productLists = ($scope.deal.stores) ? $scope.deal.stores: $scope.productLists;
                                 $scope.deal_images = $scope.deal.images;
+                                $scope.deal.images = [];
                                 $("#datetimepicker1").find("input").val(item.expired_date);
+
+                                console.log("product lists are: ", $scope.productLists)
                             }
                         });
                     }
@@ -119,6 +122,14 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             $state.go("login");
         }
 
+        $scope.productLists = [
+            {
+                store: undefined,
+                actual_price: undefined,
+                discount_price: undefined
+            }
+        ];
+
         $scope.addOneMore = function () {
             $scope.productLists.push({
                 store: undefined,
@@ -129,22 +140,32 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         // addDealBrands function
         $scope.updateDeal = function (deal) {
 
+            // if product selected as deal_type
             if(deal.deal_type == 'product') {
                 deal.stores = $scope.productLists;
             }
 
             deal.expired_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
 
-            delete deal.images;
-            delete deal.top_banner;
-            delete deal.side_banner;
-            
-            
+            if(Array.isArray(deal.images)) {
+                var images = [];
+                angular.forEach(deal.images, function (item) {
+                    images.push("data:image/jpeg;base64,"+item.base64);
+                });
+                angular.forEach($scope.deal_images, function (item) {
+                   images.push(item);
+                });
+                console.log(images);
+                deal.images = images;
+            } else {
+                toastr.error("Please select Deal Image", "Error!");
+                return false;
+            }
             delete deal._created;
             delete deal._updated;
             delete deal._links;
             console.log(deal);
-            
+
             var storeItems = [];
             // update ths store with this deal
             function updateStore(store) {
@@ -190,6 +211,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 dealFactory.update(deal, $auth.getToken()).then(function (data) {
                     console.log(data);
                     toastr.success(deal.name+" Updated", "Success!");
+                    $state.go("header.deals");
                 }, function (error) {
                     console.log(error);
 
