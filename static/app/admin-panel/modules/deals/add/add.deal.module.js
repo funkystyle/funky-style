@@ -2,7 +2,8 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
     "toastr", "satellizer","cgBusy", "naif.base64", "dealFactoryModule", "storeFactoryModule"])
     .controller("addDealCtrl", function($scope, $state, $timeout, toastr, $auth, dealFactory, storeFactory) {
         $scope.deal = {
-            expired_date: new Date()
+            expired_date: new Date(),
+            dynamic_fields: {}
         };
         $scope.deals = [];
         $scope.categories = [];
@@ -92,6 +93,15 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             });
         };
 
+        // get dynamic fields based on deal category selection
+        $scope.getDynamicFields = function (item, model) {
+            angular.forEach($scope.categories, function (category) {
+                if(category._id == item._id) {
+                    $scope.dynamicFields = item.fields;
+                }
+            });
+        };
+
         $scope.removeImage = function (item) {
             var index = $scope.deal.images.indexOf(item);
             if(index > -1) {
@@ -126,7 +136,6 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             delete deal.top_banner;
             delete deal.side_banner;
             console.log(deal);
-            return true;
             // save this deal into table
             dealFactory.post(deal).then(function (data) {
                 console.log(data);

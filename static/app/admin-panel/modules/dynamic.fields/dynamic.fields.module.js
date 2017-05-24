@@ -1,6 +1,6 @@
 angular.module("dynamicFieldsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "naif.base64", "dealFactoryModule"])
-    .controller("dynamicFieldsCtrl", function ($scope, $state, $stateParams, dealFactory, $auth, $http) {
+    .controller("dynamicFieldsCtrl", function ($scope, $state, $stateParams, dealFactory, $auth, $http, toastr) {
         console.log("dynamic field controller!");
 
         $scope.fields = {
@@ -13,8 +13,8 @@ angular.module("dynamicFieldsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
                 code: "text"
             },
             {
-                text: "List",
-                code: "list"
+                text: "Number",
+                code: "number"
             }
         ];
         $scope.required = [
@@ -29,17 +29,15 @@ angular.module("dynamicFieldsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
         ];
         $scope.repeatItems = [
             {
-                name: undefined,
-                type: undefined,
-                required: undefined
+                field_name: undefined,
+                field_type: undefined
             }
         ];
 
         $scope.addOneMoreField = function () {
             $scope.repeatItems.push({
-                name: undefined,
-                type: undefined,
-                required: undefined
+                field_name: undefined,
+                field_type: undefined
             });
         };
 
@@ -50,17 +48,20 @@ angular.module("dynamicFieldsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
         };
 
         // store this dynamic fields into the table
-        $scope.storeDynamicFilelds = function (object) {
-            console.log(object);
-
-            $http({
-                url: "",
-                method: "POST",
-                data: object
-            }).then(function (data) {
+        $scope.storeDynamicFilelds = function (deal) {
+            console.log("deal is ", deal, "Repeated Items for fields --- ", $scope.repeatItems);
+            var obj = {
+                _id: deal.deal_category,
+                fields: $scope.repeatItems
+            };
+            dealFactory.update_deal_categories(obj, $auth.getToken()).then(function (data) {
                 console.log(data);
+                toastr.success(deal.name+" Updated", "Success!");
+                $state.go("header.deal-categories");
             }, function (error) {
                 console.log(error);
+
+                toastr.error(error.data._error.message, error.data._error.code);
             });
         };
 
