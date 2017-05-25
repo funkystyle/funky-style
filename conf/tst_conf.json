@@ -34,7 +34,7 @@
   "USER_ROLES":["user"],
   "UPLOAD_FOLDER": "static/images/",
   "ALLOWED_EXTENSIONS":["png","jpg", "jpeg", "bmp"],
-  "IMAGE_FIELDS": ["image","side_banner","top_banner","all_tag_image", "alt_image", "images"]
+  "IMAGE_FIELDS": ["image","side_banner","top_banner","all_tag_image", "alt_image", "images"],
   "FIELD_CLEAR_COLLECTIONS_AFTER_DELETE": {
     "stores": [
       {
