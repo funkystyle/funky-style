@@ -2,7 +2,7 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "categoryFactoryModule", "naif.base64"])
     .controller("updateCategoryCtrl", function ($scope, $state, $stateParams, $timeout,
                                                 toastr, storeFactory, $auth, personFactory,
-                                                categoryFactory, URL) {
+                                                categoryFactory, URL, $http) {
         $scope.category = {};
         $scope.persons = [];
         $scope.categories = [];
@@ -51,7 +51,7 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
 
         // get all stores into the array
         if($auth.isAuthenticated() && $stateParams['categoryId']) {
-            $scope.load = storeFactory.get($auth.getToken()).then(function (data) {
+            $scope.load = storeFactory.get().then(function (data) {
                 console.log(data);
                 if(data['_items']) {
                     $scope.stores = data._items;
@@ -72,11 +72,20 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
             });
 
             // get all categories
-            categoryFactory.get().then(function (data) {
+            var embedded = {};
+            embedded['related_categories'] = 1;
+            embedded['top_stores'] = 1;
+            embedded['top_categories'] = 1;
+            embedded['related_coupons'] = 1;
+            embedded['related_deals'] = 1;
+
+            $http({
+                url: URL.categories+"?embedded="+JSON.stringify(embedded)+"&rand_number="+Math.random(),
+                method: "GET"
+            }).then(function (data) {
                 console.log(data);
                 if(data['data']) {
                     $scope.categories = data.data._items;
-
                     angular.forEach($scope.categories, function (item) {
                         $scope.breadcrumbs.push({
                             name: item.name,
@@ -84,7 +93,17 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
                             _id: item._id
                         });
                         if(item._id == $stateParams.categoryId) {
+                            console.log(item);
+                            // remove null ids from selected arrays
+                            item.related_categories = (item.related_categories) ? clearNullIds(item.related_categories): item.related_categories;
+                            item.top_stores = (item.top_stores) ? clearNullIds(item.top_stores): item.top_stores;
+                            item.top_categories = (item.top_categories) ? clearNullIds(item.top_categories): item.top_categories;
+                            item.related_coupons = clearNullIds(item.related_coupons);
+                            item.related_deals = clearNullIds(item.related_deals);
+
                             $scope.category = item;
+
+                            console.log("Updated category: ", $scope.category);
                         }
                     });
                 }

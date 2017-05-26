@@ -3,7 +3,7 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
     "personFactoryModule", "cgBusy", "couponFactoryModule", "categoryFactoryModule"])
     .controller("updateCouponCtrl", function($scope, $timeout, toastr, storeFactory, $q,
                                              $auth, personFactory, $log, couponFactory,
-                                             $state, $stateParams, categoryFactory, URL) {
+                                             $state, $stateParams, categoryFactory, URL, $http) {
         $scope.persons = [];
         $scope.categories = [];
         $scope.stores = [];
@@ -40,15 +40,33 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             $('#datetimepicker1').datetimepicker({
                 defaultDate: new Date()
             });
-            $scope.load = storeFactory.get($auth.getToken()).then(function (data) {
+            var embedded = {};
+            embedded['related_stores'] = 1;
+            embedded['top_stores'] = 1;
+            embedded['top_catagory_store'] = 1;
+            embedded['related_coupons'] = 1;
+            embedded['related_deals'] = 1;
+
+            var random_number = new Date().getTime();
+
+            var url = URL.stores+"?embedded="+JSON.stringify(embedded)+"&rand_number="+JSON.stringify(random_number);
+
+            $scope.load = storeFactory.get(url).then(function (data) {
                 console.log(data);
-                if(data['_items']) {
+                if(data) {
                     $scope.stores = data._items;
+                    angular.forEach($scope.stores, function (item) {
+                        item.related_stores = clearNullIds(item.related_stores);
+                        item.top_stores = clearNullIds(item.top_stores);
+                        item.top_catagory_store = clearNullIds(item.top_catagory_store);
+                        item.related_coupons = clearNullIds(item.related_coupons);
+                        item.related_deals = clearNullIds(item.related_deals);
+                    });
                 }
             }, function (error) {
                 console.log(error);
-                toastr.error(error.data._error.message, "Error!");
             });
+
             personFactory.me().then(function (data) {
                 $scope.persons.push(data.data.data);
                 $scope.selected_user.user = $scope.persons[0];
@@ -57,18 +75,46 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 console.log(error);
             });
             // get all categories
-            categoryFactory.get().then(function (data) {
+            var embedded = {};
+            embedded['related_categories'] = 1;
+            embedded['top_stores'] = 1;
+            embedded['top_categories'] = 1;
+            embedded['related_coupons'] = 1;
+            embedded['related_deals'] = 1;
+            $http({
+                url: URL.categories+"?embedded="+JSON.stringify(embedded)+"&rand_number="+Math.random(),
+                method: "GET"
+            }).then(function (data) {
                 console.log(data);
                 if(data['data']) {
                     $scope.categories = data.data._items;
+                    angular.forEach($scope.categories, function (item) {
+                        // remove null ids from selected arrays
+                        item.related_categories = (item.related_categories) ? clearNullIds(item.related_categories): item.related_categories;
+                        item.top_stores = (item.top_stores) ? clearNullIds(item.top_stores): item.top_stores;
+                        item.top_categories = (item.top_categories) ? clearNullIds(item.top_categories): item.top_categories;
+                        item.related_coupons = clearNullIds(item.related_coupons);
+                        item.related_deals = clearNullIds(item.related_deals);
+                    });
                 }
             }, function (error) {
                 console.log(error);
             }).then(function () {
-                couponFactory.get().then(function (data) {
+                var embedded = {};
+                embedded['related_categories'] = 1;
+                embedded['related_stores'] = 1;
+                embedded['recommended_stores'] = 1;
+                $http({
+                    url: URL.coupons+"?embedded="+JSON.stringify(embedded)+"&rand_number="+Math.random(),
+                    method: "GET"
+                }).then(function (data) {
                     if(data['data']) {
                         angular.forEach(data.data._items, function (item) {
                             if(item._id == $stateParams.couponId) {
+                                item.related_stores = clearNullIds(item.related_stores);
+                                item.related_categories = clearNullIds(item.related_categories);
+                                item.recommended_stores = clearNullIds(item.recommended_stores);
+
                                 $scope.coupon = item;
                                 console.log(item);
                                 $("#datetimepicker1").find("input").val(item.expire_date);

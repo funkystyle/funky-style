@@ -54,7 +54,7 @@
                                 </div>
                             </td>
                             <td style="color: #2780e3; text-decoration: underline; cursor: pointer;" at-title="Name" width="250">
-                                <a ui-sref="header.update-category({ categoryId: item._id })" target="_blank">{{ item.name }}</a>
+                                <a ui-sref="header.update-category({ categoryId: item._id })">{{ item.name }}</a>
                             </td>
                             <td at-title="Image">
                                 <img ng-if="item.image" height="60" ng-src="{{ item.image }}" />

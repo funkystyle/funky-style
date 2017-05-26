@@ -57,11 +57,6 @@
                         <input type="text" class="form-control input-sm" id="h2" ng-model="store.h2" placeholder="Store H2">
                     </div>
                     <div class="form-group">
-                        <label for="no_of_coupons">No Of Coupons</label>
-                        <input readonly type="text" class="form-control input-sm" id="no_of_coupons" placeholder="No Of Coupons"
-                               ng-model="store.number_of_coupons">
-                    </div>
-                    <div class="form-group">
                         <label>Menu</label> <br />
                         <ui-select ng-model="store.menu" theme="bootstrap">
                             <ui-select-match placeholder="Select Menu type">{{ $select.selected.text }}</ui-select-match>
@@ -205,19 +200,6 @@
                         </ui-select>
                     </div>
                     <div class="form-group">
-                        <label>No Of Deals</label>
-                        <ui-select multiple ng-model="store.number_of_deals" theme="bootstrap" close-on-select="false"  title="Select Top Category Stores">
-                            <ui-select-match placeholder="No Of Deals">{{$item.name}}</ui-select-match>
-                            <ui-select-choices repeat="person.email as person in people | propsFilter: {name: $select.search, age: $select.search}">
-                                <div ng-bind-html="person.name | highlight: $select.search"></div>
-                                <small>
-                                    email: {{person.email}}
-                                    age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
-                                </small>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                    <div class="form-group">
                         <label for="contact_number">Contact Number</label>
                         <input type="text" class="form-control input-sm" id="contact_number" placeholder="Contact Number"
                                ng-model="store.contact_number">
@@ -267,16 +249,7 @@
 
                     <div class="form-group">
                         <label>Last Modified By</label>
-                        <ui-select ng-model="selected_user.user" theme="bootstrap">
-                            <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
-                            <ui-select-choices repeat="person._id as person in persons | filter: $select.search">
-                                <small>
-                                    <span ng-bind-html="''+person.first_name | highlight: $select.search"></span>
-                                    <span ng-bind-html="''+person.last_name | highlight: $select.search"></span>
-                                </small>
-                                <div ng-bind-html="person.email | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
+                        <input type="text" disabled ng-model="modified_user.email" class="form-control">
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->

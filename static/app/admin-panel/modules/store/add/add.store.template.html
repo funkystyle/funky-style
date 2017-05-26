@@ -158,7 +158,7 @@
                     <div class="form-group">
                         <label>Top Category Stores</label>
                         <ui-select multiple ng-model="store.top_catagory_store" theme="bootstrap" close-on-select="false"  title="Select Top Category Stores">
-                            <ui-select-match placeholder="Select top category stores">{{$item.name}}</ui-select-match>
+                            <ui-select-match placeholder="Select top categories">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="item._id as item in categories | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="item.name | highlight: $select.search"></div>
                                 <small>

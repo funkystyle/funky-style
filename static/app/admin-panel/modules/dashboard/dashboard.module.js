@@ -25,7 +25,7 @@ angular.module("DashboardModule", ["constantModule", "satellizer", "toastr", "pe
 
 	    // get list of persons
 	    var projection = {};
-	    projection['name'] = 1;
+	    projection['_id'] = 1;
 	    $http({
 	        url: "/api/1.0/persons?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
 	        mathod: "GET",

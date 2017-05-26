@@ -2,14 +2,12 @@
 angular.module("storeFactoryModule", ["constantModule"])
     .factory('storeFactory', ['$http', '$q', 'URL', function ($http, $q, URL) {
         return {
-            get: function (token) {
+            get: function (finalUrl) {
+                var url = (finalUrl) ? finalUrl: URL.stores;
                 var def = $q.defer();
                 $http({
-                    url: URL.stores+'?rand_number' + new Date().getTime(),
-                    method: "GET",
-                    headers: {
-                        authorization: token
-                    }
+                    url: url+'?rand_number' + new Date().getTime(),
+                    method: "GET"
                 }).then(function (data) {
                     def.resolve(data.data);
                 }, function (error) {

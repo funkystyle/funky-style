@@ -1,3 +1,15 @@
+function clearNullIds (items) {
+    console.log("before deleting Null Items: ", items);
+    for(i=0; i<items.length; i++) {
+        if(items[i] == null || items[i] == undefined) {
+            items.splice(i, 1);
+        } else {
+            items[i] = items[i]._id;
+        }
+    }
+    console.log("after deleting null items: ", items);
+    return items;
+}
 var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
     .run(function ($rootScope) {
         var id = undefined;

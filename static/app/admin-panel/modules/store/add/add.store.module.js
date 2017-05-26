@@ -32,7 +32,7 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
 
         // get all stores into the array
         if($auth.isAuthenticated()) {
-            $scope.load = storeFactory.get($auth.getToken()).then(function (data) {
+            $scope.load = storeFactory.get().then(function (data) {
                 console.log(data);
                 if(data['_items']) {
                     $scope.stores = data._items;
