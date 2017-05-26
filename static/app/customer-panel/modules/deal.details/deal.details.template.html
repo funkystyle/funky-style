@@ -90,7 +90,7 @@
                                 <h5>Discounted Price</h5>
                             </div>
                             <div class="amazonstore-head col-md-3 text-center">
-                                <a href="{{ item.store.store_url }}" class="btn btn-primary col-xs-9">
+                                <a href="{{ deal.stores[0].landing_page }}" class="btn btn-primary col-xs-9">
                                     GO TO STORE
                                     <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                                 </a>
@@ -167,7 +167,7 @@
                         </div>
                     </td>
                     <td>
-                        <a href="{{ item.store.store_url }}" class="btn btn-primary">
+                        <a href="{{ item.landing_page }}" class="btn btn-primary">
                             GO TO STORE
                             <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                         </a>
@@ -346,7 +346,7 @@
                         </ul>
                     </div>
                     <div class="product-buynow">
-                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                        <a href="{{ item.destination_url }}" target="_blank" class="btn btn-success buynowbtn">Buy Now</a>
                     </div>
                 </div>
             </div>
