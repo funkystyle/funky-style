@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="static/app/customer-panel/modules/brand.page/brand.page.css"/>
+<link rel="stylesheet" href="static/app/customer-panel/modules/deal.category.page/deal.category.page.css"/>
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 <div class="container main-row">
     <div class="row">
@@ -34,13 +34,13 @@
     <div class="row">
         <div class="otherbrands-main col-md-12">
             <div class="otherbrands-text text-center col-md-3">
-                <h3>Other Brands</h3>
+                <h3>Other categories</h3>
                 <h4> You May Like</h4>
             </div>
             <div class="otherbrands-slider col-md-9">
                 <div class="otherbrands-text text-center">
                     <div id="owl-demo">
-                        <div class="owl-item grayscale" style="width: 293px;" ng-repeat="item in deal.related_brands">
+                        <div class="owl-item grayscale" style="width: 293px;" ng-repeat="item in deal.related_categories">
                             <img ng-src="{{ item.image }}" alt="Owl Image">
                         </div>
                     </div>
@@ -97,12 +97,12 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h5 class="font-bold">Brands</h5>
+                            <h5 class="font-bold">categories</h5>
                         </div>
                         <!--panel heading-->
                         <div class="panel-body">
                             <div class="form-group">
-                                <div class="icon-addon addon-sm" title="Search for Brands">
+                                <div class="icon-addon addon-sm" title="Search for categories">
                                     <input type="text" placeholder="Search" class="form-control input-sm"
                                            autocomplete="off" id="category_filter" ng-model="search[key]">
                                     <label for="category_filter" class="fa fa-search" rel="tooltip"></label>
@@ -110,10 +110,10 @@
                             </div>
                             <div class="check-box-filter-area">
                                 <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
-                                     ng-repeat="item in brands | filter: search[key]">
-                                    <label for="{{ item._id }}_brands_filter" style="font-weight: 500;">
-                                        <input id="{{ item._id }}_brands_filter" type="checkbox"
-                                               ng-model="filter.brands[item._id]" ng-change="applyFilter()" />
+                                     ng-repeat="item in categories | filter: search[key]">
+                                    <label for="{{ item._id }}_categories_filter" style="font-weight: 500;">
+                                        <input id="{{ item._id }}_categories_filter" type="checkbox"
+                                               ng-model="filter.categories[item._id]" ng-change="applyFilter()" />
                                         <span id="span_category_{{ item._id }}" class="cr">
                                                 <i class="cr-icon glyphicon glyphicon-ok"></i>
                                             </span>

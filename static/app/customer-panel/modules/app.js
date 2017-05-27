@@ -237,8 +237,8 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })
-                .state('main.brand_page', {
-                    url: '/brands/:id',
+                .state('main.deal_brand_page', {
+                    url: '/brands/:url',
                     templateUrl: 'static/app/customer-panel/modules/brand.page/brand.page.template.html',
                     controller: "brandPageCtrl",
                     resolve: {
@@ -246,6 +246,19 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                             return $ocLazyLoad.load({
                                 name: 'brandPageModule',
                                 files: ['static/app/customer-panel/modules/brand.page/brand.page.module.js']
+                            })
+                        }
+                    }
+                })
+                .state('main.deal_category_page', {
+                    url: '/categories/:url',
+                    templateUrl: 'static/app/customer-panel/modules/deal.category.page/deal.category.page.template.html',
+                    controller: "dealCategoryPageCtrl",
+                    resolve: {
+                        home: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'dealCategoryPageModule',
+                                files: ['static/app/customer-panel/modules/deal.category.page/deal.category.page.module.js']
                             })
                         }
                     }
@@ -273,6 +286,20 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 .state('blog_category', {
                     url: '/blog/category',
                     templateUrl: 'static/app/customer-panel/modules/blog.category/blog.category.template.html'
+                })
+
+                .state("main.cms", {
+                    url: "/:cmsId",
+                    templateUrl: "static/app/customer-panel/modules/cms/cms.template.html",
+                    controller: "cmsCtrl",
+                    resolve: {
+                        dashboard: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'cmsModule',
+                                files: ['static/app/customer-panel/modules/cms/cms.module.js']
+                            })
+                        }
+                    }
                 })
         }
     ])

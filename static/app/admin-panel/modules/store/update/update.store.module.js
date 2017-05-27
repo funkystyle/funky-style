@@ -2,7 +2,9 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "categoryFactoryModule", "naif.base64"])
     .controller("updateStoreCtrl", function ($scope, $timeout, toastr, $state,
                                              storeFactory, $auth, personFactory, $stateParams, categoryFactory, URL) {
-        $scope.store = {};
+        $scope.store = {
+            top_catagory_store: []
+        };
         $scope.persons = [];
         $scope.stores = [];
         $scope.breadcrumbs = [];

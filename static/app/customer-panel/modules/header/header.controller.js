@@ -1,7 +1,7 @@
 angular.module("headerModule", ["ui.bootstrap", "APP",
     "constantModule", "storeServiceModule", "categoryFactoryModule", "couponFactoryModule"])
-    .controller("headerCtrl", function ($scope, auth, $state, $http, URL, $http,
-                                        categoryFactory, storeFactory, couponFactory) {
+    .controller("headerCtrl", function ($scope, auth, $state, $http, URL,
+                                        categoryFactory, storeFactory, couponFactory, $q) {
         console.log("header controller!");
     	// declaring the scope variables
     	$scope.user = {};
@@ -19,46 +19,34 @@ angular.module("headerModule", ["ui.bootstrap", "APP",
             });
         }
 
-        // get the list of coupons or categories or stores
-        $scope.searchQuery = function (val) {
-    	    console.log(val)
-            $scope.totalItems = [];
-            getStoreByParam('name', val);
-            // get list of matched coupons based on query
-            var obj = {};
-            obj['title'] = true;
-            $http({
-                url: "/api/1.0/coupons/?where="+JSON.stringify(obj),
-                mathod: "GET"
-            }).then(function (data) {
-                console.log(data);
-                if(data['data']) {
-                    $scope.coupons = data.data._items;
-                }
-            }, function (error) {
-                console.log(error);
-            });
+        // get the stores
+        var obj = {
+            "projection" : {
+                "name": 1,
+                "url": 1,
+                "featured_store": 1,
+                "menu": 1,
+                "related_coupons": 1,
+                "related_coupons.title": 1,
+                "related_coupons.url": 1
+            },
+            "embedded": {
+                "related_coupons": 1
+            },
+            "random_number": new Date().getDate()
         };
-
-        function getStoreByParam(param, value) {
-            var sto = {};
-            value = (param == 'featured_store') ? true: value;
-            sto[param] = value;
-            $http({
-                url: "/api/1.0/stores/?where="+JSON.stringify(sto),
-                mathod: "GET"
-            }).then(function (data) {
-                console.log(data);
-                if(data['data']['_items']) {
-                    console.log(data.data._items);
-                    $scope.stores = data.data._items;
-                    $scope.totalItems.push($scope.stores);
-                }
-            }, function (error) {
-                console.log(error);
-            });
-        }
-        getStoreByParam('featured_store', true);
+        var url = "/api/1.0/stores?projection="+JSON.stringify(obj.projection)+"&embedded="+JSON.stringify(obj.embedded)+"&rand_number="+obj.random_number;
+        $http({
+            url: url,
+            mathod: "GET"
+        }).then(function (data) {
+            if(data['data']['_items']) {
+                $scope.stores = data.data._items;
+                console.log("All Stores: ", $scope.stores);
+            }
+        }, function (error) {
+            console.log(error);
+        });
 
     	// logout
         $scope.logout = function () {

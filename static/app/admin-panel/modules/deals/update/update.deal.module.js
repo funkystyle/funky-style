@@ -37,7 +37,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
 
         $scope.oldStore = undefined;
         $scope.newStore = undefined;
-    
+
         $scope.$watch("deal.store", function (newVal, oldVal) {
             console.log(oldVal, newVal);
             $scope.oldStore = oldVal;
@@ -226,24 +226,20 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 angular.forEach($scope.stores, function(storeItem) {
                     var deals = undefined;
                     if(storeItem._id == $scope.oldStore) {
-                        var index = storeItem.related_deals.indexOf(deal._id);
-                        if(index > -1) {
-                            storeItem.related_deals.splice(index, 1);
-                            storeItem.related_deals;
-                            updateStore(storeItem);
-                        }
+                        storeItem.related_deals = _.filter(storeItem.related_deals, function(o) { return o !== deal._id; });
+                        storeItem.related_deals = _.uniq(storeItem.related_deals);
+                        updateStore(storeItem)
                     }
                     if(storeItem._id == $scope.newStore) {
-                        var index = storeItem.related_deals.indexOf($scope.newStore);
+                        storeItem.related_deals = _.uniq(storeItem.related_deals);
+                        var index = storeItem.related_deals.indexOf(deal._id);
                         if(index == -1) {
                             storeItem.related_deals.push(deal._id);
-                            deals = storeItem.related_deals;
                             updateStore(storeItem);
                         }
                     }
                 })
             }
-            
             // after done withstoreItems
             $q.all(storeItems).then(function() {
                 dealFactory.update(deal, $auth.getToken()).then(function (data) {

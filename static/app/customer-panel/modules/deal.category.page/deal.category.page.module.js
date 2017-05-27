@@ -1,5 +1,5 @@
-angular.module("brandPageModule", [])
-    .controller("brandPageCtrl", function ($scope, $state, $stateParams,
+angular.module("dealCategoryPageModule", [])
+    .controller("dealCategoryPageCtrl", function ($scope, $state, $stateParams,
                                            $ocLazyLoad, $http, $sce, $filter) {
         console.log("brand page controller !");
 
@@ -76,17 +76,17 @@ angular.module("brandPageModule", [])
             // get the deal brand using stateparam URL
             $scope.deal = {};
             $scope.deals = [];
-            $scope.brands = [];
+            $scope.deal_categories = [];
             var random = new Date().getDate();
             if($stateParams['url']) {
                 var where = {
                     "url": $stateParams.url
                 };
                 var embedded = {
-                    "related_brands": 1
+                    "related_categories": 1
                 };
                 $http({
-                    url: "/api/1.0/deal_brands?where="+JSON.stringify(where)+"&rand="+random+"&embedded="+JSON.stringify(embedded),
+                    url: "/api/1.0/deal_categories?where="+JSON.stringify(where)+"&rand="+random+"&embedded="+JSON.stringify(embedded),
                     method: "GET"
                 }).then(function (data) {
                     console.log("Deal brand is: ", data.data._items[0]);
@@ -107,12 +107,12 @@ angular.module("brandPageModule", [])
                     // get the list of deals related to selected deal brand
                     var embedded = {};
                     embedded['related_deals'] = 1;
-                    embedded['deal_brands'] = 1;
+                    embedded['deal_categories'] = 1;
                     embedded['deal_category'] = 1;
                     embedded['stores.store'] = 1;
 
                     var where = {
-                        "deal_brands": $scope.deal._id
+                        "deal_category": $scope.deal._id
                     };
 
                     var url = '/api/1.0/deals'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + random;
@@ -126,10 +126,10 @@ angular.module("brandPageModule", [])
                             $scope.filterDeals = data.data._items;
 
                             angular.forEach($scope.deals, function (item) {
-                               angular.forEach(item.deal_brands, function (brand) {
-                                   var length = $filter('filter')($scope.brands, {_id: brand._id}).length;
+                               angular.forEach(item.deal_category, function (brand) {
+                                   var length = $filter('filter')($scope.categories, {_id: brand._id}).length;
                                    if(length == 0) {
-                                       $scope.brands.push(brand);
+                                       $scope.categories.push(brand);
                                    }
                                });
                             });
@@ -146,7 +146,7 @@ angular.module("brandPageModule", [])
     .filter("applyFilter", function ($filter) {
         return function (items, filter) {
             var list = [];
-            if(!Object.keys(filter.priceRange).length && !Object.keys(filter.brands).length) {
+            if(!Object.keys(filter.priceRange).length && !Object.keys(filter.categories).length) {
                 return items;
             }
             // return all items if all items of object is false
@@ -175,8 +175,8 @@ angular.module("brandPageModule", [])
                 });
 
                 // filter by brand wise
-                angular.forEach(filter.brands, function (val, key) {
-                    angular.forEach(item.deal_brands, function (deal_brand) {
+                angular.forEach(filter.categories, function (val, key) {
+                    angular.forEach(item.deal_category, function (deal_brand) {
                         if(val == true && key == deal_brand._id) {
                             var length = $filter("filter")(list, {_id: item._id}).length;
                             if(length == 0) {

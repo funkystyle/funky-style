@@ -1,6 +1,6 @@
 function clearNullIds (items) {
     if(items == undefined || items == null) {
-        return true;
+        return [];
     }
     var array = _.without(items, null).map(function(item) { return item["_id"]; });
     console.log("Before deleting null items: ", items," -- after deleting null items: ", array);
