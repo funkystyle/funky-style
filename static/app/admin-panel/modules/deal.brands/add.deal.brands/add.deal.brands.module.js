@@ -1,21 +1,24 @@
-angular.module("addDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
+angular.module("addDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr", "constantModule",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "naif.base64", "dealFactoryModule"])
-    .controller("addDealBrandsCtrl", function ($scope, $state, $stateParams, $timeout, toastr,
-                                               storeFactory, $auth, personFactory, dealFactory) {
+    .controller("addDealBrandsCtrl", function ($scope, $state, $stateParams, $timeout, toastr, $http,
+                                               storeFactory, $auth, personFactory, dealFactory, URL) {
         $scope.selected_user = {};
         $scope.deal = {};
-        $scope.stores = [];
+        $scope.brands = [];
         $scope.persons = [];
 
         $scope.$watch('deal.name', function(newVal, oldVal) {
-            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deals" : undefined;
         }, true);
 
         if($auth.isAuthenticated()) {
-            $scope.load = storeFactory.get($auth.getToken()).then(function (data) {
+            // get the list of deal brands
+            $scope.load = dealFactory.get_deal_brands().then(function (data) {
                 console.log(data);
-                if(data['_items']) {
-                    $scope.stores = data._items;
+
+                if(data['data']) {
+                    $scope.brands = data.data._items;
+
                 }
             }, function (error) {
                 console.log(error);
@@ -37,22 +40,19 @@ angular.module("addDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
 
         // addDealBrands function
         $scope.addDealBrands = function (deal) {
-            if(Array.isArray(deal.image)) {
-                var images = [];
-                angular.forEach(deal.image, function (item) {
-                    images.push("data:image/jpeg;base64,"+item.base64);
-                });
-
-                console.log(images);
-                deal.image = images;
-
-                $scope.images = images;
+            if(deal.image && Object.keys(deal.image).length) {
+                deal.image = "data:image/jpeg;base64,"+deal.image.base64;
             } else {
-                toastr.error("Please select Deal Image", "Error!");
-                // return false;
+                toastr.error("Please select Brand Image", "Error!");
+                return false;
             }
-            delete deal.image;
-            delete deal.alt_image;
+
+            // for an alt_image
+            if(deal.alt_image && Object.keys(deal.alt_image).length) {
+                deal.alt_image = "data:image/jpeg;base64,"+deal.alt_image.base64;
+            }
+
+
             console.log(deal);
 
             dealFactory.post_deal_brands(deal).then(function (data) {

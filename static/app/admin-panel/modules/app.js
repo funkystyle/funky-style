@@ -1,14 +1,10 @@
 function clearNullIds (items) {
-    console.log("before deleting Null Items: ", items);
-    for(i=0; i<items.length; i++) {
-        if(items[i] == null || items[i] == undefined) {
-            items.splice(i, 1);
-        } else {
-            items[i] = items[i]._id;
-        }
+    if(items == undefined || items == null) {
+        return true;
     }
-    console.log("after deleting null items: ", items);
-    return items;
+    var array = _.without(items, null).map(function(item) { return item["_id"]; });
+    console.log("Before deleting null items: ", items," -- after deleting null items: ", array);
+    return array;
 }
 var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
     .run(function ($rootScope) {

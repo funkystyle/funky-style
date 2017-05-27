@@ -1,27 +1,43 @@
 angular.module("updateDealCategoriesModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
-    "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "naif.base64", "dealFactoryModule"])
+    "storeFactoryModule", "satellizer", "constantModule", "personFactoryModule", "cgBusy", "naif.base64", "dealFactoryModule"])
     .controller("updateDealCategoriesCtrl", function ($scope, $stateParams, $timeout, toastr, $state,
-                                                   storeFactory, $auth, personFactory, dealFactory) {
+                                                   storeFactory, $auth, personFactory, dealFactory, URL, $http) {
 
         $scope.selected_user = {};
         $scope.deal = {};
+        $scope.categories = [];
         $scope.persons = [];
 
         $scope.$watch('deal.name', function(newVal, oldVal) {
-            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deals" : undefined;
         }, true);
 
         if($auth.isAuthenticated() && $stateParams['id']) {
-            $scope.load = dealFactory.get_deal_categories().then(function (data) {
+            var embedded = {
+                "related_categories": 1
+            };
+
+            var random_number = new Date().getTime();
+
+            var url = URL.deal_categories+"?embedded="+JSON.stringify(embedded)+"&rand_number="+JSON.stringify(random_number);
+            $scope.load = $http({
+                url: url,
+                method: "GET"
+            }).then(function (data) {
                 console.log(data);
 
                 if(data['data']) {
-                    var items = data.data._items;
-                    angular.forEach(items, function (item) {
+                    $scope.categories = data.data._items;
+
+                    // remove null items from array
+                    angular.forEach($scope.categories, function (item) {
+                        item.related_categories = clearNullIds(item.related_categories);
+
                         if(item._id == $stateParams.id) {
+                            console.log("Deal Item: ", item);
                             $scope.deal = item;
                         }
-                    });
+                    })
                 }
             }, function (error) {
                 console.log(error);
