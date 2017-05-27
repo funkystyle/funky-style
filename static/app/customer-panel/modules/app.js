@@ -237,6 +237,19 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })
+                .state('main.brand_page', {
+                    url: '/brands/:id',
+                    templateUrl: 'static/app/customer-panel/modules/brand.page/brand.page.template.html',
+                    controller: "brandPageCtrl",
+                    resolve: {
+                        home: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'brandPageModule',
+                                files: ['static/app/customer-panel/modules/brand.page/brand.page.module.js']
+                            })
+                        }
+                    }
+                })
                 // Dashboard
                 .state('main.dashboard', {
                     url: '/dashboard',

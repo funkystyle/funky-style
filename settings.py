@@ -846,6 +846,17 @@ SCHEMAS = {
         'rating': {
             'type': 'float'
         },
+        'related_categories':{
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'deal_categories',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
         'last_modified_by': {
             'type': 'objectid',
             'data_relation': {
@@ -905,6 +916,17 @@ SCHEMAS = {
         },
         'rating': {
             'type': 'float'
+        },
+        'related_brands':{
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'deal_brands',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
         },
         'last_modified_by': {
             'type': 'objectid',

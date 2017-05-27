@@ -1,6 +1,7 @@
 angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
-    "toastr", "satellizer","cgBusy", "naif.base64", "dealFactoryModule", "storeFactoryModule"])
-    .controller("updateDealCtrl", function($scope, $state, $stateParams, $timeout, toastr, $auth, dealFactory, $q, storeFactory) {
+    "toastr", "satellizer","cgBusy", "naif.base64", "dealFactoryModule", "storeFactoryModule", "constantModule"])
+    .controller("updateDealCtrl", function($scope, $state, $stateParams, $timeout, toastr,
+                                           $auth, dealFactory, $q, storeFactory, URL, $http) {
         $scope.deal = {};
         $scope.deals = [];
         $scope.categories = [];
@@ -67,7 +68,21 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                     $scope.categories = data.data._items;
                 }
                 // get the list of deals
-                dealFactory.get().then(function (data) {
+                var embedded = {
+                    "deal_brands": 1,
+                    "store": 1,
+                    "related_deals": 1,
+                    "deal_category": 1
+                };
+
+                var random_number = new Date().getTime();
+
+                var url = URL.deals+"?embedded="+JSON.stringify(embedded)+"&rand_number="+JSON.stringify(random_number);
+
+                $http({
+                    url: url,
+                    method: "GET"
+                }).then(function (data) {
                     console.log(data);
                     if(data) {
                         $scope.deals = data.data._items;
@@ -77,7 +92,11 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                                 url: item.url,
                                 _id: item._id
                             });
-
+                            // remove null id references from array
+                            item.deal_brands = clearNullIds(item.deal_brands);
+                            item.store = (item.store)?item.store._id: undefined;
+                            item.related_deals = clearNullIds(item.related_deals);
+                            item.deal_category = clearNullIds(item.deal_category);
                             // get the selected deal for an update/view
                             if(item._id == $stateParams.id) {
                                 console.log("selected deal: ", item);
@@ -100,14 +119,33 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 console.log(error);
                 toastr.error(error.data._error.message, "Error!");
             });
-            $scope.load = storeFactory.get().then(function (data) {
+
+            // get the list of stores
+            var embedded = {};
+            embedded['related_stores'] = 1;
+            embedded['top_stores'] = 1;
+            embedded['top_catagory_store'] = 1;
+            embedded['related_coupons'] = 1;
+            embedded['related_deals'] = 1;
+
+            var random_number = new Date().getTime();
+
+            var url = URL.stores+"?embedded="+JSON.stringify(embedded)+"&rand_number="+JSON.stringify(random_number);
+
+            $scope.load = storeFactory.get(url).then(function (data) {
                 console.log(data);
                 if(data) {
                     $scope.stores = data._items;
+                    angular.forEach($scope.stores, function (item) {
+                        item.related_stores = clearNullIds(item.related_stores);
+                        item.top_stores = clearNullIds(item.top_stores);
+                        item.top_catagory_store = clearNullIds(item.top_catagory_store);
+                        item.related_coupons = clearNullIds(item.related_coupons);
+                        item.related_deals = clearNullIds(item.related_deals);
+                    });
                 }
             }, function (error) {
                 console.log(error);
-                toastr.error(error.data._error.message, "Error!");
             });
             $scope.load = dealFactory.get_deal_brands($auth.getToken()).then(function (data) {
                 console.log(data);

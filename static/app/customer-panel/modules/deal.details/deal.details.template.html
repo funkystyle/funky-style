@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.css" />
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 
+<link rel="stylesheet" href="static/app/customer-panel/modules/store.info/store.info.css"/>
+<link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
+
 <div class="container" ng-if="deal.deal_type == 'product'">
     <div class="row">
         <div class="pagenation-main col-md-12 col-xs-12 col-sm-12">
@@ -87,7 +90,7 @@
                                 <h5>Discounted Price</h5>
                             </div>
                             <div class="amazonstore-head col-md-3 text-center">
-                                <a href="{{ item.store.store_url }}" class="btn btn-primary col-xs-9">
+                                <a href="{{ deal.stores[0].landing_page }}" class="btn btn-primary col-xs-9">
                                     GO TO STORE
                                     <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                                 </a>
@@ -164,7 +167,7 @@
                         </div>
                     </td>
                     <td>
-                        <a href="{{ item.store.store_url }}" class="btn btn-primary">
+                        <a href="{{ item.landing_page }}" class="btn btn-primary">
                             GO TO STORE
                             <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                         </a>
@@ -343,10 +346,251 @@
                         </ul>
                     </div>
                     <div class="product-buynow">
-                        <button class="btn btn-success buynowbtn" value="Buy Now">Buy Now</button>
+                        <a href="{{ item.destination_url }}" target="_blank" class="btn btn-success buynowbtn">Buy Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+<!-- ======================== if the deal type is store ================= -->
+<!-- Store info starts here -->
+<div class="container pad" ng-if="deal.deal_type == 'store'">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="thumbnail">
+                        <img ng-src="{{ deal.images[0] }}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
+                    <div style="width: 100%; min-height: 20px;">
+                        <ol class="breadcrumb pull-right">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="#/deals">Deals</a></li>
+                            <li ng-repeat="item in deal.breadcrumb">
+                                <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
+                            </li>
+                            <li class="active">{{ deal.name }}</li>
+                        </ol>
+                    </div> <!-- end div -->
+                    <h1 class="margin-top-0 h3-heading">{{ deal.h1 }}</h1>
+                    <div style="width: 100%;" class="text-center rating-stars">
+                        <div class="text-center" star-rating rating-value="deal.rating" max="5"></div>
+                    </div>
+                    <div style="width: 100%;" ng-click="show = !show" class="para_small top-desc"
+                       ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(deal.description)"></div>
+                    <div>
+                        <a style="color: white;" href="{{ store.store_url }}" target="_blank" class="btn btn-md btn-info visit_store">
+                            ACTIVATE OFFER
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end panel body -->
+    </div> <!-- end panel -->
+
+    <!--row-->
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="panel panel-default coupon coupons" ng-repeat="item in deal.related_deals">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <div class="deal-price text-center hidden-xs">
+                                <h4>
+                                    {{ item.discount_type }} {{ item.actual_price }}
+                                </h4>
+                                <div class="deal">
+                                    <span>
+                                        DEAL
+                                    </span>
+                                </div>
+                            </div> <!-- end deal-price -->
+                        </div> <!-- end col -->
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <h3 class="margin-top-0 coupon-heading">
+                                {{ item.name }}
+                                <span class="pull-right hidden-xs">
+                                    <i class="fa fa-star"></i>&nbsp;
+                                    <i class="fa fa-share-alt"></i>
+                                </span>
+                            </h3>
+                            <div style="opacity: 0.6; line-height: 25px;" class="para_small">
+                                <p class="top-desc" ng-class="{'show-desc': showMore.coupons[item._id]}"
+                                    data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                <span class="pull-right">
+                                    <a ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]" href="" class="btn btn-link">
+                                        Show {{ (showMore.coupons[item._id]) ? "Less": "More" }}
+                                    </a>
+                                </span>
+                            </div>
+                            <div style="width: 100%;">
+                                <a class="btn btn-md btn-info pull-right">ACTIVATE OFFER</a>
+                            </div>
+                        </div>
+                    </div> <!-- end row -->
+                </div> <!-- end panel body -->
+            </div> <!-- end panel -->
+        </div>
+        <!-- end col -->
+        <!--col-->
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="font-bold">Top Stores</h5>
+                </div>
+                <!--panel heading-->
+                <div class="panel-body">
+                    <div class="check-box-filter-area">
+                        <p ng-repeat="item in top_stores">
+                            <a ui-sref="main.store-info({url: item.url})" style="color: #666; text-decoration: underline;">
+                                {{ item.name }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <!--end panel body-->
+            </div>
+            <!--end panel-->
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="font-bold">Top Deals</h5>
+                </div>
+                <!--panel heading-->
+                <div class="panel-body">
+                    <div class="check-box-filter-area">
+                        <p ng-repeat="item in deal.related_deals">
+                            <a ui-sref="main.deal_post_details({url: item.url})" style="color: #666; text-decoration: underline;">
+                                <img ng-src="{{ item.images[0] }}" alt="" class="img-circle" style="width: 90px;">
+                                {{ item.name }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <!--end panel body-->
+            </div>
+            <!--end panel-->
+        </div>
+        <!--end col-->
+    </div>
+    <!--end row-->
+</div>
+<!-- end of store info -->
+
+
+
+
+<!-- ================ showing coupon popup ================= -->
+<span ng-if="params">
+    <div class="container-fluid hs-sc-top">
+        <span ui-sref="main.store-info({url: store.url, cc: undefined})" class="pull-left hs-go-back">
+            <i class="fa fa-arrow-left"></i> Go Back
+        </span>
+        <span ui-sref="main.store-info({url: store.url, cc: undefined})" class="pull-right hs-go-close">
+            Close
+            <i class="fa fa-times"></i>
+        </span>
+    </div>
+
+    <div class="container bg-w">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                <a href="" title="" class="hs-sc-img center-block">
+                    <img ng-src="{{ store.image }}" alt="{{ store.name }} Logo">
+                </a>
+                <p class="text-center">{{ couponInfo.title }}</p>
+                <div class="hs-code" ng-if="couponInfo.coupon_type == 'offer'">
+                    <span class="hs-sc-offer text-center">Offer Activated</span>
+                </div>
+
+                <div ng-if="couponInfo.coupon_type == 'coupon'">
+                    <!-- Target -->
+                    <div id="foo">{{ couponInfo.coupon_code }}</div>
+
+                    <!-- Trigger -->
+                    <button class="btn" data-clipboard-target="#foo">
+                        <img src="assets/clippy.svg" alt="Copy to clipboard">
+                    </button>
+                </div>
+                <a class="hs-goto-mrcht text-center" target="_blank"
+                   title="{{ couponInfo.related_stores[0].name }}" href="{{ couponInfo.related_stores[0].store_url }}">
+                    <i class="fa fa-arrow-circle-o-right"></i>
+                    {{ couponInfo.related_stores[0].name }}
+                </a>
+                <div class="hs-sc-c-det">
+                    <p class="hs-scd-desp" ng-bind-html="trustAsHtml(couponInfo.related_stores[0].top_description)"></p>
+                </div>
+
+                <div class="hs-scd-social text-center">
+                    <a ui-sref="main.categoryinfo({url: couponInfo.related_categories[0].url, cc: undefined})" title="{{ couponInfo.related_stores[0].name }}">
+                        Check Out All {{ couponInfo.related_categories[0].name }} Coupons
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="hs-suggested-coupons">
+        <h1 class="text-center page_h1">Recommended Coupons</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center pad">
+                            <a href="" title="Paytm Coupons">
+                                <img src="https://happysale.in/hs/img/m/flipkart-1447769846055.jpeg"
+                                     alt="Flipkart" class="img img-responsive" >
+                            </a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="coupon-type">
+                                <span class="text-center">Upto 80% OFF</span>
+                            </div>
+                            <div class="coupon-title">
+                                <span class="text-center">Flipkart Electronics Sale: Upto 80% OFF</span>
+                            </div>
+                            <div class="btn btn-md btn-block btn-info">Activate Offer</div>
+                            <a href="https://happysale.in/flipkart/" title="See all Flipkart Coupons" class="coupon-all" class="link">Flipkart Coupons</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="hs-foot">
+        <div class="container">
+            <div class="row row_1">
+                <div class="col-md-7 col-md-offset-2 col-xs-12 col-sm-12">
+                    <div class="hsf-top">
+                        <ul class="list-inline hs-social">
+                            <li class="col-xs-6 col-lg-3 col-md-3">
+                                <a href=""
+                                   target="_blank" class="hs-f-facebook">
+                                    <i class="fa fa-facebook-official right_border"></i>
+                                    <span class="left_border">Facebook</span>
+                                </a>
+                            </li>
+                            <li class="col-xs-6 col-lg-3 col-md-3">
+                                <a href="https://plus.google.com/+HappySaleIn/posts"
+                                   target="_blank" class="hs-f-google">
+                                    <i class="fa fa-google-plus right_border ga"></i>
+                                    <span  class="left_border">  Google+ </span>
+                                </a>
+                            </li>
+                            <li class="col-xs-6 col-lg-3 col-md-3"><a href="https://twitter.com/HappySaleIn" target="_blank" class="hs-f-twitter"><i class="fa fa-twitter right_border tw"></i><span class="left_border">   Twitter </span></a></li>
+                            <li class="col-xs-6 col-lg-3 col-md-3"><a href="https://www.pinterest.com/happysale/" target="_blank" class="hs-f-pinterest"><i class="fa fa-pinterest right_border"></i><span class="left_border">Pinterest</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</span>
+<!-- ================ end                  ================= -->

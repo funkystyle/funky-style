@@ -1,7 +1,7 @@
-angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
+angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr", "constantModule",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy", "categoryFactoryModule", "naif.base64"])
     .controller("updateStoreCtrl", function ($scope, $timeout, toastr, $state,
-                                             storeFactory, $auth, personFactory, $stateParams, categoryFactory) {
+                                             storeFactory, $auth, personFactory, $stateParams, categoryFactory, URL) {
         $scope.store = {};
         $scope.persons = [];
         $scope.stores = [];
@@ -29,17 +29,33 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
 
         // get all stores into the array
         if($auth.isAuthenticated() && $stateParams['storeId']) {
-            $scope.load = storeFactory.get().then(function (data) {
+            var embedded = {};
+            embedded['related_stores'] = 1;
+            embedded['top_stores'] = 1;
+            embedded['top_catagory_store'] = 1;
+            embedded['last_modified_by'] = 1;
+            embedded['related_coupons'] = 1;
+            embedded['related_deals'] = 1;
+
+            var random_number = new Date().getTime();
+
+            var url = URL.stores+"?embedded="+JSON.stringify(embedded)+"&rand_number="+JSON.stringify(random_number);
+
+            $scope.load = storeFactory.get(url).then(function (data) {
                 console.log(data);
                 if(data) {
                     $scope.stores = data._items;
                     angular.forEach($scope.stores, function (item) {
                         if(item._id == $stateParams.storeId) {
+                            item.related_stores = clearNullIds(item.related_stores);
+                            item.top_stores = clearNullIds(item.top_stores);
+                            item.top_catagory_store = clearNullIds(item.top_catagory_store);
+                            item.related_coupons = clearNullIds(item.related_coupons);
+                            item.related_deals = clearNullIds(item.related_deals);
+
+                            $scope.modified_user = item.last_modified_by;
                             $scope.store = item;
-                            personFactory.getPerson($scope.store.last_modified_by, $auth.getToken()).then(function (data) {
-                                $scope.persons.push(data.data);
-                                $scope.selected_user.user = $scope.persons[0];
-                            });
+                            $scope.store.last_modified_by = item.last_modified_by._id;
                             console.log("selected store ------- ", $scope.store);
                         }
                     });
@@ -69,6 +85,7 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
 
         // update store now
         $scope.updateStore = function (store) {
+            store.last_modified_by = $scope.user._id;
             if(typeof store.image === 'object') {
                 store.image = "data:image/jpeg;base64,"+store.image.base64;
             }

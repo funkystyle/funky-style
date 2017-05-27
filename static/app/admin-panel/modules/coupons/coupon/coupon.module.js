@@ -46,8 +46,16 @@ angular.module("couponModule", ['angular-table', 'constantModule',
         };
 
         if ($auth.isAuthenticated()) {
+
+            var embedded = {
+                "recommended_stores":1,
+                "related_categories":1,
+                "related_stores":1,
+                "last_modified_by": 1
+            };
+
             $scope.load = $http({
-                url: '/api/1.0/coupons?embedded={"recommended_stores":1, "related_categories":1, "related_stores":1, "last_modified_by": 1}'+'&rand_number=' + new Date().getTime(),
+                url: '/api/1.0/coupons?embedded='+JSON.stringify(embedded)+'&rand_number=' + new Date().getTime(),
                 method: "GET"
             }).then(function (data) {
                 // console.log(data);
@@ -76,13 +84,6 @@ angular.module("couponModule", ['angular-table', 'constantModule',
             categoryFactory.get().then(function (data) {
                 if(data.data) {
                     $scope.categories = data.data._items;
-                }
-            }, function (error) {
-                console.log(error);
-            });
-            personFactory.getAll($auth.getToken()).then(function (data) {
-                if(data.data) {
-                    $scope.persons = data.data._items;
                 }
             }, function (error) {
                 console.log(error);
@@ -121,19 +122,19 @@ angular.module("couponModule", ['angular-table', 'constantModule',
 
             var items = [];
             angular.forEach(deletedArray, function (item) {
-                /*items.push(couponFactory.delete(item._id).then(function(data) {
+                items.push(couponFactory.delete(item._id).then(function(data) {
                     console.log(data);
                     return data;
                 }, function (error) {
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);
-                }));*/
+                }));
 
                 console.log(item);
             });
             $q.all(items).then(function (finalData) {
                 toastr.success("Deleted selected items", 200);
-                // $state.reload();
+                $state.reload();
             });
         };
     })

@@ -58,23 +58,19 @@ angular.module("dealCategoriesModule", ['angular-table', 'constantModule', 'toas
             angular.forEach($scope.check.check, function(val, key) {
                 angular.forEach($scope.categories, function(item, i) {
                     if (item._id == key && val && deletedArray.indexOf(item._id) == -1) {
-                        deletedArray.push(item);
+                        deletedArray.push(dealFactory.delete_deal_categories(item._id).then(function(data) {
+                            console.log(data);
+                        }, function (error) {
+                            console.log(error);
+                            toastr.error(error.data._error.message, error.data._error.code);
+                        }));
                     }
                 });
             });
-            var items = [];
-            angular.forEach(deletedArray, function (item) {
-                items.push(dealFactory.delete_deal_categories(item._id).then(function(data) {
-                    console.log(data);
-                    toastr.success("Deleted "+item.name, 200);
-                }, function (error) {
-                    console.log(error);
-                    toastr.error(error.data._error.message, error.data._error.code);
-                }));
-            });
 
-            $q.all(items).then(function (data) {
+            $q.all(deletedArray).then(function (data) {
                 toastr.success("Deleted all selected records!", "SUCCESS!");
+                $state.reload();
             }, function (error) {
                 console.log(error);
             });

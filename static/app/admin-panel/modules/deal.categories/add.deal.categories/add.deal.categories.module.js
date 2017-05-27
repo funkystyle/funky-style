@@ -5,8 +5,17 @@ angular.module("addDealCategoriesModule", ["ui.select", "ngSanitize", "ui.bootst
     $scope.selected_user = {};
     $scope.deal = {};
     $scope.persons = [];
+    $scope.categories = [];
 
     if($auth.isAuthenticated()) {
+        // get the list of deals categories
+        dealFactory.get_deal_categories().then(function (data) {
+            console.log("Deal categories: ", data);
+            if(data.data) {
+                $scope.categories = data.data._items;
+            }
+        });
+
         personFactory.me().then(function (data) {
             console.log(data);
             $scope.persons.push(data.data.data);
@@ -21,41 +30,24 @@ angular.module("addDealCategoriesModule", ["ui.select", "ngSanitize", "ui.bootst
     }
 
     $scope.$watch('deal.name', function(newVal, oldVal) {
-        $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
+        $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deals" : undefined;
     }, true);
 
-    $scope.removeImage = function (item) {
-        if($scope.deal.image.length) {
-            angular.forEach($scope.deal.image, function(image, index) {
-                if(image.base64 == item.base64) {
-                    $scope.deal.image.splice(index, 1);
-                }
-            })
-        }
-    }
-
-    $scope.$watch('deal.name', function(newVal, oldVal) {
-        $scope.deal.url = (newVal) ? newVal+"-coupons" : undefined;
-    }, true);
 
     // addDealBrands function
     $scope.addDealCategory = function (deal) {
-        if(Array.isArray(deal.image)) {
-            var images = [];
-            angular.forEach(deal.image, function (item) {
-                images.push("data:image/jpeg;base64,"+item.base64);
-            });
-
-            console.log(images);
-            deal.image = images;
-
-            $scope.images = images;
+        if(deal.image && Object.keys(deal.image).length) {
+            deal.image = "data:image/jpeg;base64,"+deal.image.base64;
         } else {
-            toastr.error("Please select Deal Image", "Error!");
-            // return false;
+            toastr.error("Please select Brand Image", "Error!");
+            return false;
         }
-        delete deal.image;
-        delete deal.alt_image;
+
+        // for an alt_image
+        if(deal.alt_image && Object.keys(deal.alt_image).length) {
+            deal.alt_image = "data:image/jpeg;base64,"+deal.alt_image.base64;
+        }
+
         console.log(deal);
         dealFactory.post_deal_categories(deal).then(function (data) {
             console.log(data);
