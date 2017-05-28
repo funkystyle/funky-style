@@ -1,14 +1,13 @@
 angular.module("headerModule", ["ui.bootstrap", "APP",
     "constantModule", "storeServiceModule", "categoryFactoryModule", "couponFactoryModule"])
-    .controller("headerCtrl", function ($scope, auth, $state, $http, URL,
+    .controller("headerCtrl", function ($scope, auth, $state, $http, URL, $filter,
                                         categoryFactory, storeFactory, couponFactory, $q) {
         console.log("header controller!");
     	// declaring the scope variables
     	$scope.user = {};
-    	$scope.categories = [];
-    	$scope.stores = [];
-    	$scope.coupons = [];
+    	$scope.featuredStores = [];
     	$scope.totalItems = [];
+    	$scope.allStores = [];
     	
     	if(localStorage.getItem('satellizer_token')) {
             // getting the current user information
@@ -24,11 +23,12 @@ angular.module("headerModule", ["ui.bootstrap", "APP",
             "projection" : {
                 "name": 1,
                 "url": 1,
+                "image": 1,
                 "featured_store": 1,
                 "menu": 1,
                 "related_coupons": 1,
                 "related_coupons.title": 1,
-                "related_coupons.url": 1
+                "related_coupons.url": 1,
             },
             "embedded": {
                 "related_coupons": 1
@@ -41,12 +41,52 @@ angular.module("headerModule", ["ui.bootstrap", "APP",
             mathod: "GET"
         }).then(function (data) {
             if(data['data']['_items']) {
-                $scope.stores = data.data._items;
-                console.log("All Stores: ", $scope.stores);
+                var items = data.data._items;
+                console.log("All Stores: ", items);
+
+                angular.forEach(items, function (item) {
+                    // collect all featured stores
+                    if(item.featured_store == true) {
+                        $scope.featuredStores.push(item);
+                    }
+                    $scope.allStores.push(item);
+                });
             }
         }, function (error) {
             console.log(error);
         });
+
+        // search by query
+        $scope.getItems = function (query) {
+            if(!query) return;
+            var list = [];
+            angular.forEach($scope.allStores, function (item) {
+                // push stores in to array
+                if(item.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                    list.push(item);
+
+                    // push related coupons into array
+                    angular.forEach(item.related_coupons, function (coupon) {
+                        if(coupon.title.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                            var obj = {
+                                name: coupon.title,
+                                image: item.image,
+                                url: item.url
+                            };
+                            list.push(obj);
+                        }
+                    });
+                }
+            });
+            console.log("Filtered List: ", list);
+            return list;
+        };
+
+        // select match
+        $scope.goStore = function ($item, $model, $label) {
+            $state.go("main.store-info", {url: $item.url});
+            $scope.customPopupSelected = undefined;
+        };
 
     	// logout
         $scope.logout = function () {

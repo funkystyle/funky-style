@@ -3,16 +3,17 @@
 
     <ul class="dropdown-menu typeahead-ul" role="listbox">
         <li class="uib-typeahead-match" ng-repeat="match in matches track by $index"
-            ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+            ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)"
+            role="option" id="{{::match.id}}">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class="thumbnail" style="margin-bottom: 0;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/VisualEditor-logo.svg/200px-VisualEditor-logo.svg.png" alt="">
+                        <img ng-src="{{ match.model.image }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <h4 class="font_style">
-                        {{ match.name }}
+                        {{ match.model.name }}
                     </h4>
                 </div>
             </div>

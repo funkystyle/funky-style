@@ -25,9 +25,9 @@
                     <div class="col-lg-12">
                         <input ng-keyup="searchQuery(customPopupSelected)" type="text" ng-model="customPopupSelected"
                                placeholder="Search Stores/Coupons"
-                               uib-typeahead="state as state.name for state in totalItems | filter:{name:$viewValue}"
+                               uib-typeahead="state as state.name for state in getItems($viewValue)"
                                typeahead-popup-template-url="static/app/customer-panel/modules/header/typeahead.template.html"
-                               class="flipkart-navbar-input col-xs-9">
+                               class="flipkart-navbar-input col-xs-9" typeahead-on-select="goStore($item, $model, $label)">
                         <button class="search-navbar-button col-xs-2">
                             <span class="on-desktop">Search</span>
                             <span class="on-mobile">
@@ -85,7 +85,7 @@
                     </a>
                     <ul class="dropdown-menu top-store-ul">
                         <div class="row">
-                            <div class="col-lg-4" ng-if="item.menu == 'top'" ng-repeat="item in stores | limitTo: 15">
+                            <div class="col-lg-4" ng-if="item.menu == 'top'" ng-repeat="item in featuredStores | limitTo: 15">
                                 <li><a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a></li>
                             </div>
                         </div>
