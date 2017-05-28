@@ -590,6 +590,73 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
                         }
                     }
                 })
+                // Top Banners
+                .state('header.banners', {
+                    url: '/banners',
+                    templateUrl: '/static/app/admin-panel/modules/banners/banners.template.html',
+                    controller: "bannersCtrl",
+                    resolve: {
+                        dealbrands: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'bannersModule',
+                                files: ['/static/app/admin-panel/modules/banners/banners.module.js']
+                            })
+                        }
+                    }
+                })
+                .state('header.add-banners', {
+                    url: '/banners/add',
+                    templateUrl: '/static/app/admin-panel/modules/banners/add/add.banners.template.html',
+                    controller: "addBannersCtrl",
+                    resolve: {
+                        addDealBrands: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'addBannersModule',
+                                files: ['/static/app/admin-panel/modules/banners/add/add.banners.module.js']
+                            })
+                        }
+                    }
+                })
+                // Master SEO
+                .state('header.seo', {
+                    url: '/seo',
+                    templateUrl: '/static/app/admin-panel/modules/seo/seo.template.html',
+                    controller: "seoCtrl",
+                    resolve: {
+                        dealbrands: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'seoModule',
+                                files: ['/static/app/admin-panel/modules/seo/seo.module.js']
+                            })
+                        }
+                    }
+                })
+                .state('header.add-seo', {
+                    url: '/seo/add',
+                    templateUrl: '/static/app/admin-panel/modules/seo/add/add.seo.template.html',
+                    controller: "addSeoCtrl",
+                    resolve: {
+                        addDealBrands: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'addSeoModule',
+                                files: ['/static/app/admin-panel/modules/seo/add/add.seo.module.js']
+                            })
+                        }
+                    }
+                })
+                .state('header.update-seo', {
+                    url: '/seo/update/:id',
+                    templateUrl: '/static/app/admin-panel/modules/seo/update/update.seo.template.html',
+                    controller: "updateSeoCtrl",
+                    resolve: {
+                        addDealBrands: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'updateSeoModule',
+                                files: ['/static/app/admin-panel/modules/seo/update/update.seo.module.js']
+                            })
+                        }
+                    }
+                })
 
                 // CMS
                 .state('header.cms', {

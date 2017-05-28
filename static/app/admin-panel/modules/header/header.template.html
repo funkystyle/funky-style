@@ -171,6 +171,28 @@
                         <li ng-class="{active: state.includes('header.add-cms')}"><a ui-sref="header.add-cms">Add CMS<i class="fa fa-angle-right pull-right"></i></a></li>
                     </ul>
                 </li>
+                <!-- for top banners -->
+                <li>
+                    <a href="" data-toggle="collapse" data-target="#submenu-banners">
+                        Banners
+                        <i class="fa fa-fw pull-right" ng-class="{'fa-angle-down': state.includes('header.banners') || state.includes('header.add-banners') || state.includes('header.update-banners'), 'fa-angle-right': !state.includes('header.banners') || !state.includes('header.add-banners') || !state.includes('header.update-banners')}"></i>
+                    </a>
+                    <ul id="submenu-banners" class="collapse" ng-class="{in: state.includes('header.banners') || state.includes('header.add-banners') || state.includes('header.update-banners')}">
+                        <li ng-class="{active: state.includes('header.banners')}"><a ui-sref="header.banners">Banners<i class="fa fa-angle-right pull-right"></i></a></li>
+                        <li ng-class="{active: state.includes('header.add-banners')}"><a ui-sref="header.add-banners">Add Banners<i class="fa fa-angle-right pull-right"></i></a></li>
+                    </ul>
+                </li>
+                <!-- for Master SEO Table -->
+                <li>
+                    <a href="" data-toggle="collapse" data-target="#submenu-master-seo">
+                        Master SEO
+                        <i class="fa fa-fw pull-right" ng-class="{'fa-angle-down': state.includes('header.seo') || state.includes('header.add-seo') || state.includes('header.update-seo'), 'fa-angle-right': !state.includes('header.seo') || !state.includes('header.add-seo') || !state.includes('header.update-seo')}"></i>
+                    </a>
+                    <ul id="submenu-master-seo" class="collapse" ng-class="{in: state.includes('header.seo') || state.includes('header.add-seo') || state.includes('header.update-seo')}">
+                        <li ng-class="{active: state.includes('header.seo')}"><a ui-sref="header.seo">SEO<i class="fa fa-angle-right pull-right"></i></a></li>
+                        <li ng-class="{active: state.includes('header.add-seo')}"><a ui-sref="header.add-seo">Add SEO<i class="fa fa-angle-right pull-right"></i></a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

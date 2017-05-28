@@ -64,19 +64,18 @@ angular.module("headerModule", ["ui.bootstrap", "APP",
                 // push stores in to array
                 if(item.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
                     list.push(item);
-
-                    // push related coupons into array
-                    angular.forEach(item.related_coupons, function (coupon) {
-                        if(coupon.title.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-                            var obj = {
-                                name: coupon.title,
-                                image: item.image,
-                                url: item.url
-                            };
-                            list.push(obj);
-                        }
-                    });
                 }
+                // push related coupons into array
+                angular.forEach(item.related_coupons, function (coupon) {
+                    if(coupon.title.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                        var obj = {
+                            name: coupon.title,
+                            image: item.image,
+                            url: item.url
+                        };
+                        list.push(obj);
+                    }
+                });
             });
             console.log("Filtered List: ", list);
             return list;

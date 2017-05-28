@@ -93,12 +93,4 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
             })
             
         };
-
-        $scope.toggleSidebar = function(id) {
-            if ($("#"+id).css("right") == "0px") {
-                $("#"+id).animate({ "right": '-1000', 'display': 'none' }, 500);
-            } else {
-                $("#"+id).animate({ "right": '0', 'display': 'block' }, 500);
-            }
-        }
     });
