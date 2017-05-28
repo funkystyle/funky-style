@@ -223,6 +223,20 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })
+                // all deals page
+                .state('main.all_deals', {
+                    url: '/deals',
+                    templateUrl: 'static/app/customer-panel/modules/fab.deal.home/fab.deal.home.template.html',
+                    controller: "allDealsCtrl",
+                    resolve: {
+                        home: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'allDealsModule',
+                                files: ['static/app/customer-panel/modules/fab.deal.home/fab.deal.home.module.js']
+                            })
+                        }
+                    }
+                })
                 // deals brand page
                 .state('main.deal_post_details', {
                     url: '/deals/:url',
@@ -237,6 +251,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })
+
                 .state('main.deal_brand_page', {
                     url: '/brands/:url',
                     templateUrl: 'static/app/customer-panel/modules/brand.page/brand.page.template.html',
