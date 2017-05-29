@@ -66,6 +66,7 @@ def delete_image(path):
 def process_images(requests):
     for request in  requests:
         for field in CONFIG_DATA['IMAGE_FIELDS']:
+            LOGGER.info("image field:{}".format(field))
             if field in request:
                 if isinstance(request[field], list):
                     for index, image in enumerate(request[field]):
@@ -77,6 +78,7 @@ def process_images(requests):
 
 # hooks for stores
 def before_create(resource, request):
+    LOGGER.info("called for create image resource:{}".format(resource))
     process_images(request)
 
 def before_update(resource, update, original):
