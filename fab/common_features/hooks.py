@@ -79,7 +79,6 @@ def before_create(resource, request):
     process_images(request)
 
 def before_update(resource, update, original):
-    print update, '========', original
     # getting all image fields of all tables from config file
     for image_field in CONFIG_DATA['IMAGE_FIELDS']:
         # checking image field of conf in update payload

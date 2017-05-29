@@ -757,10 +757,10 @@ SCHEMAS = {
             "type": "boolean"
         },
         'top_banner':{
-          'type': 'list'
+          'type': 'string'
         },
         'side_banner':{
-          'type': 'list'
+          'type': 'string'
         },
         'last_modified_by': {
             'type': 'objectid',
