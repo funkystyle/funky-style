@@ -18,7 +18,7 @@ angular.module("constantModule", [])
         cms_pages: "/api/1.0/cms_pages",
         deal_brands: "/api/1.0/deal_brands",
         deal_categories: "/api/1.0/deal_categories",
-        banner: "/api/1.0//banner",
+        banner: "/api/1.0/banner",
         master_seo: "/api/1.0/master_seo",
         coupons_comments: "/api/1.0/coupons_comments",
         coupons_reports: "/api/1.0/coupons_reports",
