@@ -169,7 +169,7 @@ SCHEMAS = {
             'required': True
         },
         'user_level': {
-            'type': 'list',
+            'type': 'string',
             'allowed': CONFIG_DATA['APPLICATION_ROLES'],
             'required': True
         },
@@ -742,7 +742,8 @@ SCHEMAS = {
             "required":True
         },
         'image': {
-            "type": "string"
+            "type": "string",
+            "required": True
         },
         'image_text': {
             "type": "string"

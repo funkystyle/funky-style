@@ -27,12 +27,12 @@ def user_login_required(f):
             error = 'user not logged in.'
             abort(401, error)
 
-        if not len(session['user_level']):
+        if not session['user_level']:
             LOGGER.info('user roles empty.')
             error = 'user not logged in.'
             abort(401, error)
 
-        if any(True for role in session['user_level'] if role not in CONFIG_DATA['APPLICATION_ROLES']):
+        if session['user_level'] not in CONFIG_DATA['APPLICATION_ROLES']:
             LOGGER.info('Invalid user role of :{0}.'.format(session['user_id']))
             error = 'Invalid user role.'
             abort(401, error)
@@ -68,12 +68,12 @@ def submitter_login_required(f):
             error = 'user not logged in.'
             abort(401, error)
 
-        if not len(session['user_level']):
+        if not session['user_level']:
             LOGGER.info('user roles empty.')
             error = 'user not logged in.'
             abort(401, error)
 
-        if any(True for role in session['user_level'] if role not in allowed_roles):
+        if session['user_level'] not in allowed_roles:
             LOGGER.info('Invalid user role of :{0}.'.format(session['user_id']))
             error = 'Invalid user role.'
             abort(401, error)
@@ -111,12 +111,12 @@ def editor_login_required(f):
             error = 'user not logged in.'
             abort(401, error)
 
-        if not len(session['user_level']):
+        if not session['user_level']:
             LOGGER.info('user roles empty.')
             error = 'user not logged in.'
             abort(401, error)
 
-        if any(True for role in session['user_level'] if role not in allowed_roles):
+        if session['user_level'] not in allowed_roles:
             LOGGER.info('Invalid user role of :{0}.'.format(session['user_id']))
             error = 'Invalid user role.'
             abort(401, error)
@@ -153,12 +153,12 @@ def admin_login_required(f):
             error = 'user not logged in.'
             abort(401, error)
 
-        if not len(session['user_level']):
+        if not session['user_level']:
             LOGGER.info('user roles empty.')
             error = 'user not logged in.'
             abort(401, error)
-        LOGGER.info("user_level:{0} allowed levels:{1}".format(session['user_level'], allowed_roles))
-        if any(True for role in session['user_level'] if role not in allowed_roles):
+
+        if session['user_level'] not in allowed_roles:
             LOGGER.info('Invalid user role of :{0}.'.format(session['user_id']))
             error = 'Invalid user role.'
             abort(401, error)

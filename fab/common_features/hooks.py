@@ -19,6 +19,7 @@ def before_delete_persons_item(item):
 
 def check_base64_or_not(data):
     image_data = data.split(",")
+    LOGGER.error("length of image split"+str(len(image_data)))
     if len(image_data) < 2:
         return False
     try:
