@@ -6,9 +6,36 @@ function clearNullIds (items) {
     console.log("Before deleting null items: ", items," -- after deleting null items: ", array);
     return array;
 }
+var monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+var date = new Date();
+var month = undefined;
+var year = undefined;
+
+date.setDate(date.getDate() - 3);
+month = monthNames[date.getMonth()];
+year = date.getFullYear();
+
+
 var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
-    .run(function ($rootScope) {
+    .run(function ($rootScope, $http) {
         var id = undefined;
+        // get the seo details from the table
+        $rootScope.seo = {};
+        $http({
+            // TODO
+            url: '/api/1.0/master_seo',
+            method: "GET"
+        }).then(function (data) {
+            console.log("SEO data: ", data);
+            if(data.data._items.length != 0) {
+                $rootScope.seo = data.data._items[0];
+            }
+        }, function (error) {
+            console.log(error);
+        });
+
         $rootScope.textEditor = function (event) {
             $(".Editor-container").remove();
             $("#editorModal").modal("show");

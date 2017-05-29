@@ -11,9 +11,9 @@
     </div>
 
     <div class="panel-body" cg-busy="load">
-        <form name="signup" ng-submit="seo(seo)" cg-busy="load">
+        <form name="signup" cg-busy="load">
             <div class="row">
-                <div class="col-lg-9 col-md-9">
+                <div class="col-lg-11 col-md-11">
                     <div class="form-group col-md-12">
                         <label for="title">Meat Title</label>
                         <input required type="text" id="title" class="form-control" ng-model="seo.meta_title" placeholder="Meta Title" />
@@ -51,7 +51,8 @@
             </div>
             <!-- end row -->
             <div class="form-group col-md-12">
-                <button type="submit" class="btn btn-md btn-info">Submit SEO</button>
+                <button ng-if="no_seo" type="button" ng-click="update(seo)" class="btn btn-md btn-info">Update SEO</button>
+                <button ng-if="!no_seo" type="button" ng-click="create(seo)" class="btn btn-md btn-info">Create SEO</button>
             </div>
         </form>
     </div>

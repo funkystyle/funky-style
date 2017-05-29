@@ -26,6 +26,10 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
         ];
 
         $scope.$watch('store.name', function(newVal, oldVal) {
+            if($scope.seo.selection_type.indexOf('single_store') > -1) {
+                $scope.store.meta_title = $scope.seo.meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+                $scope.store.meta_description = $scope.seo.meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            }
             $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
         }, true);
 

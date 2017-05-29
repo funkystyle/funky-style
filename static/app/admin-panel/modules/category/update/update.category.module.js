@@ -46,6 +46,10 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
         ];
 
         $scope.$watch('category.name', function(newVal, oldVal) {
+            if($scope.seo.selection_type.indexOf('single_category') > -1) {
+                $scope.category.seo_title = $scope.seo.meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+                $scope.category.seo_description = $scope.seo.meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            }
             $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
         }, true);
 
