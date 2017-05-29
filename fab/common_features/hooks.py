@@ -79,6 +79,7 @@ def before_create(resource, request):
     process_images(request)
 
 def before_update(resource, update, original):
+    print update, '========', original
     # getting all image fields of all tables from config file
     for image_field in CONFIG_DATA['IMAGE_FIELDS']:
         # checking image field of conf in update payload
@@ -105,7 +106,7 @@ def before_update(resource, update, original):
                     delete_image(original[image_field])
                     update[image_field] = ""
 
-            elif update[image_field] != original[image_field]:
+            elif image_field in update and image_field in original and update[image_field] != original[image_field]:
                 # replace if image field string with path after save
                 path = save_image_from_base64(update[image_field])
                 delete_image(original[image_field])
