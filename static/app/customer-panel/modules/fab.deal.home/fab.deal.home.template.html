@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 col-lg-3 border_around" ng-repeat="item in deal_categories">
+            <div class="col-md-3 col-lg-3 border_around" ui-sref="main.deal_category_page({url: item.url})" ng-repeat="item in deal_categories">
                 <div class="col-md-9 col-lg-9">
                     <h4>{{ item.name }}</h4>
                     <p class="para1"></p>
@@ -43,7 +43,7 @@
                 <div class="row row_mar">
                     <div class="col-lg-3 col-md-3" ng-repeat="item in deal_brands">
                         <div class="panel panel-default">
-                            <div class="panel-body">
+                            <div class="panel-body" ui-sref="main.deal_brand_page({url: item.url})">
                                 <div class="media">
                                     <div class="media-left">
                                         <img ng-src="{{ item.image }}" class="media-object" style="width:60px">
@@ -84,6 +84,9 @@
                         <div class="product-price">
                             <h4>{{ item.discount_price }}</h4>
                             <p ng-if="item.deal_type == 'product'">{{ item.stores.length }} Stores at {{ item.discount_price }}</p>
+                            <p>
+                                <a ui-sref="main.deal_post_details({url: item.url})">Go to Deal</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -91,7 +94,7 @@
         </div>
         <div class="row row_best">
             <div class="col-md-4 col-lg-4 pull-left pad_left">
-                <h6 class="best_sell_txt">Upcoming Mobiles</h6>
+                <h6 class="best_sell_txt">Upcoming Deals</h6>
             </div>
             <div class="col-md-2 col-lg-2 pull-right">
                 <button class="btn btn-primary col-md-12 col-lg-12">View All </button>
@@ -112,6 +115,9 @@
                         <div class="product-price">
                             <h4>{{ item.discount_price }}</h4>
                             <p ng-if="item.deal_type == 'product'">{{ item.stores.length }} Stores at {{ item.discount_price }}</p>
+                            <p>
+                                <a ui-sref="main.deal_post_details({url: item.url})">Go to Deal</a>
+                            </p>
                         </div>
                     </div>
                 </div>
