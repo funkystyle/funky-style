@@ -757,10 +757,10 @@ SCHEMAS = {
         'status': {
             "type": "boolean"
         },
-        'top_banner':{
+        'top_banner_string':{
           'type': 'string'
         },
-        'side_banner':{
+        'side_banner_string':{
           'type': 'string'
         },
         'last_modified_by': {
