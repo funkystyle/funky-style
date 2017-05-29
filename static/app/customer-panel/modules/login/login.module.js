@@ -6,7 +6,7 @@ angular.module("loginModule", ["constantModule", "satellizer", "toastr"])
         }
         $scope.login = {};
         $scope.register = {
-            user_level: ['user'],
+            user_level: 'user',
             status: "inactive"
         };
         // login click

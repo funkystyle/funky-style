@@ -1,95 +1,53 @@
-angular.module("seoModule", ['angular-table', 'constantModule', 'toastr', 'personFactoryModule', 'cgBusy', 'satellizer', 'ui.select'])
-    .controller("seoCtrl", function($scope, $filter, toastr, mainURL, URL, $state, $stateParams,
-                                      personFactory, $auth, $q, $http) {
-        console.log("seo Controller!");
-
-
-        $scope.seos = [];
-        $scope.filterSeos = [];
-        $scope.search = {
-            search: undefined
+angular.module("seoModule", ["ui.select", "ngSanitize",
+    "ui.bootstrap", "toastr", "satellizer", "personFactoryModule", "cgBusy", "constantModule"])
+    .controller("seoCtrl", function ($scope, $timeout, toastr, $auth, personFactory, $log, URL, $state, $http) {
+        console.log("Add seo Controller!");
+        $scope.selection_type = [
+            {
+                text: "Home",
+                code: "home"
+            },
+            {
+                text: "All Categories",
+                code: "category"
+            },
+            {
+                text: "All Stores",
+                code: "store"
+            },
+            {
+                text: "All Deals",
+                code: "deal"
+            }
+        ];
+        $scope.status = [
+            {
+                text: "Active",
+                code: true
+            },
+            {
+                text: "In Active",
+                code: false
+            }
+        ];
+        $scope.seo = {
+            status: $scope.status[0].code,
+            selection_type: [$scope.selection_type[0].code]
         };
-        $scope.show = false;
-        $scope.check = {
-            all: false,
-            check: {}
-        };
-
-        $scope.config = {
-            itemsPerPage: 20,
-            maxPages: 20,
-            fillLastPage: "no"
-        };
-
-        $scope.updateFilteredList = function() {
-            $scope.filterSeos = $filter("filter")($scope.seos, $scope.search.search);
-        };
-
-        if ($auth.isAuthenticated()) {
-            var rand = new Date().getTime(),
-                embedded = {
-                    "last_modified_by": 1
-                };
-            var url = URL.master_seo+"?embedded="+ JSON.stringify(embedded)+"&r="+JSON.stringify(rand);
-
-            $scope.load = $http({
-                url: url,
-                method: "GET"
+        // add seo to the database
+        $scope.addSeo = function (seo) {
+            seo.last_modified_by = $scope.user._id;
+            console.log(seo);
+            $http({
+                url: URL.master_seo,
+                method: "POST",
+                data: seo
             }).then(function (data) {
-                console.log(data);
-                if(data.data._items) {
-                    $scope.seos = data.data._items;
-                    $scope.filterSeos = data.data._items;
-                    angular.forEach($scope.seos, function(item) {
-                        $scope.check.check[item._id] = false;
-                    });
-                }
+                console.log("Success data: ", data);
+                toastr.success(seo.meta_title, "Created!");
+                $state.go("header.seo");
             }, function (error) {
                 console.log(error);
-                toastr.error(error.data._error.message, "Error!");
             });
         }
-
-        // check for individual check boxes
-        $scope.checkBox = function(val) {
-            var count = 0;
-            angular.forEach($scope.check.check, function(val, key) {
-                if (val) {
-                    count++
-                }
-            });
-            $scope.check.all = (count == Object.keys($scope.check.check).length) ? true : false;
-            $scope.show = (count == 0) ? false : true;
-            $scope.check.count = count;
-        };
-
-        // delete selected check boxes
-        $scope.deleteSelected = function() {
-            var deletedArray = [];
-            angular.forEach($scope.check.check, function(val, key) {
-                angular.forEach($scope.seos, function(item, i) {
-                    if (item._id == key && val && deletedArray.indexOf(item._id) == -1) {
-                        deletedArray.push(
-                            $http({
-                                url: URL.master_seo+'/'+item._id+'?rand_number='+Math.random(),
-                                method: "DELETE"
-                            }).then(function (data) {
-                                console.log(data);
-                                return data;
-                            }, function (error) {
-                                console.log(error);
-                                return error;
-                            })
-                        );
-                    }
-                });
-            });
-
-            // show success message after deleting all the stores
-            $q.all(deletedArray).then(function (data) {
-                toastr.success("Deleted Selected Items!", "Success!");
-                $state.reload();
-            });
-
-        };
     });

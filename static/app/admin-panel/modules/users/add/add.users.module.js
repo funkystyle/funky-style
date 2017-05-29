@@ -27,7 +27,7 @@ angular.module("addUsersModule", ['constantModule', 'toastr', 'ui.select', 'pers
             }
         ];
         $scope.user = {
-            user_level: [$scope.userLevels[0].level],
+            user_level: $scope.userLevels[0].level,
             gender: $scope.genders[0]['code']
         };
 
