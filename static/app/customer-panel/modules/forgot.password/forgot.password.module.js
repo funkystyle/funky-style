@@ -1,31 +1,23 @@
-angular.module("forgotPasswordModule", ["constantModule"])
-	.controller('forgotPasswordCtrl', function($scope, $http, mainURL, URL){
+angular.module("forgotPasswordModule", [ "satellizer", "toastr", "cgBusy"])
+	.controller('forgotPasswordCtrl', function($scope, $http, $state, $stateParams, $auth, toastr){
 		$scope.forgot = {};
 		$scope.message = {};
 
 
 		$scope.sendLink = function (obj) {
+			console.log("Send forgot Password: ", obj);
 			$scope.message = {};
-			$http({
-				url: mainURL + URL.sendForgetPasswordLink,
+			$scope.load = $http({
+				url: "/api/1.0/auth/send-forgot-password-link",
 				method: "POST",
 				data: obj
 			}).then(function (data) {
 				console.log(data);
-				$scope.message = {
-					error: fasle,
-					success: true,
-					text: data.data,
-					type: "Success!"
-				};
+				toastr.success("Change password link has been sent to your Email!", "Please check your Email!");
+				$state.go("main.home");
 			}, function (error) {
 				console.log(error);
-
-				$scope.message = {
-					error: true,
-					text: error.data.error,
-					type: "Error!"
-				};
+				toastr.error(error.data._error.message, "Error!");
 			});
 		}
-	})
+	});

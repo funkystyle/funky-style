@@ -30,7 +30,7 @@
                     </div>
                     <span class="or">OR</span>
                 </div>
-                <form class="form-signin" ng-submit="loginNow(login)">
+                <form class="form-signin" ng-submit="loginNow(login)" cg-busy="load">
                     <div class="form-group">
                         <label>EMAIL</label>
                         <input type="text" class="form-control" ng-model="login.email" placeholder="EMAIL" required autofocus />
@@ -69,7 +69,7 @@
                     </div>
                     <span class="or">OR</span>
                 </div>
-                <form class="form-signin" name="registerForm" ng-submit="registerNow(register)" novalidate>
+                <form class="form-signin" name="registerForm" ng-submit="registerNow(register)" cg-busy="load" novalidate>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
