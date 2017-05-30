@@ -29,9 +29,18 @@ def send_fab_emails(**kwargs):
     with open(kwargs['template'], 'r') as _file:
         html_data = _file.read()
         if 'user_id' in kwargs:
-            html_data = html_data.format(server_url=kwargs['server_url'],token=kwargs['token'], user_id=kwargs['user_id'])
+            html_data = html_data.format(server_url=kwargs['server_url'],
+                                         token=kwargs['token'],
+                                         user_id=kwargs['user_id'],
+                                         email=kwargs['email'],
+                                         first_name=kwargs['first_name']
+                                         )
         else:
-            html_data = html_data.format(server_url=kwargs['server_url'], token=kwargs['token'])
+            html_data = html_data.format(server_url=kwargs['server_url'],
+                                         token=kwargs['token'],
+                                         email=kwargs['email'],
+                                         first_name=kwargs['first_name']
+                                         )
         msg.html = html_data
 
     with mail.record_messages() as outbox:
