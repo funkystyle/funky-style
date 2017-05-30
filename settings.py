@@ -645,12 +645,8 @@ SCHEMAS = {
             "type": "string"
         },
 
-        'number_of_clicks': {
-            'type': 'integer'
-        },
-        'number_of_views': {
-            'type': 'integer'
-        },
+
+
 
         'destination_url': {
             "type": "string"
@@ -1048,6 +1044,21 @@ SCHEMAS = {
             'type': 'list',
             'required': True
         }
+    },
+    'common_access_collection': {
+        'collection_name': {
+            "type": "string",
+            "unique": True,
+            "required": True
+        },
+        'number_of_clicks': {
+            "type": "integer",
+            "default": 0
+        },
+        'number_of_views': {
+            "type": "integer",
+            "default": 0
+        }
     }
 
 
@@ -1055,6 +1066,7 @@ SCHEMAS = {
 
 PERSONS_SCHEMA = SCHEMAS['persons']
 STORES_SCHEMA = SCHEMAS['stores']
+COMMON_ACCESS_COLLECTION_SCHEMA = SCHEMAS['common_access_collection']
 
 DEALS_SCHEMA = SCHEMAS['deals']
 CATEGORIES_SCHEMA = SCHEMAS['categories']
@@ -1069,6 +1081,11 @@ COUPONS_COMMENTS_SCHEMA = SCHEMAS['coupon_comments']
 BLOG_SCHEMA = SCHEMAS['blog']
 
 
+COMMON_ACCESS_COLLECTION = {
+    'item_title': 'common_access_collection',
+    'schema': COMMON_ACCESS_COLLECTION_SCHEMA,
+    'url': 'common_access_collection'
+}
 
 PERSONS = {
     'item_title': 'persons',
@@ -1154,7 +1171,8 @@ DOMAIN = {
     'master_seo': MASTER_SEO,
     'coupons_comments': COUPONS_COMMENTS,
     'coupons_reports': COUPON_REPORTS,
-    'blog': BLOG
+    'blog': BLOG,
+    'common_access_collection': COMMON_ACCESS_COLLECTION
 }
 
 COLLECTION_NAMES = DOMAIN.keys()

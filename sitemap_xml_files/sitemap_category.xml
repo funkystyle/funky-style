@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+				<urlset
+				  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+				  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+				        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+				
+						
+						<url>
+							<loc>https://fabpromocodes.in/category/fashion-offers/</loc>	
+							<lastmod>2017-04-10T11:28:14+05:30</lastmod>
+							<changefreq>daily</changefreq>
+							<priority>0.9</priority>
+						</url>
+						
+				
+						<url>
+							<loc>https://fabpromocodes.in/category/bank-offers/</loc>	
+							<lastmod>2017-04-09T23:38:35+05:30</lastmod>
+							<changefreq>daily</changefreq>
+							<priority>0.9</priority>
+						</url>
+							
+						
+					<url>
+						<loc>https://fabpromocodes.in/categories/</loc>
+						<lastmod>2017-04-10T11:31:09+05:30</lastmod>
+						<changefreq>daily</changefreq>
+						<priority>0.8</priority>
+					</url>
+				
+				   <url>
+						<loc>https://fabpromocodes.in/banks-offers/</loc>
+						<lastmod>2017-04-10T11:31:09+05:30</lastmod>
+						<changefreq>daily</changefreq>
+						<priority>0.8</priority>
+					</url>
+					
+				
+					
+				</urlset>
