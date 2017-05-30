@@ -45,8 +45,8 @@ angular.module("addBannersModule", ["ui.select", "ngSanitize",
                 defaultDate: new Date()
             }),
             deal_of_the_day_banner: $scope.deal_of_the_day[0].code,
-            top_banner: [$scope.selection_type[0].code],
-            side_banner: [$scope.selection_type[0].code],
+            top_banner_string: $scope.selection_type[0].code,
+            side_banner_string: $scope.selection_type[0].code,
             status: $scope.status[0].code
         };
         // add banner to the database
@@ -57,6 +57,7 @@ angular.module("addBannersModule", ["ui.select", "ngSanitize",
                 toastr.error("Please select Banner Image", "Error!");
                 return false;
             }
+
             banner.expired_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
             banner.last_modified_by = $scope.user._id;
             console.log(banner);

@@ -184,14 +184,10 @@
                 </li>
                 <!-- for Master SEO Table -->
                 <li>
-                    <a href="" data-toggle="collapse" data-target="#submenu-master-seo">
+                    <a ui-sref="header.seo" data-toggle="collapse" data-target="#submenu-master-seo">
                         Master SEO
-                        <i class="fa fa-fw pull-right" ng-class="{'fa-angle-down': state.includes('header.seo') || state.includes('header.add-seo') || state.includes('header.update-seo'), 'fa-angle-right': !state.includes('header.seo') || !state.includes('header.add-seo') || !state.includes('header.update-seo')}"></i>
+                        <i class="fa fa-fw pull-right"></i>
                     </a>
-                    <ul id="submenu-master-seo" class="collapse" ng-class="{in: state.includes('header.seo') || state.includes('header.add-seo') || state.includes('header.update-seo')}">
-                        <li ng-class="{active: state.includes('header.seo')}"><a ui-sref="header.seo">SEO<i class="fa fa-angle-right pull-right"></i></a></li>
-                        <li ng-class="{active: state.includes('header.add-seo')}"><a ui-sref="header.add-seo">Add SEO<i class="fa fa-angle-right pull-right"></i></a></li>
-                    </ul>
                 </li>
             </ul>
         </div>
