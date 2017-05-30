@@ -5,6 +5,7 @@
   "PASSWORD_CRYPTION_TOKEN": "j++^1k=*raynr-mw(9ux=j#omk@=05p4g=-eg3&hwx5y7#cpo7",
   "HOST": "127.0.0.1",
   "PORT":8000,
+  "SERVER_URL": "http://ec2-54-213-22-144.us-west-2.compute.amazonaws.com",
   "DEBUG": true,
   "URL_PREFIX": "api",
   "API_VERSION": "1.0",

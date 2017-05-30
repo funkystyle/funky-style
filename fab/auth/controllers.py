@@ -7,7 +7,7 @@ from bson.objectid import ObjectId
 from fab import ReturnException, app, convert_object_dates_to_string, delete_some_keys_from_dict, Validations
 from fab import send_fab_emails,parse_token
 
-from settings import LOGGER, CONFIG_DATA, HOST, PORT,DOMAIN, SCHEMAS
+from settings import LOGGER, CONFIG_DATA, HOST, PORT,DOMAIN, SCHEMAS, SERVER_URL
 
 @app.route('/api/1.0/get-fields-info', methods=['POST'])
 def get_fields_info():
@@ -50,7 +50,7 @@ def forgotpassword():
                    sender=CONFIG_DATA['FAB_SUPPORT_TEAM'],
                    user_id=str(user['_id']),
                    token=token,
-                   server_url=HOST + ':' + str(PORT),
+                   server_url=SERVER_URL,
                    template=CONFIG_DATA['FORGOT_PASSWORD_EMAIL_TEMPLATE']):
             response = jsonify(error='', data={"token": token, "user_id": str(user['_id'])})
             response.status_code = 200
@@ -272,7 +272,7 @@ def signup():
                        sender=CONFIG_DATA['FAB_SUPPORT_TEAM'],
                        user_id=user_id,
                        token=registration_token,
-                       server_url=HOST+':'+str(PORT),
+                       server_url=SERVER_URL,
                        template=CONFIG_DATA['REGISTRATION_EMAIL_TEMPLATE']):
                 payload['mail_sent'] = True
                 payload['main_sent_error'] = ''
