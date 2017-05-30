@@ -24,6 +24,13 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         ]
                     },
                     {
+                        name: "cgBusy",
+                        files: [
+                            "/static/bower_components/angular-busy/dist/angular-busy.min.js",
+                            "/static/bower_components/angular-busy/dist/angular-busy.min.css"
+                        ]
+                    },
+                    {
                         name: "satellizer",
                         files: [
                             'static/bower_components/satellizer/dist/satellizer.js'

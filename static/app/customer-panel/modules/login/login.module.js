@@ -1,4 +1,4 @@
-angular.module("loginModule", ["constantModule", "satellizer", "toastr"])
+angular.module("loginModule", ["constantModule", "satellizer", "toastr", "cgBusy"])
     .controller("loginCtrl", function($scope, $http, URL, mainURL, $state, $stateParams, $auth, toastr) {
         // Declaring variables
         if($auth.isAuthenticated()) {
@@ -11,7 +11,7 @@ angular.module("loginModule", ["constantModule", "satellizer", "toastr"])
         };
         // login click
         $scope.loginNow = function(login) {
-            $http({
+            $scope.load = $http({
                 url: URL.login,
                 method: "POST",
                 data: login
@@ -31,7 +31,7 @@ angular.module("loginModule", ["constantModule", "satellizer", "toastr"])
             register.city = "s";
             register.age = 25;
             register.gender = "male";
-            $http({
+            $scope.load = $http({
                 url: mainURL + URL.register,
                 method: "POST",
                 data: [register]
