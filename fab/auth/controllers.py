@@ -244,7 +244,7 @@ def signup():
                 if user_level in CONFIG_DATA['CREATE_USER_ROLES']:
                     can_assign = True
         if not can_assign:
-            payload['user_level'] = ["user"]
+            payload['user_level'] = "user"
 
         # initiated persons collections to create new user
 
