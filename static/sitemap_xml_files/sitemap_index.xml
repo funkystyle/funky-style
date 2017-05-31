@@ -1,0 +1,18 @@
+<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9       http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd">
+					
+			<sitemap>
+				<loc>https://fabpromocodes.in/api/1.0/sitemap-persons</loc>
+				<lastmod>2017-02-08T21:00:00+05:30</lastmod>
+			</sitemap>
+
+			<sitemap>
+				<loc>https://fabpromocodes.in/api/1.0/sitemap-deals</loc>
+				<lastmod>2017-02-08T21:00:00+05:30</lastmod>
+			</sitemap>
+
+			<sitemap>
+				<loc>http://localhost:8000/api/1.0/sitemap-coupons</loc>
+				<lastmod>2017-05-31T11:19:09+5.30</lastmod>
+			</sitemap>
+
+</sitemapindex>

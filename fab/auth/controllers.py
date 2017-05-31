@@ -122,11 +122,17 @@ def change_password():
 
         LOGGER.info("payload is:{0}".format(request.json))
         accounts = app.data.driver.db['persons']
-        user = accounts.find_one({'_id': ObjectId(str(request.json['user_id'])), "tokens.forgot_password": request.json['token']})
+        q = {'_id': ObjectId(str(request.json['user_id']))}
+        if not 'user_id' in session:
+            q["tokens.forgot_password"] = request.json['token']
+        elif session['user_id'] != str(request.json['user_id']):
+            message = "something went wrong, please login and logout"
+            abort(400, message)
+        LOGGER.info("find query:{}".format(q))
+        user = accounts.find_one(q)
         if not user:
             message="invalid token or user_id."
             abort(400, message)
-
         LOGGER.info("found user for forgot password:{0}".format(user))
         payload = {
             'password':{

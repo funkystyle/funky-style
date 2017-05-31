@@ -9,6 +9,8 @@ from fab import app
 from login_decorators import user_login_required, admin_login_required, abort_resource_deletion
 from settings import  LOGGER
 
+from fab.siteminder import SiteMinder
+
 @admin_login_required
 def before_returning_persons(response):
     LOGGER.info("persons api access processing after admin login verification")
@@ -141,3 +143,18 @@ def after_deleted_item(resource_name, item):
             accounts = app.data.driver.db[c_f['collection_name']]
             for delete_id in item[c_f['field_name']]:
                 accounts.remove({'_id': ObjectId(str(delete_id))})
+
+def after_created(resource_name, item):
+    if resource_name not in CONFIG_DATA['IGNORE_COLLECTION_NAMES']:
+        LOGGER.info("updating siteminder for resource name:{} and item:{}".format(resource_name, item))
+        date_time = str(item[0]['_updated']).replace(" ", "T")
+        sm = SiteMinder(date_time, resource_name)
+        if sm.update_index_file():
+            LOGGER.info("updated siteminder for resource name:{} and item:{}".format(resource_name, item))
+        else:
+            LOGGER.warn("updated siteminder for resource name:{} and item:{}".format(resource_name, item))
+    else:
+        LOGGER.warn(" resource name:{} in ignore_collection_names array".format(resource_name))
+
+def after_updated(resource_name, update, original):
+    print 'after update resource name', resource_name, update
