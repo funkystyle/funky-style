@@ -10,8 +10,8 @@ angular.module("updateDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstr
 
         $scope.$watch('deal.name', function(newVal, oldVal) {
             if($scope.seo.selection_type.indexOf('single_deal_brand') > -1) {
-                $scope.deal.seo_title = $scope.seo.meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-                $scope.deal.seo_description = $scope.seo.meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+                $scope.deal.seo_title = replaceSeo($scope.seo.meta_title, newVal);
+                $scope.deal.seo_description = replaceSeo($scope.seo.meta_description, newVal)
             }
             $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deals" : undefined;
         }, true);

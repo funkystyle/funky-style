@@ -1,12 +1,14 @@
 angular.module('homeModule', ["headerModule", "storeServiceModule",
     "footerModule", "couponFactoryModule", "dealFactoryModule", "categoryFactoryModule"])
     .controller('homeCtrl', function ($scope, storeFactory, $http, couponFactory, $filter, dealFactory,
-                                      categoryFactory, $ocLazyLoad, $stateParams) {
+                                      categoryFactory, $ocLazyLoad, $stateParams, $rootScope) {
         console.log("home controller");
         $scope.params = undefined;
         $scope.deals = [];
         $scope.coupons = [];
         $scope.categories = [];
+
+        $rootScope.pageTitle = "dsadasdsa";
 
         // get the list of coupons
         var embedded = {};
@@ -32,6 +34,21 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
         }, function (error) {
             console.log(error);
         });
+
+
+        // setting up the SEO title for the application
+        var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        var date = new Date();
+        var month = undefined;
+        var year = undefined;
+        date.setDate(date.getDate() - 3);
+        month = monthNames[date.getMonth()];
+        year = date.getFullYear();
+
+        var seo_title = "Fab PromoCodes - Discount Coupons, Offers, Coupon Codes - "+month+" "+year;
+        $rootScope.pageTitle = seo_title;
 
         // get the slider banners
         $scope.banners = [];
