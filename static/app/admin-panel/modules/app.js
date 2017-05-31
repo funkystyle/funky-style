@@ -17,6 +17,10 @@ date.setDate(date.getDate() - 3);
 month = monthNames[date.getMonth()];
 year = date.getFullYear();
 
+function replaceSeo(field, newVal) {
+    var replacement = field.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+    return replacement;
+}
 
 var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
     .run(function ($rootScope, $http) {

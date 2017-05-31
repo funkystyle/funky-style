@@ -33,6 +33,28 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
             console.log(error);
         });
 
+        // get the slider banners
+        $scope.banners = [];
+        var projection = {
+            "top_banner_string": 1,
+            "image": 1,
+            "title": 1,
+            "image_text": 1
+        };
+
+        url = '/api/1.0/banner'+'?projection='+JSON.stringify(projection)+'&rand_number' + new Date().getTime();
+        $http({
+            url: url,
+            method: "GET"
+        }).then(function (data) {
+            console.log(data);
+            if(data['data']) {
+                console.log("Banners: ", data.data._items);
+                $scope.banners = data.data._items;
+            }
+        }, function (error) {
+            console.log(error);
+        });
 
         // get the list of featured stores
         var store = {};
