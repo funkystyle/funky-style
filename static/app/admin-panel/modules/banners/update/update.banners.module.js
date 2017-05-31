@@ -75,13 +75,17 @@ angular.module("updateBannersModule", ["ui.select", "ngSanitize",
             delete banner._links;
 
             console.log(banner);
+
             $http({
-                url: URL.banner,
-                method: "POST",
+                url: URL.banner+'/'+banner._id+'?rand_number='+Math.random(),
+                method: "PATCH",
+                headers: {
+                    authorization: $scope.user.tokens.login
+                },
                 data: banner
             }).then(function (data) {
                 console.log("Success data: ", data);
-                toastr.success(banner.title, "Created!");
+                toastr.success(banner.title, "Updated!");
                 $state.go("header.banners");
             }, function (error) {
                 console.log(error);
