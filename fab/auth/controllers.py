@@ -49,6 +49,8 @@ def forgotpassword():
                    recipients=[request.json['email']],
                    sender=CONFIG_DATA['FAB_SUPPORT_TEAM'],
                    user_id=str(user['_id']),
+                   email=user['email'],
+                   first_name= user['first_name'],
                    token=token,
                    server_url=SERVER_URL,
                    template=CONFIG_DATA['FORGOT_PASSWORD_EMAIL_TEMPLATE']):
@@ -271,6 +273,8 @@ def signup():
                        recipients = [payload['email']],
                        sender=CONFIG_DATA['FAB_SUPPORT_TEAM'],
                        user_id=user_id,
+                        email=payload['email'],
+                        first_name=payload['first_name'],
                        token=registration_token,
                        server_url=SERVER_URL,
                        template=CONFIG_DATA['REGISTRATION_EMAIL_TEMPLATE']):
