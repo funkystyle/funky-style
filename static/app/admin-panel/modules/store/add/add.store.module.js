@@ -27,9 +27,9 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
             $scope.store.relatedStore = undefined;
         };
         $scope.$watch('store.name', function(newVal, oldVal) {
-            if($scope.seo.selection_type.indexOf('single_store') > -1) {
-                $scope.store.meta_title = $scope.seo.meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-                $scope.store.meta_description = $scope.seo.meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            if($scope.seo && $scope.seo.selection_type.indexOf('single_store') > -1) {
+                $scope.store.meta_title = replaceSeo($scope.seo.meta_title, newVal);
+                $scope.store.meta_description = replaceSeo($scope.seo.meta_description, newVal);
             }
 
             $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-") +"-coupons" : undefined;

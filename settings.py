@@ -736,7 +736,6 @@ SCHEMAS = {
     'banner': {
         'title': {
             "type": "string",
-            "unique": True,
             "required":True
         },
         'image': {

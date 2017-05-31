@@ -1,12 +1,14 @@
 angular.module('homeModule', ["headerModule", "storeServiceModule",
     "footerModule", "couponFactoryModule", "dealFactoryModule", "categoryFactoryModule"])
     .controller('homeCtrl', function ($scope, storeFactory, $http, couponFactory, $filter, dealFactory,
-                                      categoryFactory, $ocLazyLoad, $stateParams) {
+                                      categoryFactory, $ocLazyLoad, $stateParams, $rootScope) {
         console.log("home controller");
         $scope.params = undefined;
         $scope.deals = [];
         $scope.coupons = [];
         $scope.categories = [];
+
+        $rootScope.pageTitle = "dsadasdsa";
 
         // get the list of coupons
         var embedded = {};
@@ -33,6 +35,43 @@ angular.module('homeModule', ["headerModule", "storeServiceModule",
             console.log(error);
         });
 
+
+        // setting up the SEO title for the application
+        var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        var date = new Date();
+        var month = undefined;
+        var year = undefined;
+        date.setDate(date.getDate() - 3);
+        month = monthNames[date.getMonth()];
+        year = date.getFullYear();
+
+        var seo_title = "Fab PromoCodes - Discount Coupons, Offers, Coupon Codes - "+month+" "+year;
+        $rootScope.pageTitle = seo_title;
+
+        // get the slider banners
+        $scope.banners = [];
+        var projection = {
+            "top_banner_string": 1,
+            "image": 1,
+            "title": 1,
+            "image_text": 1
+        };
+
+        url = '/api/1.0/banner'+'?projection='+JSON.stringify(projection)+'&rand_number' + new Date().getTime();
+        $http({
+            url: url,
+            method: "GET"
+        }).then(function (data) {
+            console.log(data);
+            if(data['data']) {
+                console.log("Banners: ", data.data._items);
+                $scope.banners = data.data._items;
+            }
+        }, function (error) {
+            console.log(error);
+        });
 
         // get the list of featured stores
         var store = {};

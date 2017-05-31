@@ -17,6 +17,10 @@ date.setDate(date.getDate() - 3);
 month = monthNames[date.getMonth()];
 year = date.getFullYear();
 
+function replaceSeo(field, newVal) {
+    var replacement = field.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+    return replacement;
+}
 
 var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
     .run(function ($rootScope, $http) {
@@ -640,6 +644,19 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
                             return $ocLazyLoad.load({
                                 name: 'addBannersModule',
                                 files: ['/static/app/admin-panel/modules/banners/add/add.banners.module.js']
+                            })
+                        }
+                    }
+                })
+                .state('header.update-banners', {
+                    url: '/banners/update/:id',
+                    templateUrl: '/static/app/admin-panel/modules/banners/update/update.banners.template.html',
+                    controller: "updateBannersCtrl",
+                    resolve: {
+                        addDealBrands: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'updateBannersModule',
+                                files: ['/static/app/admin-panel/modules/banners/update/update.banners.module.js']
                             })
                         }
                     }
