@@ -648,6 +648,19 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
                         }
                     }
                 })
+                .state('header.update-banners', {
+                    url: '/banners/update/:id',
+                    templateUrl: '/static/app/admin-panel/modules/banners/update/update.banners.template.html',
+                    controller: "updateBannersCtrl",
+                    resolve: {
+                        addDealBrands: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'updateBannersModule',
+                                files: ['/static/app/admin-panel/modules/banners/update/update.banners.module.js']
+                            })
+                        }
+                    }
+                })
                 // Master SEO
                 .state('header.seo', {
                     url: '/seo',
