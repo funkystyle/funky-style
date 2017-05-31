@@ -1,4 +1,3 @@
-local_conf.json
 local_run.sh
 *.pyc
 images/*
