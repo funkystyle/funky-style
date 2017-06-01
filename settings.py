@@ -235,6 +235,9 @@ SCHEMAS = {
         },
     },
     'stores':{
+        "number_of_clicks": {
+            "type": "integer"
+        },
         'name': {
             'type': 'string',
             'required': True,
@@ -403,6 +406,9 @@ SCHEMAS = {
         }
     },
     'categories':{
+            "number_of_clicks": {
+                "type": "integer"
+            },
             'name': {
                 'type': 'string',
                 'required': True,
@@ -528,6 +534,9 @@ SCHEMAS = {
             }
     },
     "deals": {
+        "number_of_clicks":{
+            "type": "integer"
+        },
         'dynamic_fields': {
             'type': 'dict'
         },
@@ -832,7 +841,9 @@ SCHEMAS = {
         }
     },
     'deal_categories_collection': {
-
+        "number_of_clicks": {
+            "type": "integer"
+        },
         'name': {
             "type": "string",
             "unique": True,
@@ -904,6 +915,9 @@ SCHEMAS = {
 
     },
     'deal_brands': {
+        "number_of_clicks": {
+            "type": "integer"
+        },
         'name': {
             "type": "string",
             "unique": True,
@@ -1073,29 +1087,13 @@ SCHEMAS = {
             'type': 'list',
             'required': True
         }
-    },
-    'common_access_collection': {
-        'collection_name': {
-            "type": "string",
-            "unique": True,
-            "required": True
-        },
-        'number_of_clicks': {
-            "type": "integer",
-            "default": 0
-        },
-        'number_of_views': {
-            "type": "integer",
-            "default": 0
-        }
     }
-
 
 }
 
 PERSONS_SCHEMA = SCHEMAS['persons']
 STORES_SCHEMA = SCHEMAS['stores']
-COMMON_ACCESS_COLLECTION_SCHEMA = SCHEMAS['common_access_collection']
+
 
 DEALS_SCHEMA = SCHEMAS['deals']
 CATEGORIES_SCHEMA = SCHEMAS['categories']
@@ -1111,11 +1109,6 @@ BLOG_SCHEMA = SCHEMAS['blog']
 DEEP_LINK_SCHEMA = SCHEMAS['deep_link']
 
 
-COMMON_ACCESS_COLLECTION = {
-    'item_title': 'common_access_collection',
-    'schema': COMMON_ACCESS_COLLECTION_SCHEMA,
-    'url': 'common_access_collection'
-}
 
 PERSONS = {
     'item_title': 'persons',
@@ -1239,7 +1232,6 @@ DOMAIN = {
     'coupons_comments': COUPONS_COMMENTS,
     'coupons_reports': COUPON_REPORTS,
     'blog': BLOG,
-    'common_access_collection': COMMON_ACCESS_COLLECTION,
     'deep_link': DEEP_LINK
 }
 

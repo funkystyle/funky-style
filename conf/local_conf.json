@@ -60,8 +60,11 @@
       }
     ]
   },
-  "IGNORE_COLLECTION_NAMES": ["persons", "common_access_collection", "banner",
-  "master_seo","coupon_comments", "coupon_reports", "coupons", "deep_link"],
+
+  "IGNORE_COLLECTION_NAMES": ["persons","banner","master_seo","coupon_comments",
+    "coupon_reports", "coupons", "deep_link"],
+
+  "NUMBER_OF_CLICKS_COLLECTIONS": ["deal_brands","deal_categories","deals","stores","categories"],
 
   "PRIORITY":{
     "blog": {"changefreq": "daily", "priority": 0.4},

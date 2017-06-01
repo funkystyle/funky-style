@@ -18,6 +18,25 @@ from fab.siteminder import generate_sitemap_index_file
 def before_returning_persons(response):
     LOGGER.info("persons api access processing after admin login verification")
 
+def update_number_of_clicks(resource, _id):
+    resource_obj = app.data.driver.db[resource]
+    resource_obj.update({'_id': _id}, {'$inc': {'number_of_clicks': 1}})
+
+def before_returning_stores(response):
+    update_number_of_clicks('stores', response['_id'])
+
+def before_returning_deals(response):
+    update_number_of_clicks('deals', response['_id'])
+
+def before_returning_deal_brands(response):
+    update_number_of_clicks('deals_brands', response['_id'])
+
+def before_returning_deal_categories(response):
+    update_number_of_clicks('deals_categories', response['_id'])
+
+def before_returning_categories(response):
+    update_number_of_clicks('categories', response['_id'])
+
 @admin_login_required
 def before_delete_persons_item(item):
     LOGGER.info("persons api delete item access processing after admin login verification")
