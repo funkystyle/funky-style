@@ -45,8 +45,16 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="featured_image">Featured Image</label>
-                        <input type="file" ng-model="blog.featured_image"
+                        <input type="file" ng-model="blog.image"
                                class="form-control" id="featured_image" placeholder="Image" base-sixty-four-input>
+                    </div>
+                    <div class="form-group" ng-if="blog.image">
+                        <label>Featured Image Display</label>
+                        <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="blog.image = ''"></i>
+                            <img ng-if="!blog.image['base64']" ng-src="{{ blog.image }}" />
+                            <img ng-if="blog.image['base64']" ng-src="data:image/jpeg;base64,{{ blog.image.base64 }}" />
+                        </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="seo_title">SEO Title</label>

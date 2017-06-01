@@ -1055,7 +1055,7 @@ SCHEMAS = {
         'description': {
             "type": "string"
         },
-        'featured_image': {
+        'image': {
             "type": "string"
         },
         'h1': {
