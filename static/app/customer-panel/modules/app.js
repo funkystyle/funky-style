@@ -6,7 +6,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
     }])
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider',
         function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
-            $locationProvider.html5Mode(false).hashPrefix('');
+            $locationProvider.html5Mode(true).hashPrefix('');
 
             // configuring the lazyLoad angularjs files
             $ocLazyLoadProvider.config({
@@ -303,7 +303,16 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 // blog.category
                 .state('blog_category', {
                     url: '/blog/category',
-                    templateUrl: 'static/app/customer-panel/modules/blog.category/blog.category.template.html'
+                    templateUrl: 'static/app/customer-panel/modules/blog.category/blog.category.template.html',
+                    controller: "blogCategoryCtrl",
+                    resolve: {
+                        dashboard: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'blogCategoryModule',
+                                files: ['static/app/customer-panel/modules/blog.category/blog.category.module.js']
+                            })
+                        }
+                    }
                 })
 
                 .state("main.cms", {
