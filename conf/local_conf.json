@@ -58,5 +58,29 @@
       }
     ]
   },
-  "IGNORE_COLLECTION_NAMES": ["persons", "common_access_collection"]
+  "IGNORE_COLLECTION_NAMES": ["persons", "common_access_collection", "banner",
+  "master_seo","coupon_comments", "coupon_reports", "coupons"],
+
+  "PRIORITY":{
+    "blog": {"changefreq": "daily", "priority": 0.4},
+    "categories": {"changefreq": "weekly", "priority": 0.5},
+    "cms": {"changefreq": "monthly", "priority": 0.6},
+    "deal_brands": {"changefreq": "daily", "priority": 0.7},
+    "deal_categories": {"changefreq": "daily", "priority": 0.8},
+    "deals": {"changefreq": "daily", "priority": 0.9},
+    "stores": {"changefreq": "daily", "priority": 0.1}
+  },
+
+  "LOOK_UP_FIELDS":{
+    "blog": "title",
+    "categories": "name",
+    "cms": "name",
+    "deal_brands": "name",
+    "deal_categories": "name",
+    "deals": "name",
+    "stores": "name"
+  },
+
+  "INDEX_XML_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_index.xml",
+  "SUB_FILE_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_sub_file.xml"
 }

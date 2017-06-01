@@ -22,18 +22,6 @@ def sitemap_categories():
 def sitemap_deals():
     return make_response(open('static/sitemap_xml_files/sitemap_deals.xml').read())
 
-@app.route('/api/1.0/sitemap-coupons')
-def sitemap_coupons():
-    return make_response(open('static/sitemap_xml_files/sitemap_coupons.xml').read())
-
-@app.route('/api/1.0/sitemap-master-seo')
-def sitemap_master_seo():
-    return make_response(open('static/sitemap_xml_files/sitemap_master_seo.xml').read())
-
-@app.route('/api/1.0/sitemap-banner')
-def sitemap_sitemap_banner():
-    return make_response(open('static/sitemap_xml_files/sitemap_banner.xml').read())
-
 @app.route('/api/1.0/sitemap-cms-pages')
 def sitemap_cms_pages():
     return make_response(open('static/sitemap_xml_files/sitemap_cms_pages.xml').read())
@@ -45,15 +33,6 @@ def sitemap_deal_categories():
 @app.route('/api/1.0/sitemap-deal-brands')
 def sitemap_deal_brands():
     return make_response(open('static/sitemap_xml_files/sitemap_deal_brands.xml').read())
-
-
-@app.route('/api/1.0/sitemap-coupon-reports')
-def sitemap_coupon_reports():
-    return make_response(open('static/sitemap_xml_files/sitemap_coupon_reports.xml').read())
-
-@app.route('/api/1.0/sitemap-coupon-comments')
-def sitemap_coupon_comments():
-    return make_response(open('static/sitemap_xml_files/sitemap_coupon_comments.xml').read())
 
 @app.route('/api/1.0/sitemap-blog')
 def sitemap_blog():

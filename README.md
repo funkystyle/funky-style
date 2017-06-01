@@ -227,4 +227,7 @@ Note: if web server not serving static data we dnt need to configure Proxy serve
 
 
 
+Installation of lxml:
 
+sudo apt-get install libxml2-dev libxslt-dev python-dev
+pip install lxml

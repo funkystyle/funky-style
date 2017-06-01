@@ -4,27 +4,6 @@
 				  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 				  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
 				        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-				
-						
-						<url>
-							<loc>https://fabpromocodes.in/flipkart-coupons/</loc>	
-							<lastmod>2017-04-07T18:55:00+05:30</lastmod>
-							<changefreq>daily</changefreq>
-							<priority>0.9</priority>
-						</url>
-						
-						<url>
-							<loc>https://fabpromocodes.in/snapdeal-coupons/</loc>	
-							<lastmod>2017-04-08T14:10:00+05:30</lastmod>
-							<changefreq>daily</changefrequ>
-							<priority>0.9</priority>
-						</url>
-				
-					<url>
-						<loc>https://fabpromocodes.in/stores/</loc>
-						<lastmod>2017-04-10T11:30:00+05:30</lastmod>
-						<changefreq>daily</changefreq>
-						<priority>0.8</priority>
-					</url>
-									
+
+						<url><loc>http://localhost:8000/api/1.0/stores/sdjkfjdsiiikl</loc><lastmod>2017-05-01T10:03:56+5.30</lastmod><changefreq>daily</changefreq><priority>0.1</priority>                   </url><url><loc>http://localhost:8000/api/1.0/stores/first n3amwe1</loc><lastmod>2017-05-13T06:34:29+5.30</lastmod><changefreq>daily</changefreq><priority>0.1</priority>                   </url><url><loc>http://localhost:8000/api/1.0/stores/a;lkdal;sdk;asldk</loc><lastmod>2017-05-13T11:35:45+5.30</lastmod><changefreq>daily</changefreq><priority>0.1</priority>                   </url><url><loc>http://localhost:8000/api/1.0/stores/store 1</loc><lastmod>2017-06-01T02:13:02+5.30</lastmod><changefreq>daily</changefreq><priority>0.1</priority>                   </url>
 				</urlset>
