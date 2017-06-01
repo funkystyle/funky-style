@@ -193,7 +193,7 @@ def login():
         abort(401, message)
 
     token = str(uuid.uuid4())
-    user['login_token'] = token
+    user['login_token'] = "Bearer "+token
     del user['tokens']
     del user['password']
     accounts.update({'email': request.json['email']}, {"$set": {'tokens.login': token}})
