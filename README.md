@@ -73,6 +73,9 @@
                   assign active, inactive, deleted
                   email id and mobile number should be unique while registration
 
+                  ** admin_creation_token is you pass this field name in payload admin will be created.
+                  admin_creation_token value should be flask token(ask developer to get it)
+
 
     *  /api/1.0/auth/login:**
         * Desc: login user with email and password.
