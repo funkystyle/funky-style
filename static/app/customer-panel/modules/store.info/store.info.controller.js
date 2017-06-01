@@ -1,7 +1,7 @@
 angular
-    .module("storeinfoModule", ["footerModule", "categoryFactoryModule"])
+    .module("storeinfoModule", ["categoryFactoryModule"])
     .controller("storeinfoController", function ($scope, $stateParams, $http, $state,
-                                                 categoryFactory, $filter, $sce, $ocLazyLoad) {
+                                                 categoryFactory, $filter, $sce, $ocLazyLoad, $rootScope) {
         $scope.favorite = {
             favorite: false
         };
@@ -86,6 +86,7 @@ angular
                     $scope.store = store.data._items[0];
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
+                    $rootScope.pageTitle = $scope.store.meta_title;
                     console.log($scope.store);
                     
                     // applying carousel after dom prepared

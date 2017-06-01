@@ -1,4 +1,4 @@
-angular.module("dealDetailsModule", ["footerModule"])
+angular.module("dealDetailsModule", [])
     .controller("dealDetailsCtrl", function ($scope, $ocLazyLoad, $http, $state, $stateParams, $sce) {
         console.log("deal Details controller!");
 
