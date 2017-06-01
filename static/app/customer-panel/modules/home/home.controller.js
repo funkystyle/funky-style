@@ -1,5 +1,4 @@
-angular.module('homeModule', ["headerModule", "storeServiceModule",
-    "footerModule", "couponFactoryModule", "dealFactoryModule", "categoryFactoryModule"])
+angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFactoryModule", "dealFactoryModule", "categoryFactoryModule"])
     .controller('homeCtrl', function ($scope, storeFactory, $http, couponFactory, $filter, dealFactory,
                                       categoryFactory, $ocLazyLoad, $stateParams, $rootScope) {
         console.log("home controller");

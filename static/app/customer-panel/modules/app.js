@@ -10,7 +10,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
 
             // configuring the lazyLoad angularjs files
             $ocLazyLoadProvider.config({
-                // debug: true,
+                debug: true,
                 modules: [
                     {
                         name: 'headerModule',
@@ -50,10 +50,6 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     {
                         name: 'constantModule',
                         files: ['static/app/customer-panel/modules/constant.module.js']
-                    },
-                    {
-                        name: "footerModule",
-                        files: ['static/app/customer-panel/modules/footer/footer.controller.js']
                     },
                     //    Filters
                     {
@@ -311,7 +307,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
 
                 .state("main.cms", {
-                    url: "/:cmsId",
+                    url: "/:url",
                     templateUrl: "static/app/customer-panel/modules/cms/cms.template.html",
                     controller: "cmsCtrl",
                     resolve: {
@@ -329,16 +325,16 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
     .factory('auth', function ($http, $q) {
         return {
             getToken: function () {
-                return localStorage.getItem('token');
+                return localStorage.getItem('satellizer_token');
             },
             setToken: function (token) {
-                return localStorage.setItem('token', token);
+                return localStorage.setItem('satellizer_token', token);
             },
             logout: function () {
-                localStorage.removeItem('token');
+                localStorage.removeItem('satellizer_token');
             },
             checkLogin: function () {
-                return (localStorage.getItem('token')) ? true : false;
+                return (localStorage.getItem('satellizer_token')) ? true : false;
             },
             me: function () {
                 var def = $q.defer();
@@ -392,4 +388,26 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 });
             }
         }
+    })
+    .controller("footerCtrl", function ($scope, $http) {
+        $scope.cms = [];
+
+        var projection = {
+            "name": 1,
+            "url": 1
+        };
+
+        url = '/api/1.0/cms_pages'+'?projection='+JSON.stringify(projection)+'&rand_number' + new Date().getTime();
+        $http({
+            url: url,
+            method: "GET"
+        }).then(function (data) {
+            console.log(data);
+            if(data['data']) {
+                console.log("CMS pages: ", data.data._items);
+                $scope.cms = data.data._items;
+            }
+        }, function (error) {
+            console.log(error);
+        });
     });

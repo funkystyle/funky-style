@@ -3,7 +3,7 @@ angular.module("cmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr"
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy",
     "couponFactoryModule", "categoryFactoryModule", "constantModule", "cmsFactoryModule", "angular-table"])
     .controller("cmsCtrl", function($scope, $q, $timeout, toastr, storeFactory,
-                                     $auth, personFactory, $log, couponFactory, categoryFactory, URL, cmsFactory) {
+                                     $auth, personFactory, $log, couponFactory, categoryFactory, URL, cmsFactory, $sce) {
         $scope.cms = [];
         $scope.filterCms = [];
         $scope.search = {
@@ -19,6 +19,12 @@ angular.module("cmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr"
             itemsPerPage: 5,
             maxPages: 20,
             fillLastPage: "no"
+        };
+
+        $scope.trustAsHtml = function(string) {
+            if(string) {
+                return $sce.trustAsHtml(string);
+            }
         };
 
         $scope.updateFilteredList = function() {

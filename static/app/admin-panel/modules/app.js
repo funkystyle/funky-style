@@ -22,7 +22,7 @@ function replaceSeo(field, newVal) {
     return replacement;
 }
 
-var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
+var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'])
     .run(function ($rootScope, $http) {
         var id = undefined;
         // get the seo details from the table
@@ -59,12 +59,13 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
             $(".Editor-container").remove();
         };
     })
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', '$sceProvider',
-        function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider, $sceProvider) {
+    .config(['$stateProvider', '$authProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', '$sceProvider',
+        function($stateProvider, $authProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider, $sceProvider) {
 
             $sceProvider.enabled(false);
             $locationProvider.html5Mode(false).hashPrefix("");
-            // configuring the lazyLoad angularjs files
+
+            // configuring the lazyLoad angular js files
             $ocLazyLoadProvider.config({
                 // debug: true,
                 modules: [
@@ -106,12 +107,6 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad'])
                         name: "naif.base64",
                         files: [
                             "/static/bower_components/angular-base64-upload/dist/angular-base64-upload.min.js",
-                        ]
-                    },
-                    {
-                        name: "satellizer",
-                        files: [
-                            '/static/bower_components/satellizer/dist/satellizer.js'
                         ]
                     },
                     {

@@ -58,7 +58,9 @@
                             style="color: #2780e3; text-decoration: underline; cursor: pointer;"
                             at-title="Page Name" at-implicit at-sortable at-initial-sorting="asc"
                             at-attribute="name" width="250"></td>
-                        <td at-title="Description" at-implicit at-sortable at-attribute="description" width="250"></td>
+                        <td at-title="Description">
+                            <div ng-bind-html="trustAsHtml(item.description)"></div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

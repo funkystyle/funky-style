@@ -1,12 +1,12 @@
-angular.module("cmsModule", ["footerModule", "headerModule"])
+angular.module("cmsModule", ["headerModule"])
     .controller("cmsCtrl", function ($scope, $http, $state, $stateParams, $sce) {
         console.log("CMS module controller");
 
         $scope.cms = {};
 
-        if($stateParams['cmsId']) {
+        if($stateParams['url']) {
             var where = {
-                "url": $stateParams.cmsId
+                "url": $stateParams.url
             };
             var rand = new Date().getDate();
 
