@@ -21,6 +21,8 @@
   "MAIL_PASSWORD": "73630002b4f7fa5f8def7ed0e9ac40c446402f42589582bf575f2e2c8aa8f56436ea7131fafc01fd6d559a0b2576f653373ad2b9ffe68ce7c496bf915a3551418a98c0f2ff5126c89a4c29b9c6a3797d0ea65b61e10e59",
   "FORGOT_PASSWORD_EMAIL_TEMPLATE": "static/email_templates/forgot_password_link.html",
   "REGISTRATION_EMAIL_TEMPLATE": "static/email_templates/registration_mail_link.html",
+  "ADMIN_CREATION_EMAIL_TEMPLATE": "static/email_templates/admin_creation_template.html",
+  "ADMIN_CREATION_TITLE": "ADMIN CREATED",
   "FAB_SUPPORT_TEAM": "support@fab.in",
   "REGISTRATION_TITLE": "thanks for registration with fab",
   "FORGOT_PASSWORD_TITLE": "sent forgot password",
@@ -58,5 +60,49 @@
       }
     ]
   },
-  "IGNORE_COLLECTION_NAMES": ["persons", "common_access_collection"]
+
+  "IGNORE_COLLECTION_NAMES": ["persons","banner","master_seo","coupon_comments",
+    "coupon_reports", "coupons", "deep_link"],
+
+  "NUMBER_OF_CLICKS_COLLECTIONS": ["deal_brands","deal_categories","deals","stores","categories"],
+
+  "PRIORITY":{
+    "blog": {"changefreq": "daily", "priority": 0.4},
+    "categories": {"changefreq": "daily", "priority": 0.8},
+    "cms": {"changefreq": "weekly", "priority": 0.4},
+    "deal_brands": {"changefreq": "daily", "priority": 0.8},
+    "deal_categories": {"changefreq": "daily", "priority": 0.8},
+    "deals": {"changefreq": "daily", "priority": 0.8},
+    "stores": {"changefreq": "daily", "priority": 0.8}
+  },
+
+  "LOOK_UP_FIELDS":{
+    "blog": "title",
+    "categories": "name",
+    "cms": "name",
+    "deal_brands": "name",
+    "deal_categories": "name",
+    "deals": "name",
+    "stores": "name"
+  },
+
+  "INDEX_XML_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_index.xml",
+  "SUB_FILE_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_sub_file.xml",
+
+  "DEEP_LINK_DATA":{
+      "Affiliate_Network": "flipkart",
+      "tags": "?a=x&b=y&c=z",
+      "start_url": "tracking.ciom",
+      "replace strings": [
+	    {
+          "find_string": "www",
+          "replace_string": "dl"
+	    },
+        {
+          "find_string": "com" ,
+          "replace_string": "com/dl"
+        }
+      ]
+  }
+
 }

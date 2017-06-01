@@ -23,6 +23,25 @@ def parse_token(req):
 
 
 
+def send_admin_emails(**kwargs):
+    LOGGER.info("email sending with payload:{0}".format(kwargs))
+    msg = Message(kwargs['title'], sender=kwargs['sender'],recipients=kwargs['recipients'])
+    with open(kwargs['template'], 'r') as _file:
+        html_data = _file.read()
+        html_data = html_data.format(email=kwargs['email'],
+                                     first_name=kwargs['first_name']
+                                     )
+        msg.html = html_data
+
+    with mail.record_messages() as outbox:
+        mail.send(msg)
+        if not len(outbox):
+            LOGGER.info("email sent failed with ")
+            return False
+        else:
+            LOGGER.info("email sent ")
+            return True
+
 def send_fab_emails(**kwargs):
     LOGGER.info("email sending with payload:{0}".format(kwargs))
     msg = Message(kwargs['title'], sender=kwargs['sender'],recipients=kwargs['recipients'])

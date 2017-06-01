@@ -78,6 +78,15 @@ URL_PREFIX = CONFIG_DATA['URL_PREFIX']
 API_VERSION = CONFIG_DATA['API_VERSION']
 PROTOCAL = CONFIG_DATA['PROTOCAL']
 
+IGNORE_COLLECTION_NAMES = CONFIG_DATA['IGNORE_COLLECTION_NAMES']
+PRIORITY = CONFIG_DATA['PRIORITY']
+
+INDEX_XML_TEMPLATE = CONFIG_DATA['INDEX_XML_TEMPLATE']
+SUB_FILE_TEMPLATE = CONFIG_DATA['SUB_FILE_TEMPLATE']
+LOOK_UP_FIELDS = CONFIG_DATA['LOOK_UP_FIELDS']
+
+PRIORITY = CONFIG_DATA['PRIORITY']
+
 # LOCAL HOST MACHINE DETAILS
 MONGO_HOST = CONFIG_DATA['MONGO_HOST']
 MONGO_PORT = CONFIG_DATA['MONGO_PORT']
@@ -114,6 +123,26 @@ MONGO_QUERY_BLACKLIST = ['$where']
 
 
 SCHEMAS = {
+    'deep_link':{
+        'tags': {
+            'type': 'string'
+        },
+        'affiliate_network': {
+            'type': 'string',
+            'required': True,
+            'unique': True
+        },
+        'start_url': {
+            'type': 'string'
+        },
+        'end_url': {
+            'type': 'string'
+        },
+        'replace_strings':{
+            'type': 'list'
+        }
+
+    },
     'persons': {
         'first_name': {
             'type': 'string',
@@ -206,6 +235,9 @@ SCHEMAS = {
         },
     },
     'stores':{
+        "number_of_clicks": {
+            "type": "integer"
+        },
         'name': {
             'type': 'string',
             'required': True,
@@ -374,6 +406,9 @@ SCHEMAS = {
         }
     },
     'categories':{
+            "number_of_clicks": {
+                "type": "integer"
+            },
             'name': {
                 'type': 'string',
                 'required': True,
@@ -499,6 +534,9 @@ SCHEMAS = {
             }
     },
     "deals": {
+        "number_of_clicks":{
+            "type": "integer"
+        },
         'dynamic_fields': {
             'type': 'dict'
         },
@@ -803,7 +841,9 @@ SCHEMAS = {
         }
     },
     'deal_categories_collection': {
-
+        "number_of_clicks": {
+            "type": "integer"
+        },
         'name': {
             "type": "string",
             "unique": True,
@@ -875,6 +915,9 @@ SCHEMAS = {
 
     },
     'deal_brands': {
+        "number_of_clicks": {
+            "type": "integer"
+        },
         'name': {
             "type": "string",
             "unique": True,
@@ -1044,29 +1087,13 @@ SCHEMAS = {
             'type': 'list',
             'required': True
         }
-    },
-    'common_access_collection': {
-        'collection_name': {
-            "type": "string",
-            "unique": True,
-            "required": True
-        },
-        'number_of_clicks': {
-            "type": "integer",
-            "default": 0
-        },
-        'number_of_views': {
-            "type": "integer",
-            "default": 0
-        }
     }
-
 
 }
 
 PERSONS_SCHEMA = SCHEMAS['persons']
 STORES_SCHEMA = SCHEMAS['stores']
-COMMON_ACCESS_COLLECTION_SCHEMA = SCHEMAS['common_access_collection']
+
 
 DEALS_SCHEMA = SCHEMAS['deals']
 CATEGORIES_SCHEMA = SCHEMAS['categories']
@@ -1079,13 +1106,9 @@ MASTER_SEO_SCHEMA = SCHEMAS['master_seo']
 COUPON_REPORTS_SCHEMA = SCHEMAS['coupon_reports']
 COUPONS_COMMENTS_SCHEMA = SCHEMAS['coupon_comments']
 BLOG_SCHEMA = SCHEMAS['blog']
+DEEP_LINK_SCHEMA = SCHEMAS['deep_link']
 
 
-COMMON_ACCESS_COLLECTION = {
-    'item_title': 'common_access_collection',
-    'schema': COMMON_ACCESS_COLLECTION_SCHEMA,
-    'url': 'common_access_collection'
-}
 
 PERSONS = {
     'item_title': 'persons',
@@ -1095,23 +1118,48 @@ PERSONS = {
 
 STORES = {
     'item_title': 'stores',
-    'schema': STORES_SCHEMA
+    'schema': STORES_SCHEMA,
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'name'
+    }
+}
+
+DEEP_LINK = {
+    'item_title': 'deep_link',
+    'schema': DEEP_LINK_SCHEMA,
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'affiliate_network'
+    }
 }
 
 DEALS = {
     'item_title': 'deals',
     'allow_unknown': True,
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'name'
+    },
     'schema': DEALS_SCHEMA
 }
 
 CATEGORIES = {
     'item_title': 'categories',
-    'schema': CATEGORIES_SCHEMA
+    'schema': CATEGORIES_SCHEMA,
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'name'
+    }
 }
 
 CMS_PAGES = {
     'item_title': 'cms_pages',
-    'schema': CMS_PAGES_SCHEMA
+    'schema': CMS_PAGES_SCHEMA,
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'name'
+    }
 }
 
 COUPONS = {
@@ -1121,12 +1169,20 @@ COUPONS = {
 
 DEAL_CATEGORIES = {
     'item_title': 'deal_categories',
-    'schema': DEAL_CATEGORIES_SCHEMA
+    'schema': DEAL_CATEGORIES_SCHEMA,
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'name'
+    }
 }
 
 DEAL_BRANDS = {
     'item_title': 'deal_brands',
-    'schema': DEAL_BRANDS_SCHEMA
+    'schema': DEAL_BRANDS_SCHEMA,
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'name'
+    }
 }
 
 BANNER = {
@@ -1151,7 +1207,11 @@ COUPONS_COMMENTS = {
 
 BLOG = {
     'item_title': 'blog',
-    'schema': BLOG_SCHEMA
+    'schema': BLOG_SCHEMA,
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'title'
+    }
 }
 
 
@@ -1172,7 +1232,7 @@ DOMAIN = {
     'coupons_comments': COUPONS_COMMENTS,
     'coupons_reports': COUPON_REPORTS,
     'blog': BLOG,
-    'common_access_collection': COMMON_ACCESS_COLLECTION
+    'deep_link': DEEP_LINK
 }
 
 COLLECTION_NAMES = DOMAIN.keys()

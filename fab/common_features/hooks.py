@@ -3,17 +3,39 @@ import uuid, os
 import base64
 import binascii
 from bson.objectid import ObjectId
+import multiprocessing
 from settings import CONFIG_DATA, BASE_DIR, LOGGER
 from fab import app
 
 from login_decorators import user_login_required, admin_login_required, abort_resource_deletion
-from settings import  LOGGER
+from settings import LOGGER
 
 from fab.siteminder import SiteMinder
+from fab.siteminder import generate_sub_xml_file
+from fab.siteminder import generate_sitemap_index_file
 
 @admin_login_required
 def before_returning_persons(response):
     LOGGER.info("persons api access processing after admin login verification")
+
+def update_number_of_clicks(resource, _id):
+    resource_obj = app.data.driver.db[resource]
+    resource_obj.update({'_id': _id}, {'$inc': {'number_of_clicks': 1}})
+
+def before_returning_stores(response):
+    update_number_of_clicks('stores', response['_id'])
+
+def before_returning_deals(response):
+    update_number_of_clicks('deals', response['_id'])
+
+def before_returning_deal_brands(response):
+    update_number_of_clicks('deals_brands', response['_id'])
+
+def before_returning_deal_categories(response):
+    update_number_of_clicks('deals_categories', response['_id'])
+
+def before_returning_categories(response):
+    update_number_of_clicks('categories', response['_id'])
 
 @admin_login_required
 def before_delete_persons_item(item):
@@ -136,6 +158,7 @@ def after_deleted_item(resource_name, item):
 
             elif isinstance(item[image_field], str):
                 delete_image(item[image_field])
+
     # clearn related fields
     if resource_name in CONFIG_DATA['FIELD_CLEAR_COLLECTIONS_AFTER_DELETE'].keys():
         # c_f collection field
@@ -144,17 +167,50 @@ def after_deleted_item(resource_name, item):
             for delete_id in item[c_f['field_name']]:
                 accounts.remove({'_id': ObjectId(str(delete_id))})
 
-def after_created(resource_name, item):
+def process_index_file(resource_name, updated_date_time):
     if resource_name not in CONFIG_DATA['IGNORE_COLLECTION_NAMES']:
-        LOGGER.info("updating siteminder for resource name:{} and item:{}".format(resource_name, item))
-        date_time = str(item[0]['_updated']).replace(" ", "T")
+        LOGGER.info("updating siteminder for resource name:{} and item:{}".format(resource_name, updated_date_time))
+        date_time = str(updated_date_time).replace(" ", "T")
         sm = SiteMinder(date_time, resource_name)
         if sm.update_index_file():
-            LOGGER.info("updated siteminder for resource name:{} and item:{}".format(resource_name, item))
+            LOGGER.info("updated siteminder for resource name:{} and item:{}".format(resource_name, updated_date_time))
         else:
-            LOGGER.warn("updated siteminder for resource name:{} and item:{}".format(resource_name, item))
+            LOGGER.warn("updated siteminder for resource name:{} and item:{}".format(resource_name, updated_date_time))
     else:
         LOGGER.warn(" resource name:{} in ignore_collection_names array".format(resource_name))
 
+def process_sub_xml_files(resource_name):
+    if resource_name not in CONFIG_DATA['IGNORE_COLLECTION_NAMES']:
+        LOGGER.info("started sub xml background job:{}".format(resource_name))
+        d = multiprocessing.Process(name='daemon_sync', target=generate_sub_xml_file, args=(resource_name, app,))
+        d.daemon = True
+        d.start()
+        LOGGER.info("finished sub xml background job:{}".format(resource_name))
+
+def deman_index_sitemap_process(resource_name, date_time):
+    if resource_name not in CONFIG_DATA['IGNORE_COLLECTION_NAMES']:
+        LOGGER.info("started index file process background job:{}".format(resource_name))
+        d = multiprocessing.Process(name='daemon_sync', target=process_index_file, args=(resource_name, date_time,))
+        d.daemon = True
+        d.start()
+        LOGGER.info("finished index file process background job:{}".format(resource_name))
+
+def deman_generate_index_sitemap():
+    LOGGER.info("started create index background job")
+    d = multiprocessing.Process(name='daemon_sync', target=generate_sitemap_index_file)
+    d.daemon = True
+    d.start()
+    LOGGER.info("finished create index background job")
+
+def after_created(resource_name, item):
+    deman_generate_index_sitemap()
+    deman_index_sitemap_process(resource_name, item[0]['_updated'])
+    process_sub_xml_files(resource_name)
+
+
 def after_updated(resource_name, update, original):
-    print 'after update resource name', resource_name, update
+    deman_generate_index_sitemap()
+    deman_index_sitemap_process(resource_name, update['_updated'])
+    process_sub_xml_files(resource_name)
+
+

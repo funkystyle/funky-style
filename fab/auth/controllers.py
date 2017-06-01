@@ -5,9 +5,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from bson.objectid import ObjectId
 from fab import ReturnException, app, convert_object_dates_to_string, delete_some_keys_from_dict, Validations
-from fab import send_fab_emails,parse_token
+from fab import send_fab_emails,parse_token, send_admin_emails
 
-from settings import LOGGER, CONFIG_DATA, HOST, PORT,DOMAIN, SCHEMAS, SERVER_URL
+from settings import LOGGER, CONFIG_DATA, HOST, PORT,DOMAIN, SCHEMAS, SERVER_URL, PASSWORD_CRYPTION_TOKEN
 
 @app.route('/api/1.0/get-fields-info', methods=['POST'])
 def get_fields_info():
@@ -25,8 +25,6 @@ def get_collections():
     response = jsonify(error='', data={"collections": DOMAIN.keys()})
     response.status_code = 200
     return response
-
-
 
 @app.route('/api/1.0/auth/send-forgot-password-link', methods=['POST'])
 def forgotpassword():
@@ -211,6 +209,10 @@ def login():
     response.status_code = 200
     return response
 
+@app.route('/<path:dummy>')
+def fallback(dummy):
+    LOGGER.info("called dummy end point")
+    return make_response(open('static/app/customer-panel/index.html').read())
 
 # registration
 @app.route('/api/1.0/auth/signup', methods=['POST'])
@@ -223,6 +225,11 @@ def signup():
         if 'password' not in payload:
             message = '{0} field not found in input payload'.format('password', payload)
             abort(400, message)
+        if 'admin_creation_token' in payload:
+            admin_creation_token = payload['admin_creation_token']
+            del payload['admin_creation_token']
+        else:
+            admin_creation_token = None
 
         payload['password'] = {
                 'password':str(generate_password_hash(payload['password'])),
@@ -238,6 +245,10 @@ def signup():
         }
         payload['created_date'] = datetime.now()
         payload['email_confirmed'] = False
+
+        if admin_creation_token and admin_creation_token == PASSWORD_CRYPTION_TOKEN:
+            payload['email_confirmed']=True
+
         payload['pictures'] = {
             'thumbnail': '',
             'large': '',
@@ -253,6 +264,10 @@ def signup():
                     can_assign = True
         if not can_assign:
             payload['user_level'] = "user"
+
+        if admin_creation_token and admin_creation_token == PASSWORD_CRYPTION_TOKEN:
+            payload['user_level'] = "admin"
+
 
         # initiated persons collections to create new user
 
@@ -270,28 +285,47 @@ def signup():
         try:
             user_id = str(accounts.insert(payload))
             LOGGER.info("user successfully created:{0}".format(user_id))
-            registration_token = str(uuid.uuid4())
-            LOGGER.info("updating registration token:{0} for user id:{1}".format(registration_token, user_id))
-            accounts.update({'_id': ObjectId(user_id)}, {'$set': {'tokens.registration': registration_token}})
-            # registration email code.
 
-            if send_fab_emails(title=CONFIG_DATA['REGISTRATION_TITLE'],
-                       recipients = [payload['email']],
-                       sender=CONFIG_DATA['FAB_SUPPORT_TEAM'],
-                       user_id=user_id,
-                        email=payload['email'],
-                        first_name=payload['first_name'],
-                       token=registration_token,
-                       server_url=SERVER_URL,
-                       template=CONFIG_DATA['REGISTRATION_EMAIL_TEMPLATE']):
-                payload['mail_sent'] = True
-                payload['main_sent_error'] = ''
+            if admin_creation_token and admin_creation_token == PASSWORD_CRYPTION_TOKEN:
+                    if send_admin_emails(title=CONFIG_DATA['ADMIN_CREATION_TITLE'],
+                                       recipients=[payload['email']],
+                                       sender=CONFIG_DATA['FAB_SUPPORT_TEAM'],
+                                       user_id=user_id,
+                                       email=payload['email'],
+                                       first_name=payload['first_name'],
+                                       template=CONFIG_DATA['ADMIN_CREATION_EMAIL_TEMPLATE']):
+                        payload['mail_sent'] = True
+                        payload['main_sent_error'] = ''
+                        payload['is_created'] = True
+                        payload['_id'] = str(user_id)
+                    else:
+                        accounts.remove({'_id': ObjectId(user_id)})
+                        payload['mail_sent'] = False
+                        payload['is_created'] = False
+                        payload['main_sent_error'] = "failed to send registration email, please try again..."
             else:
-                accounts.remove({'_id': ObjectId(user_id)})
-                payload['mail_sent'] = False
-                payload['main_sent_error'] = "failed to send registration email, please try again..."
-            payload['_id'] = user_id
-            payload['is_created'] = True
+                registration_token = str(uuid.uuid4())
+                LOGGER.info("updating registration token:{0} for user id:{1}".format(registration_token, user_id))
+                accounts.update({'_id': ObjectId(user_id)}, {'$set': {'tokens.registration': registration_token}})
+                # registration email code.
+                if send_fab_emails(title=CONFIG_DATA['REGISTRATION_TITLE'],
+                           recipients = [payload['email']],
+                           sender=CONFIG_DATA['FAB_SUPPORT_TEAM'],
+                           user_id=user_id,
+                            email=payload['email'],
+                            first_name=payload['first_name'],
+                           token=registration_token,
+                           server_url=SERVER_URL,
+                           template=CONFIG_DATA['REGISTRATION_EMAIL_TEMPLATE']):
+                    payload['mail_sent'] = True
+                    payload['main_sent_error'] = ''
+                    payload['is_created'] = True
+                    payload['_id'] = str(user_id)
+                else:
+                    accounts.remove({'_id': ObjectId(user_id)})
+                    payload['mail_sent'] = False
+                    payload['is_created'] = False
+                    payload['main_sent_error'] = "failed to send registration email, please try again..."
             payload['error'] = ''
         except Exception as e:
             LOGGER.error("got exception in signup:{0}".format(e))
