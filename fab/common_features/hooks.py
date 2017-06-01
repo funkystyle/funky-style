@@ -139,6 +139,7 @@ def after_deleted_item(resource_name, item):
 
             elif isinstance(item[image_field], str):
                 delete_image(item[image_field])
+
     # clearn related fields
     if resource_name in CONFIG_DATA['FIELD_CLEAR_COLLECTIONS_AFTER_DELETE'].keys():
         # c_f collection field

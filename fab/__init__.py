@@ -140,7 +140,6 @@ app.on_update += before_update
 
 app.on_inserted += after_created
 app.on_updated += after_updated
-
 app.on_deleted_item += after_deleted_item
 
 
@@ -149,3 +148,4 @@ from data_validations import *
 from auth import *
 from users import *
 from siteminder import *
+from deeplink import *

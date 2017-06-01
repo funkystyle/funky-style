@@ -123,6 +123,26 @@ MONGO_QUERY_BLACKLIST = ['$where']
 
 
 SCHEMAS = {
+    'deep_link':{
+        'tags': {
+            'type': 'string'
+        },
+        'affiliate_network': {
+            'type': 'string',
+            'required': True,
+            'unique': True
+        },
+        'start_url': {
+            'type': 'string'
+        },
+        'end_url': {
+            'type': 'string'
+        },
+        'replace_strings':{
+            'type': 'list'
+        }
+
+    },
     'persons': {
         'first_name': {
             'type': 'string',
@@ -1088,6 +1108,7 @@ MASTER_SEO_SCHEMA = SCHEMAS['master_seo']
 COUPON_REPORTS_SCHEMA = SCHEMAS['coupon_reports']
 COUPONS_COMMENTS_SCHEMA = SCHEMAS['coupon_comments']
 BLOG_SCHEMA = SCHEMAS['blog']
+DEEP_LINK_SCHEMA = SCHEMAS['deep_link']
 
 
 COMMON_ACCESS_COLLECTION = {
@@ -1108,6 +1129,15 @@ STORES = {
     'additional_lookup': {
         'url': 'regex("[\w]+")',
         'field': 'name'
+    }
+}
+
+DEEP_LINK = {
+    'item_title': 'deep_link',
+    'schema': DEEP_LINK_SCHEMA,
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'affiliate_network'
     }
 }
 
@@ -1209,7 +1239,8 @@ DOMAIN = {
     'coupons_comments': COUPONS_COMMENTS,
     'coupons_reports': COUPON_REPORTS,
     'blog': BLOG,
-    'common_access_collection': COMMON_ACCESS_COLLECTION
+    'common_access_collection': COMMON_ACCESS_COLLECTION,
+    'deep_link': DEEP_LINK
 }
 
 COLLECTION_NAMES = DOMAIN.keys()
