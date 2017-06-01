@@ -2,6 +2,13 @@ from functools import wraps
 from flask import request, session,jsonify, abort
 from settings import CONFIG_DATA, LOGGER
 
+def check_token(client_token, server_token):
+    splitted_token = client_token.split(" ")
+    if len(splitted_token) != 2:
+        return False
+    if server_token != splitted_token[1]:
+        return False
+    return True
 
 # user logging to application
 def user_login_required(f):
@@ -17,7 +24,7 @@ def user_login_required(f):
             error = 'user not logged in.'
             abort(401, error)
 
-        if request.headers.get('Authorization') != session['login_token']:
+        if check_token(request.headers.get('Authorization'),session['login_token']):
             LOGGER.info('token mis-matched.{0}<-->{1}'.format(request.headers.get('Authorization'), session['login_token']))
             error = 'token mis-matched.'
             abort(401, error)
@@ -58,7 +65,7 @@ def submitter_login_required(f):
             error = 'user not logged in.'
             abort(401, error)
 
-        if request.headers.get('Authorization') != session['login_token']:
+        if check_token(request.headers.get('Authorization'), session['login_token']):
             LOGGER.info('token mis-matched.{0}<-->{1}'.format(request.headers.get('Authorization'), session['login_token']))
             error = 'token mis-matched.'
             abort(401, error)
@@ -101,7 +108,7 @@ def editor_login_required(f):
             error = 'user not logged in.'
             abort(401, error)
 
-        if request.headers.get('Authorization') != session['login_token']:
+        if check_token(request.headers.get('Authorization'), session['login_token']):
             LOGGER.info('token mis-matched.{0}<-->{1}'.format(request.headers.get('Authorization'), session['login_token']))
             error = 'token mis-matched.'
             abort(401, error)
@@ -143,7 +150,7 @@ def admin_login_required(f):
             error = 'user not logged in.'
             abort(401, error)
 
-        if request.headers.get('Authorization') != session['login_token']:
+        if check_token(request.headers.get('Authorization'), session['login_token']):
             LOGGER.info('token mis-matched.{0}<-->{1}'.format(request.headers.get('Authorization'), session['login_token']))
             error = 'token mis-matched.'
             abort(401, error)
