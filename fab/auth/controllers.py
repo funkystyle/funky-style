@@ -26,9 +26,6 @@ def get_collections():
     response.status_code = 200
     return response
 
-
-
-
 @app.route('/api/1.0/auth/send-forgot-password-link', methods=['POST'])
 def forgotpassword():
     try:
@@ -212,6 +209,10 @@ def login():
     response.status_code = 200
     return response
 
+@app.route('/<path:dummy>')
+def fallback(dummy):
+    LOGGER.info("called dummy end point")
+    return make_response(open('static/app/customer-panel/index.html').read())
 
 # registration
 @app.route('/api/1.0/auth/signup', methods=['POST'])
