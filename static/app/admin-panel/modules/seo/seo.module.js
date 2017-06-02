@@ -41,7 +41,7 @@ angular.module("seoModule", ["ui.select", "ngSanitize",
             },
             {
                 text: "All Deal Brands",
-                code: "deal_brands"
+                code: "deal_brand"
             },
             {
                 text: "Single Deal",
@@ -70,6 +70,9 @@ angular.module("seoModule", ["ui.select", "ngSanitize",
             };
         };
 
+        // get seoDetails
+        $scope.getSeoDetails();
+
         $scope.seoList = [];
         $scope.filterSeoList = [];
         $scope.search = {
@@ -93,7 +96,7 @@ angular.module("seoModule", ["ui.select", "ngSanitize",
 
         // update seo
         $scope.updateSeo = function (seo) {
-           $scope.showForm = !$scope.showForm;
+           $scope.showForm = true;
            $scope.no_seo = true;
            $scope.seo = seo;
         };

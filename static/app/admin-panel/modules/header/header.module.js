@@ -18,9 +18,24 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
                 $auth.removeToken();
                 $state.go('login');
             });
-
-            
         }
+
+        // get the seo details
+        $scope.seoList = [];
+        $scope.getSeoDetails = function () {
+            $http({
+                // TODO
+                url: URL.master_seo+"?rand="+Math.random(),
+                method: "GET"
+            }).then(function (data) {
+                console.log("SEO data: ", data);
+                if(data.data._items.length != 0) {
+                    $scope.seoList = data.data._items;
+                }
+            }, function (error) {
+                console.log(error);
+            });
+        };
 
         $scope.logout = function () {
             if($auth.isAuthenticated()) {
