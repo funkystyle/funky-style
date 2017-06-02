@@ -13,7 +13,7 @@ var date = new Date();
 var month = undefined;
 var year = undefined;
 
-date.setDate(date.getDate() - 3);
+date.setDate(date.getDate() + 3);
 month = monthNames[date.getMonth()];
 year = date.getFullYear();
 

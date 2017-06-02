@@ -1,6 +1,6 @@
 angular.module("seoModule", ["ui.select", "ngSanitize",
-    "ui.bootstrap", "toastr", "satellizer", "personFactoryModule", "cgBusy", "constantModule"])
-    .controller("seoCtrl", function ($scope, $timeout, toastr, $auth, personFactory, $log, URL, $state, $http) {
+    "ui.bootstrap", "toastr", "satellizer", "personFactoryModule", "cgBusy", "constantModule", "angular-table"])
+    .controller("seoCtrl", function ($scope, $filter, $q, $timeout, toastr, $auth, personFactory, $log, URL, $state, $http) {
         console.log("Add seo Controller!");
         $scope.selection_type = [
             {
@@ -58,25 +58,61 @@ angular.module("seoModule", ["ui.select", "ngSanitize",
                 code: false
             }
         ];
-        $scope.seo = {};
 
-        $scope.seo = {
-            meta_title: "%%title%% Offers, Coupons, Promo Codes Deals - %%currentmonth%% %%currentyear%%",
-            status: $scope.status[0].code,
-            selection_type: [$scope.selection_type[0].code],
-            meta_description: "Latest %%title%% Coupons %%currentmonth%% %%currentyear%%. 100% Working Verified Promo Codes , Offers, Coupon codes, Discount Codes, Deals"
+        $scope.showForm = undefined;
+        $scope.addSeo = function () {
+            $scope.showForm = true;
+            $scope.seo = {
+                meta_title: "%%title%% Offers, Coupons, Promo Codes Deals - %%currentmonth%% %%currentyear%%",
+                status: $scope.status[0].code,
+                selection_type: $scope.selection_type[0],
+                meta_description: "Latest %%title%% Coupons %%currentmonth%% %%currentyear%%. 100% Working Verified Promo Codes , Offers, Coupon codes, Discount Codes, Deals"
+            };
+        };
+
+        $scope.seoList = [];
+        $scope.filterSeoList = [];
+        $scope.search = {
+            search: undefined
+        };
+        $scope.show = false;
+        $scope.check = {
+            all: false,
+            check: {}
+        };
+
+        $scope.config = {
+            itemsPerPage: 5,
+            maxPages: 20,
+            fillLastPage: "no"
+        };
+
+        $scope.updateFilteredList = function() {
+            $scope.filterSeoList = $filter("filter")($scope.seoList, $scope.search.search);
+        };
+
+        // update seo
+        $scope.updateSeo = function (seo) {
+           $scope.showForm = !$scope.showForm;
+           $scope.no_seo = true;
+           $scope.seo = seo;
         };
 
         // get the master seo details
-        $scope.no_seo = false;
+        var embedded = {
+            "last_modified_by": 1
+        };
         $http({
-            url: URL.master_seo,
+            url: URL.master_seo+"?embedded="+JSON.stringify(embedded)+"&rand="+Math.random(),
             method: "GET"
         }).then(function (data) {
-            console.log("Success data: ", data);
-            if(data.data._items.length != 0) {
-                $scope.seo = data.data._items[0];
-                $scope.no_seo = true;
+            console.log("Success SEO list data: ", data);
+            if(data.data) {
+                $scope.seoList = data.data._items;
+                $scope.filterSeoList = data.data._items;
+                angular.forEach($scope.seoList, function(item) {
+                    $scope.check.check[item._id] = false;
+                });
             }
         }, function (error) {
             console.log(error);
@@ -96,11 +132,18 @@ angular.module("seoModule", ["ui.select", "ngSanitize",
                 $state.reload();
             }, function (error) {
                 console.log(error);
+                if(error.data['_issues']) {
+                    if(error.data._issues['selection_type']) {
+                        toastr.error("Selection type must be Unique", "Error!");
+                    }
+                }
             });
         };
 
         // update seo
         $scope.update = function (seo) {
+
+            seo.last_modified_by = $scope.user._id;
             console.log("update SEO: ", seo);
 
             delete seo._created;
@@ -124,5 +167,49 @@ angular.module("seoModule", ["ui.select", "ngSanitize",
                 console.log(error);
                 toastr.error(error.data._error.message, error.data._error.code);
             });
-        }
+        };
+
+
+        // check for individual check boxes
+        $scope.checkBox = function(val) {
+            var count = 0;
+            angular.forEach($scope.check.check, function(val, key) {
+                if (val) {
+                    count++
+                }
+            });
+            $scope.check.all = (count == Object.keys($scope.check.check).length) ? true : false;
+            $scope.show = (count == 0) ? false : true;
+            $scope.check.count = count;
+        };
+
+        // delete selected check boxes
+        $scope.deleteSelected = function() {
+            var deletedArray = [];
+            angular.forEach($scope.check.check, function(val, key) {
+                angular.forEach($scope.seoList, function(item, i) {
+                    if (item._id == key && val && deletedArray.indexOf(item._id) == -1) {
+                        deletedArray.push(
+                            $http({
+                                url: URL.master_seo+'/'+item._id+'?rand_number='+Math.random(),
+                                method: "DELETE"
+                            }).then(function (data) {
+                                console.log(data);
+                                return data;
+                            }, function (error) {
+                                console.log(error);
+                                return error;
+                            })
+                        );
+                    }
+                });
+            });
+
+            // show success message after deleting all the banners
+            $q.all(deletedArray).then(function (data) {
+                toastr.success("Selected banners Deleted", "Success!");
+                $state.reload();
+            })
+
+        };
     });

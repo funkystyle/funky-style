@@ -69,9 +69,15 @@ angular.module("bannersModule", ['angular-table', 'constantModule', 'toastr', 'c
                 angular.forEach($scope.banners, function(item, i) {
                     if (item._id == key && val && deletedArray.indexOf(item._id) == -1) {
                         deletedArray.push(
-                            storeFactory.delete(item._id).then(function (bannerdelete) {
-                                console.log("banners deleted!", bannerdelete);
-                                return bannerdelete;
+                            $http({
+                                url: URL.banner+'/'+item._id+'?rand_number='+Math.random(),
+                                method: "DELETE"
+                            }).then(function (data) {
+                                console.log(data);
+                                return data;
+                            }, function (error) {
+                                console.log(error);
+                                return error;
                             })
                         );
                     }

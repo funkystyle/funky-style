@@ -31,7 +31,6 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
                     console.log(data);
                     $auth.logout();
 
-                    toastr.success("Successfully Logged out!", "Hey!");
                     $state.go('login');
                 }, function (error) {
                     console.log(error);
