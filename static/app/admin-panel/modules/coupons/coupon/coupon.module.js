@@ -34,6 +34,8 @@ angular.module("couponModule", ['angular-table', 'constantModule',
             angular.forEach($scope.coupons, function (item) {
                 $scope.filterCoupons.push(item);
             });
+
+            $scope.filter = {};
         };
 
         // apply type filter for filtering the coupons from table
@@ -147,17 +149,21 @@ angular.module("couponModule", ['angular-table', 'constantModule',
             }
             angular.forEach(filter, function (val, key) {
                 angular.forEach(items, function (item) {
-                    console.log(item[key], typeof item[key]);
-                    if(typeof item[key] == 'array') {
+                    console.log(item[key], "isArray: ", Array.isArray(item[key]));
+                    if(Array.isArray(item[key])) {
                         angular.forEach(item[key], function (type) {
                             if(type._id == val) {
-                                console.log("----------", item);
+                                list.push(item);
                             }
 
                         });
                     }
                 })
             });
-            return items;
+
+            var uniqueList = _.uniq(list, function(item, key, a) {
+                return item._id;
+            });
+            return uniqueList;
         }
     });
