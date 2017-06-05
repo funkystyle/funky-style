@@ -88,6 +88,7 @@ angular
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $rootScope.pageTitle = $scope.store.meta_title;
+                    $rootScope.pageDescription = $scope.store.meta_description;
                     console.log($scope.store);
                     
                     // applying carousel after dom prepared

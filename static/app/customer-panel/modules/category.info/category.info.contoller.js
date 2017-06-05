@@ -2,7 +2,7 @@ angular
     .module("categoryinfoModule", ["categoryFactoryModule",
         "storeServiceModule", "couponFactoryModule"])
     .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce,
-                                              $stateParams, $http) {
+                                              $stateParams, $http, $rootScope) {
         $scope.favorite = {
             favorite: false
         };
@@ -43,8 +43,6 @@ angular
 
         if($stateParams['url']) {
             // get category information
-            var url = '/api/1.0/categories/'+$stateParams.url+'?embedded={"related_categories":1,"related_coupons": 1,"related_coupons.related_categories": 1,"top_stores":1}&rand_number='+Math.random();
-
             var where = {};
             where['url'] = $stateParams.url;
 
@@ -55,7 +53,7 @@ angular
             embedded['related_coupons.related_categories'] = 1;
             embedded['related_coupons.related_stores'] = 1;
             
-            var url = '/api/1.0/categories/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded);
+            url = '/api/1.0/categories/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded);
             $http({
                 url: url,
                 method: "GET"
@@ -66,6 +64,12 @@ angular
                         $scope.category = category.data._items[0];
                         $scope.category.toDayDate = new Date();
                         $scope.category.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
+
+                        // SEO title and description
+                        $rootScope.pageTitle = $scope.category.seo_title;
+                        $rootScope.pageDescription = $scope.category.seo_description;
+
+                        console.log("Final Category details: ", $scope.category);
                         
                         angular.forEach($scope.category.related_coupons, function (item) {
                             if(new Date(item.expire_date) > new Date()) {

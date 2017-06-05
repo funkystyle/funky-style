@@ -1,5 +1,5 @@
 angular.module("categoryModule", ["categoryFactoryModule"])
-    .controller("categoryCtrl", function($scope, $http) {
+    .controller("categoryCtrl", function($scope, $http, SEO, $rootScope) {
         console.log("category controller");
 
         $scope.sorting = {
@@ -71,5 +71,16 @@ angular.module("categoryModule", ["categoryFactoryModule"])
             }
         }, function (error) {
             console.log(error);
+        });
+
+        // get the list of SEO
+        SEO.getSEO().then(function (data) {
+            angular.forEach(data, function (item) {
+                if(item.selection_type.code == 'category') {
+                    var data = SEO.seo("", item, 'category');
+                    $rootScope.pageTitle = data.title;
+                    $rootScope.pageDescription = data.description;
+                }
+            });
         });
     });

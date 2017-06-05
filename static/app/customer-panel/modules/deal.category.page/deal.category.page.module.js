@@ -1,6 +1,6 @@
 angular.module("dealCategoryPageModule", [])
     .controller("dealCategoryPageCtrl", function ($scope, $state, $stateParams,
-                                           $ocLazyLoad, $http, $sce, $filter) {
+                                           $ocLazyLoad, $http, $sce, $filter, $rootScope) {
         console.log("brand page controller !");
 
         $scope.search_brands = {};
@@ -77,6 +77,7 @@ angular.module("dealCategoryPageModule", [])
             $scope.deal = {};
             $scope.deals = [];
             $scope.deal_categories = [];
+            $scope.categories = [];
             var random = new Date().getDate();
             if($stateParams['url']) {
                 var where = {
@@ -92,6 +93,10 @@ angular.module("dealCategoryPageModule", [])
                     console.log("Deal brand is: ", data.data._items[0]);
                     $scope.deal = data.data._items[0];
                     $scope.deal.date = new Date();
+
+                    // SEO information
+                    $rootScope.pageTitle = $scope.deal.seo_title;
+                    $rootScope.pageDescription = $scope.deal.seo_description;
 
                     setTimeout(function () {
                         $("#owl-demo").owlCarousel({
@@ -127,8 +132,8 @@ angular.module("dealCategoryPageModule", [])
 
                             angular.forEach($scope.deals, function (item) {
                                angular.forEach(item.deal_category, function (brand) {
-                                   var length = $filter('filter')($scope.categories, {_id: brand._id}).length;
-                                   if(length == 0) {
+                                   var items = $filter('filter')($scope.categories, {_id: brand._id});
+                                   if(items.length == 0) {
                                        $scope.categories.push(brand);
                                    }
                                });

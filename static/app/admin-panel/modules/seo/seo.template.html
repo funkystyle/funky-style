@@ -89,7 +89,7 @@
                                 <label for="related_seos">Selection Types</label>
                                 <ui-select id="related_seos" ng-model="seo.selection_type" theme="bootstrap">
                                     <ui-select-match placeholder="Select Types">{{ $select.selected.text }}</ui-select-match>
-                                    <ui-select-choices repeat="item in selection_type | filter: $select.search">
+                                    <ui-select-choices repeat="item in selection_type | orderBy: 'text' | filter: $select.search">
                                         <div ng-bind-html="item.text | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>

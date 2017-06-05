@@ -85,7 +85,7 @@ angular.module("seoModule", ["ui.select", "ngSanitize",
         };
 
         $scope.config = {
-            itemsPerPage: 5,
+            itemsPerPage: 20,
             maxPages: 20,
             fillLastPage: "no"
         };

@@ -10,7 +10,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
 
             // configuring the lazyLoad angularjs files
             $ocLazyLoadProvider.config({
-                debug: true,
+                // debug: true,
                 modules: [
                     {
                         name: 'headerModule',
@@ -354,6 +354,50 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     def.resolve(data.data);
                 }, function (error) {
                     def.reject(error.data);
+                });
+
+                return def.promise;
+            }
+        }
+    })
+    .factory("SEO", function ($http, $q) {
+        return {
+            seo: function (newVal, item, from) {
+                var monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+                var date = new Date();
+                var month = undefined;
+                var year = undefined;
+
+                date.setDate(date.getDate() + 3);
+                month = monthNames[date.getMonth()];
+                year = date.getFullYear();
+
+                var replacement = {
+                    title: undefined,
+                    description: undefined
+                };
+                replacement.title = item.meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+                replacement.description = item.meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+
+                console.log("SEO replacement Data: ", replacement);
+                return replacement;
+            },
+            getSEO: function () {
+                // get the seo information for home page
+                var def = $q.defer();
+                var url = '/api/1.0/master_seo'+'?rand' + new Date().getTime();
+                $http({
+                    url: url,
+                    method: "GET"
+                }).then(function (data) {
+                    console.log("SEO Data: ", data.data._items);
+                    var items = data.data._items;
+                    def.resolve(items);
+                }, function (error) {
+                    console.log(error);
+                    def.reject(error);
                 });
 
                 return def.promise;
