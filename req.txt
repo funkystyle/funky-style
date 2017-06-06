@@ -1,0 +1,42 @@
+ 'deep_link':{
+        'tags': {
+            'type': 'dict',
+            'schema': {
+                'type': 'dict',
+                'schema': {
+                    'tags': {'type': 'string'},
+                    'replace': {'type': 'boolean'}
+                }
+            }
+        },
+        'affiliate_network': {
+            'type': 'string',
+            'required': True,
+            'unique': True
+        },
+        'start_url': {
+            'type': 'dict',
+            'schema': {
+                'type': 'dict',
+                'schema': {
+                    'url': {'type': 'string'},
+                    'encode': {'type': 'boolean'}
+                }
+            }
+        },
+        'end_url': {
+            'type': 'dict',
+            'schema': {
+                'type': 'dict',
+                'schema': {
+                    'url': {'type': 'string'},
+                    'encode': {'type': 'boolean'}
+                }
+            }
+        },
+        "encode_main_url":{
+            'type': 'boolean'
+        },
+        'replace_strings':{
+            'type': 'list'
+        }

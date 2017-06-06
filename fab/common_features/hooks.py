@@ -98,12 +98,27 @@ def process_images(requests):
                 else:
                     request[field] = save_image_from_base64(request[field])
 
-
+def find_netloc(requests):
+    for request in requests:
+        if 'affiliate_network' not in request:
+            abort(403, "no affiliate_network parameter found in post request.")
+        if not request['affiliate_network']:
+            abort(403, "affiliate_network should not be empty.")
+        from urlparse import urlparse
+        parsed_uri = urlparse(request['affiliate_network'])
+        LOGGER.info('affiliate network:{}'.format(parsed_uri.netloc))
+        request['affiliate_network'] = parsed_uri.netloc
+        if not request['affiliate_network']:
+            abort(403, "affiliate_network is not valid.")
+    return requests
 
 # hooks for stores
 def before_create(resource, request):
     LOGGER.info("called for create image resource:{}".format(resource))
-    process_images(request)
+    if resource == 'deep_link':
+        request = find_netloc(request)
+    else:
+        process_images(request)
 
 def before_update(resource, update, original):
     # getting all image fields of all tables from config file
