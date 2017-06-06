@@ -1,4 +1,4 @@
-angular.module("allDealsModule", [])
+angular.module("allDealsModule", ["Directives"])
     .controller("allDealsCtrl", function ($scope, $state, $stateParams, $http, SEO, $rootScope) {
         console.log("All Deals Controller!");
 
@@ -78,9 +78,3 @@ angular.module("allDealsModule", [])
             });
         });
     })
-    .directive("dealTileDirective", function () {
-        return {
-            restrict: "E",
-            templateUrl: "static/app/customer-panel/modules/deal.details/deal.details.directive.template.html"
-        }
-    });

@@ -1,114 +1,112 @@
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="static/app/customer-panel/modules/fab.deal.home/fab.deal.home.css"/>
 
-<div class="main_content">
-    <div class="container">
-        <h1>
-            Popular Categories
-            <button class="btn btn-primary pull-right btn-md">View All Categories </button>
-        </h1>
-        <div class="row">
-            <div class="col-md-3 col-lg-3 border_around" ng-repeat="item in deal_categories">
-                <div class="row">
-                    <div class="col-md-9 col-lg-9">
-                        <h4><a ui-sref="main.deal_category_page({url: item.url})">{{ item.name }}</a></h4>
-                        <h5><a ui-sref="main.deal_category_page({url: item.url})">See All {{ item.name }} Price list</a></h5>
-                    </div>
-                    <div class="col-md-3 col-lg-3">
-                        <div class="thumbnail set_position">
-                            <img ng-src="{{ item.image }}" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- top deal brands -->
-        <div class="row">
-            <h1>Top Deal Brands</h1>
+
+<div class="container main_content">
+    <h1>
+        Popular Categories
+        <button class="btn btn-primary pull-right btn-md">View All Categories </button>
+    </h1>
+    <div class="row">
+        <div class="col-md-3 col-lg-3" ng-repeat="item in deal_categories">
             <div class="panel panel-default">
-                <div class="row row_pad">
-                    <div class="col-md-4 col-lg-4">
-                        <div class="well">
-                            <h4>Mobiles below Rs 5000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-9">
+                            <h4><a ui-sref="main.deal_category_page({url: item.url})">{{ item.name }}</a></h4>
+                            <h5><a ui-sref="main.deal_category_page({url: item.url})">See All {{ item.name }} Price list</a></h5>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-lg-4">
-                        <div class="well">
-                            <h4>Mobiles below Rs 10,000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-4">
-                        <div class="well">
-                            <h4>Mobiles below Rs 15,000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row_mar">
-                    <div class="col-md-3 col-lg-3 border_around" ng-repeat="item in deal_brands">
-                        <div class="row">
-                            <div class="col-md-9 col-lg-9">
-                                <h4><a ui-sref="main.deal_category_page({url: item.url})">{{ item.name }}</a></h4>
-                                <h5><a ui-sref="main.deal_category_page({url: item.url})">See All {{ item.name }} Price list</a></h5>
-                            </div>
-                            <div class="col-md-3 col-lg-3">
-                                <div class="thumbnail set_position">
-                                    <img ng-src="{{ item.image }}" />
-                                </div>
+                        <div class="col-md-3 col-lg-3">
+                            <div class="thumbnail set_position">
+                                <img ng-src="{{ item.image }}" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row row_best">
-            <div class="col-md-12 col-lg-12 pad-0">
-                <h1>
-                    Best selling Deals
-                    <button class="btn btn-primary pull-right btn-md">View All </button>
-                </h1>
-            </div>
-        </div>
-        <div class="row row_best_1">
-            <deal-tile-directive></deal-tile-directive>
-        </div>
-
-        <!-- upcoming deals -->
-        <div class="row row_best">
-            <div class="col-md-12 col-lg-12 pad-0">
-                <h1>
-                    Upcoming Deals
-                    <button class="btn btn-primary pull-right btn-md">View All </button>
-                </h1>
-            </div>
-        </div>
-        <div class="row row_best_1">
-            <deal-tile-directive></deal-tile-directive>
-        </div>
-        <!-- end of upcoming deals -->
-
-        <div class="row">
-            <h5 class="online_mobile_txt">Most discount coupons and offers stores</h5>
-        </div>
-        <div class="row row_bot_pad">
-            <div class="col-lg-3 col-md-3 pad_left" ng-repeat="item in stores">
-                <div class="panel panel-default pad_panel">
-                    <div class="panel-body">
-                        <div class="thumbnail">
-                            <img ng-src="{{ item.image }}">
+    </div>
+    <!-- top deal brands -->
+    <h1>Top Deal Brands</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4">
+                            <div class="well">
+                                <h4>Mobiles below Rs 5000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                            </div>
                         </div>
-                        <a ui-sref="main.store-info({url: item.url})" class="btn btn-default col-md-11">Goto {{ item.name }}</a>
+                        <div class="col-md-4 col-lg-4">
+                            <div class="well">
+                                <h4>Mobiles below Rs 10,000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <div class="well">
+                                <h4>Mobiles below Rs 15,000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row row_bot_pad">
-            <h4 class="about_raja">About CompareRaja.in</h4>
-            <p>Lorem ipsum dolor sit amet, imperdiet quis est amet sociosqu ut leo, tortor molestie sed ultrices sed vel leo. Mollis rhoncus in, nonummy enim in et praesent, phasellus et enim magna turpis proin iaculis, ut quis dictum. Nisl a diam risus.</p>
-            <p>Lorem ipsum dolor sit amet, imperdiet quis est amet sociosqu ut leo, tortor molestie sed ultrices sed vel leo. Mollis rhoncus in, nonummy enim in et praesent, phasellus et enim magna turpis proin iaculis, ut quis dictum. Nisl a diam risus.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 col-lg-3" ng-repeat="item in deal_brands">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-9">
+                            <h4><a ui-sref="main.deal_brand_page({url: item.url})">{{ item.name }}</a></h4>
+                            <h5><a ui-sref="main.deal_brand_page({url: item.url})">See All {{ item.name }} Price list</a></h5>
+                        </div>
+                        <div class="col-md-3 col-lg-3">
+                            <div class="thumbnail set_position">
+                                <img ng-src="{{ item.image }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row row_bot_pad">
-            <h4 class="about_raja">About CompareRaja.in</h4>
+    </div>
+
+    <h1>
+        Best Selling Deals
+    </h1>
+    <div class="row">
+        <deal-tile-directive items="deals"></deal-tile-directive>
+    </div>
+
+    <!-- upcoming deals -->
+    <h1>Upcoming Deals</h1>
+    <div class="row">
+        <deal-tile-directive items="deals"></deal-tile-directive>
+    </div>
+    <!-- end of upcoming deals -->
+
+    <h1>Most Discount Coupons And Offers Stores</h1>
+    <div class="row row_bot_pad">
+        <div class="col-lg-3 col-md-3" ng-repeat="item in stores">
+            <div class="panel panel-default pad_panel">
+                <div class="panel-body" style="padding: 0;">
+                    <div class="thumbnail store-thumbnail">
+                        <img ng-src="{{ item.image }}">
+                    </div>
+                    <a ui-sref="main.store-info({url: item.url})" class="text-uppercase btn btn-default btn-md btn-block">GOTO {{ item.name }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h1>About CompareRaja.in</h1>
+            <hr />
             <p>Lorem ipsum dolor sit amet, imperdiet quis est amet sociosqu ut leo, tortor molestie sed ultrices sed vel leo. Mollis rhoncus in, nonummy enim in et praesent, phasellus et enim magna turpis proin iaculis, ut quis dictum. Nisl a diam risus.</p>
             <p>Lorem ipsum dolor sit amet, imperdiet quis est amet sociosqu ut leo, tortor molestie sed ultrices sed vel leo. Mollis rhoncus in, nonummy enim in et praesent, phasellus et enim magna turpis proin iaculis, ut quis dictum. Nisl a diam risus.</p>
         </div>

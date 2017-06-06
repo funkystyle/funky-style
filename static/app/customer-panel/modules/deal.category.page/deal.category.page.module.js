@@ -1,7 +1,7 @@
-angular.module("dealCategoryPageModule", [])
+angular.module("dealCategoryPageModule", ["Directives"])
     .controller("dealCategoryPageCtrl", function ($scope, $state, $stateParams,
                                            $ocLazyLoad, $http, $sce, $filter, $rootScope) {
-        console.log("brand page controller !");
+        console.log("Deal category page controller !");
 
         $scope.search_brands = {};
         $scope.search = {};
@@ -92,7 +92,10 @@ angular.module("dealCategoryPageModule", [])
                 }).then(function (data) {
                     console.log("Deal brand is: ", data.data._items[0]);
                     $scope.deal = data.data._items[0];
-                    $scope.deal.date = new Date();
+                    $scope.deal.toDayDate = new Date();
+                    $scope.deal.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
+                    $rootScope.pageTitle = $scope.deal.seo_title;
+                    $rootScope.pageDescription = $scope.deal.seo_description;
 
                     // SEO information
                     $rootScope.pageTitle = $scope.deal.seo_title;

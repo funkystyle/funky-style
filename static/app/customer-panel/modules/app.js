@@ -56,6 +56,11 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         name: "Filters",
                         files: ['static/app/customer-panel/modules/filters/filter.module.js']
                     },
+                    //    Directives
+                    {
+                        name: "Directives",
+                        files: ['static/app/customer-panel/modules/directives/directives.module.js']
+                    },
 
                     // Services
                     {

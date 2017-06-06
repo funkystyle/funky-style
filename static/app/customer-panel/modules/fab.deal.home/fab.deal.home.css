@@ -1,6 +1,4 @@
-.main_content{
-	background: #ffffff;
-}
+
 .price_txt{
 	font-weight: bold;
 	text-align: center;
@@ -8,7 +6,6 @@
 .border_around{
 	border: 1px solid #DDDDDD;
 }
-.border_around_last{ border-top:1px solid #eee; }
 .para1{ font-size: 12px; }
 .set_position{
     margin-top: 10px; padding-left: 0;
@@ -26,9 +23,11 @@
 .best_sell_txt{ font-weight: bold; }
 .row_best{ margin-bottom: 2px; border-top: 1px solid #eee;padding:4px 0%; }
 .row_best_1{ margin-bottom: 2px; border-top: 1px solid #eee; border-bottom: 1px solid #eee;padding:4px 0%; }
-
-.online_mobile_txt{ font-weight: bold; font-size: 20px; padding: 1% 0; }
-.pad_panel{ padding-left: 12%; }
+.store-thumbnail img {
+	max-height: 120px;
+	min-height: 120px;
+    width: 100%;
+}
 .about_raja{ border-bottom: 1px solid #eeeeee; font-weight: bold; padding-bottom: 1%; }
 .row_bot_pad{
 	padding-bottom: 2%
