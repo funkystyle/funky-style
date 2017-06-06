@@ -5,5 +5,5 @@
 				  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
 				        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-						<url><loc>http://localhost:8000/api/1.0/deals/Lee Austin</loc><lastmod>2017-06-02T06:32:17+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
+						<url><loc>http://localhost:8000/api/1.0/deals/Deal-1</loc><lastmod>2017-06-06T05:24:19+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
 				</urlset>

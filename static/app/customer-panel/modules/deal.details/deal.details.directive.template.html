@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.directive.css">
+
+<div class="products-list col-md-3" ng-repeat="item in deals">
+    <div class="product-border-main">
+        <div class="product-img">
+            <img ng-src="{{ item.images[0] }}" class="img-responsive"/>
+        </div>
+    </div>
+    <div class="product-price">
+        <div class="product-title">
+            <h4><a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a></h4>
+            <div star-rating rating-value="item.rating" max="5"></div>
+        </div>
+        <hr />
+        <h4>Rs. {{ item.discount_price }}</h4>
+    </div>
+    <div>
+        <a class="btn btn-md btn-info btn-block" ui-sref="main.deal_post_details({url: item.url})">GO TO DEAL</a>
+    </div>
+</div>

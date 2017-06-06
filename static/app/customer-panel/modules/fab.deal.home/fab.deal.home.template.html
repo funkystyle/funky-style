@@ -3,126 +3,90 @@
 
 <div class="main_content">
     <div class="container">
-        <div class="row" style="margin-bottom: 2px">
-            <div class="col-md-4 col-lg-4 pull-left pad_left">
-                <h6 class="popular_txt">POPULAR CATEGORIES</h6>
-            </div>
-            <div class="col-md-2 col-lg-2 pull-right">
-                <button class="btn btn-primary">View All Categories >> </button>
-            </div>
-        </div>
+        <h1>
+            Popular Categories
+            <button class="btn btn-primary pull-right btn-md">View All Categories </button>
+        </h1>
         <div class="row">
-            <div class="col-md-3 col-lg-3 border_around" ui-sref="main.deal_category_page({url: item.url})" ng-repeat="item in deal_categories">
-                <div class="col-md-9 col-lg-9">
-                    <h4>{{ item.name }}</h4>
-                    <p class="para1"></p>
-                    <h5><a ui-sref="main.deal_category_page({url: item.url})">{{ item.name }} Price list >></a></h5>
-                </div>
-                <div class="col-md-3 col-lg-3 set_position">
-                    <div class="thumbnail">
-                        <img ng-src="{{ item.image }}" />
+            <div class="col-md-3 col-lg-3 border_around" ng-repeat="item in deal_categories">
+                <div class="row">
+                    <div class="col-md-9 col-lg-9">
+                        <h4><a ui-sref="main.deal_category_page({url: item.url})">{{ item.name }}</a></h4>
+                        <h5><a ui-sref="main.deal_category_page({url: item.url})">See All {{ item.name }} Price list</a></h5>
+                    </div>
+                    <div class="col-md-3 col-lg-3">
+                        <div class="thumbnail set_position">
+                            <img ng-src="{{ item.image }}" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- top deal brands -->
         <div class="row">
-            <h3 class="text-center">Top Deal Brands</h3>
+            <h1>Top Deal Brands</h1>
             <div class="panel panel-default">
                 <div class="row row_pad">
-                    <div class="col-md-3 col-lg-3 mobile_format">
-                        <h4>Mobiles below Rs 5000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="well">
+                            <h4>Mobiles below Rs 5000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                        </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 mobile_format">
-                        <h4>Mobiles below Rs 10,000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="well">
+                            <h4>Mobiles below Rs 10,000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                        </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 mobile_format">
-                        <h4>Mobiles below Rs 15,000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="well">
+                            <h4>Mobiles below Rs 15,000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
+                        </div>
                     </div>
                 </div>
                 <div class="row row_mar">
-                    <div class="col-lg-3 col-md-3" ng-repeat="item in deal_brands">
-                        <div class="panel panel-default">
-                            <div class="panel-body" ui-sref="main.deal_brand_page({url: item.url})">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <img ng-src="{{ item.image }}" class="media-object" style="width:60px">
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="media-heading media_pad">{{ item.name }} Price list</h5>
-                                    </div>
+                    <div class="col-md-3 col-lg-3 border_around" ng-repeat="item in deal_brands">
+                        <div class="row">
+                            <div class="col-md-9 col-lg-9">
+                                <h4><a ui-sref="main.deal_category_page({url: item.url})">{{ item.name }}</a></h4>
+                                <h5><a ui-sref="main.deal_category_page({url: item.url})">See All {{ item.name }} Price list</a></h5>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <div class="thumbnail set_position">
+                                    <img ng-src="{{ item.image }}" />
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
 
         <div class="row row_best">
-            <div class="col-md-4 col-lg-4 pull-left pad_left">
-                <h6 class="best_sell_txt">Best selling Deals</h6>
-            </div>
-            <div class="col-md-2 col-lg-2 pull-right">
-                <button class="btn btn-primary col-md-12 col-lg-12">View All </button>
+            <div class="col-md-12 col-lg-12 pad-0">
+                <h1>
+                    Best selling Deals
+                    <button class="btn btn-primary pull-right btn-md">View All </button>
+                </h1>
             </div>
         </div>
         <div class="row row_best_1">
-            <div class="products-main col-md-12">
-                <div class="products-row-main">
-                    <div class="products-list col-md-3" ng-repeat="item in deals">
-                        <div class="product-border-main">
-                            <div class="product-img">
-                                <img ng-src="{{ item.images[0] }}" class="img-responsive"/>
-                            </div>
-                            <div class="product-title">
-                                <h4>{{ item.actual_price }}</h4>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h4>{{ item.discount_price }}</h4>
-                            <p ng-if="item.deal_type == 'product'">{{ item.stores.length }} Stores at {{ item.discount_price }}</p>
-                            <p>
-                                <a ui-sref="main.deal_post_details({url: item.url})">Go to Deal</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <deal-tile-directive></deal-tile-directive>
         </div>
+
+        <!-- upcoming deals -->
         <div class="row row_best">
-            <div class="col-md-4 col-lg-4 pull-left pad_left">
-                <h6 class="best_sell_txt">Upcoming Deals</h6>
-            </div>
-            <div class="col-md-2 col-lg-2 pull-right">
-                <button class="btn btn-primary col-md-12 col-lg-12">View All </button>
+            <div class="col-md-12 col-lg-12 pad-0">
+                <h1>
+                    Upcoming Deals
+                    <button class="btn btn-primary pull-right btn-md">View All </button>
+                </h1>
             </div>
         </div>
         <div class="row row_best_1">
-            <div class="products-main col-md-12">
-                <div class="products-row-main">
-                    <div class="products-list col-md-3" ng-repeat="item in deals">
-                        <div class="product-border-main">
-                            <div class="product-img">
-                                <img ng-src="{{ item.images[0] }}" class="img-responsive"/>
-                            </div>
-                            <div class="product-title">
-                                <h4>{{ item.actual_price }}</h4>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h4>{{ item.discount_price }}</h4>
-                            <p ng-if="item.deal_type == 'product'">{{ item.stores.length }} Stores at {{ item.discount_price }}</p>
-                            <p>
-                                <a ui-sref="main.deal_post_details({url: item.url})">Go to Deal</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <deal-tile-directive></deal-tile-directive>
         </div>
+        <!-- end of upcoming deals -->
+
         <div class="row">
             <h5 class="online_mobile_txt">Most discount coupons and offers stores</h5>
         </div>

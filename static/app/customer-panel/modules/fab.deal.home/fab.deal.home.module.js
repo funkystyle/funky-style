@@ -77,4 +77,10 @@ angular.module("allDealsModule", [])
                 }
             });
         });
+    })
+    .directive("dealTileDirective", function () {
+        return {
+            restrict: "E",
+            templateUrl: "static/app/customer-panel/modules/deal.details/deal.details.directive.template.html"
+        }
     });
