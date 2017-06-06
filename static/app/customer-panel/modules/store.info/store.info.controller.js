@@ -27,7 +27,7 @@ angular
             deals: {},
             coupons: {}
         };
-        $scope.store = undefined;
+        $scope.store = {};
         $scope.coupons = [];
         $scope.expiredCoupons = [];
         $scope.suggestedCoupons = [];
