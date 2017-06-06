@@ -1,7 +1,7 @@
 angular
-    .module("storeinfoModule", ["categoryFactoryModule"])
+    .module("storeinfoModule", ["categoryFactoryModule", "Directives"])
     .controller("storeinfoController", function ($scope, $stateParams, $http, $state,
-                                                 categoryFactory, $filter, $sce, $ocLazyLoad, $rootScope) {
+                                                 categoryFactory, $filter, $sce, $ocLazyLoad, $rootScope, $compile) {
         $scope.favorite = {
             favorite: false
         };
@@ -186,6 +186,7 @@ angular
         //  ======== if stateParams having the coupon code
         if($stateParams['cc']) {
             $scope.params = $stateParams.cc;
+
             $ocLazyLoad.load("static/bower_components/clipboard/dist/clipboard.min.js").then(function (data) {
                 var clipboard = new Clipboard('.btn');
 
@@ -202,6 +203,14 @@ angular
                         angular.forEach(newVal, function (item) {
                             if(item._id == $stateParams.cc) {
                                 $scope.couponInfo = item;
+
+                                // open directive popup
+                                var el = $compile( "<coupon-info-popup></coupon-info-popup>" )( $scope );
+                                $("body").append(el);
+                                setTimeout(function () {
+                                    $("#couponPopup").modal("show");
+                                }, 1000);
+                                console.log(el)
                             }
                         });
                     }
