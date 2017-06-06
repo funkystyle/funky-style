@@ -189,6 +189,9 @@
         2. should provide access_token in headers in following format:
             {"authorization":"<login token>"}
 
+    * Deep linking
+    --------------
+
 
 ## Gunicorn: Gunicorn 'Green Unicorn' is a Python WSGI HTTP Server for UNIX.
 

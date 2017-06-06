@@ -125,7 +125,11 @@ MONGO_QUERY_BLACKLIST = ['$where']
 SCHEMAS = {
     'deep_link':{
         'tags': {
-            'type': 'string'
+            'type': 'dict',
+            'schema': {
+                'tags': {'type': 'string'},
+                'replace': {'type': 'string'}
+            }
         },
         'affiliate_network': {
             'type': 'string',
@@ -133,15 +137,33 @@ SCHEMAS = {
             'unique': True
         },
         'start_url': {
-            'type': 'string'
+            'type': 'dict',
+            'schema': {
+                    'url': {'type': 'string'},
+                    'encode': {'type': 'boolean', 'default': False}
+            }
         },
         'end_url': {
-            'type': 'string'
+            'type': 'dict',
+            'schema': {
+                    'url': {'type': 'string'},
+                    'encode': {'type': 'boolean', 'default': False}
+            }
         },
-        'replace_strings':{
-            'type': 'list'
+        "encode_main_url":{
+            'type': 'boolean', 'default': False
+        },
+        'replace': {
+            'type': 'list',
+            'schema':{
+                'type': 'dict',
+                'schema': {
+                    'replace_string': {'type': 'string'},
+                    'find_string': {'type': 'string'},
+                    'encode': {'type': 'boolean', 'default': False}
+                 }
+             }
         }
-
     },
     'persons': {
         'first_name': {
