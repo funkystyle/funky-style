@@ -773,14 +773,14 @@ SCHEMAS = {
     },
     'master_seo':{
         'meta_title': {
-            "type": "string",
-            "unique": True
+            "type": "string"
         },
         'meta_description': {
             "type": "string"
         },
         'selection_type': {
-            "type": "list"
+            "type": "dict",
+            "unique": True
         },
         'status': {
             "type": "boolean"
@@ -1077,7 +1077,7 @@ SCHEMAS = {
         'description': {
             "type": "string"
         },
-        'featured_image': {
+        'image': {
             "type": "string"
         },
         'h1': {

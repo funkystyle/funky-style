@@ -1,6 +1,6 @@
 angular
     .module("storeModule", ["storeServiceModule"])
-    .controller("storeCtrl", function($scope, storeFactory) {
+    .controller("storeCtrl", function($scope, storeFactory, SEO, $rootScope) {
         $scope.sorting = {
             sorting: "ALL"
         };
@@ -67,5 +67,17 @@ angular
             }
         }, function (error) {
             console.log(error);
+        });
+
+
+        // get the list of SEO
+        SEO.getSEO().then(function (data) {
+            angular.forEach(data, function (item) {
+                if(item.selection_type.code == 'store') {
+                    var data = SEO.seo("", item, 'store');
+                    $rootScope.pageTitle = data.title;
+                    $rootScope.pageDescription = data.description;
+                }
+            });
         });
     });

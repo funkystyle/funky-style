@@ -29,16 +29,18 @@ angular.module("profileModule", ["constantModule", "ui.select", "personFactoryMo
         }
 
         // updateUser
-        $scope.updateUser = function () {
-            delete $scope.u_user.created_date;
-            delete $scope.u_user.modified_date;
-            delete $scope.u_user._updated;
+        $scope.updateUser = function (user) {
+            delete user.created_date;
+            delete user.modified_date;
+            delete user._updated;
 
-            console.log($scope.u_user);
-            personFactory.update($scope.u_user, $scope.u_user.tokens.token).then(function (data) {
+            console.log(user);
+            personFactory.update(user, user.tokens.token).then(function (data) {
                 console.log(data);
-                toastr.success("Updated!", "Success!");
+                toastr.success("Please login Again!", "Need login!");
                 $state.go("header.dashboard");
+
+                $scope.logout();
             }, function (error) {
                 console.log(error);
                 toastr.error(error.data._error.message, "Error!");

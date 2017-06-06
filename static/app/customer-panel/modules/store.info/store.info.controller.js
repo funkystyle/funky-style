@@ -76,8 +76,9 @@ angular
             embedded['related_coupons.recommended_stores'] = 1;
             embedded['related_coupons.recommended_stores.related_coupons'] = 1;
             embedded['related_coupons.recommended_stores.related_coupons.related_categories'] = 1;
-        
-            var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + new Date().getTime();
+
+            var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+
+                JSON.stringify(embedded)+'&r=' + new Date().getTime()+"&number_of_clicks=1";
             $http({
                 url: url,
                 method: "GET"
@@ -87,6 +88,7 @@ angular
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $rootScope.pageTitle = $scope.store.meta_title;
+                    $rootScope.pageDescription = $scope.store.meta_description;
                     console.log($scope.store);
                     
                     // applying carousel after dom prepared

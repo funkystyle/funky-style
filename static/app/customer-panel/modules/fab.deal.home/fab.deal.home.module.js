@@ -1,5 +1,5 @@
-angular.module("allDealsModule", [])
-    .controller("allDealsCtrl", function ($scope, $state, $stateParams, $http) {
+angular.module("allDealsModule", ["Directives"])
+    .controller("allDealsCtrl", function ($scope, $state, $stateParams, $http, SEO, $rootScope) {
         console.log("All Deals Controller!");
 
         $scope.deals = [];
@@ -65,4 +65,16 @@ angular.module("allDealsModule", [])
         }, function (error) {
             console.log(error);
         });
-    });
+
+
+        // get the list of SEO
+        SEO.getSEO().then(function (data) {
+            angular.forEach(data, function (item) {
+                if(item.selection_type.code == 'deal') {
+                    var data = SEO.seo("", item, 'deal');
+                    $rootScope.pageTitle = data.title;
+                    $rootScope.pageDescription = data.description;
+                }
+            });
+        });
+    })

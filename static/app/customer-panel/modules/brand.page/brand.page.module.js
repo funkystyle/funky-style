@@ -1,4 +1,4 @@
-angular.module("brandPageModule", [])
+angular.module("brandPageModule", ["Directives"])
     .controller("brandPageCtrl", function ($scope, $state, $stateParams,
                                            $ocLazyLoad, $http, $sce, $filter) {
         console.log("brand page controller !");
@@ -120,7 +120,7 @@ angular.module("brandPageModule", [])
                         url: url,
                         method: "GET"
                     }).then(function (data) {
-                        console.log(data);
+                        console.log("All Related Deals: ", data.data._items);
                         if(data['data']) {
                             $scope.deals = data.data._items;
                             $scope.filterDeals = data.data._items;

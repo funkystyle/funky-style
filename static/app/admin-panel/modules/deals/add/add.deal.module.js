@@ -26,9 +26,10 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         $scope.deal.deal_type = $scope.dealTypes[1].code;
 
         $scope.$watch('deal.name', function(newVal, oldVal) {
-            if($scope.seo.selection_type.indexOf('single_deal') > -1) {
-                $scope.deal.seo_title = replaceSeo($scope.seo.meta_title, newVal);
-                $scope.deal.seo_description = replaceSeo($scope.seo.meta_description, newVal)
+            if(newVal && $scope.seoList.length) {
+                var data = replaceSeo(newVal, $scope.seoList, 'single_deal');
+                $scope.deal.seo_title = data.title;
+                $scope.deal.seo_description = data.description;
             }
             $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deal" : undefined;
         }, true);

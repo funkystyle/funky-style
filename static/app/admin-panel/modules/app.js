@@ -13,32 +13,28 @@ var date = new Date();
 var month = undefined;
 var year = undefined;
 
-date.setDate(date.getDate() - 3);
+date.setDate(date.getDate() + 3);
 month = monthNames[date.getMonth()];
 year = date.getFullYear();
 
-function replaceSeo(field, newVal) {
-    var replacement = field.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+function replaceSeo(newVal, items, from) {
+    var replacement = {
+        title: undefined,
+        description: undefined
+    };
+    for(i=0; i<items.length; i++) {
+        if(from == items[i].selection_type.code) {
+            replacement.title = items[i].meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            replacement.description = items[i].meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+        }
+    }
+    console.log("SEO replacement Data: ", replacement);
     return replacement;
 }
 
 var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'])
     .run(function ($rootScope, $http) {
         var id = undefined;
-        // get the seo details from the table
-        $rootScope.seo = {};
-        $http({
-            // TODO
-            url: '/api/1.0/master_seo',
-            method: "GET"
-        }).then(function (data) {
-            console.log("SEO data: ", data);
-            if(data.data._items.length != 0) {
-                $rootScope.seo = data.data._items[0];
-            }
-        }, function (error) {
-            console.log(error);
-        });
 
         $rootScope.textEditor = function (event) {
             $(".Editor-container").remove();

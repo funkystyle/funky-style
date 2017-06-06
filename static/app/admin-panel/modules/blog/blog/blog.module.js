@@ -2,7 +2,7 @@
 angular.module("blogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy",
     "couponFactoryModule", "categoryFactoryModule", "constantModule", "blogFactoryModule", "angular-table"])
-    .controller("blogCtrl", function($scope, $q, $timeout, toastr, storeFactory,
+    .controller("blogCtrl", function($scope, $q, $timeout, toastr, storeFactory, $state,
                                         $auth, personFactory, $log, couponFactory, categoryFactory, URL, blogFactory) {
         $scope.blogs = [];
         $scope.filterBlogs = [];
@@ -28,7 +28,7 @@ angular.module("blogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr
         if ($auth.isAuthenticated()) {
             // get all Blogs
             blogFactory.get().then(function (data) {
-                console.log(data);
+                console.log("Blog Data:", data.data);
                 if(data['data']) {
                     $scope.blogs = data.data._items;
                     $scope.filterBlogs = data.data._items;
@@ -70,7 +70,6 @@ angular.module("blogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr
             angular.forEach(deletedArray, function (item) {
                 items.push(blogFactory.delete(item._id).then(function(data) {
                     console.log(data);
-                    toastr.success("Deleted "+item.name, 200);
                 }, function (error) {
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);
@@ -79,6 +78,7 @@ angular.module("blogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr
 
             $q.all(items).then(function (data) {
                 toastr.success("Deleted all selected records!", "SUCCESS!");
+                $state.reload();
             }, function (error) {
                 console.log(error);
             });

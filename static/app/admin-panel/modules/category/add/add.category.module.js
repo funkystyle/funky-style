@@ -93,9 +93,10 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
         }
 
         $scope.$watch('category.name', function(newVal, oldVal) {
-            if($scope.seo.selection_type.indexOf('single_category') > -1) {
-                $scope.category.seo_title = replaceSeo($scope.seo.meta_title, newVal);
-                $scope.category.seo_description = replaceSeo($scope.seo.meta_description, newVal)
+            if(newVal && $scope.seoList.length) {
+                var data = replaceSeo(newVal, $scope.seoList, 'single_category');
+                $scope.category.seo_title = data.title;
+                $scope.category.seo_description = data.description;
             }
             $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
         }, true);

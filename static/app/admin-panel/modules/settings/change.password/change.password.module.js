@@ -1,6 +1,6 @@
 angular.module("changePasswordModule", ["constantModule", "toastr", "satellizer", "personFactoryModule"])
-	.controller('changePasswordCtrl', function($scope, $http, mainURL, URL, toastr, $auth, personFactory){
-		$scope.change = {};
+    .controller('changePasswordCtrl', function($scope, $http, mainURL, URL, toastr, $auth, personFactory){
+        $scope.change = {};
 
         if ($auth.isAuthenticated()) {
             personFactory.me().then(function(data) {
@@ -14,24 +14,25 @@ angular.module("changePasswordModule", ["constantModule", "toastr", "satellizer"
             });
         }
 
-		// change password click function
-		$scope.changePassword = function (obj) {
-			var object = {
-				user_id: $scope.u_user._id,
-				token: $scope.u_user.tokens.login,
-				new_password: obj.new_password
-			};
+        // change password click function
+        $scope.changePassword = function (obj) {
+            var object = {
+                user_id: $scope.u_user._id,
+                token: $scope.u_user.tokens.login,
+                new_password: obj.new_password
+            };
 
-			$http({
-				url: URL.changePassword,
-				method: "POST",
-				data: object
-			}).then(function (data) {
-				console.log(data);
-				toastr.success(data.data, "Success!");
-			}, function (error) {
-				console.log(error);
-				toastr.error(error.data.error, "Error!");
-			});
-		}
-	});
+            $http({
+                url: URL.changePassword,
+                method: "POST",
+                data: object
+            }).then(function (data) {
+                console.log(data);
+                toastr.success("Please login Again!", "Password Changed Successfully!");
+                $scope.logout();
+            }, function (error) {
+                console.log(error);
+                toastr.error(error.data.error, "Error!");
+            });
+        }
+    });

@@ -26,9 +26,10 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
         ];
 
         $scope.$watch('store.name', function(newVal, oldVal) {
-            if($scope.seo.selection_type.indexOf('single_store') > -1) {
-                $scope.store.meta_title = replaceSeo($scope.seo.meta_title, newVal);
-                $scope.store.meta_description = replaceSeo($scope.seo.meta_description, newVal);
+            if(newVal && $scope.seoList.length) {
+                var data = replaceSeo(newVal, $scope.seoList, 'single_store');
+                $scope.store.meta_title = data.title;
+                $scope.store.meta_description = data.description;
             }
             $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
         }, true);
