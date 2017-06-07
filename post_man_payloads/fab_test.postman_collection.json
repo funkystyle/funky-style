@@ -1,0 +1,33 @@
+{
+	"id": "5d77c2d6-c111-c2bf-14df-2b5cf389c9e4",
+	"name": "fab_test",
+	"description": "",
+	"order": [
+		"efc40784-29a4-7de8-7560-6cd7e21c9ae3"
+	],
+	"folders": [],
+	"timestamp": 1492409615799,
+	"owner": "1727732",
+	"public": false,
+	"requests": [
+		{
+			"id": "efc40784-29a4-7de8-7560-6cd7e21c9ae3",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://ec2-54-213-22-144.us-west-2.compute.amazonaws.com/api/1.0/auth/signup",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1492836151953,
+			"name": "registration",
+			"description": "",
+			"collectionId": "5d77c2d6-c111-c2bf-14df-2b5cf389c9e4",
+			"responses": [],
+			"rawModeData": "\n[{\n     \"first_name\": \"first name\",\n     \"last_name\": \"last name\",\n     \"email\": \"satya.nani.407@gmail.com\",\n     \"mobile_number\": \"3337\",\n     \"password\": \"passowrd\",\n     \"city\": \"coity\",\n     \"age\": 1,\n     \"gender\": \"female\",\n     \"status\": \"active\",\n     \"user_level\":[\"editor\"]\n}]"
+		}
+	]
+}
