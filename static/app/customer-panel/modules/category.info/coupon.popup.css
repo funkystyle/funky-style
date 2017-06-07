@@ -16,11 +16,12 @@
 }
 #foo {
     background: #DFFFF4;
-    padding: 10px;
+    padding: 7px;
     border-radius: 3px;
     border: 1px dashed #1FDA9A;
     text-align: center;
     width: 300px;
+    font-size: 20px;
     margin: 0 auto;
 }
 /* end of modal header */

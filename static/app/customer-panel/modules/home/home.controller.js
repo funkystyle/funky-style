@@ -1,6 +1,7 @@
-angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFactoryModule", "dealFactoryModule", "categoryFactoryModule"])
+angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFactoryModule",
+    "dealFactoryModule", "categoryFactoryModule", "Directives"])
     .controller('homeCtrl', function ($scope, storeFactory, $http, couponFactory, $filter, dealFactory,
-                                      categoryFactory, $ocLazyLoad, $stateParams, $rootScope, SEO) {
+                                      categoryFactory, $ocLazyLoad, $stateParams, $rootScope, SEO, $compile) {
         console.log("home controller");
         $scope.params = undefined;
         $scope.deals = [];
@@ -125,31 +126,24 @@ angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFacto
 
         //  ======== if stateParams having the coupon code
         if($stateParams['cc']) {
-            $scope.params = $stateParams.cc;
-            $ocLazyLoad.load("static/bower_components/clipboard/dist/clipboard.min.js").then(function (data) {
-                var clipboard = new Clipboard('.btn');
-
-                clipboard.on('success', function(e) {
-                    console.info('Action:', e.action);
-                    console.info('Text:', e.text);
-                    console.info('Trigger:', e.trigger);
-
-                    e.clearSelection();
-                });
-                $scope.$watch('coupons', function (newVal, oldVal) {
-                    console.log(newVal, oldVal);
-                    if(newVal) {
-                        angular.forEach(newVal, function (item) {
-                            if(item._id == $stateParams.cc) {
-                                $scope.couponInfo = item;
-                            }
-                        });
-                    }
-                }, true);
-                clipboard.on('error', function(e) {
-                    console.error('Action:', e.action);
-                    console.error('Trigger:', e.trigger);
-                });
-            });
+            $("coupon-info-popup").remove();
+            $scope.$watch('coupons', function (newVal, oldVal) {
+                console.log(newVal, oldVal);
+                if(newVal) {
+                    angular.forEach(newVal, function (item) {
+                        if(item._id == $stateParams.cc) {
+                            $scope.couponInfo = item;
+                            console.log("Coupon Info: ", $scope.couponInfo);
+                            // open directive popup
+                            var el = $compile( "<coupon-info-popup type='home' coupon='couponInfo'></coupon-info-popup>" )( $scope );
+                            $("body").append(el);
+                            setTimeout(function () {
+                                $("#couponPopup").modal("show");
+                            }, 1000);
+                            console.log(el)
+                        }
+                    });
+                }
+            }, true);
         }
     });

@@ -194,7 +194,7 @@ angular
                             $scope.couponInfo = item;
 
                             // open directive popup
-                            var el = $compile( "<coupon-info-popup coupon='couponInfo'></coupon-info-popup>" )( $scope );
+                            var el = $compile( "<coupon-info-popup parent='store' type='store' coupon='couponInfo'></coupon-info-popup>" )( $scope );
                             $("body").append(el);
                             setTimeout(function () {
                                 $("#couponPopup").modal("show");

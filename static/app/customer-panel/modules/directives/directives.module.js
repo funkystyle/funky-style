@@ -21,19 +21,27 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
         return {
             restrict: "E",
             scope: {
-                couponInfo: "=coupon"
+                couponInfo: "=coupon",
+                parent: "=",
+                type: "@"
             },
             controller: "couponInfoPopupCtrl",
             templateUrl: "static/app/customer-panel/modules/coupon.info.popup/coupon.info.popup.directive.template.html"
         }
     })
     // ==== coupon info popup controller
-    .controller("couponInfoPopupCtrl", function ($scope, $http, $state, $ocLazyLoad) {
+    .controller("couponInfoPopupCtrl", function ($scope, $http, $state, $ocLazyLoad, $sce) {
         console.log("couponInfoPopupCtrl: ");
 
         $ocLazyLoad.load("static/bower_components/clipboard/dist/clipboard.min.js").then(function (data) {
 
-            console.log("After loading Clipboard: ", data);
+            $scope.showMore = {};
+
+            $scope.trustAsHtml = function(string) {
+                if(string) {
+                    return $sce.trustAsHtml(string);
+                }
+            };
 
             var clipboard = new Clipboard('.btn');
 
@@ -44,7 +52,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
 
                 e.clearSelection();
 
-                $("#copyClipboard").html("Copied");
+                $("#copyClipboard").html("Copied to Clipboard");
             });
 
             clipboard.on('error', function(e) {
