@@ -1,204 +1,200 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.css" />
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 
-<link rel="stylesheet" href="static/app/customer-panel/modules/store.info/store.info.css"/>
-<link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
-
 <div class="container" ng-if="deal.deal_type == 'product'">
-    <div class="row">
-        <div class="pagenation-main col-md-12 col-xs-12 col-sm-12">
-            <div class="pagenation-text col-md-8 col-xs-7 col-sm-7">
-                <ol class="breadcrumb">
-                    <li><a ui-sref="main.home">Home</a></li>
-                    <li><a ui-sref="main.category">Mobile prices</a></li>
-                    <li ng-repeat="item in deal.breadcrumb">
-                        <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
-                    </li>
-                    <li class="active">{{ deal.url }}</li>
-                </ol>
-            </div>
-            <div class="updated-text text-right col-md-4 col-xs-5 col-sm-5">
-                <p>{{ deal.expired_date | date: 'dd MMM yyyy hh:mm a' }}</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="mobileprice-text-main col-md-12 col-xs-12 col-sm-12">
-            <div class="mobileprice-text text-left">
-                <h1>{{ deal.name }}</h1>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="mobileprice-body-main col-md-12 col-xs-12 col-sm-12">
-            <div class="mobileprice-logo col-md-3 col-xs-4 col-sm-4">
-                <div><img src="modules/assets/images/mobile.png"></div>
-                <p class="rollover text-center" >(Roll over to zoom in)</p>
-                <div class="rolloverimage">
-                    <img src="modules/assets/images/mobile.png">
+
+    <!-- deal details -->
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <ol class="breadcrumb">
+                        <li><a ui-sref="main.home">Home</a></li>
+                        <li><a ui-sref="main.all_deals">Deals</a></li>
+                        <li ng-repeat="item in deal.breadcrumb">
+                            <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
+                        </li>
+                        <li class="active">{{ deal.url }}</li>
+                    </ol>
                 </div>
             </div>
+            <div class="row">
+                <div class="mobileprice-text-main col-md-12 col-xs-12 col-sm-12">
+                    <div class="mobileprice-text text-left">
+                        <h1>{{ deal.name }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mobileprice-body-main col-md-12 col-xs-12 col-sm-12">
+                    <div class="mobileprice-logo col-md-3 col-xs-4 col-sm-4">
+                        <div class="thumbnail"><img ng-src="{{ deal.images[0] }}"></div>
+                        <p class="rollover text-center" >(Roll over to zoom in)</p>
+                        <div class="rolloverimage">
+                            <img src="modules/assets/images/mobile.png">
+                        </div>
+                    </div>
 
-            <div class="mobileprice-text col-md-9 col-xs-8 col-sm-8">
-                <div class="col-md-12 ratethisproduct-main">
-                    <div class="row ratethisproduct-row">
-                        <div class="ratethisproduct-head col-md-5 col-xs-12 col-sm-12">
-                            <h4>Rate this Product : </h4>
-                            <div class="product-stars ratethisproduct-stars">
-                                <fieldset class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
-                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
-                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
-                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
-                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
-                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <div class="col-md-3 ratethisproduct-ratingshead col-xs-6 col-sm-6">
-                            <h4><a href="#">133095 ratings &nbsp;<i class="fa fa-caret-right" aria-hidden="true"></i></a></h4>
-                        </div>
-                        <div class="col-md-4 ratethisproduct-reviewshead col-xs-6 col-sm-6">
-                            <h4><a href="#">29435 Reviews</a></h4>
-                        </div>
-                    </div>
-                    <div class="bestpricehead-main row">
-                        <div class="bestprice-head col-md-7">
-                            <h2>Best Price in India</h2>
-                        </div>
-                    </div>
-                    <div class="amazonstore-main row">
-                        <div class="amazonstore-store-main col-md-12 col-xs-12 col-sm-12">
-                            <div class="col-md-2 amazonimage">
-                                <div class="amazon-logo">
-                                    <img ng-src="{{ deal.stores[0].store.image }}">
+                    <div class="mobileprice-text col-md-9 col-xs-8 col-sm-8">
+                        <div class="col-md-12 ratethisproduct-main">
+                            <div class="row ratethisproduct-row">
+                                <div class="ratethisproduct-head col-md-5 col-xs-12 col-sm-12">
+                                    <h4>Rate this Product : </h4>
+                                    <div class="product-stars ratethisproduct-stars">
+                                        <div class="text-center" star-rating rating-value="deal.rating" max="5"></div>
+                                    </div>
                                 </div>
-                                <div class="amazon-moredetails text-center">
-                                    <a href="#">More Details <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a>
+                                <div style="display: none;" class="col-md-3 ratethisproduct-ratingshead col-xs-6 col-sm-6">
+                                    <h4><a href="#">133095 ratings &nbsp;<i class="fa fa-caret-right" aria-hidden="true"></i></a></h4>
+                                </div>
+                                <div style="display: none;" class="col-md-4 ratethisproduct-reviewshead col-xs-6 col-sm-6">
+                                    <h4><a href="#">29435 Reviews</a></h4>
                                 </div>
                             </div>
-                            <div class="amazonactualprice col-md-2 text-center col-xs-6">
-                                <h4>Rs {{ deal.actual_price }}</h4>
-                                <h5>Actual Price</h5>
+                            <div class="bestpricehead-main row">
+                                <div class="bestprice-head col-md-7">
+                                    <h1>Best Price in India</h1>
+                                </div>
                             </div>
-                            <div class="amazonactualprice col-md-3 text-center col-xs-6">
-                                <h4>Rs {{ deal.discount_price }}</h4>
-                                <h5>Discounted Price</h5>
+                            <div class="amazonstore-main row">
+                                <div class="amazonstore-store-main col-md-12 col-xs-12 col-sm-12">
+                                    <div class="col-md-2 amazonimage">
+                                        <div class="amazon-logo">
+                                            <img ng-src="{{ deal.stores[0].store.image }}">
+                                        </div>
+                                        <div class="amazon-moredetails">
+                                            <a ui-sref="main.store-info({url: deal.stores[0].store.url})">
+                                                More Details <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="amazonactualprice col-md-2 text-center col-xs-6">
+                                        <h4>Rs {{ deal.actual_price }}</h4>
+                                        <h5>Actual Price</h5>
+                                    </div>
+                                    <div class="amazonactualprice col-md-3 text-center col-xs-6">
+                                        <h4>Rs {{ deal.discount_price }}</h4>
+                                        <h5>Discounted Price</h5>
+                                    </div>
+                                    <div class="amazonstore-head col-md-3 text-center">
+                                        <a href="{{ deal.stores[0].landing_page }}" class="btn btn-info col-xs-9">
+                                            GO TO STORE
+                                            <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
                             </div>
-                            <div class="amazonstore-head col-md-3 text-center">
-                                <a href="{{ deal.stores[0].landing_page }}" class="btn btn-primary col-xs-9">
+                            <div class="quickspecifications-main col-md-12">
+                                <div class="row quickspecifications-head">
+                                    <h3>Quick Specifications<small><a href="">See Full Specifications</a></small></h3>
+                                </div>
+                                <div class="row general-head-main">
+                                    <div class="general-head col-md-12">
+
+                                        <table>
+                                            <tbody>
+                                                <tr ng-repeat="(key, val) in deal.dynamic_fields">
+                                                    <td>{{ key }}: &nbsp;</td>
+                                                    <td class="general-specifications">{{ val }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of deal details -->
+
+    <div class="row specifications-main">
+        <div class="col-md-2 specifications-text col-xs-6">
+            <button class="btn btn-md btn-info btn-block">Specifications</button>
+        </div>
+        <div class="col-md-2 specifications-text col-xs-6">
+            <button class="btn btn-md btn-info btn-block">Overview</button>
+        </div>
+        <div class="col-md-2 specifications-text col-xs-6">
+            <button class="btn btn-md btn-info btn-block">Best Price</button>
+        </div>
+        <div class="col-md-2 specifications-text col-xs-6">
+            <button class="btn btn-md btn-info btn-block">Video</button>
+        </div>
+        <div class="col-md-4 specifications-text col-xs-6">
+            <button class="btn btn-md btn-info btn-block">Best Selling Mobiles</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="discounttext-main">
+            <div class="col-md-6">
+                <h3>{{ deal.name }} <small>
+                    Price in
+                    <span ng-repeat="item in deal.stores">
+                        {{ item.store.name }} {{$last ? '' : ($index==deal.stores.length-2) ? ' and ' : ', '}}
+                    </span>
+                </small>
+                </h3>
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            <div class="table-main table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr class="product-details-tr" ng-repeat="item in deal.stores">
+                            <td class="tableimg"><img ng-src="{{ item.store.image }}"></td>
+                            <td>
+                                <div class="tabledelivery">
+                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i> 2 - 4 Days Delivery
+                                </div>
+                                <div class="tabledelivery">
+                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i> EMI Available
+                                </div>
+                            </td>
+                            <td>
+                                <div class="tabledelivery">
+                                    {{ item.discount_price }}
+                                </div>
+                                <div class="tabledelivery">
+                                    <strong>FREE</strong> Shipping
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{{ item.landing_page }}" class="btn btn-info btn-md">
                                     GO TO STORE
                                     <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                                 </a>
-                            </div>
-                            <div class="col-md-2"></div>
-                        </div>
-                    </div>
-                    <div class="quickspecifications-main col-md-12">
-                        <div class="row quickspecifications-head col-xs-12">
-                            <h3>QUICK SPECIFICATIONS <small>SEE FULL SPECIFICATIONS</small></h3>
-                        </div>
-                        <div class="row general-head-main">
-                            <div class="general-head col-md-12" ng-repeat="(key, val) in deal.dynamic_fields">
-                                <div class="col-md-2 general-text">
-                                    <strong>{{ key }} : </strong>
-                                </div>
-                                <div class="col-md-10 general-specifications-text">
-                                    <span class="general-specifications">{{ val }}</span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
+                            </td>
+                            <td>
+                                <h4><a style="text-decoration: none;" ui-sref="main.store-info({url: item.store.url})">{{ item.store.name }} Coupons</a></h4>
+                            </td>
+                            <td>
+                                <button class="btn btn-warning btn-md">Get Coupons</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <div class="row specifications-main">
-        <div class="col-md-2 specifications-text col-xs-6">
-            <button class="specifications-btn">Specifications</button>
-        </div>
-        <div class="col-md-2 specifications-text col-xs-6">
-            <button class="specifications-btn">Overview</button>
-        </div>
-        <div class="col-md-2 specifications-text col-xs-6">
-            <button class="specifications-btn">Best Price</button>
-        </div>
-        <div class="col-md-2 specifications-text col-xs-6">
-            <button class="specifications-btn">Video</button>
-        </div>
-        <div class="col-md-4 specifications-text col-xs-6">
-            <button class="specifications-btn">Best Selling Mobiles</button>
-        </div>
-    </div>
-    <div class="row pricelisttable-main col-md-12">
-        <div class="discounttext-main">
-            <div class="col-md-6">
-                <h3>{{ deal.name }} <small>Price in Amazon, Flipkart, Snapdeal</small></h3>
-            </div>
-            <div class="col-md-6 text-right">
-                <h3>50% Off Discount Coupons</h3>
-            </div>
-        </div>
-        <div class="table-main table-responsive">
-            <table class="table">
-                <tbody>
-                <tr ng-repeat="item in deal.stores">
-                    <td class="tableimg"><img ng-src="{{ item.store.image }}"></td>
-                    <td>
-                        <div class="tabledelivery">
-                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> 2 - 4 Days Delivery
-                        </div>
-                        <div class="tabledelivery">
-                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> EMI Available
-                        </div>
-                    </td>
-                    <td>
-                        <div class="tabledelivery">
-                            {{ item.discount_price }}
-                        </div>
-                        <div class="tabledelivery">
-                            <strong>FREE</strong> Shipping
-                        </div>
-                    </td>
-                    <td>
-                        <a href="{{ item.landing_page }}" class="btn btn-primary">
-                            GO TO STORE
-                            <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <h4><a ui-sref="main.store-info({url: item.store.url})">{{ item.store.name }} Coupons</a></h4>
-                    </td>
-                    <td>
-                        <button class="btn btn-warning"><strong>Get Coupons</strong></button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="mobilespecifications-main row col-md-12">
+    <div class="row">
         <div class="col-md-9 mobilespecifications-left">
-            <div class="row mobilespecifications-head">
-                <h3><strong>{{ deal.name }} Specifications</strong></h3>
-            </div>
-            <div class="mobilespecifications-body" ng-repeat="(key, val) in deal.dynamic_fields">
-                <div class="features-mobilespecifications-text">
+            <h1>{{ deal.name }} Specifications</h1>
+            <div class="general-head">
+                <div class="table-main table-responsive">
                     <table class="table">
                         <tbody>
-                        <tr class="active">
-                            <td class="brandtext">{{ key }}</td>
-                            <td class="samsungtext">{{ val }}</td>
+                        <tr ng-repeat="(key, val) in deal.dynamic_fields">
+                            <td>{{ key }}: &nbsp;</td>
+                            <td class="general-specifications">{{ val }}</td>
                         </tr>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
@@ -312,43 +308,7 @@
     <div class="row">
         <div class="pricerange-sidebar-main productlist col-md-12 col-xs-12 col-sm-12">
             <div class="products-row-main">
-                <div class="products-list col-md-3 col-xs-6 col-sm-6" ng-repeat="item in deal.related_deals">
-                    <div class="product-border-main">
-                        <div class="product-img">
-                            <img ng-src="{{ item.images[0] }}">
-                        </div>
-                        <div class="product-title text-center">
-                            <h4>{{ item.name }}</h4>
-                            <div class="product-stars">
-                                <fieldset class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5"><label class="full" for="star5" title="Awesome - 5 stars"></label>
-                                    <input type="radio" id="star4half" name="rating" value="4 and a half"><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                                    <input type="radio" id="star4" name="rating" value="4"><label class="full" for="star4" title="Pretty good - 4 stars"></label>
-                                    <input type="radio" id="star3half" name="rating" value="3 and a half"><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                                    <input type="radio" id="star3" name="rating" value="3"><label class="full" for="star3" title="Meh - 3 stars"></label>
-                                    <input type="radio" id="star2half" name="rating" value="2 and a half"><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                                    <input type="radio" id="star2" name="rating" value="2"><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
-                                    <input type="radio" id="star1half" name="rating" value="1 and a half"><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                                    <input type="radio" id="star1" name="rating" value="1"><label class="full" for="star1" title="Sucks big time - 1 star"></label>
-                                    <input type="radio" id="starhalf" name="rating" value="half"><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-price">
-                        <h4 class="text-center">{{ item.discount_price }}</h4>
-                    </div>
-                    <div class="product-specifications">
-                        <ul>
-                            <li ng-repeat="(key, val) in deal.dynamic_fields">
-                                {{ key }}: {{ val }}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="product-buynow">
-                        <a href="{{ item.destination_url }}" target="_blank" class="btn btn-success buynowbtn">Buy Now</a>
-                    </div>
-                </div>
+                <deal-tile-directive items="deal.related_deals"></deal-tile-directive>
             </div>
         </div>
     </div>

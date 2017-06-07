@@ -1,93 +1,97 @@
 .user_name{
-	font-size:14px;
-	font-weight: bold;
+    font-size:14px;
+    font-weight: bold;
+}
+.cat-top-stores img {
+    max-height: 40px;
+    max-width: 100%;
 }
 .comments-list .media{
-	border-bottom: 1px dotted #ccc;
+    border-bottom: 1px dotted #ccc;
 }
 .breadcrumb {
-	padding: 0px 15px;
-	margin-bottom: 0px !important;
-	list-style: none;
-	background-color: #f5f5f5;
-	border-radius: 0;
-	font-size: 13px;
+    padding: 0px 15px;
+    margin-bottom: 0px !important;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 0;
+    font-size: 13px;
 }
 .store-info {
-	color: #888;
+    color: #888;
 }
 .thumbnail {
-	border: 0px solid #FFFFFF;
-	border-bottom: 1px solid #DDDDDD;
-	margin: 0px;
-	padding: 10px;
+    border: 0px solid #FFFFFF;
+    border-bottom: 1px solid #DDDDDD;
+    margin: 0px;
+    padding: 10px;
 }
 .thumb{
-	border-right: 1px solid #ddd;
-	margin-top: 23px;"
+    border-right: 1px solid #ddd;
+    margin-top: 23px;"
 }
 div.thumb .thumbnail {
-	min-height: 100px;
+    min-height: 100px;
 }
 .thumbnail img {
-	width: 100%;
+    width: 100%;
 }
 .image-height img{
-	height: 150px;
+    height: 150px;
 }
 .thumbnail .fa {
-	position: absolute;
-	top: -2px;
-	right: 12px;
-	font-size: 20px;
-	cursor: pointer;
+    position: absolute;
+    top: -2px;
+    right: 12px;
+    font-size: 20px;
+    cursor: pointer;
 }
 .h3-heading {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 .rating-stars i {
-	padding: 0 3px;
-	color: #888888;
+    padding: 0 3px;
+    color: #888888;
 }
 .social-well {
-	padding: 15px;
-	background-color: #FFFFFF;
+    padding: 15px;
+    background-color: #FFFFFF;
 }
 .well {
-	margin-bottom: 10px !important;
+    margin-bottom: 10px !important;
 }
 .social-well p {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 /* tabs */
 .nav-tabs {
-	border-bottom: 0px solid #FFFFFF;
+    border-bottom: 0px solid #FFFFFF;
 }
 .nav-tabs>li>a, .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-	border: 1px solid rgba(221, 221, 221, 0.5);
+    border: 1px solid rgba(221, 221, 221, 0.5);
 }
 .nav-tabs li a span {
-	margin-top: -5px;
-	border-radius: 10px;
+    margin-top: -5px;
+    border-radius: 10px;
 }
 /* end tabs */
 
 
 /* coupons, deals */
 .deal-price {
-	position: relative;
-	border: 1px solid #9954bb;
-	min-height: 100px;
-	width: 100%;
-	border-radius: 1px;
-	max-width: 110px;
-	max-height: 100px;
+    position: relative;
+    border: 1px solid #9954bb;
+    min-height: 100px;
+    width: 100%;
+    border-radius: 1px;
+    max-width: 110px;
+    max-height: 100px;
 }
 .deal-price h4 {
-	line-height: 27px;
+    line-height: 27px;
 }
 .deal-price .deal {
-	position: absolute;
+    position: absolute;
     bottom: -20px;
     background-color: #9954bb;
     min-height: 55px;
@@ -97,197 +101,197 @@ div.thumb .thumbnail {
     left: -16px;
 }
 .deal-price .deal img {
-	height: 55px;
+    height: 55px;
     width: 100%;
     border: 1px solid #ddd;
 }
 .coupon-heading span i {
-	color: #898989;
-	font-size: 20px;
-	cursor: pointer;
+    color: #898989;
+    font-size: 20px;
+    cursor: pointer;
 }
 .coupon-footer {
-	line-height: 40px;
-	padding: 0 0 0 15px;
-	cursor: pointer;
+    line-height: 40px;
+    padding: 0 0 0 15px;
+    cursor: pointer;
 }
 .contact-info i {
-	width: 15px;
+    width: 15px;
 }
 
 .carousel {
-	margin-bottom: 0;
-	padding: 0 40px 30px 40px;
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
 }
 /* The controlsy */
 .carousel-control {
-	left: -4px;
-	height: 40px;
-	width: 40px;
-	background: none repeat scroll 0 0 #222222;
-	border: 4px solid #FFFFFF;
-	border-radius: 23px 23px 23px 23px;
-	top: 37%;
-	bottom: 37%;
+    left: -4px;
+    height: 40px;
+    width: 40px;
+    background: none repeat scroll 0 0 #222222;
+    border: 4px solid #FFFFFF;
+    border-radius: 23px 23px 23px 23px;
+    top: 37%;
+    bottom: 37%;
 }
 .carousel-control.right {
-	right: -4px;
+    right: -4px;
 }
 /* The indicators */
 .carousel-indicators {
-	right: 50%;
-	top: auto;
-	bottom: -10px;
-	margin-right: -19px;
+    right: 50%;
+    top: auto;
+    bottom: -10px;
+    margin-right: -19px;
 }
 /* The colour of the indicators */
 .carousel-indicators li {
-	background: #cecece;
+    background: #cecece;
 }
 .carousel-indicators .active {
-	background: #428bca;
+    background: #428bca;
 }
 .deals-upto{
-	font-size: 14px;
-	margin: 0px 0px 10px 0px;
-	color: #4E5055;
+    font-size: 14px;
+    margin: 0px 0px 10px 0px;
+    color: #4E5055;
 }
 .coupon-footer .btn-info{
-	padding: 10px !important;
+    padding: 10px !important;
 }
 .mar{
-	margin: 0px;
+    margin: 0px;
 }
 .pad{
-	padding: 0px;
+    padding: 0px;
 }
 .use-main-h{
-	font-size: 20px;
-	text-transform: uppercase;
+    font-size: 20px;
+    text-transform: uppercase;
 }
 .use-main-h-font{
-	font-size: 20px;
+    font-size: 20px;
 }
 .sugg-para{
-	margin: 30px 0px;
+    margin: 30px 0px;
 }
 .suggested-footer{
-	padding: 0px;
-	border-top: 0px;
-	margin-top: 15px;
+    padding: 0px;
+    border-top: 0px;
+    margin-top: 15px;
 }
 .font-13{
-	font-size: 13px;
+    font-size: 13px;
 }
 .font-icon-co{
-	color: #4FAA3B;
+    color: #4FAA3B;
 }
 .top-move-5{
-	margin-top:5px;
+    margin-top:5px;
 }
 .con-para{
-	opacity: 0.6;
-	line-height: 25px;
+    opacity: 0.6;
+    line-height: 25px;
 }
 .latest-tweet{
-	color: #B12F35;
-	font-size: 13px;
+    color: #B12F35;
+    font-size: 13px;
 }
 .tweets-para{
-	line-height: 20px;
-	font-size: 12px;
+    line-height: 20px;
+    font-size: 12px;
 }
 .tweets-date{
-	font-size: 12px;
-	opacity: 0.6;
+    font-size: 12px;
+    opacity: 0.6;
 }
 .tweets-div{
-	border-bottom: 2px dotted #ddd;
-	margin-bottom: 20px;
+    border-bottom: 2px dotted #ddd;
+    margin-bottom: 20px;
 }
 .tweets-div:last-child{
-	border-bottom: none !important;
+    border-bottom: none !important;
 }
 .panel_pad{
-	padding:14px;
+    padding:14px;
 }
 .ola_mar{
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 /* end of coupons, deals */
 @media screen and (max-width: 768px) {
-	.thumb{
-		border-right:none;
-		margin-top: 0px;"
-	}
-	.breadcrumb {
-		padding: 0px 10px 0px 0px;
-		font-size: 11px;
-	}
-	h3{
-		font-size: 19px;
-		font-weight: bold;
-	}
-	.thumbnail{
-		padding: 0px;
-	}
-	.para_small{
-		font-size: 13px;
-		text-align: justify;
-		line-height: 20px;
-	}
-	.panel{
-		margin-bottom: 0;
-	}
-	.mar_top{
-		margin-top: -3%;
-	}
-	.visit_store{
-		width:100%;
-	}
-	.panel_pad{
-		padding:15px 0px;
-	}
-	.pad-right-0 {
-		padding-right: 15px;
-	}
-	.pad_nav_left{
-		padding-left:0;
-	}
-	.pad_nav_right{
-		padding-right: 0;
-	}
-	.nav>li>a {
-		position: relative;
-		display: block;
-		padding: 10px 0px;
-		font-size: 13px;
-	}
-	.panel-body_fa {
-		padding: 17px 15px 0px;
-	}
-	.fifty_cashback{
-		margin: 0 0 2% -6%;
-		font-weight: bold;
-	}
-	.coupon-footer {
-		line-height: 20px;
-	}
-	.vari_pad{
-		padding-top: 2%;
-	}
-	.show_copan_code{
-		margin: 7% 0% 0%;
-	}
-	.ola_mar{
-		margin-bottom: 20px;
-		margin-left: 15px;
-	}
-	.table{
-		font-size: 12px;
-	}
-	h4{
-		font-size: 16px;
-	}
+    .thumb{
+        border-right:none;
+        margin-top: 0px;"
+    }
+    .breadcrumb {
+        padding: 0px 10px 0px 0px;
+        font-size: 11px;
+    }
+    h3{
+        font-size: 19px;
+        font-weight: bold;
+    }
+    .thumbnail{
+        padding: 0px;
+    }
+    .para_small{
+        font-size: 13px;
+        text-align: justify;
+        line-height: 20px;
+    }
+    .panel{
+        margin-bottom: 0;
+    }
+    .mar_top{
+        margin-top: -3%;
+    }
+    .visit_store{
+        width:100%;
+    }
+    .panel_pad{
+        padding:15px 0px;
+    }
+    .pad-right-0 {
+        padding-right: 15px;
+    }
+    .pad_nav_left{
+        padding-left:0;
+    }
+    .pad_nav_right{
+        padding-right: 0;
+    }
+    .nav>li>a {
+        position: relative;
+        display: block;
+        padding: 10px 0px;
+        font-size: 13px;
+    }
+    .panel-body_fa {
+        padding: 17px 15px 0px;
+    }
+    .fifty_cashback{
+        margin: 0 0 2% -6%;
+        font-weight: bold;
+    }
+    .coupon-footer {
+        line-height: 20px;
+    }
+    .vari_pad{
+        padding-top: 2%;
+    }
+    .show_copan_code{
+        margin: 7% 0% 0%;
+    }
+    .ola_mar{
+        margin-bottom: 20px;
+        margin-left: 15px;
+    }
+    .table{
+        font-size: 12px;
+    }
+    h4{
+        font-size: 16px;
+    }
 }

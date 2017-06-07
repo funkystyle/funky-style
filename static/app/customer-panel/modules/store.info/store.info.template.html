@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
 
 <!-- Store info starts here -->
-<div class="container pad" ng-if="!params">
+<div class="container pad">
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
@@ -101,7 +101,7 @@
         <div class="col-lg-3 col-md-3 col-sm-3 pad-right-0">
             <div class="panel panel-default" ng-repeat="(key, items) in categories">
                 <div class="panel-heading">
-                    <h5 class="font-bold">{{ (key == 'Regular'? 'Category': key) }} Filters ({{ items.length }})</h5>
+                    <h5 class="font-bold">{{ (key == 'Regular'? 'Category': key) }} Filters</h5>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -137,11 +137,18 @@
                 <!--panel heading-->
                 <div class="panel-body">
                     <div class="check-box-filter-area">
-                        <p ng-repeat="item in store.related_stores">
-                            <a ui-sref="main.store-info({url: item.url})" style="color: #666; text-decoration: underline;">
-                                {{ item.name }}
+                        <div class="media" ng-repeat="item in store.related_stores">
+                            <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
+                                <img style="width: 50px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
                             </a>
-                        </p>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <a ui-sref="main.store-info({url: item.url})">
+                                        {{ item.name }}
+                                    </a>
+                                </h4>
+                            </div>
+                        </div> <!-- end of media object -->
                     </div>
                 </div>
                 <!--end panel body-->
@@ -155,12 +162,18 @@
                 <!--panel heading-->
                 <div class="panel-body">
                     <div class="check-box-filter-area">
-                        <p ng-repeat="item in store.top_stores">
-                            <a ui-sref="main.store-info({url: item.url, cc: undefined})" style="color: #666; text-decoration: underline;">
-                                <img ng-src="{{ item.image }}" height="50" width="50" style="float: left;">
-                                {{ item.name }}
+                        <div class="media" ng-repeat="item in store.top_stores">
+                            <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
+                                <img style="width: 50px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
                             </a>
-                        </p>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <a ui-sref="main.store-info({url: item.url})">
+                                        {{ item.name }}
+                                    </a>
+                                </h4>
+                            </div>
+                        </div> <!-- end of media object -->
                     </div>
                 </div>
                 <!--end panel body-->
@@ -795,144 +808,4 @@
     </div>
     <!--end row-->
 </div>
-<!-- end of store info -->
-
-
-
-
-<!-- ================ showing coupon popup ================= -->
-<span ng-if="params">
-    <div class="container-fluid hs-sc-top">
-        <span ui-sref="main.store-info({url: store.url, cc: undefined})" class="pull-left hs-go-back">
-            <i class="fa fa-arrow-left"></i> Go Back
-        </span>
-        <span ui-sref="main.store-info({url: store.url, cc: undefined})" class="pull-right hs-go-close">
-            Close
-            <i class="fa fa-times"></i>
-        </span>
-    </div>
-
-    <div class="container bg-w">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                <a href="" title="" class="hs-sc-img center-block">
-                    <img ng-src="{{ store.image }}" alt="{{ store.name }} Logo">
-                </a>
-                <p class="text-center">{{ couponInfo.title }}</p>
-                <div class="hs-code" ng-if="couponInfo.coupon_type == 'offer'">
-                    <span class="hs-sc-offer text-center">Offer Activated</span>
-                </div>
-
-                <div ng-if="couponInfo.coupon_type == 'coupon'">
-                    <!-- Target -->
-                    <div id="foo">{{ couponInfo.coupon_code }}</div>
-
-                    <!-- Trigger -->
-                    <button class="btn" data-clipboard-target="#foo">
-                        <img src="assets/clippy.svg" alt="Copy to clipboard">
-                    </button>
-                </div>
-                <a class="hs-goto-mrcht text-center" target="_blank"
-                   title="{{ couponInfo.related_stores[0].name }}" href="{{ couponInfo.related_stores[0].store_url }}">
-                    <i class="fa fa-arrow-circle-o-right"></i>
-                    {{ couponInfo.related_stores[0].name }}
-                </a>
-                <div class="hs-sc-c-det">
-                    <p class="hs-scd-desp" ng-bind-html="trustAsHtml(couponInfo.related_stores[0].top_description)"></p>
-                </div>
-
-                <div class="hs-scd-social text-center">
-                    <a ui-sref="main.categoryinfo({url: couponInfo.related_categories[0].url, cc: undefined})" title="{{ couponInfo.related_stores[0].name }}">
-                        Check Out All {{ couponInfo.related_categories[0].name }} Coupons
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--<div class="hs-suggested-coupons">
-        <h1 class="text-center page_h1">Recommended Coupons</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center pad">
-                            <a href="" title="Paytm Coupons">
-                                <img src="https://happysale.in/hs/img/m/flipkart-1447769846055.jpeg"
-                                     alt="Flipkart" class="img img-responsive" >
-                            </a>
-                        </div>
-                        <div class="panel-body">
-                            <div class="coupon-type">
-                                <span class="text-center">Upto 80% OFF</span>
-                            </div>
-                            <div class="coupon-title">
-                                <span class="text-center">Flipkart Electronics Sale: Upto 80% OFF</span>
-                            </div>
-                            <div class="btn btn-md btn-block btn-info">Activate Offer</div>
-                            <a href="https://happysale.in/flipkart/" title="See all Flipkart Coupons" class="coupon-all" class="link">Flipkart Coupons</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
-    <div class="hs-foot">
-        <div class="container">
-            <div class="row row_1">
-                <div class="col-md-7 col-md-offset-2 col-xs-12 col-sm-12">
-                    <div class="hsf-top">
-                        <ul class="list-inline hs-social">
-                            <li class="col-xs-6 col-lg-3 col-md-3">
-                                <a href=""
-                                   target="_blank" class="hs-f-facebook">
-                                    <i class="fa fa-facebook-official right_border"></i>
-                                    <span class="left_border">Facebook</span>
-                                </a>
-                            </li>
-                            <li class="col-xs-6 col-lg-3 col-md-3">
-                                <a href="https://plus.google.com/+HappySaleIn/posts"
-                                   target="_blank" class="hs-f-google">
-                                    <i class="fa fa-google-plus right_border ga"></i>
-                                    <span  class="left_border">  Google+ </span>
-                                </a>
-                            </li>
-                            <li class="col-xs-6 col-lg-3 col-md-3"><a href="https://twitter.com/HappySaleIn" target="_blank" class="hs-f-twitter"><i class="fa fa-twitter right_border tw"></i><span class="left_border">   Twitter </span></a></li>
-                            <li class="col-xs-6 col-lg-3 col-md-3"><a href="https://www.pinterest.com/happysale/" target="_blank" class="hs-f-pinterest"><i class="fa fa-pinterest right_border"></i><span class="left_border">Pinterest</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</span>
-<!-- ================ end                  ================= -->
-
-
-
-
-
-<!-- comments section -->
-<div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span>Commenting on {{ comment.store.name }}</h4>
-            </div>
-            <form action="#" method="post" accept-charset="utf-8">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <textarea style="resize:vertical;" class="form-control"
-                                      placeholder="Comment..." rows="6" name="comment" ng-model="comment.comment" required></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <button type="button" class="btn btn-default btn-sm btn-close" data-dismiss="modal">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- end of comments -->
+<!-- end of store info --

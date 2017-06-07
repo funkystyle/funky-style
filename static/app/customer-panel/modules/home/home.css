@@ -5,7 +5,12 @@
     -o-transition-property: opacity;
     transition-property: opacity;
 }
-
+.panel-body h4 {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .carousel-fade .carousel-inner .active {
     opacity: 1;
 }

@@ -1,8 +1,8 @@
 angular
     .module("categoryinfoModule", ["categoryFactoryModule",
-        "storeServiceModule", "couponFactoryModule"])
+        "storeServiceModule", "couponFactoryModule", "Directives"])
     .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce,
-                                              $stateParams, $http, $rootScope) {
+                                              $stateParams, $http, $rootScope, $compile) {
         $scope.favorite = {
             favorite: false
         };
@@ -117,23 +117,25 @@ angular
 
         //  ======== if stateParams having the coupon code
         if($stateParams['cc']) {
-            $scope.params = $stateParams.cc;
-            $ocLazyLoad.load("static/bower_components/clipboard/dist/clipboard.min.js").then(function (data) {
-                var clipboard = new Clipboard('.btn');
+            $("coupon-info-popup").remove();
+            $scope.$watch('coupons', function (newVal, oldVal) {
+                console.log(newVal, oldVal);
+                if(newVal) {
+                    angular.forEach(newVal, function (item) {
+                        if(item._id == $stateParams.cc) {
+                            $scope.couponInfo = item;
 
-                clipboard.on('success', function(e) {
-                    console.info('Action:', e.action);
-                    console.info('Text:', e.text);
-                    console.info('Trigger:', e.trigger);
-
-                    e.clearSelection();
-                });
-
-                clipboard.on('error', function(e) {
-                    console.error('Action:', e.action);
-                    console.error('Trigger:', e.trigger);
-                });
-            });
+                            // open directive popup
+                            var el = $compile( "<coupon-info-popup coupon='couponInfo'></coupon-info-popup>" )( $scope );
+                            $("body").append(el);
+                            setTimeout(function () {
+                                $("#couponPopup").modal("show");
+                            }, 1000);
+                            console.log(el)
+                        }
+                    });
+                }
+            }, true);
         }
     })
 

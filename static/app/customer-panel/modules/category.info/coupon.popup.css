@@ -9,6 +9,22 @@
     font-size: 24px;
     z-index: 100;
 }
+
+/* modal header */
+.modal-header {
+    border-bottom: 0 solid #FFFFFF;
+}
+#foo {
+    background: #DFFFF4;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px dashed #1FDA9A;
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+}
+/* end of modal header */
+
 .bg-w {
     background-color: #fff;
     padding: 0 12%;

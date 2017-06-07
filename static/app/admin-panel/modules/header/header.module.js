@@ -37,6 +37,8 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
             });
         };
 
+        $scope.getSeoDetails();
+
         $scope.logout = function () {
             if($auth.isAuthenticated()) {
                 $http({
