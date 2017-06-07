@@ -34,7 +34,8 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                 "related_coupons._id": 1,
                 "name": 1,
                 "image": 1,
-                "top_description": 1
+                "top_description": 1,
+                "featured_store": 1
             };
 
             var random_number = new Date().getTime();

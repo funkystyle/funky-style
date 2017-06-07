@@ -51,7 +51,7 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
                 $scope.category.seo_title = data.title;
                 $scope.category.seo_description = data.description;
             }
-            $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-")+"-coupons" : undefined;
+            $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-")+"-offers" : undefined;
         }, true);
 
         // get all stores into the array

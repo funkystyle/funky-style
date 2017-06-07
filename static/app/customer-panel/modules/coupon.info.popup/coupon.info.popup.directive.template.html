@@ -1,24 +1,33 @@
 <!-- comments section -->
 <div class="modal fade" id="couponPopup" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span>Commenting on {{ comment.store.name }}</h4>
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Get Extra 50% OFF Cashback on All Fun Activities</h4>
             </div>
-            <form action="#" method="post" accept-charset="utf-8">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <textarea style="resize:vertical;" class="form-control"
-                                      placeholder="Comment..." rows="6" name="comment" ng-model="comment.comment" required></textarea>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
+                        <label>Here is your Coupon Code</label>
+
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <!-- Target -->
+                                <label id="foo">{{ couponInfo.coupon_code }}</label>
+                            </div>
+                            <!-- Trigger -->
+                            <button class="btn btn-info btn-md" data-clipboard-target="#foo" id="copyClipboard">
+                                Copy
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer">
-                    <button type="button" class="btn btn-default btn-sm btn-close" data-dismiss="modal">Submit</button>
-                </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
