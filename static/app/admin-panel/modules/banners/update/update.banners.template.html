@@ -49,7 +49,7 @@
                         <label for="related_banners">Top Banner</label>
                         <ui-select id="related_banners" ng-model="banner.top_banner_string" theme="bootstrap">
                             <ui-select-match placeholder="Selection type">{{$select.selected.text}}</ui-select-match>
-                            <ui-select-choices repeat="item.code as item in selection_type | propsFilter: {text: $select.search}">
+                            <ui-select-choices repeat="item.code as item in selection_type | orderBy: 'text' | propsFilter: {text: $select.search}">
                                 <div ng-bind-html="item.text | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
@@ -59,7 +59,7 @@
                         <ui-select id="side_banners" ng-model="banner.side_banner_string" theme="bootstrap"
                                    close-on-select="false" title="Related Stores">
                             <ui-select-match placeholder="Selection type">{{$select.selected.text}}</ui-select-match>
-                            <ui-select-choices repeat="item.code as item in selection_type | propsFilter: {text: $select.search}">
+                            <ui-select-choices repeat="item.code as item in selection_type | orderBy: 'text' | propsFilter: {text: $select.search}">
                                 <div ng-bind-html="item.text | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>

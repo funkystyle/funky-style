@@ -11,6 +11,12 @@
 .fa-close {
     cursor: pointer;
 }
+.coupon-options {
+    display: none;
+}
+.coupon-name:hover .coupon-options {
+    display: block;
+}
 .uib-datepicker .uib-title {
     margin-top: -6px;
 }
