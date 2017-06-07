@@ -9,12 +9,13 @@ import urllib
 from urlparse import urlsplit, urlunsplit
 
 
-def find_db_affiliate_network(netloc):
+def find_db_affiliate_network(url):
     accounts = app.data.driver.db['deep_link']
-    deep_link = accounts.find_one({'affiliate_network': netloc})
-    if not deep_link:
-        raise Exception("no affiliated_network found")
-    return deep_link
+    deep_links = accounts.find()
+    for deep_link in deep_links:
+        if deep_link['affiliate_network'] in url:
+            return deep_link
+    raise Exception("no affiliated_network found")
 
 
 
@@ -40,6 +41,7 @@ class DeepLink(object):
         # find affiliate_network to get from database
         #self.find_affiliate_network()
 
+
     def get_url_net_loc(self):
         return urlsplit(self.input_url).netloc
 
@@ -51,66 +53,85 @@ class DeepLink(object):
         if 'replace' in self.url_config['tags'] and 'tags' in self.url_config['tags'] and \
                 self.url_config['tags']['replace'] and self.url_config['tags']['tags']:
 
-            self.input_url = urlunsplit((split_url.scheme,
-                                         split_url.netloc,
-                                         split_url.path,
-                                         self.url_config['tags']['tags'],
-                                         split_url.fragment))
+            if self.url_config['tags']['tags'] not in self.input_url:
+
+                self.input_url = urlunsplit((split_url.scheme,
+                                             split_url.netloc,
+                                             split_url.path,
+                                             self.url_config['tags']['tags'],
+                                             split_url.fragment))
 
         # replace: False need to append database tags with existed url tags
         elif 'replace' in self.url_config['tags'] and \
                 not self.url_config['tags']['replace'] and \
                         'tags' in self.url_config['tags'] and  \
                 self.url_config['tags']['tags']:
-            # check database tags has question mark\
-            if split_url.query == '?' or not split_url.query:
-                q =  split_url.query+self.url_config['tags']['tags']
-            else:
-                q =  split_url.query+"&"+self.url_config['tags']['tags']
-            self.input_url = urlunsplit((split_url.scheme,
-                                         split_url.netloc,
-                                         split_url.path,
-                                         q,
-                                         split_url.fragment))
+            if self.url_config['tags']['tags'] not in self.input_url:
+                # check database tags has question mark\
+                if split_url.query == '?' or not split_url.query:
+                    q = split_url.query+self.url_config['tags']['tags']
+                else:
+                    q = split_url.query+"&"+self.url_config['tags']['tags']
+                self.input_url = urlunsplit((split_url.scheme,
+                                             split_url.netloc,
+                                             split_url.path,
+                                             q,
+                                             split_url.fragment))
         else:
             print 'nothing to do..'
 
     def process_start_url(self):
         if 'url' in self.url_config['start_url'] and self.url_config['start_url']['url']:
-            if 'encode' in self.url_config['start_url'] and self.url_config['start_url']['encode']:
-                self.start_url  = urllib.quote(self.url_config['start_url']['url'], safe='')
+            LOGGER.info("start url in process start url:{}".format(self.input_url))
+            if self.url_config['start_url']['url'] not in self.input_url:
+                if 'encode' in self.url_config['start_url'] and self.url_config['start_url']['encode']:
+                    self.start_url = urllib.quote(self.url_config['start_url']['url'], safe='')
+                else:
+                    self.start_url = self.url_config['start_url']['url']
             else:
-                self.start_url  = self.url_config['start_url']['url']
-
-
-
+                self.start_url = ""
+        LOGGER.info("processed start url:{}".format(self.start_url))
 
     def process_end_url(self):
         if 'url' in self.url_config['end_url'] and self.url_config['end_url']['url']:
-            if 'encode' in self.url_config['end_url'] and self.url_config['end_url']['encode']:
-                self.end_url  = urllib.quote(self.url_config['end_url']['url'], safe='')
+            if self.url_config['end_url']['url'] not in self.input_url:
+                if 'encode' in self.url_config['end_url'] and self.url_config['end_url']['encode']:
+                    self.end_url = urllib.quote(self.url_config['end_url']['url'], safe='')
+                else:
+                    self.end_url = self.url_config['end_url']['url']
             else:
-                self.end_url  = self.url_config['end_url']['url']
+                self.end_url = ""
+
+        LOGGER.info("processed end url:{}".format(self.end_url))
 
 
     def process_main_url_encode(self):
         if self.url_config['encode_main_url']:
-            self.input_url = urllib.quote(self.input_url, safe='')
+            if "%" not in self.input_url:
+                self.input_url = urllib.quote(self.input_url, safe='')
+        LOGGER.info("processed main url encode:{}".format(self.input_url))
 
     def assign_output_url(self):
         self.output_url = self.input_url
 
         if 'url' in  self.url_config['start_url'] and self.url_config['start_url']['url']:
-            self.output_url = self.start_url+self.output_url
+            if self.url_config['start_url']['url'] not in self.output_url:
+                self.output_url = self.start_url+self.output_url
 
         if 'url' in self.url_config['end_url'] and self.url_config['end_url']['url']:
-            self.output_url = self.output_url+self.end_url
+            if self.url_config['end_url']['url'] not in self.output_url:
+                self.output_url = self.output_url+self.end_url
 
     def replace_strings(self):
         for item in self.url_config['replace']:
+
             if item['encode']:
                 item['replace_string'] = urllib.quote(item['replace_string'], safe='')
-            self.output_url = self.output_url.replace(item['find_string'], item['replace_string'])
+            if item['replace_string'] not in self.output_url:
+                self.output_url = self.output_url.replace(item['find_string'], item['replace_string'])
+
+
+
 
     def process_output_url(self):
         self.add_or_replace_tags()
@@ -178,7 +199,7 @@ def get_output_deeplink_url():
         if not parsed_uri.netloc:
             raise ReturnException(message="url not valid", status_code=400)
             LOGGER.error("url not valid")
-        item = find_db_affiliate_network(parsed_uri.netloc)
+        item = find_db_affiliate_network(request.json['url'])
         LOGGER.info("deep link database configuration data:{}".format(item))
         dp = DeepLink(request.json['url'], item)
         dp.process_output_url()

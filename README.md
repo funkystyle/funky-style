@@ -191,6 +191,56 @@
 
     * Deep linking
     --------------
+    If you want to get deep link for particular url we have to store all affiliate network details into mongodb in below
+    format:
+
+        {
+            "affiliate_network": "https://www.swiggy.com/gurgaon", ## format: http(s)://www.{domain name}/{extra url part}
+            ## it should be unique
+            "start_url": {
+                "url": "http://tracking.clickonik.com/aff_c?offer_id=26&aff_id=1428&url=", ## start url is appended to output url
+                "encode": False ## do you want to encode start url also then say true or false
+            },
+            "end_url":{
+                "url": "",## end url can be appended to main url
+                "encode": False ## do you want to encode url
+            },
+            "tags":{
+             "tags": "", ## query parameters to output url
+             "replace": False, ## replace will replace all query parameter , if replace is false query parameter will be appended
+            },
+            "encode_main_url": True, ## do you want to encode input url
+            "replace":[
+                {
+                    "replace_string":"hyderabad/restaurants?utm_source=affiliate&utm_medium=clickonik",
+                    "find_string":"gurgaon", "encode":True
+                }
+            ] ## replace string will replace specific part with replaceable strings,
+            ##with encode parameter we can encode those strings
+        }
+
+     ** OPERATIONS:
+            * INSERT: /api/1.0/deep_link
+              Method: post
+              payload: json format.
+              above json data
+            * UPDATE: /api/1.0/deep_link/<id of document>
+              Method: PATCH
+              payload: json format
+            * DELETE: /api/1.0/deep_link/<id of document>
+              METHOD: DELETE
+              payload: json format
+            * FETCH: /api/1.0/deep_link/?where=<required json query>&<sort-option>&<pagination>&<count of documents>&
+                                                          &<projection fields>
+              METHOD: GET
+
+            ** /api/1.0/get-output-deep-link-url
+               Method: POST,
+               Payload: {"url": "<url>"}
+
+
+
+
 
 
 ## Gunicorn: Gunicorn 'Green Unicorn' is a Python WSGI HTTP Server for UNIX.
