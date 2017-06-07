@@ -1,6 +1,6 @@
 angular
-    .module("storeinfoModule", ["categoryFactoryModule", "Directives"])
-    .controller("storeinfoController", function ($scope, $stateParams, $http, $state,
+    .module("storeinfoModule", ["categoryFactoryModule", "Directives", "satellizer"])
+    .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth,
                                                  categoryFactory, $filter, $sce, $ocLazyLoad, $rootScope, $compile) {
         $scope.favorite = {
             favorite: false
@@ -182,6 +182,25 @@ angular
         } else {
             $state.go('main.home');
         }
+
+        // oepn comment section
+        $scope.openComment = function (item) {
+            console.log("Comment Coupon Item: ", item);
+            $("comments").remove();
+            if($auth.isAuthenticated()) {
+                $scope.info = {
+                    item: item,
+                    token: $auth.getToken()
+                };
+                // open directive popup
+                var el = $compile( "<comments info='info'></comments>" )( $scope );
+                $("body").append(el);
+                setTimeout(function () {
+                    $("#commentPopup").modal("show");
+                }, 1000);
+                console.log(el)
+            }
+        };
 
         //  ======== if stateParams having the coupon code
         if($stateParams['cc']) {

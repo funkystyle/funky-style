@@ -1,4 +1,4 @@
-angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
+angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
     .directive("dealTileDirective", function () {
         return {
             restrict: "E",
@@ -10,10 +10,11 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
     })
     .directive("comments", function () {
         return {
-            restrict: "A",
+            restrict: "E",
             scope: {
-
+                info: "="
             },
+            controller: "commentsCtrl",
             templateUrl: "static/app/customer-panel/modules/comments/comments.directive.template.html"
         }
     })
@@ -30,7 +31,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
         }
     })
     // ==== coupon info popup controller
-    .controller("couponInfoPopupCtrl", function ($scope, $http, $state, $ocLazyLoad, $sce) {
+    .controller("couponInfoPopupCtrl", function ($scope, $http, $state, $ocLazyLoad, $sce, $stateParams) {
         console.log("couponInfoPopupCtrl: ");
 
         $ocLazyLoad.load("static/bower_components/clipboard/dist/clipboard.min.js").then(function (data) {
@@ -42,6 +43,10 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     return $sce.trustAsHtml(string);
                 }
             };
+
+            $('#couponPopup').on('hidden.bs.modal', function () {
+                $state.go(".", {cc: undefined});
+            });
 
             var clipboard = new Clipboard('.btn');
 
@@ -60,4 +65,35 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 console.error('Trigger:', e.trigger);
             });
         });
+    })
+    // comments controller
+    .controller("commentsCtrl", function ($scope, $state, $stateParams, auth, $auth, $http) {
+
+        console.log("Comments controller!");
+        $scope.comment = {};
+
+        auth.me().then(function (data) {
+            $scope.loggeduser = data.data;
+        });
+
+        // submit comment
+        $scope.submitComment = function (comment) {
+            console.log("Comment Description: ", comment.comment, "Store info: ", $scope.info.item.related_stores);
+            var url = '/api/1.0/coupons_comments';
+            $http({
+                url: url,
+                method: "POST",
+                data: {
+                    user: $scope.loggeduser._id,
+                    coupon: $scope.info.item._id,
+                    status: true,
+                    comment: comment.comment
+                }
+            }).then(function (data) {
+                console.log("Comment data Success: ", data);
+                $("#commentPopup").modal("hide");
+            }, function (erorr) {
+                console.log(erorr);
+            });
+        }
     });
