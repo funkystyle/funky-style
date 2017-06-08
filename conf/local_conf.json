@@ -50,10 +50,6 @@
     ],
     "categories": [
       {
-        "field_name": "related_coupons",
-        "collection_name": "coupons"
-      },
-      {
         "field_name": "related_deals",
         "collection_name": "deals"
 
@@ -87,22 +83,6 @@
   },
 
   "INDEX_XML_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_index.xml",
-  "SUB_FILE_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_sub_file.xml",
-
-  "DEEP_LINK_DATA":{
-      "Affiliate_Network": "flipkart",
-      "tags": "?a=x&b=y&c=z",
-      "start_url": "tracking.ciom",
-      "replace strings": [
-	    {
-          "find_string": "www",
-          "replace_string": "dl"
-	    },
-        {
-          "find_string": "com" ,
-          "replace_string": "com/dl"
-        }
-      ]
-  }
+  "SUB_FILE_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_sub_file.xml"
 
 }
