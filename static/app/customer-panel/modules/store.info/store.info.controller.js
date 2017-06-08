@@ -68,14 +68,7 @@ angular
             embedded['related_categories'] = 1;
             embedded['top_stores'] = 1;
             embedded['related_stores'] = 1;
-            embedded['related_stores.related_coupons'] = 1;
-            embedded['related_stores.related_coupons.related_categories'] = 1;
             embedded['related_deals'] = 1;
-            embedded['related_coupons'] = 1;
-            embedded['related_coupons.related_categories'] = 1;
-            embedded['related_coupons.recommended_stores'] = 1;
-            embedded['related_coupons.recommended_stores.related_coupons'] = 1;
-            embedded['related_coupons.recommended_stores.related_coupons.related_categories'] = 1;
 
             var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+
                 JSON.stringify(embedded)+'&r=' + new Date().getTime()+"&number_of_clicks=1";
@@ -90,26 +83,77 @@ angular
                     $rootScope.pageTitle = $scope.store.meta_title;
                     $rootScope.pageDescription = $scope.store.meta_description;
                     console.log($scope.store);
-                    
-                    // applying carousel after dom prepared
-                    $('.carousel').carousel({
-                        interval: 4000,
-                        pause: true
+
+                    // get the suggested coupons from coupons table, from recommended stores field
+                    embedded = {
+                        "related_categories": 1
+                    };
+                    embedded = JSON.stringify(embedded);
+                    var temp = {};
+                    temp["recommended_stores"] = {
+                        "$in": [$scope.store._id]
+                    };
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded+"&r="+Math.random();
+                    $http({
+                        url: url,
+                        method: "GET"
+                    }).then(function (suggested) {
+                        console.log("Suggested Coupons Data: ", suggested.data._items);
+                        $scope.suggestedCoupons = suggested.data._items;
                     });
-                    
-                    angular.forEach($scope.store.related_coupons, function (item) {
-                        if(new Date(item.expire_date) > new Date()) {
-                            if($scope.coupons.indexOf(item) == -1) {
-                                $scope.coupons.push(item);
-                                $scope.filterCoupons.push(item);
-                                $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
-                                $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
-                            }
-                        } else {
-                           if($scope.expiredCoupons.indexOf(item) == -1) {
-                               $scope.expiredCoupons.push(item);
-                           }
+
+                    // get the related coupons from the coupons table, with related store
+                    temp = {
+                        "related_stores": {
+                            "$in": [$scope.store._id]
                         }
+                    };
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded+"&r="+Math.random();
+                    $http({
+                        url: url,
+                        method: "GET"
+                    }).then(function (coupons) {
+                        var items = coupons.data._items;
+                        console.log("Stores Coupons Data: ", items);
+                        angular.forEach(items, function (item) {
+                            if(new Date(item.expire_date) > new Date()) {
+                                if($scope.coupons.indexOf(item) == -1) {
+                                    $scope.coupons.push(item);
+                                    $scope.filterCoupons.push(item);
+                                    $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
+                                    $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
+                                }
+                            } else {
+                                if($scope.expiredCoupons.indexOf(item) == -1) {
+                                    $scope.expiredCoupons.push(item);
+                                }
+                            }
+                        });
+                    });
+
+                    // getting related coupons from the related stores
+                    angular.forEach($scope.store.related_stores, function (item) {
+                        console.log("Related Stores: ", item.name, item._id);
+                        temp = JSON.stringify(temp = {
+                            "related_stores": {
+                                "$in": [item._id]
+                            }
+                        });
+                        var sort = "&max_results=1&sort=[('_updated', -1)]";
+                        url = "/api/1.0/coupons"+"?where="+temp+sort+"&embedded="+embedded+"&r="+Math.random();
+                        $http({
+                            url: url,
+                            method: "GET"
+                        }).then(function (related) {
+                            var items = related.data._items;
+                            console.log("Related Coupons: ", items);
+                            angular.forEach(items, function (item) {
+                                var length = $filter('filter')($scope.relatedCoupons, {_id: item._id});
+                                if(!length.length) {
+                                    $scope.relatedCoupons.push(item);
+                                }
+                            });
+                        });
                     });
 
                     // if top stores length is zero query to stores for fetching featured stores
@@ -150,29 +194,8 @@ angular
                                 }
                             }
                         });
-
-                        // getting suggested coupons from the rescommended stores
-                        angular.forEach(item.recommended_stores, function (store) {
-                             angular.forEach(store.related_coupons, function (r_coupon) {
-                                var items = $filter('filter')($scope.suggestedCoupons, {_id: r_coupon._id});
-                                if(!items.length) {
-                                    $scope.suggestedCoupons.push(r_coupon);
-                                }
-                             })
-                        });
                     });
-                    console.log("Final categories are ", $scope.categories)
-                    // getting related coupons from the related stores
-                    angular.forEach($scope.store.related_stores, function (item) {
-                        angular.forEach(item.related_coupons, function (r_coupon, index) {
-                            console.log(r_coupon)
-                            var items = $filter('filter')($scope.relatedCoupons, {_id: r_coupon._id});
-                            if(!items.length) {
-                                $scope.relatedCoupons.push(r_coupon);
-                            }
-                        }) ;
-                    });
-
+                    console.log("Final categories are ", $scope.categories);
 
                     console.log($scope.expiredCoupons, $scope.coupons, "suggested coupons ", $scope.suggestedCoupons, "Related coupons ", $scope.relatedCoupons);
                 }

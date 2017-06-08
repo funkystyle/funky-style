@@ -157,7 +157,6 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
 
         // addDealBrands function
         $scope.addDeal = function (deal) {
-            return
             deal.last_modified_by = $scope.user._id;
             // if product selected as deal_type
             if(deal.deal_type == 'product') {

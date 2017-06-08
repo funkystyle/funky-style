@@ -365,7 +365,7 @@
                         </div><!-- end col -->
                     </div><!-- end row -->
                     <div class="row">
-                        <div class="col-md-4" ng-repeat="item in store.related_deals">
+                        <div class="col-md-4" ng-repeat="item in store.related_deals | orderBy: '_updated': true">
                             <div href="#" class="thumbnail image-height">
                                 <h4 class="deals-upto">{{ item.name }}</h4>
                                 <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
@@ -565,7 +565,7 @@
                 </div><!-- end row -->
 
                 <div class="row">
-                    <div class="col-lg-6 col-md-6" ng-repeat="item in suggestedCoupons | limitTo: 2">
+                    <div class="col-lg-6 col-md-6" ng-repeat="item in suggestedCoupons | orderBy: '_updated': true | limitTo: 2">
                         <div class="panel panel-default coupon all">
                             <div class="panel-body">
                                 <div class="row">
@@ -631,7 +631,7 @@
                         </h3>
                     </div><!-- end col -->
                 </div><!-- end row -->
-                <div class="panel panel-default" ng-repeat="item in relatedCoupons | limitTo: 2">
+                <div class="panel panel-default" ng-repeat="item in relatedCoupons | orderBy: '_updated': true">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
