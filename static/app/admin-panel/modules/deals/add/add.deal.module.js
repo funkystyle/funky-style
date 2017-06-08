@@ -157,6 +157,8 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
 
         // addDealBrands function
         $scope.addDeal = function (deal) {
+            return
+            deal.last_modified_by = $scope.user._id;
             // if product selected as deal_type
             if(deal.deal_type == 'product') {
                 deal.stores = $scope.productLists;
@@ -173,7 +175,7 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 console.log(images);
                 deal.images = images;
             } else {
-                toastr.error("Please select Deal Image", "Error!");
+                toastr.error("Please select Deal Images", "Error!");
                 return false;
             }
 

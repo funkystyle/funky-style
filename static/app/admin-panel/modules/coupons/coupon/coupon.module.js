@@ -68,27 +68,16 @@ angular.module("couponModule", ['angular-table', 'constantModule',
                     destArray['All'] = $scope.coupons;
                     $scope.statusOptions = destArray;
                     angular.forEach($scope.coupons, function(item) {
+                        $scope.persons.push(item.last_modified_by);
                         $scope.check.check[item._id] = false;
+                    });
+                    $scope.persons = _.uniq($scope.persons, function(x){
+                        return x['_id'];
                     });
                 }
             }, function (error) {
                 console.log(error);
                 toastr.error(error.data._error.message, "Error!");
-            });
-
-            storeFactory.get().then(function (data) {
-                if(data['_items']) {
-                    $scope.stores = data._items;
-                }
-            }, function (error) {
-                console.log(error);
-            });
-            categoryFactory.get().then(function (data) {
-                if(data.data) {
-                    $scope.categories = data.data._items;
-                }
-            }, function (error) {
-                console.log(error);
             });
         } else {
             $state.go("login");
@@ -148,17 +137,30 @@ angular.module("couponModule", ['angular-table', 'constantModule',
                 return items;
             }
             angular.forEach(filter, function (val, key) {
-                angular.forEach(items, function (item) {
-                    console.log(item[key], "isArray: ", Array.isArray(item[key]));
-                    if(Array.isArray(item[key])) {
-                        angular.forEach(item[key], function (type) {
-                            if(type._id == val) {
-                                list.push(item);
-                            }
+                if(key == 'related_categories' || key == 'related_stores') {
+                    angular.forEach(items, function (item) {
+                        if(Array.isArray(item[key])) {
+                            angular.forEach(item[key], function (type) {
+                                if(type._id == val) {
+                                    list.push(item);
+                                }
 
-                        });
-                    }
-                })
+                            });
+                        }
+                    });
+                } else if (key == 'last_modified_by') {
+                    angular.forEach(items, function (item) {
+                        if(item.last_modified_by['_id'] == val) {
+                            list.push(item);
+                        }
+                    });
+                } else if (key == 'coupon_type') {
+                    angular.forEach(items, function (item) {
+                        if(item.coupon_type == val) {
+                            list.push(item);
+                        }
+                    });
+                }
             });
 
             var uniqueList = _.uniq(list, function(item, key, a) {

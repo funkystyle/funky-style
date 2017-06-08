@@ -17,7 +17,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="deal_category">Deal Category</label>
-                        <ui-select on-select="selectedCategory($item, $model)" ng-model="fields.deal_category" theme="bootstrap" id="deal_category">
+                        <ui-select ui-required="true" on-select="selectedCategory($item, $model)" ng-model="fields.deal_category" theme="bootstrap" id="deal_category">
                             <ui-select-match placeholder="Select Deal Category">{{ $select.selected.name }}</ui-select-match>
                             <ui-select-choices repeat="item._id as item in categories | filter: $select.search">
                                 <div ng-bind-html="item.name | highlight: $select.search"></div>
@@ -31,14 +31,14 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="fields_name">Field Name</label>
-                        <input type="text" id="fields_name" class="form-control input-md"
+                        <input required type="text" id="fields_name" class="form-control input-md"
                                placeholder="Fields Name" ng-model="item.field_name" autocomplete="off">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="fields_type">Field Type</label>
-                        <ui-select ng-model="item.field_type" theme="bootstrap" id="fields_type">
+                        <ui-select ui-required="true" ng-model="item.field_type" theme="bootstrap" id="fields_type">
                             <ui-select-match placeholder="Select Field type">{{ $select.selected.text }}</ui-select-match>
                             <ui-select-choices repeat="item.code as item in types | filter: $select.search">
                                 <div ng-bind-html="item.text | highlight: $select.search"></div>

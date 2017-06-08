@@ -64,12 +64,16 @@ angular.module("updateDealCategoriesModule", ["ui.select", "ngSanitize", "ui.boo
         // addDealBrands function
         $scope.updateDealCategory = function (deal) {
             //deal.alt_image = "data:image/jpeg;base64,"+deal.image[0].base64
-            deal.image = "";
             delete deal._created;
             delete deal._updated;
             delete deal._links;
-            delete deal.image;
-            delete deal.alt_image;
+
+            if(typeof deal.image === 'object') {
+                deal.image = "data:image/jpeg;base64,"+deal.image.base64;
+            }
+            if(typeof deal.alt_image === 'object') {
+                deal.alt_image = "data:image/jpeg;base64,"+deal.alt_image.base64;
+            }
 
             console.log(deal);
 

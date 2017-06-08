@@ -15,6 +15,51 @@
             </div>
         </div>
         <!-- end row -->
+
+        <div class="row" style="margin-bottom: 30px;">
+            <div class="col-md-2 col-sm-2">
+                <label>By Store</label>
+                <ui-select on-select="applyTypeFilter()" ng-model="filter.store" theme="bootstrap">
+                    <ui-select-match placeholder="Select Store">{{ $select.selected.name }}</ui-select-match>
+                    <ui-select-choices repeat="item._id as item in stores | filter: $select.search">
+                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <label>By Deal Category</label>
+                <ui-select on-select="applyTypeFilter()" ng-model="filter.deal_category" theme="bootstrap">
+                    <ui-select-match placeholder="Select Deal Category">{{ $select.selected.name }}</ui-select-match>
+                    <ui-select-choices repeat="item._id as item in categories | filter: $select.search">
+                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <label>By User</label>
+                <ui-select on-select="applyTypeFilter()" ng-model="filter.last_modified_by" theme="bootstrap">
+                    <ui-select-match placeholder="Select User">{{ $select.selected.first_name }}</ui-select-match>
+                    <ui-select-choices repeat="item._id as item in persons | orderBy: 'first_name' | filter: $select.search">
+                        <div>{{ item.first_name | highlight: $select.search }} {{ item.last_name | highlight: $select.search }}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <label>By Deal Type</label>
+                <ui-select on-select="applyTypeFilter()" ng-model="filter.deal_type" theme="bootstrap">
+                    <ui-select-match placeholder="Select Deal Types">{{ $select.selected }}</ui-select-match>
+                    <ui-select-choices repeat="item in deal_types | orderBy: 'item' | filter: $select.search">
+                        <div ng-bind-html="item | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <label style="visibility: hidden;">Clear All</label>
+                <div class="form-group">
+                    <button ng-click="clearAll()" class="btn btn-md btn-default">Clear All</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="panel-body" cg-busy="load">
@@ -62,8 +107,13 @@
                                 <span><a ui-sref="header.update-deal({id: item._id})">Edit</a></span>
                             </p>
                         </td>
-                        <td at-title="URL" at-implicit at-sortable at-attribute="url" width="250"></td>
-                        <td at-title="Coupons" at-implicit at-sortable at-attribute="number_of_coupons" width="250"></td>
+                        <td at-title="Deal Type" at-sortable width="200">{{ item.deal_type }}</td>
+                        <td at-title="Submitted By" width="100">
+                            {{ item.last_modified_by.first_name }} {{ item.last_modified_by.last_name }}
+                        </td>
+                        <td at-title="Store Name" width="100">
+                            {{ item.store.name }}
+                        </td>
                     </tr>
                     </tbody>
                 </table>

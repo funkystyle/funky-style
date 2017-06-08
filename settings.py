@@ -688,6 +688,13 @@ SCHEMAS = {
                     'field': '_id'
                 }
             }
+        },
+        'last_modified_by':{
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
         }
     },
     'coupons':{

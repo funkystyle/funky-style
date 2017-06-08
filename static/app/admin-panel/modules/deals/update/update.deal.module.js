@@ -77,7 +77,8 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                     "deal_brands": 1,
                     "store": 1,
                     "related_deals": 1,
-                    "deal_category": 1
+                    "deal_category": 1,
+                    "last_modified_by": 1
                 };
 
                 var random_number = new Date().getTime();
@@ -182,6 +183,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         };
         // addDealBrands function
         $scope.updateDeal = function (deal) {
+            deal.last_modified_by = $scope.user._id;
 
             // if product selected as deal_type
             if(deal.deal_type == 'product') {

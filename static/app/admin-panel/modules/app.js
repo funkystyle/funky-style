@@ -7,8 +7,8 @@ function clearNullIds (items) {
     return array;
 }
 var monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
+    "July", "August", "September", "October", "November", "December"
+];
 var date = new Date();
 var month = undefined;
 var year = undefined;
@@ -821,5 +821,35 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'
                 out = items;
             }
             return out;
+        };
+    })
+    .directive('uiRequired', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, elm, attrs, ctrl) {
+                ctrl.$validators.required = function(modelValue, viewValue) {
+                    var element = $(elm).find('input');
+                    if(modelValue != undefined) {
+                        if(Array.isArray(modelValue)) {
+                            if(modelValue.length == 0) {
+                                element.prop('required',true);
+                            } else {
+                                element.removeAttr('required');
+                            }
+                        } else {
+                            element.removeAttr('required');
+                        }
+                    } else if (modelValue == undefined) {
+                        element.prop('required', true);
+                    } else {
+                        element.removeAttr('required');
+                    }
+                    return !((viewValue && viewValue.length === 0 || false) && attrs.uiRequired === 'true');
+                };
+
+                attrs.$observe('uiRequired', function() {
+                    ctrl.$setValidity('required', !(attrs.uiRequired === 'true' && ctrl.$viewValue && ctrl.$viewValue.length === 0));
+                });
+            }
         };
     });

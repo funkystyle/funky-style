@@ -22,7 +22,7 @@
                 <div class="col-lg-9 col-md-9">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control input-md" id="title" placeholder="Title" ng-model="coupon.title">
+                        <input type="text" required class="form-control input-md" id="title" placeholder="Title" ng-model="coupon.title">
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea ng-click="textEditor($event)" class="form-control input-sm" id="description" placeholder="Description" ng-model="coupon.description"></textarea>
+                        <textarea required ng-click="textEditor($event)" class="form-control input-sm" id="description" placeholder="Description" ng-model="coupon.description"></textarea>
                     </div>
                     <div class="form-group" ng-init="coupon.coupon_type = 'coupon'">
                         <label>Coupon Type</label> <br />
@@ -45,12 +45,12 @@
                     </div>
                     <div class="form-group">
                         <label for="coupon_code">Coupon Code</label>
-                        <input ng-disabled="coupon.coupon_type == 'offer'" type="text" class="form-control input-sm"
+                        <input required ng-disabled="coupon.coupon_type == 'offer'" type="text" class="form-control input-sm"
                                id="coupon_code" placeholder="Coupon Code" ng-model="coupon.coupon_code">
                     </div>
                     <div class="form-group">
                         <label for="destination_url">Destination URL</label>
-                        <input type="text" id="destination_url" class="form-control input-sm" ng-model="coupon.destination_url" placeholder="Destination URL" />
+                        <input required type="text" id="destination_url" class="form-control input-sm" ng-model="coupon.destination_url" placeholder="Destination URL" />
                     </div>
 
                 </div>
@@ -74,11 +74,11 @@
                     </div>
                     <div class="form-group">
                         <label for="discount">Discount</label>
-                        <input type="text" class="form-control input-sm" id="discount" placeholder="Discount" ng-model="coupon.discount">
+                        <input required type="text" class="form-control input-sm" id="discount" placeholder="Discount" ng-model="coupon.discount">
                     </div>
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
+                            <input required type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="form-group">
                         <label>Store</label>
-                        <ui-select limit="1" on-select="addStore($item, $model)" on-remove="removeStore($item, $model)" multiple ng-model="coupon.related_stores" theme="bootstrap" close-on-select="false" title="Related Stores">
+                        <ui-select ui-required="true" limit="1" on-select="addStore($item, $model)" on-remove="removeStore($item, $model)" multiple ng-model="coupon.related_stores" theme="bootstrap" close-on-select="false" title="Related Stores">
                             <ui-select-match placeholder="Select Store">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="store._id as store in stores | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="store.name | highlight: $select.search"></div>
@@ -110,7 +110,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="form-group">
                         <label>Related Categories</label>
-                        <ui-select on-select="addCategory($item, $model)" on-remove="removeCategory($item, $model)" multiple ng-model="coupon.related_categories"
+                        <ui-select ui-required="true" on-select="addCategory($item, $model)" on-remove="removeCategory($item, $model)" multiple ng-model="coupon.related_categories"
                                    theme="bootstrap" close-on-select="false" title="Related Categories">
                             <ui-select-match placeholder="Select Related Categories">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="store._id as store in categories | propsFilter: {name: $select.search}">
@@ -132,7 +132,7 @@
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <ui-select ng-model="coupon.status" theme="bootstrap">
+                        <ui-select ng-required="true" ng-model="coupon.status" theme="bootstrap">
                             <ui-select-match placeholder="Select User Level">{{ $select.selected }}</ui-select-match>
                             <ui-select-choices repeat="st in status | filter: $select.search">
                                 <div ng-bind-html="st | highlight: $select.search"></div>
