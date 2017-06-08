@@ -1026,10 +1026,10 @@ SCHEMAS = {
                 'embeddable': True
             }
         },
-        'store': {
+        'coupon': {
             'type': 'objectid',
             'data_relation': {
-                'resource': 'stores',
+                'resource': 'coupons',
                 'embeddable': True
             }
         },
@@ -1037,7 +1037,7 @@ SCHEMAS = {
             'type': 'boolean'
         },
         'comment': {
-            'type': 'boolean'
+            'type': 'string'
         }
 
     },

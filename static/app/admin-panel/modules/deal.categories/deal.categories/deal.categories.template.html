@@ -55,10 +55,13 @@
                                 </label>
                             </div>
                         </td>
-                        <td ui-sref="header.update-deal-categories({id: item._id})"
-                            style="color: #2780e3; text-decoration: underline; cursor: pointer;"
-                            at-title="Name" at-implicit at-sortable at-initial-sorting="asc"
-                            at-attribute="name" width="250"></td>
+                        <td  class="coupon-name" at-title="Name" at-sortable width="250">
+                            <p>{{ item.name }}</p>
+                            <p class="coupon-options">
+                                <span><a href="/categories/{{ item.url }}" target="_blank">View</a></span> &nbsp;&nbsp;
+                                <span><a ui-sref="header.update-deal-categories({id: item._id})">Edit</a></span>
+                            </p>
+                        </td>
                         <td at-title="URL" at-implicit at-sortable at-attribute="url" width="250"></td>
                         <td at-title="Coupons" at-implicit at-sortable at-attribute="number_of_coupons" width="250"></td>
                     </tr>

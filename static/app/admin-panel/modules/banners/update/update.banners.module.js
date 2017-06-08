@@ -4,6 +4,10 @@ angular.module("updateBannersModule", ["ui.select", "ngSanitize",
         console.log("Add seo Controller!");
         $scope.selection_type = [
             {
+                text: "None",
+                code: "none"
+            },
+            {
                 text: "Home",
                 code: "home"
             },

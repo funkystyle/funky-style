@@ -4,6 +4,10 @@ angular.module("addBannersModule", ["ui.select", "ngSanitize",
         console.log("Add seo Controller!");
         $scope.selection_type = [
             {
+                text: "None",
+                code: "none"
+            },
+            {
                 text: "Home",
                 code: "home"
             },
@@ -44,7 +48,7 @@ angular.module("addBannersModule", ["ui.select", "ngSanitize",
             expired_date: $('#datetimepicker1').datetimepicker({
                 defaultDate: new Date()
             }),
-            deal_of_the_day_banner: $scope.deal_of_the_day[0].code,
+            deal_of_the_day_banner: $scope.deal_of_the_day[1].code,
             top_banner_string: $scope.selection_type[0].code,
             side_banner_string: $scope.selection_type[0].code,
             status: $scope.status[0].code

@@ -50,12 +50,20 @@
                                 </label>
                             </div>
                         </td>
-                        <td ui-sref="header.update-store({storeId: item._id})"
+                        <td ui-sref="header.update-coupon-comments({id: item._id})"
                             style="color: #2780e3; text-decoration: underline; cursor: pointer;"
-                            at-title="Name" at-implicit at-sortable at-initial-sorting="asc"
-                            at-attribute="name" width="250"></td>
-                        <td at-title="URL" at-implicit at-sortable at-attribute="url" width="250"></td>
-                        <td at-title="Coupons" at-implicit at-sortable at-attribute="number_of_coupons" width="250"></td>
+                            at-title="Comment" at-implicit at-sortable at-initial-sorting="asc"
+                            at-attribute="comment" width="250"></td>
+                        <td at-title="Coupon" at-implicit at-sortable at-attribute="coupon.title" width="250"></td>
+                        <td at-title="Submitted By" at-implicit at-sortable at-attribute="user.email" width="250"></td>
+                        <td at-title="Status" at-sortable>
+                            {{ (item.status) ? "Active": "InActive" }}
+                        </td>
+                        <td at-title="Action">
+                            <button class="btn btn-info btn-sm" ng-click="changeStatus(item)">
+                                Change to {{ (!item.status) ? "Active": "InActive" }}
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

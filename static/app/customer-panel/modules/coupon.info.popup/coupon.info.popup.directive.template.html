@@ -10,20 +10,60 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
-                        <label>Here is your Coupon Code</label>
+                        <div class="form-inline">
+                            <label style="font-weight: normal;">
+                                Here is your Coupon Code
+                            </label>
+                        </div>
 
                         <div class="form-inline">
                             <div class="form-group">
                                 <!-- Target -->
-                                <label id="foo">{{ couponInfo.coupon_code }}</label>
+                                <label id="foo">{{ (couponInfo.coupon_type =='coupon')? couponInfo.coupon_code: 'Offer Activated' }}</label>
                             </div>
                             <!-- Trigger -->
-                            <button class="btn btn-info btn-md" data-clipboard-target="#foo" id="copyClipboard">
-                                Copy
+                            <button ng-if="couponInfo.coupon_type == 'coupon'" class="btn btn-info btn-md" data-clipboard-target="#foo" id="copyClipboard">
+                                Copy to Clipboard
                             </button>
+
+                            <a ng-if="couponInfo.coupon_type == 'offer'" href="{{ couponInfo.destination_url }}"
+                               class="btn btn-md btn-info">Activate Offer</a>
+                        </div>
+                    </div>
+                </div> <!-- end row -->
+
+                <!-- row starts -->
+                <div class="row" ng-if="parent">
+                    <div class="col-lg-12">
+                        <h4><b>Related Coupons You May Like</b></h4>
+                    </div>
+                    <hr />
+                    <div class="col-lg-6" ng-repeat="item in parent.related_coupons | limitTo: 2">
+                        <div class="well">
+                            <h4>{{ item.title }}</h4>
+
+                            <p ng-click="showMore[item._id] = !showMore[item._id]" class="top-desc" ng-class="{'show-desc': showMore[item._id]}"
+                               ng-bind-html="trustAsHtml(item.description)"></p>
+
+                            <a ng-if="type == 'store'" target="_blank" ui-sref="main.store-info({url: parent.url, cc: item._id})"
+                               class="btn btn-md btn-block btn-info show_copan_code">
+                                <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
+                                <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                            </a>
+                            <a ng-if="type == 'category'" target="_blank" ui-sref="main.categoryinfo({url: parent.url, cc: item._id})"
+                               class="btn btn-md btn-block btn-info show_copan_code">
+                                <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
+                                <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                            </a>
+                            <a ng-if="type == 'home'" target="_blank" ui-sref="main.home({cc: item._id})"
+                               class="btn btn-md btn-block btn-info show_copan_code">
+                                <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
+                                <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+                <!-- row ends -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

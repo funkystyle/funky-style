@@ -1,8 +1,8 @@
 angular
     .module("categoryinfoModule", ["categoryFactoryModule",
-        "storeServiceModule", "couponFactoryModule", "Directives"])
+        "storeServiceModule", "couponFactoryModule", "Directives", "satellizer"])
     .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce,
-                                              $stateParams, $http, $rootScope, $compile) {
+                                              $stateParams, $http, $rootScope, $compile, $auth) {
         $scope.favorite = {
             favorite: false
         };
@@ -115,6 +115,25 @@ angular
             $state.go('main.category');
         }
 
+        // oepn comment section
+        $scope.openComment = function (item) {
+            console.log("Comment Coupon Item: ", item);
+            $("comments").remove();
+            if($auth.isAuthenticated()) {
+                $scope.info = {
+                    item: item,
+                    token: $auth.getToken()
+                };
+                // open directive popup
+                var el = $compile( "<comments info='info'></comments>" )( $scope );
+                $("body").append(el);
+                setTimeout(function () {
+                    $("#commentPopup").modal("show");
+                }, 1000);
+                console.log(el)
+            }
+        };
+
         //  ======== if stateParams having the coupon code
         if($stateParams['cc']) {
             $("coupon-info-popup").remove();
@@ -126,7 +145,7 @@ angular
                             $scope.couponInfo = item;
 
                             // open directive popup
-                            var el = $compile( "<coupon-info-popup coupon='couponInfo'></coupon-info-popup>" )( $scope );
+                            var el = $compile( "<coupon-info-popup parent='category' type='category' coupon='couponInfo'></coupon-info-popup>" )( $scope );
                             $("body").append(el);
                             setTimeout(function () {
                                 $("#couponPopup").modal("show");

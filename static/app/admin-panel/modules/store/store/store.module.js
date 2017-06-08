@@ -33,6 +33,7 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
             var projections = {
                 "related_coupons._id": 1,
                 "name": 1,
+                "url": 1,
                 "image": 1,
                 "top_description": 1,
                 "featured_store": 1

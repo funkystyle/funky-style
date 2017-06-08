@@ -2,7 +2,7 @@
 angular.module("couponCommentsModule", ['angular-table', 'constantModule', 'toastr', 'personFactoryModule',
     'storeFactoryModule', 'cgBusy', 'satellizer', 'ui.select', 'commentsReportsFactoryModule'])
     .controller("couponCommentsCtrl", function($scope, $filter, toastr, mainURL, URL, $state, $stateParams,
-                                      personFactory, $auth, storeFactory, $q, commentsReportsFactory) {
+                                      personFactory, $auth, storeFactory, $q, commentsReportsFactory, $http) {
         console.log("store controller!");
 
         $scope.comments = [];
@@ -27,37 +27,47 @@ angular.module("couponCommentsModule", ['angular-table', 'constantModule', 'toas
         };
 
         if ($auth.isAuthenticated()) {
+            var embedded = {
+                "user": 1,
+                "coupon": 1
+            };
+            var url = URL.coupons_comments+"?embedded="+JSON.stringify(embedded)+"&r="+Math.random();
+            $http({
+                url: url,
+                method: "GET"
+            }).then(function (data) {
+                $scope.comments = data.data._items;
+                $scope.filterComments = data.data._items;
+                angular.forEach($scope.comments, function(item) {
+                    $scope.check.check[item._id] = false;
+                });
 
-            commentsReportsFactory.get(URL.coupons_comments).then(function (data) {
-                console.log(data)
+                console.log("Comments are: ", $scope.comments)
             }, function (error) {
                 console.log(error);
-            });
-
-            personFactory.me().then(function(data) {
-                if(data['data']['data']) {
-                    var user = data.data.data;
-                    console.log(user, user.tokens.login);
-                    $scope.load = storeFactory.get(user.tokens.login).then(function (data) {
-                        console.log(data);
-                        if(data) {
-                            $scope.stores = data._items;
-                            $scope.filterStores = data._items;
-                            angular.forEach($scope.stores, function(item) {
-                                $scope.check.check[item._id] = false;
-                            });
-                        }
-                    }, function (error) {
-                        console.log(error);
-                        toastr.error(error.data._error.message, "Error!");
-                    });
-                }
-            }, function (error) {
-                console.log(error);
-                toastr.error(error.data._error.message, 'Error!');
-                $state.go("login");
             });
         }
+
+        // change status to in active
+        $scope.changeStatus = function (item) {
+            var obj = {
+                _id: item._id,
+                status: !item.status
+            };
+
+            commentsReportsFactory.update(obj, $auth.getToken(), URL.coupons_comments).then(function (data) {
+                console.log("After updating comment status: ", data.data);
+                angular.forEach($scope.filterComments, function (json, index) {
+                    if(json._id == item._id) {
+                        json.status = !item.status;
+                    }
+                });
+
+                toastr.success("Status Updated!");
+            }, function (erorr) {
+                console.log(erorr);
+            });
+        };
 
         // check for individual check boxes
         $scope.checkBox = function(val) {
