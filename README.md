@@ -240,6 +240,32 @@
 
 
 
+## Roles and Responsibilites:
+
+    Roles of Employees:
+
+    Admin: can able to do all operations
+
+    Submitter :
+    1. Can able to submit the coupon, Not able to edit coupons, delete coupons. He can view the coupons
+    2. Can able to submit the deal, Not able to edit deal, delete deal. He can view the deals
+    3. Not able to do create, edit, delete categories. He can view the categories
+    4. Not able to do create, edit, delete stores. He can view the stores
+
+    Editor:
+    1. Can able to submit the coupon, edit coupons and delete coupons.
+    2. Can able to submit the deal, edit deal and delete deal.
+    3. Not able to do create, edit, delete categories. He can view the categories
+    4. Not able to do create, edit, delete stores. He can view the stores
+
+    Satya, We need one field in while adding categories, Category type-> Generic, Bank, Festival, Wallet, City - To get easy filters from front end.
+
+    Please Let me know your free time, We can discuss about pending tasks in deals.
+
+    table wise permissions
+    ----------------------:
+    1. persons:
+        view: admin only
 
 
 
