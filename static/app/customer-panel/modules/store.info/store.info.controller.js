@@ -203,6 +203,7 @@ angular
                     
                     angular.forEach($scope.coupons, function (item) {
                         angular.forEach(item.related_categories, function (category) {
+                            if(category == null) return true;
                             if(!$scope.categories[category.category_type]) {
                                 $scope.categories[category.category_type] = [];
                                 $scope.categories[category.category_type].push(category);
