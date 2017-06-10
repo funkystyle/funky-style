@@ -18,6 +18,15 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
             templateUrl: "static/app/customer-panel/modules/comments/comments.directive.template.html"
         }
     })
+    .directive("commentsDisplay", function () {
+        return {
+            restrict: "E",
+            scope: {
+                items: "="
+            },
+            templateUrl: "static/app/customer-panel/modules/comments/comments.display.template.html"
+        }
+    })
     .directive("couponInfoPopup", function () {
         return {
             restrict: "E",

@@ -344,8 +344,13 @@
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>
                                     </div>
-
-                                    <!--<pre>{{ item.comments | json }}</pre>-->
+                                </div>
+                                <div class="row vari_pad">
+                                    <div class="col-lg-12 col-md-12">
+                                        <!-- comments display directive -->
+                                        <comments-display items="item.comments"></comments-display>
+                                        <!-- end of comments display directive -->
+                                    </div>
                                 </div>
                             </div>
                             <!--end panel footer -->

@@ -242,6 +242,8 @@ angular
                     $("#commentPopup").modal("show");
                 }, 1000);
                 console.log(el)
+            } else {
+                $state.go('main.login');
             }
         };
 

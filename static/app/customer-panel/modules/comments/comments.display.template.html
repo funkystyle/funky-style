@@ -1,0 +1,25 @@
+<style>
+    .media-object {
+        max-width: 50px;
+    }
+</style>
+<span ng-if="items.length">
+    <hr />
+    <h4>Comments</h4>
+</span>
+<div class="media" ng-repeat="item in items | orderBy: '_created': true">
+    <div class="media-left">
+        <a href="#">
+            <img src="/static/app/customer-panel/modules/assets/images/static-image.png"
+                 class="media-object" alt="Sample Image">
+        </a>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">{{ item.user.first_name }} {{ item.user.last_name }}
+            <small><i>Posted on {{ item._created | date: 'ddd MMM yyyy hh:mm a' }}</i></small>
+        </h4>
+        <p>
+            {{ item.comment }}
+        </p>
+    </div>
+</div>
