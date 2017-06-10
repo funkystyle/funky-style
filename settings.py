@@ -883,6 +883,9 @@ SCHEMAS = {
             "unique": True,
             "required": True
         },
+        'featured': {
+            "type": "boolean"
+        },
         'top_description': {
             "type": "string"
         },
@@ -962,6 +965,9 @@ SCHEMAS = {
         },
         'footer_description': {
             "type": "string"
+        },
+        'featured': {
+            "type": "boolean"
         },
         'image': {
             "type": "string"

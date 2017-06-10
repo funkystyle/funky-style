@@ -41,7 +41,7 @@ angular.module("updateBannersModule", ["ui.select", "ngSanitize",
             },
             {
                 text: "None",
-                code: null
+                code: "none"
             }
         ];
 

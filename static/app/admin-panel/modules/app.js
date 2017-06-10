@@ -48,7 +48,8 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'
 
         $rootScope.submit = function () {
             var input = $(id);
-            input.val($("#textEditor").Editor("getText"));
+            var text = $("#textEditor").Editor("getText");
+            input.val(text);
             input.trigger('input'); // Use for Chrome/Firefox/Edge
             input.trigger('change'); // Use for Chrome/Firefox/Edge + IE11
             $("#editorModal").modal('hide');

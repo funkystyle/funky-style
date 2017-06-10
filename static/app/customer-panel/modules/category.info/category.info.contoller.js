@@ -106,6 +106,8 @@ angular
 
 
                         console.log($scope.stores, $scope.coupons, "categories", $scope.categories);
+                    } else {
+                        $state.go('404');
                     }
                 }
             }, function (error) {

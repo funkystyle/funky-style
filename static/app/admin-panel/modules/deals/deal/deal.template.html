@@ -21,8 +21,8 @@
                 <label>By Store</label>
                 <ui-select on-select="applyTypeFilter()" ng-model="filter.store" theme="bootstrap">
                     <ui-select-match placeholder="Select Store">{{ $select.selected.name }}</ui-select-match>
-                    <ui-select-choices repeat="item._id as item in stores | filter: $select.search">
-                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                    <ui-select-choices repeat="item._id as item in stores | orderBy: 'name' | filter: $select.search">
+                        <div style="text-transform: capitalize;" ng-bind-html="item.name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
             </div>
@@ -30,8 +30,8 @@
                 <label>By Deal Category</label>
                 <ui-select on-select="applyTypeFilter()" ng-model="filter.deal_category" theme="bootstrap">
                     <ui-select-match placeholder="Select Deal Category">{{ $select.selected.name }}</ui-select-match>
-                    <ui-select-choices repeat="item._id as item in categories | filter: $select.search">
-                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                    <ui-select-choices repeat="item._id as item in categories | orderBy: 'name' | filter: $select.search">
+                        <div style="text-transform: capitalize;" ng-bind-html="item.name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
             </div>
@@ -40,7 +40,7 @@
                 <ui-select on-select="applyTypeFilter()" ng-model="filter.last_modified_by" theme="bootstrap">
                     <ui-select-match placeholder="Select User">{{ $select.selected.first_name }}</ui-select-match>
                     <ui-select-choices repeat="item._id as item in persons | orderBy: 'first_name' | filter: $select.search">
-                        <div>{{ item.first_name | highlight: $select.search }} {{ item.last_name | highlight: $select.search }}</div>
+                        <div style="text-transform: capitalize;">{{ item.first_name | highlight: $select.search }} {{ item.last_name | highlight: $select.search }}</div>
                     </ui-select-choices>
                 </ui-select>
             </div>
@@ -49,7 +49,7 @@
                 <ui-select on-select="applyTypeFilter()" ng-model="filter.deal_type" theme="bootstrap">
                     <ui-select-match placeholder="Select Deal Types">{{ $select.selected }}</ui-select-match>
                     <ui-select-choices repeat="item in deal_types | orderBy: 'item' | filter: $select.search">
-                        <div ng-bind-html="item | highlight: $select.search"></div>
+                        <div style="text-transform: capitalize;" ng-bind-html="item | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
             </div>

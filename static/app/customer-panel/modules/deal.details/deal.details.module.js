@@ -33,6 +33,8 @@ angular.module("dealDetailsModule", ["Directives"])
                     console.log(data.data._items[0]);
                     $scope.deal = data.data._items[0];
                     $scope.deal.expired_date = new Date($scope.deal.expired_date);
+                } else {
+                    $state.go('404');
                 }
             }, function (error) {
                 console.log(error);

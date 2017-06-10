@@ -1,7 +1,8 @@
 angular
     .module("storeinfoModule", ["categoryFactoryModule", "Directives", "satellizer"])
     .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth,
-                                                 categoryFactory, $filter, $sce, $ocLazyLoad, $rootScope, $compile) {
+                                                 categoryFactory, $filter, $sce, $ocLazyLoad,
+                                                 $rootScope, $compile, Query, $q) {
         $scope.favorite = {
             favorite: false
         };
@@ -71,12 +72,12 @@ angular
             embedded['related_deals'] = 1;
 
             var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+
-                JSON.stringify(embedded)+'&r=' + new Date().getTime()+"&number_of_clicks=1";
-            $http({
-                url: url,
-                method: "GET"
-            }).then(function (store) {
+                JSON.stringify(embedded)+"&number_of_clicks=1";
+            Query.get(url).then(function (store) {
                 if(store.data) {
+                    if(store.data._items.length == 0) {
+                        $state.go('404');
+                    }
                     $scope.store = store.data._items[0];
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
@@ -93,11 +94,8 @@ angular
                     temp["recommended_stores"] = {
                         "$in": [$scope.store._id]
                     };
-                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded+"&r="+Math.random();
-                    $http({
-                        url: url,
-                        method: "GET"
-                    }).then(function (suggested) {
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
+                    Query.get(url).then(function (suggested) {
                         console.log("Suggested Coupons Data: ", suggested.data._items);
                         $scope.suggestedCoupons = suggested.data._items;
                     });
@@ -108,12 +106,10 @@ angular
                             "$in": [$scope.store._id]
                         }
                     };
-                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded+"&r="+Math.random();
-                    $http({
-                        url: url,
-                        method: "GET"
-                    }).then(function (coupons) {
-                        var items = coupons.data._items;
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
+                    Query.get(url).then(function (coupons) {
+                        var items = coupons.data._items,
+                            qItems = [];
                         console.log("Stores Coupons Data: ", items);
                         angular.forEach(items, function (item) {
                             if(new Date(item.expire_date) > new Date()) {
@@ -122,12 +118,43 @@ angular
                                     $scope.filterCoupons.push(item);
                                     $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
                                     $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
+
+                                    // get the Coupon comments
+                                    var embedded = JSON.stringify({
+                                        "user":1
+                                    });
+                                    temp = JSON.stringify({
+                                        "coupon": item._id
+                                    });
+                                    url = "/api/1.0/coupons_comments?embedded="+embedded+"&where="+temp;
+                                    qItems.push(Query.get(url).then(function (comment) {
+                                        console.log(comment.data._items);
+                                        return comment;
+                                    }));
                                 }
                             } else {
                                 if($scope.expiredCoupons.indexOf(item) == -1) {
                                     $scope.expiredCoupons.push(item);
                                 }
                             }
+                        });
+
+                        // after getting all the coupons comments
+                        $q.all(qItems).then(function (fComments) {
+                            console.log("Comments Are: ", fComments, "Coupons: ", $scope.coupons);
+
+                            // push comments to coupons document
+                            angular.forEach(fComments, function (fComment) {
+                                angular.forEach(fComment.data._items, function (com) {
+                                    angular.forEach($scope.coupons, function (item, index) {
+                                        item['comments'] = [];
+                                        if (com.coupon == item._id) {
+                                            item.comments.push(com);
+                                        }
+                                    });
+                                })
+                            });
+                            $scope.filterComments = angular.copy($scope.coupons);
                         });
                     });
 
@@ -140,11 +167,8 @@ angular
                             }
                         });
                         var sort = "&max_results=1&sort=[('_updated', -1)]";
-                        url = "/api/1.0/coupons"+"?where="+temp+sort+"&embedded="+embedded+"&r="+Math.random();
-                        $http({
-                            url: url,
-                            method: "GET"
-                        }).then(function (related) {
+                        url = "/api/1.0/coupons"+"?where="+temp+sort+"&embedded="+embedded;
+                        Query.get(url).then(function (related) {
                             var items = related.data._items;
                             console.log("Related Coupons: ", items);
                             angular.forEach(items, function (item) {
@@ -158,13 +182,8 @@ angular
 
                     // if top stores length is zero query to stores for fetching featured stores
                     if($scope.store.top_stores.length == 0) {
-                        var top_store_url = '/api/1.0/stores?where={"featured_store": true}&max_results=24&rand_number='+Math.random();
-                        var cat = {};
-                        cat['featured_category'] = true;
-                        $http({
-                            url: top_store_url,
-                            mathod: "GET"
-                        }).then(function (top_stores) {
+                        var top_store_url = '/api/1.0/stores?where={"featured_store": true}&max_results=2';
+                        Query.get(top_store_url).then(function (top_stores) {
                             console.log(top_stores);
                             if(top_stores.data['_items']) {
                                 $scope.store.top_stores = top_stores.data._items;
@@ -283,4 +302,20 @@ angular
             });
             return list;
         }
-    });
+    })
+    .factory("Query", function ($http, $q) {
+        return {
+            get: function (url) {
+                var d = $q.defer();
+                $http({
+                    url: url+"&r="+Math.random(),
+                    method: "GET"
+                }).then(function (data) {
+                    d.resolve(data);
+                }, function (error) {
+                    d.reject(error);
+                });
+                return d.promise;
+            }
+        }
+    })

@@ -76,6 +76,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 var embedded = {
                     "deal_brands": 1,
                     "store": 1,
+                    "stores.store": 1,
                     "related_deals": 1,
                     "deal_category": 1,
                     "last_modified_by": 1
@@ -103,6 +104,9 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                             item.store = (item.store)?item.store._id: undefined;
                             item.related_deals = clearNullIds(item.related_deals);
                             item.deal_category = clearNullIds(item.deal_category);
+                            angular.forEach(item.stores, function (sel_store, index) {
+                                item.stores[index].store = (sel_store.store)?sel_store.store._id: undefined;
+                            });
                             // get the selected deal for an update/view
                             if(item._id == $stateParams.id) {
                                 console.log("selected deal: ", item);

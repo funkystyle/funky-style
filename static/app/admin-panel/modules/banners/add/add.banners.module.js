@@ -41,7 +41,7 @@ angular.module("addBannersModule", ["ui.select", "ngSanitize",
             },
             {
                 text: "None",
-                code: null
+                code: "none"
             }
         ];
         $scope.banner = {

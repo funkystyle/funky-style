@@ -1,6 +1,6 @@
 angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFactoryModule",
     "dealFactoryModule", "categoryFactoryModule", "Directives"])
-    .controller('homeCtrl', function ($scope, storeFactory, $http, couponFactory, $filter, dealFactory,
+    .controller('homeCtrl', function ($scope, $sce, storeFactory, $http, couponFactory, $filter, dealFactory,
                                       categoryFactory, $ocLazyLoad, $stateParams, $rootScope, SEO, $compile) {
         console.log("home controller");
         $scope.params = undefined;
@@ -128,7 +128,6 @@ angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFacto
         if($stateParams['cc']) {
             $("coupon-info-popup").remove();
             $scope.$watch('coupons', function (newVal, oldVal) {
-                console.log(newVal, oldVal);
                 if(newVal) {
                     angular.forEach(newVal, function (item) {
                         if(item._id == $stateParams.cc) {
@@ -140,10 +139,24 @@ angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFacto
                             setTimeout(function () {
                                 $("#couponPopup").modal("show");
                             }, 1000);
-                            console.log(el)
                         }
                     });
                 }
             }, true);
+        }
+
+        $scope.trustAsHtml = function(string) {
+            if(string) {
+                return $sce.trustAsHtml(string);
+            }
+        };
+
+        // show description
+        $scope.showDescription = function (id) {
+            $(".show-description").hide();
+            $("#show-desc-"+id).show();
+        };
+        $scope.closeDescription = function () {
+            $(".show-description").hide();
         }
     });

@@ -90,6 +90,9 @@ angular.module("dealCategoryPageModule", ["Directives"])
                     url: "/api/1.0/deal_categories?where="+JSON.stringify(where)+"&rand="+random+"&embedded="+JSON.stringify(embedded),
                     method: "GET"
                 }).then(function (data) {
+                    if(data.data._items.length == 0) {
+                        $state.go('404');
+                    }
                     console.log("Deal brand is: ", data.data._items[0]);
                     $scope.deal = data.data._items[0];
                     $scope.deal.toDayDate = new Date();

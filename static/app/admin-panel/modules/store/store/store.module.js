@@ -28,10 +28,11 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
         if ($auth.isAuthenticated()) {
             var embedded = {};
             embedded['related_coupons'] = 1;
-            embedded['related_deals'] = 1;
 
             var projections = {
-                "related_coupons._id": 1,
+                "related_coupons": {
+                    "title": 1
+                },
                 "name": 1,
                 "url": 1,
                 "image": 1,
@@ -45,11 +46,14 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                 JSON.stringify(projections)+"&rand_number="+JSON.stringify(random_number);
 
             $scope.load = storeFactory.get(url).then(function (data) {
-                console.log(data);
+                console.log("Stores: ", data._items);
                 if(data) {
                     $scope.stores = data._items;
                     $scope.filterStores = data._items;
-                    angular.forEach($scope.stores, function(item) {
+                    angular.forEach($scope.stores, function(item, index) {
+                        // check related coupons null ids
+                        $scope.stores[index].related_coupons = clearNullIds(item.related_coupons);
+
                         $scope.check.check[item._id] = false;
                     });
                 }

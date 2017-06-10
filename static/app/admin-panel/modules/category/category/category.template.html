@@ -73,8 +73,7 @@
                                 <span ng-if="item.featured_category == false">No</span>
                             </td>
                             <td at-title="No.of Coupons">
-                                <span ng-if="item.number_of_coupons">{{ item.number_of_coupons }}</span>
-                                <span ng-if="!item.number_of_coupons">0</span>
+                                <span>{{ item.related_coupons.length }}</span>
                             </td>
                         </tr>
                     </tbody>

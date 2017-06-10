@@ -73,14 +73,12 @@ angular.module("dealModule", ['angular-table', 'constantModule', 'toastr', 'cgBu
                     if(item['store']) {
                         $scope.stores.push(item.store);
                     }
-
                     // by deal category
                     if(item['deal_category']) {
                         angular.forEach(item.deal_category, function (deal_item) {
                             $scope.categories.push(deal_item);
                         });
                     }
-
                     $scope.persons.push(item.last_modified_by);
                     $scope.check.check[item._id] = false;
                 });

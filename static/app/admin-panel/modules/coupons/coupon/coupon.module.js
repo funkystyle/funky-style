@@ -66,12 +66,42 @@ angular.module("couponModule", ['angular-table', 'constantModule',
                     $scope.filterCoupons = data.data._items;
                     var destArray = _.groupBy(data.data._items, 'status');
                     destArray['All'] = $scope.coupons;
-                    $scope.statusOptions = destArray;
+                    destArray['Expired Coupons'] = [];
                     angular.forEach($scope.coupons, function(item) {
-                        $scope.persons.push(item.last_modified_by);
+                        if(new Date(item.expire_date) < new Date()) {
+                            destArray['Expired Coupons'].push(item);
+                        }
+                        // get the related stores
+                        angular.forEach(item.related_stores, function (store) {
+                            if(store) {
+                                $scope.stores.push(store);
+                            }
+                        });
+                        // get the related categories
+                        angular.forEach(item.related_categories, function (cat) {
+                            if(cat) {
+                                $scope.categories.push(cat);
+                            }
+                        });
+
+                        if(item.last_modified_by) {
+                            $scope.persons.push(item.last_modified_by);
+                        }
                         $scope.check.check[item._id] = false;
                     });
+                    // Sort by keys
+                    var keys = Object.keys( destArray );
+                    keys = keys.sort( function ( a, b ) { return a > b; } );
+                    for ( var i = 0; i < keys.length; i++ ) {
+                        $scope.statusOptions[keys[i]] = destArray[keys[i]];
+                    }
                     $scope.persons = _.uniq($scope.persons, function(x){
+                        return x['_id'];
+                    });
+                    $scope.stores = _.uniq($scope.stores, function(x){
+                        return x['_id'];
+                    });
+                    $scope.categories = _.uniq($scope.categories, function(x){
                         return x['_id'];
                     });
                 }

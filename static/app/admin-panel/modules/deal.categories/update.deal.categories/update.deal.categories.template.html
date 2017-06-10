@@ -89,6 +89,15 @@
                             <input type="radio" data-ng-value="false" name="deal.status" data-ng-model="deal.status">Pending
                         </label>
                     </div>
+                    <div class="form-group" ng-init="deal.featured = false">
+                        <label>Featured</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="true" name="deal.feat" data-ng-model="deal.featured">Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="false" name="deal.feat" data-ng-model="deal.featured">No
+                        </label>
+                    </div>
                     <div class="form-group">
                         <label for="rating">Rating</label>
                         <input required type="number" class="form-control" ng-model="deal.rating" placeholder="Rating" id="rating">
