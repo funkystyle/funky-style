@@ -1020,15 +1020,21 @@ SCHEMAS = {
                 'embeddable': True
             }
         },
-        'store': {
+        'coupon': {
             'type': 'objectid',
             'data_relation': {
-                'resource': 'stores',
+                'resource': 'coupons',
                 'embeddable': True
             }
         },
-        'working': {
+        'status': {
             'type': 'boolean'
+        },
+        'issue': {
+            'type': 'string'
+        },
+        'description': {
+            'type': 'string'
         }
     },
     'coupon_comments': {

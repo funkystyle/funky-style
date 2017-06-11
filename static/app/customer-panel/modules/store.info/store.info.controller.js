@@ -129,6 +129,7 @@ angular
                             });
 
                             if(new Date(item.expire_date) > new Date()) {
+                                item._updated = new Date(item._updated);
                                 if($scope.coupons.indexOf(item) == -1) {
                                     $scope.coupons.push(item);
                                     $scope.filterCoupons.push(item);
@@ -257,6 +258,27 @@ angular
                 $("body").append(el);
                 setTimeout(function () {
                     $("#commentPopup").modal("show");
+                }, 1000);
+                console.log(el)
+            } else {
+                $state.go('main.login');
+            }
+        };
+
+        // oepn Report section
+        $scope.openReport = function (item) {
+            console.log("Report Coupon Item: ", item);
+            $("reports").remove();
+            if($auth.isAuthenticated()) {
+                $scope.info = {
+                    item: item,
+                    token: $auth.getToken()
+                };
+                // open directive popup
+                var el = $compile( "<reports info='info'></reports>" )( $scope );
+                $("body").append(el);
+                setTimeout(function () {
+                    $("#reportPopup").modal("show");
                 }, 1000);
                 console.log(el)
             } else {

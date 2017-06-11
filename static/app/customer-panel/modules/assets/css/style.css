@@ -130,6 +130,27 @@ h4 {
     color: #000000;
     opacity: 1;
 }
+.form-group input[type="radio"] {
+    display: none;
+}
+
+.form-group input[type="radio"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="radio"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="radio"] + .btn-group > label span:last-child {
+    display: inline-block;
+}
+
+.form-group input[type="radio"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="radio"]:checked + .btn-group > label span:last-child {
+    display: none;
+}
 /* for styled checkboxes and radio buttons */
 
 .checkbox label,

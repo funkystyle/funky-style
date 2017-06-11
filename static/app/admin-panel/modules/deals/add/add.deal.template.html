@@ -15,27 +15,27 @@
             <div class="row">
                 <div class="col-lg-9 col-md-9">
                     <div class="form-group">
-                        <label for="deal_name">Name</label>
+                        <label for="deal_name">Name*</label>
                         <input required type="text" class="form-control input-sm" id="deal_name"
                                placeholder="Deal Name" ng-model="deal.name">
                     </div>
                     <div class="form-group">
-                        <label for="url">URL</label>
+                        <label for="url">URL*</label>
                         <input required type="text" class="form-control input-sm" id="url"
                                placeholder="URL" ng-model="deal.url">
                     </div>
                     <div class="form-group">
-                        <label for="destination_url">Destination URL</label>
+                        <label for="destination_url">Destination URL*</label>
                         <input required type="text" class="form-control input-sm" id="destination_url"
                                placeholder="Destination URL" ng-model="deal.destination_url">
                     </div>
                     <div class="form-group">
-                        <label for="deal_description">Description</label>
+                        <label for="deal_description">Description*</label>
                         <textarea required ng-click="textEditor($event)" class="form-control input-sm" id="deal_description"
                                   placeholder="Description" ng-model="deal.description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="deal_images">Images</label>
+                        <label for="deal_images">Images*</label>
                         <input type="file" id="deal_images" ng-model="deal.images" multiple base-sixty-four-input>
                         <div id="dealimage" class="image-multi"></div>
                         <p class="help-block">Example block-level help text here.</p>
@@ -45,27 +45,27 @@
                         <ui-select multiple ng-model="deal.breadcrumb" theme="bootstrap"
                                    close-on-select="false" title="Related Categories" id="breadcrumbs">
                             <ui-select-match placeholder="Select Breadcrumb">{{$item.name}}</ui-select-match>
-                            <ui-select-choices repeat="item in breadcrumbs | propsFilter: {name: $select.search}">
+                            <ui-select-choices repeat="item in breadcrumbs | orderBy: 'name' | propsFilter: {name: $select.search}">
                                 <div ng-bind-html="item.name | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
                     </div>
                     <div class="form-group">
-                        <label for="actual_price">Actual Price</label>
+                        <label for="actual_price">Actual Price*</label>
                         <input required type="text" class="form-control input-sm" id="actual_price" placeholder="Actual Price" ng-model="deal.actual_price">
                     </div>
                     <div class="form-group">
-                        <label for="discounted_price">Discounted Price</label>
+                        <label for="discounted_price">Discounted Price*</label>
                         <input required type="text" class="form-control input-sm" id="discounted_price" placeholder="Discounted Price"
                                ng-model="deal.discount_price">
                     </div>
                     <div class="form-group">
-                        <label for="deal_rating">Rating</label>
+                        <label for="deal_rating">Rating*</label>
                         <input required type="number" class="form-control input-sm" id="deal_rating" placeholder="Rating"
                                ng-model="deal.rating">
                     </div>
                     <div class="form-group">
-                        <label for="deal_type">Deal Type</label>
+                        <label for="deal_type">Deal Type*</label>
                         <ui-select ng-required="true" ng-model="deal.deal_type" theme="bootstrap" id="deal_type">
                             <ui-select-match placeholder="Deal Type">{{ $select.selected.text }}</ui-select-match>
                             <ui-select-choices repeat="item.code as item in dealTypes | filter: $select.search">
@@ -77,7 +77,7 @@
                         <div class="row" ng-repeat="item in productLists">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Store</label>
+                                    <label>Store*</label>
                                     <ui-select ui-required="true" ng-model="item.store" theme="bootstrap">
                                         <ui-select-match placeholder="Select Store">{{ $select.selected.name }}</ui-select-match>
                                         <ui-select-choices repeat="item._id as item in stores | filter: $select.search">
@@ -87,15 +87,15 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <label>Actual Price</label>
+                                <label>Actual Price*</label>
                                 <input required type="text" class="form-control" ng-model="item.actual_price" placeholder="Actual Price" />
                             </div>
                             <div class="col-lg-3">
-                                <label>Discount Price</label>
+                                <label>Discount Price*</label>
                                 <input required type="text" class="form-control" ng-model="item.discount_price" placeholder="Discount Price" />
                             </div>
                             <div class="col-lg-3">
-                                <label>Landing Page</label>
+                                <label>Landing Page*</label>
                                 <input required type="text" class="form-control" ng-model="item.landing_page" placeholder="Landing page" />
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="form-group" ng-if="deal.deal_type == 'store'">
-                        <label>Deal Store</label>
+                        <label>Deal Store*</label>
                         <ui-select ui-required="true" ng-model="deal.store" theme="bootstrap">
                             <ui-select-match placeholder="Select Store">{{ $select.selected.name }}</ui-select-match>
                             <ui-select-choices repeat="item._id as item in stores | filter: $select.search">
@@ -115,7 +115,7 @@
                         </ui-select>
                     </div>
                     <div class="form-group">
-                        <label>Deal Brand</label>
+                        <label>Deal Brand*</label>
                         <ui-select ui-required="true" multiple ng-model="deal.deal_brands" theme="bootstrap" close-on-select="false"  title="Category">
                             <ui-select-match placeholder="Deal Brands">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="item._id as item in brands | propsFilter: {name: $select.search}">
@@ -124,7 +124,7 @@
                         </ui-select>
                     </div>
                     <div class="form-group">
-                        <label>Deal Category</label>
+                        <label>Deal Category*</label>
                         <ui-select ui-required="true" on-select="getDynamicFields($item, $model)" multiple limit="1"
                                    ng-model="deal.deal_category" theme="bootstrap" close-on-select="false"  title="Category">
                             <ui-select-match placeholder="Category">{{$item.name}}</ui-select-match>
@@ -149,11 +149,11 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <label for="deal_video">Deal Video</label>
+                        <label for="deal_video">Deal Video*</label>
                         <input required type="text" ng-model="deal.deal_video" class="form-control" placeholder="Deal Video" id="deal_video" />
                     </div>
                     <div class="form-group">
-                        <label for="datetimepicker1">Expiry Date</label>
+                        <label for="datetimepicker1">Expiry Date*</label>
                         <div class='input-group date' id='datetimepicker1'>
                             <input required type='text' data-date-format="MM/DD/YYYY HH:mm:ss" class="form-control" />
                             <span class="input-group-addon">
@@ -162,12 +162,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="h1">H1</label>
+                        <label for="h1">H1*</label>
                         <input required type="text" class="form-control input-sm" id="h1" placeholder="H1"
                                ng-model="deal.h1">
                     </div>
                     <div class="form-group">
-                        <label for="h2">H2</label>
+                        <label for="h2">H2*</label>
                         <input required type="text" class="form-control input-sm" id="h2" placeholder="H2"
                                ng-model="deal.h2">
                     </div>

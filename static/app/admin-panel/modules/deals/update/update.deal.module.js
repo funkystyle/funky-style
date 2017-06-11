@@ -71,6 +71,13 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 console.log(data);
                 if(data) {
                     $scope.categories = data.data._items;
+                    angular.forEach($scope.categories, function (item) {
+                        $scope.breadcrumbs.push({
+                            name: item.name,
+                            url: item.url,
+                            _id: item._id
+                        });
+                    });
                 }
                 // get the list of deals
                 var embedded = {
@@ -161,6 +168,13 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 console.log(data);
                 if(data) {
                     $scope.brands = data.data._items;
+                    angular.forEach($scope.brands, function (item) {
+                        $scope.breadcrumbs.push({
+                            name: item.name,
+                            url: item.url,
+                            _id: item._id
+                        });
+                    });
                 }
             }, function (error) {
                 console.log(error);

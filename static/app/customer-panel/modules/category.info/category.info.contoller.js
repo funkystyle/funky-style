@@ -74,6 +74,7 @@ angular
                         var qItems = [];
                         
                         angular.forEach($scope.category.related_coupons, function (item) {
+                            item._updated = new Date(item._updated);
                             if(new Date(item.expire_date) > new Date()) {
                                 if($scope.coupons.indexOf(item) == -1) {
                                     $scope.coupons.push(item);
@@ -183,6 +184,27 @@ angular
                     $("#commentPopup").modal("show");
                 }, 1000);
                 console.log(el)
+            }
+        };
+
+        // oepn Report section
+        $scope.openReport = function (item) {
+            console.log("Report Coupon Item: ", item);
+            $("reports").remove();
+            if($auth.isAuthenticated()) {
+                $scope.info = {
+                    item: item,
+                    token: $auth.getToken()
+                };
+                // open directive popup
+                var el = $compile( "<reports info='info'></reports>" )( $scope );
+                $("body").append(el);
+                setTimeout(function () {
+                    $("#reportPopup").modal("show");
+                }, 1000);
+                console.log(el)
+            } else {
+                $state.go('main.login');
             }
         };
 

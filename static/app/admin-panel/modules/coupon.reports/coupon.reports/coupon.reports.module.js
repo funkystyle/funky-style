@@ -2,11 +2,11 @@
 angular.module("couponReportsModule", ['angular-table', 'constantModule', 'toastr', 'personFactoryModule',
     'storeFactoryModule', 'cgBusy', 'satellizer', 'ui.select', 'commentsReportsFactoryModule'])
     .controller("couponReportsCtrl", function($scope, $filter, toastr, mainURL, URL, $state, $stateParams,
-                                               personFactory, $auth, storeFactory, $q, commentsReportsFactory) {
-        console.log("store controller!");
+                                               personFactory, $auth, storeFactory, $q, commentsReportsFactory, $http) {
+        console.log("Coupon Reports controller!");
 
-        $scope.comments = [];
-        $scope.filterComments = [];
+        $scope.reports = [];
+        $scope.filterReports = [];
         $scope.search = {
             search: undefined
         };
@@ -17,47 +17,57 @@ angular.module("couponReportsModule", ['angular-table', 'constantModule', 'toast
         };
 
         $scope.config = {
-            itemsPerPage: 5,
+            itemsPerPage: 20,
             maxPages: 20,
             fillLastPage: "no"
         };
 
         $scope.updateFilteredList = function() {
-            $scope.filterComments = $filter("filter")($scope.comments, $scope.search.search);
+            $scope.filterReports = $filter("filter")($scope.reports, $scope.search.search);
         };
 
         if ($auth.isAuthenticated()) {
+            var embedded = {
+                "user": 1,
+                "coupon": 1
+            };
+            var url = URL.coupons_reports+"?embedded="+JSON.stringify(embedded)+"&r="+Math.random();
+            $http({
+                url: url,
+                method: "GET"
+            }).then(function (data) {
+                $scope.reports = data.data._items;
+                $scope.filterReports = data.data._items;
+                angular.forEach($scope.reports, function(item) {
+                    $scope.check.check[item._id] = false;
+                });
 
-            commentsReportsFactory.get(URL.coupons_comments).then(function (data) {
-                console.log(data)
+                console.log("Reports are: ", $scope.comments)
             }, function (error) {
                 console.log(error);
-            });
-
-            personFactory.me().then(function(data) {
-                if(data['data']['data']) {
-                    var user = data.data.data;
-                    console.log(user, user.tokens.login);
-                    $scope.load = storeFactory.get(user.tokens.login).then(function (data) {
-                        console.log(data);
-                        if(data) {
-                            $scope.stores = data._items;
-                            $scope.filterStores = data._items;
-                            angular.forEach($scope.stores, function(item) {
-                                $scope.check.check[item._id] = false;
-                            });
-                        }
-                    }, function (error) {
-                        console.log(error);
-                        toastr.error(error.data._error.message, "Error!");
-                    });
-                }
-            }, function (error) {
-                console.log(error);
-                toastr.error(error.data._error.message, 'Error!');
-                $state.go("login");
             });
         }
+
+        // change status to in active
+        $scope.changeStatus = function (item) {
+            var obj = {
+                _id: item._id,
+                status: !item.status
+            };
+
+            commentsReportsFactory.update(obj, $auth.getToken(), URL.coupons_reports).then(function (data) {
+                console.log("After updating Report status: ", data.data);
+                angular.forEach($scope.filterReports, function (json, index) {
+                    if(json._id == item._id) {
+                        json.status = !item.status;
+                    }
+                });
+
+                toastr.success("Status Updated!");
+            }, function (erorr) {
+                console.log(erorr);
+            });
+        };
 
         // check for individual check boxes
         $scope.checkBox = function(val) {
@@ -76,7 +86,7 @@ angular.module("couponReportsModule", ['angular-table', 'constantModule', 'toast
         $scope.deleteSelected = function() {
             var deletedArray = [];
             angular.forEach($scope.check.check, function(val, key) {
-                angular.forEach($scope.stores, function(item, i) {
+                angular.forEach($scope.reports, function(item, i) {
                     if (item._id == key && val && deletedArray.indexOf(item._id) == -1) {
                         deletedArray.push(item);
                     }
@@ -84,7 +94,7 @@ angular.module("couponReportsModule", ['angular-table', 'constantModule', 'toast
             });
             var items = [];
             angular.forEach(deletedArray, function (item) {
-                items.push(storeFactory.delete(item._id).then(function(data) {
+                items.push(commentsReportsFactory.delete(item._id, URL.coupons_reports).then(function(data) {
                     console.log(data);
                     toastr.success("Deleted "+item.name, 200);
                 }, function (error) {
@@ -99,12 +109,4 @@ angular.module("couponReportsModule", ['angular-table', 'constantModule', 'toast
                 console.log(error);
             });
         };
-
-        $scope.toggleSidebar = function(id) {
-            if ($("#"+id).css("right") == "0px") {
-                $("#"+id).animate({ "right": '-1000', 'display': 'none' }, 500);
-            } else {
-                $("#"+id).animate({ "right": '0', 'display': 'block' }, 500);
-            }
-        }
     });

@@ -17,16 +17,6 @@
     border-color: rgb(221, 221, 221);
     border-image: initial;
 }
-.deal-price .deal {
-    position: absolute;
-    bottom: -20px;
-    background-color: rgb(153, 84, 187);
-    min-height: 55px;
-    width: 140%;
-    color: rgb(255, 255, 255);
-    line-height: 25px;
-    left: -16px;
-}
 .thumbnail {
     border: 0px solid #FFFFFF;
     border-bottom: 1px solid #DDDDDD;

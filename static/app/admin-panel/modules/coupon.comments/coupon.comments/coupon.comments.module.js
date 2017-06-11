@@ -86,7 +86,7 @@ angular.module("couponCommentsModule", ['angular-table', 'constantModule', 'toas
         $scope.deleteSelected = function() {
             var deletedArray = [];
             angular.forEach($scope.check.check, function(val, key) {
-                angular.forEach($scope.stores, function(item, i) {
+                angular.forEach($scope.comments, function(item, i) {
                     if (item._id == key && val && deletedArray.indexOf(item._id) == -1) {
                         deletedArray.push(item);
                     }
@@ -94,7 +94,7 @@ angular.module("couponCommentsModule", ['angular-table', 'constantModule', 'toas
             });
             var items = [];
             angular.forEach(deletedArray, function (item) {
-                items.push(storeFactory.delete(item._id).then(function(data) {
+                items.push(commentsReportsFactory.delete(item._id, URL.coupons_comments).then(function(data) {
                     console.log(data);
                     toastr.success("Deleted "+item.name, 200);
                 }, function (error) {

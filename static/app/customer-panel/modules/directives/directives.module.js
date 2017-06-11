@@ -39,6 +39,51 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
             templateUrl: "static/app/customer-panel/modules/coupon.info.popup/coupon.info.popup.directive.template.html"
         }
     })
+    // reports directive
+    .directive("reports", function () {
+        return {
+            restrict: "E",
+            scope: {
+                info: "="
+            },
+            controller: function ($scope, $state, $stateParams, $http, auth, $auth) {
+                $scope.issue = {
+                    "Not Valid": "not valid",
+                    "Expired": "expired",
+                    "Other Issue": "other issue"
+                };
+                $scope.report = {};
+
+                auth.me().then(function (data) {
+                    $scope.loggeduser = data.data;
+                });
+
+                // submit comment
+                $scope.submitReport= function (report) {
+                    console.log("Report: ", report);
+                    var url = '/api/1.0/coupons_reports';
+                    $http({
+                        url: url,
+                        method: "POST",
+                        data: {
+                            user: $scope.loggeduser._id,
+                            coupon: $scope.info.item._id,
+                            status: false,
+                            issue: report.issue,
+                            description: report.description
+                        }
+                    }).then(function (data) {
+                        console.log("Report data Success: ", data);
+                        $("#reportPopup").modal("hide");
+                    }, function (erorr) {
+                        console.log(erorr);
+                    });
+                }
+            },
+            templateUrl: "static/app/customer-panel/modules/reports/reports.template.html"
+        }
+    })
+
     // ==== coupon info popup controller
     .controller("couponInfoPopupCtrl", function ($scope, $http, $state, $ocLazyLoad, $sce, $stateParams) {
         console.log("couponInfoPopupCtrl: ");

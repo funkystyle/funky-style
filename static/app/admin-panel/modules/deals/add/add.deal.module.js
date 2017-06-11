@@ -58,12 +58,6 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 if(data) {
                     $scope.deals = data.data._items;
                     angular.forEach($scope.deals, function (item) {
-                        $scope.breadcrumbs.push({
-                            name: item.name,
-                            url: item.url,
-                            _id: item._id
-                        });
-
                         // remove null id references from array
                         item.deal_brands = clearNullIds(item.deal_brands);
                         item.store = (item.store)?item.store._id: undefined;
@@ -79,6 +73,13 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 console.log(data);
                 if(data) {
                     $scope.categories = data.data._items;
+                    angular.forEach($scope.categories, function (item) {
+                        $scope.breadcrumbs.push({
+                            name: item.name,
+                            url: item.url,
+                            _id: item._id
+                        });
+                    });
                 }
             }, function (error) {
                 console.log(error);
@@ -116,6 +117,13 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 console.log(data);
                 if(data) {
                     $scope.brands = data.data._items;
+                    angular.forEach($scope.brands, function (item) {
+                        $scope.breadcrumbs.push({
+                            name: item.name,
+                            url: item.url,
+                            _id: item._id
+                        });
+                    });
                 }
             }, function (error) {
                 console.log(error);

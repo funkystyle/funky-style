@@ -306,6 +306,20 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     templateUrl: 'static/app/customer-panel/modules/404/404.template.html'
                 })
                 // blog.category
+                .state('blogs', {
+                    url: '/blogs/',
+                    templateUrl: 'static/app/customer-panel/modules/blog.list/blog.list.template.html',
+                    controller: "blogListCtrl",
+                    resolve: {
+                        dashboard: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'blogListModule',
+                                files: ['static/app/customer-panel/modules/blog.list/blog.list.module.js']
+                            })
+                        }
+                    }
+                })
+                // blog.category
                 .state('blog_category', {
                     url: '/blog/category',
                     templateUrl: 'static/app/customer-panel/modules/blog.category/blog.category.template.html',
