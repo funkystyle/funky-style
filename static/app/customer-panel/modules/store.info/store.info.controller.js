@@ -171,6 +171,7 @@ angular
                             angular.forEach($scope.coupons, function (item) {
                                 item['comments'] = [];
                                 angular.forEach(comments, function (comment) {
+                                    comment._created = new Date(comment._created);
                                     if(comment.coupon == item._id) {
                                         item.comments.push(comment);
                                     }
