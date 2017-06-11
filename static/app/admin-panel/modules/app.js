@@ -80,6 +80,13 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'
                         ]
                     },
                     {
+                        name: "highCharts",
+                        files: [
+                            '/static/bower_components/highcharts/js/highcharts.js',
+                            '/static/bower_components/highcharts/css/highcharts.css'
+                        ]
+                    },
+                    {
                         name: "cgBusy",
                         files: [
                             "/static/bower_components/angular-busy/dist/angular-busy.min.js",
