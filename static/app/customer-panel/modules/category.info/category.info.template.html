@@ -208,13 +208,22 @@
 		</div>
 		<!--end col-->
 		<div class="col-lg-9 col-md-9 col-sm-12">
+            <!-- top banner area -->
+            <div class="row" ng-if="top_banner">
+                <div class="col-md-12 col-sm-12">
+                    <div class="thumbnail" style="margin-bottom: 20px;">
+                        <img style="max-height: 100px;" ng-src="{{ top_banner.image }}" alt="{{ top_banner.title }}" />
+                    </div>
+                </div>
+            </div>
+            <!-- end of top banner area -->
             <div class="row" style="margin-bottom: 20px;">
                 <div ng-repeat="item in category.top_stores | limitTo: 6" class="col-md-2 col-sm-2">
                     <div class="thumbnail cat-top-stores" ui-sref="main.store-info({url: item.url})">
                         <img ng-src="{{ item.image }}" alt="" height="50" width="100">
                     </div>
                 </div>
-            </div>
+            </div> <!-- end of top stores -->
 			<div class="tab-content">
 				<div class="tab-pane active" id="all-tab">
                     <span ng-repeat="item in filterCoupons">
@@ -285,6 +294,14 @@
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>
+                                    </div>
+                                </div>
+
+                                <div class="row vari_pad">
+                                    <div class="col-lg-12 col-md-12">
+                                        <!-- comments display directive -->
+                                        <comments-display items="item.comments"></comments-display>
+                                        <!-- end of comments display directive -->
                                     </div>
                                 </div>
                             </div>
@@ -372,6 +389,13 @@
                                         </a>
                                     </div>
                                 </div>
+                                <div class="row vari_pad">
+                                    <div class="col-lg-12 col-md-12">
+                                        <!-- comments display directive -->
+                                        <comments-display items="item.comments"></comments-display>
+                                        <!-- end of comments display directive -->
+                                    </div>
+                                </div>
                             </div>
                             <!--end panel footer -->
                         </div> <!-- end panel -->
@@ -446,6 +470,13 @@
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>
+                                    </div>
+                                </div>
+                                <div class="row vari_pad">
+                                    <div class="col-lg-12 col-md-12">
+                                        <!-- comments display directive -->
+                                        <comments-display items="item.comments"></comments-display>
+                                        <!-- end of comments display directive -->
                                     </div>
                                 </div>
                             </div>

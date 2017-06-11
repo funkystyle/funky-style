@@ -1,7 +1,7 @@
 angular
     .module("categoryinfoModule", ["categoryFactoryModule",
         "storeServiceModule", "couponFactoryModule", "Directives", "satellizer"])
-    .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce,
+    .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce, Query, $q,
                                               $stateParams, $http, $rootScope, $compile, $auth) {
         $scope.favorite = {
             favorite: false
@@ -70,6 +70,8 @@ angular
                         $rootScope.pageDescription = $scope.category.seo_description;
 
                         console.log("Final Category details: ", $scope.category);
+
+                        var qItems = [];
                         
                         angular.forEach($scope.category.related_coupons, function (item) {
                             if(new Date(item.expire_date) > new Date()) {
@@ -78,8 +80,44 @@ angular
                                     $scope.filterCoupons.push(item);
                                     $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
                                     $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
+
+                                    // get the Coupon comments
+                                    var embedded = JSON.stringify({
+                                        "user":1
+                                    });
+                                    temp = JSON.stringify({
+                                        "coupon": item._id,
+                                        "status": true
+                                    });
+                                    url = "/api/1.0/coupons_comments?embedded="+embedded+"&where="+temp;
+                                    qItems.push(Query.get(url).then(function (comment) {
+                                        console.log(comment.data._items);
+                                        return comment;
+                                    }));
                                 }
                             }
+                        });
+
+                        // after getting all the coupons comments
+                        $q.all(qItems).then(function (fComments) {
+                            console.log("Comments Are: ", fComments, "Coupons: ", $scope.coupons);
+                            var comments = [];
+                            // push comments to coupons document
+                            angular.forEach(fComments, function (fComment) {
+                                angular.forEach(fComment.data._items, function (com) {
+                                    comments.push(com);
+                                });
+                            });
+                            // push comments items into coupon obj
+                            angular.forEach($scope.coupons, function (item) {
+                                item['comments'] = [];
+                                angular.forEach(comments, function (comment) {
+                                    if(comment.coupon == item._id) {
+                                        item.comments.push(comment);
+                                    }
+                                });
+                            });
+                            $scope.filterComments = angular.copy($scope.coupons);
                         });
 
                         angular.forEach($scope.coupons, function (item) {
@@ -111,6 +149,17 @@ angular
                         $state.go('404');
                     }
                 }
+
+                // Get the top banner from banners table
+                $scope.top_banner = {};
+                var where = JSON.stringify({
+                    "top_banner_string": 'category'
+                });
+                var url = "/api/1.0/banner?where="+where;
+                Query.get(url).then(function (banner) {
+                    console.log("banner Details: ", banner.data._items);
+                    $scope.top_banner = banner.data._items[0];
+                });
             }, function (error) {
                 console.log(error);
             });
@@ -184,12 +233,13 @@ angular
                 angular.forEach(filter, function (values, keys) {
                     angular.forEach(values, function (val, key) {
                         angular.forEach(item.related_stores, function (store) {
-                            if(val == true && key == store._id && list.indexOf(item) == -1) {
+                            if(store && val == true && key == store._id && list.indexOf(item) == -1) {
                                 list.push(item);
                             }
                         });
                         angular.forEach(item.related_categories, function (category) {
-                            if(val == true && key == category._id && list.indexOf(item) == -1) {
+                            console.log("Related Category: ", category);
+                            if(category && val == true && key == category._id && list.indexOf(item) == -1) {
                                 list.push(item);
                             }
                         });
@@ -197,5 +247,21 @@ angular
                 });
             });
             return list;
+        }
+    })
+    .factory("Query", function ($http, $q) {
+        return {
+            get: function (url) {
+                var d = $q.defer();
+                $http({
+                    url: url+"&r="+Math.random(),
+                    method: "GET"
+                }).then(function (data) {
+                    d.resolve(data);
+                }, function (error) {
+                    d.reject(error);
+                });
+                return d.promise;
+            }
         }
     });

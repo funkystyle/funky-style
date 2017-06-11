@@ -95,7 +95,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
                 data: {
                     user: $scope.loggeduser._id,
                     coupon: $scope.info.item._id,
-                    status: true,
+                    status: false,
                     comment: comment.comment
                 }
             }).then(function (data) {

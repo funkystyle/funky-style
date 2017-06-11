@@ -87,7 +87,8 @@ angular
 
                     // get the suggested coupons from coupons table, from recommended stores field
                     embedded = {
-                        "related_categories": 1
+                        "related_categories": 1,
+                        "related_stores": 1
                     };
                     embedded = JSON.stringify(embedded);
                     var temp = {};
@@ -112,6 +113,21 @@ angular
                             qItems = [];
                         console.log("Stores Coupons Data: ", items);
                         angular.forEach(items, function (item) {
+                            // get related categories of each coupon
+                            angular.forEach(item.related_categories, function (category) {
+                                console.log("Related Category: ", category);
+                                if(category == null) return true;
+                                if(!$scope.categories[category.category_type]) {
+                                    $scope.categories[category.category_type] = [];
+                                    $scope.categories[category.category_type].push(category);
+                                } else {
+                                    var items = $filter('filter')($scope.categories[category.category_type], {_id: category._id});
+                                    if(!items.length) {
+                                        $scope.categories[category.category_type].push(category);
+                                    }
+                                }
+                            });
+
                             if(new Date(item.expire_date) > new Date()) {
                                 if($scope.coupons.indexOf(item) == -1) {
                                     $scope.coupons.push(item);
@@ -124,7 +140,8 @@ angular
                                         "user":1
                                     });
                                     temp = JSON.stringify({
-                                        "coupon": item._id
+                                        "coupon": item._id,
+                                        "status": true
                                     });
                                     url = "/api/1.0/coupons_comments?embedded="+embedded+"&where="+temp;
                                     qItems.push(Query.get(url).then(function (comment) {
@@ -142,17 +159,21 @@ angular
                         // after getting all the coupons comments
                         $q.all(qItems).then(function (fComments) {
                             console.log("Comments Are: ", fComments, "Coupons: ", $scope.coupons);
-
+                            var comments = [];
                             // push comments to coupons document
                             angular.forEach(fComments, function (fComment) {
                                 angular.forEach(fComment.data._items, function (com) {
-                                    angular.forEach($scope.coupons, function (item, index) {
-                                        item['comments'] = [];
-                                        if (com.coupon == item._id) {
-                                            item.comments.push(com);
-                                        }
-                                    });
-                                })
+                                    comments.push(com);
+                                });
+                            });
+                            // push comments items into coupon obj
+                            angular.forEach($scope.coupons, function (item) {
+                                item['comments'] = [];
+                                angular.forEach(comments, function (comment) {
+                                    if(comment.coupon == item._id) {
+                                        item.comments.push(comment);
+                                    }
+                                });
                             });
                             $scope.filterComments = angular.copy($scope.coupons);
                         });
@@ -200,27 +221,23 @@ angular
                             console.log(error);
                         })
                     }
-                    
-                    angular.forEach($scope.coupons, function (item) {
-                        angular.forEach(item.related_categories, function (category) {
-                            if(category == null) return true;
-                            if(!$scope.categories[category.category_type]) {
-                                $scope.categories[category.category_type] = [];
-                                $scope.categories[category.category_type].push(category);
-                            } else {
-                                var items = $filter('filter')($scope.categories[category.category_type], {_id: category._id});
-                                if(!items.length) {
-                                    $scope.categories[category.category_type].push(category);
-                                }
-                            }
-                        });
-                    });
                     console.log("Final categories are ", $scope.categories);
 
                     console.log($scope.expiredCoupons, $scope.coupons, "suggested coupons ", $scope.suggestedCoupons, "Related coupons ", $scope.relatedCoupons);
                 }
             }, function (error) {
                 console.log(error);
+            }); // end of getting store
+
+            // Get the top banner from banners table
+            $scope.top_banner = {};
+            var where = JSON.stringify({
+                "top_banner_string": 'store'
+            });
+            var url = "/api/1.0/banner?where="+where;
+            Query.get(url).then(function (banner) {
+                console.log("banner Details: ", banner.data._items);
+                $scope.top_banner = banner.data._items[0];
             });
         } else {
             $state.go('main.home');
@@ -296,7 +313,7 @@ angular
                 angular.forEach(item.related_categories, function (category) {
                     angular.forEach(filter, function (values, keys) {
                         angular.forEach(values, function (val, key) {
-                            if(val == true && key == category._id && list.indexOf(item) == -1) {
+                            if(category && val == true && key == category._id && list.indexOf(item) == -1) {
                                 list.push(item);
                             }
                         });

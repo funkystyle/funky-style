@@ -111,7 +111,25 @@ h4 {
     display: none;
 }
 
-
+.show-description {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+}
+.show-description .show {
+    background-color: #FFFFFF;
+    height: 96%;
+    padding: 15px;
+    z-index: 99999;
+}
+.show-description .show * {
+    color: #000000;
+    opacity: 1;
+}
 /* for styled checkboxes and radio buttons */
 
 .checkbox label,
