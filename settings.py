@@ -785,6 +785,12 @@ SCHEMAS = {
         'meta_description': {
             "type": "string"
         },
+        'h1': {
+            "type": "string"
+        },
+        'h2': {
+            "type": "string"
+        },
         'selection_type': {
             "type": "dict",
             "unique": True

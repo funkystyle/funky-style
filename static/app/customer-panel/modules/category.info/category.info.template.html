@@ -209,10 +209,10 @@
 		<!--end col-->
 		<div class="col-lg-9 col-md-9 col-sm-12">
             <!-- top banner area -->
-            <div class="row" ng-if="top_banner">
+            <div class="row" ng-if="category.top_banner || top_banner">
                 <div class="col-md-12 col-sm-12">
                     <div class="thumbnail" style="margin-bottom: 20px;">
-                        <img style="max-height: 100px;" ng-src="{{ top_banner.image }}" alt="{{ top_banner.title }}" />
+                        <img style="max-height: 100px;" ng-src="{{ (category.top_banner) ? category.top_banner: top_banner.image }}" alt="{{ top_banner.title }}" />
                     </div>
                 </div>
             </div>

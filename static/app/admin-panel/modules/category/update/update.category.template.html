@@ -43,7 +43,7 @@
                         <textarea ng-click="textEditor($event)" class="form-control" id="top_desc"
                                   placeholder="Top Description" ng-model="category.top_description"></textarea>
                     </div>
-                    <div ng-bind-html="category.top_description"></div>
+                    <div style="height: 200px; overflow: scroll;" ng-bind-html="category.top_description"></div>
                     <div class="form-group">
                         <label for="footer_desc">Footer Description</label>
                         <textarea ng-click="textEditor($event)" class="form-control" id="footer_desc"

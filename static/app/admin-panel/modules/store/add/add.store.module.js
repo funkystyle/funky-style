@@ -35,9 +35,12 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
                 var data = replaceSeo(newVal, $scope.seoList, 'single_store');
                 $scope.store.meta_title = data.title;
                 $scope.store.meta_description = data.description;
+
+                $scope.store.h1 = data.h1;
+                $scope.store.h2 = data.h2;
             }
 
-            $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-") +"-coupons" : undefined;
+            $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase() +"-coupons" : undefined;
         }, true);
 
         // get all stores into the array

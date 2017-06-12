@@ -64,6 +64,8 @@ angular.module("seoModule", ["ui.select", "ngSanitize",
             $scope.showForm = true;
             $scope.seo = {
                 meta_title: "%%title%% Offers, Coupons, Promo Codes Deals - %%currentmonth%% %%currentyear%%",
+                h1: "%%title%% Coupons and Offers",
+                h2: "%%title%% Coupons and Offers",
                 status: $scope.status[0].code,
                 selection_type: $scope.selection_type[0],
                 meta_description: "Latest %%title%% Coupons %%currentmonth%% %%currentyear%%. 100% Working Verified Promo Codes , Offers, Coupon codes, Discount Codes, Deals"

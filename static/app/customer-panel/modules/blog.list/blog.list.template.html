@@ -1,5 +1,30 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/blog.list/blog.list.css" />
+<link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 <section id="blog-section" >
+    <div class="well">
+        <div id="myCarousel" class="carousel fdi-Carousel slide">
+            <!-- Carousel items -->
+            <div class="carousel fdi-Carousel slide" id="eventCarousel" data-interval="0">
+                <div class="carousel-inner onebyone-carosel">
+                    <div class="item" id="aa-{{ $index }}" ng-repeat="item in [1,2,3,4,5]">
+                        <div class="col-md-4">
+                            <a href="#"><img src="http://placehold.it/250x250" class="img-responsive center-block"></a>
+                            <div class="text-center item-text">
+                                {{ item }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="left carousel-control" data-target="#eventCarousel" data-slide="prev">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a class="right carousel-control" data-target="#eventCarousel" data-slide="next">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+            <!--/carousel-inner-->
+        </div><!--/myCarousel-->
+    </div><!--/well-->
     <div class="container">
         <div class="row">
             <div class="col-lg-8">

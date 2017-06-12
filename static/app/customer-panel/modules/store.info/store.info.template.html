@@ -270,10 +270,10 @@
         <div class="col-lg-9 col-md-9 col-sm-12">
             <div class="tab-content">
                 <!-- top banner area -->
-                <div class="row" ng-if="top_banner">
+                <div class="row" ng-if="store.top_banner || top_banner">
                     <div class="col-md-12 col-sm-12">
                         <div class="thumbnail" style="margin-bottom: 20px;">
-                            <img style="max-height: 100px;" ng-src="{{ top_banner.image }}" alt="{{ top_banner.title }}" />
+                            <img style="max-height: 100px;" ng-src="{{ (store.top_banner)? store.top_banner: top_banner.image }}" alt="{{ top_banner.title }}" />
                         </div>
                     </div>
                 </div>
@@ -586,7 +586,7 @@
                 </div> <!-- tab-3 -->
 
                 <!-- suggested coupons start here -->
-                <div class="row">
+                <div class="row" ng-if="suggestedCoupons.length">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <h3 class="ola_mar">
                             Suggested Coupons
@@ -653,7 +653,7 @@
                 <!-- suggested coupons end here -->
 
                 <!-- Related Coupons start here -->
-                <div class="row">
+                <div class="row" ng-if="relatedCoupons.length">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <h3 class="ola_mar">
                             Related Coupons
@@ -735,7 +735,7 @@
                 <!-- Related Coupons ends here -->
 
                 <!-- Related Coupons start here -->
-                <div class="row">
+                <div class="row" ng-if="expiredCoupons.length">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <h3 class="ola_mar">
                             Expired Coupons

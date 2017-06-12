@@ -30,8 +30,11 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 var data = replaceSeo(newVal, $scope.seoList, 'single_deal');
                 $scope.deal.seo_title = data.title;
                 $scope.deal.seo_description = data.description;
+
+                $scope.deal.h1 = data.h1;
+                $scope.deal.h2 = data.h2;
             }
-            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deal" : undefined;
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-deal" : undefined;
         }, true);
         // get all stores into the array
         if($auth.isAuthenticated()) {

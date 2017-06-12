@@ -34,8 +34,11 @@ angular.module("addDealCategoriesModule", ["ui.select", "ngSanitize", "ui.bootst
             var data = replaceSeo(newVal, $scope.seoList, 'single_deal_category');
             $scope.deal.seo_title = data.title;
             $scope.deal.seo_description = data.description;
+
+            $scope.deal.h1 = data.h1;
+            $scope.deal.h2 = data.h2;
         }
-        $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deals" : undefined;
+        $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-deals" : undefined;
     }, true);
 
 

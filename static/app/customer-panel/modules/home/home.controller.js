@@ -47,6 +47,9 @@ angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFacto
 
         // get the slider banners
         $scope.banners = [];
+        var where = JSON.stringify({
+            "top_banner_string": 'home'
+        });
         var projection = {
             "top_banner_string": 1,
             "image": 1,
@@ -54,7 +57,7 @@ angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFacto
             "image_text": 1
         };
 
-        url = '/api/1.0/banner'+'?projection='+JSON.stringify(projection)+'&rand_number' + new Date().getTime();
+        url = '/api/1.0/banner'+'?where='+where+'&projection='+JSON.stringify(projection)+'&rand_number' + new Date().getTime();
         $http({
             url: url,
             method: "GET"

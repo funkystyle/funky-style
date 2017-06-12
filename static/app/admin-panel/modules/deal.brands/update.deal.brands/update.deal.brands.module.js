@@ -13,8 +13,15 @@ angular.module("updateDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstr
                 var data = replaceSeo(newVal, $scope.seoList, 'single_deal_brand');
                 $scope.deal.seo_title = data.title;
                 $scope.deal.seo_description = data.description;
+
+                if(data.h1) {
+                    $scope.deal.h1 = data.h1;
+                }
+                if(data.h2) {
+                    $scope.deal.h2 = data.h2;
+                }
             }
-            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-")+"-deals" : undefined;
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-deals" : undefined;
         }, true);
 
         if($auth.isAuthenticated() && $stateParams['id']) {

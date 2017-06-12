@@ -20,7 +20,7 @@ angular.module("addBlogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toa
         });
 
         $scope.$watch('blog.title', function(newVal, oldVal) {
-            $scope.blog.url = (newVal) ? newVal.replace(/\s/g, "-") +"-blog" : undefined;
+            $scope.blog.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase() +"-blog" : undefined;
         }, true);
 
         // get all Blogs

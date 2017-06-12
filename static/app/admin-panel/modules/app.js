@@ -26,6 +26,12 @@ function replaceSeo(newVal, items, from) {
         if(from == items[i].selection_type.code) {
             replacement.title = items[i].meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
             replacement.description = items[i].meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            if(items[i]['h1']) {
+                replacement.h1 = items[i].h1.replace("%%title%%", newVal);
+            }
+            if(items[i]['h2']) {
+                replacement.h2 = items[i].h2.replace("%%title%%", newVal);
+            }
         }
     }
     console.log("SEO replacement Data: ", replacement);

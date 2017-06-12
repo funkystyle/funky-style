@@ -97,8 +97,11 @@ angular.module("addCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
                 var data = replaceSeo(newVal, $scope.seoList, 'single_category');
                 $scope.category.seo_title = data.title;
                 $scope.category.seo_description = data.description;
+
+                $scope.category.h1 = data.h1;
+                $scope.category.h2 = data.h2;
             }
-            $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-")+"-offers" : undefined;
+            $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-offers" : undefined;
         }, true);
 
         // add category

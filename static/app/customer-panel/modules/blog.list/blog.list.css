@@ -242,4 +242,25 @@ button.accordion.active:after {
     background-color: #F39C12;
     margin-top: 15px;
 }
-.input-group-addon{border-radius: 0px;}
+.input-group-addon{
+    border-radius: 0;
+}
+
+.carousel-inner.onebyone-carosel { margin: auto; width: 90%; }
+.onebyone-carosel .active.left { left: -33.33%; }
+.onebyone-carosel .active.right { left: 33.33%; }
+.onebyone-carosel .next { left: 33.33%; }
+.onebyone-carosel .prev { left: -33.33%; }
+.carousel-control {
+    width: 70px;
+    background-color: rgba(0, 0, 0, 0.42);
+}
+.carousel-control .fa {
+    position: absolute;
+    top: 45%;
+    left: 30%;
+}
+.item .item-text {
+    position: absolute;
+    top: 20px;
+}

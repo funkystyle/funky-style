@@ -2,6 +2,30 @@ angular.module("blogListModule", [])
 .controller("blogListCtrl", function ($scope, $stateParams, $state, $http) {
     console.log("Blog List Controller!");
 
+    setTimeout(function () {
+        $('#myCarousel').carousel({
+            interval: 10000
+        });
+
+        $('.fdi-Carousel .item').each(function (index, item) {
+            if (index == 0) {
+                $(this).addClass('active');
+            }
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            if (next.next().length > 0) {
+                next.next().children(':first-child').clone().appendTo($(this));
+            }
+            else {
+                $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+            }
+        });
+    }, 1000);
+
 
     $scope.blogs = [];
     // get the list of all blogs
