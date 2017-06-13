@@ -1,10 +1,10 @@
 angular.module("blogListModule", [])
-.controller("blogListCtrl", function ($scope, $stateParams, $state, $http) {
+.controller("blogListCtrl", function ($scope, $stateParams, $state, $http, $sce) {
     console.log("Blog List Controller!");
 
     setTimeout(function () {
         $('#myCarousel').carousel({
-            interval: 10000
+            interval: false
         });
 
         $('.fdi-Carousel .item').each(function (index, item) {
@@ -25,6 +25,12 @@ angular.module("blogListModule", [])
             }
         });
     }, 1000);
+
+    $scope.trustAsHtml = function(string) {
+        if(string) {
+            return $sce.trustAsHtml(string);
+        }
+    };
 
 
     $scope.blogs = [];

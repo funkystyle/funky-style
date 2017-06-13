@@ -1,5 +1,27 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/blog.list/blog.list.css" />
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
+
+<!-- navbar -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand navbar-brand-centered">
+                <a ui-sref="main.home">
+                    <img src="static/app/customer-panel/modules/assets/images/logo-png.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+<!-- end of navbar -->
+
 <section id="blog-section" >
     <div class="well">
         <div id="myCarousel" class="carousel fdi-Carousel slide">
@@ -10,7 +32,8 @@
                         <div class="col-md-4">
                             <a href="#"><img src="http://placehold.it/250x250" class="img-responsive center-block"></a>
                             <div class="text-center item-text">
-                                {{ item }}
+                                <label class="label label-primary">Category</label>
+                                <h3>The features of best Ergonomic Keyboard</h3>
                             </div>
                         </div>
                     </div>
@@ -28,60 +51,50 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+                <div class="head-title text-center">
+                    <h1>Fresh Topics</h1>
+                </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6" ng-repeat="item in blogs | orderBy: '_updated': true">
                         <aside>
                             <img ng-if="item.image" ng-src="{{ item.image }}" class="img-responsive">
                             <div class="content-title">
                                 <div class="text-center">
-                                    <h3>
+                                    <h4>
                                         {{ item.title }}
-                                    </h3>
+                                    </h4>
                                 </div>
-
+                                <div class="text-center" style="opacity: 0.5; margin-bottom: 15px;">
+                                    {{ item._updated | date: 'dd MMM yyyy' }}
+                                </div>
                                 <div class="text-left">
-                                    <p>
-                                        {{ item.description }}
-                                    </p>
+                                    <p style="word-wrap: break-word;" ng-bind-html="trustAsHtml(item.description)"></p>
                                 </div>
                             </div>
-                            <div class="content-footer">
-                                <img class="user-small-img"
-                                     ng-src="/static/app/customer-panel/modules/assets/images/static-image.png">
-                                <span style="font-size: 16px;color: #fff;">
-                                    {{ item.last_modified_by.first_name }} {{ item.last_modified_by.last_name }}
-                                </span>
-                                <span class="pull-right">
-                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Comments"><i class="fa fa-comments" ></i> 30</a>
-                                    <a href="#" data-toggle="tooltip" data-placement="right" title="Loved"><i class="fa fa-heart"></i> 20</a>
-				                </span>
-                                <div class="user-ditels">
-                                    <div class="user-img">
-                                        <img ng-src="/static/app/customer-panel/modules/assets/images/static-image.png"
-                                             class="img-responsive"></div>
-                                    <span class="user-full-ditels">
-                                        <h3>
-                                            {{ item.last_modified_by.first_name }} {{ item.last_modified_by.last_name }}
-                                        </h3>
-                                    </span>
-                                    <div class="social-icon">
-                                        <a href="#"><i class="fa fa-facebook" data-toggle="tooltip" data-placement="bottom" title="Facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter" data-toggle="tooltip" data-placement="bottom" title="Twitter"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus" data-toggle="tooltip" data-placement="bottom" title="Google Plus"></i></a>
-                                        <a href="#"><i class="fa fa-youtube" data-toggle="tooltip" data-placement="bottom" title="Youtube"></i></a>
-                                        <a href="#"><i class="fa fa-github" data-toggle="tooltip" data-placement="bottom" title="Github"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+
                         </aside>
                     </div>
                 </div>
             </div>
 
-            <!--           // RECENT POST===========-->
+            <!-- ========= Categories ===========-->
             <div class="col-lg-4">
+                <!-- categories section -->
                 <div class="widget-sidebar">
-                    <h2 class="title-widget-sidebar">// RECENT POST</h2>
+                    <h2 class="title-widget-sidebar">Categories</h2>
+                    <div class="content-widget-sidebar">
+                        <ul>
+                            <li class="recent-post category">
+                                <a href="#"><h5>Excepteur sint occaecat cupi non proident laborum.</h5></a>
+                            </li>
+                            <hr>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end of categories section -->
+
+                <div class="widget-sidebar">
+                    <h2 class="title-widget-sidebar"> RECENT POST</h2>
                     <div class="content-widget-sidebar">
                         <ul>
                             <li class="recent-post">
@@ -125,7 +138,7 @@
                 </div>
 
                 <div class="widget-sidebar">
-                    <h2 class="title-widget-sidebar">// ARCHIVES</h2>
+                    <h2 class="title-widget-sidebar">ARCHIVES</h2>
                     <div class="last-post">
                         <button class="accordion">21/4/2016</button>
                         <div class="panel">
