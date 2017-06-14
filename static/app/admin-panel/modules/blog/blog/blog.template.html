@@ -58,8 +58,10 @@
                             style="color: #2780e3; text-decoration: underline; cursor: pointer;"
                             at-title="Title" at-implicit at-sortable at-initial-sorting="asc"
                             at-attribute="title" width="250"></td>
-                        <td at-title="Description" at-implicit at-sortable at-attribute="description" width="250"></td>
-                        <td at-title="Featured Image">
+                        <td at-title="Description" width="250">
+                            <div ng-bind-html="item.description"></div>
+                        </td>
+                        <td at-title="Featured Image" width="250">
                             <div class="thumbnail" style="max-height: 200px;">
                                 <img style="max-height: 200px;" ng-src="{{ item.image }}" alt="">
                             </div>

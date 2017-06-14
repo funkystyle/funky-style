@@ -47,7 +47,15 @@ ul {
     padding-left: 0;
 }
 li.category {
-    height: 25px;
+    height: 35px;
+    border-left: 2px solid;
+    padding: 8px 15px;
+    line-height: 105px;
+    margin-bottom: 3px;
+}
+li.category h5 {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .btn-default {
     background-color: #009688;
@@ -73,7 +81,12 @@ li.category {
     margin: 0;
 }
 #blog-section{;margin-bottom:80px;}
-.content-title{padding:15px;background-color:#fff;}
+.content-title{
+    padding:15px;
+    background-color:#fff;
+    min-height: 240px;
+    max-height: 240px;
+}
 .content-title h3 a{color:#34495E;text-decoration:none; transition: 0.5s;}
 .content-title h3 a:hover{color:#F39C12; }
 aside{

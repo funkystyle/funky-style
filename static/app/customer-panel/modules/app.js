@@ -305,30 +305,48 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     url: '/404',
                     templateUrl: 'static/app/customer-panel/modules/404/404.template.html'
                 })
-                // blog.category
+                // blog state
                 .state('blogs', {
-                    url: '/blogs/',
-                    templateUrl: 'static/app/customer-panel/modules/blog.list/blog.list.template.html',
+                    url: '/blogs',
+                    templateUrl: 'static/app/customer-panel/modules/blog/blog.header.template.html',
+                    controller: "blogHeaderCtrl",
+                    resolve: {
+                        dashboard: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'blogModule',
+                                files: [
+                                    'static/app/customer-panel/modules/blog/blog.directive.js'
+                                ]
+                            })
+                        }
+                    }
+                })
+                // All blogs
+                .state('blogs.blogs', {
+                    url: '/all/',
+                    templateUrl: 'static/app/customer-panel/modules/blog/blog.template.html',
                     controller: "blogListCtrl",
                     resolve: {
                         dashboard: function($ocLazyLoad) {
                             return $ocLazyLoad.load({
-                                name: 'blogListModule',
-                                files: ['static/app/customer-panel/modules/blog.list/blog.list.module.js']
+                                files: [
+                                    'static/app/customer-panel/modules/blog/blog.module.js'
+                                ]
                             })
                         }
                     }
                 })
                 // blog.category
-                .state('blog_category', {
-                    url: '/blog/category',
+                .state('blogs.category', {
+                    url: '/category/:url/',
                     templateUrl: 'static/app/customer-panel/modules/blog.category/blog.category.template.html',
                     controller: "blogCategoryCtrl",
                     resolve: {
                         dashboard: function($ocLazyLoad) {
                             return $ocLazyLoad.load({
-                                name: 'blogCategoryModule',
-                                files: ['static/app/customer-panel/modules/blog.category/blog.category.module.js']
+                                files: [
+                                    'static/app/customer-panel/modules/blog.category/blog.category.module.js'
+                                ]
                             })
                         }
                     }

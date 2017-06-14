@@ -53,7 +53,7 @@ angular
             embedded['related_coupons.related_categories'] = 1;
             embedded['related_coupons.related_stores'] = 1;
             
-            url = '/api/1.0/categories/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded);
+            url = '/api/1.0/categories/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+"&r="+Math.random();
             $http({
                 url: url,
                 method: "GET"

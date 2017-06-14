@@ -14,6 +14,39 @@ body{
 .row_carousel{
     margin: 0 -15px;
 }
+
+.carousel-inner.onebyone-carosel { margin: auto; width: 90%; }
+.onebyone-carosel .active.left { left: -33.33%; }
+.onebyone-carosel .active.right { left: 33.33%; }
+.onebyone-carosel .next { left: 33.33%; }
+.onebyone-carosel .prev { left: -33.33%; }
+.carousel-control {
+    width: 70px;
+    background-color: #000000;
+}
+.carousel-control .fa {
+    position: absolute;
+    top: 45%;
+    left: 30%;
+}
+.item .item-text {
+    position: absolute;
+    top: 0;
+    left: 3.2%;
+    width: 93.6%;
+    background: rgba(0, 0, 0, 0.39);
+    margin: 0 auto;
+    height: 100%;
+    padding: 50px 20px;
+}
+.item img {
+    max-height: 250px;
+    min-height: 250px;
+    width: 100%;
+}
+.item-text * {
+    color: #FFFFFF;
+}
 .col_pad{
     padding: 0;
 }
@@ -143,10 +176,12 @@ h4{
     margin-bottom: 0;
 }
 .cont_1{
-    background: #ffffff;
     text-align: center;
+    padding:15px;
+    background-color:#fff;
+    min-height: 320px;
+    max-height: 320px;
     font-weight: bold;
-    padding: 4%;
     border: 1px solid transparent;
     border-radius: 0;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -181,14 +216,21 @@ h4{
     color:#b49a99;
     font-weight: normal;
 }
+.blog-tile img {
+    max-height:250px;
+    width: 100%;
+    min-height: 250px;
+}
 .para_last{
     color:#333333;
     font-weight: normal;
     padding: 0 5%;
+    word-wrap: break-word;
 }
 .technoloy_txt{
     color: #858ac5;
     padding: 2% 0 0 0;
+    text-transform: capitalize;
 }
 .img_back{
     background-color: #ffffff;

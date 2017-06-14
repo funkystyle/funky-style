@@ -2,7 +2,7 @@
 angular.module("blogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy",
     "couponFactoryModule", "categoryFactoryModule", "constantModule", "blogFactoryModule", "angular-table"])
-    .controller("blogCtrl", function($scope, $q, $timeout, toastr, storeFactory, $state,
+    .controller("blogCtrl", function($scope, $q, $timeout, toastr, storeFactory, $state, $http,
                                         $auth, personFactory, $log, couponFactory, categoryFactory, URL, blogFactory) {
         $scope.blogs = [];
         $scope.filterBlogs = [];
@@ -27,7 +27,12 @@ angular.module("blogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr
 
         if ($auth.isAuthenticated()) {
             // get all Blogs
-            blogFactory.get().then(function (data) {
+
+
+            $http({
+                url: URL.blog+"?r="+Math.random(),
+                method: "GET"
+            }).then(function (data) {
                 console.log("Blog Data:", data.data);
                 if(data['data']) {
                     $scope.blogs = data.data._items;
