@@ -18,20 +18,37 @@ var blog = angular.module("blogModule", [])
             }
         }
     })
-    .controller("blogHeaderCtrl", function ($scope, $http, $state, $filter) {
+    .controller("blogHeaderCtrl", function ($scope, $http, $state, $filter, Query, $sce) {
         // ==== jquery Script
         console.log("blog Header Controller!");
         $scope.blogs = [];
         $scope.categories = [];
+
+        $scope.trustAsHtml = function(string, length) {
+            if(string) {
+                string = (string.length > length) ? string.substr(0, length)+" ...": string.substr(0, length);
+                return $sce.trustAsHtml(string);
+            }
+        };
+
+        // Get the top banner from banners table
+        $scope.top_banner = {};
+        var where = JSON.stringify({
+            "top_banner_string": 'blog'
+        });
+        var url = "/api/1.0/banner?where="+where;
+        Query.get(url).then(function (banner) {
+            console.log("banner Details: ", banner.data._items);
+            $scope.top_banner = banner.data._items[0];
+        });
+
         // get the list of all blogs
         var embedded = JSON.stringify({
             "last_modified_by": 1,
             "related_categories": 1
         });
-        $http({
-            url: '/api/1.0/blog/?embedded='+embedded+'&r='+Math.random(),
-            method: "GET"
-        }).then(function (data) {
+        url = '/api/1.0/blog/?embedded='+embedded;
+        Query.get(url).then(function (data) {
             console.log("Blog List: ", data.data._items);
             $scope.blogs = data.data._items;
             angular.forEach($scope.blogs, function (item) {
@@ -76,4 +93,20 @@ var blog = angular.module("blogModule", [])
                 });
             }, 1000);
         });
+    })
+    .factory("Query", function ($http, $q) {
+        return {
+            get: function (url) {
+                var d = $q.defer();
+                $http({
+                    url: url+"&r="+Math.random(),
+                    method: "GET"
+                }).then(function (data) {
+                    d.resolve(data);
+                }, function (error) {
+                    d.reject(error);
+                });
+                return d.promise;
+            }
+        }
     })

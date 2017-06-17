@@ -91,7 +91,7 @@
                     <div class="row row_env" ng-repeat="item in categories">
                         <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
                             <p class="env_txt">
-                                <a ui-sref="main.categoryinfo({url: item.url})">
+                                <a ui-sref="blogs.category({url: item.url})">
                                     {{ item.name }}
                                 </a>
                             </p>
@@ -100,78 +100,23 @@
                             <p class="p_txt">9</p>
                         </div>
                     </div> <!-- end row -->
-                    <div class="word_press">
-                        <img src="modules/assets/images/word_press.png" alt="" class="img-responsive"/>
+                    <div class="word_press" ng-if="top_banner">
+                        <img ng-src="{{ top_banner.image }}" alt="" class="img-responsive"/>
                     </div>
                 </div>
             </div>
             <p class="lat_blog">Latest Blog Articles</p>
             <div class="blogs">
-                <div class="blogs_inner">
+                <div class="blogs_inner" ng-repeat="blog in blogs | orderBy: '_updated': true">
                     <div class="row">
                         <div class="col-md-5 col-lg-5 col-xs-5 col-sm-5 pad_right">
-                            <img src="modules/assets/images/blog_1.png" alt="" class="img-responsive"/>
+                            <img ng-src="{{ blog.image }}" alt="" class="img-responsive"/>
                         </div>
                         <div class="col-md-7 col-lg-7 col-xs-7 col-sm-7">
-                            <p class="entertain_txt">Entertainment</p>
-                            <p class="entertain_txt_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blogs_inner">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-5 col-xs-5 col-sm-5 pad_right">
-                            <img src="modules/assets/images/blog_1.png" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-7 col-lg-7 col-xs-7 col-sm-7">
-                            <p class="entertain_txt">Entertainment</p>
-                            <p class="entertain_txt_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blogs_inner">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-5 col-xs-5 col-sm-5 pad_right">
-                            <img src="modules/assets/images/blog_1.png" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-7 col-lg-7 col-xs-7 col-sm-7">
-                            <p class="entertain_txt">Entertainment</p>
-                            <p class="entertain_txt_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="blogs">
-                <div class="blogs_inner">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-5 col-xs-5 col-sm-5 pad_right">
-                            <img src="modules/assets/images/blog_1.png" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-7 col-lg-7 col-xs-7 col-sm-7">
-                            <p class="entertain_txt">Entertainment</p>
-                            <p class="entertain_txt_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blogs_inner">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-5 col-xs-5 col-sm-5 pad_right">
-                            <img src="modules/assets/images/blog_1.png" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-7 col-lg-7 col-xs-7 col-sm-7">
-                            <p class="entertain_txt">Entertainment</p>
-                            <p class="entertain_txt_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="blogs_inner">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-5 col-xs-5 col-sm-5 pad_right">
-                            <img src="modules/assets/images/blog_1.png" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-7 col-lg-7 col-xs-7 col-sm-7">
-                            <p class="entertain_txt">Entertainment</p>
-                            <p class="entertain_txt_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                            <p class="entertain_txt">
+                                <a ng-bind-html="trustAsHtml(blog.title, 30)" ui-sref="blogs.details({url: blog.url})"></a>
+                            </p>
+                            <p class="entertain_txt_1" ng-bind-html="trustAsHtml(blog.description, 60)"></p>
                         </div>
                     </div>
                 </div>
@@ -186,40 +131,16 @@
             <div class="panel panel_black">
                 <div class="panel-heading most_txt panel_head_black">Most Popular</div>
                 <div class="panel-body panel_body_back">
-                    <div class="row">
+                    <div class="row" ng-repeat="blog in blogs | orderBy: '_updated': true">
                         <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                            <img src="modules/assets/images/blog_foot_1.png" width="100px" height="100px" alt="" class="img-responsive"/>
+                            <img ng-src="{{ blog.image }}" width="100px" height="100px"
+                                 alt="" class="img-responsive"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
-                            <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p class="views">5,508 Views</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                            <img src="modules/assets/images/blog_foot_1.png" width="100px" height="100px" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
-                            <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p class="views">5,508 Views</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                            <img src="modules/assets/images/blog_foot_1.png" width="100px" height="100px" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
-                            <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p class="views">5,508 Views</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                            <img src="modules/assets/images/blog_foot_1.png" width="100px" height="100px" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
-                            <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p class="views">5,508 Views</p>
+                            <p class="lorem">
+                                <a ng-bind-html="trustAsHtml(blog.title, 30)" ui-sref="blogs.details({url: blog.url})"></a>
+                            </p>
+                            <p class="views">{{ Math.random() }} Views</p>
                         </div>
                     </div>
                 </div>
@@ -229,40 +150,16 @@
             <div class="panel panel_black">
                 <div class="panel-heading most_txt panel_head_black">Most Popular</div>
                 <div class="panel-body panel_body_back">
-                    <div class="row">
+                    <div class="row" ng-repeat="blog in blogs | orderBy: '_updated': true">
                         <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                            <img src="modules/assets/images/blog_foot_1.png" width="100px" height="100px" alt="" class="img-responsive"/>
+                            <img ng-src="{{ blog.image }}" width="100px" height="100px"
+                                 alt="" class="img-responsive"/>
                         </div>
                         <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
-                            <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p class="views">5,508 Views</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                            <img src="modules/assets/images/blog_foot_1.png" width="100px" height="100px" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
-                            <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p class="views">5,508 Views</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                            <img src="modules/assets/images/blog_foot_1.png" width="100px" height="100px" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
-                            <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p class="views">5,508 Views</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
-                            <img src="modules/assets/images/blog_foot_1.png" width="100px" height="100px" alt="" class="img-responsive"/>
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
-                            <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p class="views">5,508 Views</p>
+                            <p class="lorem">
+                                <a ng-bind-html="trustAsHtml(blog.title, 30)" ui-sref="blogs.details({url: blog.url})"></a>
+                            </p>
+                            <p class="views">{{ Math.random() }} Views</p>
                         </div>
                     </div>
                 </div>
@@ -271,9 +168,6 @@
         <div class="col-lg-4 col-md-4">
             <div class="panel panel_black">
                 <div class="panel-heading most_txt panel_head_black">Video of the day</div>
-                <div class="panel-body panel_body_back_1">
-                    <img src="modules/assets/images/word_press2.png" alt="" class="img-responsive wordpress2"/>
-                </div>
             </div>
             <div class="panel panel_black">
                 <div class="panel-heading most_txt panel_head_black">Join Us</div>

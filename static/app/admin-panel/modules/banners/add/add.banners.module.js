@@ -22,6 +22,10 @@ angular.module("addBannersModule", ["ui.select", "ngSanitize",
             {
                 text: "All Deals",
                 code: "deal"
+            },
+            {
+                text: "All Blogs",
+                code: "blog"
             }
         ];
         $scope.status = [

@@ -329,6 +329,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     resolve: {
                         dashboard: function($ocLazyLoad) {
                             return $ocLazyLoad.load({
+                                name: "blogListModule",
                                 files: [
                                     'static/app/customer-panel/modules/blog/blog.module.js'
                                 ]
@@ -344,8 +345,25 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     resolve: {
                         dashboard: function($ocLazyLoad) {
                             return $ocLazyLoad.load({
+                                name: "blogCategoryModule",
                                 files: [
                                     'static/app/customer-panel/modules/blog.category/blog.category.module.js'
+                                ]
+                            })
+                        }
+                    }
+                })
+                // blog.category
+                .state('blogs.details', {
+                    url: '/:url/',
+                    templateUrl: 'static/app/customer-panel/modules/blog.details/blog.details.template.html',
+                    controller: "blogDetailsCtrl",
+                    resolve: {
+                        dashboard: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: "blogDetailsModule",
+                                files: [
+                                    'static/app/customer-panel/modules/blog.details/blog.details.module.js'
                                 ]
                             })
                         }
