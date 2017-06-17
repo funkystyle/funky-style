@@ -87,6 +87,8 @@ LOOK_UP_FIELDS = CONFIG_DATA['LOOK_UP_FIELDS']
 
 PRIORITY = CONFIG_DATA['PRIORITY']
 
+XML_FILES_FOLDER = CONFIG_DATA['XML_GENERATOR_FILE_PATH']
+
 # LOCAL HOST MACHINE DETAILS
 MONGO_HOST = CONFIG_DATA['MONGO_HOST']
 MONGO_PORT = CONFIG_DATA['MONGO_PORT']
@@ -124,6 +126,10 @@ MONGO_QUERY_BLACKLIST = ['$where']
 
 SCHEMAS = {
     'deep_link':{
+        'is_default':{
+           'type': 'boolean',
+            'default': False
+        },
         'tags': {
             'type': 'dict',
             'schema': {
@@ -1134,6 +1140,40 @@ SCHEMAS = {
             'type': 'list',
             'required': True
         }
+    },
+    'user_favourites': {
+        'user_id': {
+            'type': 'objectid',
+            "unique": True,
+            "required": True,
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True,
+                'field': '_id'
+            }
+        },
+        'fav_stores': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'stores',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'fav_coupons': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'coupons',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        }
     }
 
 }
@@ -1154,6 +1194,7 @@ COUPON_REPORTS_SCHEMA = SCHEMAS['coupon_reports']
 COUPONS_COMMENTS_SCHEMA = SCHEMAS['coupon_comments']
 BLOG_SCHEMA = SCHEMAS['blog']
 DEEP_LINK_SCHEMA = SCHEMAS['deep_link']
+USER_FAV_SCHEMA = SCHEMAS['user_favourites']
 
 
 
@@ -1162,7 +1203,11 @@ PERSONS = {
     'schema': PERSONS_SCHEMA,
     'url': 'persons'
 }
-
+USER_FAV_COLLECTION = {
+    'item_title': 'user_favs',
+    'schema': USER_FAV_SCHEMA,
+    'url': 'user-favs'
+}
 STORES = {
     'item_title': 'stores',
     'schema': STORES_SCHEMA,
@@ -1279,7 +1324,8 @@ DOMAIN = {
     'coupons_comments': COUPONS_COMMENTS,
     'coupons_reports': COUPON_REPORTS,
     'blog': BLOG,
-    'deep_link': DEEP_LINK
+    'deep_link': DEEP_LINK,
+    'user_favs': USER_FAV_COLLECTION
 }
 
 COLLECTION_NAMES = DOMAIN.keys()

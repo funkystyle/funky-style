@@ -1,4 +1,4 @@
-from flask import abort
+from flask import abort, request
 import uuid, os
 import base64
 import binascii
@@ -19,8 +19,11 @@ def before_returning_persons(response):
     LOGGER.info("persons api access processing after admin login verification")
 
 def update_number_of_clicks(resource, _id):
-    resource_obj = app.data.driver.db[resource]
-    resource_obj.update({'_id': _id}, {'$inc': {'number_of_clicks': 1}})
+    number_of_click_required = request.args.get("number_of_clicks", None)
+    if number_of_click_required and int(number_of_click_required) == 1:
+        LOGGER.info("calculating number of clicks...")
+        resource_obj = app.data.driver.db[resource]
+        resource_obj.update({'_id': _id}, {'$inc': {'number_of_clicks': 1}})
 
 def before_returning_stores(response):
     update_number_of_clicks('stores', response['_id'])
@@ -188,9 +191,9 @@ def process_index_file(resource_name, updated_date_time):
         date_time = str(updated_date_time).replace(" ", "T")
         sm = SiteMinder(date_time, resource_name)
         if sm.update_index_file():
-            LOGGER.info("updated siteminder for resource name:{} and item:{}".format(resource_name, updated_date_time))
+            LOGGER.info("updated siteminder for resource ")
         else:
-            LOGGER.warn("updated siteminder for resource name:{} and item:{}".format(resource_name, updated_date_time))
+            LOGGER.warn("updated siteminder for resource ")
     else:
         LOGGER.warn(" resource name:{} in ignore_collection_names array".format(resource_name))
 
@@ -215,6 +218,7 @@ def deman_generate_index_sitemap():
     d = multiprocessing.Process(name='daemon_sync', target=generate_sitemap_index_file)
     d.daemon = True
     d.start()
+    d.join()
     LOGGER.info("finished create index background job")
 
 def after_created(resource_name, item):

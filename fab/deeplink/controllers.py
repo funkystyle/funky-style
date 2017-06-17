@@ -12,10 +12,15 @@ from urlparse import urlsplit, urlunsplit
 def find_db_affiliate_network(url):
     accounts = app.data.driver.db['deep_link']
     deep_links = accounts.find()
+    default_deep_link = ""
     for deep_link in deep_links:
         if deep_link['affiliate_network'] in url:
             return deep_link
-    raise Exception("no affiliated_network found")
+        if deep_link['is_default']:
+            default_deep_link = deep_link
+    if not default_deep_link:
+        raise Exception("no affiliated_network found")
+    return default_deep_link
 
 
 
