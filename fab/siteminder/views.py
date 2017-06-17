@@ -1,8 +1,9 @@
 import os
 from datetime import datetime
 from lxml import etree
-from settings import SERVER_URL, API_VERSION, URL_PREFIX, PROTOCAL, \
-    PORT, SCHEMAS, IGNORE_COLLECTION_NAMES, BASE_DIR, INDEX_XML_TEMPLATE, SUB_FILE_TEMPLATE, LOOK_UP_FIELDS, PRIORITY
+from settings import SERVER_URL, \
+    SCHEMAS, IGNORE_COLLECTION_NAMES, BASE_DIR, INDEX_XML_TEMPLATE, \
+    SUB_FILE_TEMPLATE, LOOK_UP_FIELDS, PRIORITY,XML_FILES_FOLDER
 
 class SiteMinder(object):
 
@@ -11,11 +12,10 @@ class SiteMinder(object):
         self.replaced_resource = resource_name.replace("_", "-")
         self.date_time = "{}+5.30".format(date_time)
 
-        self.base_url = "{protocal}://{server_name}/{api_prefix}/{api_version}".format(
-            protocal = PROTOCAL,
-            server_name = SERVER_URL,
-            api_prefix = URL_PREFIX,
-            api_version = API_VERSION
+        self.base_url = "{server_name}/{xml_file_path}".format(
+            server_name=SERVER_URL,
+            xml_file_path=XML_FILES_FOLDER
+
         )
         self.index_file = "static/sitemap_xml_files/sitemap_index.xml"
 
@@ -29,11 +29,11 @@ class SiteMinder(object):
         self.parser(self.index_file)
         # update index file
         for child in self.root:
-            print(child.getchildren()[0].text, "{base_url}/sitemap-{resource_name}".format(
+            print(child.getchildren()[0].text, "{base_url}/sitemap_{resource_name}.xml".format(
                     base_url=self.base_url,
                     resource_name=self.resource_name
             ))
-            if child.getchildren()[0].text == "{base_url}/sitemap-{resource_name}".format(
+            if child.getchildren()[0].text == "{base_url}/sitemap_{resource_name}.xml".format(
                     base_url=self.base_url,
                     resource_name=self.resource_name
             ):
@@ -58,13 +58,13 @@ def generate_sitemap_index_file():
 
     element = ""
     for schema_name in schema_names:
-        base_url = "{protocal}://{server_name}/{api_prefix}/{api_version}".format(
-            protocal=PROTOCAL,
+        base_url = "{server_name}/{xml_file_path}".format(
             server_name=SERVER_URL,
-            api_prefix=URL_PREFIX,
-            api_version=API_VERSION
+            xml_file_path=XML_FILES_FOLDER
+
+
         )
-        loc = "{base_url}/sitemap-{resource_name}".format(
+        loc = "{base_url}/sitemap_{resource_name}.xml".format(
             base_url=base_url,
             resource_name=schema_name.replace("_", "-")
         )
@@ -87,20 +87,18 @@ def generate_sub_xml_file(resource_name, app):
     for item in data:
         _updated = str(item['_updated']).replace(" ", "T")
         _updated = _updated.split("+")[0]+"+5.30"
-        base_url = "{protocal}://{server_name}/{api_prefix}/{api_version}".format(
-            protocal=PROTOCAL,
-            server_name=SERVER_URL,
-            api_prefix=URL_PREFIX,
-            api_version=API_VERSION
+        base_url = "{server_name}".format(
+            server_name=SERVER_URL
         )
-        loc = "{base_url}/{resource_name}/{field_string}".format(
+        loc = "{base_url}/{prefix_collcection}/{field_string}".format(
             base_url=base_url,
-            resource_name=resource_name,
+            prefix_collcection=PRIORITY[resource_name]['prefix'],
             field_string=str(item[LOOK_UP_FIELDS[resource_name]])
         )
         lastmod = _updated
         changefreq = PRIORITY[resource_name]['changefreq']
         priority = PRIORITY[resource_name]['priority']
+
         element += "<url>" \
                    "<loc>{}</loc>" \
                    "<lastmod>{}</lastmod>"\

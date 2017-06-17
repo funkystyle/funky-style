@@ -3,7 +3,8 @@
   "PASSWORD_CRYPTION_TOKEN": "j++^1k=*raynr-mw(9ux=j#omk@=05p4g=-eg3&hwx5y7#cpo7",
   "HOST": "127.0.0.1",
   "PORT":8000,
-  "SERVER_URL": "localhost:8000",
+  "SERVER_URL": "http://localhost:8000",
+
   "PROTOCAL": "http",
   "DEBUG": true,
   "URL_PREFIX": "api",
@@ -63,25 +64,25 @@
   "NUMBER_OF_CLICKS_COLLECTIONS": ["deal_brands","deal_categories","deals","stores","categories"],
 
   "PRIORITY":{
-    "blog": {"changefreq": "daily", "priority": 0.4},
-    "categories": {"changefreq": "daily", "priority": 0.8},
-    "cms": {"changefreq": "weekly", "priority": 0.4},
-    "deal_brands": {"changefreq": "daily", "priority": 0.8},
-    "deal_categories": {"changefreq": "daily", "priority": 0.8},
-    "deals": {"changefreq": "daily", "priority": 0.8},
-    "stores": {"changefreq": "daily", "priority": 0.8}
+    "blog": {"changefreq": "daily", "priority": 0.4, "prefix": "blogs/category"},
+    "categories": {"changefreq": "daily", "priority": 0.8, "prefix": "category"},
+    "cms": {"changefreq": "weekly", "priority": 0.4, "prefix": ""},
+    "deal_brands": {"changefreq": "daily", "priority": 0.8, "prefix": "brands"},
+    "deal_categories": {"changefreq": "daily", "priority": 0.8, "prefix": "categories"},
+    "deals": {"changefreq": "daily", "priority": 0.8, "prefix": "deals"},
+    "stores": {"changefreq": "daily", "priority": 0.8, "prefix": "store"}
   },
 
   "LOOK_UP_FIELDS":{
-    "blog": "title",
-    "categories": "name",
-    "cms": "name",
-    "deal_brands": "name",
-    "deal_categories": "name",
-    "deals": "name",
-    "stores": "name"
+    "blog": "url",
+    "categories": "url",
+    "cms": "url",
+    "deal_brands": "url",
+    "deal_categories": "url",
+    "deals": "url",
+    "stores": "url"
   },
-
+  "XML_GENERATOR_FILE_PATH": "static/sitemap_xml_files",
   "INDEX_XML_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_index.xml",
   "SUB_FILE_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_sub_file.xml"
 

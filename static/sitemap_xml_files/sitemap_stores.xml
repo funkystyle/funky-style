@@ -5,5 +5,5 @@
 				  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
 				        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-						<url><loc>http://localhost:8000/api/1.0/stores/Flipkart</loc><lastmod>2017-06-11T07:19:31+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url><url><loc>http://localhost:8000/api/1.0/stores/snapdeal</loc><lastmod>2017-06-09T09:48:46+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url><url><loc>http://localhost:8000/api/1.0/stores/Amazon</loc><lastmod>2017-06-08T13:18:40+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
+						<url><loc>http://localhost:8000/store/some_url</loc><lastmod>2017-06-17T06:25:54+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
 				</urlset>
