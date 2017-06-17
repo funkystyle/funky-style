@@ -14,16 +14,19 @@ angular.module("dealDetailsModule", ["Directives"])
         // if stateParams of url found the call http request to get the deal details from ther server
         if($stateParams['url']) {
             // get the list of coupons
-            var where = {};
-            where['url'] = $stateParams.url;
+            var where = JSON.stringify({
+                url: $stateParams.url
+            });
 
-            var embedded = {};
-            embedded['related_deals'] = 1;
-            embedded['deal_brands'] = 1;
-            embedded['deal_category'] = 1;
-            embedded['stores.store'] = 1;
+            var embedded = JSON.stringify({
+                'related_deals': 1,
+                'deal_brands': 1,
+                'deal_category': 1,
+                'stores': 1,
+                'stores.store': 1
+            });
 
-            var url = '/api/1.0/deals'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
+            var url = '/api/1.0/deals'+'?where='+where+'&number_of_clicks=1&embedded='+embedded+'&rand_number'+Math.random();
             $http({
                 url: url,
                 method: "GET"

@@ -290,7 +290,7 @@
                                         Report
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
-                                        <a target="_blank" ui-sref="main.categoryinfo({url: category.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
+                                        <a ng-click="openCouponCode(category, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>
@@ -383,7 +383,7 @@
                                         Report
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
-                                        <a target="_blank" ui-sref="main.categoryinfo({url: category.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
+                                        <a ng-click="openCouponCode(category, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>
@@ -466,7 +466,7 @@
                                         Report
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
-                                        <a target="_blank" ui-sref="main.categoryinfo({url: category.url, cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
+                                        <a ng-click="openCouponCode(category, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                         </a>

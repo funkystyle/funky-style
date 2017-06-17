@@ -59,6 +59,23 @@ angular
             $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
         };
 
+        // open coupon popup code
+        $scope.openCouponCode = function (store, item) {
+
+            // put a request to update the no of clicks into the particular coupon document
+            var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
+            Query.get(url);
+
+            if(store.store_url) {
+                setTimeout(function () {
+                    window.location.href = store.store_url;
+                }, 500);
+            }
+
+            url = $state.href('main.store-info', {url: store.url, cc: item._id});
+            window.open(url,'_blank');
+        };
+
         if($stateParams['url']) {
             // get store information
             var where = {};

@@ -34,7 +34,7 @@ angular.module("cmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr"
         if ($auth.isAuthenticated()) {
             // get all Blogs
             cmsFactory.get().then(function (data) {
-                console.log(data);
+                console.log(data,'---------------');
                 if(data['data']) {
                     $scope.cms = data.data._items;
                     $scope.filterCms = data.data._items;

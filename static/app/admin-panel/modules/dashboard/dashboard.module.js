@@ -1,4 +1,5 @@
-angular.module("DashboardModule", ["constantModule", "satellizer", "toastr", "personFactoryModule", "highCharts"])
+angular.module("DashboardModule", ["constantModule",
+    "satellizer", "toastr", "personFactoryModule", "highCharts", "ui.select"])
     .controller("dashBoardCtrl", function ($scope, mainURL, URL, $state, $auth, $http, toastr, personFactory) {
 
         $scope.deals = [];

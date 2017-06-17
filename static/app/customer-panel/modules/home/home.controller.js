@@ -1,7 +1,8 @@
 angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFactoryModule",
     "dealFactoryModule", "categoryFactoryModule", "Directives"])
     .controller('homeCtrl', function ($scope, $sce, storeFactory, $http, couponFactory, $filter, dealFactory,
-                                      categoryFactory, $ocLazyLoad, $stateParams, $rootScope, SEO, $compile) {
+                                      categoryFactory, $ocLazyLoad, $state, $stateParams,
+                                      $rootScope, SEO, $compile, Query) {
         console.log("home controller");
         $scope.params = undefined;
         $scope.deals = [];
@@ -70,6 +71,17 @@ angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFacto
         }, function (error) {
             console.log(error);
         });
+
+        // open coupon popup code
+        $scope.openCouponCode = function (store, item) {
+
+            // put a request to update the no of clicks into the particular coupon document
+            var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
+            Query.get(url);
+
+            url = $state.href('main.home', {cc: item._id});
+            window.open(url,'_blank');
+        };
 
         // get the list of featured stores
         var store = {};
@@ -162,4 +174,20 @@ angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFacto
         $scope.closeDescription = function () {
             $(".show-description").hide();
         }
-    });
+    })
+    .factory("Query", function ($http, $q) {
+        return {
+            get: function (url) {
+                var d = $q.defer();
+                $http({
+                    url: url+"&r="+Math.random(),
+                    method: "GET"
+                }).then(function (data) {
+                    d.resolve(data);
+                }, function (error) {
+                    d.reject(error);
+                });
+                return d.promise;
+            }
+        }
+    })

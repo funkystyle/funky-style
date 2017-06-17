@@ -147,7 +147,7 @@
                                 <a href=""><span class="glyphicon glyphicon-ok-sign gly"></span>Verified</a>
                             </div>
                             <div class="col-lg-5 col-md-5 col-sm-5 pad-right-0 col-xs-12 btn_mobile">
-                                <a target="_blank" ui-sref="main.home({cc: item._id})" class="btn btn-md btn-block btn-info show_copan_code">
+                                <a ng-click="openCouponCode(undefined, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                     <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                     <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                                 </a>

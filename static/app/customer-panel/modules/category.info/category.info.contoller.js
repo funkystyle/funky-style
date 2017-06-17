@@ -41,6 +41,17 @@ angular
             $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
         };
 
+        // open coupon popup code
+        $scope.openCouponCode = function (category, item) {
+
+            // put a request to update the no of clicks into the particular coupon document
+            var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
+            Query.get(url);
+
+            url = $state.href('main.categoryinfo', {url: category.url, cc: item._id});
+            window.open(url,'_blank');
+        };
+
         if($stateParams['url']) {
             // get category information
             var where = {};
