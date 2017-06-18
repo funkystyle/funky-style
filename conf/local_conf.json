@@ -61,7 +61,7 @@
   "IGNORE_COLLECTION_NAMES": ["persons","banner","master_seo","coupon_comments",
     "coupon_reports", "coupons", "deep_link"],
 
-  "NUMBER_OF_CLICKS_COLLECTIONS": ["deal_brands","deal_categories","deals","stores","categories"],
+  "NUMBER_OF_CLICKS_COLLECTIONS": ["deal_brands","deal_categories","deals","stores","categories", "coupons"],
 
   "PRIORITY":{
     "blog": {"changefreq": "daily", "priority": 0.4, "prefix": "blogs/category"},
