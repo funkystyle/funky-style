@@ -264,7 +264,8 @@ SCHEMAS = {
     },
     'stores':{
         "number_of_clicks": {
-            "type": "integer"
+            "type": "integer",
+            "default": 0
         },
         'name': {
             'type': 'string',
@@ -435,7 +436,8 @@ SCHEMAS = {
     },
     'categories':{
             "number_of_clicks": {
-                "type": "integer"
+                "type": "integer",
+                "default": 0
             },
             'name': {
                 'type': 'string',
@@ -563,7 +565,8 @@ SCHEMAS = {
     },
     "deals": {
         "number_of_clicks":{
-            "type": "integer"
+            "type": "integer",
+            "default": 0
         },
         'dynamic_fields': {
             'type': 'dict'
@@ -704,6 +707,10 @@ SCHEMAS = {
         }
     },
     'coupons':{
+        "number_of_clicks": {
+            "type": "integer",
+            "default": 0
+        },
         'title': {
             "required": True,
             "unique": True,
@@ -883,7 +890,8 @@ SCHEMAS = {
     },
     'deal_categories_collection': {
         "number_of_clicks": {
-            "type": "integer"
+            "type": "integer",
+            "default": 0
         },
         'name': {
             "type": "string",
@@ -960,7 +968,8 @@ SCHEMAS = {
     },
     'deal_brands': {
         "number_of_clicks": {
-            "type": "integer"
+            "type": "integer",
+            "default": 0
         },
         'name': {
             "type": "string",
