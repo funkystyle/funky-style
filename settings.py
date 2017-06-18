@@ -1222,7 +1222,7 @@ STORES = {
     'schema': STORES_SCHEMA,
     'additional_lookup': {
         'url': 'regex("[\w]+")',
-        'field': 'name'
+        'field': 'url'
     }
 }
 
@@ -1240,7 +1240,7 @@ DEALS = {
     'allow_unknown': True,
     'additional_lookup': {
         'url': 'regex("[\w]+")',
-        'field': 'name'
+        'field': 'url'
     },
     'schema': DEALS_SCHEMA
 }
@@ -1250,7 +1250,7 @@ CATEGORIES = {
     'schema': CATEGORIES_SCHEMA,
     'additional_lookup': {
         'url': 'regex("[\w]+")',
-        'field': 'name'
+        'field': 'url'
     }
 }
 
@@ -1259,7 +1259,7 @@ CMS_PAGES = {
     'schema': CMS_PAGES_SCHEMA,
     'additional_lookup': {
         'url': 'regex("[\w]+")',
-        'field': 'name'
+        'field': 'url'
     }
 }
 
@@ -1273,7 +1273,7 @@ DEAL_CATEGORIES = {
     'schema': DEAL_CATEGORIES_SCHEMA,
     'additional_lookup': {
         'url': 'regex("[\w]+")',
-        'field': 'name'
+        'field': 'url'
     }
 }
 
@@ -1282,7 +1282,7 @@ DEAL_BRANDS = {
     'schema': DEAL_BRANDS_SCHEMA,
     'additional_lookup': {
         'url': 'regex("[\w]+")',
-        'field': 'name'
+        'field': 'url'
     }
 }
 
@@ -1311,7 +1311,7 @@ BLOG = {
     'schema': BLOG_SCHEMA,
     'additional_lookup': {
         'url': 'regex("[\w]+")',
-        'field': 'title'
+        'field': 'url'
     }
 }
 
