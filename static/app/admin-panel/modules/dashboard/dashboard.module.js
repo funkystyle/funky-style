@@ -12,6 +12,9 @@ angular.module("DashboardModule", ["constantModule",
         }
     })
     .controller("barController", function ($scope, $state) {
+        $scope.menuTypes = [
+            {code: "month", text: "Month"}, {code: "week", text: "Week"}
+        ]
 
         $scope.showDateType = {
             month: [
@@ -31,13 +34,13 @@ angular.module("DashboardModule", ["constantModule",
             week: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
         };
 
-        $scope.watch('items', function (items, oldVal) {
+        $scope.$watch('items', function (items, oldVal) {
             angular.forEach(items, function (item) {
                 console.log("Item is: ", item);
             });
         });
 
-        Highcharts.chart('container', {
+        var chartOptions = {
             chart: {
                 type: 'column'
             },
@@ -88,7 +91,9 @@ angular.module("DashboardModule", ["constantModule",
                 data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
 
             }]
-        });
+        };
+
+        Highcharts.chart('container', chartOptions);
     })
     .controller("dashBoardCtrl", function ($scope, mainURL, URL, $state, $auth, $http, toastr, personFactory) {
 

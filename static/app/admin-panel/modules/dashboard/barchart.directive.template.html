@@ -1,1 +1,15 @@
+<div class="row">
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label id="by">Select by</label>
+            <ui-select ng-model="select.by" theme="bootstrap">
+                <ui-select-match placeholder="Select by Month/Week">{{ $select.selected.text }}</ui-select-match>
+                <ui-select-choices repeat="item.code as item in menuTypes | filter: $select.search">
+                    <div ng-bind-html="item.text | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+</div>
+
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
