@@ -8,7 +8,7 @@ from settings import LOGGER
 
 @app.route('/api/1.0/sitemap-index')
 def sitemap_index():
-    return make_response(open('static/sitemap_xml_files/sitemap_index.xml').read())
+    return make_response(open('static/sitemap_xml_files/sitemap_main_index.xml').read())
 
 @app.route('/api/1.0/sitemap-stores')
 def sitemap_stores():

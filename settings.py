@@ -113,6 +113,8 @@ RESOURCE_METHODS = ['GET', 'POST']
 # (defaults to read-only item access).
 ITEM_METHODS = ['GET', 'PATCH', 'DELETE','PUT']
 
+
+
 IF_MATCH = False
 # We enable standard client cache directives for all resources exposed by the
 # API. We can always override these global settings later.
@@ -1221,7 +1223,7 @@ STORES = {
     'item_title': 'stores',
     'schema': STORES_SCHEMA,
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': 'regex("[\w\-]+")',
         'field': 'url'
     }
 }
@@ -1230,7 +1232,7 @@ DEEP_LINK = {
     'item_title': 'deep_link',
     'schema': DEEP_LINK_SCHEMA,
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': 'regex("[\w\-]+")',
         'field': 'affiliate_network'
     }
 }
@@ -1239,7 +1241,7 @@ DEALS = {
     'item_title': 'deals',
     'allow_unknown': True,
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': 'regex("[\w\-]+")',
         'field': 'url'
     },
     'schema': DEALS_SCHEMA
@@ -1249,7 +1251,7 @@ CATEGORIES = {
     'item_title': 'categories',
     'schema': CATEGORIES_SCHEMA,
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': 'regex("[\w\-]+")',
         'field': 'url'
     }
 }
@@ -1258,7 +1260,7 @@ CMS_PAGES = {
     'item_title': 'cms_pages',
     'schema': CMS_PAGES_SCHEMA,
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': 'regex("[\w\-]+")',
         'field': 'url'
     }
 }
@@ -1272,7 +1274,7 @@ DEAL_CATEGORIES = {
     'item_title': 'deal_categories',
     'schema': DEAL_CATEGORIES_SCHEMA,
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': 'regex("[\w\-]+")',
         'field': 'url'
     }
 }
@@ -1281,7 +1283,7 @@ DEAL_BRANDS = {
     'item_title': 'deal_brands',
     'schema': DEAL_BRANDS_SCHEMA,
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': 'regex("[\w\-]+")',
         'field': 'url'
     }
 }
@@ -1310,7 +1312,7 @@ BLOG = {
     'item_title': 'blog',
     'schema': BLOG_SCHEMA,
     'additional_lookup': {
-        'url': 'regex("[\w]+")',
+        'url': 'regex("[\w\-]+")',
         'field': 'url'
     }
 }

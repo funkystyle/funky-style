@@ -209,14 +209,11 @@ def login():
     response.status_code = 200
     return response
 
+
+
 @app.route('/<path:dummy>')
 def fallback(dummy):
     LOGGER.info("called dummy end point")
-    slpited_dummy = dummy.split("/")
-    if len(slpited_dummy) >= 2 and slpited_dummy[0] == "api" and slpited_dummy[1] == "1.0":
-        response = jsonify(errors="page not found")
-        response.status_code = 404
-        return response
     return make_response(open('static/app/customer-panel/index.html').read())
 
 # registration
