@@ -31,11 +31,11 @@ class SiteMinder(object):
         for child in self.root:
             print(child.getchildren()[0].text, "{base_url}/sitemap_{resource_name}.xml".format(
                     base_url=self.base_url,
-                    resource_name=self.resource_name
+                    resource_name=self.replaced_resource
             ))
             if child.getchildren()[0].text == "{base_url}/sitemap_{resource_name}.xml".format(
                     base_url=self.base_url,
-                    resource_name=self.resource_name
+                    resource_name=self.replaced_resource
             ):
                 child.getchildren()[1].text = self.date_time
                 print("file path::::", self.file_path)
@@ -106,7 +106,7 @@ def generate_sub_xml_file(resource_name, app):
                    "<priority>{}</priority>\
                    </url>".format(loc, lastmod, changefreq, priority)
     template = template.format(data=element)
-    out_file = os.path.join(BASE_DIR, 'static', 'sitemap_xml_files', 'sitemap_{}.xml'.format(resource_name))
+    out_file = os.path.join(BASE_DIR, 'static', 'sitemap_xml_files', 'sitemap_{}.xml'.format(resource_name.replace("-","_")))
     write_to_file(out_file, template)
 
 
