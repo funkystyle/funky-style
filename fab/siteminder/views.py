@@ -74,7 +74,7 @@ def generate_sitemap_index_file():
                   "<lastmod>{}</lastmod>\
                   </sitemap>".format(loc, lastmod)
     template = template.format(data=element)
-    out_file = os.path.join(BASE_DIR, 'static', 'sitemap_xml_files', 'sitemap_main_index.xml')
+    out_file = os.path.join(BASE_DIR, 'static', 'sitemap_xml_files', 'sitemap_index.xml')
     write_to_file(out_file, template)
 
 def generate_sub_xml_file(resource_name, app):
