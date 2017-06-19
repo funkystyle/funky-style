@@ -82,14 +82,7 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'
                     {
                         name: "ngSanitize",
                         files: [
-                            "/static/bower_components/angular-sanitize/angular-sanitize.min.js",
-                        ]
-                    },
-                    {
-                        name: "highCharts",
-                        files: [
-                            '/static/bower_components/highcharts/js/highcharts.js',
-                            '/static/bower_components/highcharts/css/highcharts.css'
+                            "/static/bower_components/angular-sanitize/angular-sanitize.min.js"
                         ]
                     },
                     {

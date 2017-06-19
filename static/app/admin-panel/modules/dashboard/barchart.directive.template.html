@@ -1,8 +1,10 @@
+<h1>{{ from }}</h1>
+
 <div class="row">
     <div class="col-lg-3">
         <div class="form-group">
             <label id="by">Select by</label>
-            <ui-select ng-model="select.by" theme="bootstrap">
+            <ui-select on-select="changeChart()" ng-model="select.by" theme="bootstrap">
                 <ui-select-match placeholder="Select by Month/Week">{{ $select.selected.text }}</ui-select-match>
                 <ui-select-choices repeat="item.code as item in menuTypes | filter: $select.search">
                     <div ng-bind-html="item.text | highlight: $select.search"></div>
@@ -10,6 +12,34 @@
             </ui-select>
         </div>
     </div>
+
+    <!-- custom dates -->
+    <div class="col-lg-3 col-md-3 col-sm-3" ng-show="select.by == 'customdate'">
+        <div class="form-group">
+            <label>From Date</label>
+            <div class='input-group date' id='from-date-{{ id }}'>
+                <input required type='text' id="from-date-id-{{ id }}" data-date-format="MM/DD/YYYY" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3" ng-show="select.by == 'customdate'">
+        <div class="form-group">
+            <label>To Date</label>
+            <div class='input-group date' id='to-date-{{ id }}'>
+                <input required type='text' id="to-date-id-{{ id }}" data-date-format="MM/DD/YYYY" class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- end of custom dates -->
 </div>
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<canvas chart-options="options" id="doughnut" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
+
+<br>
+<hr />

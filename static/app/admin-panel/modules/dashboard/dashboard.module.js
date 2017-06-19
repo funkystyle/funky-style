@@ -1,101 +1,104 @@
 angular.module("DashboardModule", ["constantModule",
-    "satellizer", "toastr", "personFactoryModule", "highCharts", "ui.select"])
+    "satellizer", "toastr", "personFactoryModule", "ui.select", "chart.js"])
+    .config(function (ChartJsProvider) {
+        ChartJsProvider.setOptions({ colors : [ '#000000', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
+    })
     .directive("barChart", function () {
         return {
             restrict: "E",
             scope: {
                 items: "=",
-                from: "@"
+                from: "@",
+                id: "@"
             },
             templateUrl: "static/app/admin-panel/modules/dashboard/barchart.directive.template.html",
             controller: "barController"
         }
     })
     .controller("barController", function ($scope, $state) {
+
         $scope.menuTypes = [
-            {code: "month", text: "Month"}, {code: "week", text: "Week"}
-        ]
-
-        $scope.showDateType = {
-            month: [
-                'Jan',
-                'Feb',
-                'Mar',
-                'Apr',
-                'May',
-                'Jun',
-                'Jul',
-                'Aug',
-                'Sep',
-                'Oct',
-                'Nov',
-                'Dec'
-            ],
-            week: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+            {code: "month", text: "Month"},
+            {code: "customdate", text: "By Custom Date"}
+        ];
+        $scope.select = {
+            by: $scope.menuTypes[0].code
         };
 
-        $scope.$watch('items', function (items, oldVal) {
-            angular.forEach(items, function (item) {
-                console.log("Item is: ", item);
+        setTimeout(function () {
+            $('#from-date-'+$scope.id).datetimepicker({
+                defaultDate: new Date().setDate(new Date().getDate() - 10)
             });
-        });
 
-        var chartOptions = {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Monthly Average Rainfall'
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
-            },
-            xAxis: {
-                categories: $scope.showDateType.week,
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Rainfall (mm)'
+            $('#to-date-'+$scope.id).datetimepicker({
+                defaultDate: new Date()
+            });
+        }, 2000);
+
+        Date.prototype.addDays = function(days) {
+            var dat = new Date(this.valueOf())
+            dat.setDate(dat.getDate() + days);
+            return dat;
+        }
+
+        function getDates(startDate, stopDate) {
+            var dateArray = new Array();
+            var currentDate = startDate;
+            while (currentDate <= stopDate) {
+                dateArray.push( new Date (currentDate) )
+                currentDate = currentDate.addDays(1);
+            }
+            return dateArray;
+        }
+
+        var objItems = {};
+        function generateArrays () {
+            angular.forEach(objItems, function (val, key) {
+                $scope.labels.push(key);
+                $scope.data[0].push(val);
+            });
+        }
+        $scope.changeChart = function () {
+            $scope.labels = [];
+            $scope.data = [[]];
+            objItems = {};
+            var created = undefined,
+                type = undefined,
+                fromDate = new Date($("#from-date-id-"+$scope.id).val()),
+                toDate = new Date($("#to-date-id-"+$scope.id).val()),
+                dates = [];
+
+            if($scope.select.by == 'customdate') {
+                objItems = {};
+                dates = getDates(fromDate, toDate);
+                angular.forEach(dates, function (date) {
+                    objItems[moment(date).format("DD/MM/YYYY")] = 0;
+                })
+            } else {
+                angular.forEach(monthNames, function (month) {
+                    objItems[month] = 0
+                });
+            }
+            angular.forEach($scope.items, function (item) {
+                var date = new Date(item._created);
+                if($scope.select.by == 'month') {
+                    created = monthNames[date.getMonth()];
+                    objItems[created] = objItems[created] + 1;
+                } else if ($scope.select.by == 'customdate') {
+                    if(objItems[moment(date).format('DD/MM/YYYY')]) {
+                        objItems[moment(date).format('DD/MM/YYYY')] = objItems[moment(date).format('DD/MM/YYYY')] + 1;
+                    }
                 }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Tokyo',
-                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            });
 
-            }, {
-                name: 'New York',
-                data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
-
-            }, {
-                name: 'London',
-                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
-
-            }, {
-                name: 'Berlin',
-                data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
-
-            }]
+            console.log(objItems);
+            generateArrays($scope.select.by);
         };
 
-        Highcharts.chart('container', chartOptions);
+        $scope.changeChart();
+
     })
-    .controller("dashBoardCtrl", function ($scope, mainURL, URL, $state, $auth, $http, toastr, personFactory) {
+    .controller("dashBoardCtrl", function ($scope, mainURL, URL, $state, $auth, $http, $compile, toastr, personFactory) {
 
         $scope.deals = [];
         $scope.coupons = [];
@@ -114,6 +117,12 @@ angular.module("DashboardModule", ["constantModule",
                 console.log(data);
                 if(data['data']) {
                     $scope.coupons = data.data._items;
+                    $("#coupon").remove();
+
+                    setTimeout(function () {
+                        var el = $compile('<bar-chart id="coupon" items="coupons" from="Coupons Graph"></bar-chart>')($scope);
+                        $("#chart-area").append(el);
+                    }, 400);
                 }
             }, function (error) {
                 console.log(error);
@@ -132,6 +141,12 @@ angular.module("DashboardModule", ["constantModule",
                 console.log(data);
                 if(data['data']) {
                     $scope.persons = data.data._items;
+                    $("#persons").remove();
+
+                    setTimeout(function () {
+                        var el = $compile('<bar-chart id="persons" items="persons" from="Persons Graph"></bar-chart>')($scope);
+                        $("#chart-area").append(el);
+                    }, 400);
                 }
             }, function (error) {
                 console.log(error);
@@ -147,6 +162,12 @@ angular.module("DashboardModule", ["constantModule",
                 console.log(data);
                 if(data['data']) {
                     $scope.deals = data.data._items;
+                    $("#deals").remove();
+
+                    setTimeout(function () {
+                        var el = $compile('<bar-chart id="deals" items="deals" from="Deals Graph"></bar-chart>')($scope);
+                        $("#chart-area").append(el);
+                    }, 400);
                 }
             }, function (error) {
                 console.log(error);
@@ -163,6 +184,12 @@ angular.module("DashboardModule", ["constantModule",
                 console.log(data);
                 if(data['data']) {
                     $scope.stores = data.data._items;
+                    $("#stores").remove();
+
+                    setTimeout(function () {
+                        var el = $compile('<bar-chart id="stores" items="stores" from="Stores Graph"></bar-chart>')($scope);
+                        $("#chart-area").append(el);
+                    }, 400);
                 }
             }, function (error) {
                 console.log(error);
