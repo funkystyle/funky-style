@@ -26,13 +26,21 @@ angular.module("DashboardModule", ["constantModule",
         };
 
         setTimeout(function () {
-            $('#from-date-'+$scope.id).datetimepicker({
-                defaultDate: new Date().setDate(new Date().getDate() - 10)
-            });
+            $('#to-date-id-'+$scope.id).datepicker({
+                maxDate: 0,
+                onSelect: function(dateText) {
+                    $('#from-date-id-'+$scope.id).datepicker('option', 'maxDate', this.value );
+                    console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+                }
+            }).datepicker('setDate', new Date());
 
-            $('#to-date-'+$scope.id).datetimepicker({
-                defaultDate: new Date()
-            });
+            var toDate = new Date($('#to-date-id-'+$scope.id).datepicker( "getDate" ));
+            $('#from-date-id-'+$scope.id).datepicker({
+                maxDate: toDate,
+                onSelect: function(dateText) {
+                    console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+                }
+            }).datepicker('setDate', toDate.setDate(toDate.getDate() - 7));
         }, 2000);
 
         Date.prototype.addDays = function(days) {
