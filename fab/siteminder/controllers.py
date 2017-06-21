@@ -35,11 +35,11 @@ def sitemap_deal_categories():
 
 
 @app.route('/api/1.0/sitemap_deal_brands.xml')
-def sitemap_deal_categories():
+def sitemap_deal_brands():
     return Response(open('sitemap_xml_files/sitemap_deal_brands.xml').read(), mimetype='text/xml')
 
 
 @app.route('/api/1.0/sitemap_blog.xml')
-def sitemap_deal_categories():
+def sitemap_blog():
     return Response(open('sitemap_xml_files/sitemap_blog.xml').read(), mimetype='text/xml')
 
