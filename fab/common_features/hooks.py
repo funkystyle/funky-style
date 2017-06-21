@@ -26,6 +26,7 @@ def update_number_of_clicks(resource, _id):
         resource_obj.update({'_id': _id}, {'$inc': {'number_of_clicks': 1}})
 
 def before_returning_stores(response):
+    LOGGER.info("ddddddddddddddddddddddddd")
     update_number_of_clicks('stores', response['_id'])
 
 def before_returning_deals(response):

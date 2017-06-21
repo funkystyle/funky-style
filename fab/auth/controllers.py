@@ -213,7 +213,7 @@ def login():
 
 @app.route('/<path:dummy>')
 def fallback(dummy):
-    LOGGER.info("called dummy end point")
+    LOGGER.info("called dummy end point:{}".format(dummy))
     return make_response(open('static/app/customer-panel/index.html').read())
 
 # registration

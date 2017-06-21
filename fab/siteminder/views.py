@@ -17,7 +17,7 @@ class SiteMinder(object):
             xml_file_path=XML_FILES_FOLDER
 
         )
-        self.index_file = "static/sitemap_xml_files/sitemap_main_index.xml"
+        self.index_file = "sitemap_xml_files/sitemap_index.xml"
 
     def parser(self, file_path):
         self.file_path = file_path
@@ -74,7 +74,7 @@ def generate_sitemap_index_file():
                   "<lastmod>{}</lastmod>\
                   </sitemap>".format(loc, lastmod)
     template = template.format(data=element)
-    out_file = os.path.join(BASE_DIR, 'static', 'sitemap_xml_files', 'sitemap_index.xml')
+    out_file = os.path.join(BASE_DIR, 'sitemap_xml_files', 'sitemap_index.xml')
     write_to_file(out_file, template)
 
 def generate_sub_xml_file(resource_name, app):
@@ -106,7 +106,7 @@ def generate_sub_xml_file(resource_name, app):
                    "<priority>{}</priority>\
                    </url>".format(loc, lastmod, changefreq, priority)
     template = template.format(data=element)
-    out_file = os.path.join(BASE_DIR, 'static', 'sitemap_xml_files', 'sitemap_{}.xml'.format(resource_name.replace("-","_")))
+    out_file = os.path.join(BASE_DIR, 'sitemap_xml_files', 'sitemap_{}.xml'.format(resource_name.replace("-","_")))
     write_to_file(out_file, template)
 
 

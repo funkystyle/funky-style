@@ -1,4 +1,4 @@
-from flask import make_response
+from flask import make_response, Response
 
 from fab import app
 
@@ -6,34 +6,40 @@ from settings import LOGGER
 
 
 
-@app.route('/api/1.0/sitemap-index')
+@app.route('/sitemap_index.xml')
 def sitemap_index():
-    return make_response(open('static/sitemap_xml_files/sitemap_main_index.xml').read())
+    return Response(open('sitemap_xml_files/sitemap_index.xml').read(), mimetype='text/xml')
 
-@app.route('/api/1.0/sitemap-stores')
+@app.route('/sitemap_stores.xml')
 def sitemap_stores():
-    return make_response(open('static/sitemap_xml_files/sitemap_stores.xml').read())
+    return Response(open('sitemap_xml_files/sitemap_stores.xml').read(), mimetype='text/xml')
 
-@app.route('/api/1.0/sitemap-categories')
+
+@app.route('/sitemap_categories.xml')
 def sitemap_categories():
-    return make_response(open('static/sitemap_xml_files/sitemap_categories.xml').read())
+    return Response(open('sitemap_xml_files/sitemap_categories.xml').read(), mimetype='text/xml')
 
-@app.route('/api/1.0/sitemap-deals')
+@app.route('/sitemap_deals.xml')
 def sitemap_deals():
-    return make_response(open('static/sitemap_xml_files/sitemap_deals.xml').read())
+    return Response(open('sitemap_xml_files/sitemap_deals.xml').read(), mimetype='text/xml')
 
-@app.route('/api/1.0/sitemap-cms-pages')
+
+@app.route('/api/1.0/sitemap_cms_pages.xml')
 def sitemap_cms_pages():
-    return make_response(open('static/sitemap_xml_files/sitemap_cms_pages.xml').read())
+    return Response(open('sitemap_xml_files/sitemap_cms_pages.xml').read(), mimetype='text/xml')
 
-@app.route('/api/1.0/sitemap-deal-categories')
+
+@app.route('/api/1.0/sitemap_deal_categories.xml')
 def sitemap_deal_categories():
-    return make_response(open('static/sitemap_xml_files/sitemap_deal_categories.xml').read())
+    return Response(open('sitemap_xml_files/sitemap_deal_categories.xml').read(), mimetype='text/xml')
 
-@app.route('/api/1.0/sitemap-deal-brands')
-def sitemap_deal_brands():
-    return make_response(open('static/sitemap_xml_files/sitemap_deal_brands.xml').read())
 
-@app.route('/api/1.0/sitemap-blog')
-def sitemap_blog():
-    return make_response(open('static/sitemap_xml_files/sitemap_blog.xml').read())
+@app.route('/api/1.0/sitemap_deal_brands.xml')
+def sitemap_deal_categories():
+    return Response(open('sitemap_xml_files/sitemap_deal_brands.xml').read(), mimetype='text/xml')
+
+
+@app.route('/api/1.0/sitemap_blog.xml')
+def sitemap_deal_categories():
+    return Response(open('sitemap_xml_files/sitemap_blog.xml').read(), mimetype='text/xml')
+
