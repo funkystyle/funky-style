@@ -85,7 +85,8 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
     })
 
     // ==== coupon info popup controller
-    .controller("couponInfoPopupCtrl", function ($scope, $http, $state, $ocLazyLoad, $sce, $stateParams) {
+    .controller("couponInfoPopupCtrl", function ($scope, $http, $state,
+                                                 $ocLazyLoad, $sce, $stateParams, Query) {
         console.log("couponInfoPopupCtrl: ");
 
         $ocLazyLoad.load("static/bower_components/clipboard/dist/clipboard.min.js").then(function (data) {
@@ -117,6 +118,12 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
             clipboard.on('error', function(e) {
                 console.error('Action:', e.action);
                 console.error('Trigger:', e.trigger);
+            });
+
+            url = "/api/1.0/coupons";
+            Query.get(url).then(function (coupons) {
+                var items = coupons.data._items;
+                console.log(" Coupons Data: ", items);
             });
         });
     })
@@ -150,4 +157,20 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
                 console.log(erorr);
             });
         }
-    });
+    })
+    .factory("Query", function ($http, $q) {
+        return {
+            get: function (url) {
+                var d = $q.defer();
+                $http({
+                    url: url+"&r="+Math.random(),
+                    method: "GET"
+                }).then(function (data) {
+                    d.resolve(data);
+                }, function (error) {
+                    d.reject(error);
+                });
+                return d.promise;
+            }
+        }
+    })
