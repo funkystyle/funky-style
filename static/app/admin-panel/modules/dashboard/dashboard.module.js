@@ -1,7 +1,17 @@
 angular.module("DashboardModule", ["constantModule",
     "satellizer", "toastr", "personFactoryModule", "ui.select", "chart.js"])
     .config(function (ChartJsProvider) {
-        ChartJsProvider.setOptions({ colors : [ '#000000', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
+        // Configure all charts
+        ChartJsProvider.setOptions({
+            colors: ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']
+        });
+        // Configure all doughnut charts
+        ChartJsProvider.setOptions('doughnut', {
+            cutoutPercentage: 60
+        });
+        ChartJsProvider.setOptions('bar', {
+            tooltips: { enabled: false }
+        });
     })
     .directive("barChart", function () {
         return {
@@ -16,7 +26,6 @@ angular.module("DashboardModule", ["constantModule",
         }
     })
     .controller("barController", function ($scope, $state) {
-
         $scope.menuTypes = [
             {code: "month", text: "Month"},
             {code: "customdate", text: "By Custom Date"}
@@ -31,6 +40,7 @@ angular.module("DashboardModule", ["constantModule",
                 onSelect: function(dateText) {
                     $('#from-date-id-'+$scope.id).datepicker('option', 'maxDate', this.value );
                     console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+                    $scope.changeChart();
                 }
             }).datepicker('setDate', new Date());
 
@@ -39,6 +49,7 @@ angular.module("DashboardModule", ["constantModule",
                 maxDate: toDate,
                 onSelect: function(dateText) {
                     console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+                    $scope.changeChart();
                 }
             }).datepicker('setDate', toDate.setDate(toDate.getDate() - 7));
         }, 2000);
@@ -47,7 +58,7 @@ angular.module("DashboardModule", ["constantModule",
             var dat = new Date(this.valueOf())
             dat.setDate(dat.getDate() + days);
             return dat;
-        }
+        };
 
         function getDates(startDate, stopDate) {
             var dateArray = new Array();
@@ -65,6 +76,8 @@ angular.module("DashboardModule", ["constantModule",
                 $scope.labels.push(key);
                 $scope.data[0].push(val);
             });
+            window.dispatchEvent(new Event('resize'));
+            console.log($scope.labels, $scope.data[0]);
         }
         $scope.changeChart = function () {
             $scope.labels = [];

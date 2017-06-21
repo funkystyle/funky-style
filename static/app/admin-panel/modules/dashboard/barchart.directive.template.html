@@ -1,4 +1,4 @@
-<h1>{{ from }}</h1>
+<h3>{{ from }}</h3>
 
 <div class="row">
     <div class="col-lg-3">
@@ -19,9 +19,6 @@
             <label>From Date</label>
             <div class='input-group date' id='from-date-{{ id }}'>
                 <input required type='text' id="from-date-id-{{ id }}" data-date-format="MM/DD/YYYY" class="form-control dateInput" />
-                <span class="input-group-addon" ng-click="openDatePicker('from-date-', id)">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
             </div>
         </div>
     </div>
@@ -30,16 +27,13 @@
             <label>To Date</label>
             <div class='input-group date' id='to-date-{{ id }}'>
                 <input onchange="getDate()" required type='text' id="to-date-id-{{ id }}" data-date-format="MM/DD/YYYY" class="form-control dateInput" />
-                <span class="input-group-addon" ng-click="openDatePicker('to-date-', id)">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
             </div>
         </div>
     </div>
     <!-- end of custom dates -->
 </div>
 
-<canvas chart-options="options" id="doughnut" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
+<canvas id="doughnut" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series"></canvas>
 
 <br>
 <hr />
