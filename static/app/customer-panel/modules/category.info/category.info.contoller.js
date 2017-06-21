@@ -43,7 +43,6 @@ angular
 
         // open coupon popup code
         $scope.openCouponCode = function (category, item) {
-
             // put a request to update the no of clicks into the particular coupon document
             var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
             Query.get(url);
@@ -53,10 +52,6 @@ angular
         };
 
         if($stateParams['url']) {
-            // get category information
-            var where = {};
-            where['url'] = $stateParams.url;
-
             var embedded = {};
             embedded['related_categories'] = 1;
             embedded['top_stores'] = 1;
@@ -64,15 +59,15 @@ angular
             embedded['related_coupons.related_categories'] = 1;
             embedded['related_coupons.related_stores'] = 1;
             
-            url = '/api/1.0/categories/'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+"&r="+Math.random();
+            url = '/api/1.0/categories/'+$stateParams.url+'?embedded='+JSON.stringify(embedded)+"&number_of_clicks=1&r="+Math.random();
             $http({
                 url: url,
                 method: "GET"
             }).then(function (category) {
                 console.log(category);
                 if(category['data']) {
-                    if(category.data._items.length) {
-                        $scope.category = category.data._items[0];
+                    if(category.data) {
+                        $scope.category = category.data;
                         $scope.category.toDayDate = new Date();
                         $scope.category.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
 
