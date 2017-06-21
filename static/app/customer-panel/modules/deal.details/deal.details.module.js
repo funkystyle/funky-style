@@ -13,11 +13,6 @@ angular.module("dealDetailsModule", ["Directives"])
 
         // if stateParams of url found the call http request to get the deal details from ther server
         if($stateParams['url']) {
-            // get the list of coupons
-            var where = JSON.stringify({
-                url: $stateParams.url
-            });
-
             var embedded = JSON.stringify({
                 'related_deals': 1,
                 'deal_brands': 1,
@@ -26,15 +21,15 @@ angular.module("dealDetailsModule", ["Directives"])
                 'stores.store': 1
             });
 
-            var url = '/api/1.0/deals'+'?where='+where+'&number_of_clicks=1&embedded='+embedded+'&rand_number'+Math.random();
+            var url = '/api/1.0/deals/'+$stateParams.url+'?number_of_clicks=1&embedded='+embedded+'&rand_number'+Math.random();
             $http({
                 url: url,
                 method: "GET"
             }).then(function (data) {
                 console.log(data);
-                if(data['data'] && data['data']['_items'].length) {
-                    console.log(data.data._items[0]);
-                    $scope.deal = data.data._items[0];
+                if(data['data']) {
+                    console.log(data.data);
+                    $scope.deal = data.data;
                     $scope.deal.expired_date = new Date($scope.deal.expired_date);
                 } else {
                     $state.go('404');

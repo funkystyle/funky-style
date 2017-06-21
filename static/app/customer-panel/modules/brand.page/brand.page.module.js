@@ -79,21 +79,18 @@ angular.module("brandPageModule", ["Directives"])
             $scope.brands = [];
             var random = new Date().getDate();
             if($stateParams['url']) {
-                var where = {
-                    "url": $stateParams.url
-                };
                 var embedded = {
                     "related_brands": 1
                 };
                 $http({
-                    url: "/api/1.0/deal_brands?where="+JSON.stringify(where)+"&rand="+random+"&embedded="+JSON.stringify(embedded),
+                    url: "/api/1.0/deal_brands/"+$stateParams.url+"?number_of_clicks=1&rand="+random+"&embedded="+JSON.stringify(embedded),
                     method: "GET"
                 }).then(function (data) {
-                    if(data.data._items.length == 0) {
+                    if(!data.data) {
                         $state.go('404');
                     }
-                    console.log("Deal brand is: ", data.data._items[0]);
-                    $scope.deal = data.data._items[0];
+                    console.log("Deal brand is: ", data.data);
+                    $scope.deal = data.data;
                     $scope.deal.date = new Date();
 
                     setTimeout(function () {
