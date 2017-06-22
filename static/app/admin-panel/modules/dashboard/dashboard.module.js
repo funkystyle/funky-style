@@ -1,18 +1,5 @@
 angular.module("DashboardModule", ["constantModule",
-    "satellizer", "toastr", "personFactoryModule", "ui.select", "chart.js"])
-    .config(function (ChartJsProvider) {
-        // Configure all charts
-        ChartJsProvider.setOptions({
-            colors: ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']
-        });
-        // Configure all doughnut charts
-        ChartJsProvider.setOptions('doughnut', {
-            cutoutPercentage: 60
-        });
-        ChartJsProvider.setOptions('bar', {
-            tooltips: { enabled: false }
-        });
-    })
+    "satellizer", "toastr", "personFactoryModule", "ui.select"])
     .directive("barChart", function () {
         return {
             restrict: "E",
@@ -34,6 +21,18 @@ angular.module("DashboardModule", ["constantModule",
             by: $scope.menuTypes[0].code
         };
 
+        var morris = undefined;
+        setTimeout(function () {
+            morris = Morris.Bar({
+                element: 'bar-example-'+$scope.id,
+                data: [],
+                xkey: 'y',
+                ykeys: ['a'],
+                labels: [$scope.from],
+                xLabelMargin: 10
+            });
+        }, 1000);
+
         setTimeout(function () {
             $('#to-date-id-'+$scope.id).datepicker({
                 maxDate: 0,
@@ -52,7 +51,7 @@ angular.module("DashboardModule", ["constantModule",
                     $scope.changeChart();
                 }
             }).datepicker('setDate', toDate.setDate(toDate.getDate() - 7));
-        }, 2000);
+        }, 4000);
 
         Date.prototype.addDays = function(days) {
             var dat = new Date(this.valueOf())
@@ -70,18 +69,20 @@ angular.module("DashboardModule", ["constantModule",
             return dateArray;
         }
 
-        var objItems = {};
+        var objItems = {},
+            keyValues = [];
         function generateArrays () {
             angular.forEach(objItems, function (val, key) {
-                $scope.labels.push(key);
-                $scope.data[0].push(val);
+                keyValues.push({y: key, a: val})
             });
-            window.dispatchEvent(new Event('resize'));
-            console.log($scope.labels, $scope.data[0]);
+
+            console.log("Final Key Values: ", keyValues);
+            setTimeout(function () {
+                morris.setData(keyValues);
+            }, 1000);
         }
         $scope.changeChart = function () {
-            $scope.labels = [];
-            $scope.data = [[]];
+            keyValues = [];
             objItems = {};
             var created = undefined,
                 type = undefined,
@@ -112,7 +113,7 @@ angular.module("DashboardModule", ["constantModule",
                 }
             });
 
-            console.log(objItems);
+            console.log("objItems: ", objItems);
             generateArrays($scope.select.by);
         };
 
@@ -141,7 +142,7 @@ angular.module("DashboardModule", ["constantModule",
                     $("#coupon").remove();
 
                     setTimeout(function () {
-                        var el = $compile('<bar-chart id="coupon" items="coupons" from="Coupons Graph"></bar-chart>')($scope);
+                        var el = $compile('<bar-chart id="coupon" items="coupons" from="Coupons"></bar-chart>')($scope);
                         $("#chart-area").append(el);
                     }, 400);
                 }
@@ -165,7 +166,7 @@ angular.module("DashboardModule", ["constantModule",
                     $("#persons").remove();
 
                     setTimeout(function () {
-                        var el = $compile('<bar-chart id="persons" items="persons" from="Persons Graph"></bar-chart>')($scope);
+                        var el = $compile('<bar-chart id="persons" items="persons" from="Persons"></bar-chart>')($scope);
                         $("#chart-area").append(el);
                     }, 400);
                 }
@@ -186,7 +187,7 @@ angular.module("DashboardModule", ["constantModule",
                     $("#deals").remove();
 
                     setTimeout(function () {
-                        var el = $compile('<bar-chart id="deals" items="deals" from="Deals Graph"></bar-chart>')($scope);
+                        var el = $compile('<bar-chart id="deals" items="deals" from="Deals"></bar-chart>')($scope);
                         $("#chart-area").append(el);
                     }, 400);
                 }
@@ -208,7 +209,7 @@ angular.module("DashboardModule", ["constantModule",
                     $("#stores").remove();
 
                     setTimeout(function () {
-                        var el = $compile('<bar-chart id="stores" items="stores" from="Stores Graph"></bar-chart>')($scope);
+                        var el = $compile('<bar-chart id="stores" items="stores" from="Stores"></bar-chart>')($scope);
                         $("#chart-area").append(el);
                     }, 400);
                 }
