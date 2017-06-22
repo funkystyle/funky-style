@@ -80,18 +80,21 @@ angular.module("dealCategoryPageModule", ["Directives"])
             $scope.categories = [];
             var random = new Date().getDate();
             if($stateParams['url']) {
+                var where = {
+                    "url": $stateParams.url
+                };
                 var embedded = {
                     "related_categories": 1
                 };
                 $http({
-                    url: "/api/1.0/deal_categories/"+$stateParams.url+"?number_of_clicks=1&rand="+random+"&embedded="+JSON.stringify(embedded),
+                    url: "/api/1.0/deal_categories?where="+JSON.stringify(where)+"&rand="+random+"&embedded="+JSON.stringify(embedded),
                     method: "GET"
                 }).then(function (data) {
-                    if(!data.data) {
+                    if(data.data._items.length == 0) {
                         $state.go('404');
                     }
-                    console.log("Deal brand is: ", data.data);
-                    $scope.deal = data.data;
+                    console.log("Deal brand is: ", data.data._items[0]);
+                    $scope.deal = data.data._items[0];
                     $scope.deal.toDayDate = new Date();
                     $scope.deal.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $rootScope.pageTitle = $scope.deal.seo_title;

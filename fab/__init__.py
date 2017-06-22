@@ -8,8 +8,6 @@ from binascii import unhexlify, hexlify
 from simplecrypt import encrypt, decrypt
 from settings import *
 
-import os
-tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
 class EncrptDecrpt:
 
@@ -86,7 +84,7 @@ class MediaClass(MediaStorage):
         raise NotImplementedError
 
 
-app = Eve(__name__, media=MediaClass, template_folder=tmpl_dir)
+app = Eve(__name__, media=MediaClass)
 app._static_folder = os.path.abspath("/")
 #UPLOAD_FOLDER = 'static/images'
 #app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER

@@ -211,6 +211,11 @@ def login():
 
 
 
+@app.route('/favicon.ico')
+def favicon():
+    LOGGER.info("called: favicon.ico")
+    return make_response(open('static/app/customer-panel/index.html').read())
+
 @app.route('/<path:dummy>')
 def fallback(dummy):
     LOGGER.info("called dummy end point:{}".format(dummy))

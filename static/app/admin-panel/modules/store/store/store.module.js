@@ -36,7 +36,6 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                 "name": 1,
                 "url": 1,
                 "image": 1,
-                "number_of_clicks": 1,
                 "top_description": 1,
                 "featured_store": 1
             };
