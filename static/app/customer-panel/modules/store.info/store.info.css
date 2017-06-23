@@ -9,6 +9,10 @@
 .store-info {
     color: #888;
 }
+.store-logo img {
+    max-height: 100px;
+    border-radius: 3px;
+}
 .deal-price .deal img {
     height: 55px;
     width: 100%;
@@ -59,8 +63,8 @@ div.coupon {
 }
 .thumbnail .fa {
     position: absolute;
-    top: -2px;
-    right: 12px;
+    top: -9px;
+    right: 5px;
     font-size: 20px;
     cursor: pointer;
 }
@@ -82,11 +86,8 @@ div.coupon {
     margin-bottom: 0;
 }
 /* tabs */
-.nav-tabs {
-    border-bottom: 0px solid #FFFFFF;
-}
-.nav-tabs>li>a, .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-    border: 1px solid rgba(221, 221, 221, 0.5);
+.nav-tabs>li>a {
+    padding: 15px;
 }
 .nav-tabs li a span {
     margin-top: -5px;

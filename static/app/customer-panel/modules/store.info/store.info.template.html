@@ -8,16 +8,14 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 thumb">
-                    <div class="thumbnail">
-                        <i class="fa" ng-class="{'fa-heart-o': !favorite.favorite, 'fa-heart': favorite.favorite}" ng-click="manageFavorite()"></i>
-                        <img ng-src="{{ store.image }}" alt="Flipkart logo" title="Flip cart logo">
+                    <div class="thumbnail store-logo">
+                        <i class="fa" ng-class="{'fa-heart-o': !favorite.favorite, 'fa-heart': favorite.favorite}"
+                           ng-click="manageFavorite()"></i>
+                        <img ng-src="{{ store.image }}" alt="{{ store.name }}" title="{{ store.name }}">
                     </div> <!-- end thumbnail -->
-                    <p class="text-center font-bold">
-                        Rate this store
-                    </p>
-                    <p class="text-center rating-stars">
+                    <div class="text-center rating-stars">
                         <div class="text-center" star-rating rating-value="store.rating" max="5"></div>
-                    </p>
+                    </div>
                     <p class="text-center">
                         {{ store.rating }}/5 Based on {{ store.voting }} Votes
                     </p>
@@ -37,7 +35,7 @@
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(store.top_description)"></p>
                     <p class="para_small">
-                        {{ store.number_of_coupons }} Verified Coupons -
+                        {{ store.related_coupons.length }} Verified Coupons -
                         <time datetime="{{ store.toDayDate | date: 'dd MMM yyyy hh:mm' }}">{{ store.toDayDate | date: "dd MMM yyyy hh:mm a" }}</time>
                     </p>
                     <p>
