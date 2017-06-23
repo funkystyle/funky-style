@@ -120,7 +120,7 @@
                             <div class="col-lg-5 col-md-5 col-sm-5 pull-left">
                                 <img style="max-height: 50px;" ng-src="{{ item.related_stores[0]['image'] }}" alt="">
                             </div>
-                            <div class="col-lg-3 col-sm-3 col-md-3 pull-right">
+                            <div class="col-lg-5 col-sm-5 col-md-5 pull-right">
                                 <h4 style="font-weight: bold;" class="text-right rupee">
                                     {{ item.discount_type }} {{ item.discount }}
                                 </h4>
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <p style="min-height: 40px;">{{ item.title }}</p>
+                        <p style="min-height: 40px; max-height: 40px; overflow: hidden;">{{ item.title }}</p>
                         <div class="row">
                             <div class="col-lg-6 col-sm-6 col-md-6 pull-right">
                                 <a class="desc-p pull-right"
@@ -201,7 +201,7 @@
                                 <a href="">Rs. {{ item.discount_price }}</a>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6   text-right col-xs-5">
-                                View Offers
+                                <a ui-sref="main.deal_post_details({url: item.url})">View Offers</a>
                             </div>
                         </div>
                     </div>

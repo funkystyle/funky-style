@@ -120,10 +120,23 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
                 console.error('Trigger:', e.trigger);
             });
 
-            url = "/api/1.0/coupons";
+            // open coupon popup code
+            $scope.openCouponCode = function (store, item) {
+
+                // put a request to update the no of clicks into the particular coupon document
+                var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
+                Query.get(url);
+
+                url = $state.href($state.current.name, {cc: item._id});
+                window.open(url,'_blank');
+            };
+
+            $scope.moreCoupons = [];
+            url = "/api/1.0/coupons?sort=-number_of_clicks&max_results=3";
             Query.get(url).then(function (coupons) {
                 var items = coupons.data._items;
                 console.log(" Coupons Data: ", items);
+                $scope.moreCoupons = items;
             });
         });
     })

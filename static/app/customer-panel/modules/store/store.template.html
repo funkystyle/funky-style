@@ -18,19 +18,21 @@
         </div>
     </div>
     <div class="row main-popular-grids row_style">
-        <div ui-sref="main.store-info({url: item.url})" class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="item in storeAlphabet[sorting.sorting].array | orderBy: 'name'">
-            <div class="thumbnail" style="position: relative;">
-                <img class="img-responsive" ng-src="{{ item.image }}" alt="">
-                <div class="overlay-on-image text-center">
-                    <h4>
-                        {{ item.name }}
-                    </h4>
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="item in storeAlphabet[sorting.sorting].array | orderBy: 'name'">
+            <a ui-sref="main.store-info({url: item.url})">
+                <div class="thumbnail" style="position: relative;">
+                    <img class="img-responsive" ng-src="{{ item.image }}" alt="">
+                    <div class="overlay-on-image text-center">
+                        <h4>
+                            {{ item.name }}
+                        </h4>
+                    </div>
                 </div>
-            </div>
-            <!-- end thumbnail -->
-            <div class="well social-well">
-                <h4 class="text-center">{{ item.name }} ({{ item.related_coupons.length }})</h4>
-            </div>
+                <!-- end thumbnail -->
+                <div class="well social-well">
+                    <h4 class="text-center">{{ item.name }} ({{ item.related_coupons.length }})</h4>
+                </div>
+            </a>
         </div>
         <!-- end col -->
     </div>

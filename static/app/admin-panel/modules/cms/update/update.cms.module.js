@@ -31,6 +31,7 @@ angular.module("updateCmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
                 cmsFactory.update(cms, $auth.getToken()).then(function (data) {
                     console.log(data);
                     toastr.success(cms.name+" Updated!", "Success");
+                    $state.go("header.cms");
                 }, function (error) {
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);
