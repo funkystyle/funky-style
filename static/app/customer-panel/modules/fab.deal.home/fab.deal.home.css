@@ -1,4 +1,7 @@
-
+.pop-cat-panel {
+	max-height: 100px;
+	min-height: 100px;
+}
 .price_txt{
 	font-weight: bold;
 	text-align: center;
@@ -10,8 +13,16 @@
 .set_position{
     margin-top: 10px; padding-left: 0;
 }
+.set_position img, .product-img img {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
 .thumbnail {
     border: 0 solid #FFFFFF;
+}
+.brand-well {
+    margin-bottom: 0;
 }
 .pad-0 {
     padding: 0;
@@ -23,10 +34,17 @@
 .best_sell_txt{ font-weight: bold; }
 .row_best{ margin-bottom: 2px; border-top: 1px solid #eee;padding:4px 0%; }
 .row_best_1{ margin-bottom: 2px; border-top: 1px solid #eee; border-bottom: 1px solid #eee;padding:4px 0%; }
+.store-thumbnail {
+    padding: 0;
+    margin-bottom: 0;
+}
 .store-thumbnail img {
-	max-height: 120px;
-	min-height: 120px;
+	max-height: 90px;
+	min-height: 90px;
     width: 100%;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 .about_raja{ border-bottom: 1px solid #eeeeee; font-weight: bold; padding-bottom: 1%; }
 .row_bot_pad{

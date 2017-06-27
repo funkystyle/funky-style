@@ -10,7 +10,7 @@
 }
 .product-img {
     max-height: 200px;
-    padding-top: 10px;
+    padding-top: 0;
 }
 .product-img img {
     max-height: 200px;

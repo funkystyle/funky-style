@@ -1216,7 +1216,11 @@ PERSONS = {
 USER_FAV_COLLECTION = {
     'item_title': 'user_favs',
     'schema': USER_FAV_SCHEMA,
-    'url': 'user-favs'
+    'url': 'user-favs',
+    'additional_lookup': {
+        'url': 'regex("[\w\-]+")',
+        'field': 'user_id'
+    }
 }
 STORES = {
     'item_title': 'stores',

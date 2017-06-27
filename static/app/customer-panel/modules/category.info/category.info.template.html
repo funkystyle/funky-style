@@ -7,17 +7,14 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 thumb">
-					<div class="thumbnail">
+					<div class="thumbnail store-logo">
 						<i class="fa" ng-class="{'fa-heart-o': !favorite.favorite, 'fa-heart': favorite.favorite}"
 						   ng-click="manageFavorite()"></i>
 						<img ng-src="{{ category.image }}" alt="{{ category.name }}" title="{{ category.name }}">
 					</div> <!-- end thumbnail -->
-					<p class="text-center font-bold">
-						Rate this category
-					</p>
-                    <p class="text-center rating-stars">
+					<div style="width: 100%;" class="text-center rating-stars">
                         <div class="text-center" star-rating rating-value="category.rating" max="5"></div>
-                    </p>
+                    </div>
 					<p class="text-center">
 						{{ category.rating }}/5 Based on {{ category.voting }} Votes
 					</p>
@@ -165,7 +162,7 @@
 					<div class="check-box-filter-area">
                         <div class="media" ng-repeat="item in category.related_categories">
                             <a class="pull-left" ui-sref="main.categoryinfo({url: item.url, cc: undefined})">
-                                <img style="width: 50px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
+                                <img style="width: 120px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
                             </a>
                             <div class="media-body">
                                 <h4 class="media-heading">
@@ -190,7 +187,7 @@
 					<div class="check-box-filter-area">
                         <div class="media" ng-repeat="item in category.top_stores">
                             <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
-                                <img style="width: 50px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
+                                <img style="width: 120px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
                             </a>
                             <div class="media-body">
                                 <h4 class="media-heading">
@@ -217,8 +214,8 @@
                 </div>
             </div>
             <!-- end of top banner area -->
-            <div class="row" style="margin-bottom: 20px;">
-                <div ng-repeat="item in category.top_stores | limitTo: 6" class="col-md-2 col-sm-2">
+            <div class="row cat-top-store-area">
+                <div ng-repeat="item in category.top_stores | limitTo: 6" class="col-md-2 col-sm-2 pad-left-0">
                     <div class="thumbnail cat-top-stores" ui-sref="main.store-info({url: item.url})">
                         <img ng-src="{{ item.image }}" alt="" height="50" width="100">
                     </div>
@@ -235,7 +232,7 @@
                                             <h4>
                                                 {{ item.discount_type }} {{ item.discount }}
                                             </h4>
-                                            <div class="deal">
+                                            <div class="related-coupon-deal">
                                                 <img ng-src="{{ item.related_stores[0].image }}">
                                             </div>
                                         </div> <!-- end deal-price -->

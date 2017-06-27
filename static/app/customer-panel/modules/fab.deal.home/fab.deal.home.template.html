@@ -10,11 +10,13 @@
     <div class="row">
         <div class="col-md-3 col-lg-3" ng-repeat="item in deal_categories">
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body pop-cat-panel">
                     <div class="row">
                         <div class="col-md-9 col-lg-9">
                             <h4><a ui-sref="main.deal_category_page({url: item.url})">{{ item.name }}</a></h4>
-                            <h5><a ui-sref="main.deal_category_page({url: item.url})">See All {{ item.name }} Price list</a></h5>
+                            <h5><a ui-sref="main.deal_category_page({url: item.url})">
+                                See All {{ item.name }} Price list
+                            </a></h5>
                         </div>
                         <div class="col-md-3 col-lg-3">
                             <div class="thumbnail set_position">
@@ -31,10 +33,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body" style="padding-bottom: 0;">
                     <div class="row">
                         <div class="col-md-4 col-lg-4">
-                            <div class="well">
+                            <div class="well brand-well">
                                 <h4>Mobiles below Rs 5000 <i class="fa fa-arrow-right pull-right" aria-hidden="true"></i></h4>
                             </div>
                         </div>
@@ -57,7 +59,7 @@
     <div class="row">
         <div class="col-md-3 col-lg-3" ng-repeat="item in deal_brands">
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body pop-cat-panel">
                     <div class="row">
                         <div class="col-md-9 col-lg-9">
                             <h4><a ui-sref="main.deal_brand_page({url: item.url})">{{ item.name }}</a></h4>
@@ -93,10 +95,11 @@
         <div class="col-lg-3 col-md-3" ng-repeat="item in stores">
             <div class="panel panel-default pad_panel">
                 <div class="panel-body" style="padding: 0;">
-                    <div class="thumbnail store-thumbnail">
-                        <img ng-src="{{ item.image }}">
-                    </div>
-                    <a ui-sref="main.store-info({url: item.url})" class="text-uppercase btn btn-default btn-md btn-block">GOTO {{ item.name }}</a>
+                    <a title="{{ item.name }}" ui-sref="main.store-info({url: item.url})">
+                        <div class="thumbnail store-thumbnail">
+                            <img ng-src="{{ item.image }}">
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
