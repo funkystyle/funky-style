@@ -3203,7 +3203,8 @@ fieldset[disabled] .form-control {
 }
 
 textarea.form-control {
-    height: auto
+    height: auto;
+    resize: none !important;
 }
 
 input[type="search"] {
@@ -3257,7 +3258,8 @@ input[type="search"] {
     padding-left: 20px;
     margin-bottom: 0;
     font-weight: normal;
-    cursor: pointer
+    cursor: pointer;
+    text-transform: capitalize;
 }
 
 .radio input[type="radio"],
@@ -6243,7 +6245,11 @@ a.thumbnail.active {
 .media,
 .media-body {
     zoom: 1;
-    overflow: hidden
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
 }
 
 .media-body {
@@ -6251,7 +6257,10 @@ a.thumbnail.active {
 }
 
 .media-object {
-    display: block
+    display: block;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .media-object.img-thumbnail {
@@ -6560,8 +6569,8 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-title {
-    margin-top: 0;
-    margin-bottom: 0;
+    /*margin-top: 0;
+    margin-bottom: 0;*/
     font-size: 17px;
     color: inherit
 }

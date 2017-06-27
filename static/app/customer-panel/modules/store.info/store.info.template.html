@@ -352,15 +352,11 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="row vari_pad">
-                                    <div class="col-lg-12 col-md-12">
-                                        <!-- comments display directive -->
-                                        <comments-display items="item.comments"></comments-display>
-                                        <!-- end of comments display directive -->
-                                    </div>
-                                </div>
                             </div>
                             <!--end panel footer -->
+                            <!-- comments display directive -->
+                                    <comments-display items="item.comments"></comments-display>
+                            <!-- end of comments display directive -->
                         </div> <!-- end panel -->
                         <!-- promo codes starts here --> <!-- panel -->
                         <div class="row" ng-if="$index == 2">
@@ -380,24 +376,28 @@
                     </div><!-- end row -->
                     <div class="row">
                         <div class="col-md-4" ng-repeat="item in store.related_deals | orderBy: '_updated': true">
-                            <div href="#" class="thumbnail image-height">
-                                <h4 class="deals-upto">{{ item.name }}</h4>
-                                <img src="http://placehold.it/250x250" alt="Image" style="min-width:100%;">
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 pad-right-0">
-                                        <strike>Rs. {{ item.actual_price }}</strike> &nbsp; &nbsp;
-                                        <a href="">Rs. {{ item.discount_price }}</a>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h4><b>{{ item.name }}</b></h4>
+
+                                    <div class="thumbnail border-0">
+                                        <img class="top-deal-img" ng-src="{{ item.images[0] }}" alt="">
                                     </div>
-                                    <!-- <div class="col-lg-6 col-md-6 col-sm-6 pad-left-0 text-right">
-                                        View Offers
-                                    </div> -->
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 pad-right-0 col-xs-7">
+                                            <strike>Rs. {{ item.actual_price }}</strike> &nbsp; &nbsp;
+                                            <a href="">Rs. {{ item.discount_price }}</a>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6   text-right col-xs-5">
+                                            <a ui-sref="main.deal_post_details({url: item.url})">View Offers</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col-lg-12">
-                                        <a ui-sref="main.deal_post_details({url: item.url})" class="btn btn-md btn-info btn-block">
-                                            GET DEAL
-                                        </a>
-                                    </div>
+                                <div class="panel-footer" style="padding: 0;">
+                                    <a ui-sref="main.deal_post_details({url: item.url})" class="btn btn-md btn-info btn-block">
+                                        GET DEAL
+                                    </a>
                                 </div>
                             </div>
                         </div>
