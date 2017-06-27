@@ -6,6 +6,27 @@
     border-radius: 0;
     font-size: 13px;
 }
+.related-coupon-deal {
+    position: absolute;
+    bottom: -20px;
+    background-color: #9954bb;
+    min-height: 50px;
+    width: 130px;
+    border-radius: 5px;
+    max-height: 50px;
+    left: -10px;
+    color: #FFFFFF;
+    line-height: 25px;
+}
+.related-coupon-deal img {
+    height: 50px;
+    border-radius: 3px;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-image: initial;
+}
 .store-info {
     color: #888;
 }
@@ -20,6 +41,14 @@
     border-style: solid;
     border-color: rgb(221, 221, 221);
     border-image: initial;
+}
+.deal-thumbnail {
+    padding: 0 !important;
+    margin-bottom: 15px !important;
+}
+.deal-thumbnail img {
+    max-height: 200px;
+    min-height: 200px;
 }
 .thumbnail {
     border: 0px solid #FFFFFF;
@@ -235,7 +264,9 @@ div.coupon {
 .ola_mar{
     margin-bottom: 20px;
 }
-
+.desc-area {
+    line-height: 40px;
+}
 /* ----------- coupon popup ----- */
 .coupon-content{
     border-radius: 0px;

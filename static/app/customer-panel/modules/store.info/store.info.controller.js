@@ -2,7 +2,7 @@ angular
     .module("storeinfoModule", ["categoryFactoryModule", "Directives", "satellizer"])
     .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth,
                                                  categoryFactory, $filter, $sce, $ocLazyLoad,
-                                                 $rootScope, $compile, Query, $q) {
+                                                 $rootScope, $compile, Query, $q, auth) {
         $scope.favorite = {
             favorite: false
         };
@@ -42,14 +42,38 @@ angular
             }
         };
 
+        // show description
+        $scope.showDescription = function (id) {
+            $(".show-description").hide();
+            $("#show-desc-"+id).fadeIn(200);
+        };
+        $scope.closeDescription = function () {
+            $(".show-description").fadeOut();
+        };
+
         // comment now
         $scope.commentNow = function (item) {
             $scope.comment.store = item.related_stores[0];
         };
 
+        // get the list of user favorites
+        $scope.user_favorites = {};
+        var url = "/api/1.0/user-favs?dummy=0";
+        Query.get(url).then(function (fav) {
+            console.log("User Favorites: ", fav);
+            $scope.user_favorites = fav.data
+        }, function (error) {
+            console.log(error);
+        });
         // manageFavorite function
         $scope.manageFavorite = function () {
             $scope.favorite.favorite = !$scope.favorite.favorite;
+            console.log($scope.favorite.favorite);
+            if($auth.isAuthenticated()) {
+                auth.me().then(function (user) {
+                    $scope.user = user.data;
+                });
+            }
         };
 
         // apply filter for coupons array
@@ -74,7 +98,7 @@ angular
             url = $state.href('main.store-info', {url: store.url, cc: item._id});
             window.open(url,'_blank');
         };
-
+        $("#top_banner_area").hide();
         if($stateParams['url']) {
             var embedded = {};
             embedded['recommended_stores'] = 1;
@@ -240,20 +264,20 @@ angular
 
                     console.log($scope.expiredCoupons, $scope.coupons, "suggested coupons ", $scope.suggestedCoupons, "Related coupons ", $scope.relatedCoupons);
                 }
+                // Get the top banner from banners table
+                $scope.top_banner = {};
+                var where = JSON.stringify({
+                    "top_banner_string": 'store'
+                });
+                var url = "/api/1.0/banner?where="+where;
+                Query.get(url).then(function (banner) {
+                    console.log("banner Details: ", banner.data._items);
+                    $scope.top_banner = banner.data._items[0];
+                    $("#top_banner_area").show();
+                });
             }, function (error) {
                 console.log(error);
             }); // end of getting store
-
-            // Get the top banner from banners table
-            $scope.top_banner = {};
-            var where = JSON.stringify({
-                "top_banner_string": 'store'
-            });
-            var url = "/api/1.0/banner?where="+where;
-            Query.get(url).then(function (banner) {
-                console.log("banner Details: ", banner.data._items);
-                $scope.top_banner = banner.data._items[0];
-            });
         } else {
             $state.go('main.home');
         }
@@ -372,6 +396,19 @@ angular
                     d.reject(error);
                 });
                 return d.promise;
+            },
+            post: function (data) {
+                var d = $q.defer();
+                $http({
+                    url: url+"&r="+Math.random(),
+                    method: "POST",
+                    data: data
+                }).then(function (data) {
+                    d.resolve(data);
+                }, function (error) {
+                    d.reject(error);
+                });
+                return d.promise;
             }
         }
-    })
+    });

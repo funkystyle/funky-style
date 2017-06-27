@@ -191,7 +191,7 @@
                     <div class="panel-body">
                         <h4><b>{{ item.name }}</b></h4>
 
-                        <div class="thumbnail border-0">
+                        <div class="thumbnail border-0 deal-thumbnail">
                             <img class="top-deal-img" ng-src="{{ item.images[0] }}" alt="">
                         </div>
 
@@ -206,7 +206,7 @@
                         </div>
                     </div>
                     <div class="panel-footer" style="padding: 0;">
-                        <a ui-sref="main.deal_post_details({url: item.url})" class="btn btn-md btn-info btn-block">
+                        <a href="{{ item.destination_url }}" class="btn btn-md btn-info btn-block">
                             GET DEAL
                         </a>
                     </div>

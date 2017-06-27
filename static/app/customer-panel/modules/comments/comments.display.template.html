@@ -1,15 +1,15 @@
 <style>
-    .media-object {
+    .comment-image {
         max-width: 40px;
     }
 </style>
 
-<div class="comment-row">
+<div class="comment-row" ng-if="items.length">
     <div class="media" ng-repeat="item in items | orderBy: '_created': true">
         <div class="media-left">
             <a href="#">
                 <img src="/static/app/customer-panel/modules/assets/images/static-image.png"
-                     class="media-object" alt="Sample Image">
+                     class="media-object comment-image" alt="Sample Image">
             </a>
         </div>
         <div class="media-body">

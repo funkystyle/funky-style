@@ -5,6 +5,15 @@
     -o-transition-property: opacity;
     transition-property: opacity;
 }
+.deal-thumbnail {
+    padding: 0 !important;
+    margin-bottom: 15px !important;
+}
+.deal-thumbnail img {
+    max-height: 200px;
+    min-height: 200px;
+    width: 100%;
+}
 .panel-body h4 {
     width: 100%;
     white-space: nowrap;

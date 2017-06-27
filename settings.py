@@ -727,10 +727,9 @@ SCHEMAS = {
         'coupon_code': {
             "type": "string"
         },
-
-
-
-
+        'coupon_sorting': {
+            'type': 'integer'
+        },
         'destination_url': {
             "type": "string"
         },

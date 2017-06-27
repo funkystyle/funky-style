@@ -12,7 +12,8 @@ angular.module("headerModule", ["ui.bootstrap", "APP",
         if(localStorage.getItem('satellizer_token')) {
             // getting the current user information
             auth.me().then(function (data) {
-                console.log(data)
+                console.log(data);
+                $scope.user = data.data;
             }, function (error) {
                 console.log(error);
             });
