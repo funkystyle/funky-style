@@ -85,7 +85,7 @@ class MediaClass(MediaStorage):
 
 
 app = Eve(__name__, media=MediaClass)
-app._static_folder = os.path.abspath("/")
+app._static_folder = os.path.abspath("static/")
 #UPLOAD_FOLDER = 'static/images'
 #app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER
 app.config.update(
