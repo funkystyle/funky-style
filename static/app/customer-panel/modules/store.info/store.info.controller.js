@@ -57,23 +57,26 @@ angular
         };
 
         // get the list of user favorites
-        $scope.user_favorites = {};
-        var url = "/api/1.0/user-favs?dummy=0";
-        Query.get(url).then(function (fav) {
-            console.log("User Favorites: ", fav);
-            $scope.user_favorites = fav.data
-        }, function (error) {
-            console.log(error);
-        });
+        if($auth.isAuthenticated()) {
+            $scope.user_favorites = {};
+            $scope.user = {};
+            // get user info
+            auth.me().then(function (user) {
+                $scope.user = user.data;
+            }).then(function () {
+                var url = "/api/1.0/user-favs/"+$scope.user._id+"?dummy=0";
+                Query.get(url).then(function (fav) {
+                    console.log("User Favorites: ", fav);
+                    $scope.user_favorites = fav.data;
+                }, function (error) {
+                    console.log(error);
+                });
+            });
+        }
         // manageFavorite function
         $scope.manageFavorite = function () {
             $scope.favorite.favorite = !$scope.favorite.favorite;
             console.log($scope.favorite.favorite);
-            if($auth.isAuthenticated()) {
-                auth.me().then(function (user) {
-                    $scope.user = user.data;
-                });
-            }
         };
 
         // apply filter for coupons array
@@ -155,7 +158,6 @@ angular
                         angular.forEach(items, function (item) {
                             // get related categories of each coupon
                             angular.forEach(item.related_categories, function (category) {
-                                console.log("Related Category: ", category);
                                 if(category == null) return true;
                                 if(!$scope.categories[category.category_type]) {
                                     $scope.categories[category.category_type] = [];
