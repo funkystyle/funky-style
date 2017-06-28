@@ -116,6 +116,9 @@ angular
                         $state.go('404');
                     }
                     $scope.store = store.data;
+                    $scope.store.related_stores = clearNullIds($scope.store.related_stores);
+                    $scope.store.top_stores = clearNullIds($scope.store.top_stores);
+                    $scope.store.related_deals = clearNullIds($scope.store.related_deals);
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $rootScope.pageTitle = $scope.store.meta_title;

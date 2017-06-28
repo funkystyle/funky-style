@@ -838,6 +838,9 @@ SCHEMAS = {
         'deal_of_the_day_banner': {
             "type": "string"
         },
+        'destination_url': {
+            "type": "string"
+        },
         'status': {
             "type": "boolean"
         },

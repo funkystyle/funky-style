@@ -1,3 +1,15 @@
+function clearNullIds (items) {
+    if(items == undefined || items == null) {
+        return [];
+    }
+    var array = [];
+    angular.forEach(items, function (item, index) {
+        if(item != null) {
+            array.push(item);
+        }
+    });
+    return array;
+}
 angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
     .run(["$rootScope", function($rootScope) {
         $rootScope.$on('$stateChangeSuccess', function() {
