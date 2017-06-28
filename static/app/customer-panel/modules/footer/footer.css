@@ -46,9 +46,11 @@ ul.footer-unstyled li i {
 }
 ul.footer-unstyled li a, a{
 	color:#a6a6a6;
+    text-transform: capitalize;
 }
 .footer-email-form {
 	margin: 28px 0;
+    padding: 0;
 }
 .footer-bottom-container {
     border-top: 1px solid #322b2b; padding: 30px 15px;

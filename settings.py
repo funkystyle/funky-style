@@ -347,7 +347,13 @@ SCHEMAS = {
         'side_banner': {
             'type': 'string'
         },
+        'side_banner_url': {
+            'type': 'string'
+        },
         'top_banner': {
+            'type': 'string'
+        },
+        'top_banner_url': {
             'type': 'string'
         },
         'meta_title':{
@@ -524,7 +530,13 @@ SCHEMAS = {
             'side_banner': {
                 'type': 'string'
             },
+            'side_banner_url': {
+                'type': 'string'
+            },
             'top_banner': {
+                'type': 'string'
+            },
+            'top_banner_url': {
                 'type': 'string'
             },
             'featured_category':{
@@ -727,10 +739,9 @@ SCHEMAS = {
         'coupon_code': {
             "type": "string"
         },
-
-
-
-
+        'coupon_sorting': {
+            'type': 'integer'
+        },
         'destination_url': {
             "type": "string"
         },
@@ -837,6 +848,9 @@ SCHEMAS = {
             "type": "datetime"
         },
         'deal_of_the_day_banner': {
+            "type": "string"
+        },
+        'destination_url': {
             "type": "string"
         },
         'status': {
@@ -1217,7 +1231,11 @@ PERSONS = {
 USER_FAV_COLLECTION = {
     'item_title': 'user_favs',
     'schema': USER_FAV_SCHEMA,
-    'url': 'user-favs'
+    'url': 'user-favs',
+    'additional_lookup': {
+        'url': 'regex("[\w\-]+")',
+        'field': 'user_id'
+    }
 }
 STORES = {
     'item_title': 'stores',

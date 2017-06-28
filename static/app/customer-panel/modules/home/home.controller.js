@@ -169,10 +169,10 @@ angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFacto
         // show description
         $scope.showDescription = function (id) {
             $(".show-description").hide();
-            $("#show-desc-"+id).show();
+            $("#show-desc-"+id).fadeIn(200);
         };
         $scope.closeDescription = function () {
-            $(".show-description").hide();
+            $(".show-description").fadeOut();
         }
     })
     .factory("Query", function ($http, $q) {

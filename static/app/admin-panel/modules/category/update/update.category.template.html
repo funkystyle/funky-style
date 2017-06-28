@@ -122,6 +122,11 @@
                             <img ng-if="category.side_banner['base64']" ng-src="data:image/jpeg;base64,{{ category.side_banner.base64 }}" />
                         </div>
                     </div>
+                    <div class="form-group" ng-if="category.side_banner">
+                        <label for="side_banner_url">Side Banner URL*</label>
+                        <input type="text" class="form-control input-sm" placeholder="Side Banner URL"
+                               ng-model="category.side_banner_url" required id="side_banner_url">
+                    </div>
                     <div class="form-group">
                         <label for="top_banner">Top Banner</label>
                         <input type="file" id="top_banner" ng-model="category.top_banner" base-sixty-four-input />
@@ -134,6 +139,11 @@
                             <img ng-if="!category.top_banner['base64']" ng-src="{{ category.top_banner }}" />
                             <img ng-if="category.top_banner['base64']" ng-src="data:image/jpeg;base64,{{ category.top_banner.base64 }}" />
                         </div>
+                    </div>
+                    <div class="form-group" ng-if="category.top_banner">
+                        <label for="top_banner_url">Top Banner URL*</label>
+                        <input type="text" class="form-control input-sm" placeholder="Top Banner URL"
+                               ng-model="category.top_banner_url" required id="top_banner_url">
                     </div>
                     <div class="form-group">
                         <label>Featured Category</label> <br />

@@ -12,6 +12,7 @@ angular.module("addCmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toas
                 cmsFactory.post(cms).then(function (data) {
                     console.log(data);
                     toastr.success(cms.name+' Created', "Created!");
+                    $state.go("header.cms");
                 }, function (error) {
                     console.log(error);
                     if(error.data._error) {

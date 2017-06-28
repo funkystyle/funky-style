@@ -110,13 +110,18 @@
                         <input type="file" id="side_banner" ng-model="store.side_banner" base-sixty-four-input>
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
-                    <div class="form-group" ng-if="store.top_banner">
+                    <div class="form-group" ng-if="store.side_banner">
                         <label>Image Display</label>
                         <div class="thumbnail">
                             <i class="fa fa-close" ng-click="store.side_banner = ''"></i>
                             <img ng-if="!store.side_banner['base64']" ng-src="{{ store.side_banner }}" />
                             <img ng-if="store.side_banner['base64']" ng-src="data:image/jpeg;base64,{{ store.side_banner.base64 }}" />
                         </div>
+                    </div>
+                    <div class="form-group" ng-if="store.side_banner">
+                        <label for="side_banner_url">Side Banner URL*</label>
+                        <input type="text" class="form-control input-sm" placeholder="Side Banner URL"
+                               ng-model="store.side_banner_url" required id="side_banner_url">
                     </div>
                     <div class="form-group">
                         <label for="top_banner">Top Banner</label>
@@ -130,6 +135,11 @@
                             <img ng-if="!store.top_banner['base64']" ng-src="{{ store.top_banner }}" />
                             <img ng-if="store.top_banner['base64']" ng-src="data:image/jpeg;base64,{{ store.top_banner.base64 }}" />
                         </div>
+                    </div>
+                    <div class="form-group" ng-if="store.top_banner">
+                        <label for="top_banner_url">Top Banner URL*</label>
+                        <input type="text" class="form-control input-sm" placeholder="Top Banner URL"
+                               ng-model="store.top_banner_url" required id="top_banner_url">
                     </div>
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>

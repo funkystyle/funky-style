@@ -1,18 +1,5 @@
 angular.module("DashboardModule", ["constantModule",
-    "satellizer", "toastr", "personFactoryModule", "ui.select", "chart.js"])
-    .config(function (ChartJsProvider) {
-        // Configure all charts
-        ChartJsProvider.setOptions({
-            colors: ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']
-        });
-        // Configure all doughnut charts
-        ChartJsProvider.setOptions('doughnut', {
-            cutoutPercentage: 60
-        });
-        ChartJsProvider.setOptions('bar', {
-            tooltips: { enabled: false }
-        });
-    })
+    "satellizer", "toastr", "personFactoryModule", "ui.select"])
     .directive("barChart", function () {
         return {
             restrict: "E",
@@ -25,7 +12,7 @@ angular.module("DashboardModule", ["constantModule",
             controller: "barController"
         }
     })
-    .controller("barController", function ($scope, $state) {
+    .controller("barController", function ($scope, $log) {
         $scope.menuTypes = [
             {code: "month", text: "Month"},
             {code: "customdate", text: "By Custom Date"}
@@ -34,12 +21,24 @@ angular.module("DashboardModule", ["constantModule",
             by: $scope.menuTypes[0].code
         };
 
+        $scope.morris = undefined;
+        setTimeout(function () {
+            $scope.morris = Morris.Bar({
+                element: 'bar-example-'+$scope.id,
+                data: [],
+                xkey: 'y',
+                ykeys: ['a'],
+                labels: [$scope.from],
+                xLabelMargin: 10
+            });
+            $scope.changeChart();
+        }, 1000);
+
         setTimeout(function () {
             $('#to-date-id-'+$scope.id).datepicker({
                 maxDate: 0,
                 onSelect: function(dateText) {
                     $('#from-date-id-'+$scope.id).datepicker('option', 'maxDate', this.value );
-                    console.log("Selected date: " + dateText + "; input's current value: " + this.value);
                     $scope.changeChart();
                 }
             }).datepicker('setDate', new Date());
@@ -48,11 +47,10 @@ angular.module("DashboardModule", ["constantModule",
             $('#from-date-id-'+$scope.id).datepicker({
                 maxDate: toDate,
                 onSelect: function(dateText) {
-                    console.log("Selected date: " + dateText + "; input's current value: " + this.value);
                     $scope.changeChart();
                 }
             }).datepicker('setDate', toDate.setDate(toDate.getDate() - 7));
-        }, 2000);
+        }, 4000);
 
         Date.prototype.addDays = function(days) {
             var dat = new Date(this.valueOf())
@@ -61,7 +59,7 @@ angular.module("DashboardModule", ["constantModule",
         };
 
         function getDates(startDate, stopDate) {
-            var dateArray = new Array();
+            var dateArray = [];
             var currentDate = startDate;
             while (currentDate <= stopDate) {
                 dateArray.push( new Date (currentDate) )
@@ -70,19 +68,21 @@ angular.module("DashboardModule", ["constantModule",
             return dateArray;
         }
 
-        var objItems = {};
+        $scope.objItems = {};
+        $scope.keyValues = [];
         function generateArrays () {
-            angular.forEach(objItems, function (val, key) {
-                $scope.labels.push(key);
-                $scope.data[0].push(val);
+            angular.forEach($scope.objItems, function (val, key) {
+                $scope.keyValues.push({y: key, a: val})
             });
-            window.dispatchEvent(new Event('resize'));
-            console.log($scope.labels, $scope.data[0]);
+
+            // console.log("Final Key Values: ", $scope.keyValues);
+            setTimeout(function () {
+                $scope.morris.setData($scope.keyValues);
+            }, 1000);
         }
         $scope.changeChart = function () {
-            $scope.labels = [];
-            $scope.data = [[]];
-            objItems = {};
+            $scope.keyValues = [];
+            $scope.objItems = {};
             var created = undefined,
                 type = undefined,
                 fromDate = new Date($("#from-date-id-"+$scope.id).val()),
@@ -90,33 +90,34 @@ angular.module("DashboardModule", ["constantModule",
                 dates = [];
 
             if($scope.select.by == 'customdate') {
-                objItems = {};
+                $scope.objItems = {};
                 dates = getDates(fromDate, toDate);
                 angular.forEach(dates, function (date) {
-                    objItems[moment(date).format("DD/MM/YYYY")] = 0;
+                    $scope.objItems[moment(date).format("DD/MM/YYYY")] = 0;
                 })
             } else {
                 angular.forEach(monthNames, function (month) {
-                    objItems[month] = 0
+                    $scope.objItems[month] = 0
                 });
             }
             angular.forEach($scope.items, function (item) {
                 var date = new Date(item._created);
                 if($scope.select.by == 'month') {
-                    created = monthNames[date.getMonth()];
-                    objItems[created] = objItems[created] + 1;
-                } else if ($scope.select.by == 'customdate') {
-                    if(objItems[moment(date).format('DD/MM/YYYY')]) {
-                        objItems[moment(date).format('DD/MM/YYYY')] = objItems[moment(date).format('DD/MM/YYYY')] + 1;
+                    if(date.getFullYear() == new Date().getFullYear()) {
+                        created = monthNames[date.getMonth()];
+                        $scope.objItems[created] = $scope.objItems[created] + 1;
                     }
+                } else if ($scope.select.by == 'customdate') {
+                    angular.forEach($scope.objItems, function (val, key) {
+                        if(key == moment(date).format('DD/MM/YYYY')) {
+                            $scope.objItems[key] ++;
+                        }
+                    })
                 }
             });
 
-            console.log(objItems);
             generateArrays($scope.select.by);
         };
-
-        $scope.changeChart();
 
     })
     .controller("dashBoardCtrl", function ($scope, mainURL, URL, $state, $auth, $http, $compile, toastr, personFactory) {
@@ -141,7 +142,7 @@ angular.module("DashboardModule", ["constantModule",
                     $("#coupon").remove();
 
                     setTimeout(function () {
-                        var el = $compile('<bar-chart id="coupon" items="coupons" from="Coupons Graph"></bar-chart>')($scope);
+                        var el = $compile('<bar-chart id="coupon" items="coupons" from="Coupons"></bar-chart>')($scope);
                         $("#chart-area").append(el);
                     }, 400);
                 }
@@ -165,7 +166,7 @@ angular.module("DashboardModule", ["constantModule",
                     $("#persons").remove();
 
                     setTimeout(function () {
-                        var el = $compile('<bar-chart id="persons" items="persons" from="Persons Graph"></bar-chart>')($scope);
+                        var el = $compile('<bar-chart id="persons" items="persons" from="Persons"></bar-chart>')($scope);
                         $("#chart-area").append(el);
                     }, 400);
                 }
@@ -186,7 +187,7 @@ angular.module("DashboardModule", ["constantModule",
                     $("#deals").remove();
 
                     setTimeout(function () {
-                        var el = $compile('<bar-chart id="deals" items="deals" from="Deals Graph"></bar-chart>')($scope);
+                        var el = $compile('<bar-chart id="deals" items="deals" from="Deals"></bar-chart>')($scope);
                         $("#chart-area").append(el);
                     }, 400);
                 }
@@ -208,7 +209,7 @@ angular.module("DashboardModule", ["constantModule",
                     $("#stores").remove();
 
                     setTimeout(function () {
-                        var el = $compile('<bar-chart id="stores" items="stores" from="Stores Graph"></bar-chart>')($scope);
+                        var el = $compile('<bar-chart id="stores" items="stores" from="Stores"></bar-chart>')($scope);
                         $("#chart-area").append(el);
                     }, 400);
                 }

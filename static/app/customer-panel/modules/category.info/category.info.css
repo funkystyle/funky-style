@@ -1,24 +1,54 @@
-.user_name{
-    font-size:14px;
-    font-weight: bold;
-}
-.cat-top-stores img {
-    max-height: 40px;
-    max-width: 100%;
-}
-.comments-list .media{
-    border-bottom: 1px dotted #ccc;
-}
 .breadcrumb {
-    padding: 0px 15px;
-    margin-bottom: 0px !important;
+    padding: 0 15px;
+    margin-bottom: 0 !important;
     list-style: none;
     background-color: #f5f5f5;
     border-radius: 0;
     font-size: 13px;
 }
+.related-coupon-deal {
+    position: absolute;
+    bottom: -20px;
+    background-color: #9954bb;
+    min-height: 50px;
+    width: 130px;
+    border-radius: 5px;
+    max-height: 50px;
+    left: -10px;
+    color: #FFFFFF;
+    line-height: 25px;
+}
+.related-coupon-deal img {
+    height: 50px;
+    border-radius: 3px;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-image: initial;
+}
 .store-info {
     color: #888;
+}
+.store-logo img {
+    max-height: 100px;
+    border-radius: 3px;
+}
+.deal-price .deal img {
+    height: 55px;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(221, 221, 221);
+    border-image: initial;
+}
+.deal-thumbnail {
+    padding: 0 !important;
+    margin-bottom: 15px !important;
+}
+.deal-thumbnail img {
+    max-height: 200px;
+    min-height: 200px;
 }
 .thumbnail {
     border: 0px solid #FFFFFF;
@@ -26,12 +56,33 @@
     margin: 0px;
     padding: 10px;
 }
-.thumb{
+.thumb {
     border-right: 1px solid #ddd;
-    margin-top: 23px;"
+    margin-top: 23px;
 }
-div.thumb .thumbnail {
-    min-height: 100px;
+div.coupon {
+    -webkit-animation: fade 1s;
+    animation: fade 1s;
+    opacity: 1;
+}
+/* -fail- */
+
+@-webkit-keyframes fade {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
 }
 .thumbnail img {
     width: 100%;
@@ -41,13 +92,26 @@ div.thumb .thumbnail {
 }
 .thumbnail .fa {
     position: absolute;
-    top: -2px;
-    right: 12px;
+    top: -9px;
+    right: 5px;
     font-size: 20px;
     cursor: pointer;
 }
 .h3-heading {
     margin-bottom: 15px;
+    text-transform: capitalize;
+}
+.cat-top-store-area {
+    margin: 0 0 20px;
+}
+.cat-top-stores, .cat-top-stores img{
+    max-height: 70px;
+    min-height: 70px;
+    height: 70px;
+    padding: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 .rating-stars i {
     padding: 0 3px;
@@ -64,11 +128,8 @@ div.thumb .thumbnail {
     margin-bottom: 0;
 }
 /* tabs */
-.nav-tabs {
-    border-bottom: 0px solid #FFFFFF;
-}
-.nav-tabs>li>a, .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-    border: 1px solid rgba(221, 221, 221, 0.5);
+.nav-tabs>li>a {
+    padding: 15px;
 }
 .nav-tabs li a span {
     margin-top: -5px;
@@ -83,27 +144,25 @@ div.thumb .thumbnail {
     border: 1px solid #9954bb;
     min-height: 100px;
     width: 100%;
-    border-radius: 1px;
+    border-radius: 3px;
     max-width: 110px;
     max-height: 100px;
 }
 .deal-price h4 {
     line-height: 27px;
+    text-transform: capitalize;
 }
 .deal-price .deal {
     position: absolute;
-    bottom: -20px;
+    bottom: 0;
     background-color: #9954bb;
-    min-height: 55px;
-    width: 140%;
+    min-height: 25px;
+    width: 100%;
     color: #FFFFFF;
     line-height: 25px;
-    left: -16px;
 }
-.deal-price .deal img {
-    height: 55px;
-    width: 100%;
-    border: 1px solid #ddd;
+.deal-price .deal span {
+    font-size: 12px;
 }
 .coupon-heading span i {
     color: #898989;
@@ -217,7 +276,151 @@ div.thumb .thumbnail {
 }
 .ola_mar{
     margin-bottom: 20px;
+    text-transform: capitalize;
 }
+.desc-area {
+    line-height: 40px;
+}
+/* ----------- coupon popup ----- */
+.coupon-content{
+    border-radius: 0px;
+}
+.modal-lg-main{
+    width: 800px;
+}
+.extra-h3{
+    margin: 0px;
+    color: #323333;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+.coupon-main-div{
+    width: 70%;
+    margin: auto;
+    display: table;
+}
+.mar-bot{
+    margin-bottom: 0px;
+}
+.here-para{
+    color: #67686A;
+    letter-spacing: 1px;
+    font-size: 15px;
+}
+.view-a{
+    letter-spacing: 1px;
+    font-size: 15px;
+}
+.mar{
+    margin:0px !important;
+}
+.promo-code{
+    background: #DFFFF4;
+    padding: 12px 0px;
+    text-align: center;
+    border: 2px dotted #11BC9A;
+    border-left: 0px;
+    border-right: 2px solid #11bc9a;
+}
+.promo-code h4{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+.copy-div{
+    background: #6E6093;
+    color: #fff;
+    text-align: center;
+    padding: 14px 0px;
+    cursor: pointer;
+}
+.copy-div h4{
+    font-weight: 600;
+}
+.little-app-check{
+    letter-spacing: 1px;
+    font-weight: normal;
+    font-size: 16px;
+}
+.coupon-div-4 h3{
+    margin: 18px 0px;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+}
+.coupon-div-4 p{
+    margin: 18px 0px;
+    letter-spacing: 0.5px;
+}
+.get-btn{
+    outline: none;
+    border-radius: 0px;
+    width: 100%;
+    color: #fff;
+    font-weight: 600;
+    background: #6E6093;
+}
+.get-btn.focus, .get-btn:focus, .get-btn:hover{
+    outline: none;
+    border-radius: 0px;
+    width: 100%;
+    color: #fff;
+    font-weight: 600;
+    background: #6E6093;
+}
+.left-never{
+    letter-spacing: 1px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #3F3E3F;
+    margin-top: -10px !Important;
+    margin: 0px;
+}
+.subscribe-email-field{
+    outline: none;
+    padding: 8px 7px;
+    border: 1px solid #D3D3D3;
+    width: 70%;
+}
+.subscribe-btn{
+    outline: none;
+    background: #11BC9A;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px 10px;
+    border-radius: 0px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-left: -5px;
+    margin-top: -3px;
+}
+.subscribe-btn.focus, .subscribe-btn:focus, .subscribe-btn:hover{
+    outline: none;
+    background: #11BC9A;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px 10px;
+    border-radius: 0px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-left: -5px;
+    margin-top: -3px;
+}
+.modal-body-in{
+    padding: 0px !important;
+    background: #F5F5F5;
+}
+.div-fff{
+    background: #fff;
+}
+.close-btn{
+    margin-right: 10px;
+    font-size: 28px;
+    color: #595959 !Important;
+    opacity: 1;
+}
+/* ------end ------ */
 
 /* end of coupons, deals */
 @media screen and (max-width: 768px) {

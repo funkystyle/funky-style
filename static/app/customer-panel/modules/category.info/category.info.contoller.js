@@ -76,6 +76,13 @@ angular
                         $scope.category.toDayDate = new Date();
                         $scope.category.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
 
+                        // clear null ids for related, etc
+                        $scope.category.top_stores = clearNullIds($scope.category.top_stores);
+                        $scope.category.related_categories = clearNullIds($scope.category.related_categories);
+                        $scope.category.top_categories = clearNullIds($scope.category.top_categories);
+                        $scope.category.related_deals = clearNullIds($scope.category.related_deals);
+                        $scope.category.related_coupons = clearNullIds($scope.category.related_coupons);
+
                         // SEO title and description
                         $rootScope.pageTitle = $scope.category.seo_title;
                         $rootScope.pageDescription = $scope.category.seo_description;

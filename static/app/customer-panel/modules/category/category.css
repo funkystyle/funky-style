@@ -10,10 +10,20 @@ div.thumb {
     -webkit-animation: fade 1s;
     animation: fade 1s;
     opacity: 1;
+    margin-bottom: 15px;
 }
-div.thumb .thumbnail {
+div.thumb .thumbnail, .overlay-on-image {
     min-height: 165px;
-}
+    max-height: 165px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}div.thumb .thumbnail img {
+     height: 165px;
+     width: 100%;
+     border-radius: 3px;
+ }
 
 /* -fail- */
 
@@ -47,6 +57,7 @@ div.thumb .thumbnail {
     padding: 10px;
     background-color: #FFFFFF;
     margin: 5px 0px;
+    border-radius: 3px;
 }
 
 .social-well h4 {
@@ -86,7 +97,7 @@ div.thumb .thumbnail {
 
 .overlay-on-image {
     position: absolute;
-    top: 0;
+    top: -1px;
     width: 100%;
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.67);
@@ -94,7 +105,6 @@ div.thumb .thumbnail {
 }
 
 .overlay-on-image h4 {
-    margin-top: 35%;
     color: #FFFFFF;
 }
 .row_style{
