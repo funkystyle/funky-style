@@ -156,7 +156,7 @@
             <!-- side banner area -->
             <div class="thumbnail" style="padding: 0; border-bottom: 0; margin-bottom: 10px;"
                  ng-if="store.side_banner || top_banner.side_banner_string != 'none'">
-                <a target="_blank" href="{{ (store.side_banner)? store.store_url: top_banner.destination_url }}">
+                <a target="_blank" href="{{ (store.side_banner)? store.side_banner_url: top_banner.destination_url }}">
                     <img style="max-height: 100px;" ng-src="{{ (store.side_banner)? store.side_banner: top_banner.image }}"
                          alt="{{ top_banner.title }}" />
                 </a>
@@ -280,7 +280,7 @@
                 <div class="row" id="top_banner_area" ng-if="store.top_banner || top_banner">
                     <div class="col-md-12 col-sm-12">
                         <div class="thumbnail" style="margin-bottom: 20px; padding: 0;">
-                            <a target="_blank" href="{{ (store.top_banner)? store.store_url: top_banner.destination_url }}">
+                            <a target="_blank" href="{{ (store.top_banner)? store.top_banner_url: top_banner.destination_url }}">
                                 <img style="max-height: 100px; border-radius: 3px;" ng-src="{{ (store.top_banner)? store.top_banner: top_banner.image }}"
                                      alt="{{ top_banner.title }}" />
                             </a>

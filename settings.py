@@ -347,7 +347,13 @@ SCHEMAS = {
         'side_banner': {
             'type': 'string'
         },
+        'side_banner_url': {
+            'type': 'string'
+        },
         'top_banner': {
+            'type': 'string'
+        },
+        'top_banner_url': {
             'type': 'string'
         },
         'meta_title':{
@@ -524,7 +530,13 @@ SCHEMAS = {
             'side_banner': {
                 'type': 'string'
             },
+            'side_banner_url': {
+                'type': 'string'
+            },
             'top_banner': {
+                'type': 'string'
+            },
+            'top_banner_url': {
                 'type': 'string'
             },
             'featured_category':{

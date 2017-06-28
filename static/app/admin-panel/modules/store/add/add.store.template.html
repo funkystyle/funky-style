@@ -113,11 +113,16 @@
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
                     <div class="form-group" ng-if="store.side_banner.base64">
-                        <label for="displayImage">Image Display</label>
-                        <div class="thumbnail">
+                        <label for="side_image_banner">Image Display</label>
+                        <div class="thumbnail" id="side_image_banner">
                             <i class="fa fa-close" ng-click="store.side_banner = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ store.side_banner.base64 }}" />
                         </div>
+                    </div>
+                    <div class="form-group" ng-if="store.side_banner.base64">
+                        <label for="side_banner_url">Side Banner URL*</label>
+                        <input type="text" class="form-control input-sm" placeholder="Side Banner URL"
+                               ng-model="store.side_banner_url" required id="side_banner_url">
                     </div>
                     <div class="form-group">
                         <label for="top_banner">Top Banner</label>
@@ -125,11 +130,16 @@
                         <p class="help-block">Example block-level help text here.</p>
                     </div>
                     <div class="form-group" ng-if="store.top_banner.base64">
-                        <label for="displayImage">Image Display</label>
-                        <div class="thumbnail">
+                        <label for="image_top_banner">Image Display</label>
+                        <div class="thumbnail" id="image_top_banner">
                             <i class="fa fa-close" ng-click="store.top_banner = ''"></i>
                             <img ng-src="data:image/jpeg;base64,{{ store.top_banner.base64 }}" />
                         </div>
+                    </div>
+                    <div class="form-group" ng-if="store.top_banner.base64">
+                        <label for="top_banner_url">Top Banner URL*</label>
+                        <input type="text" class="form-control input-sm" placeholder="Top Banner URL"
+                               ng-model="store.top_banner_url" required id="top_banner_url">
                     </div>
                     <div class="form-group">
                         <label for="meta_title">Meta Title</label>
