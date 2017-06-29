@@ -71,6 +71,7 @@ angular.module("DashboardModule", ["constantModule",
             setTimeout(function () {
                 $scope.morris.setData($scope.keyValues);
                 $scope.morris.options.labels = [$scope.select.category];
+                $scope.morris.options.barSize = 30;
                 $scope.morris.redraw();
             }, 1000);
         }
@@ -130,7 +131,8 @@ angular.module("DashboardModule", ["constantModule",
                         xkey: 'y',
                         ykeys: ['a'],
                         labels: [$scope.select.category],
-                        xLabelMargin: 10
+                        xLabelMargin: 1,
+                        xLabelAngle: 50
                     });
                     $scope.changeChart();
                 }
