@@ -9,8 +9,8 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 thumb">
                     <div class="thumbnail store-logo">
-                        <i class="fa" ng-class="{'fa-heart-o': !favorite.favorite, 'fa-heart': favorite.favorite}"
-                           ng-click="manageFavorite()"></i>
+                        <i class="fa" ng-class="{'fa-heart-o': !favorites[store._id], 'fa-heart': favorites[store._id]}"
+                           ng-click="manageFavorite('fav_stores', store._id)"></i>
                         <img ng-src="{{ store.image }}" alt="{{ store.name }}" title="{{ store.name }}">
                     </div> <!-- end thumbnail -->
                     <div class="text-center rating-stars">
@@ -317,12 +317,14 @@
                                         <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs">
-                                                <i class="fa fa-star"></i>&nbsp;
+                                                <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
+                                                   ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
                                         </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
+                                               ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
@@ -445,12 +447,14 @@
                                         <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs">
-                                                <i class="fa fa-star"></i>&nbsp;
+                                                <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
+                                                   ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
                                         </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
+                                               ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
@@ -535,12 +539,14 @@
                                         <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs">
-                                                <i class="fa fa-star"></i>&nbsp;
+                                                <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
+                                                   ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
                                         </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
-                                            <i class="fa fa-star"></i>&nbsp;
+                                            <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
+                                               ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
