@@ -2,10 +2,8 @@ angular
     .module("storeinfoModule", ["categoryFactoryModule", "Directives", "satellizer"])
     .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth,
                                                  categoryFactory, $filter, $sce, $ocLazyLoad,
-                                                 $rootScope, $compile, Query, $q, auth) {
-        $scope.favorite = {
-            favorite: false
-        };
+                                                 $rootScope, $compile, StoreQuery, $q, auth) {
+        $scope.favorites = {};
         $scope.comment = {};
         $scope.filter = {
             category: {},
@@ -51,29 +49,33 @@ angular
             $(".show-description").fadeOut();
         };
 
-        // comment now
-        $scope.commentNow = function (item) {
-            $scope.comment.store = item.related_stores[0];
-        };
-
-        // get the list of user favorites
-        $scope.user_favorites = {};
-        var url = "/api/1.0/user-favs?dummy=0";
-        Query.get(url).then(function (fav) {
-            console.log("User Favorites: ", fav);
-            $scope.user_favorites = fav.data
-        }, function (error) {
-            console.log(error);
-        });
         // manageFavorite function
-        $scope.manageFavorite = function () {
-            $scope.favorite.favorite = !$scope.favorite.favorite;
-            console.log($scope.favorite.favorite);
-            if($auth.isAuthenticated()) {
-                auth.me().then(function (user) {
-                    $scope.user = user.data;
-                });
+        $scope.manageFavorite = function (where, id) {
+            var status = !$scope.favorites[id];
+            if(!$auth.isAuthenticated()) {
+                return true;
             }
+            console.log(where, $scope.user[where], id)
+            var object = {
+                url: "/api/1.0/persons/"+$scope.user._id,
+                method: "PATCH",
+                data: {}
+            };
+            var index = $scope.user[where].indexOf(id);
+            if(status) {
+                if(index == -1) {
+                    $scope.user[where].push(id);
+                }
+            } else {
+                $scope.user[where].splice(index, 1);
+            }
+            object.data[where] = $scope.user[where];
+            StoreQuery.postFav(object).then(function (success) {
+                console.log("Success Store Favorite: ", success);
+                $scope.favorites[id] = status;
+            }, function (error) {
+                console.log(error);
+            });
         };
 
         // apply filter for coupons array
@@ -88,7 +90,7 @@ angular
 
             // put a request to update the no of clicks into the particular coupon document
             var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
-            Query.get(url);
+            StoreQuery.get(url);
 
             if(store.store_url) {
                 setTimeout(function () {
@@ -114,7 +116,12 @@ angular
 
             var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+
                 JSON.stringify(embedded)+"&number_of_clicks=1";
+<<<<<<< HEAD
             Query.get(url).then(function (store) {
+=======
+            StoreQuery.get(url).then(function (store) {
+                console.log(store)
+>>>>>>> a4d13d43a3679f78d819b91fc4d7bb379c6c0a72
                 if(store.data) {
                     if(store.data._items.length == 0) {
                         $state.go('404');
@@ -131,6 +138,16 @@ angular
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $rootScope.pageTitle = $scope.store.meta_title;
                     $rootScope.pageDescription = $scope.store.meta_description;
+
+                    // mark store favorite
+                    $scope.favorites[$scope.store._id] = false;
+                    console.log($scope.user.fav_stores);
+                    angular.forEach($scope.user.fav_stores, function (item) {
+                        if(item == $scope.store._id) {
+                            $scope.favorites[$scope.store._id] = true;
+                        }
+                    });
+
                     console.log($scope.store);
 
                     // get the suggested coupons from coupons table, from recommended stores field
@@ -144,7 +161,7 @@ angular
                         "$in": [$scope.store._id]
                     };
                     url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
-                    Query.get(url).then(function (suggested) {
+                    StoreQuery.get(url).then(function (suggested) {
                         console.log("Suggested Coupons Data: ", suggested.data._items);
                         $scope.suggestedCoupons = suggested.data._items;
                     });
@@ -156,14 +173,19 @@ angular
                         }
                     };
                     url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
-                    Query.get(url).then(function (coupons) {
+                    StoreQuery.get(url).then(function (coupons) {
                         var items = coupons.data._items,
                             qItems = [];
                         console.log("Stores Coupons Data: ", items);
                         angular.forEach(items, function (item) {
+                            console.log($scope.user.fav_coupons);
+                            angular.forEach($scope.user.fav_coupons, function (coupon_id) {
+                                if(coupon_id == item._id) {
+                                    $scope.favorites[item._id] = true;
+                                }
+                            });
                             // get related categories of each coupon
                             angular.forEach(item.related_categories, function (category) {
-                                console.log("Related Category: ", category);
                                 if(category == null) return true;
                                 if(!$scope.categories[category.category_type]) {
                                     $scope.categories[category.category_type] = [];
@@ -193,7 +215,7 @@ angular
                                         "status": true
                                     });
                                     url = "/api/1.0/coupons_comments?embedded="+embedded+"&where="+temp;
-                                    qItems.push(Query.get(url).then(function (comment) {
+                                    qItems.push(StoreQuery.get(url).then(function (comment) {
                                         console.log(comment.data._items);
                                         return comment;
                                     }));
@@ -239,7 +261,7 @@ angular
                         });
                         var sort = "&max_results=1&sort=[('_updated', -1)]";
                         url = "/api/1.0/coupons"+"?where="+temp+sort+"&embedded="+embedded;
-                        Query.get(url).then(function (related) {
+                        StoreQuery.get(url).then(function (related) {
                             var items = related.data._items;
                             console.log("Related Coupons: ", items);
                             angular.forEach(items, function (item) {
@@ -251,10 +273,10 @@ angular
                         });
                     });
 
-                    // if top stores length is zero query to stores for fetching featured stores
+                    // if top stores length is zero StoreQuery to stores for fetching featured stores
                     if($scope.store.top_stores.length == 0) {
                         var top_store_url = '/api/1.0/stores?where={"featured_store": true}&max_results=2';
-                        Query.get(top_store_url).then(function (top_stores) {
+                        StoreQuery.get(top_store_url).then(function (top_stores) {
                             console.log(top_stores);
                             if(top_stores.data['_items']) {
                                 $scope.store.top_stores = top_stores.data._items;
@@ -281,7 +303,7 @@ angular
                     "top_banner_string": 'store'
                 });
                 var url = "/api/1.0/banner?where="+where;
-                Query.get(url).then(function (banner) {
+                StoreQuery.get(url).then(function (banner) {
                     console.log("banner Details: ", banner.data._items);
                     $scope.top_banner = banner.data._items[0];
                     $("#top_banner_area").show();
@@ -394,26 +416,22 @@ angular
             return list;
         }
     })
-    .factory("Query", function ($http, $q) {
+    .factory("StoreQuery", function ($http, $q) {
         return {
-            get: function (url) {
+            postFav: function (object) {
                 var d = $q.defer();
-                $http({
-                    url: url+"&r="+Math.random(),
-                    method: "GET"
-                }).then(function (data) {
+                $http(object).then(function (data) {
                     d.resolve(data);
                 }, function (error) {
                     d.reject(error);
                 });
                 return d.promise;
             },
-            post: function (data) {
+            get: function (url) {
                 var d = $q.defer();
                 $http({
                     url: url+"&r="+Math.random(),
-                    method: "POST",
-                    data: data
+                    method: "GET"
                 }).then(function (data) {
                     d.resolve(data);
                 }, function (error) {

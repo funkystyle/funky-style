@@ -3,9 +3,7 @@ angular
         "storeServiceModule", "couponFactoryModule", "Directives", "satellizer"])
     .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce, Query, $q,
                                               $stateParams, $http, $rootScope, $compile, $auth) {
-        $scope.favorite = {
-            favorite: false
-        };
+        $scope.favorites = {};
         $scope.filter = {
             store: {},
             wallet: {}
@@ -27,8 +25,32 @@ angular
         $scope.categories = {};
         $scope.stores = [];
         // manageFavorite function
-        $scope.manageFavorite = function () {
-            $scope.favorite.favorite = !$scope.favorite.favorite;
+        $scope.manageFavorite = function (where, id) {
+            var status = !$scope.favorites[id];
+            if(!$auth.isAuthenticated()) {
+                return true;
+            }
+            console.log(where, $scope.user[where], id)
+            var object = {
+                url: "/api/1.0/persons/"+$scope.user._id,
+                method: "PATCH",
+                data: {}
+            };
+            var index = $scope.user[where].indexOf(id);
+            if(status) {
+                if(index == -1) {
+                    $scope.user[where].push(id);
+                }
+            } else {
+                $scope.user[where].splice(index, 1);
+            }
+            object.data[where] = $scope.user[where];
+            StoreQuery.postFav(object).then(function (success) {
+                console.log("Success Store Favorite: ", success);
+                $scope.favorites[id] = status;
+            }, function (error) {
+                console.log(error);
+            });
         };
         $scope.trustAsHtml = function(string) {
             return $sce.trustAsHtml(string);
@@ -93,6 +115,12 @@ angular
                         
                         angular.forEach($scope.category.related_coupons, function (item) {
                             item._updated = new Date(item._updated);
+                            console.log($scope.user, $scope.user.fav_coupons);
+                            angular.forEach($scope.user.fav_coupons, function (coupon_id) {
+                                if(coupon_id == item._id) {
+                                    $scope.favorites[item._id] = true;
+                                }
+                            });
                             if(new Date(item.expire_date) > new Date()) {
                                 if($scope.coupons.indexOf(item) == -1) {
                                     $scope.coupons.push(item);

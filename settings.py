@@ -263,6 +263,20 @@ SCHEMAS = {
                 'forgot_password': {'type': 'string', 'empty': True}
             },
         },
+        'fav_stores': {
+            'type': 'list',
+            'data_relation': {
+                'resource': 'stores',
+                'embeddable': True
+            }
+        },
+        'fav_coupons': {
+            'type': 'list',
+            'data_relation': {
+                'resource': 'coupons',
+                'embeddable': True
+            }
+        }
     },
     'stores':{
         "number_of_clicks": {
@@ -1176,28 +1190,6 @@ SCHEMAS = {
                 'embeddable': True,
                 'field': '_id'
             }
-        },
-        'fav_stores': {
-            'type': 'list',
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'stores',
-                    'embeddable': True,
-                    'field': '_id'
-                }
-            }
-        },
-        'fav_coupons': {
-            'type': 'list',
-            'schema': {
-                'type': 'objectid',
-                'data_relation': {
-                    'resource': 'coupons',
-                    'embeddable': True,
-                    'field': '_id'
-                }
-            }
         }
     }
 
@@ -1231,11 +1223,7 @@ PERSONS = {
 USER_FAV_COLLECTION = {
     'item_title': 'user_favs',
     'schema': USER_FAV_SCHEMA,
-    'url': 'user-favs',
-    'additional_lookup': {
-        'url': 'regex("[\w\-]+")',
-        'field': 'user_id'
-    }
+    'url': 'user-favs'
 }
 STORES = {
     'item_title': 'stores',

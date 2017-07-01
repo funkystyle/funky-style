@@ -6,10 +6,18 @@ angular.module("dashboardModule", ["headerModule", "APP", "satellizer","toastr"]
     	$scope.user = {};
     	
     	if($auth.isAuthenticated()) {
+    	    var embedded = JSON.stringify({
+                "fav_stores": 1,
+                "fav_coupons": 1
+            });
+    	    var url = "/api/1.0/auth/me?embedded="+embedded+"&r="+Math.random();
             // getting the current user information
-            auth.me().then(function (data) {
-                console.log(data);
-                $scope.user = data.data;
+            $http({
+                url: url,
+                method: "GET"
+            }).then(function (data) {
+                console.log("Logged user Data in dashboard: ", data.data.data);
+                $scope.user = data.data.data;
             }, function (error) {
                 console.log(error.error);
             });
