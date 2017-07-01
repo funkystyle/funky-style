@@ -16,6 +16,7 @@ angular.module("headerModule", ["ui.bootstrap", "APP",
                 $scope.user = data.data;
             }, function (error) {
                 console.log(error);
+                localStorage.removeItem('satellizer_token');
             });
         }
 

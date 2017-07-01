@@ -49,11 +49,6 @@ angular
             $(".show-description").fadeOut();
         };
 
-        // comment now
-        $scope.commentNow = function (item) {
-            $scope.comment.store = item.related_stores[0];
-        };
-
         // manageFavorite function
         $scope.manageFavorite = function (where, id) {
             var status = !$scope.favorites[id];
