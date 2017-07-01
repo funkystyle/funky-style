@@ -4,14 +4,6 @@
 <!-- header -->
 <include path="static/app/customer-panel/modules/header/header.template.html"></include>
 
-
-
-<!--
-User Profile Sidebar by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
--->
-
 <div class="container">
     <div class="row profile">
         <div class="col-md-3">
@@ -69,65 +61,81 @@ Licensed under MIT
                <div class="tab-content">
                     <div class="tab-pane active" id="saved_offers">
                         <h1>Saved Offers</h1>
-                        <div class="panel panel-default" ng-repeat="item in [1,2]">
+                        <div class="panel panel-default" ng-repeat="item in user.fav_coupons">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center">
                                             <h4>
-                                                Rs. 1000
-                                                <br />
-                                                OFF
+                                                {{ item.discount_type }} {{ item.discount }}
                                             </h4>
-                                            <div class="deal">Deal</div>
+                                            <div class="deal">
+                                                <span ng-if="item.coupon_type == 'coupon'">
+                                                    COUPON
+                                                </span>
+                                                <span ng-if="item.coupon_type == 'offer'">
+                                                    DEAL
+                                                </span>
+                                            </div>
                                         </div> <!-- end deal-price -->
                                     </div> <!-- end col -->
-                                    <div class="col-lg-10 col-md-10 col-sm-10">
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                         <h3 class="margin-top-0 coupon-heading">
-                                            Upto Rs. 30 Supercash everyday on Recharge
-                                            <span class="pull-right">
-                                                <i class="fa fa-star"></i>&nbsp;
+                                            {{ item.title }}
+                                            <span class="pull-right hidden-xs">
+                                                <i class="fa fa-heart-o"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
                                         </h3>
-                                        <p style="opacity: 0.6; line-height: 25px;">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s,
-                                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                            <span class="pull-right">
-                                                <a href="">Show More</a>
+                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                            <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
+                                               ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
+                                        <p style="opacity: 0.6; line-height: 25px;" class="para_small">
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                        <span class="pull-right">
+                                                <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                    Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                                </a>
                                             </span>
                                         </p>
                                         <p>
-                                            <a href="">See all Mobile Recharge Coupons</a>
+                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                                See all {{ item.related_categories[0].name }} Coupons
+                                            </a>
                                         </p>
                                     </div>
                                 </div> <!-- end row -->
                             </div> <!-- end panel body -->
                             <!--panel footer-->
                             <div class="panel-footer coupon-footer">
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <i class="fa fa-heart-o"></i> &nbsp;
-                                        Verified today
+                                <div class="row vari_pad">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                                        <i class="fa fa-heart-o"></i>
+                                        {{ item.status }}
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <div ng-click="openComment(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <div ng-click="openReport(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
                                         <i class="fa fa-bug"></i> &nbsp;
-                                        Report Coupon
+                                        Report
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <button class="btn btn-md btn-block btn-info">
-                                            <span>Show Coupon Code</span>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                        <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
+                                            <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                             <!--end panel footer -->
+                            <!-- comments display directive -->
+                            <comments-display items="item.comments"></comments-display>
+                            <!-- end of comments display directive -->
                         </div> <!-- end panel -->
                     </div>
                     <div class="tab-pane" id="favorite_offers">
