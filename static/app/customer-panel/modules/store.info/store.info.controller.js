@@ -104,9 +104,6 @@ angular
         $("#top_banner_area").hide();
         if($stateParams['url']) {
             // get store information
-            var where = {};
-            where['url'] = $stateParams.url;
-
             var embedded = {};
             embedded['recommended_stores'] = 1;
             embedded['related_categories'] = 1;
@@ -114,15 +111,14 @@ angular
             embedded['related_stores'] = 1;
             embedded['related_deals'] = 1;
 
-            var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+
+            var url = '/api/1.0/stores/'+$stateParams.url+'?embedded='+
                 JSON.stringify(embedded)+"&number_of_clicks=1";
             StoreQuery.get(url).then(function (store) {
                 console.log(store)
                 if(store.data) {
-                    if(store.data._items.length == 0) {
+                    if(!store.data) {
                         $state.go('404');
                     }
-                    $scope.store = store.data._items[0];
                     $scope.store = store.data;
                     $scope.store.related_stores = clearNullIds($scope.store.related_stores);
                     $scope.store.top_stores = clearNullIds($scope.store.top_stores);

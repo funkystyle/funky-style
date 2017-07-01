@@ -5,6 +5,7 @@ angular.module("loginModule", ["Directives", "cgBusy", "constantModule", "satell
         console.log($scope.login)
         // login click function
         $scope.loginNow = function(login) {
+            console.log($scope, $http)
             $scope.load = $http({
                 url: URL.login,
                 method: "POST",

@@ -5,6 +5,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                                        storeFactory, categoryFactory, personFactory) {
         $scope.coupons = [];
         $scope.gridOptions = {
+            data: [],
             enablePaginationControls: true,
             paginationPageSize: 25,
             columnDefs: [
@@ -21,13 +22,29 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     field: "last_modified_by", displayName: "Submitted By",
                     cellTemplate: '<p style="text-transform: capitalize;">{{ row.entity.last_modified_by.first_name }} {{ row.entity.last_modified_by.last_name }}</p>'
                 },
-                { field: 'company', enableFiltering: false },
-                { field: 'email', enableFiltering: false },
-                { field: 'phone', enableFiltering: false },
-                { field: 'age',
-                    filterHeaderTemplate: '<div class="ui-grid-filter-container" ng-repeat="colFilter in col.filters"><div my-custom-modal></div></div>'
+                { field: 'related_stores[0].name', displayName: "Store", enableFiltering: false },
+                {
+                    field: 'related_categories', displayName: "Category", enableFiltering: false,
+                    cellTemplate: '<p style="text-transform: capitalize;">' +
+                    '<span ng-repeat="i in row.entity.related_categories">' +
+                    '<a ui-sref="header.update-category({categoryId: i._id})"> {{ i.name }}</a> ' +
+                    '{{$last ? "" : ($index == row.entity.related_categories.length-2) ? " and " : ", "}}</span>' +
+                    '</p>'
                 },
-                { field: 'mixedDate', cellFilter: 'date', width: '15%', enableFiltering: false }
+                { field: 'coupon_type', displayName: "Coupon Type", enableFiltering: false },
+                { field: 'coupon_code', displayName: "Coupon Code"
+                },
+                {
+                    field: '_created', displayName: "Created Date", type: 'date', cellFilter: 'date', width: '15%', enableFiltering: false,
+                    cellTemplate: "<p>{{ row.entity._created | date: 'dd MMM yyyy hh:mm a' }}</p>"
+                },
+                {
+                    field: 'expire_date', displayName: "Expiry Date", type: 'date', cellFilter: 'date', width: '15%', enableFiltering: false,
+                    cellTemplate: "<p>{{ row.entity.expire_date | date: 'dd MMM yyyy hh:mm a' }}</p>", sort: { direction: 'desc', priority: 0 }
+                },
+                {
+                    field: 'number_of_clicks', displayName: "Clicks"
+                }
             ]
         };
 
@@ -95,7 +112,6 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 if(data['data']) {
                     $scope.coupons = data.data._items;
                     $scope.filterCoupons = data.data._items;
-                    $scope.gridOptions.data = data.data._items;
                     console.log($scope.gridOptions.data);
                     var destArray = _.groupBy(data.data._items, 'status');
                     destArray['All'] = $scope.coupons;
@@ -121,6 +137,9 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                             $scope.persons.push(item.last_modified_by);
                         }
                         $scope.check.check[item._id] = false;
+                        item._created = new Date(item._created);
+                        item._expire_date = new Date(item.expire_date);
+                        $scope.gridOptions.data.push(item);
                     });
                     // Sort by keys
                     var keys = Object.keys( destArray );

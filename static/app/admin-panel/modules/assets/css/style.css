@@ -354,3 +354,21 @@ img-crop canvas{
 .image-multi img{
     margin:5px;
 }
+.ui-grid-pager-control input {
+    padding: 5px 2px !important;
+    width: 30px !important;
+}.ui-grid, .ui-grid-viewport {
+     height: auto !important;
+ }
+
+.ui-grid-pager-panel {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ui-grid-pager-container, .ui-grid-pager-count-container {
+    margin-top: 10px;
+}
