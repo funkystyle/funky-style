@@ -265,16 +265,24 @@ SCHEMAS = {
         },
         'fav_stores': {
             'type': 'list',
-            'data_relation': {
-                'resource': 'stores',
-                'embeddable': True
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'stores',
+                    'embeddable': True,
+                    'field': '_id'
+                }
             }
         },
         'fav_coupons': {
             'type': 'list',
-            'data_relation': {
-                'resource': 'coupons',
-                'embeddable': True
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'coupons',
+                    'embeddable': True,
+                    'field': '_id'
+                }
             }
         }
     },

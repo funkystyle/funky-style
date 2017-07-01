@@ -137,6 +137,7 @@ def editor_login_required(f):
 def admin_login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
+        LOGGER.info("args:{}, kwargs:{}".format(args[0]['_id'], kwargs))
         allowed_roles = []
         allowed_roles.extend(CONFIG_DATA['ADMIN_ROLES'])
 
@@ -155,20 +156,24 @@ def admin_login_required(f):
             error = 'token mis-matched.'
             abort(401, error)
 
-        if 'user_level' not in session:
+
+        if 'user_level' not in session or 'user_id' not in session:
             LOGGER.info('user not logged in.')
             error = 'user not logged in.'
             abort(401, error)
+
+
 
         if not session['user_level']:
             LOGGER.info('user roles empty.')
             error = 'user not logged in.'
             abort(401, error)
 
-        if session['user_level'] not in allowed_roles:
-            LOGGER.info('Invalid user role of :{0}.'.format(session['user_id']))
-            error = 'Invalid user role.'
-            abort(401, error)
+        if session['user_id'] != str(args[0]['_id']):
+            if session['user_level'] not in allowed_roles:
+                LOGGER.info('Invalid user role of :{0}.'.format(session['user_id']))
+                error = 'Invalid user role.'
+                abort(401, error)
 
         LOGGER.info("user role:{0}, allowed roles:{1}".format(session['user_level'], allowed_roles))
 

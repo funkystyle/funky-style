@@ -87,6 +87,7 @@ angular
 
         // open coupon popup code
         $scope.openCouponCode = function (store, item) {
+
             // put a request to update the no of clicks into the particular coupon document
             var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
             StoreQuery.get(url);
@@ -102,6 +103,10 @@ angular
         };
         $("#top_banner_area").hide();
         if($stateParams['url']) {
+            // get store information
+            var where = {};
+            where['url'] = $stateParams.url;
+
             var embedded = {};
             embedded['recommended_stores'] = 1;
             embedded['related_categories'] = 1;
@@ -109,18 +114,26 @@ angular
             embedded['related_stores'] = 1;
             embedded['related_deals'] = 1;
 
-            var url = '/api/1.0/stores/'+$stateParams.url+'?embedded='+
+            var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+
                 JSON.stringify(embedded)+"&number_of_clicks=1";
+<<<<<<< HEAD
+            Query.get(url).then(function (store) {
+=======
             StoreQuery.get(url).then(function (store) {
                 console.log(store)
+>>>>>>> a4d13d43a3679f78d819b91fc4d7bb379c6c0a72
                 if(store.data) {
-                    if(!store.data) {
+                    if(store.data._items.length == 0) {
                         $state.go('404');
                     }
+<<<<<<< HEAD
+                    $scope.store = store.data._items[0];
+=======
                     $scope.store = store.data;
                     $scope.store.related_stores = clearNullIds($scope.store.related_stores);
                     $scope.store.top_stores = clearNullIds($scope.store.top_stores);
                     $scope.store.related_deals = clearNullIds($scope.store.related_deals);
+>>>>>>> 1c328f10b8d358c4f93f1888fdab86617e131ab9
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $rootScope.pageTitle = $scope.store.meta_title;
