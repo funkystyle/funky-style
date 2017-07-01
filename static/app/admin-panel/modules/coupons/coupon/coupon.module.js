@@ -1,5 +1,4 @@
-angular.module("couponModule", ['constantModule',
-    'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule',
+angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule',
     'storeFactoryModule', 'categoryFactoryModule', 'personFactoryModule', 'ui.grid', 'ui.grid.pagination'])
     .controller("couponCtrl", function($scope, $filter, toastr, $http, $q,
                                        mainURL, URL, $state, $stateParams, $auth, couponFactory,
