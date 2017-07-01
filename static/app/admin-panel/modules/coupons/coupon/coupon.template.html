@@ -16,6 +16,9 @@
     </div>
 
     <div class="panel-body" cg-busy="load">
+
+        <div id="grid1" ui-grid="gridOptions" ui-grid-pagination class="grid" class="grid"></div>
+
         <div class="row" style="margin-bottom: 30px;">
             <div class="col-lg-6 col-md-6">
                 <span ng-click="filterByStatus(val)" ng-repeat="(key, val) in statusOptions">

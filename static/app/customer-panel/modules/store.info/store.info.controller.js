@@ -2,7 +2,7 @@ angular
     .module("storeinfoModule", ["categoryFactoryModule", "Directives", "satellizer"])
     .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth,
                                                  categoryFactory, $filter, $sce, $ocLazyLoad,
-                                                 $rootScope, $compile, StoreQuery, $q, auth) {
+                                                 $rootScope, $compile, StoreQuery, $q, auth, $window) {
         $scope.favorites = {};
         $scope.comment = {};
         $scope.filter = {
@@ -124,6 +124,7 @@ angular
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $rootScope.pageTitle = $scope.store.meta_title;
+                    $("title").text($scope.store.meta_title);
                     $rootScope.pageDescription = $scope.store.meta_description;
 
                     // mark store favorite

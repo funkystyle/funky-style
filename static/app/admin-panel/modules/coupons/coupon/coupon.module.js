@@ -1,10 +1,42 @@
-angular.module("couponModule", ['angular-table', 'constantModule',
+angular.module("couponModule", ['constantModule',
     'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule',
-    'storeFactoryModule', 'categoryFactoryModule', 'personFactoryModule'])
+    'storeFactoryModule', 'categoryFactoryModule', 'personFactoryModule', 'ui.grid', 'ui.grid.pagination'])
     .controller("couponCtrl", function($scope, $filter, toastr, $http, $q,
                                        mainURL, URL, $state, $stateParams, $auth, couponFactory,
                                        storeFactory, categoryFactory, personFactory) {
         $scope.coupons = [];
+        $scope.gridOptions = {
+            enablePaginationControls: true,
+            paginationPageSize: 25,
+            columnDefs: [
+                {
+                    field: 'title', displayName: "Title", width: "25%",
+                    cellTemplate: '<div class="coupon-name">' +
+                    '<p>{{ row.entity.title }}</p>' +
+                    '<p class="coupon-options">' +
+                    '<span><a href="/store/{{ row.entity.related_stores[0].url }}" target="_blank">View</a></span> &nbsp;&nbsp;' +
+                    '<span><a ui-sref="header.update-coupon({couponId: row.entity._id})">Edit</a></span></p>' +
+                    '</div>'
+                },
+                {
+                    field: "last_modified_by", displayName: "Submitted By",
+                    cellTemplate: '<p style="text-transform: capitalize;">{{ row.entity.last_modified_by.first_name }} {{ row.entity.last_modified_by.last_name }}</p>'
+                },
+                { field: 'company', enableFiltering: false },
+                { field: 'email', enableFiltering: false },
+                { field: 'phone', enableFiltering: false },
+                { field: 'age',
+                    filterHeaderTemplate: '<div class="ui-grid-filter-container" ng-repeat="colFilter in col.filters"><div my-custom-modal></div></div>'
+                },
+                { field: 'mixedDate', cellFilter: 'date', width: '15%', enableFiltering: false }
+            ]
+        };
+
+
+
+
+
+
         $scope.stores = [];
         $scope.categories = [];
         $scope.persons = [];
@@ -64,6 +96,8 @@ angular.module("couponModule", ['angular-table', 'constantModule',
                 if(data['data']) {
                     $scope.coupons = data.data._items;
                     $scope.filterCoupons = data.data._items;
+                    $scope.gridOptions.data = data.data._items;
+                    console.log($scope.gridOptions.data);
                     var destArray = _.groupBy(data.data._items, 'status');
                     destArray['All'] = $scope.coupons;
                     destArray['Expired Coupons'] = [];

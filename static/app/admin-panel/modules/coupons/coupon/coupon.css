@@ -7,3 +7,6 @@
 td {
     max-width: 100px !important;
 }
+.ui-grid-cell, .ui-grid-row {
+    height: 100px !important;
+}
