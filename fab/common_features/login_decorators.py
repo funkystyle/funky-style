@@ -137,7 +137,10 @@ def editor_login_required(f):
 def admin_login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        LOGGER.info("args:{}, kwargs:{}".format(args[0]['_id'], kwargs))
+
+        if len(args) and '_items' in args[0]:
+            args = args[0]['_items']
+
         allowed_roles = []
         allowed_roles.extend(CONFIG_DATA['ADMIN_ROLES'])
 
@@ -169,11 +172,18 @@ def admin_login_required(f):
             error = 'user not logged in.'
             abort(401, error)
 
-        if session['user_id'] != str(args[0]['_id']):
+
+
+
+        if len(args) and session['user_id'] != str(args[0]['_id']):
             if session['user_level'] not in allowed_roles:
                 LOGGER.info('Invalid user role of :{0}.'.format(session['user_id']))
                 error = 'Invalid user role.'
                 abort(401, error)
+
+        elif session['user_level'] not in allowed_roles:
+             error = 'Invalid user role.'
+             abort(401, error)
 
         LOGGER.info("user role:{0}, allowed roles:{1}".format(session['user_level'], allowed_roles))
 

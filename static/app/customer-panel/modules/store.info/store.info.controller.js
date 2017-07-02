@@ -94,7 +94,7 @@ angular
 
             if(store.store_url) {
                 setTimeout(function () {
-                    window.location.href = store.store_url;
+                    // window.location.href = store.store_url;
                 }, 500);
             }
 

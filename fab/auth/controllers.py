@@ -162,7 +162,7 @@ def me():
         LOGGER.info("user:{0}".format(user))
         json_user = convert_object_dates_to_string(user, ['_id', 'created_date', 'modified_date',
                                                           'last_modified_by',''])
-        del_some_keys = delete_some_keys_from_dict(json_user, ['password'])
+        del_some_keys = delete_some_keys_from_dict(json_user, ['password','fav_stores', 'fav_coupons'])
 
         response = jsonify(error='', data = del_some_keys)
         response.status_code = 200
@@ -200,6 +200,8 @@ def login():
 
     json_user = convert_object_dates_to_string(user, ['_id', 'created_date', 'modified_date',
                                                       'last_modified_by',''])
+    del json_user['fav_stores']
+    del json_user['fav_coupons']
 
     session['user_id'] = json_user['_id']
     session['user_level'] = json_user['user_level']

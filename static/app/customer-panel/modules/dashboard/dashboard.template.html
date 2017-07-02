@@ -41,12 +41,12 @@
                             <i class="glyphicon glyphicon-user"></i>
                             Favorite Offers </a>
                         </li>
-                        <li>
+                        <li style="display: none;">
                             <a href="#" target="_blank">
                             <i class="glyphicon glyphicon-ok"></i>
                             Tasks </a>
                         </li>
-                        <li>
+                        <li style="display: none;">
                             <a href="#">
                             <i class="glyphicon glyphicon-flag"></i>
                             Help </a>
@@ -158,13 +158,12 @@
                         </div> <!-- end well -->
                         <h1>All Favorite Stores</h1>
                         <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-2" ng-repeat="item in [1,2]">
+                            <div class="col-lg-2 col-md-2 col-sm-2" ng-repeat="item in user.fav_stores">
                                 <div class="thumbnail text-center">
-                                    <img src="http://blankloanagreement.com/wp-content/uploads/2017/02/word-logo-design-sample-media-tribe_logo-150x150.jpg"
-                                         alt="" />
+                                    <img ng-src="{{ item.image }}" alt="" />
 
                                     <h5>
-                                        <i class="fa fa-heart"></i>&nbsp;
+                                        <i class="fa fa-heart" area-hidden="true"></i>&nbsp;
                                         Faved!
                                     </h5>
                                 </div> <!-- thumbnail -->

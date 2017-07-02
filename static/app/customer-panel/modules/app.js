@@ -319,7 +319,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // blog state
                 .state('blogs', {
-                    url: '/blogs',
+                    url: '/',
                     templateUrl: 'static/app/customer-panel/modules/blog/blog.header.template.html',
                     controller: "blogHeaderCtrl",
                     resolve: {
@@ -335,7 +335,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // All blogs
                 .state('blogs.blogs', {
-                    url: '/all/',
+                    url: '/blog/',
                     templateUrl: 'static/app/customer-panel/modules/blog/blog.template.html',
                     controller: "blogListCtrl",
                     resolve: {
@@ -351,7 +351,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // blog.category
                 .state('blogs.category', {
-                    url: '/category/:url/',
+                    url: '/blog/category/:url/',
                     templateUrl: 'static/app/customer-panel/modules/blog.category/blog.category.template.html',
                     controller: "blogCategoryCtrl",
                     resolve: {

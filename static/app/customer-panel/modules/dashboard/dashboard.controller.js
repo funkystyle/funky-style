@@ -21,7 +21,7 @@ angular.module("dashboardModule", ["headerModule", "APP", "satellizer","toastr",
                         authorization: $auth.getToken()
                     }
                 }).then(function (data) {
-                    console.log(data);
+                    console.log("Dashboard Looged User Data: ", data.data);
                     $scope.user = data.data;
                 }, function (error) {
                     console.log(error);

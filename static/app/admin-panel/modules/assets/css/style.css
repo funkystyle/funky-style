@@ -362,13 +362,8 @@ img-crop canvas{
  }
 
 .ui-grid-pager-panel {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    padding-top: 0;
-    padding-bottom: 0;
+    position: relative !important;
 }
-
-.ui-grid-pager-container, .ui-grid-pager-count-container {
+.ui-grid-pager-container, .ui-grid-pager-count-container, .ui-grid-grid-footer {
     margin-top: 10px;
 }

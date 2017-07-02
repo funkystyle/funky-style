@@ -29,6 +29,11 @@ def before_returning_stores(response):
     LOGGER.info("ddddddddddddddddddddddddd")
     update_number_of_clicks('stores', response['_id'])
 
+
+def before_returning_coupons(response):
+    LOGGER.info("coupons")
+    update_number_of_clicks('coupons', response['_id'])
+
 def before_returning_deals(response):
     update_number_of_clicks('deals', response['_id'])
 
