@@ -141,11 +141,8 @@ angular.module("DashboardModule", ["constantModule",
                 console.log(error);
             });
 
-            // get list of persons
-            var projection = {};
-            projection['_id'] = 1;
             $http({
-                url: "/api/1.0/persons?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
+                url: "/api/1.0/persons",
                 mathod: "GET",
                 headers: {
                     authorization: $auth.getToken()
