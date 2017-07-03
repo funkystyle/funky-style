@@ -127,7 +127,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })
-                .state('main.login', {
+                /*.state('main.login', {
                     url: '/login',
                     templateUrl: 'static/app/customer-panel/modules/login/login.template.html',
                     controller: "loginCtrl",
@@ -186,7 +186,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                             })
                         }
                     }
-                })
+                })*/
                 // store state
                 .state('main.store', {
                     url: '/stores',
@@ -299,7 +299,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     }
                 })
                 // Dashboard
-                .state('main.dashboard', {
+                /*.state('main.dashboard', {
                     url: '/dashboard',
                     templateUrl: 'static/app/customer-panel/modules/dashboard/dashboard.template.html',
                     controller: "dashboardCtrl",
@@ -311,7 +311,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                             })
                         }
                     }
-                })
+                })*/
                 // 404
                 .state('404', {
                     url: '/404',

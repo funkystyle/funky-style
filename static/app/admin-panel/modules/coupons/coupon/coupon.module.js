@@ -3,6 +3,10 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
     .controller("couponCtrl", function($scope, $filter, toastr, $http, $q,
                                        mainURL, URL, $state, $stateParams, $auth, couponFactory, $log) {
         $scope.coupons = [];
+        var storeHeaderTemplate = '<div style="width: 100%;" class="ui-grid-column-menu-button">' +
+            '<label style="float: left;">Store</label>' +
+            '<i style="cursor: pointer; float: right;" class="ui-grid-icon-angle-down" aria-hidden="true">&nbsp;</i>' +
+            '</div>';
         $scope.gridOptions = {
             data: [],
             enableRowSelection: true,
@@ -15,7 +19,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
             columnDefs: [
                 {
                     field: 'title', displayName: "Title", width: "25%",
-                    cellTemplate: '<div class="coupon-name">' +
+                    cellTemplate: '<div class="coupon-name" style="padding: 5px;">' +
                     '<p>{{ row.entity.title }}</p>' +
                     '<p class="coupon-options">' +
                     '<span><a href="/store/{{ row.entity.related_stores[0].url }}" target="_blank">View</a></span> &nbsp;&nbsp;' +
@@ -24,12 +28,15 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 },
                 {
                     field: "last_modified_by", displayName: "Submitted By",
-                    cellTemplate: '<p style="text-transform: capitalize;">{{ row.entity.last_modified_by.first_name }} {{ row.entity.last_modified_by.last_name }}</p>'
+                    cellTemplate: '<p style="text-transform: capitalize; padding: 5px;">{{ row.entity.last_modified_by.first_name }} {{ row.entity.last_modified_by.last_name }}</p>'
                 },
-                { field: 'related_stores[0].name', displayName: "Store", enableFiltering: false },
+                {
+                    field: 'related_stores[0].name', displayName: "Store", enableFiltering: false,
+                    headerCellTemplate: storeHeaderTemplate
+                },
                 {
                     field: 'related_categories', displayName: "Category", enableFiltering: false,
-                    cellTemplate: '<p style="text-transform: capitalize;">' +
+                    cellTemplate: '<p style="text-transform: capitalize; padding: 5px;">' +
                     '<span ng-repeat="i in row.entity.related_categories">' +
                     '<a ui-sref="header.update-category({categoryId: i._id})"> {{ i.name }}</a> ' +
                     '{{$last ? "" : ($index == row.entity.related_categories.length-2) ? " and " : ", "}}</span>' +
@@ -40,11 +47,11 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 },
                 {
                     field: '_created', displayName: "Created Date", type: 'date', cellFilter: 'date', width: '15%', enableFiltering: false,
-                    cellTemplate: "<p>{{ row.entity._created | date: 'dd MMM yyyy hh:mm a' }}</p>"
+                    cellTemplate: "<p style='padding: 5px;'>{{ row.entity._created | date: 'dd MMM yyyy hh:mm a' }}</p>"
                 },
                 {
                     field: 'expire_date', displayName: "Expiry Date", type: 'date', cellFilter: 'date', width: '15%', enableFiltering: false,
-                    cellTemplate: "<p>{{ row.entity.expire_date | date: 'dd MMM yyyy hh:mm a' }}</p>", sort: { direction: 'desc', priority: 0 }
+                    cellTemplate: "<p style='padding: 5px;'>{{ row.entity.expire_date | date: 'dd MMM yyyy hh:mm a' }}</p>", sort: { direction: 'desc', priority: 0 }
                 },
                 {
                     field: 'number_of_clicks', displayName: "Clicks"
@@ -131,5 +138,11 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 toastr.success(items.length, "Deleted Selected Items");
                 $state.reload();
             });
+        };
+    })
+    .directive('myCustomModal', function() {
+        return {
+            template: '<label>{{colFilter.term}}</label><button ng-click="showAgeModal()">...</button>',
+            controller: 'myCustomModalCtrl'
         };
     });
