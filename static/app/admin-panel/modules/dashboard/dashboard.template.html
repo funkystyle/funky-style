@@ -9,7 +9,7 @@
                     <label id="Select">Select Category</label>
                     <ui-select on-select="changeChart()" ng-model="select.category" theme="bootstrap">
                         <ui-select-match placeholder="Select Category">{{ $select.selected.text }}</ui-select-match>
-                        <ui-select-choices repeat="item.code as item in types | orderBy: 'text' | filter: $select.search">
+                        <ui-select-choices repeat="item in types | orderBy: 'text' | filter: $select.search">
                             <div ng-bind-html="item.text | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>

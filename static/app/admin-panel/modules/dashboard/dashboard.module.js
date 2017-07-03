@@ -13,15 +13,19 @@ angular.module("DashboardModule", ["constantModule",
             {code: "customdate", text: "By Custom Date"}
         ];
         $scope.types = [
-            {code: "coupons", text: "Coupons"},
-            {code: "deals", text: "Deals"},
-            {code: "persons", text: "Persons"},
-            {code: "stores", text: "Stores"},
-            {code: "categories", text: "Categories"}
+            {code: "coupons", text: "No of Coupons Added", type: "count"},
+            {code: "persons", text: "Persons", type: "count"},
+            {code: "stores", text: "No of Stores Added", type: "count"},
+            {code: "categories", text: "No of Categories Added", type: "count"},
+            {code: "coupons", text: "No of Coupon Clicks", type: "number_of_clicks"},
+            {code: "stores", text: "No of Stores Clicks", type: "number_of_clicks"},
+            {code: "deals", text: "No of Deals Clicks", type: "number_of_clicks"},
+            {code: "deals", text: "No of New Deals Added", type: "count"},
+            {code: "coupons", text: "High Clicked Coupons", type: "number_of_clicks"}
         ];
         $scope.select = {
             by: $scope.menuTypes[0].code,
-            category: $scope.types[0].code
+            category: $scope.types[0]
         };
 
         $scope.morris = undefined;
@@ -45,7 +49,7 @@ angular.module("DashboardModule", ["constantModule",
         }, 4000);
 
         Date.prototype.addDays = function(days) {
-            var dat = new Date(this.valueOf())
+            var dat = new Date(this.valueOf());
             dat.setDate(dat.getDate() + days);
             return dat;
         };
@@ -54,7 +58,7 @@ angular.module("DashboardModule", ["constantModule",
             var dateArray = [];
             var currentDate = startDate;
             while (currentDate <= stopDate) {
-                dateArray.push( new Date (currentDate) )
+                dateArray.push( new Date (currentDate) );
                 currentDate = currentDate.addDays(1);
             }
             return dateArray;
@@ -70,7 +74,7 @@ angular.module("DashboardModule", ["constantModule",
             // console.log("Final Key Values: ", $scope.keyValues);
             setTimeout(function () {
                 $scope.morris.setData($scope.keyValues);
-                $scope.morris.options.labels = [$scope.select.category];
+                $scope.morris.options.labels = [$scope.select.category.text];
                 $scope.morris.options.barSize = 30;
                 $scope.morris.redraw();
             }, 1000);
@@ -92,20 +96,30 @@ angular.module("DashboardModule", ["constantModule",
                 })
             } else {
                 angular.forEach(monthNames, function (month) {
-                    $scope.objItems[month] = 0
+                    $scope.objItems[month] = 0;
                 });
             }
-            angular.forEach($scope[$scope.select.category], function (item) {
+            angular.forEach($scope[$scope.select.category.code], function (item) {
                 var date = new Date(item._created);
+                console.log($scope.select.category);
                 if($scope.select.by == 'month') {
                     if(date.getFullYear() == new Date().getFullYear()) {
                         created = monthNames[date.getMonth()];
-                        $scope.objItems[created] = $scope.objItems[created] + 1;
+                        if($scope.select.category.type == 'count') {
+                            $scope.objItems[created] = $scope.objItems[created] + 1;
+                        } else if ($scope.select.category.type == 'number_of_clicks') {
+                            $scope.objItems[created] = $scope.objItems[created] + item.number_of_clicks;
+                        }
                     }
                 } else if ($scope.select.by == 'customdate') {
                     angular.forEach($scope.objItems, function (val, key) {
                         if(key == moment(date).format('DD/MM/YYYY')) {
-                            $scope.objItems[key] ++;
+                            if($scope.select.category.type == 'count') {
+                                $scope.objItems[key] ++;
+                            } else if ($scope.select.category.type == 'number_of_clicks') {
+                                console.log(key, $scope.objItems[key], item.number_of_clicks);
+                                $scope.objItems[key] = $scope.objItems[key] + item.number_of_clicks;
+                            }
                         }
                     })
                 }
@@ -116,8 +130,10 @@ angular.module("DashboardModule", ["constantModule",
 
         if($auth.isAuthenticated()) {
             // get the list of coupons
-            var projection = {};
-            projection['name'] = 1;
+            var projection = {
+                "name": 1,
+                "number_of_clicks": 1
+            };
             $http({
                 url: "/api/1.0/coupons?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
                 mathod: "GET"
@@ -130,7 +146,7 @@ angular.module("DashboardModule", ["constantModule",
                         data: [],
                         xkey: 'y',
                         ykeys: ['a'],
-                        labels: [$scope.select.category],
+                        labels: [$scope.select.category.code],
                         xLabelMargin: 1,
                         xLabelAngle: 50
                     });
@@ -156,9 +172,6 @@ angular.module("DashboardModule", ["constantModule",
                 console.log(error);
             });
 
-            // get list of persons
-            var projection = {};
-            projection['name'] = 1;
             $http({
                 url: "/api/1.0/deals?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
                 mathod: "GET"
@@ -172,9 +185,6 @@ angular.module("DashboardModule", ["constantModule",
             });
 
 
-            // get the list of featured stores
-            var projection = {};
-            projection['name'] = 1;
             $http({
                 url: "/api/1.0/stores?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),
                 mathod: "GET"
@@ -188,8 +198,6 @@ angular.module("DashboardModule", ["constantModule",
             });
 
 
-            // get the list of Categories
-            var projection = {};
             projection['name'] = 1;
             $http({
                 url: "/api/1.0/categories?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),

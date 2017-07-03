@@ -5,5 +5,5 @@
 				  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
 				        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-						<url><loc>http://localhost:8000/category/regan-abbot-offers</loc><lastmod>2017-06-30T14:28:37+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
+						<url><loc>http://localhost:8000/category/regan-abbot-offers</loc><lastmod>2017-07-03T14:44:31+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url><url><loc>http://localhost:8000/category/yvette-parsons-offers</loc><lastmod>2017-07-03T13:16:06+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
 				</urlset>
