@@ -1,5 +1,5 @@
 angular.module("constantModule", [])
-    .constant("mainURL", "")
+    .constant("mainURL", "http://localhost:8888/")
     .constant('URL', {
-        blog: "/api/1.0/blog"
+        getProjects: "/api/1.0/blog"
     });

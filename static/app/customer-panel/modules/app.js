@@ -96,6 +96,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
 
             $urlRouterProvider.otherwise('/');
             $stateProvider
+
                 .state('main', {
                     url: '',
                     templateUrl: 'static/app/customer-panel/modules/header/header.template.html',
