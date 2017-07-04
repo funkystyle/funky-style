@@ -128,7 +128,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })
-                .state('main.login', {
+                /*.state('main.login', {
                     url: '/login',
                     templateUrl: 'static/app/customer-panel/modules/login/login.template.html',
                     controller: "loginCtrl",
@@ -187,7 +187,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                             })
                         }
                     }
-                })
+                })*/
                 // store state
                 .state('main.store', {
                     url: '/stores',
@@ -300,7 +300,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     }
                 })
                 // Dashboard
-                .state('main.dashboard', {
+                /*.state('main.dashboard', {
                     url: '/dashboard',
                     templateUrl: 'static/app/customer-panel/modules/dashboard/dashboard.template.html',
                     controller: "dashboardCtrl",
@@ -312,7 +312,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                             })
                         }
                     }
-                })
+                })*/
                 // 404
                 .state('404', {
                     url: '/404',
@@ -320,7 +320,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // blog state
                 .state('blogs', {
-                    url: '/blogs',
+                    url: '/blog',
                     templateUrl: 'static/app/customer-panel/modules/blog/blog.header.template.html',
                     controller: "blogHeaderCtrl",
                     resolve: {
@@ -336,7 +336,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // All blogs
                 .state('blogs.blogs', {
-                    url: '/all/',
+                    url: '/',
                     templateUrl: 'static/app/customer-panel/modules/blog/blog.template.html',
                     controller: "blogListCtrl",
                     resolve: {

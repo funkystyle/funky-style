@@ -132,6 +132,8 @@ app.on_fetched_resource_persons += before_returning_persons
 app.on_fetched_item_persons += before_returning_persons
 
 app.on_fetched_item_stores += before_returning_stores
+app.on_fetched_item_coupons += before_returning_coupons
+
 app.on_fetched_item_deals += before_returning_deals
 app.on_fetched_item_deal_brands += before_returning_deal_brands
 app.on_fetched_item_deal_categories += before_returning_deal_categories

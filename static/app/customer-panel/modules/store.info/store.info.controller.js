@@ -2,7 +2,7 @@ angular
     .module("storeinfoModule", ["categoryFactoryModule", "Directives", "satellizer"])
     .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth,
                                                  categoryFactory, $filter, $sce, $ocLazyLoad,
-                                                 $rootScope, $compile, StoreQuery, $q, auth) {
+                                                 $rootScope, $compile, StoreQuery, $q, auth, $window) {
         $scope.favorites = {};
         $scope.comment = {};
         $scope.filter = {
@@ -94,7 +94,7 @@ angular
 
             if(store.store_url) {
                 setTimeout(function () {
-                    window.location.href = store.store_url;
+                    // window.location.href = store.store_url;
                 }, 500);
             }
 
@@ -104,9 +104,6 @@ angular
         $("#top_banner_area").hide();
         if($stateParams['url']) {
             // get store information
-            var where = {};
-            where['url'] = $stateParams.url;
-
             var embedded = {};
             embedded['recommended_stores'] = 1;
             embedded['related_categories'] = 1;
@@ -114,29 +111,22 @@ angular
             embedded['related_stores'] = 1;
             embedded['related_deals'] = 1;
 
-            var url = '/api/1.0/stores/'+'?where='+JSON.stringify(where)+'&embedded='+
+            var url = '/api/1.0/stores/'+$stateParams.url+'?embedded='+
                 JSON.stringify(embedded)+"&number_of_clicks=1";
-<<<<<<< HEAD
-            Query.get(url).then(function (store) {
-=======
             StoreQuery.get(url).then(function (store) {
                 console.log(store)
->>>>>>> a4d13d43a3679f78d819b91fc4d7bb379c6c0a72
                 if(store.data) {
-                    if(store.data._items.length == 0) {
+                    if(!store.data) {
                         $state.go('404');
                     }
-<<<<<<< HEAD
-                    $scope.store = store.data._items[0];
-=======
                     $scope.store = store.data;
                     $scope.store.related_stores = clearNullIds($scope.store.related_stores);
                     $scope.store.top_stores = clearNullIds($scope.store.top_stores);
                     $scope.store.related_deals = clearNullIds($scope.store.related_deals);
->>>>>>> 1c328f10b8d358c4f93f1888fdab86617e131ab9
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $rootScope.pageTitle = $scope.store.meta_title;
+                    $("title").text($scope.store.meta_title);
                     $rootScope.pageDescription = $scope.store.meta_description;
 
                     // mark store favorite

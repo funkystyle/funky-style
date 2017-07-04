@@ -2,9 +2,10 @@ angular.module("loginModule", ["Directives", "cgBusy", "constantModule", "satell
     .controller("loginCtrl", function($scope, $http, mainURL, URL, $auth, $state, toastr) {
         // Declaring variables
         $scope.login = {};
-
+        console.log($scope.login)
         // login click function
         $scope.loginNow = function(login) {
+            console.log($scope, $http)
             $scope.load = $http({
                 url: URL.login,
                 method: "POST",

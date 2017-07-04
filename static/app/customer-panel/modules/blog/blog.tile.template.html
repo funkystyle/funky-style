@@ -8,7 +8,7 @@
             </span>
         </p>
         <h3 class="txt_h3">
-            <a ui-sref="blogs.category({url: item.related_categories[0].url})">{{ item.title }}</a>
+            <a ui-sref="blogs.details({url: item.url})">{{ item.title }}</a>
         </h3>
         <p class="week_txt">
             {{ item._created | date: 'dd MMM yyyy' }}

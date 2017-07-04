@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 thumb">
                     <div class="thumbnail store-logo">
-                        <i class="fa" ng-class="{'fa-heart-o': !favorites[store._id], 'fa-heart': favorites[store._id]}"
+                        <i style="display: none;" class="fa" ng-class="{'fa-heart-o': !favorites[store._id], 'fa-heart': favorites[store._id]}"
                            ng-click="manageFavorite('fav_stores', store._id)"></i>
                         <img ng-src="{{ store.image }}" alt="{{ store.name }}" title="{{ store.name }}">
                     </div> <!-- end thumbnail -->
@@ -316,13 +316,13 @@
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                         <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
-                                            <span class="pull-right hidden-xs">
+                                            <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
                                         </h3>
-                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
@@ -351,11 +351,11 @@
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div ng-click="openComment(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
-                                    <div ng-click="openReport(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
@@ -446,13 +446,13 @@
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                         <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
-                                            <span class="pull-right hidden-xs">
+                                            <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
                                         </h3>
-                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
@@ -483,7 +483,7 @@
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div ng-click="openComment(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
@@ -491,7 +491,7 @@
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                    <div style="visibility: hidden;" class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
@@ -538,13 +538,13 @@
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                         <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
-                                            <span class="pull-right hidden-xs">
+                                            <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
                                         </h3>
-                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
@@ -573,11 +573,11 @@
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div ng-click="openComment(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
-                                    <div ng-click="openReport(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
@@ -697,12 +697,12 @@
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <h3 class="margin-top-0 coupon-heading">
                                     {{ item.title }}
-                                    <span class="pull-right hidden-xs">
+                                    <span class="pull-right hidden-xs" style="display: none;">
                                             <i class="fa fa-star"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                 </h3>
-                                <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                         <i class="fa fa-star"></i>&nbsp;
                                         <i class="fa fa-share-alt"></i>
                                     </span>
@@ -730,11 +730,11 @@
                                 <i class="fa fa-heart-o"></i>
                                 {{ item.status }}
                             </div>
-                            <div ng-click="openComment(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
                                 Comment
                             </div>
-                            <div ng-click="openReport(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
                                 <i class="fa fa-bug"></i> &nbsp;
                                 Report
                             </div>
@@ -784,12 +784,12 @@
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <h3 class="margin-top-0 coupon-heading">
                                     {{ item.title }}
-                                    <span class="pull-right hidden-xs">
+                                    <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa fa-star"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
                                 </h3>
-                                <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa fa-star"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
                                         </span>
@@ -817,11 +817,11 @@
                                 <i class="fa fa-heart-o"></i>
                                 {{ item.status }}
                             </div>
-                            <div ng-click="openComment(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
                                 Comment
                             </div>
-                            <div ng-click="openReport(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
                                 <i class="fa fa-bug"></i> &nbsp;
                                 Report
                             </div>

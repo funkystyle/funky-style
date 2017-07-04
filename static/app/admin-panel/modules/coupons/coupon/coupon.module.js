@@ -1,109 +1,158 @@
-angular.module("couponModule", ['angular-table', 'constantModule',
-    'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule',
-    'storeFactoryModule', 'categoryFactoryModule', 'personFactoryModule'])
+angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule'
+    , 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection'])
     .controller("couponCtrl", function($scope, $filter, toastr, $http, $q,
-                                       mainURL, URL, $state, $stateParams, $auth, couponFactory,
-                                       storeFactory, categoryFactory, personFactory) {
+                                       mainURL, URL, $state, $stateParams, $auth, couponFactory, uiGridConstants) {
         $scope.coupons = [];
-        $scope.stores = [];
         $scope.categories = [];
-        $scope.persons = [];
-        $scope.filterCoupons = [];
-        $scope.search = {
-            search: undefined
+        $scope.stores = [];
+        $scope.gridOptions = {
+            data: [],
+            enableRowSelection: true,
+            enableSelectAll: true,
+            selectionRowHeaderWidth: 35,
+            enablePaginationControls: true,
+            paginationPageSize: 25,
+            showGridFooter:true,
+            enableFiltering: true,
+            rowHeight: 35,
+            columnDefs: [
+                {
+                    field: 'title', displayName: "Title", width: "25%",
+                    cellTemplate: '<div class="coupon-name" style="padding: 5px;">' +
+                    '<p>{{ row.entity.title }}</p>' +
+                    '<p class="coupon-options">' +
+                    '<span><a href="/store/{{ row.entity.related_stores[0].url }}" target="_blank">View</a></span> &nbsp;&nbsp;' +
+                    '<span><a ui-sref="header.update-coupon({couponId: row.entity._id})">Edit</a></span></p>' +
+                    '</div>'
+                },
+                {
+                    field: "last_modified_by", displayName: "Submitted By",
+                    cellTemplate: '<p style="text-transform: capitalize; padding: 5px;">{{ row.entity.last_modified_by.first_name }} {{ row.entity.last_modified_by.last_name }}</p>'
+                },
+                {
+                    field: 'related_stores', displayName: "Store",
+                    enableSorting: false,
+                    filter: {
+                        condition: function (searchTerm, cellValue, row, column) {
+                            var filtered = false;
+                            for (var i = 0; i < cellValue.length; i++) {
+                                filtered = cellValue[i]._id === searchTerm;
+                                if (filtered) {
+                                    break;
+                                }
+                            }
+                            return filtered;
+                        },
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: $scope.stores
+                    },
+                    cellTemplate: "<div ng-repeat='item in row.entity[col.field]'>{{ item.name }}</div>"
+                },
+                {
+                    field: 'related_categories', displayName: "Category",
+                    enableSorting: false,
+                    filter: {
+                        condition: function (searchTerm, cellValue, row, column) {
+                            var filtered = false;
+                            for (var i = 0; i < cellValue.length; i++) {
+                                filtered = cellValue[i]._id === searchTerm;
+                                if (filtered) {
+                                    break;
+                                }
+                            }
+                            return filtered;
+                        },
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: $scope.categories
+                    },
+                    cellTemplate: "<div ng-repeat='item in row.entity[col.field]'>{{ item.name }}</div>"
+                },
+                { field: 'coupon_type', displayName: "Coupon Type" },
+                { field: 'coupon_code', displayName: "Coupon Code"
+                },
+                {
+                    field: '_created', displayName: "Created Date", type: 'date', cellFilter: 'date', width: '15%',
+                    cellTemplate: "<p style='padding: 5px;'>{{ row.entity._created | date: 'dd MMM yyyy hh:mm a' }}</p>"
+                },
+                {
+                    field: 'expire_date', displayName: "Expiry Date", type: 'date', cellFilter: 'date', width: '15%',
+                    cellTemplate: "<p style='padding: 5px;'>{{ row.entity.expire_date | date: 'dd MMM yyyy hh:mm a' }}</p>", sort: { direction: 'desc', priority: 0 }
+                },
+                {
+                    field: 'number_of_clicks', displayName: "Clicks"
+                }
+            ]
         };
-        $scope.coupon_type = ["coupon", "offer"];
-        $scope.show = false;
-        $scope.check = {
-            all: false,
-            check: {}
-        };
-        $scope.filter = {};
-        $scope.statusOptions = {};
 
-        $scope.config = {
-            itemsPerPage: 10,
-            maxPages: 20,
-            fillLastPage: "no"
+        $scope.getSelectedRows = function () {
+            $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
         };
-        $scope.filterByStatus = function (array) {
-            $scope.filterCoupons = array;
-        };
-        $scope.clearAll = function () {
-            $scope.filterCoupons = [];
-            angular.forEach($scope.coupons, function (item) {
-                $scope.filterCoupons.push(item);
+        // register API
+        $scope.gridOptions.onRegisterApi = function(gridApi){
+            //set gridApi on scope
+            $scope.gridApi = gridApi;
+            gridApi.selection.on.rowSelectionChanged($scope,function(row){
+                $scope.getSelectedRows();
             });
 
-            $scope.filter = {};
+            gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
+                var msg = 'rows changed ' + rows;
+                $scope.getSelectedRows();
+            });
         };
 
-        // apply type filter for filtering the coupons from table
-        $scope.applyTypeFilter = function () {
-            console.log($scope.coupons, $scope.filter);
-            $scope.filterCoupons = $filter('typeCouponFilter')($scope.coupons, $scope.filter);
-        };
-        $scope.updateFilteredList = function() {
-            $scope.filterCoupons = $filter("filter")($scope.coupons, $scope.search.search);
-        };
 
+        $scope.statusOptions = {};
+        $scope.filterByStatus = function (array) {
+            $scope.gridOptions.data = array;
+        };
         if ($auth.isAuthenticated()) {
-
             var embedded = {
                 "recommended_stores":1,
                 "related_categories":1,
                 "related_stores":1,
                 "last_modified_by": 1
             };
-
             $scope.load = $http({
                 url: '/api/1.0/coupons?embedded='+JSON.stringify(embedded)+'&rand_number=' + new Date().getTime(),
                 method: "GET"
             }).then(function (data) {
-                // console.log(data);
                 if(data['data']) {
                     $scope.coupons = data.data._items;
-                    $scope.filterCoupons = data.data._items;
                     var destArray = _.groupBy(data.data._items, 'status');
                     destArray['All'] = $scope.coupons;
                     destArray['Expired Coupons'] = [];
                     angular.forEach($scope.coupons, function(item) {
+
+                        // push categories into array for filtering
+                        angular.forEach(item.related_categories, function (category) {
+                            $scope.categories.push({
+                                value: category._id,
+                                label: category.name
+                            });
+                        });
+                        $scope.stores.push({
+                            value: item.related_stores[0]._id,
+                            label: item.related_stores[0].name
+                        });
+
                         if(new Date(item.expire_date) < new Date()) {
                             destArray['Expired Coupons'].push(item);
                         }
-                        // get the related stores
-                        angular.forEach(item.related_stores, function (store) {
-                            if(store) {
-                                $scope.stores.push(store);
-                            }
-                        });
-                        // get the related categories
-                        angular.forEach(item.related_categories, function (cat) {
-                            if(cat) {
-                                $scope.categories.push(cat);
-                            }
-                        });
-
-                        if(item.last_modified_by) {
-                            $scope.persons.push(item.last_modified_by);
-                        }
-                        $scope.check.check[item._id] = false;
+                        item._created = new Date(item._created);
+                        item._expire_date = new Date(item.expire_date);
                     });
+                    setTimeout(function () {
+                        $scope.gridOptions.data = $scope.coupons;
+                        $scope.gridApi.core.refresh();
+                    }, 1000);
+
                     // Sort by keys
                     var keys = Object.keys( destArray );
                     keys = keys.sort( function ( a, b ) { return a > b; } );
                     for ( var i = 0; i < keys.length; i++ ) {
                         $scope.statusOptions[keys[i]] = destArray[keys[i]];
                     }
-                    $scope.persons = _.uniq($scope.persons, function(x){
-                        return x['_id'];
-                    });
-                    $scope.stores = _.uniq($scope.stores, function(x){
-                        return x['_id'];
-                    });
-                    $scope.categories = _.uniq($scope.categories, function(x){
-                        return x['_id'];
-                    });
                 }
             }, function (error) {
                 console.log(error);
@@ -113,36 +162,10 @@ angular.module("couponModule", ['angular-table', 'constantModule',
             $state.go("login");
         }
 
-        // check for individual check boxes
-        $scope.checkBox = function(selectAll) {
-            var count = 0;
-            angular.forEach($scope.check.check, function(val, key) {
-                if(selectAll) {
-                    val = true;
-                }
-                if (val) {
-                    count++;
-                }
-            });
-            $scope.check.all = (count == Object.keys($scope.check.check).length) ? true : false;
-            $scope.show = (count == 0) ? false : true;
-
-            $scope.check.count = count;
-        };
-
         // delete selected check boxes
-        $scope.deleteSelected = function() {
-            var deletedArray = [];
-            angular.forEach($scope.check.check, function(val, key) {
-                angular.forEach($scope.coupons, function(item, i) {
-                    if (item._id == key && val && deletedArray.indexOf(item._id) == -1) {
-                        deletedArray.push(item);
-                    }
-                });
-            });
-
+        $scope.deleteSelected = function(array) {
             var items = [];
-            angular.forEach(deletedArray, function (item) {
+            angular.forEach(array, function (item) {
                 items.push(couponFactory.delete(item._id).then(function(data) {
                     console.log(data);
                     return data;
@@ -154,48 +177,14 @@ angular.module("couponModule", ['angular-table', 'constantModule',
                 console.log(item);
             });
             $q.all(items).then(function (finalData) {
-                toastr.success("Deleted selected items", 200);
+                toastr.success(items.length, "Deleted Selected Items");
                 $state.reload();
             });
         };
     })
-    .filter("typeCouponFilter", function ($filter) {
-        return function (items, filter) {
-            console.log(items, filter);
-            var list = [];
-            if(!Object.keys(filter).length) {
-                return items;
-            }
-            angular.forEach(filter, function (val, key) {
-                if(key == 'related_categories' || key == 'related_stores') {
-                    angular.forEach(items, function (item) {
-                        if(Array.isArray(item[key])) {
-                            angular.forEach(item[key], function (type) {
-                                if(type._id == val) {
-                                    list.push(item);
-                                }
-
-                            });
-                        }
-                    });
-                } else if (key == 'last_modified_by') {
-                    angular.forEach(items, function (item) {
-                        if(item.last_modified_by['_id'] == val) {
-                            list.push(item);
-                        }
-                    });
-                } else if (key == 'coupon_type') {
-                    angular.forEach(items, function (item) {
-                        if(item.coupon_type == val) {
-                            list.push(item);
-                        }
-                    });
-                }
-            });
-
-            var uniqueList = _.uniq(list, function(item, key, a) {
-                return item._id;
-            });
-            return uniqueList;
-        }
+    .directive('myCustomModal', function() {
+        return {
+            template: '<label>{{colFilter.term}}</label><button ng-click="showAgeModal()">...</button>',
+            controller: 'myCustomModalCtrl'
+        };
     });
