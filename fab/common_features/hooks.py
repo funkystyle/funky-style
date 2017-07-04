@@ -15,7 +15,7 @@ from fab.siteminder import generate_sub_xml_file
 from fab.siteminder import generate_sitemap_index_file
 
 @admin_login_required
-def before_returning_persons(response):
+def before_returning_persons(*args, **kwargs):
     LOGGER.info("persons api access processing after admin login verification")
 
 def update_number_of_clicks(resource, _id):
