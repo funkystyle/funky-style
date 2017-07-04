@@ -1,12 +1,10 @@
 angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule'
     , 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection'])
     .controller("couponCtrl", function($scope, $filter, toastr, $http, $q,
-                                       mainURL, URL, $state, $stateParams, $auth, couponFactory, $log) {
+                                       mainURL, URL, $state, $stateParams, $auth, couponFactory, uiGridConstants) {
         $scope.coupons = [];
-        var storeHeaderTemplate = '<div style="width: 100%;" class="ui-grid-column-menu-button">' +
-            '<label style="float: left;">Store</label>' +
-            '<i style="cursor: pointer; float: right;" class="ui-grid-icon-angle-down" aria-hidden="true">&nbsp;</i>' +
-            '</div>';
+        $scope.categories = [];
+        $scope.stores = [];
         $scope.gridOptions = {
             data: [],
             enableRowSelection: true,
@@ -15,6 +13,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
             enablePaginationControls: true,
             paginationPageSize: 25,
             showGridFooter:true,
+            enableFiltering: true,
             rowHeight: 35,
             columnDefs: [
                 {
@@ -31,26 +30,52 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     cellTemplate: '<p style="text-transform: capitalize; padding: 5px;">{{ row.entity.last_modified_by.first_name }} {{ row.entity.last_modified_by.last_name }}</p>'
                 },
                 {
-                    field: 'related_stores[0].name', displayName: "Store", enableFiltering: false,
-                    headerCellTemplate: storeHeaderTemplate
+                    field: 'related_stores', displayName: "Store",
+                    enableSorting: false,
+                    filter: {
+                        condition: function (searchTerm, cellValue, row, column) {
+                            var filtered = false;
+                            for (var i = 0; i < cellValue.length; i++) {
+                                filtered = cellValue[i]._id === searchTerm;
+                                if (filtered) {
+                                    break;
+                                }
+                            }
+                            return filtered;
+                        },
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: $scope.stores
+                    },
+                    cellTemplate: "<div ng-repeat='item in row.entity[col.field]'>{{ item.name }}</div>"
                 },
                 {
-                    field: 'related_categories', displayName: "Category", enableFiltering: false,
-                    cellTemplate: '<p style="text-transform: capitalize; padding: 5px;">' +
-                    '<span ng-repeat="i in row.entity.related_categories">' +
-                    '<a ui-sref="header.update-category({categoryId: i._id})"> {{ i.name }}</a> ' +
-                    '{{$last ? "" : ($index == row.entity.related_categories.length-2) ? " and " : ", "}}</span>' +
-                    '</p>'
+                    field: 'related_categories', displayName: "Category",
+                    enableSorting: false,
+                    filter: {
+                        condition: function (searchTerm, cellValue, row, column) {
+                            var filtered = false;
+                            for (var i = 0; i < cellValue.length; i++) {
+                                filtered = cellValue[i]._id === searchTerm;
+                                if (filtered) {
+                                    break;
+                                }
+                            }
+                            return filtered;
+                        },
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: $scope.categories
+                    },
+                    cellTemplate: "<div ng-repeat='item in row.entity[col.field]'>{{ item.name }}</div>"
                 },
-                { field: 'coupon_type', displayName: "Coupon Type", enableFiltering: false },
+                { field: 'coupon_type', displayName: "Coupon Type" },
                 { field: 'coupon_code', displayName: "Coupon Code"
                 },
                 {
-                    field: '_created', displayName: "Created Date", type: 'date', cellFilter: 'date', width: '15%', enableFiltering: false,
+                    field: '_created', displayName: "Created Date", type: 'date', cellFilter: 'date', width: '15%',
                     cellTemplate: "<p style='padding: 5px;'>{{ row.entity._created | date: 'dd MMM yyyy hh:mm a' }}</p>"
                 },
                 {
-                    field: 'expire_date', displayName: "Expiry Date", type: 'date', cellFilter: 'date', width: '15%', enableFiltering: false,
+                    field: 'expire_date', displayName: "Expiry Date", type: 'date', cellFilter: 'date', width: '15%',
                     cellTemplate: "<p style='padding: 5px;'>{{ row.entity.expire_date | date: 'dd MMM yyyy hh:mm a' }}</p>", sort: { direction: 'desc', priority: 0 }
                 },
                 {
@@ -98,13 +123,30 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     destArray['All'] = $scope.coupons;
                     destArray['Expired Coupons'] = [];
                     angular.forEach($scope.coupons, function(item) {
+
+                        // push categories into array for filtering
+                        angular.forEach(item.related_categories, function (category) {
+                            $scope.categories.push({
+                                value: category._id,
+                                label: category.name
+                            });
+                        });
+                        $scope.stores.push({
+                            value: item.related_stores[0]._id,
+                            label: item.related_stores[0].name
+                        });
+
                         if(new Date(item.expire_date) < new Date()) {
                             destArray['Expired Coupons'].push(item);
                         }
                         item._created = new Date(item._created);
                         item._expire_date = new Date(item.expire_date);
-                        $scope.gridOptions.data.push(item);
                     });
+                    setTimeout(function () {
+                        $scope.gridOptions.data = $scope.coupons;
+                        $scope.gridApi.core.refresh();
+                    }, 1000);
+
                     // Sort by keys
                     var keys = Object.keys( destArray );
                     keys = keys.sort( function ( a, b ) { return a > b; } );
