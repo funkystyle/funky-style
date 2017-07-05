@@ -5,6 +5,8 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
         $scope.coupons = [];
         $scope.categories = [];
         $scope.stores = [];
+        $scope.persons = [];
+
         $scope.gridOptions = {
             data: [],
             enableRowSelection: true,
@@ -26,8 +28,18 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     '</div>'
                 },
                 {
-                    field: "last_modified_by", displayName: "Submitted By",
-                    cellTemplate: '<p style="text-transform: capitalize; padding: 5px;">{{ row.entity.last_modified_by.first_name }} {{ row.entity.last_modified_by.last_name }}</p>'
+                    field: "last_modified_by", displayName: "Submitted By", enableSorting: false,
+                    filter: {
+                        condition: function (searchTerm, cellValue, row, column) {
+                            console.log(cellValue, searchTerm);
+                            var filtered = false;
+                            filtered = cellValue._id === searchTerm;
+                            return filtered;
+                        },
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: $scope.persons
+                    },
+                    cellTemplate: "<div>{{ row.entity[col.field].email }}</div>"
                 },
                 {
                     field: 'related_stores', displayName: "Store",
@@ -67,7 +79,9 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     },
                     cellTemplate: "<div ng-repeat='item in row.entity[col.field]'>{{ item.name }}</div>"
                 },
-                { field: 'coupon_type', displayName: "Coupon Type" },
+                {
+                    field: 'coupon_type', displayName: "Coupon Type"
+                },
                 { field: 'coupon_code', displayName: "Coupon Code"
                 },
                 {
@@ -99,6 +113,12 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 var msg = 'rows changed ' + rows;
                 $scope.getSelectedRows();
             });
+        };
+
+        $scope.autoRefresh = function () {
+            // refresh function no longer triggers custom filter function
+            $scope.gridApi.grid.columns[4].filter.selectOptions = $scope.categories;
+            $scope.gridApi.grid.refresh();
         };
 
 
@@ -135,16 +155,32 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                             value: item.related_stores[0]._id,
                             label: item.related_stores[0].name
                         });
+                        $scope.persons.push({
+                            value: item.last_modified_by._id,
+                            label: item.last_modified_by.email
+                        });
 
                         if(new Date(item.expire_date) < new Date()) {
                             destArray['Expired Coupons'].push(item);
                         }
                         item._created = new Date(item._created);
                         item._expire_date = new Date(item.expire_date);
+                        $scope.gridOptions.data.push(item);
                     });
                     setTimeout(function () {
-                        $scope.gridOptions.data = $scope.coupons;
-                        $scope.gridApi.core.refresh();
+                        $scope.categories = _.uniq($scope.categories, function (item) {
+                            return item.value;
+                        });
+                        $scope.stores = _.uniq($scope.stores, function (item) {
+                            return item.value;
+                        });
+                        $scope.persons = _.uniq($scope.persons, function (item) {
+                            return item.value;
+                        });
+                        $scope.gridApi.grid.columns[4].filter.selectOptions = $scope.categories;
+                        $scope.gridApi.grid.columns[3].filter.selectOptions = $scope.stores;
+                        $scope.gridApi.grid.columns[2].filter.selectOptions = $scope.persons;
+                        $scope.gridApi.grid.refresh();
                     }, 1000);
 
                     // Sort by keys
