@@ -42,9 +42,21 @@
             </div>
             <!-- end of custom dates -->
         </div> <!-- end row -->
-        <div class="row">
+        <div class="row" ng-hide="select.category.type == 'number_of_clicks'">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div id="bar-example"></div>
+            </div>
+        </div>
+
+        <div class="row" ng-repeat="(monthName, coupons) in clickObjects" ng-show="select.category.type == 'number_of_clicks' && coupons.length">
+            <div class="col-lg-12">
+                <p><strong>{{ monthName }}</strong></p>
+                <table class="table table-bordered">
+                    <tr ng-repeat="coupon in coupons | orderBy: 'number_of_clicks': true">
+                        <td style="width: 60%;">{{ coupon.title }}</td>
+                        <td>{{ coupon.number_of_clicks }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div><!-- /.container-fluid -->

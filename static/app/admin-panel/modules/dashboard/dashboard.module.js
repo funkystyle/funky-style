@@ -66,6 +66,7 @@ angular.module("DashboardModule", ["constantModule",
 
         $scope.objItems = {};
         $scope.keyValues = [];
+        $scope.clickObjects = {};
         function generateArrays () {
             angular.forEach($scope.objItems, function (val, key) {
                 $scope.keyValues.push({y: key, a: val})
@@ -82,6 +83,7 @@ angular.module("DashboardModule", ["constantModule",
         $scope.changeChart = function () {
             $scope.keyValues = [];
             $scope.objItems = {};
+            $scope.clickObjects = {};
             var created = undefined,
                 type = undefined,
                 fromDate = new Date($("#from-date").val()),
@@ -93,10 +95,12 @@ angular.module("DashboardModule", ["constantModule",
                 dates = getDates(fromDate, toDate);
                 angular.forEach(dates, function (date) {
                     $scope.objItems[moment(date).format("DD/MM/YYYY")] = 0;
+                    $scope.clickObjects[moment(date).format("DD/MM/YYYY")] = [];
                 })
             } else {
                 angular.forEach(monthNames, function (month) {
                     $scope.objItems[month] = 0;
+                    $scope.clickObjects[month] = [];
                 });
             }
             angular.forEach($scope[$scope.select.category.code], function (item) {
@@ -108,7 +112,8 @@ angular.module("DashboardModule", ["constantModule",
                         if($scope.select.category.type == 'count') {
                             $scope.objItems[created] = $scope.objItems[created] + 1;
                         } else if ($scope.select.category.type == 'number_of_clicks') {
-                            $scope.objItems[created] = $scope.objItems[created] + item.number_of_clicks;
+                            console.log(item, created, $scope.objItems)
+                            $scope.clickObjects[created].push(item);
                         }
                     }
                 } else if ($scope.select.by == 'customdate') {
@@ -118,7 +123,7 @@ angular.module("DashboardModule", ["constantModule",
                                 $scope.objItems[key] ++;
                             } else if ($scope.select.category.type == 'number_of_clicks') {
                                 console.log(key, $scope.objItems[key], item.number_of_clicks);
-                                $scope.objItems[key] = $scope.objItems[key] + item.number_of_clicks;
+                                $scope.clickObjects[key].push(item);
                             }
                         }
                     })
@@ -131,7 +136,7 @@ angular.module("DashboardModule", ["constantModule",
         if($auth.isAuthenticated()) {
             // get the list of coupons
             var projection = {
-                "name": 1,
+                "title": 1,
                 "number_of_clicks": 1
             };
             $http({
