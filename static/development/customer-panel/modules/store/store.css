@@ -1,0 +1,244 @@
+.main-popular-grids div .thumbnail {
+    padding: 0px;
+}
+
+.thumb {
+    opacity: 0;
+}
+
+div.thumb {
+    -webkit-animation: fade 1s;
+    animation: fade 1s;
+    opacity: 1;
+    margin-bottom: 15px;
+}
+div.thumb .thumbnail, .overlay-on-image {
+    min-height: 165px;
+    max-height: 165px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}div.thumb .thumbnail img {
+     height: 165px;
+     width: 100%;
+    border-radius: 3px;
+ }
+
+/* -fail- */
+
+@-webkit-keyframes fade {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+.thumbnail {
+    margin-bottom: 0;
+}
+
+.opacity-5 {
+    opacity: 0.2 !important;
+}
+
+.social-well {
+    padding: 10px;
+    background-color: #FFFFFF;
+    margin: 5px 0px;
+    border-radius: 3px;
+}
+
+.social-well h4 {
+    margin: 0px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.order-list-alpha ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.order-list-alpha ul li {
+    float: left;
+    padding: 0px 14px;
+    cursor: pointer;
+    font-size: 15px;
+    opacity: 0.8;
+    font-weight: 600;
+}
+
+.footer-brand-ulli ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.footer-brand-ulli ul li {
+    float: left;
+}
+
+.footer-brand-ulli ul li a {
+    padding: 0px 10px;
+    text-decoration: underline;
+}
+
+.overlay-on-image {
+    position: absolute;
+    top: -1px;
+    width: 100%;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.67);
+    height: 162px;
+}
+
+.overlay-on-image h4 {
+    color: #FFFFFF;
+}
+.row_style{
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+@media screen and (max-width: 359px){
+    .overlay-on-image {
+        height: 96px;
+    }
+    .social-well h4 {
+        font-size: 12px;
+    }
+    .order-list-alpha ul li {
+        padding: 0 14px 4px 0;
+        font-size: 14px;
+    }
+    .footer-brand-ulli ul li {
+        padding-bottom: 10px;
+    }
+    .footer-brand-ulli ul li a {
+        padding: 0 13px 0 1px;
+        font-size: 13px;
+    }
+    .pad_0{
+        padding: 0;
+    }
+    .row_style{
+        margin-top:10px;
+        margin-bottom: 10px;
+    }
+    div.thumb {
+        margin-bottom: 15px;
+    }
+}
+@media screen and (min-width: 360px) and (max-width: 374px){
+    .overlay-on-image {
+        height: 110px;
+    }
+    .social-well h4 {
+        font-size: 14px;
+    }
+    .order-list-alpha ul li {
+        padding: 0 5px 0 0;
+    }
+    .footer-brand-ulli ul li {
+        padding-bottom: 10px;
+    }
+    .footer-brand-ulli ul li a {
+        padding: 0 13px 0 1px;
+        font-size: 15px;
+    }
+    .pad_0{
+        padding: 0;
+    }
+    .row_style{
+        margin-top:10px;
+        margin-bottom: 10px;
+    }
+    div.thumb {
+        margin-bottom: 15px;
+    }
+}
+@media (min-width:1200px) {
+    .container-body {
+        width: 1000px
+    }
+}
+@media screen and (min-width: 375px) and (max-width: 411px){
+    .overlay-on-image {
+        height: 115px;
+    }
+    .social-well h4 {
+        font-size: 15px;
+    }
+    .order-list-alpha ul li {
+        padding: 0 16px 0 0px;
+        font-size: 18px;
+    }
+    .footer-brand-ulli ul li {
+        padding-bottom: 10px;
+    }
+    .footer-brand-ulli ul li a {
+        padding: 0 17px 0 2px;
+        font-size: 15px;
+    }
+    .pad_0{
+        padding: 0;
+    }
+    .row_style{
+        margin-top:10px;
+        margin-bottom: 10px;
+    }
+    div.thumb {
+        margin-bottom: 15px;
+    }
+}
+@media screen and (min-width: 412px) and (max-width: 414px){
+    .overlay-on-image {
+        height: 129px;
+    }
+    .social-well h4 {
+        font-size: 17px;
+    }
+    .order-list-alpha ul li {
+        padding: 0px 18px 6px 0;
+        font-size: 20px;
+    }
+    .footer-brand-ulli ul li {
+        padding-bottom: 10px;
+    }
+    .footer-brand-ulli ul li a {
+        padding: 0 18px 0 1px;
+        font-size: 17px;
+    }
+    .pad_0{
+        padding: 0;
+    }
+    .row_style{
+        margin-top:10px;
+        margin-bottom: 10px;
+    }
+    div.thumb {
+        margin-bottom: 15px;
+    }
+}
+@media (min-width:1200px) {
+    .container-body {
+        width: 1000px
+    }
+}
+
+@media (min-width:1400px) {
+    .container-body {
+        width: 1200px
+    }
+}

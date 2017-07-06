@@ -1,0 +1,18 @@
+.products-list{
+    border: 1px solid #eee;
+    padding: 0;
+}
+.product-border-main {
+    max-height: 200px;
+}
+.product-price {
+    padding: 10px;
+}
+.product-img {
+    max-height: 200px;
+    padding-top: 0;
+}
+.product-img img {
+    max-height: 200px;
+    width: 100%;
+}

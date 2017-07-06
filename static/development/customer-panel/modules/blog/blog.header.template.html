@@ -1,0 +1,196 @@
+<link rel="stylesheet" type="text/css" href="/static/app/customer-panel/modules/blog.category/blog.category.css">
+<link rel="stylesheet" href="/static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
+<div id="flipkart-navbar">
+    <div class="container">
+        <div class="row row2">
+            <div class="col-md-6 col-md-offset-4 col-lg-6 col-lg-offset-4">
+                <h1>
+                    <span class="largenav fab_code_coupns">
+	                    <a ui-sref="main.home">
+	                         <img src="static/app/customer-panel/modules/assets/images/logo-png.png" alt="" class="img-responsive header_img">
+	                    </a>
+	                </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Navbar start-->
+<div class="container cont_pad">
+    <nav class="navbar navbar-default">
+        <div class="container col-md-offset-1 col-lg-offset-1 col-xs-offset-1 col-sm-offset-1">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="nav1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a ui-sref="main.home">Home</a>
+                    </li>
+                    <li>
+                        <a ui-sref="blogs.blogs">Blog Home</a>
+                    </li>
+                    <li ng-repeat="item in categories | orderBy: 'name'">
+                        <a ui-sref="blogs.category({url: item.url})" role="button">{{ item.name }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div><!--Navbar end-->
+<!--carousel start-->
+<div class="well">
+    <div id="myCarousel" class="carousel fdi-Carousel slide">
+        <!-- Carousel items -->
+        <div class="carousel fdi-Carousel slide" id="eventCarousel" data-interval="0">
+            <div class="carousel-inner onebyone-carosel">
+                <div class="item" id="aa-{{ $index }}" ng-repeat="item in categories| orderBy: 'name'">
+                    <div class="col-md-4">
+                        <a href="#"><img ng-src="{{ item.image }}" class="img-responsive center-block"></a>
+                        <div class="text-center item-text">
+                            <label class="label label-primary">{{ item.name }}</label>
+                            <h3>{{ item.h1 }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" data-target="#eventCarousel" data-slide="prev">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="right carousel-control" data-target="#eventCarousel" data-slide="next">
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+        <!--/carousel-inner-->
+    </div><!--/myCarousel-->
+</div><!--/well-->
+<!--carousel end-->
+
+
+
+
+<div class="container cont_back">
+    <div class="row row2_1">
+        <div class="col-md-9 col-lg-9">
+            <ui-view></ui-view>
+        </div>
+        <div class="col-md-3 col-lg-3 col_3_border_top col-xs-12 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p class="catagory">Categories</p>
+                </div>
+                <div class="panel-body pan_body">
+                    <div class="row row_env" ng-repeat="item in categories">
+                        <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+                            <p class="env_txt">
+                                <a ui-sref="blogs.category({url: item.url})">
+                                    {{ item.name }}
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+                            <p class="p_txt">9</p>
+                        </div>
+                    </div> <!-- end row -->
+                    <div class="word_press" ng-if="top_banner">
+                        <a target="_blank" href="{{ top_banner.destination_url }}">
+                            <img ng-src="{{ top_banner.image }}" alt="" class="img-responsve"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <p class="lat_blog">Latest Blog Articles</p>
+            <div class="blogs">
+                <div class="blogs_inner" ng-repeat="blog in blogs | orderBy: '_updated': true">
+                    <div class="row">
+                        <div class="col-md-5 col-lg-5 col-xs-5 col-sm-5 pad_right">
+                            <img ng-src="{{ blog.image }}" alt="" class="img-responsive"/>
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-xs-7 col-sm-7">
+                            <p class="entertain_txt">
+                                <a ng-bind-html="trustAsHtml(blog.title, 30)" ui-sref="blogs.details({url: blog.url})"></a>
+                            </p>
+                            <p class="entertain_txt_1" ng-bind-html="trustAsHtml(blog.description, 60)"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of technlogy-->
+<div class="container last_cont_1">
+    <div class="row">
+        <div class="col-lg-4 col-md-4">
+            <div class="panel panel_black">
+                <div class="panel-heading most_txt panel_head_black">Most Popular</div>
+                <div class="panel-body panel_body_back">
+                    <div class="row" ng-repeat="blog in blogs | orderBy: '_updated': true">
+                        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
+                            <img ng-src="{{ blog.image }}" width="100px" height="100px"
+                                 alt="" class="img-responsive"/>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
+                            <p class="lorem">
+                                <a ng-bind-html="trustAsHtml(blog.title, 30)" ui-sref="blogs.details({url: blog.url})"></a>
+                            </p>
+                            <p class="views">{{ Math.random() }} Views</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <div class="panel panel_black">
+                <div class="panel-heading most_txt panel_head_black">Most Popular</div>
+                <div class="panel-body panel_body_back">
+                    <div class="row" ng-repeat="blog in blogs | orderBy: '_updated': true">
+                        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4">
+                            <img ng-src="{{ blog.image }}" width="100px" height="100px"
+                                 alt="" class="img-responsive"/>
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-xs-8 col-sm-8">
+                            <p class="lorem">
+                                <a ng-bind-html="trustAsHtml(blog.title, 30)" ui-sref="blogs.details({url: blog.url})"></a>
+                            </p>
+                            <p class="views">{{ Math.random() }} Views</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <div class="panel panel_black">
+                <div class="panel-heading most_txt panel_head_black">Video of the day</div>
+            </div>
+            <div class="panel panel_black">
+                <div class="panel-heading most_txt panel_head_black">Join Us</div>
+                <div class="panel-body panel_body_back">
+                    <ul class="foot_webicons">
+                        <li><span class="label fa_instagram"><i class="fa fa-instagram"></i></span></li>
+                        <li><span class="label fa_twitter"><i class="fa fa-twitter"></i></span></li>
+                        <li><span class="label fa_facebook"><i class="fa fa-facebook"></i></span></li>
+                        <li><span class="label fa_google"><i class="fa fa-google-plus"></i></span></li>
+                        <li><span class="label fa_pinterest"><i class="fa fa-pinterest"></i></span></li>
+                        <li><span class="label fa_whatsapp"><i class="fa fa-tumblr"></i></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container last_cont_2">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <p class="copy">Copyright@ 2017. <span>Fabpromocode.in</span></p>
+        </div>
+    </div>
+</div>

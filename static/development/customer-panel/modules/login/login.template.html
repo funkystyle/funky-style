@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="static/app/customer-panel/modules/login/login.css" />
+
+
+<div class="container login-container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1 style="text-transform: capitalize;" class="text-center">
+                We Helps you to Save big money on every purchase!
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1 border-col">
+            <div class="account-box">
+                <h2 class="text-center">Login</h2>
+                <hr />
+                <div class="or-box">
+                    <div class="row">
+                        <div class="col-md-6 row-block">
+                            <a href="" class="btn btn-facebook btn-block">
+                                <i class="fa fa-facebook pull-left" aria-hidden="true"></i> &nbsp; Facebook
+                            </a>
+                        </div>
+                        <div class="col-md-6 row-block">
+                            <a href="" class="btn btn-google btn-block">
+                                <i class="fa fa-google-plus pull-left" aria-hidden="true"></i> &nbsp; Google Plus
+                            </a>
+                        </div>
+                    </div>
+                    <span class="or">OR</span>
+                </div>
+                <form class="form-signin" ng-submit="loginNow(login)" cg-busy="load">
+                    <div class="form-group">
+                        <label>EMAIL</label>
+                        <input type="text" class="form-control" ng-model="login.email" placeholder="EMAIL" required autofocus />
+                    </div>
+                    <div class="form-group">
+                        <label>PASSWORD</label>
+                        <input type="password" class="form-control" ng-model="login.password" placeholder="PASSWORD" required />
+                    </div>
+                    <button class="btn btn-md btn-block btn-facebook" type="submit">
+                        Login
+                    </button>
+                </form>
+                <p class="text-center">
+                    <a class="forgotLnk" ui-sref="main.forgot_password">Forgot your Password?</a>
+                </p>
+            </div>
+        </div>
+        <!-- end col -->
+        <div class="col-md-4 col-md-offset-2 border-col">
+            <!-- register starts here -->
+            <div class="account-box">
+                <h2 class="text-center">Sign Up</h2>
+                <hr />
+                <div class="or-box">
+                    <div class="row">
+                        <div class="col-md-6 row-block">
+                            <a href="" class="btn btn-facebook btn-block">
+                                <i class="fa fa-facebook pull-left" aria-hidden="true"></i> &nbsp; Facebook
+                            </a>
+                        </div>
+                        <div class="col-md-6 row-block">
+                            <a href="" class="btn btn-google btn-block">
+                                <i class="fa fa-google-plus pull-left" aria-hidden="true"></i> &nbsp; Google Plus
+                            </a>
+                        </div>
+                    </div>
+                    <span class="or">OR</span>
+                </div>
+                <form class="form-signin" name="registerForm" ng-submit="registerNow(register)" cg-busy="load" novalidate>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>FIRST NAME</label>
+                                <input name="firstname" type="text" class="form-control" placeholder="NAME" required ng-model="register.first_name" autocomplete="off" />
+                                <p ng-show="registerForm.firstname.$invalid && !registerForm.firstname.$pristine"><br>You First Name is required.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>LAST NAME</label>
+                                <input type="text" name="lastname" class="form-control" placeholder="LAST NAME" required ng-model="register.last_name" autocomplete="off" />
+                                <p ng-show="registerForm.lastname.$invalid && !registerForm.lastname.$pristine"><br>You Last Name is required.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL</label>
+                        <input type="email" name="Email" class="form-control" placeholder="EMAIL" required ng-model="register.email" />
+                        <p ng-show="registerForm.Email.$invalid && !registerForm.Email.$pristine"><br>
+                            Email is not valid
+                        </p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>PASSWORD</label>
+                        <input type="password" name="Password" ng-minlength="5" class="form-control" placeholder="MINIMUM OF 6 CHARACTERS" required ng-model="register.password" />
+                        <p ng-show="registerForm.Password.$error.minlength"><br>Please enter more than 5 characters</p>
+                    </div>
+                    <div class="form-group">
+                        <label>PHONE NUMBER</label>
+                        <input only-digits type="text" ng-maxlength="10" ng-minlength="10" name="phone" class="form-control" placeholder="PHONE NUMBER" required ng-model="register.mobile_number" autocomplete="off" />
+                        <p ng-show="registerForm.phone.$invalid && !registerForm.phone.$pristine"><br>You Phone Number is required.</p>
+                        <p ng-show="registerForm.phone.$error.minlength || registerForm.phone.$error.maxlength"><br>Phome number should be 10 digits</p>
+                    </div>
+                    <button ng-disabled="registerForm.$invalid" class="btn btn-md btn-block btn-facebook" type="submit">
+                        Register
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+</div>

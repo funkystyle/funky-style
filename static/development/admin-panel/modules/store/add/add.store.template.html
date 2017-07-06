@@ -1,0 +1,291 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/store/add/add.store.css" />
+
+<div class="panel panel-default" style="margin-top: 90px;">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 style="margin-top: 10px;">
+                    Add Store!
+                </h1>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+    </div>
+
+    <div class="panel-body" cg-busy="load">
+        <form ng-submit="addStore(store)">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="name">Store Name*</label>
+                        <input type="text" class="form-control input-sm" id="name"
+                               placeholder="Store Name" ng-model="store.name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">Store URL*</label>
+                        <input type="text" class="form-control input-sm" id="url"
+                               placeholder="URL" ng-model="store.url" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Store Image*</label>
+                        <input type="file" id="image" ng-model="store.image" base-sixty-four-input>
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="store.image.base64">
+                        <label for="displayImage">Image Display</label>
+                        <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.image = ''"></i>
+                            <img ng-src="data:image/jpeg;base64,{{ store.image.base64 }}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="top_desc">Top Description</label>
+                        <textarea ng-click="textEditor($event)" class="form-control input-sm" id="top_desc"
+                                  placeholder="Top Description" ng-model="store.top_description"></textarea>
+                    </div>
+                    <div class="form-group" ng-if="store.top_description">
+                        <div class="thumbnail" ng-bind-html="store.top_description"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="footer_desc">Footer Description</label>
+                        <textarea ng-click="textEditor($event)" class="form-control input-sm" id="footer_desc"
+                                  placeholder="Footer Description" ng-model="store.footer_description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="h1">Store H1*</label>
+                        <input required type="text" class="form-control input-sm" ng-model="store.h1" id="h1" placeholder="Store H1">
+                    </div>
+                    <div class="form-group">
+                        <label for="h2">Store H2*</label>
+                        <input required type="text" class="form-control input-sm" id="h2" ng-model="store.h2" placeholder="Store H2">
+                    </div>
+                    <div class="form-group">
+                        <label>Menu</label> <br />
+                        <ui-select ng-model="store.menu" theme="bootstrap">
+                            <ui-select-match placeholder="Select Menu type">{{ $select.selected.text }}</ui-select-match>
+                            <ui-select-choices repeat="item.code as item in menuTypes | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div><!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label>Related Stores</label>
+                        <ui-select multiple ng-model="store.related_stores" theme="bootstrap" close-on-select="false" title="Related Stores">
+                            <ui-select-match placeholder="Select Multiple Top Stores">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="store._id as store in stores | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="store.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+store.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label>Top Stores</label>
+                        <ui-select multiple ng-model="store.top_stores" theme="bootstrap" close-on-select="false"  title="Related Stores">
+                            <ui-select-match placeholder="Select Multiple Top Stores">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="store._id as store in stores | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="store.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+store.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group" ng-init="store.featured_store = undefined">
+                        <label>Featured Store</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="true" name="store.rating" data-ng-model="store.featured_store">Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="false" name="store.rating" data-ng-model="store.featured_store">No
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating*</label>
+                        <input type="number" class="form-control input-sm" id="rating" placeholder="Store Rating"
+                               ng-model="store.rating" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="side_banner">Side Banner</label>
+                        <input type="file" id="side_banner" ng-model="store.side_banner" base-sixty-four-input>
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="store.side_banner.base64">
+                        <label for="side_image_banner">Image Display</label>
+                        <div class="thumbnail" id="side_image_banner">
+                            <i class="fa fa-close" ng-click="store.side_banner = ''"></i>
+                            <img ng-src="data:image/jpeg;base64,{{ store.side_banner.base64 }}" />
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="store.side_banner.base64">
+                        <label for="side_banner_url">Side Banner URL*</label>
+                        <input type="text" class="form-control input-sm" placeholder="Side Banner URL"
+                               ng-model="store.side_banner_url" required id="side_banner_url">
+                    </div>
+                    <div class="form-group">
+                        <label for="top_banner">Top Banner</label>
+                        <input type="file" id="top_banner" ng-model="store.top_banner" base-sixty-four-input>
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="store.top_banner.base64">
+                        <label for="image_top_banner">Image Display</label>
+                        <div class="thumbnail" id="image_top_banner">
+                            <i class="fa fa-close" ng-click="store.top_banner = ''"></i>
+                            <img ng-src="data:image/jpeg;base64,{{ store.top_banner.base64 }}" />
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="store.top_banner.base64">
+                        <label for="top_banner_url">Top Banner URL*</label>
+                        <input type="text" class="form-control input-sm" placeholder="Top Banner URL"
+                               ng-model="store.top_banner_url" required id="top_banner_url">
+                    </div>
+                    <div class="form-group">
+                        <label for="meta_title">Meta Title</label>
+                        <textarea class="form-control input-sm" id="meta_title" placeholder="Meta Title"
+                                  ng-model="store.meta_title"></textarea>
+                    </div>
+                    <div class="form-group" ng-init="store.status = true">
+                        <label>Status*</label> <br />
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="true" name="store.status"
+                                   data-ng-model="store.status">Active
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" data-ng-value="false" name="store.status" data-ng-model="store.status">Pending
+                        </label>
+                    </div>
+                </div> <!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="meta_description">Meta Description</label>
+                        <textarea ng-click="textEditor($event)" class="form-control input-sm" id="meta_description" placeholder="Meta Description"
+                                  ng-model="store.meta_description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Top Category Stores</label>
+                        <ui-select multiple ng-model="store.top_catagory_store" theme="bootstrap" close-on-select="false"  title="Select Top Category Stores">
+                            <ui-select-match placeholder="Select top categories">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="item._id as item in categories | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+item.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="all_tag_image">All Tag Image</label>
+                        <input type="file" id="all_tag_image" ng-model="store.all_tag_image" base-sixty-four-input>
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="form-group" ng-if="store.all_tag_image.base64">
+                        <label for="all_tag_image">Image Display</label>
+                        <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="store.all_tag_image = ''"></i>
+                            <img ng-src="data:image/jpeg;base64,{{ store.all_tag_image.base64 }}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="image_text">Image Text</label>
+                        <input type="text" class="form-control input-sm" id="image_text" placeholder="Image Text"
+                               ng-model="store.image_text">
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter_id">Twitter ID</label>
+                        <input type="text" class="form-control input-sm" id="twitter_id" placeholder="Twitter ID"
+                               ng-model="store.twitter_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="breadcrumbs">BreadCrumbs</label>
+                        <ui-select multiple ng-model="store.breadcrumb" theme="bootstrap"
+                                   close-on-select="false" title="Related Categories" id="breadcrumbs">
+                            <ui-select-match placeholder="Select Breadcrumb">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="item in breadcrumbs | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="item.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label>No Of Deals</label>
+                        <ui-select multiple ng-model="store.number_of_deals" theme="bootstrap" close-on-select="false"  title="Select Top Category Stores">
+                            <ui-select-match placeholder="No Of Deals">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="person.email as person in people | propsFilter: {name: $select.search, age: $select.search}">
+                                <div ng-bind-html="person.name | highlight: $select.search"></div>
+                                <small>
+                                    email: {{person.email}}
+                                    age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact_number">Contact Number</label>
+                        <input type="text" class="form-control input-sm" id="contact_number" placeholder="Contact Number"
+                               ng-model="store.contact_number">
+                    </div>
+                    <div class="form-group">
+                        <label for="store_url">Store URL*</label>
+                        <input type="text" class="form-control input-sm" ng-model="store.store_url" placeholder="Store URL" required id="store_url" />
+                    </div>
+
+                </div> <!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <label for="facebook">Facebook URL</label>
+                        <input type="text" class="form-control input-sm" id="facebook" placeholder="Facebook URL"
+                               ng-model="store.facebook_url">
+                    </div>
+                    <div class="form-group">
+                        <label for="google_plus">Google+ URL</label>
+                        <input type="text" class="form-control input-sm" id="google_plus" placeholder="Google+ URL"
+                               ng-model="store.google_plus_url">
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter">Twitter URL</label>
+                        <input type="text" class="form-control input-sm" id="twitter" placeholder="Twitter URL"
+                               ng-model="store.twitter_url">
+                    </div>
+                    <div class="form-group">
+                        <label for="youtube">YouTube</label>
+                        <input type="text" class="form-control input-sm" id="youtube" placeholder="YouTube URL"
+                               ng-model="store.youtube_url">
+                    </div>
+                    <div class="form-group">
+                        <label for="pinterest">Pinterest</label>
+                        <input type="text" class="form-control input-sm" id="pinterest" placeholder="Pinterest URL"
+                               ng-model="store.pintrest_url">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Store Address</label>
+                        <textarea class="form-control input-sm" id="address" placeholder="Store Address"
+                                  ng-model="store.store_address"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_id">Store Email ID</label>
+                        <input type="email" class="form-control input-sm" id="email_id" placeholder="Store Email ID"
+                               ng-model="store.store_email_id">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Last Modified By</label>
+                        <ui-select ng-model="selected_user.user" theme="bootstrap">
+                            <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
+                            <ui-select-choices repeat="person._id as person in persons | filter: $select.search">
+                                <small>
+                                    <span ng-bind-html="''+person.first_name | highlight: $select.search"></span>
+                                    <span ng-bind-html="''+person.last_name | highlight: $select.search"></span>
+                                </small>
+                                <div ng-bind-html="person.email | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+            <button type="submit" class="btn btn-md btn-info">Add Store</button>
+        </form>
+        <br><br><br><br><br><br>
+    </div> <!-- end panel-body -->
+</div>

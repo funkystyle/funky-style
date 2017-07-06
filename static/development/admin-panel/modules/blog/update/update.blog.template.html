@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/blog/update/update.blog.css" />
+<div class="panel panel-default" style="margin-top: 90px;">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 style="margin-top: 10px;">
+                    Viewing/Updating <b>Blog 1</b>!
+                </h1>
+
+                <p>Note: You can update this blog by clicking on Update Blog!</p>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+
+    <div class="panel-body" cg-busy="load">
+        <form name="signup" ng-submit="updateBlog(blog)">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group col-md-12">
+                        <label for="title">Title</label>
+                        <input required type="text" id="title" class="form-control" ng-model="blog.title" placeholder="Title" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="url">URL</label>
+                        <input required id="url" type="text" class="form-control" ng-model="blog.url" placeholder="URL" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="categories">Categories</label>
+                        <ui-select ui-required="true" id="categories" multiple ng-model="blog.related_categories" theme="bootstrap" close-on-select="false" title="Related Stores">
+                            <ui-select-match placeholder="Select Categories">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="item._id as item in categories | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+item.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="description">Description</label>
+                        <textarea required ng-click="textEditor($event)" class="form-control input-md" name="description"
+                                  id="description" ng-model="blog.description" cols="30" rows="3"
+                                  placeholder="Description" ng-focus="openTextEditor()"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="featured_image">Featured Image</label>
+                        <input type="file" ng-model="blog.image"
+                               class="form-control" id="featured_image" placeholder="Image" base-sixty-four-input>
+                    </div>
+                    <div class="form-group" ng-if="blog.image">
+                        <label>Featured Image Display</label>
+                        <div class="thumbnail">
+                            <i class="fa fa-close" ng-click="blog.image = ''"></i>
+                            <img ng-if="!blog.image['base64']" ng-src="{{ blog.image }}" />
+                            <img ng-if="blog.image['base64']" ng-src="data:image/jpeg;base64,{{ blog.image.base64 }}" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="seo_title">SEO Title</label>
+                        <input type="text" id="seo_title" ng-model="blog.seo_title"
+                               class="form-control input-md" placeholder="SEO Title" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="seo_description">Seo Description</label>
+                        <textarea ng-click="textEditor($event)" id="seo_description"
+                                  class="form-control" ng-model="blog.seo_description" placeholder="Seo Description" ></textarea>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group col-md-12">
+                        <label for="h1">H1</label>
+                        <input required type="text" class="form-control input-md" ng-model="blog.h1" placeholder="H1" id="h1">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="h2">H2</label>
+                        <input required type="text" class="form-control input-md" ng-model="blog.h2" placeholder="H2" id="h2">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="status">Status</label>
+                        <ui-select id="status" required ng-model="blog.status" theme="bootstrap">
+                            <ui-select-match placeholder="Select Status">{{ $select.selected }}</ui-select-match>
+                            <ui-select-choices repeat="item in status | filter: $select.search">
+                                <div ng-bind-html="item | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="last_modified_by">Last Modified By</label>
+                        <input type="text" id="last_modified_by" class="form-control input-md" value="{{ user.first_name }} {{ user.last_name }}" disabled />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="related_blogs">Related Blogs</label>
+                        <ui-select id="related_blogs" multiple ng-model="blog.related_blogs" theme="bootstrap" close-on-select="false" title="Related Stores">
+                            <ui-select-match placeholder="Select Related Blogs">{{$item.title}}</ui-select-match>
+                            <ui-select-choices repeat="item._id as item in blogs | propsFilter: {title: $select.search}">
+                                <div ng-bind-html="item.title | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+item.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="rating">Rating</label>
+                        <input type="number" class="form-control input-md" id="rating" placeholder="Rating" ng-model="blog.rating" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="breadcrumb">Breadcrumb</label>
+                        <ui-select id="breadcrumb" multiple ng-model="blog.breadcrumb" theme="bootstrap"
+                                   close-on-select="false" title="Related Stores">
+                            <ui-select-match placeholder="Select Breadcrumb">{{$item.title}}</ui-select-match>
+                            <ui-select-choices repeat="item._id as item in blogs | propsFilter: {title: $select.search}">
+                                <div ng-bind-html="item.title | highlight: $select.search"></div>
+                                <small>
+                                    <span ng-bind-html="''+item.h1 | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+            <div class="form-group col-md-12">
+                <button type="submit" class="btn btn-md btn-info">Update Blog</button>
+            </div>
+        </form>
+    </div>
+    <!-- end panel-body -->
+</div>

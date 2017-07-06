@@ -34,6 +34,7 @@ def search():
 
 
             query = {"name": {"$regex": ".*{}.*".format(query), "$options": "i"}}
+            print "Query", query
             stores = store_obj.find(query)
             categories = categories_obj.find(query)
             deals = deals_object.find(query)
@@ -49,8 +50,11 @@ def search():
                 {'name': 'url', 'label': 'destination_url'},
                 {'name': 'image', 'label': 'image'},
             ]
+            print "Stores", stores
             for store in stores:
+                print store, "==========="
                 result.append(return_required_dict(store, store_fields))
+                print result
                 if 'related_coupons' in store:
                     print('loading coupons of store:{}'.format(store['name']))
                     query = { "_id" : { "$in" : store['related_coupons']}}

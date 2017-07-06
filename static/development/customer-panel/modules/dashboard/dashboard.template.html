@@ -1,0 +1,177 @@
+<link rel="stylesheet" href="static/app/customer-panel/modules/dashboard/dashboard.css" />
+<link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
+
+<!-- header -->
+<include path="static/app/customer-panel/modules/header/header.template.html"></include>
+
+<div class="container">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="static/app/customer-panel/modules/assets/images/user.png" class="img-responsive" alt="">
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        {{ user.first_name }}
+                    </div>
+                    <div class="profile-usertitle-job">
+                        {{ user.last_name }}
+                    </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+                    <button type="button" ng-click="logout()" class="btn btn-success btn-sm">Logout</button>
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li class="active">
+                            <a data-target="#saved_offers" data-toggle="pill">
+                            <i class="glyphicon glyphicon-home"></i>
+                            Saved Offers </a>
+                        </li>
+                        <li>
+                            <a data-target="#favorite_offers" data-toggle="pill">
+                            <i class="glyphicon glyphicon-user"></i>
+                            Favorite Offers </a>
+                        </li>
+                        <li style="display: none;">
+                            <a href="#" target="_blank">
+                            <i class="glyphicon glyphicon-ok"></i>
+                            Tasks </a>
+                        </li>
+                        <li style="display: none;">
+                            <a href="#">
+                            <i class="glyphicon glyphicon-flag"></i>
+                            Help </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+               <div class="tab-content">
+                    <div class="tab-pane active" id="saved_offers">
+                        <h1>Saved Offers</h1>
+                        <div class="panel panel-default" ng-repeat="item in user.fav_coupons">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                        <div class="deal-price text-center">
+                                            <h4>
+                                                {{ item.discount_type }} {{ item.discount }}
+                                            </h4>
+                                            <div class="deal">
+                                                <span ng-if="item.coupon_type == 'coupon'">
+                                                    COUPON
+                                                </span>
+                                                <span ng-if="item.coupon_type == 'offer'">
+                                                    DEAL
+                                                </span>
+                                            </div>
+                                        </div> <!-- end deal-price -->
+                                    </div> <!-- end col -->
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <h3 class="margin-top-0 coupon-heading">
+                                            {{ item.title }}
+                                            <span class="pull-right hidden-xs">
+                                                <i class="fa fa-heart-o"></i>&nbsp;
+                                                <i class="fa fa-share-alt"></i>
+                                            </span>
+                                        </h3>
+                                        <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left">
+                                            <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
+                                               ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
+                                            <i class="fa fa-share-alt"></i>
+                                        </span>
+                                        <p style="opacity: 0.6; line-height: 25px;" class="para_small">
+                                        <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
+                                           data-ng-bind-html="trustAsHtml(item.description)"></p>
+                                        <span class="pull-right">
+                                                <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
+                                                    Show {{ (showMore.all[item._id]) ? "Less": "More" }}
+                                                </a>
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                                See all {{ item.related_categories[0].name }} Coupons
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div> <!-- end row -->
+                            </div> <!-- end panel body -->
+                            <!--panel footer-->
+                            <div class="panel-footer coupon-footer">
+                                <div class="row vari_pad">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                                        <i class="fa fa-heart-o"></i>
+                                        {{ item.status }}
+                                    </div>
+                                    <div ng-click="openComment(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                        <i class="fa fa-comment-o"></i> &nbsp;
+                                        Comment
+                                    </div>
+                                    <div ng-click="openReport(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                                        <i class="fa fa-bug"></i> &nbsp;
+                                        Report
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                        <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
+                                            <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
+                                            <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end panel footer -->
+                            <!-- comments display directive -->
+                            <comments-display items="item.comments"></comments-display>
+                            <!-- end of comments display directive -->
+                        </div> <!-- end panel -->
+                    </div>
+                    <div class="tab-pane" id="favorite_offers">
+                        <h1>Favorite Offers</h1>
+                        <div class="well">
+                            <h3>We recommend these stores for you</h3>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2" ng-repeat="item in [1,2,3,4,5,6]">
+                                    <div class="thumbnail text-center">
+                                        <img src="http://blankloanagreement.com/wp-content/uploads/2017/02/word-logo-design-sample-media-tribe_logo-150x150.jpg"
+                                             alt="" />
+
+                                        <h5>
+                                            <i class="fa fa-heart-o"></i>&nbsp;
+                                            Add Favorite
+                                        </h5>
+                                    </div> <!-- thumbnail -->
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+                        </div> <!-- end well -->
+                        <h1>All Favorite Stores</h1>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2" ng-repeat="item in user.fav_stores">
+                                <div class="thumbnail text-center">
+                                    <img ng-src="{{ item.image }}" alt="" />
+
+                                    <h5>
+                                        <i class="fa fa-heart" area-hidden="true"></i>&nbsp;
+                                        Faved!
+                                    </h5>
+                                </div> <!-- thumbnail -->
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                    </div> <!-- tab-pane -->
+                </div><!-- tab content -->
+            </div>
+        </div>
+    </div>
+</div>

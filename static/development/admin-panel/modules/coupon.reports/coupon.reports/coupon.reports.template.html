@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/store/store/store.css" />
+
+<div class="panel panel-default" style="margin-top: 90px;">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 style="margin-top: 10px;">
+                    All Coupons Reports
+                </h1>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+
+    <div class="panel-body" cg-busy="load">
+        <div class="row">
+            <div class="col-xs-12 third-controller">
+                <div class="row">
+                    <div class="col-lg-2 col-xs-2 col-md-2 col-sm-2" ng-if="show && reports.length">
+                        <button style="margin-top: 20px;" class="btn btn-md btn-info"
+                                ng-click="deleteSelected()">
+                            Delete <b>{{ check.count }}</b> Item(s)
+                        </button>
+                    </div>
+                    <div class="col-xs-2" ng-if="!show && reports.length">
+                        <label for="search">Search:</label>
+                        <input ng-model="search.search" ng-change="updateFilteredList()" id="search" class="form-control input-sm" placeholder="Search...">
+                    </div>
+                    <div class="col-xs-2" ng-if="!show && reports.length">
+                        <label for="search">Items per page:</label>
+                        <input type="number" min="1" max="200" class="form-control input-sm" ng-model="config.itemsPerPage">
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-12 pull-right">
+                        <at-pagination class="pull-right" at-list="filterReports" at-config="config"></at-pagination>
+                    </div>
+                </div>
+                <br>
+
+                <table class="table table-striped table-bordered" at-table at-paginated at-list="filterReports" at-config="config">
+                    <thead></thead>
+                    <tbody>
+                    <tr>
+                        <td style="max-width: 50px;" at-title="Select" width="10">
+                            <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;">
+                                <label for="check_box_store_{{ item._id }}" style="font-weight: 500;">
+                                    <input id="check_box_store_{{ item._id }}" type="checkbox"
+                                           ng-model="check.check[item._id]" ng-change="checkBox(item._id)" />
+                                    <span id="span_for_select_{{ item._id }}" class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                    <span></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td style="color: #2780e3; text-decoration: underline; cursor: pointer;"
+                            at-title="Description" at-implicit at-sortable at-initial-sorting="asc"
+                            at-attribute="description" width="250"></td>
+                        <td at-title="Issue" at-implicit at-sortable at-attribute="issue" width="250"></td>
+                        <td at-title="Coupon" at-implicit at-sortable at-attribute="coupon.title" width="250"></td>
+                        <td at-title="Submitted By" at-implicit at-sortable at-attribute="user.email" width="250"></td>
+                        <td at-title="Status" at-sortable width="250">
+                            {{ (item.status) ? "Active": "InActive" }}
+                        </td>
+                        <td at-title="Created On" at-sortable width="250">
+                            {{ item._created | date: 'dd MMM yyyy' }}
+                        </td>
+                        <td at-title="Action" width="250">
+                            <button class="btn btn-info btn-sm" ng-click="changeStatus(item)">
+                                Change to {{ (!item.status) ? "Active": "InActive" }}
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end panel-body -->
+</div>

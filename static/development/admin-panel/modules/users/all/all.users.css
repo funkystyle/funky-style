@@ -1,0 +1,7 @@
+.pagination {
+    margin: 0;
+    margin-top: 20px;
+}
+.pagination>li>a, .pagination>li>span {
+    padding: 5px 18px;
+}

@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/settings/profile/profile.css" />
+<link rel="stylesheet" href="/static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h1 style="margin-bottom: 40px;">Profile Settings.!</h1>
+
+
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 pad-0">
+                        <form name="signup" ng-submit="updateUser(u_user, u_user.tokens.login)">
+                            <div class="form-group col-md-6">
+                                <label for="first_name">FIRST NAME</label>
+                                <input type="text" class="form-control" ng-model="u_user.first_name" placeholder="FIRST NAME" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="last_name">LAST NAME</label>
+                                <input type="text" id="last_name" class="form-control" ng-model="u_user.last_name" placeholder="LAST NAME" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="email">Email address</label>
+                                <input type="email" disabled class="form-control" id="email" ng-model="u_user.email" placeholder="Email" autocomplete="off">
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label for="mobile_number">MOBILE NUMBER</label>
+                                <input type="text" only-digits class="form-control" id="mobile_number" ng-model="u_user.mobile_number" placeholder="MOBILE NUMBER" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label style="width: 100%;">Status</label>
+                                <label class="radio-inline"><input type="radio" name="status" value="active" ng-model="u_user.status">Active</label>
+                                <label class="radio-inline"><input type="radio" name="status" value="inactive" ng-model="u_user.status">Inactive</label>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="user_level">User Level</label>
+                                <ui-select id="user_level" ng-model="u_user.user_level" theme="bootstrap">
+                                    <ui-select-match placeholder="Select User Role">{{ $select.selected.text }}</ui-select-match>
+                                    <ui-select-choices repeat="item.level as item in userLevels | orderBy: 'text' | propsFilter: {level: $select.search}">
+                                        <div ng-bind-html="item.text | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-md btn-info">Update</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
