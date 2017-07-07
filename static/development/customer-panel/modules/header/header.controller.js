@@ -1,7 +1,5 @@
-angular.module("headerModule", ["ui.bootstrap", "APP",
-    "constantModule", "storeServiceModule", "categoryFactoryModule", "couponFactoryModule"])
-    .controller("headerCtrl", function ($scope, auth, $state, $http, URL, $filter,
-                                        categoryFactory, storeFactory, couponFactory, $q, HTTP, $location) {
+angular.module("headerModule", ["ui.bootstrap", "APP"])
+    .controller("headerCtrl", function ($scope, auth, $state, $http, $filter, $q, HTTP, $location) {
         console.log("header controller!");
         // declaring the scope variables
         $scope.user = {};
@@ -102,7 +100,7 @@ angular.module("headerModule", ["ui.bootstrap", "APP",
         $scope.logout = function () {
             if(localStorage.getItem('satellizer_token')) {
                 $http({
-                    url: URL.logout,
+                    url: "/api/1.0/auth/logout",
                     method: "GET"
                 }).then(function (data) {
                     console.log(data);

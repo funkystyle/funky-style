@@ -1,8 +1,7 @@
 angular
-    .module("storeinfoModule", ["categoryFactoryModule", "Directives", "satellizer"])
-    .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth,
-                                                 categoryFactory, $filter, $sce, $ocLazyLoad,
-                                                 $rootScope, $compile, StoreQuery, $q, auth, $window) {
+    .module("storeinfoModule", ["Directives", "satellizer"])
+    .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth, $filter, $sce, $ocLazyLoad,
+                                                 $rootScope, $compile, StoreQuery, $q) {
         $scope.favorites = {};
         $scope.comment = {};
         $scope.filter = {

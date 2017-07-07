@@ -31,8 +31,8 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     {
                         name: "ui.bootstrap",
                         files: [
-                            'static/bower_components/angular-bootstrap/ui-bootstrap.min.js',
-                            'static/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+                            'static/bower_components/angular-bootstrap/ui-bootstrap-custom-2.5.0.min.js',
+                            'static/bower_components/angular-bootstrap/ui-bootstrap-custom-tpls-2.5.0.min.js'
                         ]
                     },
                     {

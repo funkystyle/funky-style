@@ -3,7 +3,7 @@ angular.module("constantModule", [])
     .constant('URL', {
         login: "/api/1.0/auth/login",
         register: "/api/1.0/auth/signup",
-        logout: "/api/1.0/auth/logout",
+                logout: "/api/1.0/auth/logout",
         currentUser: "/api/1.0/auth/me",
         sendForgetPasswordLink: "/api/1.0/auth/send-forgot-password-link",
         changePassword: "/api/1.0/auth/change-password",

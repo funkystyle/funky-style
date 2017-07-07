@@ -1,6 +1,5 @@
 angular
-    .module("categoryinfoModule", ["categoryFactoryModule",
-        "storeServiceModule", "couponFactoryModule", "Directives", "satellizer"])
+    .module("categoryinfoModule", ["Directives", "satellizer"])
     .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce, Query, $q,
                                               $stateParams, $http, $rootScope, $compile, $auth) {
         $scope.favorites = {};

@@ -1,8 +1,5 @@
-angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFactoryModule",
-    "dealFactoryModule", "categoryFactoryModule", "Directives"])
-    .controller('homeCtrl', function ($scope, $sce, storeFactory, $http, couponFactory, $filter, dealFactory,
-                                      categoryFactory, $ocLazyLoad, $state, $stateParams,
-                                      $rootScope, SEO, $compile, Query) {
+angular.module('homeModule', ["headerModule", "Directives"])
+    .controller('homeCtrl', function ($scope, $sce, $http, $filter, $ocLazyLoad, $state, $stateParams, $rootScope, SEO, $compile, Query) {
         console.log("home controller");
         $scope.params = undefined;
         $scope.deals = [];
@@ -190,4 +187,4 @@ angular.module('homeModule', ["headerModule", "storeServiceModule", "couponFacto
                 return d.promise;
             }
         }
-    })
+    });
