@@ -1,5 +1,5 @@
 angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule'
-    , 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection'])
+    , 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.exporter'])
     .controller("couponCtrl", function($scope, $filter, toastr, $http, $q,
                                        mainURL, URL, $state, $stateParams, $auth, couponFactory, uiGridConstants) {
         $scope.coupons = [];
@@ -9,6 +9,8 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
 
         $scope.gridOptions = {
             data: [],
+            exporterMenuCsv: false,
+            enableGridMenu: true,
             enableRowSelection: true,
             enableSelectAll: true,
             selectionRowHeaderWidth: 35,
