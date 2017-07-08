@@ -144,11 +144,15 @@ angular
                         "related_stores": 1
                     };
                     embedded = JSON.stringify(embedded);
-                    var temp = {};
+                    var temp = {},
+                        projection = JSON.stringify({
+                            "related_stores.name": 1,
+                            "related_stores.url": 1
+                        });
                     temp["recommended_stores"] = {
                         "$in": [$scope.store._id]
                     };
-                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded+"&projection="+projection;
                     StoreQuery.get(url).then(function (suggested) {
                         console.log("Suggested Coupons Data: ", suggested.data._items);
                         $scope.suggestedCoupons = suggested.data._items;
@@ -160,7 +164,8 @@ angular
                             "$in": [$scope.store._id]
                         }
                     };
-                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded+"&projection="+projection;
+                    console.log("url ------------------------------ ",url)
                     StoreQuery.get(url).then(function (coupons) {
                         var items = coupons.data._items,
                             qItems = [];
@@ -249,6 +254,7 @@ angular
                         });
                         var sort = "&max_results=1&sort=[('_updated', -1)]";
                         url = "/api/1.0/coupons"+"?where="+temp+sort+"&embedded="+embedded;
+                        return true;
                         StoreQuery.get(url).then(function (related) {
                             var items = related.data._items;
                             console.log("Related Coupons: ", items);

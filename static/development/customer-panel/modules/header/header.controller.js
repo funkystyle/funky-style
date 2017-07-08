@@ -7,6 +7,19 @@ angular.module("headerModule", ["ui.bootstrap", "APP"])
         $scope.totalItems = [];
         $scope.allStores = [];
 
+        // Any function returning a promise object can be used to load values asynchronously
+        $scope.searchResults = function(val) {
+            console.log("Search Query Value is --- ", val);
+
+            return $http.get('/api/1.0/search', {
+                params: {
+                    q: val
+                }
+            }).then(function(response){
+                return response.data['data'];
+            });
+        };
+
         if(localStorage.getItem('satellizer_token')) {
             // getting the current user information
             auth.me().then(function (data) {
@@ -55,43 +68,9 @@ angular.module("headerModule", ["ui.bootstrap", "APP"])
             $scope.allCategories = items;
         });
 
-
-        // search by query
-        $scope.getItems = function (query) {
-            if(!query) return;
-            var list = [],
-                source = {
-                    store: $scope.allStores,
-                    category: $scope.allCategories
-                };
-            // get the selected stores, categories, Coupons
-            angular.forEach(source, function (items, key) {
-                angular.forEach(items, function (item) {
-                    // push stores in to array
-                    if(item.name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-                        item.relativePath = key
-                        list.push(item);
-                    }
-                    // push related coupons into array
-                    angular.forEach(item.related_coupons, function (coupon) {
-                        if(coupon.title.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-                            var obj = {
-                                name: coupon.title,
-                                image: item.image,
-                                url: item.url,
-                                relativePath: key
-                            };
-                            list.push(obj);
-                        }
-                    });
-                });
-            });
-            console.log("Filtered List: ", list);
-            return list;
-        };
-
         // select match
         $scope.goDetails = function ($item, $model, $label) {
+            console.log($item, $model, $label)
             $location.path('/'+$item.relativePath+"/"+$item.url);
             $scope.customPopupSelected = undefined;
         };
