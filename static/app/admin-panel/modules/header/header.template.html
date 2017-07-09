@@ -189,6 +189,19 @@
                         <i class="fa fa-fw pull-right"></i>
                     </a>
                 </li>
+
+                <!-- Deeplink UI -->
+                <li>
+                    <a href="" data-toggle="collapse" data-target="#submenu-deeplink">
+                        Deeplink UI
+                        <i class="fa fa-fw pull-right"
+                           ng-class="{'fa-angle-down': state.includes('header.deeplink') || state.includes('header.add-deeplink') || state.includes('header.update-deeplink'), 'fa-angle-right': !state.includes('header.deeplink') || !state.includes('header.add-deeplink') || !state.includes('header.update-deeplink')}"></i>
+                    </a>
+                    <ul id="submenu-deeplink" class="collapse" ng-class="{in: state.includes('header.deeplink') || state.includes('header.add-deeplink') || state.includes('header.update-deeplink')}">
+                        <li ng-class="{active: state.includes('header.deeplink')}"><a ui-sref="header.deeplink">Deeplink<i class="fa fa-angle-right pull-right"></i></a></li>
+                        <li ng-class="{active: state.includes('header.add-deeplink')}"><a ui-sref="header.add-deeplink">Add Deeplink<i class="fa fa-angle-right pull-right"></i></a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

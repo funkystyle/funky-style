@@ -1,0 +1,125 @@
+<link rel="stylesheet" href="/static/app/admin-panel/modules/deals/add/add.deeplink.css" />
+
+<div class="panel panel-default" style="margin-top: 90px;">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 style="margin-top: 10px;">
+                    Add Deal!
+                </h1>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+    </div>
+    <div class="panel-body">
+        <form ng-submit="addDeal(deal)">
+            <div class="row">
+                <div class="col-lg-5 col-md-5">
+                    <div class="form-group">
+                        <label for="is_default">Is Default*</label>
+                        <ui-select ng-required="true" ng-model="deeplink.is_default" theme="bootstrap" id="is_default">
+                            <ui-select-match placeholder="Is Default">{{ $select.selected.text }}</ui-select-match>
+                            <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="affiliate_network">Affiliate Network*</label>
+                        <input required type="url" class="form-control input-sm" id="affiliate_network"
+                               placeholder="Affiliate Network" ng-model="deeplink.affiliate_network">
+                    </div>
+                    <label>Start URL*</label>
+                    <div class="well">
+                        <div class="form-group">
+                            <label for="start_url_url">URL*</label>
+                            <input required type="url" class="form-control input-sm" id="start_url_url"
+                                   placeholder="URL" ng-model="deeplink.start_url.url">
+                        </div>
+                        <div class="form-group">
+                            <label for="start_url_encode">Encode*</label>
+                            <ui-select ng-required="true" ng-model="deeplink.start_url.encode" theme="bootstrap" id="start_url_encode">
+                                <ui-select-match placeholder="Encode">{{ $select.selected.text }}</ui-select-match>
+                                <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
+                                    <div ng-bind-html="item.text | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <!-- End URL code -->
+                    <label>End URL*</label>
+                    <div class="well">
+                        <div class="form-group">
+                            <label for="end_url_url">URL*</label>
+                            <input required type="url" class="form-control input-sm" id="end_url_url"
+                                   placeholder="URL" ng-model="deeplink.end_url.url">
+                        </div>
+                        <div class="form-group">
+                            <label for="end_url_encode">Encode*</label>
+                            <ui-select ng-required="true" ng-model="deeplink.end_url.encode" theme="bootstrap" id="end_url_encode">
+                                <ui-select-match placeholder="Encode">{{ $select.selected.text }}</ui-select-match>
+                                <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
+                                    <div ng-bind-html="item.text | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <!-- End URL code -->
+                    <label>Tags*</label>
+                    <div class="well">
+                        <div class="form-group">
+                            <label for="tags_tags">Tags*</label>
+                            <input required type="text" class="form-control input-sm" id="tags_tags"
+                                   placeholder="Tags" ng-model="deeplink.tags.tags">
+                        </div>
+                        <div class="form-group">
+                            <label for="tags_release">Encode*</label>
+                            <ui-select ng-required="true" ng-model="deeplink.tags.replace" theme="bootstrap" id="tags_release">
+                                <ui-select-match placeholder="Release">{{ $select.selected.text }}</ui-select-match>
+                                <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
+                                    <div ng-bind-html="item.text | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <!-- Encoded Main URL -->
+                    <div class="form-group">
+                        <label for="encode_main_url">Encoded Main URL*</label>
+                        <ui-select ng-required="true" ng-model="deeplink.encode_main_url" theme="bootstrap" id="encode_main_url">
+                            <ui-select-match placeholder="Encoded Main URL">{{ $select.selected.text }}</ui-select-match>
+                            <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
+                                <div ng-bind-html="item.text | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <!-- replace content -->
+                    <div ng-repeat="item in indexArray" class="well">
+                        <div class="form-group">
+                            <label for="replace_replace_string">Replace String*</label>
+                            <input required type="text" class="form-control input-sm" id="replace_replace_string"
+                                   placeholder="Replace String" ng-model="item.replace_string">
+                        </div>
+                        <div class="form-group">
+                            <label for="find_string">Find String*</label>
+                            <input required type="text" class="form-control input-sm" id="find_string"
+                                   placeholder="Find String" ng-model="item.find_string">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-xs btn-primary" ng-click="deeplinkReplace(true)">+</a> &nbsp;&nbsp;
+                        <a class="btn btn-xs btn-primary" ng-click="deeplinkReplace(false)">-</a>
+                    </div>
+                </div> <!-- end col -->
+                <div class="col-lg-3 col-md-3">
+                    <pre>{{ deeplink | json }}</pre>
+                    <pre>{{ indexArray | json }}</pre>
+                </div>
+            </div> <!-- end row -->
+
+            <button type="submit" class="btn btn-info btn-md">Add deal</button>
+        </form>
+        <br><br><br><br><br><br>
+    </div> <!-- end panel-body -->
+</div>

@@ -659,6 +659,46 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'
                         }
                     }
                 })
+                // Top Banners
+                .state('header.deeplink', {
+                    url: '/deeplink',
+                    templateUrl: '/static/app/admin-panel/modules/deeplink/deeplink/deeplink.template.html',
+                    controller: "deeplinkCtrl",
+                    resolve: {
+                        deeplink: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'deeplinkModule',
+                                files: ['/static/app/admin-panel/modules/deeplink/deeplink/deeplink.module.js']
+                            })
+                        }
+                    }
+                })
+                .state('header.add-deeplink', {
+                    url: '/deeplink/add',
+                    templateUrl: '/static/app/admin-panel/modules/deeplink/add/add.deeplink.template.html',
+                    controller: "addDeeplinkCtrl",
+                    resolve: {
+                        addDeeplink: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'addDeeplinkModule',
+                                files: ['/static/app/admin-panel/modules/deeplink/add/add.deeplink.module.js']
+                            })
+                        }
+                    }
+                })
+                .state('header.update-deeplink', {
+                    url: '/deeplink/update/:id',
+                    templateUrl: '/static/app/admin-panel/modules/deeplink/update/update.deeplink.template.html',
+                    controller: "updateDeeplinkCtrl",
+                    resolve: {
+                        addDealBrands: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'updateDeeplinkModule',
+                                files: ['/static/app/admin-panel/modules/deeplink/update/update.deeplink.module.js']
+                            })
+                        }
+                    }
+                })
                 // Master SEO
                 .state('header.seo', {
                     url: '/seo',
