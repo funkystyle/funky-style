@@ -1,5 +1,5 @@
-angular.module("addDeeplinkModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr","cgBusy"])
-    .controller("addDeeplinkCtrl", function($scope, $state, $timeout, toastr, $auth, $http) {
+angular.module("updateDeeplinkModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr","cgBusy"])
+    .controller("updateDeeplinkCtrl", function($scope, $state, $timeout, toastr, $auth, $http) {
         // true or false
         $scope.condition = [
             {
