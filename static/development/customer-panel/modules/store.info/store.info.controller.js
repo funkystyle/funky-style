@@ -144,15 +144,11 @@ angular
                         "related_stores": 1
                     };
                     embedded = JSON.stringify(embedded);
-                    var temp = {},
-                        projection = JSON.stringify({
-                            "related_stores.name": 1,
-                            "related_stores.url": 1
-                        });
+                    var temp = {};
                     temp["recommended_stores"] = {
                         "$in": [$scope.store._id]
                     };
-                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded+"&projection="+projection;
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
                     StoreQuery.get(url).then(function (suggested) {
                         console.log("Suggested Coupons Data: ", suggested.data._items);
                         $scope.suggestedCoupons = suggested.data._items;
@@ -164,7 +160,7 @@ angular
                             "$in": [$scope.store._id]
                         }
                     };
-                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded+"&projection="+projection;
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
                     console.log("url ------------------------------ ",url)
                     StoreQuery.get(url).then(function (coupons) {
                         var items = coupons.data._items,
