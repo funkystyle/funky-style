@@ -4,4 +4,4 @@ angular.module("deeplinkModule", ['angular-table', 'constantModule', 'toastr', '
     .controller("deeplinkCtrl", function ($scope, $filter, toastr, mainURL, URL, $state, $stateParams,
                                                 $auth, $q, $http) {
 
-    })
+    });
