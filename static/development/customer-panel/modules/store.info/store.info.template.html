@@ -419,7 +419,7 @@
                 </div> <!-- tab-1 -->
 
                 <div class="tab-pane" id="deals-tab">
-                    <span ng-if="item.coupon_type == 'offer'" ng-repeat="item in filterCoupons">
+                    <span ng-if="item.coupon_type == 'offer'" ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
                         <div class="panel panel-default coupon deals">
                             <div class="panel-body">
                                 <div class="row">

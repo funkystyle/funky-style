@@ -94,7 +94,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 ]
             });
 
-            $urlRouterProvider.otherwise('/');
+            $urlRouterProvider.otherwise('/404');
             $stateProvider
 
                 .state('main', {

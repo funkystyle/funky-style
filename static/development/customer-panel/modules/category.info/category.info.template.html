@@ -234,7 +234,7 @@
             </div> <!-- end of top stores -->
 			<div class="tab-content">
 				<div class="tab-pane active" id="all-tab">
-                    <span ng-repeat="item in filterCoupons | orderBy: 'number_of_clicks': true">
+                    <span ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
                         <div class="panel panel-default coupon all">
                             <div class="panel-body">
                                 <div class="row">
@@ -327,7 +327,7 @@
 				</div> <!-- tab-1 -->
 
 				<div class="tab-pane" id="deals-tab">
-                    <span ng-if="item.coupon_type == 'offer'" ng-repeat="item in filterCoupons | orderBy: 'number_of_clicks': true">
+                    <span ng-if="item.coupon_type == 'offer'" ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
                         <div class="panel panel-default coupon deals">
                             <div class="panel-body">
                                 <div class="row">
@@ -414,7 +414,7 @@
                     </span>
 				</div> <!-- tab-2 -->
 				<div class="tab-pane" id="coupons-tab">
-                    <span ng-if="item.coupon_type == 'coupon'" ng-repeat="item in filterCoupons | orderBy: 'number_of_clicks': true">
+                    <span ng-if="item.coupon_type == 'coupon'" ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
                         <div class="panel panel-default coupon coupons">
                             <div class="panel-body">
                                 <div class="row">
