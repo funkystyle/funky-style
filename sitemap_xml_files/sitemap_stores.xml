@@ -5,5 +5,5 @@
 				  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
 				        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-						<url><loc>http://localhost:8000/store/virginia-mckee-coupons</loc><lastmod>2017-07-12T11:26:32+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url><url><loc>http://localhost:8000/store/elijah-caldwels-coupons</loc><lastmod>2017-07-05T13:10:55+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
+						<url><loc>http://localhost:8000/store/store 1 url</loc><lastmod>2017-07-12T16:18:17+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
 				</urlset>
