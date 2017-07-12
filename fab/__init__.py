@@ -143,7 +143,7 @@ app.on_update_resource_persons += before_returning_persons
 app.on_update_item_persons += before_returning_persons
 app.on_delete_item_persons += before_delete_persons_item
 
-# stores schema request accessablity and processing some fields
+# stores schema request accessibility and processing some fields
 app.on_insert += before_create
 app.on_update += before_update
 
@@ -157,4 +157,7 @@ from data_validations import *
 from auth import *
 from users import *
 from siteminder import *
+from image_processing import *
 from deeplink import *
+
+
