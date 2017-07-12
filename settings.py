@@ -136,7 +136,7 @@ SCHEMAS = {
             'type': 'dict',
             'schema': {
                 'tags': {'type': 'string'},
-                'replace': {'type': 'string'}
+                'replace': {'type': 'boolean'}
             }
         },
         'affiliate_network': {
