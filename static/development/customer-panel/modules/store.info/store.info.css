@@ -27,6 +27,9 @@
     border-color: rgb(221, 221, 221);
     border-image: initial;
 }
+.top-banner-thumbnail {
+    padding: 0 !important; border-bottom: 0 !important; margin-bottom: 10px;
+}
 .store-info {
     color: #888;
 }

@@ -5,5 +5,5 @@
 				  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
 				        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-						<url><loc>http://localhost:8000/categories/merritt-middleton-virginia-deals</loc><lastmod>2017-07-08T17:01:10+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
+						<url><loc>http://localhost:8000/categories/merritt-middleton-virginia-deals</loc><lastmod>2017-07-08T17:01:10+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url><url><loc>http://localhost:8000/categories/courtney-adkins-deals</loc><lastmod>2017-07-12T11:24:57+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url><url><loc>http://localhost:8000/categories/sharon-vaughn-deals</loc><lastmod>2017-07-12T11:25:18+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
 				</urlset>

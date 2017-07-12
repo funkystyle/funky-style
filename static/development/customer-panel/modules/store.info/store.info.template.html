@@ -154,8 +154,7 @@
             <!--end panel-->
 
             <!-- side banner area -->
-            <div class="thumbnail" style="padding: 0; border-bottom: 0; margin-bottom: 10px;"
-                 ng-if="store.side_banner || top_banner.side_banner_string != 'none'">
+            <div class="thumbnail top-banner-thumbnail" ng-if="store.side_banner || top_banner.side_banner_string != 'none'">
                 <a target="_blank" href="{{ (store.side_banner)? store.side_banner_url: top_banner.destination_url }}">
                     <img style="max-height: 100px;" ng-src="{{ (store.side_banner)? store.side_banner: top_banner.image }}"
                          alt="{{ top_banner.title }}" />

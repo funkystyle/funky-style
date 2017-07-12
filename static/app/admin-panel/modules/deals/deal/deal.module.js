@@ -16,7 +16,7 @@ angular.module("dealModule", ['constantModule', 'toastr', 'cgBusy',
         // Custom template using Bootstrap DatePickerPopup
         $templateCache.put('ui-grid/ui-grid-date-filter',
             "<div class=\"ui-grid-filter-container date-filter-container\" ng-repeat=\"colFilter in col.filters\" >" +
-            "<input type=\"text\" class=\"ui-grid-filter-input ui-grid-filter-input-{{$index}}\"" +
+            "<input type=\"text\" class=\"ui-grid-filter-input date-filter-input ui-grid-filter-input-{{$index}}\"" +
             "style=\"font-size:1em; width:11em!important\" ng-model=\"colFilter.term\" ng-attr-placeholder=\"{{colFilter.placeholder || ''}}\" " +
             " aria-label=\"{{colFilter.ariaLabel || aria.defaultFilterLabel}}\" />"
         );
@@ -30,7 +30,7 @@ angular.module("dealModule", ['constantModule', 'toastr', 'cgBusy',
         };
 
         setTimeout(function () {
-            $('.ui-grid-filter-input').datepicker({
+            $('.date-filter-input').datepicker({
                 dateFormat: 'yy-mm-dd',
                 onSelect: function(dateText) {
                     $(this).trigger('input')
