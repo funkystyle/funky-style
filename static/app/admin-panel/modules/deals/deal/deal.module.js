@@ -1,47 +1,160 @@
 /* store module */
-angular.module("dealModule", ['angular-table', 'constantModule', 'toastr', 'cgBusy',
-    'satellizer', 'ui.select', 'dealFactoryModule'])
+angular.module("dealModule", ['constantModule', 'toastr', 'cgBusy',
+    'satellizer', 'ui.select', 'dealFactoryModule', 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.exporter'])
     .controller("dealCtrl", function ($scope, $filter, toastr, mainURL, URL, $state, $stateParams,
-                                                $auth, dealFactory, $q, $http) {
+                                                $auth, dealFactory, $q, $http, uiGridConstants, $templateCache) {
         $scope.deals = [];
-        $scope.filterDeals = [];
-        $scope.persons = [];
-        $scope.stores = [];
         $scope.categories = [];
-        $scope.deal_types = [];
+        $scope.stores = [];
+        $scope.persons = [];
 
-        $scope.search = {
-            search: undefined
-        };
-        $scope.show = false;
-        $scope.check = {
-            all: false,
-            check: {}
-        };
-        $scope.filter = {};
-        $scope.config = {
-            itemsPerPage: 20,
-            maxPages: 20,
-            fillLastPage: "no"
+        $templateCache.put('ui-grid/date-cell',
+            "<div class='ui-grid-cell-contents'>{{COL_FIELD | date:'yyyy-MM-dd'}}</div>"
+        );
+
+        // Custom template using Bootstrap DatePickerPopup
+        // Custom template using Bootstrap DatePickerPopup
+        $templateCache.put('ui-grid/ui-grid-date-filter',
+            "<div class=\"ui-grid-filter-container date-filter-container\" ng-repeat=\"colFilter in col.filters\" >" +
+            "<input type=\"text\" class=\"ui-grid-filter-input ui-grid-filter-input-{{$index}}\"" +
+            "style=\"font-size:1em; width:11em!important\" ng-model=\"colFilter.term\" ng-attr-placeholder=\"{{colFilter.placeholder || ''}}\" " +
+            " aria-label=\"{{colFilter.ariaLabel || aria.defaultFilterLabel}}\" />"
+        );
+
+        $scope.highlightFilteredHeader = function( row, rowRenderIndex, col, colRenderIndex ) {
+            if( col.filters[0].term ){
+                return 'header-filtered';
+            } else {
+                return '';
+            }
         };
 
-        // apply type filter for filtering the coupons from table
-        $scope.applyTypeFilter = function () {
-            console.log($scope.coupons, $scope.filter);
-            $scope.filterDeals = $filter('typeDealFilter')($scope.deals, $scope.filter);
+        setTimeout(function () {
+            $('.ui-grid-filter-input').datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(dateText) {
+                    $(this).trigger('input')
+                }
+            });
+        }, 1000);
+
+        $scope.gridOptions = {
+            data: [],
+            exporterMenuCsv: false,
+            enableGridMenu: true,
+            enableRowSelection: true,
+            enableSelectAll: true,
+            selectionRowHeaderWidth: 35,
+            enablePaginationControls: true,
+            paginationPageSize: 25,
+            showGridFooter:true,
+            enableFiltering: true,
+            rowHeight: 35,
+            columnDefs: [
+                {
+                    field: 'name', displayName: "Name", width: "25%",
+                    cellTemplate: '<div class="coupon-name" style="padding: 5px;">' +
+                    '<p><a ui-sref="header.update-deal({id: row.entity._id})">{{ row.entity.name }}</a></p>' +
+                    '</div>'
+                },
+                {
+                    field: "last_modified_by", displayName: "Submitted By", enableSorting: false,
+                    filter: {
+                        condition: function (searchTerm, cellValue, row, column) {
+                            console.log(cellValue, searchTerm);
+                            var filtered = false;
+                            filtered = cellValue._id === searchTerm;
+                            return filtered;
+                        },
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: $scope.persons
+                    },
+                    cellTemplate: "<div>{{ row.entity[col.field].email }}</div>"
+                },
+                {
+                    field: 'deal_category', displayName: "Deal Category",
+                    enableSorting: false,
+                    filter: {
+                        condition: function (searchTerm, cellValue, row, column) {
+                            var filtered = false;
+                            for (var i = 0; i < cellValue.length; i++) {
+                                filtered = cellValue[i]._id === searchTerm;
+                                if (filtered) {
+                                    break;
+                                }
+                            }
+                            return filtered;
+                        },
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: $scope.categories
+                    },
+                    cellTemplate: "<div ng-repeat='item in row.entity[col.field]'>{{ item.name }}</div>"
+                },
+                {
+                    field: 'deal_type', displayName: "Deal Type", enableSorting: true
+                },
+                {
+                    field: "_created", displayName: "Created Date",
+                    cellTooltip: true,
+                    cellFilter: "date:'yyyy-MM-dd'",
+                    cellTemplate: 'ui-grid/date-cell',
+                    filterHeaderTemplate: 'ui-grid/ui-grid-date-filter',
+                    width: '20%',
+                    filters: [
+                        {
+                            condition: function(term, value, row, column){
+                                if (!term) return true;
+                                var term = term.replace(/\\/g, '');
+                                var valueDate = new Date(value);
+                                return valueDate >= new Date(term);
+                            },
+                            placeholder: 'From Date'
+                        },
+                        {
+                            condition: function(term, value, row, column){
+                                if (!term) return true;
+                                var term = term.replace(/\\/g, '');
+                                var valueDate = new Date(value);
+                                return valueDate <= new Date(term);
+                            },
+                            placeholder: 'To Date'
+                        }
+                    ],
+                    headerCellClass: $scope.highlightFilteredHeader
+                },
+                {
+                    field: 'number_of_clicks', displayName: "Clicks"
+                }
+            ]
         };
 
-        $scope.clearAll = function () {
-            $scope.filterDeals = [];
-            angular.forEach($scope.deals, function (item) {
-                $scope.filterDeals.push(item);
+        $scope.getSelectedRows = function () {
+            $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
+        };
+        // register API
+        $scope.gridOptions.onRegisterApi = function(gridApi){
+            //set gridApi on scope
+            $scope.gridApi = gridApi;
+            gridApi.selection.on.rowSelectionChanged($scope,function(row){
+                $scope.getSelectedRows();
             });
 
-            $scope.filter = {};
+            gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
+                var msg = 'rows changed ' + rows;
+                $scope.getSelectedRows();
+            });
         };
 
-        $scope.updateFilteredList = function() {
-            $scope.filterDeals = $filter("filter")($scope.deals, $scope.search.search);
+        $scope.autoRefresh = function () {
+            // refresh function no longer triggers custom filter function
+            $scope.gridApi.grid.columns[4].filter.selectOptions = $scope.categories;
+            $scope.gridApi.grid.refresh();
+        };
+
+
+        $scope.statusOptions = {};
+        $scope.filterByStatus = function (array) {
+            $scope.gridOptions.data = array;
         };
 
         if ($auth.isAuthenticated()) {
@@ -62,43 +175,43 @@ angular.module("dealModule", ['angular-table', 'constantModule', 'toastr', 'cgBu
                 method: "GET"
             }).then(function (data) {
                 console.log(data);
+                $scope.gridOptions.data = data.data._items;
                 $scope.deals = data.data._items;
-                $scope.filterDeals = data.data._items;
                 angular.forEach($scope.deals, function(item) {
-                    // push deal types
-                    if($scope.deal_types.indexOf(item.deal_type) == -1) {
-                        $scope.deal_types.push(item.deal_type);
-                    }
-                    // by store
-                    if(item['store']) {
-                        $scope.stores.push(item.store);
-                    }
-                    // by deal category
-                    if(item['deal_category']) {
-                        angular.forEach(item.deal_category, function (deal_item) {
-                            $scope.categories.push(deal_item);
+                    console.log(item);
+                    // push categories into array for filtering
+                    angular.forEach(item.deal_category, function (category) {
+                        $scope.categories.push({
+                            value: category._id,
+                            label: category.name
+                        });
+                    });
+                    if(item.store) {
+                        $scope.stores.push({
+                            value: item.store._id,
+                            label: item.store.name
                         });
                     }
-                    $scope.persons.push(item.last_modified_by);
-                    $scope.check.check[item._id] = false;
+                    $scope.persons.push({
+                        value: item.last_modified_by._id,
+                        label: item.last_modified_by.email
+                    });
                 });
-                // get unique stores
-                $scope.stores = _.uniq($scope.stores, function(x){
-                    return x['_id'];
-                });
+                setTimeout(function () {
+                    $scope.categories = _.uniq($scope.categories, function (item) {
+                        return item.value;
+                    });
+                    $scope.stores = _.uniq($scope.stores, function (item) {
+                        return item.value;
+                    });
+                    $scope.persons = _.uniq($scope.persons, function (item) {
+                        return item.value;
+                    });
+                    $scope.gridApi.grid.columns[3].filter.selectOptions = $scope.categories;
+                    $scope.gridApi.grid.columns[2].filter.selectOptions = $scope.persons;
+                    $scope.gridApi.grid.refresh();
+                }, 1000);
 
-                // get unique persons
-                $scope.persons = _.uniq($scope.persons, function(x){
-                    return x['_id'];
-                });
-
-                // get unique persons
-                $scope.categories = _.uniq($scope.categories, function(x){
-                    return x['_id'];
-                });
-
-                console.log("Final persons: ", $scope.persons, "Deal Types: ", $scope.deal_types, "Stores: ", $scope.stores);
-                console.log("Categories: ", $scope.categories)
             }, function (error) {
                 console.log(error);
                 toastr.error(error.data._error.message, "Error!");
@@ -120,16 +233,8 @@ angular.module("dealModule", ['angular-table', 'constantModule', 'toastr', 'cgBu
 
         // delete selected check boxes
         $scope.deleteSelected = function() {
-            var deletedArray = [];
-            angular.forEach($scope.check.check, function(val, key) {
-                angular.forEach($scope.deals, function(item, i) {
-                    if (item._id == key && val && deletedArray.indexOf(item._id) == -1) {
-                        deletedArray.push(item);
-                    }
-                });
-            });
             var items = [];
-            angular.forEach(deletedArray, function (item) {
+            angular.forEach(array, function (item) {
                 items.push(dealFactory.delete(item._id).then(function(data) {
                     console.log(data);
                     toastr.success("Deleted "+item.name, 200);
@@ -137,12 +242,12 @@ angular.module("dealModule", ['angular-table', 'constantModule', 'toastr', 'cgBu
                     console.log(error);
                     toastr.error(error.data._error.message, error.data._error.code);
                 }));
-            });
 
-            $q.all(items).then(function (data) {
-                toastr.success("Deleted all selected records!", "SUCCESS!");
-            }, function (error) {
-                console.log(error);
+                console.log(item);
+            });
+            $q.all(items).then(function (finalData) {
+                toastr.success(items.length, "Deleted Selected Items");
+                $state.reload();
             });
         };
     })

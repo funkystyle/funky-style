@@ -24,7 +24,8 @@ angular.module("addDeeplinkModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
             },
             replace: [{
                 replace_string: "",
-                find_string: ""
+                find_string: "",
+                encode: $scope.condition[1].code
             }]
         };
 
@@ -32,7 +33,8 @@ angular.module("addDeeplinkModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
         $scope.deeplinkReplace = function (value) {
             (value)? $scope.deeplink.replace.push({
                 replace_string: "",
-                find_string: ""
+                find_string: "",
+                encode: $scope.condition[1].code
             }): $scope.deeplink.replace.pop();
         };
 

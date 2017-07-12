@@ -18,7 +18,7 @@
     <div class="panel-body" cg-busy="load">
         <div class="row" style="margin-bottom: 30px;">
             <div class="col-lg-1 col-md-1" ng-if="mySelectedRows.length">
-                <button class="btn btn-sm btn-primary"  ng-click="deleteSelected(mySelectedRows)">Delete Selected</button>
+                <button class="btn btn-sm btn-primary"  ng-click="deleteSelected(mySelectedRows)">Delete Selected <b>{{ mySelectedRows.length }}</b></button>
             </div>
             <div class="col-lg-6 col-md-6">
                 <span ng-click="filterByStatus(val)" ng-repeat="(key, val) in statusOptions">

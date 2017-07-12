@@ -17,6 +17,10 @@
 .coupon-name:hover .coupon-options {
     display: block;
 }
+.date-filter-container {
+    float: left;
+    width: 30%;
+}
 .uib-datepicker .uib-title {
     margin-top: -6px;
 }

@@ -18,6 +18,9 @@ angular.module("cmsModule", ["headerModule"])
             }).then(function (data) {
                 console.log(data);
                 if(data['data']) {
+                    if(data.data._items.length == 0) {
+                        $state.go('404');
+                    }
                     $scope.cms = data.data._items[0];
                 }
             }, function (error) {
