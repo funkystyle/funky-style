@@ -40,7 +40,8 @@ angular.module("addDeeplinkModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
 
         // Insert deeplink data to the database using addDeeplink()
         $scope.addDeeplink = function (deeplink) {
-            console.log(deeplink);
+            delete deeplink.$$hashKey;
+            console.log(deeplink, JSON.stringify(deeplink));
 
             $http({
                 url: "/api/1.0/deep_link",
