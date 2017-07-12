@@ -1,11 +1,41 @@
 angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule'
     , 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.exporter'])
     .controller("couponCtrl", function($scope, $filter, toastr, $http, $q,
-                                       mainURL, URL, $state, $stateParams, $auth, couponFactory, uiGridConstants) {
+                                       mainURL, URL, $state, $stateParams, $auth, couponFactory, uiGridConstants, $templateCache) {
         $scope.coupons = [];
         $scope.categories = [];
         $scope.stores = [];
         $scope.persons = [];
+
+        $templateCache.put('ui-grid/date-cell',
+            "<div class='ui-grid-cell-contents'>{{COL_FIELD | date:'yyyy-MM-dd'}}</div>"
+        );
+
+        // Custom template using Bootstrap DatePickerPopup
+        // Custom template using Bootstrap DatePickerPopup
+        $templateCache.put('ui-grid/ui-grid-date-filter',
+            "<div class=\"ui-grid-filter-container date-filter-container\" ng-repeat=\"colFilter in col.filters\" >" +
+            "<input type=\"text\" class=\"ui-grid-filter-input ui-grid-filter-input-{{$index}}\"" +
+            "style=\"font-size:1em; width:11em!important\" ng-model=\"colFilter.term\" ng-attr-placeholder=\"{{colFilter.placeholder || ''}}\" " +
+            " aria-label=\"{{colFilter.ariaLabel || aria.defaultFilterLabel}}\" />"
+        );
+
+        $scope.highlightFilteredHeader = function( row, rowRenderIndex, col, colRenderIndex ) {
+            if( col.filters[0].term ){
+                return 'header-filtered';
+            } else {
+                return '';
+            }
+        };
+
+        setTimeout(function () {
+            $('.ui-grid-filter-input').datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(dateText) {
+                    $(this).trigger('input')
+                }
+            });
+        }, 1000);
 
         $scope.gridOptions = {
             data: [],
@@ -91,8 +121,33 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     cellTemplate: "<p style='padding: 5px;'>{{ row.entity._created | date: 'dd MMM yyyy hh:mm a' }}</p>"
                 },
                 {
-                    field: 'expire_date', displayName: "Expiry Date", type: 'date', cellFilter: 'date', width: '15%',
-                    cellTemplate: "<p style='padding: 5px;'>{{ row.entity.expire_date | date: 'dd MMM yyyy hh:mm a' }}</p>", sort: { direction: 'desc', priority: 0 }
+                    field: 'expire_date', displayName: "Expiry Date",
+                    cellTooltip: true,
+                    cellFilter: "date:'yyyy-MM-dd'",
+                    cellTemplate: 'ui-grid/date-cell',
+                    filterHeaderTemplate: 'ui-grid/ui-grid-date-filter',
+                    width: '20%',
+                    filters: [
+                        {
+                            condition: function(term, value, row, column){
+                                if (!term) return true;
+                                var term = term.replace(/\\/g, '');
+                                var valueDate = new Date(value);
+                                return valueDate >= new Date(term);
+                            },
+                            placeholder: 'From Date'
+                        },
+                        {
+                            condition: function(term, value, row, column){
+                                if (!term) return true;
+                                var term = term.replace(/\\/g, '');
+                                var valueDate = new Date(value);
+                                return valueDate <= new Date(term);
+                            },
+                            placeholder: 'To Date'
+                        }
+                    ],
+                    headerCellClass: $scope.highlightFilteredHeader
                 },
                 {
                     field: 'number_of_clicks', displayName: "Clicks"
