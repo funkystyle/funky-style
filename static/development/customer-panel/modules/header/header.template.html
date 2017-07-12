@@ -27,7 +27,7 @@
                                uib-typeahead="address for address in searchResults($viewValue)"
                                typeahead-loading="loadingLocations" typeahead-no-results="noResults"
                                typeahead-popup-template-url="static/app/customer-panel/modules/header/typeahead.template.html"
-                               class="flipkart-navbar-input col-xs-9" typeahead-on-select="goDetails($item, $model, $label)">
+                               class="flipkart-navbar-input col-xs-9" typeahead-on-select="goClick($item, $model, $label)">
                         <button class="search-navbar-button col-xs-2">
                             <span class="on-desktop">Search</span>
                             <span class="on-mobile">

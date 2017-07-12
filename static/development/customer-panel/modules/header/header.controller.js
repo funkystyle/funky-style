@@ -31,6 +31,13 @@ angular.module("headerModule", ["ui.bootstrap", "APP"])
             });
         }
 
+        // go click to redirect
+        $scope.goClick = function (item) {
+            console.log("Header search: ", item, "main."+item.type, {url: item.url, cc: item['cc']});
+            $state.go("main."+item.type, {url: item.url, cc: item['cc']});
+            $scope.customPopupSelected = undefined;
+        };
+
         // get the stores
         var obj = {
             "projection" : {
@@ -68,12 +75,6 @@ angular.module("headerModule", ["ui.bootstrap", "APP"])
             $scope.allCategories = items;
         });
 
-        // select match
-        $scope.goDetails = function ($item, $model, $label) {
-            console.log($item, $model, $label)
-            $location.path('/'+$item.relativePath+"/"+$item.url);
-            $scope.customPopupSelected = undefined;
-        };
 
         // logout
         $scope.logout = function () {

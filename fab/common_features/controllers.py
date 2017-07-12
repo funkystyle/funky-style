@@ -52,7 +52,7 @@ def search():
                     print store, "==========="
                     store_response = return_required_dict(store, store_fields)
                     if store_response:
-                        store_response['type'] = 'store'
+                        store_response['type'] = 'store-info'
                     result.append(store_response)
                     print result
                     if 'related_coupons' in store:
@@ -75,13 +75,14 @@ def search():
                             else:
                                 coupons_output['name'] = ""
                             if coupons_output:
-                                coupons_output['type'] = 'coupon'
+                                coupons_output['type'] = 'store-info'
+                                coupons_output['cc'] = str(coupon['_id'])
                             result.append(coupons_output)
 
                 for category in categories:
                     category_response = return_required_dict(category, store_fields)
                     if category_response:
-                        category_response['type'] = 'category'
+                        category_response['type'] = 'categoryinfo'
                     result.append(category_response)
                     if 'related_coupons' in category:
                         print('loading coupons of store:{}'.format(category['name']))
@@ -90,11 +91,11 @@ def search():
                         for coupon in coupons:
                             coupons_output = {}
                             if 'image' in store:
-                                coupons_output['image'] = store['image']
+                                coupons_output['image'] = category['image']
                             else:
                                 coupons_output['image'] = ""
                             if 'url' in store:
-                                coupons_output['url'] = store['url']
+                                coupons_output['url'] = category['url']
                             else:
                                 coupons_output['url'] = ""
 
@@ -104,7 +105,8 @@ def search():
                                 coupons_output['name'] = ""
 
                             if coupons_output:
-                                coupons_output['type'] = 'coupon'
+                                coupons_output['type'] = 'categoryinfo'
+                                coupons_output['cc'] = str(coupon['_id'])
                             result.append(coupons_output)
 
                 for deal in deals:
@@ -115,13 +117,13 @@ def search():
                             deal['image'] = ""
                     deal_response = return_required_dict(deal, store_fields)
                     if deal_response:
-                        deal_response['type'] = 'deal'
+                        deal_response['type'] = 'deal_post_details'
                     result.append(deal_response)
 
                 for deal_brand in deal_brands:
                     deal_brand_response = return_required_dict(deal_brand, store_fields)
                     if deal_brand_response:
-                        deal_brand_response['type'] = 'deal_brand'
+                        deal_brand_response['type'] = 'deal_brand_page'
                     result.append(deal_brand_response)
 
         response = jsonify(error='', data = result)
