@@ -2,30 +2,32 @@
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
 <span ng-if="!params">
-    <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carousel"data-slide-to="{{ $index }}"
-                ng-class="{'active': $index == 0}" ng-repeat="item in banners"></li>
-        </ol>
-        <!-- Carousel items -->
-        <div class="carousel-inner carousel-zoom">
-            <div class="item" ng-class="{'active': $index == 0}" ng-repeat="item in banners">
-                <a href="{{ item.destination_url }}" target="_blank">
-                    <img class="img-responsive" ng-src="{{ item.image }}">
-                    <div class="carousel-caption">
-                        <h2>{{ item.title }}</h2>
-                        <p>{{ item.image_text }}</p>
-                    </div>
-                </a>
+    <div class="container">
+        <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel"data-slide-to="{{ $index }}"
+                    ng-class="{'active': $index == 0}" ng-repeat="item in banners"></li>
+            </ol>
+                <!-- Carousel items -->
+            <div class="carousel-inner carousel-zoom">
+                <div class="item" ng-class="{'active': $index == 0}" ng-repeat="item in banners">
+                    <a href="{{ item.destination_url }}" target="_blank">
+                        <img class="img-responsive" ng-src="{{ item.image }}">
+                        <div class="carousel-caption">
+                            <h2>{{ item.title }}</h2>
+                            <p>{{ item.image_text }}</p>
+                        </div>
+                    </a>
+                </div>
             </div>
+                <!-- Carousel nav -->
+            <a class="left carousel-control" data-target="#carousel" data-slide="prev">
+                <span class="fa fa-angle-left"></span>
+            </a>
+            <a class="right carousel-control" data-target="#carousel" data-slide="next">
+                <span class="fa fa-angle-right"></span>
+            </a>
         </div>
-        <!-- Carousel nav -->
-        <a class="left carousel-control" data-target="#carousel" data-slide="prev">
-            <span class="fa fa-angle-left"></span>
-        </a>
-        <a class="right carousel-control" data-target="#carousel" data-slide="next">
-            <span class="fa fa-angle-right"></span>
-        </a>
     </div>
 
         <!-- popular stores -->
