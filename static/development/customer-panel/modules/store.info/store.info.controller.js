@@ -250,7 +250,6 @@ angular
                         });
                         var sort = "&max_results=1&sort=[('_updated', -1)]";
                         url = "/api/1.0/coupons"+"?where="+temp+sort+"&embedded="+embedded;
-                        return true;
                         StoreQuery.get(url).then(function (related) {
                             var items = related.data._items;
                             console.log("Related Coupons: ", items);

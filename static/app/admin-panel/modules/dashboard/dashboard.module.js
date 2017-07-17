@@ -137,7 +137,8 @@ angular.module("DashboardModule", ["constantModule",
             // get the list of coupons
             var projection = {
                 "title": 1,
-                "number_of_clicks": 1
+                "number_of_clicks": 1,
+                "name": 1
             };
             $http({
                 url: "/api/1.0/coupons?projection="+JSON.stringify(projection)+"&rand_number=" + new Date().getTime(),

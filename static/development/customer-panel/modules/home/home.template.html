@@ -10,11 +10,13 @@
         <!-- Carousel items -->
         <div class="carousel-inner carousel-zoom">
             <div class="item" ng-class="{'active': $index == 0}" ng-repeat="item in banners">
-                <img class="img-responsive" ng-src="{{ item.image }}">
-                <div class="carousel-caption">
-                    <h2>{{ item.title }}</h2>
-                    <p>{{ item.image_text }}</p>
-                </div>
+                <a href="{{ item.destination_url }}" target="_blank">
+                    <img class="img-responsive" ng-src="{{ item.image }}">
+                    <div class="carousel-caption">
+                        <h2>{{ item.title }}</h2>
+                        <p>{{ item.image_text }}</p>
+                    </div>
+                </a>
             </div>
         </div>
         <!-- Carousel nav -->

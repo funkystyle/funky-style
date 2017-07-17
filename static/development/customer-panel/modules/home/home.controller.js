@@ -52,7 +52,8 @@ angular.module('homeModule', ["headerModule", "Directives"])
             "top_banner_string": 1,
             "image": 1,
             "title": 1,
-            "image_text": 1
+            "image_text": 1,
+            "destination_url": 1
         };
 
         url = '/api/1.0/banner'+'?where='+where+'&projection='+JSON.stringify(projection)+'&rand_number' + new Date().getTime();

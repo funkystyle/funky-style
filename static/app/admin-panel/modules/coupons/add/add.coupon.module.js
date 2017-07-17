@@ -30,7 +30,8 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
         $scope.coupon = {
             status: $scope.status[4],
             expire_date: new Date(),
-            related_categories: []
+            related_categories: [],
+            coupon_sorting: 0
         };
         $scope.mytime = new Date();
 

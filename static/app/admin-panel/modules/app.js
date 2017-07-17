@@ -55,6 +55,16 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'
         $rootScope.submit = function () {
             var input = $(id);
             var text = $("#textEditor").Editor("getText");
+            var m,
+                urls = [],
+                str = text,
+                rex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g;
+
+            while ( m = rex.exec( str ) ) {
+                urls.push( m[1] );
+            }
+
+            console.log("Image URL's: ", urls)
             input.val(text);
             input.trigger('input'); // Use for Chrome/Firefox/Edge
             input.trigger('change'); // Use for Chrome/Firefox/Edge + IE11
@@ -211,6 +221,19 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'
                         login: function($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'loginModule',
+                                files: ['/static/app/admin-panel/modules/login/login.module.js']
+                            })
+                        }
+                    }
+                })
+                .state('register', {
+                    url: '/register',
+                    templateUrl: '/static/app/admin-panel/modules/register/register.template.html',
+                    controller: "registerCtrl",
+                    resolve: {
+                        login: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'registerModule',
                                 files: ['/static/app/admin-panel/modules/login/login.module.js']
                             })
                         }

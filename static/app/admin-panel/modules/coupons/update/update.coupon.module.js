@@ -31,7 +31,8 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         $scope.status = ["Pending", "Draft", "Trash", "Verified", "Publish"];
         $scope.coupon = {
             status: $scope.status[0].type,
-            expire_date: new Date()
+            expire_date: new Date(),
+            coupon_sorting: 0
         };
         $scope.mytime = new Date();
 

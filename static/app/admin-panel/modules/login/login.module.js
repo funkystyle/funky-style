@@ -28,3 +28,14 @@ angular.module("loginModule", ["Directives", "cgBusy", "constantModule", "satell
             });
         }
     });
+
+// register module
+angular.module('registerModule', ["cgBusy", "constantModule", "satellizer", "toastr"])
+.controller("registerCtrl", function ($scope, $http, mainURL, URL, $auth, $state, toastr) {
+    if($auth.isAuthenticated()) {
+        $state.go('main.dashboard');
+    }
+    $scope.register = {
+        status: "inactive"
+    };
+});
