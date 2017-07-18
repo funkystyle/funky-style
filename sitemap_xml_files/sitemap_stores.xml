@@ -5,5 +5,5 @@
 				  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
 				        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-						<url><loc>http://localhost:8000/store/flipkart-coupons</loc><lastmod>2017-07-17T13:13:51+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url><url><loc>http://localhost:8000/store/amazon-coupons</loc><lastmod>2017-07-17T13:00:11+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
+						<url><loc>http://localhost:8000/store/amazon-coupons</loc><lastmod>2017-07-18T13:02:49+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url><url><loc>http://localhost:8000/store/flipkart-coupons</loc><lastmod>2017-07-18T13:02:36+5.30</lastmod><changefreq>daily</changefreq><priority>0.8</priority>                   </url>
 				</urlset>
