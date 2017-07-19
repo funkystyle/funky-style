@@ -48,6 +48,9 @@ body {
     overflow: visible;
     height: auto;
 }
+ol > li > a {
+    color: #2780e3;
+}
 
 h2,
 h3,
@@ -98,17 +101,19 @@ h4 {
     border: 0px solid #FFFFFF;
 }
 
-.social-icons i {
-    background-color: #000000;
-    color: #FFFFFF;
-    min-width: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    line-height: 32px;
-    padding: 5px 12px;
-    margin-right: 5px;
-    cursor: pointer;
+.social-icons a{
+    min-width: 45%;
+    display: inline-block;
+    border: 1px solid #ddd;
+    padding: 3px 5px;
+    margin: 5px;
+    border-radius: 3px;
+}
+.social-icons a:hover {
+    text-decoration: none;
+}
+.social-icons a i {
+    min-width: 15px;
 }
 
 .top-store-ul {

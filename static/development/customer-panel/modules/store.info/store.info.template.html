@@ -31,7 +31,7 @@
                             <li class="active">{{ store.url }}</li>
                         </ol>
                     </div> <!-- end div -->
-                    <h1 class="margin-top-0 h3-heading">{{ store.h1 }}</h1>
+                    <h3 class="margin-top-0 h3-heading">{{ store.h1 }}</h3>
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(store.top_description)"></p>
                     <p class="para_small">
@@ -42,57 +42,29 @@
             </div>
         </div> <!-- end panel body -->
     </div> <!-- end panel -->
-    <div class="row">
-        <div class="col-lg-3 col-sm-12 col-md-3 pad-right-0 col-xs-12">
-            <div class="well social-well">
-                <p class="social-icons text-center">
-                    <a target="_blank" href="https://www.facebook.com/FabPromoCodes/">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                    <a target="_blank" href="https://plus.google.com/113116676582324316660/about?gmbpt=true&_ga=1.176672103.352270514.1467899366">
-                        <i class="fa fa-google-plus"></i>
-                    </a>
-                    <a target="_blank" href="https://twitter.com/FabPromocodes">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                    <a target="_blank" href="https://www.pinterest.com/fabpromocodes/">
-                        <i class="fa fa-pinterest"></i>
-                    </a>
-                </p>
-            </div>
-        </div> <!-- end col-lg-3 -->
-        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 mar_top">
-            <div class="panel panel-default">
-                <div class="panel-body panel_pad">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active col-lg-4 col-xs-4 pad-0 text-center pad_nav_right">
-                            <a href="" data-target="#all-tab" aria-controls="home" role="tab" data-toggle="tab">All &nbsp;
-                                <span class="label label-info">{{ filterCoupons.length }}</span>
-                            </a>
-                        </li>
-                        <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_right pad_nav_left">
-                            <a href="" data-target="#deals-tab" aria-controls="profile" role="tab" data-toggle="tab">Deals&nbsp;
-                                <span class="label label-primary">{{ dealsLength.length }}</span>
-                            </a>
-                        </li>
-                        <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_left">
-                            <a href="" data-target="#coupons-tab" aria-controls="messages" role="tab" data-toggle="tab">
-                                Coupons&nbsp;
-                                <span class="label label-success">{{ couponsLength.length }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
-
     <!--row-->
     <div class="row">
         <!--col-->
         <div class="col-lg-3 col-md-3 col-sm-3 pad-right-0">
-            <div class="panel panel-default" ng-repeat="(key, items) in categories">
+            <div class="well social-well">
+                <p class="social-icons">
+                    <a target="_blank" href="https://www.facebook.com/FabPromoCodes/">
+                        <i class="fa fa-facebook"></i> &nbsp;Facebook
+                    </a>
+                    <a target="_blank" href="https://plus.google.com/113116676582324316660/about?gmbpt=true&_ga=1.176672103.352270514.1467899366">
+                        <i class="fa fa-google-plus"></i> &nbsp;Google+
+                    </a>
+                </p>
+                <p class="social-icons">
+                    <a target="_blank" href="https://twitter.com/FabPromocodes">
+                        <i class="fa fa-twitter"></i> &nbsp;Twitter
+                    </a>
+                    <a target="_blank" href="https://www.pinterest.com/fabpromocodes/">
+                        <i class="fa fa-pinterest"></i> &nbsp;Pinterest
+                    </a>
+                </p>
+            </div>
+            <div class="panel panel-default cat-filters" ng-repeat="(key, items) in categories">
                 <div class="panel-heading">
                     <h5 class="font-bold">{{ (key == 'Regular'? 'Category': key) }} Filters</h5>
                 </div>
@@ -123,7 +95,7 @@
             </div>
             <!--end panel-->
 
-            <div class="panel panel-default">
+            <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
                     <h5 class="font-bold">Related Stores</h5>
                 </div>
@@ -156,7 +128,7 @@
                 </a>
             </div> <!-- end of side banner area -->
 
-            <div class="panel panel-default">
+            <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
                     <h5 class="font-bold">Top Stores</h5>
                 </div>
@@ -181,7 +153,7 @@
             </div>
             <!--end panel-->
 
-            <div class="panel panel-default">
+            <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
                     <h5 class="font-bold">{{ store.name }} Contact Info</h5>
                 </div>
@@ -206,7 +178,7 @@
             </div>
             <!--end panel-->
 
-            <div class="panel panel-default">
+            <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
                     <h5 class="font-bold">{{ store.name }} Social Links</h5>
                 </div>
@@ -240,7 +212,7 @@
             <!--end panel-->
 
             <!-- ola cab address start here -->
-            <div class="panel panel-default">
+            <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
                     <h5 class="font-bold">{{ store.name }} Address</h5>
                 </div>
@@ -254,7 +226,7 @@
             <!-- ola cab address end here -->
 
             <!-- latest tweets start here -->
-            <div class="panel panel-default">
+            <div class="panel panel-default cat-filters">
                 <div class="panel-heading" style="border-bottom: 2px dotted #9954bb;">
                     <h5 class="font-bold latest-tweet">Latest Tweets From {{ store.twitter_id }}</h5>
                     <a class="twitter-timeline" href="https://twitter.com/{{ store.twitter_id }}" data-tweet-limit="3">
@@ -269,6 +241,29 @@
         </div>
         <!--end col-->
         <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body panel_pad">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active col-lg-4 col-xs-4 pad-0 text-center pad_nav_right">
+                            <a href="" data-target="#all-tab" aria-controls="home" role="tab" data-toggle="tab">All &nbsp;
+                                <span class="label label-info">{{ filterCoupons.length }}</span>
+                            </a>
+                        </li>
+                        <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_right pad_nav_left">
+                            <a href="" data-target="#deals-tab" aria-controls="profile" role="tab" data-toggle="tab">Deals&nbsp;
+                                <span class="label label-primary">{{ dealsLength.length }}</span>
+                            </a>
+                        </li>
+                        <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_left">
+                            <a href="" data-target="#coupons-tab" aria-controls="messages" role="tab" data-toggle="tab">
+                                Coupons&nbsp;
+                                <span class="label label-success">{{ couponsLength.length }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="tab-content">
                 <!-- top banner area -->
                 <div class="row" id="top_banner_area" ng-if="store.top_banner || top_banner">
@@ -289,9 +284,9 @@
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
-                                            <h4>
-                                                {{ item.discount_type }} {{ item.discount }}
-                                            </h4>
+                                            <h3>
+                                                {{ item.discount_type }} <br> {{ item.discount }}
+                                            </h3>
                                             <div class="deal">
                                                 <span ng-if="item.coupon_type == 'coupon'">
                                                     COUPON
@@ -308,14 +303,14 @@
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h3 class="margin-top-0 coupon-heading">
+                                        <h4 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                        </h3>
+                                        </h4>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
@@ -419,9 +414,9 @@
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
-                                            <h4>
+                                            <h3>
                                                 {{ item.discount_type }} {{ item.discount }}
-                                            </h4>
+                                            </h3>
                                             <div class="deal">
                                                 <span ng-if="item.coupon_type == 'coupon'">
                                                     COUPON
@@ -438,14 +433,14 @@
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h3 class="margin-top-0 coupon-heading">
+                                        <h4 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                        </h3>
+                                        </h4>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
@@ -511,9 +506,9 @@
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
-                                            <h4>
+                                            <h3>
                                                 {{ item.discount_type }} {{ item.discount }}
-                                            </h4>
+                                            </h3>
                                             <div class="deal">
                                                 <span ng-if="item.coupon_type == 'coupon'">
                                                     COUPON
@@ -530,14 +525,14 @@
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h3 class="margin-top-0 coupon-heading">
+                                        <h4 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                        </h3>
+                                        </h4>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
@@ -675,9 +670,9 @@
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
-                                    <h4>
+                                    <h3>
                                         {{ item.discount_type }} {{ item.discount }}
-                                    </h4>
+                                    </h3>
                                     <div class="related-coupon-deal">
                                         <img ng-src="{{ item.related_stores[0].image }}">
                                     </div>
@@ -689,13 +684,13 @@
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                <h3 class="margin-top-0 coupon-heading">
+                                <h4 class="margin-top-0 coupon-heading">
                                     {{ item.title }}
                                     <span class="pull-right hidden-xs" style="display: none;">
                                             <i class="fa fa-star"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
                                         </span>
-                                </h3>
+                                </h4>
                                 <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                         <i class="fa fa-star"></i>&nbsp;
                                         <i class="fa fa-share-alt"></i>
@@ -757,9 +752,9 @@
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
-                                    <h4>
+                                    <h3>
                                         {{ item.discount_type }} {{ item.discount }}
-                                    </h4>
+                                    </h3>
                                     <div class="deal">
                                                 <span ng-if="item.coupon_type == 'coupon'">
                                                     COUPON
@@ -776,13 +771,13 @@
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                <h3 class="margin-top-0 coupon-heading">
+                                <h4 class="margin-top-0 coupon-heading">
                                     {{ item.title }}
                                     <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa fa-star"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                </h3>
+                                </h4>
                                 <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa fa-star"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
