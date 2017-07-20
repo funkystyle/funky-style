@@ -6,20 +6,20 @@
     border-radius: 0;
     font-size: 13px;
 }
+
 .related-coupon-deal {
     position: absolute;
-    bottom: -20px;
-    background-color: #9954bb;
-    min-height: 50px;
-    width: 130px;
+    bottom: -45px;
+    min-height: 80px;
+    width: 160px;
     border-radius: 5px;
-    max-height: 50px;
+    max-height: 80px;
     left: -10px;
-    color: #FFFFFF;
+    color: #fff;
     line-height: 25px;
 }
 .related-coupon-deal img {
-    height: 50px;
+    height: 60px;
     border-radius: 3px;
     width: 100%;
     border-width: 1px;
@@ -27,6 +27,7 @@
     border-color: rgb(221, 221, 221);
     border-image: initial;
 }
+
 .store-info {
     color: #888;
 }
@@ -97,12 +98,16 @@ div.coupon {
     font-size: 20px;
     cursor: pointer;
 }
+.cat-filters {
+    border-top: 3px solid #7e70a1;
+    border-radius: 3px;
+}
 .h3-heading {
     margin-bottom: 15px;
-    text-transform: capitalize;
+    color: #333;
 }
 .cat-top-store-area {
-    margin: 0 0 20px;
+    margin: 0 0 10px;
 }
 .cat-top-stores, .cat-top-stores img{
     max-height: 70px;
@@ -139,35 +144,39 @@ div.coupon {
 
 
 /* coupons, deals */
+
+
+/* coupons, deals */
 .deal-price {
     position: relative;
     border: 1px solid #9954bb;
-    min-height: 100px;
+    min-height: 120px;
     width: 100%;
     border-radius: 3px;
-    max-width: 110px;
-    max-height: 100px;
+    max-width: 140px;
+    max-height: 120px;
 }
-.deal-price h4 {
-    line-height: 27px;
+.deal-price h3 {
+    line-height: 32px;
     text-transform: capitalize;
+    margin-top: 10px;
 }
 .deal-price .deal {
     position: absolute;
     bottom: 0;
     background-color: #9954bb;
-    min-height: 25px;
+    min-height: 30px;
     width: 100%;
-    color: #FFFFFF;
-    line-height: 25px;
+    color: #fff;
+    line-height: 28px;
 }
 .deal-price .deal span {
-    font-size: 12px;
+    font-size: 14px;
 }
-.coupon-heading span i {
-    color: #898989;
-    font-size: 20px;
-    cursor: pointer;
+.coupon-heading {
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: 0.1px;
 }
 .coupon-footer {
     line-height: 40px;

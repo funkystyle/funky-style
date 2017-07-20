@@ -23,8 +23,8 @@
                 <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
                     <div style="width: 100%; min-height: 20px;">
                         <ol class="breadcrumb pull-right">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="#/stores">Stores</a></li>
+                            <li><a ui-sref="main.home">Home</a></li>
+                            <li><a ui-sref="main.store">Stores</a></li>
                             <li ng-repeat="item in store.breadcrumb">
                                 <a ui-sref="main.categoryinfo({url: item.url})">{{ item.name }}</a>
                             </li>
@@ -241,34 +241,30 @@
         </div>
         <!--end col-->
         <div class="col-lg-9 col-md-9 col-sm-12">
-            <div class="panel panel-default">
-                <div class="panel-body panel_pad">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active col-lg-4 col-xs-4 pad-0 text-center pad_nav_right">
-                            <a href="" data-target="#all-tab" aria-controls="home" role="tab" data-toggle="tab">All &nbsp;
-                                <span class="label label-info">{{ filterCoupons.length }}</span>
-                            </a>
-                        </li>
-                        <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_right pad_nav_left">
-                            <a href="" data-target="#deals-tab" aria-controls="profile" role="tab" data-toggle="tab">Deals&nbsp;
-                                <span class="label label-primary">{{ dealsLength.length }}</span>
-                            </a>
-                        </li>
-                        <li role="presentation" class="col-lg-4 pad-0 text-center col-xs-4 pad_nav_left">
-                            <a href="" data-target="#coupons-tab" aria-controls="messages" role="tab" data-toggle="tab">
-                                Coupons&nbsp;
-                                <span class="label label-success">{{ couponsLength.length }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active col-lg-2 col-xs-2 pad-0 text-center pad_nav_right">
+                    <a href="" data-target="#all-tab" aria-controls="home" role="tab" data-toggle="tab">All &nbsp;
+                        <span> ({{ filterCoupons.length }})</span>
+                    </a>
+                </li>
+                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-2 pad_nav_right pad_nav_left">
+                    <a href="" data-target="#deals-tab" aria-controls="profile" role="tab" data-toggle="tab">Deals&nbsp;
+                        <span> ({{ dealsLength.length }})</span>
+                    </a>
+                </li>
+                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-2 pad_nav_left">
+                    <a href="" data-target="#coupons-tab" aria-controls="messages" role="tab" data-toggle="tab">
+                        Coupons&nbsp;
+                        <span> ({{ couponsLength.length }})</span>
+                    </a>
+                </li>
+            </ul>
             <div class="tab-content">
                 <!-- top banner area -->
                 <div class="row" id="top_banner_area" ng-if="store.top_banner || top_banner">
                     <div class="col-md-12 col-sm-12">
-                        <div class="thumbnail" style="margin-bottom: 20px; padding: 0;">
+                        <div class="thumbnail" style="margin-bottom: 10px; padding: 0;">
                             <a target="_blank" href="{{ (store.top_banner)? store.top_banner_url: top_banner.destination_url }}">
                                 <img style="max-height: 100px; border-radius: 3px;" ng-src="{{ (store.top_banner)? store.top_banner: top_banner.image }}"
                                      alt="{{ top_banner.title }}" />
@@ -631,7 +627,7 @@
                                         <a href="" ng-click="showDescription(item._id)">Show Description</a>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 txt_small text-right">
-                                        <a href=""><span class="glyphicon glyphicon-ok-sign gly"></span>Verified</a>
+                                        <a href=""><span class="glyphicon glyphicon-check gly"></span>Verified</a>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5 pad-right-0 col-xs-12 btn_mobile">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">

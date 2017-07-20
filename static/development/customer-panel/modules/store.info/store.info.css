@@ -8,18 +8,17 @@
 }
 .related-coupon-deal {
     position: absolute;
-    bottom: -20px;
-    background-color: #9954bb;
-    min-height: 50px;
-    width: 130px;
+    bottom: -45px;
+    min-height: 80px;
+    width: 160px;
     border-radius: 5px;
-    max-height: 50px;
+    max-height: 80px;
     left: -10px;
-    color: #FFFFFF;
+    color: #fff;
     line-height: 25px;
 }
 .related-coupon-deal img {
-    height: 50px;
+    height: 60px;
     border-radius: 3px;
     width: 100%;
     border-width: 1px;
@@ -138,15 +137,6 @@ div.coupon {
 .social-well p {
     margin-bottom: 0;
 }
-/* tabs */
-.nav-tabs>li>a {
-    padding: 15px;
-}
-.nav-tabs li a span {
-    margin-top: -5px;
-    border-radius: 10px;
-}
-/* end tabs */
 
 
 /* coupons, deals */
