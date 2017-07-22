@@ -90,6 +90,7 @@ angular.module('homeModule', ["headerModule", "Directives"])
         projection['url'] = 1;
         projection['image'] = 1;
         projection['menu'] = 1;
+        projection['related_coupons'] = 1;
         $http({
             url: "/api/1.0/stores/?where="+JSON.stringify(store)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
             mathod: "GET"
@@ -111,6 +112,7 @@ angular.module('homeModule', ["headerModule", "Directives"])
         projection['name'] = 1;
         projection['url'] = 1;
         projection['image'] = 1;
+        projection['related_coupons'] = 1;
         $http({
             url: "/api/1.0/categories/?where="+JSON.stringify(cat)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
             mathod: "GET"

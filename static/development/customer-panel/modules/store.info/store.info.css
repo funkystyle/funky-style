@@ -1,3 +1,6 @@
+.top-container {
+    margin-top: 30px;
+}
 .breadcrumb {
     padding: 0 15px;
     margin-bottom: 0 !important;
@@ -40,7 +43,9 @@ div.thumbnail.top-banner-thumbnail > a > img {
     color: rgba(0,0,0,.75);
 }
 .coupon-heading {
-    font-weight: 600;
+    font-weight: 400;
+    color: #000;
+    text-transform: capitalize;
     line-height: 23px;
     letter-spacing: 0.1px;
 }
@@ -80,7 +85,7 @@ div.thumbnail.top-banner-thumbnail > a > img {
 }
 .thumb {
     border-right: 1px solid #ddd;
-    margin-top: 23px;
+    margin-top: 5px;
 }
 div.coupon {
     -webkit-animation: fade 1s;
@@ -120,9 +125,11 @@ div.coupon {
     cursor: pointer;
 }
 .h3-heading {
-    margin-bottom: 15px;
-    color: #333;
+    margin-bottom: 10px;
+    color: #000000;
+    text-transform: capitalize;
 }
+
 .rating-stars i {
     padding: 0 3px;
     color: #888888;

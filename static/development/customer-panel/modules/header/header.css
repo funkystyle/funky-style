@@ -1,6 +1,19 @@
 .header {
     background-color: #2f1231 !important;
-    height: 90px;
+    height: 95px;
+}
+.main-header-ul li a {
+    font-size: 18px;
+}
+.header-login-btn {
+    background: #fff;
+    color: #000!important;
+    padding: 7px 20px!important;
+    border-radius: 6px;
+    margin: 7px 50px 0 0;
+}
+.header-login-btn:hover {
+    color: #FFFFFF !important;
 }
 .bottom-header, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
     background-color: rgb(126, 112, 161) !important;
@@ -8,19 +21,29 @@
 }
 .header .container {
     padding: 20px 0;
-    height: 90px;
 }
 .navbar-brand {
     padding: 0 15px;
-    margin-top: -2px;
 }
 .navbar-form {
-    width: 40%;
+    width: 45%;
 }
-.navbar-form .form-group {
+.search-btn {
+    height: 39px;
+    border-radius: 2px;
+    padding: 5px 20px;
+    margin-left: -2px;
+}
+.bottom-header {
+    position: absolute;
     width: 100%;
+    z-index: 9;
+    top: -12px;
+    height: 20px;
 }
-
+.bottom-header ul {
+    padding: 0 15px;
+}
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
     background: none !important;
 }
@@ -44,7 +67,6 @@
     border-radius: 2px;
     border: 0 none;
     outline: 0 none;
-    margin-top: 2px;
     color: #333;
     font-size: 15px;
 }
@@ -236,12 +258,24 @@ ul.nav li.dropdown ul.dropdown-menu {
 
 
 /* ---- custome popup template css for typeahead ----- */
-
+.search-thumbnail {
+    width: 120px;
+    height: 45px;
+    min-height: 45px;
+    border: 0 solid !important;
+    background: transparent !important;
+}
+.search-thumbnail img {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 45px;
+    max-height: 45px;
+}
 .custom-popup-wrapper {
     position: absolute;
     top: 100%;
     overflow-y: scroll;
-    height: 390px;
     overflow-x: hidden;
     max-height: 400px;
     border: 1px solid #ddd;
@@ -249,7 +283,7 @@ ul.nav li.dropdown ul.dropdown-menu {
     left: 0;
     z-index: 1000;
     display: none;
-    width: 600px;
+    width: 430px;
     background-color: #f9f9f9;
 }
 
@@ -278,10 +312,10 @@ ul.nav li.dropdown ul.dropdown-menu {
         width: auto;
     }
 }
-
 .uib-typeahead-match {
     background-color: #f5f5f5;
     color: #333333;
+    min-height: 70px;
     cursor: pointer;
     padding: 8px 5px;
     border-bottom: 1px solid #E2E2E2;
