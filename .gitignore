@@ -5,3 +5,13 @@ access_logs/*
 *.log
 fab_key.pem
 nohup.out
+sitemap_index.xml
+sitemap_stores.xml
+sitemap_blog.xml
+sitemap_cms_pages.xml
+sitemap_deal_brands.xml
+sitemap_deal_categories.xml
+sitemap_deals.xml
+sitemap_index.xml
+static/images/*.jpeg
+static/images/*.jpg

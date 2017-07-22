@@ -1,7 +1,0 @@
-<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-			  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-			  http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd">
-<sitemap><loc>http://localhost:8000/sitemap_xml_files/sitemap_stores.xml</loc><lastmod>2017-07-19T18-06-41+5.30</lastmod>                  </sitemap><sitemap><loc>http://localhost:8000/sitemap_xml_files/sitemap_user-favourites.xml</loc><lastmod>2017-07-19T18-06-41+5.30</lastmod>                  </sitemap><sitemap><loc>http://localhost:8000/sitemap_xml_files/sitemap_deal-brands.xml</loc><lastmod>2017-07-19T18-06-41+5.30</lastmod>                  </sitemap><sitemap><loc>http://localhost:8000/sitemap_xml_files/sitemap_cms-pages.xml</loc><lastmod>2017-07-19T18-06-41+5.30</lastmod>                  </sitemap><sitemap><loc>http://localhost:8000/sitemap_xml_files/sitemap_blog.xml</loc><lastmod>2017-07-19T18-06-41+5.30</lastmod>                  </sitemap><sitemap><loc>http://localhost:8000/sitemap_xml_files/sitemap_deals.xml</loc><lastmod>2017-07-19T18-06-41+5.30</lastmod>                  </sitemap><sitemap><loc>http://localhost:8000/sitemap_xml_files/sitemap_categories.xml</loc><lastmod>2017-07-19T18-06-41+5.30</lastmod>                  </sitemap><sitemap><loc>http://localhost:8000/sitemap_xml_files/sitemap_deal-categories-collection.xml</loc><lastmod>2017-07-19T18-06-41+5.30</lastmod>                  </sitemap>
-
-</sitemapindex>
