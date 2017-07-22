@@ -12,6 +12,7 @@ sitemap_cms_pages.xml
 sitemap_deal_brands.xml
 sitemap_deal_categories.xml
 sitemap_deals.xml
+sitemap_categories.xml
 sitemap_index.xml
 static/images/*.jpeg
 static/images/*.jpg
