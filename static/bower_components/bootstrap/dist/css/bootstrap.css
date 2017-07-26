@@ -71,7 +71,7 @@ figure {
 }
 
 html {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans",Arial,sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
@@ -1421,7 +1421,7 @@ html {
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans",Arial,sans-serif;
     font-size: 15px;
     line-height: 1.42857143;
     color: #333
@@ -1526,7 +1526,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+    font-family: "Open Sans", Arial, sans-serif;
     font-weight: 300;
     line-height: 1.1;
     color: inherit
@@ -1622,8 +1622,9 @@ h2 {
 }
 
 .h3,
-h3 {
-    font-size: 26px
+h3, .ola_mar {
+    font-size: 24px;
+    text-transform: capitalize;
 }
 
 .h4,
@@ -6656,7 +6657,7 @@ button.list-group-item-danger.active:hover {
 
 .popover,
 .tooltip {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans",Arial,sans-serif;
     font-style: normal;
     font-weight: 400;
     letter-spacing: normal;
@@ -7231,7 +7232,7 @@ button.close {
     width: 20px;
     height: 20px;
     line-height: 1;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans",Arial,sans-serif;
 }
 
 .carousel-control .icon-prev:before {

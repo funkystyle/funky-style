@@ -1,6 +1,6 @@
 body {
     background-color: #f3f3f3;
-    font-family: 'Open Sans', sans-serif;;
+    font-family: "Open Sans",Arial,sans-serif;
     margin: 0 auto !important;
     overflow-x: hidden;
 }
@@ -24,7 +24,7 @@ ol > li > a {
 h2,
 h3,
 h4 {
-    font-family: 'Open Sans', sans-serif;;
+    font-family: "Open Sans",Arial,sans-serif;
 }
 
 .margin-20 {
