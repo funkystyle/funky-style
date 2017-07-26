@@ -1422,7 +1422,7 @@ html {
 
 body {
     font-family: "Open Sans",Arial,sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.42857143;
     color: #333
 }
@@ -3569,8 +3569,8 @@ textarea.input-lg {
     border: 1px solid transparent;
     white-space: nowrap;
     padding: 10px 5px;
-    font-size: 15px;
-    line-height: 1.42857143;
+    font-size: 13px;
+    line-height: 1.2;
     border-radius: 0;
     -webkit-user-select: none;
     -moz-user-select: none;

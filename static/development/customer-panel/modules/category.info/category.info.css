@@ -148,41 +148,39 @@ div.coupon {
 
 /* coupons, deals */
 .deal-price {
-    position: relative;
-    border: 1px solid #9954bb;
-    min-height: 120px;
-    width: 100%;
-    border-radius: 3px;
-    max-width: 140px;
-    max-height: 120px;
+    font-size: 12px;
+    background: #fff;
+    display: block;
+    border-radius: 2px;
+    overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 6px rgba(34,34,34,.2);
 }
 .deal-price h3 {
-    line-height: 32px;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 3px;
+    line-height: 20px;
+    margin: 0;
+    display: block;
     text-transform: capitalize;
-    margin-top: 10px;
 }
 .deal-price .deal {
-    position: absolute;
-    bottom: 0;
-    background-color: #9954bb;
-    min-height: 30px;
-    width: 100%;
+    display: block;
+    padding-top: 4px;
+    margin-top: 4px;
     color: #fff;
-    line-height: 28px;
-}
-.deal-price .deal span {
-    font-size: 14px;
+    padding-bottom: 4px;
+    background: #8a438c;
+    text-transform: uppercase;
 }
 .coupon-heading {
     font-weight: 600;
-    line-height: 23px;
+    line-height: 1.2;
     letter-spacing: 0.1px;
 }
-.coupon-footer {
-    line-height: 40px;
-    padding: 0 0 0 15px;
-    cursor: pointer;
-}
+
 .contact-info i {
     width: 15px;
 }
@@ -223,9 +221,6 @@ div.coupon {
     font-size: 14px;
     margin: 0px 0px 10px 0px;
     color: #4E5055;
-}
-.coupon-footer .btn-info{
-    padding: 10px !important;
 }
 .mar{
     margin: 0px;

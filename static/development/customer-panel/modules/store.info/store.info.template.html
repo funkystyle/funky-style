@@ -101,19 +101,11 @@
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
-                    <div class="check-box-filter-area">
-                        <div class="media" ng-repeat="item in store.related_stores">
-                            <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
-                                <img style="width: 120px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">
-                                    <a ui-sref="main.store-info({url: item.url})">
-                                        {{ item.name }}
-                                    </a>
-                                </h4>
-                            </div>
-                        </div> <!-- end of media object -->
+                    <div class="check-box-filter-area rel-stores scroll">
+                        <a class="pull-left" ng-repeat="item in store.related_stores"
+                           ui-sref="main.store-info({url: item.url, cc: undefined})">
+                            <img  ng-src="{{ item.image }}" alt="64x64">
+                        </a>
                     </div>
                 </div>
                 <!--end panel body-->
@@ -134,19 +126,11 @@
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
-                    <div class="check-box-filter-area">
-                        <div class="media" ng-repeat="item in store.top_stores">
-                            <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
-                                <img style="width: 120px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">
-                                    <a ui-sref="main.store-info({url: item.url})">
-                                        {{ item.name }}
-                                    </a>
-                                </h4>
-                            </div>
-                        </div> <!-- end of media object -->
+                    <div class="check-box-filter-area rel-stores scroll">
+                        <a class="pull-left" ng-repeat="item in store.top_stores"
+                           ui-sref="main.store-info({url: item.url, cc: undefined})">
+                            <img  ng-src="{{ item.image }}" alt="64x64">
+                        </a>
                     </div>
                 </div>
                 <!--end panel body-->
@@ -344,10 +328,10 @@
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
-                                            <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                            <i class="pull-right fa fa-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -476,10 +460,10 @@
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div style="visibility: hidden;" class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                    <div style="visibility: hidden;" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
-                                            <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                            <i class="pull-right fa fa-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -566,10 +550,10 @@
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
-                                            <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                            <i class="pull-right fa fa-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -632,7 +616,7 @@
                                     <div class="col-lg-5 col-md-5 col-sm-5 pad-right-0 col-xs-12 btn_mobile">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
-                                            <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                            <i class="pull-right fa fa-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -723,10 +707,10 @@
                                 <i class="fa fa-bug"></i> &nbsp;
                                 Report
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
                                 <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                     <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
-                                    <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                    <i class="pull-right fa fa-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
@@ -810,10 +794,10 @@
                                 <i class="fa fa-bug"></i> &nbsp;
                                 Report
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
                                 <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                     <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
-                                    <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                    <i class="pull-right fa fa-arrow-right"></i>
                                 </a>
                             </div>
                         </div>

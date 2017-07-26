@@ -20,7 +20,35 @@ body {
 ol > li > a {
     color: #2780e3;
 }
-
+.rel-stores {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.rel-stores a {
+    border: 1px solid rgba(128,128,128,0.31);
+    width: 110px;
+    display: flex;
+    height: 55px;
+    align-items: center;
+    margin: 2px;
+    padding: 2px;
+}
+.rel-stores a img {
+    width: 104px;
+    height: 50px;
+}
+.coupon-footer {
+    line-height: 35px;
+    padding: 0 0 0 15px;
+    cursor: pointer;
+}
+.show_copan_code {
+    font-weight: bold;
+}
+.top-container {
+    margin-top: 40px;
+}
 h2,
 h3,
 h4 {

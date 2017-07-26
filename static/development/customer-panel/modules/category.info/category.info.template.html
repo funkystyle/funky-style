@@ -130,20 +130,12 @@
 				</div>
 				<!--panel heading-->
 				<div class="panel-body">
-					<div class="check-box-filter-area">
-                        <div class="media" ng-repeat="item in category.related_categories">
-                            <a class="pull-left" ui-sref="main.categoryinfo({url: item.url, cc: undefined})">
-                                <img style="width: 120px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">
-                                    <a ui-sref="main.categoryinfo({url: item.url})">
-                                        {{ item.name }}
-                                    </a>
-                                </h4>
-                            </div>
-                        </div> <!-- end of media object -->
-					</div>
+					<div class="check-box-filter-area rel-stores scroll">
+                        <a class="pull-left" ng-repeat="item in category.related_categories"
+                           ui-sref="main.categoryinfo({url: item.url, cc: undefined})">
+                            <img ng-src="{{ item.image }}" alt="64x64">
+                        </a>
+                    </div>
 				</div>
 				<!--end panel body-->
 			</div>
@@ -164,20 +156,12 @@
 				</div>
 				<!--panel heading-->
 				<div class="panel-body">
-					<div class="check-box-filter-area">
-                        <div class="media" ng-repeat="item in category.top_stores">
-                            <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
-                                <img style="width: 120px; height: 50px;" class="media-object" ng-src="{{ item.image }}" alt="64x64">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">
-                                    <a ui-sref="main.store-info({url: item.url})">
-                                        {{ item.name }}
-                                    </a>
-                                </h4>
-                            </div>
-                        </div> <!-- end of media object -->
-					</div>
+                    <div class="check-box-filter-area rel-stores scroll">
+                        <a class="pull-left" ng-repeat="item in category.top_stores"
+                           ui-sref="main.store-info({url: item.url, cc: undefined})">
+                            <img  ng-src="{{ item.image }}" alt="64x64">
+                        </a>
+                    </div>
 				</div>
 				<!--end panel body-->
 			</div>
