@@ -232,7 +232,7 @@ angular.module("dealModule", ['constantModule', 'toastr', 'cgBusy',
         };
 
         // delete selected check boxes
-        $scope.deleteSelected = function() {
+        $scope.deleteSelected = function(array) {
             var items = [];
             angular.forEach(array, function (item) {
                 items.push(dealFactory.delete(item._id).then(function(data) {

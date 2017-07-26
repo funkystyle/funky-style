@@ -6,7 +6,6 @@ angular.module('homeModule', ["headerModule", "Directives"])
         $scope.coupons = [];
         $scope.categories = [];
 
-
         // get the list of coupons
         var embedded = {};
         embedded['related_categories'] = 1;
@@ -65,6 +64,12 @@ angular.module('homeModule', ["headerModule", "Directives"])
             if(data['data']) {
                 console.log("Banners: ", data.data._items);
                 $scope.banners = data.data._items;
+
+                $('#myCarousel').carousel({
+                    interval: 4000,
+                    pause: "hover",
+                    loop: true
+                });
             }
         }, function (error) {
             console.log(error);

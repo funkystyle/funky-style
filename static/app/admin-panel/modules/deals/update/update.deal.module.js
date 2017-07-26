@@ -115,7 +115,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                             });
                             // remove null id references from array
                             item.deal_brands = clearNullIds(item.deal_brands);
-                            item.store = (item.store)?item.store._id: undefined;
+                            // item.store = (item.store)?item.store._id: undefined;
                             item.related_deals = clearNullIds(item.related_deals);
                             item.deal_category = clearNullIds(item.deal_category);
                             angular.forEach(item.stores, function (sel_store, index) {
@@ -131,7 +131,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                                 $scope.deal.images = [];
                                 $("#datetimepicker1").find("input").val(item.expired_date);
 
-                                console.log("product lists are: ", $scope.productLists)
+                                console.log("Deal product details are: ", $scope.deal, "product lists are: ", $scope.productLists)
                             }
                         });
                     }
