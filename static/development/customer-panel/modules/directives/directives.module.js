@@ -5,7 +5,8 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
             scope: {
                 items: "=items",
                 class: "@className",
-                limit: "@"
+                limit: "@",
+                orderBy: "@"
             },
             templateUrl: "static/app/customer-panel/modules/deal.details/deal.details.directive.template.html"
         }

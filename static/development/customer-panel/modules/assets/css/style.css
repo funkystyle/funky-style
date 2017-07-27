@@ -17,6 +17,20 @@ body {
     overflow: visible;
     height: auto;
 }
+.deal-tile {
+    border-color: #FFFFFF;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+.deal-tile .panel-body {
+    transition: .3s all;
+}
+.deal-tile .panel-body:hover {
+    -webkit-box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
+    -moz-box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
+    box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
+}
 ol > li > a {
     color: #2780e3;
 }
@@ -24,6 +38,7 @@ ol > li > a {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    flex-wrap: wrap;
 }
 .rel-stores a {
     border: 1px solid rgba(128,128,128,0.31);
@@ -31,7 +46,7 @@ ol > li > a {
     display: flex;
     height: 55px;
     align-items: center;
-    margin: 2px;
+    margin: 5px;
     padding: 2px;
 }
 .rel-stores a img {
@@ -49,10 +64,28 @@ ol > li > a {
 .top-container {
     margin-top: 40px;
 }
+.goToTop {
+    position: fixed;
+    display: none;
+    font-weight: bold;
+    background-color: red;
+    width: 60px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    color: #FFF;
+    border-radius: 2px;
+    bottom: 0;
+    right: 0;
+    z-index: 100000;
+    cursor: pointer;
+    margin: 10px;
+}
 h2,
 h3,
 h4 {
     font-family: "Open Sans",Arial,sans-serif;
+    text-transform: capitalize;
 }
 
 .margin-20 {
@@ -107,7 +140,7 @@ h4 {
     margin: 5px;
     border-radius: 3px;
 }
-.social-icons a:hover {
+.social-icons a:hover, a {
     text-decoration: none;
 }
 .social-icons a i {

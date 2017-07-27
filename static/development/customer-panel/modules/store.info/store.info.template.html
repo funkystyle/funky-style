@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/store.info/store.info.css"/>
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
-
+<link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.directive.css">
 <!-- Store info starts here -->
 <div class="container pad top-container">
     <div class="panel panel-default heading-content-panel">
@@ -259,7 +259,7 @@
                 <!-- end of top banner area -->
                 <div class="tab-pane active" id="all-tab">
                     <span ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
-                        <div class="panel panel-default coupon all">
+                        <div class="panel panel-default coupon all deal-tile">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
@@ -358,38 +358,14 @@
                         </div><!-- end col -->
                     </div><!-- end row -->
                     <div class="row">
-                        <div class="col-md-4" ng-repeat="item in store.related_deals | orderBy: '_updated': true">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4><b>{{ item.name }}</b></h4>
-
-                                    <div class="thumbnail border-0 deal-thumbnail">
-                                        <img class="top-deal-img" ng-src="{{ item.images[0] }}" alt="">
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 pad-right-0 col-xs-7">
-                                            <strike>Rs. {{ item.actual_price }}</strike> &nbsp; &nbsp;
-                                            <a href="">Rs. {{ item.discount_price }}</a>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6   text-right col-xs-5">
-                                            <a ui-sref="main.deal_post_details({url: item.url})">View Offers</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel-footer" style="padding: 0;">
-                                    <a ui-sref="main.deal_post_details({url: item.url})" class="btn btn-md btn-info btn-block">
-                                        GET DEAL
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        <deal-tile-directive class-name="col-lg-4 col-md-4 col-sm-12" order-by="_updated"
+                                             items="store.related_deals" limit="3"></deal-tile-directive>
                     </div><!--.row-->
                 </div> <!-- tab-1 -->
 
                 <div class="tab-pane" id="deals-tab">
                     <span ng-if="item.coupon_type == 'offer'" ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
-                        <div class="panel panel-default coupon deals">
+                        <div class="panel panel-default coupon deals deal-tile">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
@@ -481,7 +457,7 @@
                 </div> <!-- tab-2 -->
                 <div class="tab-pane" id="coupons-tab">
                     <span ng-if="item.coupon_type == 'coupon'" ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
-                        <div class="panel panel-default coupon coupons">
+                        <div class="panel panel-default coupon coupons deal-tile">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
@@ -581,8 +557,8 @@
 
                 <div class="row">
                     <div class="col-lg-6 col-md-6" ng-repeat="item in suggestedCoupons | orderBy: '_updated': true | limitTo: 2">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" style="border-bottom: 0 solid;">
+                        <div class="panel panel-default deal-tile">
+                            <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-5 col-md-5 col-sm-5 pull-left">
                                         <img style="max-height: 50px;" ng-src="{{ item.related_stores[0]['image'] }}" alt="">
@@ -593,8 +569,6 @@
                                         </h4>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="panel-body">
                                 <p style="min-height: 40px;">{{ item.title }}</p>
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-6 col-md-6 pull-right">
@@ -607,13 +581,15 @@
                             </div>
                             <div class="panel-footer" style="border-top: 1px solid #FFF; padding: 0 15px;">
                                 <div class="row desc-area">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 text-left col-xs-8 txt_small">
+                                    <div>
                                         <a href="" ng-click="showDescription(item._id)">Show Description</a>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 txt_small text-right">
-                                        <a href=""><span class="glyphicon glyphicon-check gly"></span>Verified</a>
+                                    <div>
+                                        <a href="">
+                                            <span class="glyphicon glyphicon-check gly"></span>&nbsp;
+                                            Verified</a>
                                     </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5 pad-right-0 col-xs-12 btn_mobile">
+                                    <div>
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right"></i>
@@ -645,7 +621,7 @@
                         </h3>
                     </div><!-- end col -->
                 </div><!-- end row -->
-                <div class="panel panel-default" ng-repeat="item in relatedCoupons | orderBy: '_updated': true">
+                <div class="panel panel-default deal-tile" ng-repeat="item in relatedCoupons | orderBy: '_updated': true">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
@@ -727,7 +703,7 @@
                         </h3>
                     </div><!-- end col -->
                 </div><!-- end row -->
-                <div class="panel panel-default coupon all" ng-repeat="item in expiredCoupons">
+                <div class="panel panel-default coupon all deal-tile" ng-repeat="item in expiredCoupons">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">

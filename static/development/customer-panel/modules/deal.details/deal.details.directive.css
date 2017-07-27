@@ -41,17 +41,3 @@
 strike {
     color: #666666;
 }
-.deal-tile {
-    border-color: #FFFFFF;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-}
-.deal-tile .panel-body {
-    transition: .3s all;
-}
-.deal-tile .panel-body:hover {
-    -webkit-box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
-    -moz-box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
-    box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
-}

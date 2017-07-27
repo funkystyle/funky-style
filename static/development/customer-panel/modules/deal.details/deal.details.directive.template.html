@@ -1,4 +1,4 @@
-<div class="{{ class }}" ng-repeat="item in items | limitTo: limit">
+<div class="{{ class }}" ng-repeat="item in items | limitTo: limit | orderBy: orderBy: true">
     <div class="panel panel-default deal-tile">
         <div class="panel-body" style="padding: 0;">
             <div class="product-border-main">

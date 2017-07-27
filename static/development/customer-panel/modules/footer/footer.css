@@ -11,25 +11,6 @@
 .footer-p {
 	color: rgba(150, 150, 150, 0.57);
 }
-.goToTop {
-    position: fixed;
-    display: none;
-    background-color: red;
-    width: 100px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    color: #FFF;
-    border-radius: 2px;
-    bottom: 0;
-    right: 0;
-    z-index: 100000;
-    cursor: pointer;
-    margin: 10px;
-    -moz-opacity: 0.60;
-    opacity: .60;
-    filter: alpha(opacity=60);
-}
 .app-icons {
 	float: left;
     width: 42.5%;
@@ -64,7 +45,7 @@ ul.footer-unstyled li i {
     padding: 2px 3px 2px 0;
 }
 ul.footer-unstyled li a, a{
-	color:#a6a6a6;
+	color:#889ba6;
     text-transform: capitalize;
 }
 .footer-email-form {

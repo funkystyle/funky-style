@@ -11,23 +11,22 @@
 }
 .related-coupon-deal {
     position: absolute;
-    bottom: -45px;
-    min-height: 80px;
-    width: 160px;
+    bottom: -50px;
+    background: #FFF;
+    border: 1px solid #eee;
+    min-height: 55px;
+    padding: 5px;
+    z-index: 99;
+    width: 120px;
     border-radius: 5px;
-    max-height: 80px;
-    left: -10px;
+    max-height: 50px;
+    left: 10px;
     color: #fff;
     line-height: 25px;
 }
 .related-coupon-deal img {
-    height: 60px;
-    border-radius: 3px;
-    width: 100%;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(221, 221, 221);
-    border-image: initial;
+    height: 45px;
+    width: 110px;
 }
 .top-banner-thumbnail {
     padding: 0 !important; border-bottom: 0 !important; margin-bottom: 10px;
@@ -127,7 +126,6 @@ div.coupon {
 .h3-heading {
     margin-bottom: 10px;
     color: #000000;
-    text-transform: capitalize;
 }
 
 .rating-stars i {
@@ -281,7 +279,15 @@ div.coupon {
     margin-bottom: 20px;
 }
 .desc-area {
-    line-height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.desc-area div {
+    margin-left: 15px;
+}
+.desc-area .show_copan_code {
+    min-width: 160px;
 }
 /* ----------- coupon popup ----- */
 .coupon-content{
