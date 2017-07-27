@@ -64,6 +64,14 @@ ol > li > a {
 .top-container {
     margin-top: 40px;
 }
+.breadcrumb {
+    padding: 0 15px;
+    margin-bottom: 0 !important;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 0;
+    font-size: 13px;
+}
 .goToTop {
     position: fixed;
     display: none;

@@ -13,14 +13,14 @@ div.thumb {
     margin-bottom: 15px;
 }
 div.thumb .thumbnail, .overlay-on-image {
-    min-height: 165px;
-    max-height: 165px;
-    border-radius: 3px;
+    min-height: 110px;
+    max-height: 110px;
+    border-radius: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
 }div.thumb .thumbnail img {
-     height: 165px;
+     height: 100px;
      width: 100%;
     border-radius: 3px;
  }
@@ -97,11 +97,11 @@ div.thumb .thumbnail, .overlay-on-image {
 
 .overlay-on-image {
     position: absolute;
-    top: -1px;
+    top: 0px;
     width: 100%;
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.67);
-    height: 162px;
+    background-color: rgba(0,0,0,.67);
+    height: 110px;
 }
 
 .overlay-on-image h4 {
