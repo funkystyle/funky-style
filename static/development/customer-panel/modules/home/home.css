@@ -43,7 +43,9 @@
 #myCarousel .list-group .active {
     background-color:#eee;
 }
-
+.show_copan_code {
+    height: 40px;
+}
 @media (min-width: 992px) {
     #myCarousel {padding-right:23.3333%;}
     #myCarousel .carousel-controls {display:none;}

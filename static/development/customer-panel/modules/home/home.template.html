@@ -1,13 +1,16 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/home/home.css" />
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
+<link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.directive.css">
 <span ng-if="!params">
     <div class="container carousel-container">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item" ng-class="{'active': $index == 0}" ng-repeat="item in banners">
-                    <img ng-src="{{ item.image }}">
+                    <a href="{{ item.destination_url }}">
+                        <img ng-src="{{ item.image }}">
+                    </a>
                 </div><!-- End Item -->
             </div><!-- End Carousel Inner -->
 
@@ -186,7 +189,7 @@
                             <div class="col-lg-5 col-md-5 col-sm-5 pad-right-0 col-xs-12 btn_mobile">
                                 <a ng-click="openCouponCode(undefined, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                     <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
-                                    <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
+                                    <i class="pull-right fa fa-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
@@ -217,32 +220,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-sm-12 col-md-3" ng-repeat="item in deals | limitTo: 8">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h4><b>{{ item.name }}</b></h4>
-
-                        <div class="thumbnail border-0 deal-thumbnail">
-                            <img class="top-deal-img" ng-src="{{ item.images[0] }}" alt="">
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-7 col-md-7 col-sm-7 pad-right-0 col-xs-7">
-                                <strike>Rs. {{ item.actual_price }}</strike> &nbsp; &nbsp;
-                                <a href="">Rs. {{ item.discount_price }}</a>
-                            </div>
-                            <div class="col-lg-5 col-md-5 col-sm-5   text-right col-xs-5">
-                                <a ui-sref="main.deal_post_details({url: item.url})">View Offers</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer" style="padding: 0;">
-                        <a href="{{ item.destination_url }}" class="btn btn-md btn-info btn-block">
-                            GET DEAL
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <deal-tile-directive class-name="col-lg-3 col-md-3 col-sm-12" items="deals" limit="8"></deal-tile-directive>
         </div>
     </div>
     <!-- Top deal of the week End Here  -->

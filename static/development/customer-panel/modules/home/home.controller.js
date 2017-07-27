@@ -31,6 +31,7 @@ angular.module('homeModule', ["headerModule", "Directives"])
             console.log(error);
         });
 
+
         // get the list of SEO
         SEO.getSEO().then(function (data) {
             angular.forEach(data, function (item) {

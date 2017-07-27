@@ -3,7 +3,9 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
         return {
             restrict: "E",
             scope: {
-                items: "=items"
+                items: "=items",
+                class: "@className",
+                limit: "@"
             },
             templateUrl: "static/app/customer-panel/modules/deal.details/deal.details.directive.template.html"
         }
