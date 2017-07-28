@@ -90,7 +90,6 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 // get the list of deals
                 var embedded = {
                     "deal_brands": 1,
-                    "store_temp": 1,
                     "stores.store": 1,
                     "related_deals": 1,
                     "deal_category": 1,
@@ -207,6 +206,17 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 discount_price: undefined
             });
         };
+
+        // update deal category for site map related
+        function dealCategoryService(deal) {
+            dealFactory.update_deal_categories(deal, $auth.getToken());
+        }
+
+        // update deal category for site map related
+        function dealBrandService(deal) {
+            dealFactory.update_deal_brands(deal, $auth.getToken());
+        }
+
         // addDealBrands function
         $scope.updateDeal = function (deal) {
             deal.last_modified_by = $scope.user._id;
@@ -238,11 +248,8 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             console.log(deal);
 
             var storeItems = [];
-            // update ths store with this deal
-            function updateStore(store) {
-                var obj = {};
-                obj._id = store._id;
-                obj.related_deals = store.related_deals;
+
+            function storeService(obj) {
                 storeItems.push(
                     storeFactory.update(obj, $auth.getToken()).then(function (storeSuccess) {
                         console.log(storeSuccess);
@@ -253,7 +260,20 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 );
             }
 
+            // update ths store with this deal
+            function updateStore(store) {
+                var obj = {};
+                obj._id = store._id;
+                obj.related_deals = store.related_deals;
+                storeService(obj);
+            }
+
             console.log($scope.productLists);
+
+            // update store for if product lists we have
+            angular.forEach($scope.productLists, function (product) {
+                updateStore({_id: product.store});
+            });
             
             
             // update this deal for the selected store
@@ -274,7 +294,19 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                         }
                     }
                 })
+            } else {
+                updateStore({_id: $scope.deal.store});
             }
+
+
+            // call update deal category or brand from here
+            angular.forEach($scope.deal.deal_category, function (cat) {
+                dealCategoryService({_id: cat});
+            });
+            angular.forEach($scope.deal.deal_brands, function (cat) {
+                dealBrandService({_id: cat});
+            });
+
             // after done withstoreItems
             $q.all(storeItems).then(function() {
                 dealFactory.update(deal, $auth.getToken()).then(function (data) {
