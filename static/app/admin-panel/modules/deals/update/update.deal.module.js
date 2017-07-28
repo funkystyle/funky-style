@@ -50,7 +50,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         $scope.oldStore = undefined;
         $scope.newStore = undefined;
 
-        $scope.$watch("deal.store", function (newVal, oldVal) {
+        $scope.$watch("deal.store_temp", function (newVal, oldVal) {
             console.log(oldVal, newVal);
             $scope.oldStore = oldVal;
             $scope.newStore = newVal;
@@ -86,10 +86,11 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                         });
                     });
                 }
+
                 // get the list of deals
                 var embedded = {
                     "deal_brands": 1,
-                    "store": 1,
+                    "store_temp": 1,
                     "stores.store": 1,
                     "related_deals": 1,
                     "deal_category": 1,
@@ -250,7 +251,9 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                         console.log(error);
                     })
                 );
-            };
+            }
+
+            console.log($scope.productLists);
             
             
             // update this deal for the selected store

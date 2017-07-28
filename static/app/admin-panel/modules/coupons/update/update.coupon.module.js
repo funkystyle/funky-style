@@ -171,6 +171,17 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             console.log(coupon);
             couponFactory.update(coupon, $auth.getToken()).then(function (data) {
                 console.log(data);
+
+                function storeService(store, token) {
+                    finalItems.push(storeFactory.update(store, token).then(function (store_data) {
+                        console.log(store_data);
+                        return store_data;
+                    }, function (error) {
+                        console.log(error);
+                        toastr.error(error.data._error.message, error.data._error.code);
+                    }));
+                }
+
                 function updateStore (store, fromRemove) {
                     if(!fromRemove) {
                         store.related_coupons.push(coupon._id);
@@ -182,15 +193,18 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                     delete store._updated;
                     delete store._links;
                     console.log(store);
-                    finalItems.push(storeFactory.update(store, $auth.getToken()).then(function (store_data) {
-                        console.log(store_data);
-                        return store_data;
+                    storeService(store, $auth.getToken());
+                }
+
+                function categoryService(category, token) {
+                    finalItems.push(categoryFactory.update(category, token).then(function (category_data) {
+                        console.log(category_data);
+                        return category_data;
                     }, function (error) {
                         console.log(error);
                         toastr.error(error.data._error.message, error.data._error.code);
                     }));
                 }
-
                 function updateCategory (category, fromRemove) {
                     if(!fromRemove) {
                         category.related_coupons.push(coupon._id);
@@ -201,13 +215,7 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                     delete category._updated;
                     delete category._links;
                     console.log(category);
-                    finalItems.push(categoryFactory.update(category, $auth.getToken()).then(function (category_data) {
-                        console.log(category_data);
-                        return category_data;
-                    }, function (error) {
-                        console.log(error);
-                        toastr.error(error.data._error.message, error.data._error.code);
-                    }));
+                    categoryService(category, $auth.getToken());
                 }
 
                 // update the coupon count in particular selected store
@@ -220,6 +228,20 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 if($scope.removedStores.length) {
                     angular.forEach($scope.removedStores, function (item) {
                         updateStore(item, true);
+                    });
+                }
+
+                if($scope.addedStores.length == 0 && $scope.removedStores.length == 0) {
+                    console.log("-----", $scope.coupon.related_stores);
+                    angular.forEach($scope.coupon.related_stores, function (storeItem) {
+                        storeService({_id: storeItem}, $auth.getToken());
+                    });
+                }
+
+                if($scope.addedCategories.length == 0 && $scope.removedCategories.length == 0) {
+                    console.log("-----", $scope.coupon.related_categories);
+                    angular.forEach($scope.coupon.related_categories, function (categoryItem) {
+                        categoryService({_id: categoryItem}, $auth.getToken());
                     });
                 }
 

@@ -686,11 +686,12 @@ SCHEMAS = {
                 }
             }
         },
-        'store': {
+        'store_temp': {
             'type': 'objectid',
             'data_relation': {
                 'resource': 'stores',
-                'embeddable': True
+                'embeddable': True,
+                'field': '_id'
             }
         },
         'featured_deal': {
