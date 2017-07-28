@@ -7,8 +7,8 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 thumb">
-                    <div class="thumbnail">
-                        <img ng-src="{{ deal.image }}" alt="Flipkart logo" title="Flip cart logo">
+                    <div class="thumbnail store-logo">
+                        <img ng-src="{{ deal.image }}" alt="{{ deal.name }}" title="{{ deal.name }}">
                     </div> <!-- end thumbnail -->
                     <p class="text-center rating-stars">
                         <div class="text-center" star-rating rating-value="deal.rating" max="5"></div>

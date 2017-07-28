@@ -200,12 +200,10 @@
             </div>
             <!-- end of top banner area -->
             <div class="row cat-top-store-area">
-                <div ng-repeat="item in category.top_stores | limitTo: 6" class="col-md-2 col-sm-2 pad-left-0">
-                    <div class="thumbnail cat-top-stores">
-                        <a ui-sref="main.store-info({url: item.url})">
-                            <img ng-src="{{ item.image }}" alt="" height="50" width="100">
-                        </a>
-                    </div>
+                <div class="thumbnail cat-top-stores" ng-repeat="item in category.top_stores | limitTo: 6">
+                    <a ui-sref="main.store-info({url: item.url})">
+                        <img ng-src="{{ item.image }}" alt="">
+                    </a>
                 </div>
             </div> <!-- end of top stores -->
 			<div class="tab-content">
@@ -217,7 +215,7 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
                                             <h3>
-                                                {{ item.discount_type }} {{ item.discount }}
+                                                {{ item.discount_type }} <br> {{ item.discount }}
                                             </h3>
                                             <div class="related-coupon-deal">
                                                 <img ng-src="{{ item.related_stores[0].image }}">
@@ -310,7 +308,7 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
                                             <h3>
-                                                {{ item.discount_type }} {{ item.discount }}
+                                                {{ item.discount_type }} <br> {{ item.discount }}
                                             </h3>
                                             <div class="related-coupon-deal">
                                                 <img ng-src="{{ item.related_stores[0].image }}">
@@ -397,7 +395,7 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
                                             <h3>
-                                                {{ item.discount_type }} {{ item.discount }}
+                                                {{ item.discount_type }} <br> {{ item.discount }}
                                             </h3>
                                             <div class="related-coupon-deal">
                                                 <img ng-src="{{ item.related_stores[0].image }}">

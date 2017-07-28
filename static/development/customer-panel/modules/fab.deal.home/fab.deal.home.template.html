@@ -61,31 +61,25 @@
         Best Selling Deals
     </h3>
     <div class="row">
-        <deal-tile-directive class-name="col-lg-4 col-md-4 col-sm-11" items="deals"></deal-tile-directive>
+        <deal-tile-directive class-name="col-lg-3 col-md-3 col-sm-12" items="deals"></deal-tile-directive>
     </div>
 
     <!-- upcoming deals -->
     <h3 class="h3-heading">Upcoming Deals</h3>
     <div class="row">
-        <deal-tile-directive class-name="col-lg-4 col-md-4 col-sm-11" items="deals"></deal-tile-directive>
+        <deal-tile-directive class-name="col-lg-3 col-md-3 col-sm-12" items="deals"></deal-tile-directive>
     </div>
     <!-- end of upcoming deals -->
 
     <h3 class="h3-heading">Most Discount Coupons And Offers Stores</h3>
-    <div class="row row_bot_pad">
-        <div class="col-lg-3 col-md-3" ng-repeat="item in stores">
-            <div class="panel panel-default pad_panel">
-                <div class="panel-body" style="padding: 0;">
-                    <a title="{{ item.name }}" ui-sref="main.store-info({url: item.url})">
-                        <div class="thumbnail store-thumbnail">
-                            <img ng-src="{{ item.image }}">
-                        </div>
-                    </a>
-                </div>
-            </div>
+    <!-- end of top banner area -->
+    <div class="row cat-top-store-area">
+        <div class="thumbnail cat-top-stores" ng-repeat="item in stores">
+            <a ui-sref="main.store-info({url: item.url})">
+                <img ng-src="{{ item.image }}" alt="">
+            </a>
         </div>
-    </div>
-
+    </div> <!-- end of top stores -->
 
     <div class="panel panel-default">
         <div class="panel-body">
