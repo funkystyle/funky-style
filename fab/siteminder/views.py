@@ -29,16 +29,15 @@ class SiteMinder(object):
         self.parser(self.index_file)
         # update index file
         for child in self.root:
-            print(child.getchildren()[0].text, "{base_url}/sitemap_{resource_name}.xml".format(
-                    base_url=self.base_url,
+            print(child.getchildren()[0].text, "{server_url}/sitemap_{resource_name}.xml".format(
+                    server_url=SERVER_URL,
                     resource_name=self.replaced_resource
             ))
-            if child.getchildren()[0].text == "{base_url}/sitemap_{resource_name}.xml".format(
-                    base_url=self.base_url,
+            if child.getchildren()[0].text == "{server_url}/sitemap_{resource_name}.xml".format(
+                    server_url=SERVER_URL,
                     resource_name=self.replaced_resource
             ):
                 child.getchildren()[1].text = self.date_time
-                print("file path::::", self.file_path)
                 self.tree.write(self.file_path)
                 return True
         return False
@@ -64,8 +63,8 @@ def generate_sitemap_index_file():
 
 
         )
-        loc = "{base_url}/sitemap_{resource_name}.xml".format(
-            base_url=base_url,
+        loc = "{server_url}/sitemap_{resource_name}.xml".format(
+            server_url=SERVER_URL,
             resource_name=schema_name.replace("_", "-")
         )
         lastmod = "{}+5.30".format(datetime.now().strftime('%Y-%m-%dT%H-%M-%S'))
