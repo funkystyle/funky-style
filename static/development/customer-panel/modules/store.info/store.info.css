@@ -1,21 +1,20 @@
-.top-container {
-    margin-top: 30px;
-}
+
 .related-coupon-deal {
     position: absolute;
-    bottom: -50px;
-    background: #FFF;
+    bottom: -20px;
+    background: #fff;
     border: 1px solid #eee;
     min-height: 55px;
     padding: 5px;
     z-index: 99;
-    width: 120px;
+    width: 140px;
     border-radius: 5px;
     max-height: 50px;
-    left: 10px;
+    left: 0px;
     color: #fff;
     line-height: 25px;
 }
+
 .related-coupon-deal img {
     height: 45px;
     width: 110px;
@@ -34,11 +33,12 @@ div.thumbnail.top-banner-thumbnail > a > img {
     color: rgba(0,0,0,.75);
 }
 .coupon-heading {
-    font-weight: 400;
-    color: #000;
-    text-transform: capitalize;
-    line-height: 1.2;
-    letter-spacing: 0.1px;
+    font-family: "Open Sans Semibold", "Open Sans", Arial, sans-serif!important;
+    font-style: normal;
+    font-weight: 700;
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
 }
 
 .deal-price .deal img {
@@ -106,7 +106,9 @@ div.coupon {
 }
 .h3-heading {
     margin-bottom: 10px;
-    color: #000000;
+    color: #151313;
+    font-weight: 400;
+    font-size: 24px;
 }
 
 .rating-stars i {
@@ -132,7 +134,8 @@ div.coupon {
     display: block;
     border-radius: 2px;
     overflow: hidden;
-    width: 80%;
+    width: 110px;
+    min-height: 100px;
     margin: 0 auto;
     box-shadow: 0px 0px 6px rgba(34,34,34,.2);
 }
@@ -153,6 +156,9 @@ div.coupon {
     padding-bottom: 4px;
     background: #8a438c;
     text-transform: uppercase;
+    position: absolute;
+    width: inherit;
+    bottom: 0;
 }
 .coupon-heading span i {
     color: #898989;
@@ -266,6 +272,8 @@ div.coupon {
 }
 .desc-area div {
     margin-left: 15px;
+    min-width: 28%;
+    text-align: center;
 }
 .desc-area .show_copan_code {
     min-width: 160px;

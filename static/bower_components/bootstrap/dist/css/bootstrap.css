@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300normal,300italic,400normal,400italic,600normal,600italic,700normal,700italic,800normal,800italic);
 
 /*!
  * bootswatch v3.3.7
@@ -71,7 +71,7 @@ figure {
 }
 
 html {
-    font-family: "Open Sans",Arial,sans-serif;
+    font-family: "Open Sans", Arial, sans-serif !important;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
@@ -1421,7 +1421,7 @@ html {
 }
 
 body {
-    font-family: "Open Sans",Arial,sans-serif;
+    font-family: "Open Sans", Arial, sans-serif !important;
     font-size: 13px;
     line-height: 1.42857143;
     color: #333
@@ -1525,7 +1525,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Open Sans", Arial, sans-serif;
+    font-family: "Open Sans", Arial, sans-serif !important;
     font-weight: 300;
     line-height: 1.1;
     color: inherit
@@ -1642,7 +1642,7 @@ h6 {
 }
 
 p {
-    margin: 0 0 10.5px
+    margin: 0 0 10.5px;
 }
 
 .lead {
@@ -1943,7 +1943,7 @@ code,
 kbd,
 pre,
 samp {
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace
+    font-family: "Open Sans", Arial, sans-serif !important;
 }
 
 code {
@@ -3786,8 +3786,8 @@ fieldset[disabled] .btn-success:hover {
 
 .btn-info {
     color: #fff;
-    background-color: #9954bb;
-    border-color: #9954bb
+    background-color: #7e3f9d;
+    border-color: #783c96;
 }
 
 .btn-info.focus,
@@ -4948,7 +4948,8 @@ textarea.input-group-sm>.input-group-btn>.btn {
 .navbar-nav>li>a {
     padding-top: 10px;
     padding-bottom: 10px;
-    line-height: 21px
+    line-height: 21px;
+    font-size: 15px;
 }
 
 @media (max-width:767px) {
@@ -6651,7 +6652,7 @@ button.list-group-item-danger.active:hover {
 
 .popover,
 .tooltip {
-    font-family: "Open Sans",Arial,sans-serif;
+    font-family: "Open Sans", Arial, sans-serif !important;
     font-style: normal;
     font-weight: 400;
     letter-spacing: normal;
@@ -7226,7 +7227,7 @@ button.close {
     width: 20px;
     height: 20px;
     line-height: 1;
-    font-family: "Open Sans",Arial,sans-serif;
+    font-family: "Open Sans", Arial, sans-serif !important;
 }
 
 .carousel-control .icon-prev:before {

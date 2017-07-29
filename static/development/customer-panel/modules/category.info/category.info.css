@@ -149,16 +149,13 @@ div.coupon {
 .deal-price {
     font-size: 12px;
     background: #fff;
-    display: flex;
+    display: block;
     border-radius: 2px;
-    align-items: center;
-    justify-content: center;
-    max-height: 70px;
     overflow: hidden;
-    width: 100px;
+    width: 110px;
+    min-height: 100px;
     margin: 0 auto;
-    box-shadow: 0 0 6px rgba(34,34,34,.2);
-    height: 70px;
+    box-shadow: 0px 0px 6px rgba(34,34,34,.2);
 }
 .deal-price h3 {
     font-size: 15px;
@@ -177,11 +174,17 @@ div.coupon {
     padding-bottom: 4px;
     background: #8a438c;
     text-transform: uppercase;
+    position: absolute;
+    width: inherit;
+    bottom: 0;
 }
 .coupon-heading {
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: 0.1px;
+    font-family: "Open Sans Semibold", "Open Sans", Arial, sans-serif!important;
+    font-style: normal;
+    font-weight: 700;
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
 }
 
 .contact-info i {

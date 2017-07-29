@@ -31,7 +31,7 @@
                             <li class="active">{{ store.url }}</li>
                         </ol>
                     </div> <!-- end div -->
-                    <h3 class="margin-top-0 h3-heading">{{ store.h1 }}</h3>
+                    <h1 class="margin-top-0 h3-heading">{{ store.h1 }}</h1>
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(store.top_description)"></p>
                     <p class="para_small">
@@ -66,7 +66,7 @@
             </div>
             <div class="panel panel-default cat-filters" ng-repeat="(key, items) in categories">
                 <div class="panel-heading">
-                    <h5 class="font-bold">{{ (key == 'Regular'? 'Category': key) }} Filters</h5>
+                    <p class="font-bold h3-side-heading">{{ (key == 'Regular'? 'Category': key) }} Filters</p>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -97,7 +97,7 @@
 
             <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Related Stores</h5>
+                    <h3 class="font-bold h3-side-heading">Related Stores</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -122,7 +122,7 @@
 
             <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Top Stores</h5>
+                    <h3 class="font-bold h3-side-heading">Top Stores</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -260,7 +260,7 @@
                 <div class="tab-pane active" id="all-tab">
                     <span ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
                         <div class="panel panel-default coupon all deal-tile">
-                            <div class="panel-body">
+                            <div class="panel-body bottom-5">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
@@ -283,14 +283,14 @@
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h4 class="margin-top-0 coupon-heading">
+                                        <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                        </h4>
+                                        </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
@@ -306,7 +306,7 @@
                                             </span>
                                         </p>
                                         <p>
-                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                            <a class="btn-link" ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
                                                 See all {{ item.related_categories[0].name }} Coupons
                                             </a>
                                         </p>
@@ -316,19 +316,19 @@
                             <!--panel footer-->
                             <div class="panel-footer coupon-footer">
                                 <div class="row vari_pad">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                                    <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right"></i>
@@ -344,7 +344,7 @@
                         <!-- promo codes starts here --> <!-- panel -->
                         <div class="row" ng-if="$index == 2">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <h3 class="ola_mar">{{ store.h2 }}</h3>
+                                <h2 class="ola_mar h3-heading">{{ store.h2 }}</h2>
                             </div>
                         </div>
                     </span>
@@ -352,9 +352,9 @@
                     <!-- Deals carousel starts here -->
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h3  class="ola_mar">
+                            <h4 class="ola_mar h3-heading">
                                 {{ store.name }} Deals
-                            </h3>
+                            </h4>
                         </div><!-- end col -->
                     </div><!-- end row -->
                     <div class="row">
@@ -389,14 +389,14 @@
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h4 class="margin-top-0 coupon-heading">
+                                        <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                        </h4>
+                                        </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
@@ -414,7 +414,7 @@
                                             </span>
                                         </p>
                                         <p>
-                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                            <a class="btn-link" ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
                                                 See all {{ item.related_categories[0].name }} Coupons
                                             </a>
                                         </p>
@@ -424,19 +424,19 @@
                             <!--panel footer-->
                             <div class="panel-footer coupon-footer">
                                 <div class="row vari_pad">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
-                                    <div ng-click="openReport(item)" class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div style="visibility: hidden;" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                                    <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right"></i>
@@ -481,14 +481,14 @@
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h4 class="margin-top-0 coupon-heading">
+                                        <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                        </h4>
+                                        </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;
@@ -504,7 +504,7 @@
                                             </span>
                                         </p>
                                         <p>
-                                            <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                            <a class="btn-link" ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
                                                 See all {{ item.related_categories[0].name }} Coupons
                                             </a>
                                         </p>
@@ -514,19 +514,19 @@
                                 <!--panel footer-->
                             <div class="panel-footer coupon-footer">
                                 <div class="row vari_pad">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                                    <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right"></i>
@@ -549,9 +549,9 @@
                 <!-- suggested coupons start here -->
                 <div class="row" ng-if="suggestedCoupons.length">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <h3 class="ola_mar">
+                        <h4 class="ola_mar h3-heading">
                             Suggested Coupons
-                        </h3>
+                        </h4>
                     </div><!-- end col -->
                 </div><!-- end row -->
 
@@ -616,9 +616,9 @@
                 <!-- Related Coupons start here -->
                 <div class="row" ng-if="relatedCoupons.length">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <h3 class="ola_mar">
+                        <h4 class="ola_mar h3-heading">
                             Related Coupons
-                        </h3>
+                        </h4>
                     </div><!-- end col -->
                 </div><!-- end row -->
                 <div class="panel panel-default deal-tile" ng-repeat="item in relatedCoupons | orderBy: '_updated': true">
@@ -627,7 +627,7 @@
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
                                     <h3>
-                                        {{ item.discount_type }} {{ item.discount }}
+                                        {{ item.discount_type }} <br>{{ item.discount }}
                                     </h3>
                                     <div class="related-coupon-deal">
                                         <img ng-src="{{ item.related_stores[0].image }}">
@@ -640,13 +640,13 @@
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                <h4 class="margin-top-0 coupon-heading">
+                                <h3 class="margin-top-0 coupon-heading">
                                     {{ item.title }}
                                     <span class="pull-right hidden-xs" style="display: none;">
                                             <i class="fa fa-star"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
                                         </span>
-                                </h4>
+                                </h3>
                                 <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                         <i class="fa fa-star"></i>&nbsp;
                                         <i class="fa fa-share-alt"></i>
@@ -661,7 +661,7 @@
                                         </span>
                                 </p>
                                 <p>
-                                    <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                    <a class="btn-link" ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
                                         See all {{ item.related_categories[0].name }} Coupons
                                     </a>
                                 </p>
@@ -670,20 +670,20 @@
                     </div> <!-- end panel body -->
                     <!--panel footer-->
                     <div class="panel-footer coupon-footer">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                        <div class="row vari_pad">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
                                 <i class="fa fa-heart-o"></i>
                                 {{ item.status }}
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
                                 Comment
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
                                 <i class="fa fa-bug"></i> &nbsp;
                                 Report
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                            <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
                                 <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                     <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                     <i class="pull-right fa fa-arrow-right"></i>
@@ -698,9 +698,9 @@
                 <!-- Related Coupons start here -->
                 <div class="row" ng-if="expiredCoupons.length">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <h3 class="ola_mar">
+                        <h4 class="ola_mar h3-heading">
                             Expired Coupons
-                        </h3>
+                        </h4>
                     </div><!-- end col -->
                 </div><!-- end row -->
                 <div class="panel panel-default coupon all deal-tile" ng-repeat="item in expiredCoupons">
@@ -709,7 +709,7 @@
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
                                     <h3>
-                                        {{ item.discount_type }} {{ item.discount }}
+                                        {{ item.discount_type }} <br> {{ item.discount }}
                                     </h3>
                                     <div class="deal">
                                                 <span ng-if="item.coupon_type == 'coupon'">
@@ -727,13 +727,13 @@
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                <h4 class="margin-top-0 coupon-heading">
+                                <h3 class="margin-top-0 coupon-heading">
                                     {{ item.title }}
                                     <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa fa-star"></i>&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                </h4>
+                                </h3>
                                 <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa fa-star"></i>&nbsp;
                                             <i class="fa fa-share-alt"></i>
@@ -748,7 +748,7 @@
                                             </span>
                                 </p>
                                 <p>
-                                    <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
+                                    <a class="btn-link" ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
                                         See all {{ item.related_categories[0].name }} Coupons
                                     </a>
                                 </p>
@@ -758,19 +758,19 @@
                     <!--panel footer-->
                     <div class="panel-footer coupon-footer">
                         <div class="row vari_pad">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_right text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
                                 <i class="fa fa-heart-o"></i>
                                 {{ item.status }}
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left pad_nav_right text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
                                 Comment
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pad_nav_left text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
                                 <i class="fa fa-bug"></i> &nbsp;
                                 Report
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+                            <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
                                 <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                     <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                     <i class="pull-right fa fa-arrow-right"></i>

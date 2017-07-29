@@ -1,6 +1,6 @@
 body {
     background-color: #f3f3f3;
-    font-family: "Open Sans",Arial,sans-serif;
+    font-family: "Open Sans", Arial, sans-serif !important;
     margin: 0 auto !important;
     overflow-x: hidden;
 }
@@ -8,10 +8,13 @@ body {
     height: 40px;
     cursor: pointer;
     overflow: hidden;
-    color: rgb(102, 102, 102);
-    font-family: "Open Sans", Arial, sans-serif;
+    color: #999;
+    font-family: "Open Sans", Arial, sans-serif !important;
     font-size: 12.8px;
     text-align: justify;
+}
+.top-desc:hover {
+    color: #060505;
 }
 .show-desc {
     overflow: visible;
@@ -58,8 +61,24 @@ ol > li > a {
     padding: 0 0 0 15px;
     cursor: pointer;
 }
+.panel-footer .row {
+    display: flex;
+    align-items: center;
+}
 .show_copan_code {
     font-weight: bold;
+    line-height: 20px;
+}
+.show_copan_code i.fa-arrow-right {
+    padding-top: 4px;
+}
+.h3-side-heading {
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.bottom-5 {
+    padding-bottom: 5px;
 }
 .top-container {
     margin-top: 40px;
@@ -75,24 +94,24 @@ ol > li > a {
 .goToTop {
     position: fixed;
     display: none;
-    font-weight: bold;
-    background-color: red;
-    width: 60px;
-    height: 35px;
+    font-weight: 700;
+    background-color: rgb(115, 115, 115);
+    width: 50px;
+    height: 45px;
     text-align: center;
-    line-height: 35px;
-    color: #FFF;
+    color: #fff;
     border-radius: 2px;
     bottom: 0;
     right: 0;
     z-index: 100000;
     cursor: pointer;
     margin: 10px;
+    padding: 15px 20px;
 }
 h2,
 h3,
 h4 {
-    font-family: "Open Sans",Arial,sans-serif;
+    font-family: "Open Sans", Arial, sans-serif !important;
     text-transform: capitalize;
 }
 

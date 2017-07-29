@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.directive.css">
 
-<div class="container main-row">
+<div class="container main-row top-container">
     <!-- deal category information -->
     <div class="panel panel-default">
         <div class="panel-body">
@@ -29,7 +29,7 @@
                             <li class="active">{{ deal.name }}</li>
                         </ol>
                     </div> <!-- end div -->
-                    <h1 class="margin-top-0 h3-heading">{{ deal.name }}</h1>
+                    <h3 class="margin-top-0 h3-heading">{{ deal.name }}</h3>
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(deal.top_description)"></p>
                 </div>
