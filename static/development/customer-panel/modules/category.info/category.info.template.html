@@ -130,10 +130,11 @@
 				</div>
 				<!--panel heading-->
 				<div class="panel-body">
-					<div class="check-box-filter-area rel-stores scroll">
+					<div class="check-box-filter-area rel-stores">
                         <a class="pull-left" ng-repeat="item in category.related_categories"
                            ui-sref="main.categoryinfo({url: item.url, cc: undefined})">
                             <img ng-src="{{ item.image }}" alt="64x64">
+                            <p>{{ item.name }}</p>
                         </a>
                     </div>
 				</div>
@@ -156,10 +157,11 @@
 				</div>
 				<!--panel heading-->
 				<div class="panel-body">
-                    <div class="check-box-filter-area rel-stores scroll">
+                    <div class="check-box-filter-area rel-stores">
                         <a class="pull-left" ng-repeat="item in category.top_stores"
                            ui-sref="main.store-info({url: item.url, cc: undefined})">
                             <img  ng-src="{{ item.image }}" alt="64x64">
+                            <p>{{ item.name }}</p>
                         </a>
                     </div>
 				</div>

@@ -1,5 +1,6 @@
 .h3-heading, .h3-heading a, .media-heading a {
     color: #000000;
+    text-transform: capitalize;
 }
 .pop-cat-panel {
     max-height: 100px;

@@ -77,7 +77,7 @@
                             <label for="category_filter" class="fa fa-search" rel="tooltip"></label>
                         </div>
                     </div>
-                    <div class="check-box-filter-area">
+                    <div class="check-box-filter-area scroll">
                         <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
                              ng-repeat="item in items | filter: search[key]">
                             <label for="{{ item._id }}_category_filter" style="font-weight: 500;">
@@ -101,10 +101,11 @@
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
-                    <div class="check-box-filter-area rel-stores scroll">
+                    <div class="check-box-filter-area rel-stores">
                         <a class="pull-left" ng-repeat="item in store.related_stores"
                            ui-sref="main.store-info({url: item.url, cc: undefined})">
                             <img  ng-src="{{ item.image }}" alt="64x64">
+                            <p>{{ item.name }}</p>
                         </a>
                     </div>
                 </div>
@@ -126,10 +127,11 @@
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
-                    <div class="check-box-filter-area rel-stores scroll">
+                    <div class="check-box-filter-area rel-stores">
                         <a class="pull-left" ng-repeat="item in store.top_stores"
                            ui-sref="main.store-info({url: item.url, cc: undefined})">
                             <img  ng-src="{{ item.image }}" alt="64x64">
+                            <p>{{ item.name }}</p>
                         </a>
                     </div>
                 </div>

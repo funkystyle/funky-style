@@ -109,6 +109,7 @@ div.coupon {
     color: #151313;
     font-weight: 400;
     font-size: 24px;
+    text-transform: capitalize;
 }
 
 .rating-stars i {
@@ -272,11 +273,11 @@ div.coupon {
 }
 .desc-area div {
     margin-left: 15px;
-    min-width: 28%;
+    min-width: 20%;
     text-align: center;
 }
 .desc-area .show_copan_code {
-    min-width: 160px;
+    min-width: 170px;
 }
 /* ----------- coupon popup ----- */
 .coupon-content{
