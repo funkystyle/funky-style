@@ -244,6 +244,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             }
             delete deal._created;
             delete deal._updated;
+            delete deal.store;
             delete deal._links;
             console.log(deal);
 

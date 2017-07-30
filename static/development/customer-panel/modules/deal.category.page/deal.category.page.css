@@ -23,6 +23,9 @@
     height: 120px;
     background: #fff;
 }
+.deal-section {
+    padding-left: 5px;
+}
 .deal-tile {
     /*border-color: #fff;*/
     -webkit-border-radius: 2px;

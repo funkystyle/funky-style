@@ -248,6 +248,9 @@ h4 {
 .form-group input[type="radio"]:checked + .btn-group > label span:last-child {
     display: none;
 }
+.pad-5 {
+    padding: 0 5px;
+}
 /* for styled checkboxes and radio buttons */
 
 .checkbox label,
