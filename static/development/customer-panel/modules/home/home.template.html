@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
 <link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.directive.css">
 <span ng-if="!params">
-    <div class="container carousel-container">
+    <div class="container top-container">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
@@ -232,8 +232,8 @@
                 <h4><b>More Top Stores</b></h4>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3 col-sm-12 col-md-3"
+        <div class="row bottom-more">
+            <div class="col-lg-2 col-sm-12 col-md-2"
                  ng-if="item.menu == 'bottom'" ng-repeat="item in stores">
                 <ul class="unstyled">
                     <li><a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a></li>

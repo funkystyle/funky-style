@@ -106,6 +106,15 @@ ol > li > a {
 .coupon-well p {
     margin: 5px 0;
 }
+.bottom-more {
+    border: 1px solid #DDDDDD;
+    padding: 10px 0;
+    background-color: #FFFFFF;
+    margin-bottom: 15px;
+}
+.bottom-more .col-lg-2 {
+    width: 12.66667%;
+}
 .popup-more-info-title {
     color: #000;
     font-weight: 400;

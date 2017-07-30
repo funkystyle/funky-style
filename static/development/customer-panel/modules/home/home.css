@@ -236,8 +236,9 @@ ul.unstyled li {
 }
 
 ul.unstyled li a {
-    color: #11A7B9;
+    color: #000;
     text-transform: capitalize;
+    font-size: 15px;
 }
 /*update-nag start*/
 .update-nag{
