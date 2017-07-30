@@ -90,11 +90,11 @@ def search():
                         coupons = coupons_obj.find(query).sort([('_updated', -1)]).limit(3)
                         for coupon in coupons:
                             coupons_output = {}
-                            if 'image' in store:
+                            if 'image' in category:
                                 coupons_output['image'] = category['image']
                             else:
                                 coupons_output['image'] = ""
-                            if 'url' in store:
+                            if 'url' in category:
                                 coupons_output['url'] = category['url']
                             else:
                                 coupons_output['url'] = ""
