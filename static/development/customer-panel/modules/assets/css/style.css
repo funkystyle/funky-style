@@ -13,6 +13,16 @@ body {
     font-size: 12.8px;
     text-align: justify;
 }
+.h3-heading {
+    margin-bottom: 10px;
+    color: #151313;
+    font-weight: 400;
+    font-size: 24px;
+    text-transform: capitalize;
+}
+.media-heading a {
+    color: #151313;
+}
 .top-desc:hover {
     color: #060505;
 }
@@ -21,7 +31,7 @@ body {
     height: auto;
 }
 .deal-tile {
-    border-color: #FFFFFF;
+    /*border-color: #FFFFFF;*/
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -244,7 +254,6 @@ h4 {
 .radio label {
     padding-left: 0 !important;
     min-height: 25px !important;
-    line-height: 20px;
 }
 
 .checkbox label:after,

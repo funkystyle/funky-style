@@ -14,7 +14,10 @@ angular.module('homeModule', ["headerModule", "Directives"])
         var url = '/api/1.0/coupons'+'?sort=-_created&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
         $http({
             url: url,
-            method: "GET"
+            method: "GET",
+            headers: {
+                "Content-Encoding": "gzip"
+            }
         }).then(function (data) {
             console.log(data);
             if(data['data']) {
@@ -59,7 +62,10 @@ angular.module('homeModule', ["headerModule", "Directives"])
         url = '/api/1.0/banner'+'?where='+where+'&projection='+JSON.stringify(projection)+'&rand_number' + new Date().getTime();
         $http({
             url: url,
-            method: "GET"
+            method: "GET",
+            headers: {
+                "Content-Encoding": "gzip"
+            }
         }).then(function (data) {
             console.log(data);
             if(data['data']) {
@@ -99,7 +105,10 @@ angular.module('homeModule', ["headerModule", "Directives"])
         projection['related_coupons'] = 1;
         $http({
             url: "/api/1.0/stores/?where="+JSON.stringify(store)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
-            mathod: "GET"
+            mathod: "GET",
+            headers: {
+                "Content-Encoding": "gzip"
+            }
         }).then(function (data) {
             console.log(data);
             if(data['data']) {
@@ -121,7 +130,10 @@ angular.module('homeModule', ["headerModule", "Directives"])
         projection['related_coupons'] = 1;
         $http({
             url: "/api/1.0/categories/?where="+JSON.stringify(cat)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
-            mathod: "GET"
+            mathod: "GET",
+            headers: {
+                "Content-Encoding": "gzip"
+            }
         }).then(function (data) {
             console.log(data);
             if(data['data']) {
@@ -134,7 +146,10 @@ angular.module('homeModule', ["headerModule", "Directives"])
         // get the list of featured stores
         $http({
             url: "/api/1.0/deals?max_results=24&rand_number" + new Date().getTime(),
-            mathod: "GET"
+            mathod: "GET",
+            headers: {
+                "Content-Encoding": "gzip"
+            }
         }).then(function (data) {
             console.log(data);
             if(data['data']) {
@@ -187,7 +202,10 @@ angular.module('homeModule', ["headerModule", "Directives"])
                 var d = $q.defer();
                 $http({
                     url: url+"&r="+Math.random(),
-                    method: "GET"
+                    method: "GET",
+                    headers: {
+                        "Content-Encoding": "gzip"
+                    }
                 }).then(function (data) {
                     d.resolve(data);
                 }, function (error) {

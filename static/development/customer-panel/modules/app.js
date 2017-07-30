@@ -57,7 +57,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     {
                         name: "satellizer",
                         files: [
-                            'static/bower_components/satellizer/dist/satellizer.js'
+                            'static/bower_components/satellizer/dist/satellizer.min.js'
                         ]
                     },
                     {

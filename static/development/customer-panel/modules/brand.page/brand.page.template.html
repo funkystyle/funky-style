@@ -71,7 +71,7 @@
                 <!--panel heading-->
                 <div class="panel-body">
                     <div class="check-box-filter-area">
-                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;" ng-repeat="item in priceRange">
+                        <div class="checkbox" style="word-wrap: break-word;" ng-repeat="item in priceRange">
                             <label for="{{ item.range }}_filter" style="font-weight: 500;">
                                 <input id="{{ item.range }}_filter" type="checkbox"
                                        ng-model="filter.priceRange[item.range]" ng-change="applyFilter()" />
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div class="check-box-filter-area">
-                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
+                        <div class="checkbox" style="word-wrap: break-word;"
                              ng-repeat="item in categories | filter: search[key]">
                             <label for="{{ item._id }}_categories_filter" style="font-weight: 500;">
                                 <input id="{{ item._id }}_categories_filter" type="checkbox"

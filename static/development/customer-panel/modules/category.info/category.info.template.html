@@ -78,7 +78,7 @@
 						</div>
 					</div>
 					<div class="check-box-filter-area">
-						<div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
+						<div class="checkbox" style="word-wrap: break-word;"
 							 ng-repeat="item in stores | filter: search.store">
 							<label for="{{ item._id }}_select_all_filter" style="font-weight: 500;">
 								<input id="{{ item._id }}_select_all_filter" type="checkbox"
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="check-box-filter-area">
-                        <div class="checkbox" style="word-wrap: break-word; margin-top: 5px; line-height: 30px;"
+                        <div class="checkbox" style="word-wrap: break-word;"
                              ng-repeat="item in items | filter: search[key]">
                             <label for="{{ item._id }}_category_filter" style="font-weight: 500;">
                                 <input id="{{ item._id }}_category_filter" type="checkbox"

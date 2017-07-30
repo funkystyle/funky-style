@@ -7,7 +7,10 @@ angular.module("storeFactoryModule", ["constantModule"])
                 var def = $q.defer();
                 $http({
                     url: url+'?rand_number' + new Date().getTime(),
-                    method: "GET"
+                    method: "GET",
+                    headers: {
+                        "Content-Encoding": "gzip"
+                    }
                 }).then(function (data) {
                     def.resolve(data.data);
                 }, function (error) {
@@ -21,7 +24,10 @@ angular.module("storeFactoryModule", ["constantModule"])
                 var def = $q.defer();
                 $http({
                     url: URL.stores+"?where="+JSON.stringify(obj)+'&rand_number='+Math.random(),
-                    method: "GET"
+                    method: "GET",
+                    headers: {
+                        "Content-Encoding": "gzip"
+                    }
                 }).then(function (data) {
                     console.log(data);
                     def.resolve(data)
@@ -37,7 +43,8 @@ angular.module("storeFactoryModule", ["constantModule"])
                     method: "POST",
                     data: obj,
                     headers: {
-                        authorization: token
+                        "authorization": token,
+                        "Content-Encoding": "gzip"
                     }
                 }).then(function (data) {
                     def.resolve(data.data);
@@ -52,7 +59,8 @@ angular.module("storeFactoryModule", ["constantModule"])
                     url: URL.stores+'/'+obj._id+'?rand_number='+Math.random(),
                     method: "PATCH",
                     headers: {
-                        authorization: token
+                        authorization: token,
+                        "Content-Encoding": "gzip"
                     },
                     data: obj
                 }).then(function (data) {
@@ -66,7 +74,8 @@ angular.module("storeFactoryModule", ["constantModule"])
                 var d = $q.defer();
                 $http({
                     url: URL.stores+'/'+id+'?rand_number='+Math.random(),
-                    method: "DELETE"
+                    method: "DELETE",
+                    "Content-Encoding": "gzip"
                 }).then(function (data) {
                     console.log(data);
                     d.resolve(data);

@@ -3204,8 +3204,8 @@ textarea.form-control {
 .radio {
     position: relative;
     display: block;
-    margin-top: 10px;
-    margin-bottom: 10px
+    margin: 10px 0;
+    line-height: 15px;
 }
 
 .checkbox label,
@@ -5957,7 +5957,8 @@ a.thumbnail:hover {
 
 .media-heading {
     margin-top: 0;
-    margin-bottom: 5px
+    margin-bottom: 5px;
+    font-weight: 500;
 }
 
 .media-list {
@@ -6220,7 +6221,7 @@ button.list-group-item-danger.active:hover {
 .panel {
     margin-bottom: 10px;
     background-color: #fff;
-    border: 1px solid transparent;
+    /*border: 1px solid transparent;*/
     border-radius: 0;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
