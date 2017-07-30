@@ -47,7 +47,7 @@ var blog = angular.module("blogModule", [])
             "last_modified_by": 1,
             "related_categories": 1
         });
-        url = '/api/1.0/blog/?embedded='+embedded;
+        url = '/api/1.0/blog/?embedded='+embedded+"&max_results=7";
         Query.get(url).then(function (data) {
             console.log("Blog List: ", data.data._items);
             $scope.blogs = data.data._items;

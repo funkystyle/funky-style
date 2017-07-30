@@ -55,13 +55,13 @@ ol > li > a {
     flex-wrap: wrap;
 }
 .rel-stores a {
-    width: 100px;
+    width: 110px;
     display: block;
     margin: 5px;
     padding: 2px;
 }
 .rel-stores a img {
-    width: 94px;
+    width: inherit;
     height: 50px;
     padding: 2px;
     border-radius: 2px;

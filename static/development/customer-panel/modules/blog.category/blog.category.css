@@ -1,5 +1,16 @@
-body{
-    background-color: #ffffff;
+.blog-logo, .nav-section-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.blog-logo {
+    min-height: 100px;
+}
+.h3-heading a {
+    color: #000000;
+}
+.read-more {
+    width: 100px;
 }
 #flipkart-navbar {
     background-color: #2f1231;
@@ -63,12 +74,8 @@ body{
     border:none;
     margin-bottom: 0;
 }
-.navbar-default .navbar-nav>li>a {
-    background-color: #fcfcfc; !important;
-    color: black;
-    border-left:1px solid #f1f1f1;
-    font-weight: bold;
-    font-size: 18px;
+.navbar-nav>li>a {
+    color: #000000;
 }
 .navbar-default .navbar-nav>li>a:last-child,.navbar-default .navbar-nav>li>a:hover:last-child{
     border-right: 1px solid #f1f1f1;
@@ -129,15 +136,17 @@ body{
 .carousel-indicators .active {
     background: #333333;
 }
+.date {
+    margin-top: 15px;
+}
 .thumbnail{
     margin-bottom: 0;
 }
-/* carousel end*/
-.cont_back{
-    background-color: #f0f0f0;
+.blog-desc {
+    max-height: none !important;
 }
-.footer{
-    display: none;
+.cont_back {
+    margin-bottom: 20px;
 }
 .cont_pad{
     padding: 0px;
@@ -175,12 +184,17 @@ h4{
     box-shadow:none;
     margin-bottom: 0;
 }
+.side-heading {
+    margin: 3px 0;
+    font-weight: 400;
+    color: #000;
+}
 .cont_1{
     text-align: center;
     padding:15px;
     background-color:#fff;
-    min-height: 320px;
-    max-height: 320px;
+    min-height: 240px;
+    max-height: 240px;
     font-weight: bold;
     border: 1px solid transparent;
     border-radius: 0;
@@ -220,6 +234,9 @@ h4{
     max-height:250px;
     width: 100%;
     min-height: 250px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 .para_last{
     color:#333333;
@@ -239,17 +256,13 @@ h4{
 .row_mar{
     margin:0;
 }
-.pan_body{
-    padding: 0;
+.pan_body {
+    padding: 0 15px;
 }
-.row_env{
-    background-color: #ca85ca;
-    margin: 0;
-}
-.env_txt {
-    background-color: #f9f9f9;
-    margin: 0% -16% 0% -6%;
-    padding: 10% 7%;
+.row_env {
+    padding: 4px 0px;
+    border-bottom: 1px solid #eae8e8;
+    margin-top: 5px;
 }
 .row_fashion{
     background-color: #e54e7e;
@@ -278,37 +291,28 @@ h4{
     margin: 0% -16% 0% -6%;
     padding: 10% 7%;
 }
-.p_txt{
-    text-align: center;
-    margin:20px 0 0 10px;
-}
+
 .catagory {
     font-size: 20px;
     text-align: center;
     padding: 2% 0% 0%;
 }
 .lat_blog {
-    font-size: 17px;
-    font-weight: bold;
-    color: #7e70a1;
-    padding: 2% 0 0 3%;
+    margin: 20px 0;
 }
 .col_3_border_top{
-    border-top: 1px solid white;
     margin-top: -1%;
+    padding-left: 0;
     padding-top: 1%;
 }
-.blogs{
-    background-color: #f9f9f9;
-    font-weight: bold;
-    color:#333333;
-    font-size: 12px;
-    padding: 1%;
-    margin-bottom: 8%;
-}
+
 .blogs_inner{
     background: #ffffff;
-    margin: 2% 2% 7%;
+    margin: 3% 0;
+}
+.blogs_inner a {
+    padding: 0 15px;
+    display: inline-block;
 }
 .entertain_txt{
     font-size: 14px;

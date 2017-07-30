@@ -203,6 +203,7 @@ a.right span {
     width: 120px;
     display: inline-block;
     max-height: 40px;
+    padding-bottom: 0;
 }
 .store-logo img {
     max-width: 100%;

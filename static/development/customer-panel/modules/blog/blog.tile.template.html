@@ -7,12 +7,14 @@
                 {{$last ? '' : ($index == item.related_categories.length-2) ? ' and ' : ', '}}
             </span>
         </p>
-        <h3 class="txt_h3">
+        <h3 class="h3-heading">
             <a ui-sref="blogs.details({url: item.url})">{{ item.title }}</a>
         </h3>
         <p class="week_txt">
             {{ item._created | date: 'dd MMM yyyy' }}
         </p>
-        <p class="para_last" ng-bind-html="trustAsHtml(item.description, 250)"></p>
+        <p>
+            <a ui-sref="blogs.details({url: item.url})" class="btn btn-primary btn-md read-more">Read More</a>
+        </p>
     </div>
 </div>
