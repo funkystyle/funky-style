@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 
 <div class="container top-container" ng-if="deal.deal_type == 'product'">
-
     <!-- deal details -->
     <div class="panel panel-default">
         <div class="panel-body">
@@ -324,9 +323,14 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-12">
-                    <div class="thumbnail">
+                <div class="col-lg-3 col-md-3 col-sm-12 deal-cat-left">
+                    <div class="thumbnail store-logo">
                         <img ng-src="{{ deal.images[0] }}" alt="">
+                    </div>
+
+                    <div class="text-center rating" star-rating rating-value="deal.rating" max="5"></div>
+                    <div class="text-center">
+                        {{ deal.rating }}/5 Based on {{ deal.voting }} Votes
                     </div>
                 </div>
                 <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
@@ -341,14 +345,12 @@
                         </ol>
                     </div> <!-- end div -->
                     <h3 class="margin-top-0 h3-heading">{{ deal.h1 }}</h3>
-                    <div style="width: 100%;" class="text-center rating-stars">
-                        <div class="text-center" star-rating rating-value="deal.rating" max="5"></div>
-                    </div>
                     <div style="width: 100%;" ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(deal.description)"></div>
                     <div>
-                        <a style="color: white;" href="{{ store.store_url }}" target="_blank" class="btn btn-md btn-info visit_store">
-                            ACTIVATE OFFER
+                        <a href="{{ store.store_url }}" target="_blank" class="btn-link">
+                            ACTIVATE OFFER &nbsp;
+                            <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
@@ -359,14 +361,14 @@
     <!--row-->
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12">
-            <div class="panel panel-default coupon coupons" ng-repeat="item in deal.related_deals">
+            <div class="panel panel-default coupon coupons deal-tile" ng-repeat="item in deal.related_deals">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2">
                             <div class="deal-price text-center hidden-xs">
-                                <h4>
-                                    {{ item.discount_type }} {{ item.actual_price }}
-                                </h4>
+                                <h3>
+                                    {{ item.discount_type }} <br> {{ item.actual_price }}
+                                </h3>
                                 <div class="deal">
                                     <span>
                                         DEAL
@@ -377,26 +379,23 @@
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                             <h3 class="margin-top-0 coupon-heading">
                                 {{ item.name }}
-                                <span class="pull-right hidden-xs">
-                                    <i class="fa fa-star"></i>&nbsp;
-                                    <i class="fa fa-share-alt"></i>
-                                </span>
                             </h3>
                             <div style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                <p class="top-desc" ng-class="{'show-desc': showMore.coupons[item._id]}"
-                                    data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                <span class="pull-right">
-                                    <a ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]" href="" class="btn btn-link">
-                                        Show {{ (showMore.coupons[item._id]) ? "Less": "More" }}
-                                    </a>
-                                </span>
-                            </div>
-                            <div style="width: 100%;">
-                                <a class="btn btn-md btn-info pull-right">ACTIVATE OFFER</a>
+                                <p class="top-desc" ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]"
+                                   ng-class="{'show-desc': showMore.coupons[item._id]}"
+                                    data-ng-bind-html="trustAsHtml(item.description)" title="Click to Expand/Collapse"></p>
                             </div>
                         </div>
                     </div> <!-- end row -->
                 </div> <!-- end panel body -->
+                <div class="tile-footer">
+                    <div>
+                        <a class="btn btn-md btn-info btn-block font-bold">
+                            ACTIVATE OFFER
+                            <i class="pull-right fa fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
             </div> <!-- end panel -->
         </div>
         <!-- end col -->
