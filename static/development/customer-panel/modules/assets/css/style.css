@@ -92,7 +92,53 @@ ol > li > a {
     padding-bottom: 5px;
 }
 .top-container {
-    margin-top: 40px;
+    margin-top: 130px;
+}
+.coupon-well {
+    border: 1px solid #DDDDDD;
+    padding: 15px;
+    max-height: 230px;
+    min-height: 230px;
+}
+.coupon-well .thumbnail img {
+    height: 45px;
+}
+.coupon-well p {
+    margin: 5px 0;
+}
+.popup-more-info-title {
+    color: #000;
+    font-weight: 400;
+    font-size: 14px;
+}
+.popup-coupon-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 5px 0;
+}
+.popup-btn {
+    height: 44px;
+    min-width: 120px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.popup-coupon-heading .popup-heading {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 95%;
+    float: left;
+}
+.popup-coupon-heading .popup-heading .store-logo {
+    border: 1px solid #DDDDDD;
+    width: 150px;
+    margin: 0 !important;
+}
+.popup-coupon-heading .popup-heading .modal-title {
+    margin-left: 20px;
 }
 .breadcrumb {
     padding: 0 15px;

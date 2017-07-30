@@ -3,34 +3,46 @@
     <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{{ couponInfo.title }}</h4>
-            </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
-                        <div class="form-inline">
-                            <label style="font-weight: normal;">
-                                Here is your Coupon Code
-                            </label>
+                <div class="row popup-coupon-heading">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="popup-heading">
+                            <div class="thumbnail store-logo">
+                                <img ng-src="{{ couponInfo.related_stores[0].image }}" alt="{{ couponInfo.related_stores[0].image }}"
+                                     title="{{ couponInfo.related_stores[0].name }}">
+                            </div> <!-- end thumbnail -->
+                            <h4 class="modal-title h3-heading">{{ couponInfo.title }}</h4>
                         </div>
-
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <!-- Target -->
-                                <label id="foo">{{ (couponInfo.coupon_type =='coupon')? couponInfo.coupon_code: 'Offer Activated' }}</label>
-                            </div>
-                            <!-- Trigger -->
-                            <button ng-if="couponInfo.coupon_type == 'coupon'" class="btn btn-info btn-md" data-clipboard-target="#foo" id="copyClipboard">
-                                Copy to Clipboard
-                            </button>
-
-                            <a ng-if="couponInfo.coupon_type == 'offer'" href="{{ couponInfo.destination_url }}"
-                               class="btn btn-md btn-info">Goto Store</a>
+                        <div class="popup-close">
+                            <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
                         </div>
                     </div>
+                </div>
+                <div class="row popup-coupon-code">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <!-- Target -->
+                            <label id="foo">{{ (couponInfo.coupon_type =='coupon')? couponInfo.coupon_code: 'Offer Activated' }}</label>
+                        </div>
+                        <!-- Trigger -->
+                        <button ng-if="couponInfo.coupon_type == 'coupon'" class="btn btn-info btn-md popup-btn" data-clipboard-target="#foo" id="copyClipboard">
+                            Click to Copy
+                        </button>
+
+                        <a ng-if="couponInfo.coupon_type == 'offer'" href="{{ couponInfo.destination_url }}"
+                           class="btn btn-md btn-info popup-btn">Goto Store</a>
+                    </div>
                 </div> <!-- end row -->
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <h5 class="text-center font-bold">
+                            Copy the code, go to Amazon. Paste the coupon code on checkout.
+                        </h5>
+                    </div>
+                </div>
+
+                <br>
 
                 <!-- row starts -->
                 <div class="row" ng-if="moreCoupons.length">
@@ -39,23 +51,27 @@
                     </div>
                     <hr />
                     <div class="col-lg-4" ng-repeat="item in moreCoupons | limitTo: 3 | orderBy: 'number_of_clicks': true">
-                        <div class="well coupon-well">
-                            <h4>{{ item.title }}</h4>
+                        <div class="coupon-well">
+                            <div class="thumbnail store-logo">
+                                <img ng-src="{{ item.related_stores[0].image }}" alt="{{ item.related_stores[0].image }}"
+                                     title="{{ item.related_stores[0].name }}">
+                            </div> <!-- end thumbnail -->
 
-                            <p ng-click="showMore[item._id] = !showMore[item._id]" class="top-desc" ng-class="{'show-desc': showMore[item._id]}"
-                               ng-bind-html="trustAsHtml(item.description)"></p>
+                            <h4 class="popup-more-info-title">{{ item.title }}</h4>
 
-                            <a ng-click="openCouponCode(undefined, item)" class="btn btn-md btn-block btn-info show_copan_code">
+                            <a ng-click="openCouponCode(undefined, item)"
+                               class="btn btn-md btn-block btn-info show_copan_code">
                                 <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                 <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
                             </a>
+
+                            <p class="text-center">
+                                <a ui-sref="main.store-info({url: item.related_stores[0].url, cc: undefined})">See {{ item.related_stores[0].name }} Offers</a>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <!-- row ends -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

@@ -6741,7 +6741,7 @@ button.close {
 .modal-backdrop {
     position: fixed;
     top: 0;
-    z-index: 1040;
+    z-index: 999;
     background-color: #000
 }
 
@@ -7739,7 +7739,7 @@ table .warning a {
 }
 
 .close {
-    opacity: .4
+    opacity: 1;
 }
 
 .close:focus,
@@ -7759,7 +7759,7 @@ table .warning a {
 .modal .close,
 .panel-default .close,
 .popover {
-    color: #333
+    color: #000000;
 }
 
 .label {

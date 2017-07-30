@@ -115,7 +115,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
 
                 e.clearSelection();
 
-                $("#copyClipboard").html("Copied to Clipboard");
+                $("#copyClipboard").html("Copied");
             });
 
             clipboard.on('error', function(e) {
@@ -135,7 +135,10 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
             };
 
             $scope.moreCoupons = [];
-            url = "/api/1.0/coupons?sort=-number_of_clicks&max_results=3";
+            var embedded = JSON.stringify({
+                "related_stores": 1
+            });
+            url = "/api/1.0/coupons?sort=-number_of_clicks&max_results=3&embedded="+embedded;
             Query.get(url).then(function (coupons) {
                 var items = coupons.data._items;
                 console.log(" Coupons Data: ", items);

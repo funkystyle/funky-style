@@ -24,9 +24,9 @@
     font-size: 20px;
     margin: 0 auto;
 }
-.coupon-well h4, .coupon-well p {
-    height: 40px;
-    overflow: hidden;
+.coupon-well h4 {
+    height: 60px;
+    line-height: 20px;
 }
 /* end of modal header */
 

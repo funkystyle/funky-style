@@ -2,6 +2,13 @@
     background-color: #2f1231 !important;
     height: 95px;
 }
+header {
+    height: 135px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 140;
+}
 .main-header-ul li a {
     font-size: 18px;
 }
@@ -15,9 +22,15 @@
 .header-login-btn:hover {
     color: #FFFFFF !important;
 }
-.bottom-header, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+.main-header-ul li a:hover, .main-header-ul li a:focus, .main-header-ul li a:active {
+    background: #2f1231 !important;
+    border-color: #2f1231 !important;
+}
+.bottom-header, .bottom-header .nav li a, .bottom-header .nav li a:hover,
+.bottom-header .nav li a:active, .bottom-header .nav li a:focus{
     background-color: rgb(126, 112, 161) !important;
     border-color: rgb(126, 112, 161) !important;
+    padding-bottom: 10.5px;
 }
 .header .container {
     padding: 20px 0;
