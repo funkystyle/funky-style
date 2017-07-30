@@ -48,7 +48,8 @@ angular.module("dealDetailsModule", ["Directives"])
             $scope.top_stores = [];
             var projection = {
                 "name": 1,
-                "url": 1
+                "url": 1,
+                "image": 1
             };
 
             $http({

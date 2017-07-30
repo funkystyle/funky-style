@@ -407,12 +407,12 @@
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
-                    <div class="check-box-filter-area">
-                        <p ng-repeat="item in top_stores">
-                            <a ui-sref="main.store-info({url: item.url})" style="color: #666; text-decoration: underline;">
-                                {{ item.name }}
-                            </a>
-                        </p>
+                    <div class="check-box-filter-area rel-stores">
+                        <a class="pull-left" ng-repeat="item in top_stores"
+                           ui-sref="main.store-info({url: item.url, cc: undefined})">
+                            <img  ng-src="{{ item.image }}" alt="64x64">
+                            <p>{{ item.name }}</p>
+                        </a>
                     </div>
                 </div>
                 <!--end panel body-->
@@ -425,13 +425,12 @@
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
-                    <div class="check-box-filter-area">
-                        <p ng-repeat="item in deal.related_deals">
-                            <a ui-sref="main.deal_post_details({url: item.url})" style="color: #666; text-decoration: underline;">
-                                <img ng-src="{{ item.images[0] }}" alt="" class="img-circle" style="width: 90px;">
-                                {{ item.name }}
-                            </a>
-                        </p>
+                    <div class="check-box-filter-area rel-stores">
+                        <a class="pull-left" ng-repeat="item in deal.related_deals"
+                           ui-sref="main.deal_post_details({url: item.url})">
+                            <img  ng-src="{{ item.images[0] }}" alt="64x64">
+                            <p>{{ item.name }}</p>
+                        </a>
                     </div>
                 </div>
                 <!--end panel body-->
