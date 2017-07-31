@@ -209,6 +209,8 @@ def login():
     session['user_level'] = json_user['user_level']
     session['login_token'] = user['login_token']
 
+    print session, '*********************'
+
     response = jsonify(data=json_user, errors = [])
     response.status_code = 200
     return response
