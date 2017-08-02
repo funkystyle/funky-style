@@ -17,6 +17,16 @@
 .tile-footer div {
     min-width: 30%;
 }
+.showcase-img {
+    height: 150px;
+    max-height: 150px;
+    overflow: hidden;
+    padding: 3px;
+    border-radius: 3px;
+}
+.showcase-img img {
+    height: 140px;
+}
 .deal-price {
     font-size: 12px;
     background: #fff;
@@ -61,12 +71,25 @@
     align-items: center;
     justify-content: center;
 }
-
-.mobileprice-logo img {
-    width: 100%;
-    padding: 15px;
-    margin: 0px auto;
-    display: table;
+.rolloverimage {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.rolloverimage a {
+    display: inline-flex;
+    width: 60px;
+    height: 40px;
+    border: 1px solid #DDDDDD;
+    margin-right: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.rolloverimage a img {
+    width: inherit;
+    height: inherit;
+    padding: 3px;
 }
 
 .pagenation-main {
@@ -77,11 +100,6 @@
     padding-left: 0px;
 }
 
-.mobileprice-text h3 {
-    margin-bottom: 0px;
-    border-bottom: 1px solid #999;
-    padding-bottom: 10px;
-}
 
 .mobileprice-body-main {
     padding: 10px 0px;
@@ -92,12 +110,6 @@
     padding: 0px !important;
 }
 
-.mobileprice-text p {
-    border-left: 5px solid #eaeaea;
-    border-right: 5px solid #eaeaea;
-    padding: 0px 15px;
-    text-align: justify;
-}
 
 .mobileprice-logo-stars fieldset,
 .mobileprice-logo-stars label {
@@ -118,7 +130,50 @@
     border: none;
     float: left;
 }
-
+.stores-description {
+    padding: 10px 0;
+}
+div.stores-description-inner h4, div.stores-description-inner p {
+    margin: 0 0 5px 0;
+}
+.stores-description div.stores-description-inner {
+    width: 17%;
+}
+div.stores-description-inner div.amazon-logo {
+    height: 50px;
+    width: 130px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 3px;
+    margin-bottom: 5px;
+}
+div.stores-description-inner div.amazon-logo img {
+    height: 40px;
+    width: 120px;
+}
+.rating-section, .stores-description {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #eeecec;
+}
+.rating-section {
+    height: 45px;
+}
+.rating-section div, .stores-description div.stores-description-inner {
+    margin-right: 10px;
+}
+.rating-section .rating-number {
+    padding: 5px 10px;
+    border: 1px solid #DDD;
+    font-weight: bold;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
 .rating > input {
     display: none;
 }
@@ -564,14 +619,6 @@ h2 {
     transform: rotate(-45deg);
 }
 
-.rolloverimage img {
-    width: 65px;
-    margin: 0px auto;
-    display: table;
-    border: 1px solid #eaeaea;
-    padding: 2px;
-}
-
 .ratethisproduct-stars {
     float: left;
     padding-left: 8px;
@@ -600,21 +647,6 @@ h2 {
     margin-left: 15px;
 }
 
-.amazon-logo {
-    padding-top: 10px;
-}
-
-.amazon-logo img {
-    width: 100%;
-}
-
-.amazonactualprice {
-    padding-top: 10px;
-}
-
-.amazonstore-head {
-    padding-top: 25px;
-}
 
 .chevron_right {
     margin-left: 10px;
@@ -629,15 +661,9 @@ h2 {
 }
 
 .quickspecifications-main {
-    background: #DDEDFD;
-    padding: 15px 30px;
-    margin-top: 15px;
-}
-
-.general-head {
-    float: left;
-    padding: 5px 0;
-    margin-top: 15px;
+    padding: 5px;
+    border-radius: 4px;
+    background: #f7f7f7;
 }
 
 .general-text strong {
@@ -653,9 +679,8 @@ h2 {
 .general-specifications-text {
     padding-left: 0px;
 }
-
-.general-head-main {
-    padding-top: 10px;
+div.general-head table td {
+    text-transform: capitalize;
 }
 .product-details-tr td, .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
     padding: 15px 5px;
@@ -667,11 +692,24 @@ h2 {
 .product-details-tr {
     margin-top: 10px;
 }
-.specifications-main {
-    padding-top: 15px;
-    padding-bottom: 15px;
+.btn-grey {
+    color: #000;
+    background-color: #f5f5f6;
+    border-color: #DDD;
+    width: 18%;
+    margin-right: 10px;
+    border-radius: 3px;
 }
-
+.btn-grey:hover, .btn-grey:active, .btn-grey:focus {
+    color: #000;
+}
+.stores-section {
+    background-color: #FFFFFF;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 10px;
+}
 .tableimg img {
     width: 100px;
 }

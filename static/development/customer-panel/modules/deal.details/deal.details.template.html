@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.css" />
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 
@@ -6,103 +7,74 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-12 col-xs-12 col-sm-12">
-                    <ol class="breadcrumb">
-                        <li><a ui-sref="main.home">Home</a></li>
-                        <li><a ui-sref="main.all_deals">Deals</a></li>
-                        <li ng-repeat="item in deal.breadcrumb">
-                            <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
-                        </li>
-                        <li class="active">{{ deal.url }}</li>
-                    </ol>
-                </div>
-            </div>
-            <div class="row">
-                <div class="mobileprice-text-main col-md-12 col-xs-12 col-sm-12">
-                    <div class="mobileprice-text text-left">
-                        <h3 class="h3-heading">{{ deal.name }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="mobileprice-body-main col-md-12 col-xs-12 col-sm-12">
+                <div class="mobileprice-body-main col-md-12 col-xs-12 col-sm-12" ng-init="imageShow.image = deal.images[0]">
                     <div class="mobileprice-logo col-md-3 col-xs-4 col-sm-4">
-                        <div class="thumbnail"><img ng-src="{{ deal.images[0] }}"></div>
-                        <p class="rollover text-center" >(Roll over to zoom in)</p>
+                        <div class="thumbnail showcase-img"><img ng-src="{{ imageShow.image }}"></div>
                         <div class="rolloverimage">
-                            <img src="modules/assets/images/mobile.png">
+                            <a href="" ng-repeat="item in deal.images" ng-click="imageShow.image = item;">
+                                <img ng-src="{{ item }}">
+                            </a>
                         </div>
                     </div>
 
-                    <div class="mobileprice-text col-md-9 col-xs-8 col-sm-8">
-                        <div class="col-md-12 ratethisproduct-main">
-                            <div class="row ratethisproduct-row">
-                                <div class="ratethisproduct-head col-md-5 col-xs-12 col-sm-12">
-                                    <h4>Rate this Product : </h4>
-                                    <div class="product-stars ratethisproduct-stars">
-                                        <div class="text-center" star-rating rating-value="deal.rating" max="5"></div>
-                                    </div>
-                                </div>
-                                <div style="display: none;" class="col-md-3 ratethisproduct-ratingshead col-xs-6 col-sm-6">
-                                    <h4><a href="#">133095 ratings &nbsp;<i class="fa fa-caret-right" aria-hidden="true"></i></a></h4>
-                                </div>
-                                <div style="display: none;" class="col-md-4 ratethisproduct-reviewshead col-xs-6 col-sm-6">
-                                    <h4><a href="#">29435 Reviews</a></h4>
+                    <div class="col-md-9 col-xs-8 col-sm-8">
+                        <ol class="breadcrumb pull-right">
+                            <li><a ui-sref="main.home">Home</a></li>
+                            <li><a ui-sref="main.all_deals">Deals</a></li>
+                            <li ng-repeat="item in deal.breadcrumb">
+                                <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
+                            </li>
+                            <li class="active">{{ deal.url }}</li>
+                        </ol>
+                        <h3 class="h3-heading">{{ deal.name }}</h3>
+
+                        <div class="rating-section">
+                            <div star-rating rating-value="deal.rating" max="5"></div>
+                            <div>
+                                <a class="rating-number">{{ deal.rating }}/5</a>
+                            </div>
+                            <div>
+                                - {{ deal.voting }} Ratings
+                            </div>
+                        </div>
+                        <div class="stores-description">
+                            <div class="stores-description-inner">
+                                <div class="amazon-logo">
+                                    <a ui-sref="main.store-info({url: deal.stores[0].store.url})">
+                                        <img ng-src="{{ deal.stores[0].store.image }}">
+                                    </a>
                                 </div>
                             </div>
-                            <div class="bestpricehead-main row">
-                                <div class="bestprice-head col-md-7">
-                                    <h1>Best Price in India</h1>
-                                </div>
+                            <div class="stores-description-inner">
+                                <h4><b>Rs. {{ deal.actual_price }}</b></h4>
+                                <p>Actual Price</p>
                             </div>
-                            <div class="amazonstore-main row">
-                                <div class="amazonstore-store-main col-md-12 col-xs-12 col-sm-12">
-                                    <div class="col-md-2 amazonimage">
-                                        <div class="amazon-logo">
-                                            <img ng-src="{{ deal.stores[0].store.image }}">
-                                        </div>
-                                        <div class="amazon-moredetails">
-                                            <a ui-sref="main.store-info({url: deal.stores[0].store.url})">
-                                                More Details <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="amazonactualprice col-md-2 text-center col-xs-6">
-                                        <h4>Rs {{ deal.actual_price }}</h4>
-                                        <h5>Actual Price</h5>
-                                    </div>
-                                    <div class="amazonactualprice col-md-3 text-center col-xs-6">
-                                        <h4>Rs {{ deal.discount_price }}</h4>
-                                        <h5>Discounted Price</h5>
-                                    </div>
-                                    <div class="amazonstore-head col-md-3 text-center">
-                                        <a href="{{ deal.stores[0].landing_page }}" class="btn btn-info col-xs-9">
-                                            GO TO STORE
-                                            <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
+                            <div class="stores-description-inner">
+                                <h4><b>Rs. {{ deal.discount_price }}</b></h4>
+                                <p>Discounted Price</p>
                             </div>
-                            <div class="quickspecifications-main col-md-12">
-                                <div class="row quickspecifications-head">
-                                    <h3>Quick Specifications<small><a href="">See Full Specifications</a></small></h3>
+                            <div class="stores-description-inner">
+                                <a href="{{ deal.stores[0].landing_page }}" class="btn btn-info col-xs-9">
+                                    GO TO STORE
+                                    <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div> <!-- end of Stores Description -->
+
+                        <div class="quickspecifications-main">
+                            <h5><b>Quick Specifications</b></h5>
+                            <div class="general-head-main">
+                                <div class="general-head">
+
+                                    <table>
+                                        <tbody>
+                                        <tr ng-repeat="(key, val) in deal.dynamic_fields">
+                                            <td>{{ key }} <span style="float: right;">:</span> &nbsp;</td>
+                                            <td class="general-specifications">{{ val }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="row general-head-main">
-                                    <div class="general-head col-md-12">
-
-                                        <table>
-                                            <tbody>
-                                                <tr ng-repeat="(key, val) in deal.dynamic_fields">
-                                                    <td>{{ key }}: &nbsp;</td>
-                                                    <td class="general-specifications">{{ val }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -113,77 +85,56 @@
     <!-- end of deal details -->
 
     <div class="row specifications-main">
-        <div class="col-md-2 specifications-text col-xs-6">
-            <button class="btn btn-md btn-info btn-block">Specifications</button>
-        </div>
-        <div class="col-md-2 specifications-text col-xs-6">
-            <button class="btn btn-md btn-info btn-block">Overview</button>
-        </div>
-        <div class="col-md-2 specifications-text col-xs-6">
-            <button class="btn btn-md btn-info btn-block">Best Price</button>
-        </div>
-        <div class="col-md-2 specifications-text col-xs-6">
-            <button class="btn btn-md btn-info btn-block">Video</button>
-        </div>
-        <div class="col-md-4 specifications-text col-xs-6">
-            <button class="btn btn-md btn-info btn-block">Best Selling Mobiles</button>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <button class="btn btn-md btn-grey">Specifications</button>
+            <button class="btn btn-md btn-grey">Overview</button>
+            <button class="btn btn-md btn-grey">Best Price</button>
+            <button class="btn btn-md btn-grey">Video</button>
+            <button class="btn btn-md btn-grey">Best Selling Mobiles</button>
         </div>
     </div>
+
     <div class="row">
-        <div class="discounttext-main">
-            <div class="col-md-6">
-                <h3>{{ deal.name }} <small>
+        <div class="col-md-9 mobilespecifications-left">
+            <h3 class="h3-heading">
+                {{ deal.name }}
+                <small>
                     Price in
                     <span ng-repeat="item in deal.stores">
                         {{ item.store.name }} {{$last ? '' : ($index==deal.stores.length-2) ? ' and ' : ', '}}
                     </span>
                 </small>
-                </h3>
-            </div>
-        </div>
-        <div class="col-md-12 col-xs-12">
-            <div class="table-main table-responsive">
-                <table class="table">
-                    <tbody>
-                        <tr class="product-details-tr" ng-repeat="item in deal.stores">
-                            <td class="tableimg"><img ng-src="{{ item.store.image }}"></td>
-                            <td>
-                                <div class="tabledelivery">
-                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i> 2 - 4 Days Delivery
-                                </div>
-                                <div class="tabledelivery">
-                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i> EMI Available
-                                </div>
-                            </td>
-                            <td>
-                                <div class="tabledelivery">
-                                    {{ item.discount_price }}
-                                </div>
-                                <div class="tabledelivery">
-                                    <strong>FREE</strong> Shipping
-                                </div>
-                            </td>
-                            <td>
-                                <a href="{{ item.landing_page }}" class="btn btn-info btn-md">
-                                    GO TO STORE
-                                    <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <h4><a style="text-decoration: none;" ui-sref="main.store-info({url: item.store.url})">{{ item.store.name }} Coupons</a></h4>
-                            </td>
-                            <td>
-                                <button class="btn btn-warning btn-md">Get Coupons</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-9 mobilespecifications-left">
-            <h1>{{ deal.name }} Specifications</h1>
+            </h3>
+            <div class="stores-description stores-section" ng-repeat="item in deal.stores">
+                <div class="stores-description-inner">
+                    <div class="amazon-logo">
+                        <a ui-sref="main.store-info({url: item.store.url})">
+                            <img ng-src="{{ item.store.image }}">
+                        </a>
+                    </div>
+                </div>
+                <div class="stores-description-inner">
+                    <p>
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>&nbsp;
+                        2 - 4 Days Delivery
+                    </p>
+                    <p>
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>&nbsp;
+                        EMI Available
+                    </p>
+                </div>
+                <div class="stores-description-inner">
+                    <h4><b>Rs. {{ item.discount_price }}</b></h4>
+                    <p><b>Free</b> Shipping</p>
+                </div>
+                <div class="stores-description-inner">
+                    <a href="{{ item.landing_page }}" class="btn btn-info col-xs-9">
+                        GO TO STORE
+                        <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div> <!-- end of Stores Description -->
+            
             <div class="general-head">
                 <div class="table-main table-responsive">
                     <table class="table">

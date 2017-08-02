@@ -383,9 +383,6 @@ h4 {
 }
 /* check-box-filter-area */
 
-.check-box-filter-area {
-    max-height: 200px;
-}
 /* ----- scroll area ------ */
 .scroll {
     max-height: 200px;
@@ -486,18 +483,17 @@ ul.rating {
 }
 .rating li {
     list-style-type: none;
-    display: inline-block;
-    padding: 1px;
+    display: inline-flex;
+    padding: 4px 1px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
-    font-size:20px;
+    font-size: 16px;
 }
 .rating .filled {
-    color: orangered;
+    color: #FFC315;
 }
 .clear{
     margin-top:20px;
 }
-
 /* rating module css */
