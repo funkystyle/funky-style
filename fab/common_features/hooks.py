@@ -7,16 +7,37 @@ import multiprocessing
 from settings import CONFIG_DATA, BASE_DIR, LOGGER
 from fab import app
 
-from login_decorators import user_login_required, admin_login_required, abort_resource_deletion
+from login_decorators import *
 from settings import LOGGER
 
 from fab.siteminder import SiteMinder
 from fab.siteminder import generate_sub_xml_file
 from fab.siteminder import generate_sitemap_index_file
 
+# stoers
+@admin_login_required
+def before_create_store(*args, **kwargs):
+    LOGGER.info("before created")
+
 @admin_login_required
 def before_returning_persons(*args, **kwargs):
     LOGGER.info("persons api access processing after admin login verification")
+
+@admin_login_required
+def before_returning_master_seo(*args, **kwargs):
+    LOGGER.info("persons api access processing after admin login verification")
+
+@admin_login_required
+def before_create_person(*args, **kwargs):
+    LOGGER.info("person creatin permission check done.")
+
+@self_or_admin_login_required
+def before_update_person(*args, **kwargs):
+    LOGGER.info("person update permission check done.")
+
+@self_or_admin_login_required
+def before_returning_person(*args, **kwargs):
+    LOGGER.info("single persons access verification is done...")
 
 def update_number_of_clicks(resource, _id):
     number_of_click_required = request.args.get("number_of_clicks", None)
@@ -26,7 +47,6 @@ def update_number_of_clicks(resource, _id):
         resource_obj.update({'_id': _id}, {'$inc': {'number_of_clicks': 1}})
 
 def before_returning_stores(response):
-    LOGGER.info("ddddddddddddddddddddddddd")
     update_number_of_clicks('stores', response['_id'])
 
 
@@ -46,7 +66,7 @@ def before_returning_deal_categories(response):
 def before_returning_categories(response):
     update_number_of_clicks('categories', response['_id'])
 
-@admin_login_required
+@self_or_admin_login_required
 def before_delete_persons_item(item):
     LOGGER.info("persons api delete item access processing after admin login verification")
 
@@ -121,15 +141,43 @@ def find_netloc(requests):
             abort(403, "affiliate_network is not valid.")
     return requests
 
+
+@admin_or_editor_or_submitor_login_required
+def before_create_deal(resource, request):
+    LOGGER.info("before create deal")
 # hooks for stores
 def before_create(resource, request):
     LOGGER.info("called for create image resource:{}".format(resource))
+    if resource == 'persons':
+        before_create_person(resource, request)
+    elif resource == 'stores' or resource == 'categories':
+        before_create_store(resource, request)
+    elif resource == 'deals' or resource == 'coupons':
+        before_create_deal(resource, request)
+    elif resource == 'master_seo' or resource == 'banner' or resource == 'cms_pages':
+        before_returning_master_seo(resource, request)
+
     if resource == 'deep_link':
         request = find_netloc(request)
     else:
         process_images(request)
 
+
+@admin_or_editor_login_required
+def before_edit_deal(resource, update, original):
+    LOGGER.info("before edit deal")
+
 def before_update(resource, update, original):
+    if resource == 'persons':
+        before_update_person(resource, update, original)
+    elif resource == 'stores' or resource == 'categories':
+        before_create_store(resource, update, original)
+
+    elif resource == 'deals' or resource == 'coupons':
+        before_edit_deal(resource, update, original)
+    elif resource == 'master_seo' or resource == 'banner' or resource == 'cms_pages':
+        before_returning_master_seo(resource, update, original)
+
     # getting all image fields of all tables from config file
     for image_field in CONFIG_DATA['IMAGE_FIELDS']:
         # checking image field of conf in update payload
@@ -170,6 +218,15 @@ def before_update(resource, update, original):
                     # if original image not in update payload delete from original data
                     if original_image not in update[image_field]:
                         delete_image(original_image)
+
+@abort_resource_deletion
+def before_delete_resource(resource_name, item):
+    LOGGER.error("resource:{} deleted".format(resource_name))
+    exit()
+
+@admin_or_user_login_required
+def before_returning_cms_pages(*args, **kwargs):
+    LOGGER.info('before returning cms pages')
 
 
 def after_deleted_item(resource_name, item):

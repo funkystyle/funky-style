@@ -129,22 +129,61 @@ from common_features import *
 
 # persons schema can be assessable and editable by admin only
 app.on_fetched_resource_persons += before_returning_persons
-app.on_fetched_item_persons += before_returning_persons
-
-app.on_fetched_item_stores += before_returning_stores
-app.on_fetched_item_coupons += before_returning_coupons
-
-app.on_fetched_item_deals += before_returning_deals
-app.on_fetched_item_deal_brands += before_returning_deal_brands
-app.on_fetched_item_deal_categories += before_returning_deal_categories
-app.on_fetched_item_categories += before_returning_categories
+app.on_fetched_item_persons += before_returning_person
 
 app.on_update_resource_persons += before_returning_persons
 app.on_update_item_persons += before_returning_persons
-app.on_delete_item_persons += before_delete_persons_item
 
+app.on_delete_item_persons += before_delete_persons_item
+app.on_delete_resource += before_delete_resource
+
+# stores
+app.on_fetched_item_stores += before_returning_stores
+app.on_delete_stores += before_create_store
+
+#categories
+app.on_fetched_item_categories += before_returning_categories
+app.on_delete_categories += before_create_store
+
+#deals
+app.on_fetched_item_deals += before_returning_deals
+app.on_update_item_deals += before_edit_deal
+app.on_delete_item_deals += before_edit_deal
+
+#coupons
+app.on_fetched_item_coupons += before_returning_coupons
+app.on_update_item_coupons += before_edit_deal
+app.on_delete_item_coupons += before_edit_deal
+
+# master seo
+app.on_fetched_resource_master_seo += before_returning_master_seo
+app.on_fetched_item_master_seo += before_returning_master_seo
+app.on_update_resource_master_seo += before_returning_master_seo
+app.on_update_item_master_seo += before_returning_master_seo
+app.on_delete_item_master_seo += before_returning_master_seo
+
+#banner
+app.on_fetched_resource_banner += before_returning_master_seo
+app.on_fetched_item_banner += before_returning_master_seo
+app.on_update_resource_banner += before_returning_master_seo
+app.on_update_item_banner += before_returning_master_seo
+app.on_delete_item_banner += before_returning_master_seo
+
+#cms_pages
+app.on_fetched_resource_banner += before_returning_cms_pages
+app.on_fetched_item_banner += before_returning_cms_pages
+app.on_update_resource_cms_pages += before_returning_master_seo
+app.on_update_item_cms_pages += before_returning_master_seo
+app.on_delete_item_cms_pages += before_returning_master_seo
+
+# deal_categories
+
+app.on_fetched_item_deal_brands += before_returning_deal_brands
+app.on_fetched_item_deal_categories += before_returning_deal_categories
 # stores schema request accessibility and processing some fields
+# checking for person insert
 app.on_insert += before_create
+# checking on update
 app.on_update += before_update
 
 app.on_inserted += after_created

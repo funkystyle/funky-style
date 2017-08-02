@@ -29,6 +29,9 @@ def read_configuration_file(config_file_path):
         sys.exit(0)
 
 env = False
+
+
+
 accepted_env = ['stg', 'prd', 'tst', 'dev', 'local']
 if os.environ.get('env_name'):
     env = os.environ.get('env_name')
@@ -43,6 +46,10 @@ if os.environ.get('env_name'):
         exit()
     if env not in ['dev', 'local']:
         DEBUG=False
+    else:
+        DEBUG=True
+
+
 else:
     LOGGER.warn("no environment name specified. taking default env local...")
     #exit()
@@ -99,7 +106,7 @@ MONGO_AUTHDBNAME = "admin"
 #"""
 #MONGO_URI = 'mongodb://t:t127.0.0.1:27017mongodb://@127.0.0.1:27027/admin'
 
-TOKEN_SECRET = os.environ.get('SECRET_KEY') or 'JWT Token Secret String'
+TOKEN_SECRET = CONFIG_DATA['PASSWORD_CRYPTION_TOKEN']#os.environ.get('SECRET_KEY') or 'JWT Token Secret String'
 
 # let's not forget the API entry point (not really needed anyway)
 
