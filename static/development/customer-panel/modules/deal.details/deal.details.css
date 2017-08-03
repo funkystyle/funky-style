@@ -42,9 +42,15 @@ ul.dynamic-fields li {
     overflow: hidden;
     padding: 3px;
     border-radius: 3px;
+    border: 0 solid;
 }
 .showcase-img img {
     height: 140px;
+}
+.breadcrumb-sec {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 .deal-price {
     font-size: 12px;

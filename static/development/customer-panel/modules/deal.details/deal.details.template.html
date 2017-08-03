@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.css" />
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.directive.css">
+
 
 <div class="container top-container" ng-if="deal.deal_type == 'product'">
     <!-- deal details -->
@@ -18,14 +18,16 @@
                     </div>
 
                     <div class="col-md-9 col-xs-8 col-sm-8 border-left">
-                        <ol class="breadcrumb pull-right">
-                            <li><a ui-sref="main.home">Home</a></li>
-                            <li><a ui-sref="main.all_deals">Deals</a></li>
-                            <li ng-repeat="item in deal.breadcrumb">
-                                <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
-                            </li>
-                            <li class="active">{{ deal.url }}</li>
-                        </ol>
+                        <div class="breadcrumb-sec">
+                            <ol class="breadcrumb">
+                                <li><a ui-sref="main.home">Home</a></li>
+                                <li><a ui-sref="main.all_deals">Deals</a></li>
+                                <li ng-repeat="item in deal.breadcrumb">
+                                    <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
+                                </li>
+                                <li class="active">{{ deal.url }}</li>
+                            </ol>
+                        </div>
                         <h3 class="h3-heading">{{ deal.name }}</h3>
 
                         <div class="rating-section">

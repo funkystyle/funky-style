@@ -45,6 +45,51 @@ body {
     -moz-box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
     box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
 }
+.products-list{
+    border: 1px solid #eee;
+    padding: 0;
+}
+.product-border-main {
+    max-height: 100px;
+    height: 100px;
+    min-height: 120px;
+    margin-top: 15px;
+}
+.product-border-main a {
+    height: 100px;
+    width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-price {
+    padding: 10px;
+}
+.product-border-main img {
+    height: 100px;
+    width: 200px;
+}
+.deal-title, .deal-title:hover, .deal-tile a {
+    text-decoration: none;
+    text-transform: capitalize;
+}
+.deal-title {
+    color: #000;
+    font-size: 17px;
+    font-weight: 400;
+    height: 50px;
+    display: block;
+}
+.deal-title:hover {
+    color: #165ba8;
+}
+.disc-price {
+    margin: 0;
+    color: #000;
+}
+strike {
+    color: #666666;
+}
 ol > li > a {
     color: #2780e3;
 }
