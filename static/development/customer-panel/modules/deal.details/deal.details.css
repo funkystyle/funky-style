@@ -27,11 +27,15 @@ ul.dynamic-fields {
 ul.dynamic-fields li {
     text-transform: capitalize;
     line-height: 20px;
-    width: 25%;
+    width: 30%;
     white-space: nowrap;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
     text-overflow: ellipsis;
     color: #666;
+}
+.bottom-features {
+    background: #FFFFFF !important;
+    padding: 15px !important;
 }
 .tile-footer div {
     min-width: 30%;
@@ -49,7 +53,7 @@ ul.dynamic-fields li {
 }
 .breadcrumb-sec {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 }
 .deal-price {
@@ -101,6 +105,10 @@ ul.dynamic-fields li {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 10px;
+}
+.product-panel {
+    padding-bottom: 0;
 }
 .rolloverimage a {
     display: inline-flex;
@@ -163,7 +171,7 @@ div.stores-description-inner h4, div.stores-description-inner p {
     margin: 0 0 5px 0;
 }
 .stores-description div.stores-description-inner {
-    width: 17%;
+    width: 19%;
 }
 div.stores-description-inner div.amazon-logo {
     height: 50px;
@@ -303,7 +311,21 @@ div.stores-description-inner div.amazon-logo img {
 .otherbrands-main {
     border-bottom: 1px solid #999;
 }
+table {
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+}
+.deal-description-area {
+    padding: 15px;
+    background: #FFFFFF;
+    border: 1px solid #ddd;
+    border-radius: 2px;
 
+}
+.h3-main-heading {
+    margin-top: 0;
+}
 .otherbrands-text h3 {
     font-weight: 600;
     font-size: 30px;
@@ -707,6 +729,8 @@ h2 {
 }
 div.general-head table td {
     text-transform: capitalize;
+    padding: 5px;
+    min-width: 270px;
 }
 .product-details-tr td, .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
     padding: 15px 5px;
@@ -735,6 +759,36 @@ div.general-head table td {
     -moz-border-radius: 3px;
     border-radius: 3px;
     padding: 10px;
+}
+.well {
+    margin-bottom: 10px!important;
+}
+.social-well {
+    padding: 15px;
+    background-color: #fff;
+}
+.stores-section .stores-description-inner {
+    width: 15% !important;
+}
+.mobilespecifications-right .brands-content {
+    background-color: #FFFFFF;
+    padding: 10px;
+}
+.mobilespecifications-right .brands-content li {
+    list-style-type: none;
+    margin: 5px 0;
+}
+.mobilespecifications-right .brands-content li a {
+    color: #000;
+    text-decoration: underline;
+}
+.stores-section .stores-description-inner:last-child {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.stores-section .stores-description-inner .store-name {
+    margin-right: 30px;
 }
 .tableimg img {
     width: 100px;

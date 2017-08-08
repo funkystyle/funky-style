@@ -177,9 +177,40 @@ app.on_update_item_cms_pages += before_returning_master_seo
 app.on_delete_item_cms_pages += before_returning_master_seo
 
 # deal_categories
-
-app.on_fetched_item_deal_brands += before_returning_deal_brands
 app.on_fetched_item_deal_categories += before_returning_deal_categories
+app.on_update_resource_deal_categories += before_update_deal_categories
+app.on_update_item_deal_categories += before_update_deal_categories
+app.on_delete_item_deal_categories += before_update_deal_categories
+
+
+# deal_brands
+app.on_fetched_item_deal_brands += before_returning_deal_brands
+app.on_update_resource_deal_brands += before_update_deal_categories
+app.on_update_item_deal_brands  += before_update_deal_categories
+app.on_delete_item_deal_brands  += before_update_deal_categories
+
+# coupon reports
+app.on_update_resource_coupon_reports += before_update_deal_categories
+app.on_update_item_coupon_reports += before_update_deal_categories
+app.on_delete_item_coupon_reports += before_update_deal_categories
+
+# coupon comments
+app.on_update_resource_coupon_reports += before_update_deal_categories
+app.on_update_item_coupon_reports += before_update_deal_categories
+app.on_delete_item_coupon_reports += before_update_deal_categories
+
+
+# BLOG
+app.on_update_resource_blog += before_update_deal_categories
+app.on_update_item_blog += before_update_deal_categories
+app.on_delete_item_blog += before_update_deal_categories
+
+# deep link
+app.on_update_resource_deep_link += before_update_deal_categories
+app.on_update_item_deep_link += before_update_deal_categories
+app.on_delete_item_deep_link += before_update_deal_categories
+
+
 # stores schema request accessibility and processing some fields
 # checking for person insert
 app.on_insert += before_create

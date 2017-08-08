@@ -31,9 +31,16 @@ def before_returning_master_seo(*args, **kwargs):
 def before_create_person(*args, **kwargs):
     LOGGER.info("person creatin permission check done.")
 
+@admin_login_required
+def before_update_deal_categories(*args, **kwargs):
+    LOGGER.info("person creatin permission check done.")
+
+
 @self_or_admin_login_required
 def before_update_person(*args, **kwargs):
     LOGGER.info("person update permission check done.")
+
+
 
 @self_or_admin_login_required
 def before_returning_person(*args, **kwargs):
@@ -59,6 +66,7 @@ def before_returning_deals(response):
 
 def before_returning_deal_brands(response):
     update_number_of_clicks('deals_brands', response['_id'])
+
 
 def before_returning_deal_categories(response):
     update_number_of_clicks('deals_categories', response['_id'])
@@ -148,7 +156,8 @@ def before_create_deal(resource, request):
 # hooks for stores
 def before_create(resource, request):
     LOGGER.info("called for create image resource:{}".format(resource))
-    if resource == 'persons':
+    if resource == 'persons' or resource == 'deal_categories' or resource == 'deal_brands'\
+            or resoure == 'coupon_reports' or resource == 'blog' or resource == 'deep_link':
         before_create_person(resource, request)
     elif resource == 'stores' or resource == 'categories':
         before_create_store(resource, request)
@@ -156,6 +165,8 @@ def before_create(resource, request):
         before_create_deal(resource, request)
     elif resource == 'master_seo' or resource == 'banner' or resource == 'cms_pages':
         before_returning_master_seo(resource, request)
+    elif resource == 'coupon_comments':
+        before_returning_cms_pages(resource, request)
 
     if resource == 'deep_link':
         request = find_netloc(request)
@@ -177,6 +188,11 @@ def before_update(resource, update, original):
         before_edit_deal(resource, update, original)
     elif resource == 'master_seo' or resource == 'banner' or resource == 'cms_pages':
         before_returning_master_seo(resource, update, original)
+    elif resource == 'deal_categories' or resource == 'deal_brands' or resource == 'coupon_reports'\
+            or resource == 'blog' or resource == 'deep_link':
+        before_update_deal_categories(resource, update, original)
+    elif resource == 'coupon_comments':
+        before_returning_cms_pages(resource, update, original)
 
     # getting all image fields of all tables from config file
     for image_field in CONFIG_DATA['IMAGE_FIELDS']:

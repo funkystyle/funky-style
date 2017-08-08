@@ -2,7 +2,30 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/fab.deal.home/fab.deal.home.css"/>
 
 <div class="container main_content top-container">
-    <h3 class="h3-heading">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item" ng-class="{'active': $index == 0}" ng-repeat="item in banners">
+                <a href="{{ item.destination_url }}">
+                    <img ng-src="{{ item.image }}">
+                </a>
+            </div><!-- End Item -->
+        </div><!-- End Carousel Inner -->
+
+        <!-- Controls -->
+        <div class="carousel-controls">
+            <a class="left carousel-control" data-target="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" data-target="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div><!-- End Carousel -->
+    <h1 class="h3-heading text-center">
+        Best Price For Mobiles, Laptops, Tvs and More
+    </h1>
+    <h3 class="h3-heading text-center">
         Popular Categories
     </h3>
     <div class="row">
@@ -29,7 +52,7 @@
     </div>
 
     <!-- Popular Brands -->
-    <h3 class="h3-heading">
+    <h3 class="h3-heading text-center">
         Popular Brands
     </h3>
 
@@ -56,21 +79,21 @@
         </div>
     </div>
 
-    <h3 class="h3-heading">
+    <h3 class="h3-heading text-center">
         Best Selling Deals
     </h3>
     <div class="row">
-        <deal-tile-directive class-name="col-lg-3 col-md-3 col-sm-12" items="deals"></deal-tile-directive>
+        <deal-tile-directive class-name="col-lg-3 col-md-3 col-sm-12" items="best_deals"></deal-tile-directive>
     </div>
 
     <!-- upcoming deals -->
-    <h3 class="h3-heading">Upcoming Deals</h3>
+    <h3 class="h3-heading text-center">Upcoming Deals</h3>
     <div class="row">
-        <deal-tile-directive class-name="col-lg-3 col-md-3 col-sm-12" items="deals"></deal-tile-directive>
+        <deal-tile-directive class-name="col-lg-3 col-md-3 col-sm-12" items="upcoming_deals"></deal-tile-directive>
     </div>
     <!-- end of upcoming deals -->
 
-    <h3 class="h3-heading">Most Discount Coupons And Offers Stores</h3>
+    <h3 class="h3-heading text-center">Most Discount Coupons And Offers Stores</h3>
     <!-- end of top banner area -->
     <div class="row cat-top-store-area">
         <div class="thumbnail cat-top-stores" ng-repeat="item in stores">
@@ -82,10 +105,7 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
-            <h3 class="h3-heading">About CompareRaja.in</h3>
-            <hr />
-            <p>Lorem ipsum dolor sit amet, imperdiet quis est amet sociosqu ut leo, tortor molestie sed ultrices sed vel leo. Mollis rhoncus in, nonummy enim in et praesent, phasellus et enim magna turpis proin iaculis, ut quis dictum. Nisl a diam risus.</p>
-            <p>Lorem ipsum dolor sit amet, imperdiet quis est amet sociosqu ut leo, tortor molestie sed ultrices sed vel leo. Mollis rhoncus in, nonummy enim in et praesent, phasellus et enim magna turpis proin iaculis, ut quis dictum. Nisl a diam risus.</p>
+            <h3 class="h3-heading">Fab Promocodes</h3>
         </div>
     </div>
 </div>

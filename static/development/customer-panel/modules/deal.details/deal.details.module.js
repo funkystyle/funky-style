@@ -12,6 +12,22 @@ angular.module("dealDetailsModule", ["Directives"])
             }
         };
 
+        var random = new Date().getDate();
+
+        // get the list of top deal Brands
+        var featured = JSON.stringify({
+            featured: true
+        });
+        $http({
+            url: "/api/1.0/deal_brands?where="+featured+"&max_results=8&rand="+random,
+            method: "GET"
+        }).then(function (data) {
+            console.log("Deal Brands are: ", data.data._items);
+            $scope.deal_brands = data.data._items;
+        }, function (error) {
+            console.log(error);
+        });
+
         // if stateParams of url found the call http request to get the deal details from ther server
         if($stateParams['url']) {
             // get the list of coupons
@@ -36,6 +52,7 @@ angular.module("dealDetailsModule", ["Directives"])
                 if(data['data'] && data['data']['_items'].length) {
                     console.log(data.data._items[0]);
                     $scope.deal = data.data._items[0];
+                    $scope.deal.toDayDate = new Date();
                     $scope.deal.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $scope.deal.expired_date = new Date($scope.deal.expired_date);
                 } else {
@@ -64,5 +81,17 @@ angular.module("dealDetailsModule", ["Directives"])
             }, function (error) {
                 console.log(error);
             });
+        }
+    }).filter("quickLimit", function () {
+        return function (item) {
+            var object = {};
+
+            angular.forEach(item, function (val, key) {
+                if (Object.keys(object).length < 15) {
+                    object[key] = val;
+                }
+            });
+
+            return object;
         }
     });

@@ -15,8 +15,8 @@
             <div class="row">
                 <div class="col-lg-5 col-md-5">
                     <div class="form-group">
-                        <label for="is_default">Is Default*</label>
-                        <ui-select ng-required="true" ng-model="deeplink.is_default" theme="bootstrap" id="is_default">
+                        <label for="is_default">Is Default</label>
+                        <ui-select  ng-model="deeplink.is_default" theme="bootstrap" id="is_default">
                             <ui-select-match placeholder="Is Default">{{ $select.selected.text }}</ui-select-match>
                             <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
                                 <div ng-bind-html="item.text | highlight: $select.search"></div>
@@ -24,20 +24,20 @@
                         </ui-select>
                     </div>
                     <div class="form-group">
-                        <label for="affiliate_network">Affiliate Network*</label>
-                        <input required type="url" class="form-control input-sm" id="affiliate_network"
+                        <label for="affiliate_network">Affiliate Network</label>
+                        <input  type="url" class="form-control input-sm" id="affiliate_network"
                                placeholder="Affiliate Network" ng-model="deeplink.affiliate_network">
                     </div>
-                    <label>Start URL*</label>
+                    <label>Start URL</label>
                     <div class="well">
                         <div class="form-group">
-                            <label for="start_url_url">URL*</label>
-                            <input required type="url" class="form-control input-sm" id="start_url_url"
+                            <label for="start_url_url">URL</label>
+                            <input  type="url" class="form-control input-sm" id="start_url_url"
                                    placeholder="URL" ng-model="deeplink.start_url.url">
                         </div>
                         <div class="form-group">
-                            <label for="start_url_encode">Encode*</label>
-                            <ui-select ng-required="true" ng-model="deeplink.start_url.encode" theme="bootstrap" id="start_url_encode">
+                            <label for="start_url_encode">Encode</label>
+                            <ui-select  ng-model="deeplink.start_url.encode" theme="bootstrap" id="start_url_encode">
                                 <ui-select-match placeholder="Encode">{{ $select.selected.text }}</ui-select-match>
                                 <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
                                     <div ng-bind-html="item.text | highlight: $select.search"></div>
@@ -46,36 +46,18 @@
                         </div>
                     </div>
                     <!-- End URL code -->
-                    <label>End URL*</label>
-                    <div class="well">
-                        <div class="form-group">
-                            <label for="end_url_url">URL*</label>
-                            <input required type="url" class="form-control input-sm" id="end_url_url"
-                                   placeholder="URL" ng-model="deeplink.end_url.url">
-                        </div>
-                        <div class="form-group">
-                            <label for="end_url_encode">Encode*</label>
-                            <ui-select ng-required="true" ng-model="deeplink.end_url.encode" theme="bootstrap" id="end_url_encode">
-                                <ui-select-match placeholder="Encode">{{ $select.selected.text }}</ui-select-match>
-                                <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
-                                    <div ng-bind-html="item.text | highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
-                    </div>
 
-                    <!-- Tags -->
                     <!-- End URL code -->
-                    <label>Tags*</label>
+                    <label>Tags</label>
                     <div class="well">
                         <div class="form-group">
-                            <label for="tags_tags">Tags*</label>
-                            <input required type="text" class="form-control input-sm" id="tags_tags"
+                            <label for="tags_tags">Tags</label>
+                            <input  type="text" class="form-control input-sm" id="tags_tags"
                                    placeholder="Tags" ng-model="deeplink.tags.tags">
                         </div>
                         <div class="form-group">
-                            <label for="tags_release">Encode*</label>
-                            <ui-select ng-required="true" ng-model="deeplink.tags.replace" theme="bootstrap" id="tags_release">
+                            <label for="tags_release">Encode</label>
+                            <ui-select  ng-model="deeplink.tags.replace" theme="bootstrap" id="tags_release">
                                 <ui-select-match placeholder="Release">{{ $select.selected.text }}</ui-select-match>
                                 <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
                                     <div ng-bind-html="item.text | highlight: $select.search"></div>
@@ -85,8 +67,8 @@
                     </div>
                     <!-- Encoded Main URL -->
                     <div class="form-group">
-                        <label for="encode_main_url">Encoded Main URL*</label>
-                        <ui-select ng-required="true" ng-model="deeplink.encode_main_url" theme="bootstrap" id="encode_main_url">
+                        <label for="encode_main_url">Encoded Main URL</label>
+                        <ui-select  ng-model="deeplink.encode_main_url" theme="bootstrap" id="encode_main_url">
                             <ui-select-match placeholder="Encoded Main URL">{{ $select.selected.text }}</ui-select-match>
                             <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
                                 <div ng-bind-html="item.text | highlight: $select.search"></div>
@@ -97,18 +79,18 @@
                     <!-- replace content -->
                     <div ng-repeat="item in deeplink.replace" class="well">
                         <div class="form-group">
-                            <label for="replace_replace_string">Replace String*</label>
-                            <input required type="text" class="form-control input-sm" id="replace_replace_string"
+                            <label for="replace_replace_string">Replace String</label>
+                            <input  type="text" class="form-control input-sm" id="replace_replace_string"
                                    placeholder="Replace String" ng-model="item.replace_string">
                         </div>
                         <div class="form-group">
-                            <label for="find_string">Find String*</label>
-                            <input required type="text" class="form-control input-sm" id="find_string"
+                            <label for="find_string">Find String</label>
+                            <input  type="text" class="form-control input-sm" id="find_string"
                                    placeholder="Find String" ng-model="item.find_string">
                         </div>
                         <div class="form-group">
-                            <label for="is_default">Is Default*</label>
-                            <ui-select ng-required="true" ng-model="deeplink.is_default" theme="bootstrap" id="is_default">
+                            <label for="is_default">Is Default</label>
+                            <ui-select  ng-model="deeplink.is_default" theme="bootstrap" id="is_default">
                                 <ui-select-match placeholder="Is Default">{{ $select.selected.text }}</ui-select-match>
                                 <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
                                     <div ng-bind-html="item.text | highlight: $select.search"></div>

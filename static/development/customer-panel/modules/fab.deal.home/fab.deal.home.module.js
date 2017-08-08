@@ -10,8 +10,11 @@ angular.module("allDealsModule", ["Directives"])
         var random = new Date().getDate();
 
         // get the list of top deal categories
+        var featured = JSON.stringify({
+            featured: true
+        });
         $http({
-            url: "/api/1.0/deal_categories?max_results=4&rand="+random,
+            url: "/api/1.0/deal_categories?where="+featured+"&max_results=4&rand="+random,
             method: "GET"
         }).then(function (data) {
             console.log("Deal Categories are: ", data.data._items);
@@ -21,7 +24,7 @@ angular.module("allDealsModule", ["Directives"])
         });
 
         $http({
-            url: "/api/1.0/deal_brands?max_results=8&rand="+random,
+            url: "/api/1.0/deal_brands?where="+featured+"&max_results=8&rand="+random,
             method: "GET"
         }).then(function (data) {
             console.log("Deal Brands are: ", data.data._items);
@@ -30,15 +33,29 @@ angular.module("allDealsModule", ["Directives"])
             console.log(error);
         });
 
-        // get the list of deals related to selected deal brand
-        var url = '/api/1.0/deals'+'?rand_number=' + random;
+        // get the list of Best selling deals based on number of clicks
+        var url = '/api/1.0/deals'+'?sort=-number_of_clicks&rand_number=' + random;
         $http({
             url: url,
             method: "GET"
         }).then(function (data) {
             console.log("All deals are: ", data.data._items);
             if(data['data']) {
-                $scope.deals = data.data._items;
+                $scope.best_deals = data.data._items;
+            }
+        }, function (error) {
+            console.log(error);
+        });
+
+        // get the list of deals based on upcoming field in database
+        var url = '/api/1.0/deals'+'?sort=-upcoming&rand_number=' + random;
+        $http({
+            url: url,
+            method: "GET"
+        }).then(function (data) {
+            console.log("All deals are: ", data.data._items);
+            if(data['data']) {
+                $scope.upcoming_deals = data.data._items;
             }
         }, function (error) {
             console.log(error);

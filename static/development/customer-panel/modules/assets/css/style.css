@@ -17,8 +17,8 @@ body {
 .h3-heading {
     margin-bottom: 10px;
     color: #151313;
-    font-weight: 400;
-    font-size: 24px;
+    font-weight: 600;
+    font-size: 20px;
     text-transform: capitalize;
 }
 .media-heading a {
@@ -45,18 +45,31 @@ body {
     -moz-box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
     box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
 }
+deal-tile-directive {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.deal-directive-tile {
+    width: 250px;
+    height: auto;
+    margin: 10px;
+}
 .products-list{
     border: 1px solid #eee;
     padding: 0;
 }
 .product-border-main {
-    max-height: 100px;
-    height: 100px;
-    min-height: 120px;
+    max-height: 130px;
+    height: 130px;
     margin-top: 15px;
 }
+.deal-directive-tile a.btn {
+    font-size: 15px;
+}
 .product-border-main a {
-    height: 100px;
+    height: 120px;
     width: inherit;
     display: flex;
     align-items: center;
@@ -66,7 +79,7 @@ body {
     padding: 10px;
 }
 .product-border-main img {
-    height: 100px;
+    height: 120px;
     width: 200px;
 }
 .deal-title, .deal-title:hover, .deal-tile a {
@@ -239,6 +252,9 @@ h4 {
 
 .pad-left-0 {
     padding-left: 0;
+}
+.pad-left-5 {
+    padding-left: 5px;
 }
 
 .pad-right-0 {

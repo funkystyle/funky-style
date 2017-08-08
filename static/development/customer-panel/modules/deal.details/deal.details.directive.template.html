@@ -1,4 +1,4 @@
-<div class="{{ class }}" ng-repeat="item in items | limitTo: limit | orderBy: orderBy: true">
+<div class="deal-directive-tile" ng-repeat="item in items | limitTo: limit | orderBy: orderBy: true">
     <div class="panel panel-default deal-tile">
         <div class="panel-body" style="padding: 0;">
             <div class="product-border-main">
@@ -17,13 +17,13 @@
                     <strike>Rs. {{ item.actual_price }}</strike>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 text-right">
-                    <a ui-sref="main.deal_post_details({url: item.url})">View Offers</a>
+                    <a ui-sref="main.deal_post_details({url: item.url})">View Deal</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <a href="{{ item.destination_url }}" class="btn btn-md btn-info btn-block">
-                        GET DEAL
+                        <strong>GET DEAL</strong>
                     </a>
                 </div>
             </div>
