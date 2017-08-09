@@ -1,4 +1,6 @@
-
+.technoloy_txt a {
+    color: #858ac5 !important;
+}
 body{background-color:#ECF0F1;}
 
 .navbar-inverse {

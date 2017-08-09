@@ -14,8 +14,28 @@
     justify-content: flex-end;
     align-items: center;
 }
+.coupon-footer .vari_pad {
+    justify-content: flex-end;
+}
+.top-desc-from-top {
+    height: auto;
+    max-height: 180px;
+    margin-bottom: 10px;
+}
 div.border-left {
     border-left: 1px solid #DDDDDD;
+}
+.deal-store-logo {
+    width: 250px;
+    height: 220px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0,0,0,.09);
+}
+.deal-store-logo img {
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 ul.dynamic-fields {
     display: flex;

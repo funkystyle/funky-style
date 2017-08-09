@@ -1,6 +1,6 @@
 .header {
     background-color: #2f1231 !important;
-    height: 95px;
+    height: 85px;
 }
 header {
     height: 135px;
@@ -30,10 +30,10 @@ header {
 .bottom-header .nav li a:active, .bottom-header .nav li a:focus{
     background-color: rgb(126, 112, 161) !important;
     border-color: rgb(126, 112, 161) !important;
-    padding-bottom: 10.5px;
+    padding: 3px 15px;
 }
 .header .container {
-    padding: 20px 0;
+    padding: 10px 0;
 }
 .navbar-brand {
     padding: 0 15px;
@@ -52,7 +52,7 @@ header {
     width: 100%;
     z-index: 9;
     top: -12px;
-    height: 20px;
+    height: 40px;
 }
 .bottom-header ul {
     padding: 0 15px;

@@ -11,7 +11,7 @@ body {
     overflow: hidden;
     color: #999;
     font-family: "Open Sans", Arial, sans-serif !important;
-    font-size: 12.8px;
+    font-size: 13px;
     text-align: justify;
 }
 .h3-heading {
@@ -29,7 +29,7 @@ body {
 }
 .show-desc {
     overflow: visible;
-    height: auto;
+    height: auto !important;
 }
 .deal-tile {
     /*border-color: #FFFFFF;*/
@@ -61,16 +61,16 @@ deal-tile-directive {
     padding: 0;
 }
 .product-border-main {
-    max-height: 130px;
-    height: 130px;
-    margin-top: 15px;
+    height: 160px;
+    width: 95%;
+    padding-top: 10px;
+    margin: 0 auto;
 }
 .deal-directive-tile a.btn {
     font-size: 15px;
 }
 .product-border-main a {
-    height: 120px;
-    width: inherit;
+    height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,8 +79,10 @@ deal-tile-directive {
     padding: 10px;
 }
 .product-border-main img {
-    height: 120px;
-    width: 200px;
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
 }
 .deal-title, .deal-title:hover, .deal-tile a {
     text-decoration: none;
@@ -150,7 +152,7 @@ ol > li > a {
     padding-bottom: 5px;
 }
 .top-container {
-    margin-top: 130px;
+    margin-top: 115px;
 }
 .coupon-well {
     border: 1px solid #DDDDDD;

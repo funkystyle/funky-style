@@ -96,17 +96,6 @@ angular.module("brandPageModule", ["Directives"])
                     $scope.deal = data.data._items[0];
                     $scope.deal.date = new Date();
 
-                    setTimeout(function () {
-                        $("#owl-demo").owlCarousel({
-                            autoPlay: 2000, //Set AutoPlay to 2 seconds
-                            transitionStyle: "fade",
-                            loop: true,
-                            items: 5,
-                            itemsDesktop: [1199, 3],
-                            itemsDesktopSmall: [979, 3]
-                        });
-                    });
-
                     // get the list of deals related to selected deal brand
                     var embedded = {};
                     embedded['related_deals'] = 1;

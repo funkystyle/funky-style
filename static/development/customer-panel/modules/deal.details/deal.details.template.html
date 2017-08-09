@@ -83,7 +83,7 @@
                                 <p>Discounted Price</p>
                             </div>
                             <div class="stores-description-inner">
-                                <a href="{{ deal.stores[0].landing_page }}" class="btn btn-info btn-block">
+                                <a target="_blank" href="{{ deal.stores[0].landing_page }}" class="btn btn-info btn-block">
                                     GO TO STORE
                                     <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                                 </a>
@@ -111,11 +111,11 @@
 
     <div class="row specifications-main">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <button class="btn btn-md btn-grey">Specifications</button>
+            <button ng-click="goScroll('specifications')" class="btn btn-md btn-grey">Specifications</button>
             <button class="btn btn-md btn-grey">Overview</button>
             <button class="btn btn-md btn-grey">Best Price</button>
-            <button class="btn btn-md btn-grey">Video</button>
-            <button class="btn btn-md btn-grey">Best Selling Mobiles</button>
+            <button ng-click="goScroll('video')" class="btn btn-md btn-grey">Video</button>
+            <button ng-click="goScroll('best-selling')" class="btn btn-md btn-grey">Best Selling Mobiles</button>
         </div>
     </div>
 
@@ -147,14 +147,14 @@
                     <p><b>Free</b> Shipping</p>
                 </div>
                 <div class="stores-description-inner">
-                    <a href="{{ item.landing_page }}" class="btn btn-info btn-block">
+                    <a target="_blank" href="{{ item.landing_page }}" class="btn btn-info btn-block">
                         GO TO STORE
                         <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                     </a>
                 </div>
                 <div class="stores-description-inner" style="width: 30% !important;">
                     <h5 class="text-capitalize store-name"><strong>{{ item.store.name }} Coupons</strong> &nbsp;</h5>
-                    <a ui-sref="main.store-info({url: item.store.url})" class="btn btn-info">
+                    <a target="_blank" ui-sref="main.store-info({url: item.store.url})" class="btn btn-info">
                         <b>Get Coupons</b>
                         <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                     </a>
@@ -165,7 +165,7 @@
 
     <div class="row">
         <div class="col-md-9 pad-right-0 mobilespecifications-left">
-            <h3 class="h3-heading">{{ deal.name }} Specifications</h3>
+            <h3 id="specifications" class="h3-heading">{{ deal.name }} Specifications</h3>
             <div class="quickspecifications-main bottom-features">
                 <div class="general-head-main">
                     <div class="general-head">
@@ -182,7 +182,7 @@
                 </div>
             </div>
 
-            <div ng-if="deal.deal_video">
+            <div id="video" ng-if="deal.deal_video">
                 <h3 class="h3-heading">{{ deal.name }} Unboxing Video</h3>
                 <div ng-bind-html="trustAsHtml(deal.deal_video)"></div>
             </div>
@@ -207,7 +207,7 @@
     </div> <!-- End row -->
 
     <!-- Show list of deals from here -->
-    <h3 class="h3-heading">Related Deals</h3>
+    <h3 id="best-selling" class="h3-heading">Related Deals</h3>
     <div class="row">
         <deal-tile-directive order-by="_updated" class-name="col-lg-6 col-md-6 col-sm-12" items="deal.related_deals"></deal-tile-directive>
     </div>
@@ -225,7 +225,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 deal-cat-left">
-                    <div class="thumbnail store-logo">
+                    <div class="thumbnail deal-store-logo">
                         <img ng-src="{{ deal.images[0] }}" alt="">
                     </div>
 
@@ -238,7 +238,7 @@
                     <div style="width: 100%; min-height: 20px;">
                         <ol class="breadcrumb pull-right">
                             <li><a href="/">Home</a></li>
-                            <li><a href="#/deals">Deals</a></li>
+                            <li><a ui-sref="main.all_deals">Deals</a></li>
                             <li ng-repeat="item in deal.breadcrumb">
                                 <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
                             </li>
@@ -246,11 +246,11 @@
                         </ol>
                     </div> <!-- end div -->
                     <h3 class="margin-top-0 h3-heading">{{ deal.h1 }}</h3>
-                    <div style="width: 100%;" ng-click="show = !show" class="para_small top-desc"
+                    <div style="width: 100%;" ng-click="show = !show" class="para_small top-desc-from-top top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(deal.description)"></div>
                     <div>
-                        <a href="{{ store.store_url }}" target="_blank" class="btn-link">
-                            ACTIVATE OFFER &nbsp;
+                        <a href="{{ deal.destination_url }}" target="_blank" class="btn btn-md btn-info">
+                            <b>ACTIVATE OFFER &nbsp;</b>
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -262,46 +262,58 @@
     <!--row-->
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12">
-            <div class="panel panel-default coupon coupons deal-tile" ng-repeat="item in deal.related_deals">
+            <div class="panel panel-default coupon all deal-tile" ng-repeat="item in store_related_coupons">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2">
                             <div class="deal-price text-center hidden-xs">
                                 <h3>
-                                    {{ item.discount_type }} <br> {{ item.actual_price }}
+                                    {{ item.discount_type }} <br> {{ item.discount }}
                                 </h3>
                                 <div class="deal">
-                                    <span>
+                                    <span ng-if="item.coupon_type == 'coupon'">
+                                        COUPON
+                                    </span>
+                                    <span ng-if="item.coupon_type == 'offer'">
                                         DEAL
                                     </span>
                                 </div>
                             </div> <!-- end deal-price -->
+                            <div class="col-xs-12 hidden-lg hidden-md">
+                                <p class="fifty_cashback">
+                                    {{ item.discount_type }} {{ item.discount }}
+                                </p>
+                            </div>
                         </div> <!-- end col -->
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                             <h3 class="margin-top-0 coupon-heading">
-                                {{ item.name }}
+                                {{ item.title }}
                             </h3>
-                            <div style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                <p class="top-desc" ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]"
-                                   ng-class="{'show-desc': showMore.coupons[item._id]}"
-                                    data-ng-bind-html="trustAsHtml(item.description)" title="Click to Expand/Collapse"></p>
-                            </div>
+                            <p>
+                                <a class="btn-link" ui-sref="main.categoryinfo({url: deal.store_temp.url})">
+                                    See all {{ deal.store_temp.name }} Coupons
+                                </a>
+                            </p>
                         </div>
                     </div> <!-- end row -->
                 </div> <!-- end panel body -->
-                <div class="tile-footer">
-                    <div>
-                        <a class="btn btn-md btn-info btn-block font-bold">
-                            ACTIVATE OFFER
-                            <i class="pull-right fa fa-arrow-right"></i>
-                        </a>
+                <!--panel footer-->
+                <div class="panel-footer coupon-footer pad-0">
+                    <div class="row vari_pad">
+                        <div class="col-md-4">
+                            <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
+                                <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
+                                <i class="pull-right fa fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                <!--end panel footer -->
             </div> <!-- end panel -->
         </div>
         <!-- end col -->
         <!--col-->
-        <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="col-lg-3 col-md-3 col-sm-3 pad-left-0">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h5 class="font-bold">Top Stores</h5>
@@ -312,7 +324,7 @@
                         <a class="pull-left" ng-repeat="item in top_stores"
                            ui-sref="main.store-info({url: item.url, cc: undefined})">
                             <img  ng-src="{{ item.image }}" alt="64x64">
-                            <p>{{ item.name }}</p>
+                            <p>{{ item.name }} Coupons</p>
                         </a>
                     </div>
                 </div>
@@ -322,7 +334,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Top Deals</h5>
+                    <h5 class="font-bold">Related Deals</h5>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">

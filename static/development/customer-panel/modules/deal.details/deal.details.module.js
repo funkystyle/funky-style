@@ -12,6 +12,13 @@ angular.module("dealDetailsModule", ["Directives"])
             }
         };
 
+        $scope.goScroll = function (id) {
+            console.log($("#"+id).position().top + 150)
+            $('html, body').animate({
+                'scrollTop' : $("#"+id).offset().top - 150
+            });
+        }
+
         var random = new Date().getDate();
 
         // get the list of top deal Brands
@@ -40,7 +47,8 @@ angular.module("dealDetailsModule", ["Directives"])
                 'deal_brands': 1,
                 'deal_category': 1,
                 'stores': 1,
-                'stores.store': 1
+                'stores.store': 1,
+                'store_temp': 1
             });
 
             var url = '/api/1.0/deals'+'?where='+where+'&number_of_clicks=1&embedded='+embedded+'&rand_number'+Math.random();
@@ -55,6 +63,23 @@ angular.module("dealDetailsModule", ["Directives"])
                     $scope.deal.toDayDate = new Date();
                     $scope.deal.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
                     $scope.deal.expired_date = new Date($scope.deal.expired_date);
+
+                    // get the related coupons of selected store
+                    if($scope.deal.deal_type == 'store') {
+                        var temp = {};
+                        temp["related_stores"] = {
+                            "$in": [$scope.deal.store_temp._id]
+                        };
+                        var sort = "&max_results=5&sort=[('_updated', -1)]";
+                        url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+sort;
+                        $http({
+                            url: url,
+                            method: "GET"
+                        }).then(function (coupons_list) {
+                            console.log("Coupons List: ", coupons_list);
+                            $scope.store_related_coupons = coupons_list['data']['_items'];
+                        });
+                    }
                 } else {
                     $state.go('404');
                 }

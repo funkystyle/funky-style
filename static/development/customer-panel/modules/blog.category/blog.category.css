@@ -1,3 +1,6 @@
+.technoloy_txt a {
+    color: #858ac5 !important;
+}
 .blog-logo, .nav-section-area {
     display: flex;
     justify-content: center;

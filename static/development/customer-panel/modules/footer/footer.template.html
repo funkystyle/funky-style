@@ -12,8 +12,17 @@
                 <p class="footer-p">
                     Search The Biggest Database of coupons on the planet,
                     <br>
-                    Connect with friends with our coupons apps
+                    Connect with friends with our coupons apps.
                 </p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <ul class="footer-unstyled">
+                    <h6 class="footer-p" style="font-weight: bold; font-size: 14px;">Company</h6>
+                    <li ng-repeat="item in cms">
+                        <i class="fa fa-angle-right"></i>&nbsp;
+                        <a ui-sref="main.cms({url: item.url})">{{ item.name }}</a>
+                    </li>
+                </ul>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                 <ul class="footer-unstyled">
@@ -39,6 +48,14 @@
                     You can opt out of our news letters at any time. See our
                     <a href="">Privacy policy</a>
                 </p>
+
+                <div class="footer-social-links">
+                    <a target="_blank" href="https://www.facebook.com/FabPromoCodes/"><i class="fa fa-facebook"></i></a>
+                    <a target="_blank" href="https://www.pinterest.com/fabpromocodes/"><i class="fa fa-pinterest"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/fabpromocodes/"><i class="fa fa-instagram"></i></a>
+                    <a target="_blank" href="https://twitter.com/FabPromocodes"><i class="fa fa-twitter"></i></a>
+                    <a target="_blank" href="https://plus.google.com/+FabPromocodes"><i class="fa fa-google-plus"></i></a>
+                </div>
             </div>
         </div>
     </div> <!-- end container -->

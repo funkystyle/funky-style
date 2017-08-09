@@ -34,7 +34,7 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 $scope.deal.h1 = data.h1;
                 $scope.deal.h2 = data.h2;
             }
-            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-deal" : undefined;
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase(): undefined;
         }, true);
         // get all stores into the array
         if($auth.isAuthenticated()) {

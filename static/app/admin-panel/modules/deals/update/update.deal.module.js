@@ -44,7 +44,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                     $scope.deal.h2 = data.h2;
                 }
             }
-            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-deal" : undefined;
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase() : undefined;
         }, true);
 
         $scope.oldStore = undefined;
