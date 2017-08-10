@@ -157,7 +157,7 @@ def before_create_deal(resource, request):
 def before_create(resource, request):
     LOGGER.info("called for create image resource:{}".format(resource))
     if resource == 'persons' or resource == 'deal_categories' or resource == 'deal_brands'\
-            or resoure == 'coupon_reports' or resource == 'blog' or resource == 'deep_link':
+            or resource == 'coupon_reports' or resource == 'blog' or resource == 'deep_link':
         before_create_person(resource, request)
     elif resource == 'stores' or resource == 'categories':
         before_create_store(resource, request)
