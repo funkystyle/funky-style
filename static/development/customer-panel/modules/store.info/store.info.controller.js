@@ -107,8 +107,6 @@ angular
             embedded['related_categories'] = 1;
             embedded['top_stores'] = 1;
             embedded['related_stores'] = 1;
-            embedded['related_deals'] = 1;
-
             var url = '/api/1.0/stores/'+$stateParams.url+'?embedded='+
                 JSON.stringify(embedded)+"&number_of_clicks=1";
             StoreQuery.get(url).then(function (store) {
@@ -282,9 +280,30 @@ angular
                             console.log(error);
                         })
                     }
-                    console.log("Final categories are ", $scope.categories);
 
-                    console.log($scope.expiredCoupons, $scope.coupons, "suggested coupons ", $scope.suggestedCoupons, "Related coupons ", $scope.relatedCoupons);
+
+                    // get the list of deals related to selected deal brand
+                    var embedded = {};
+                    embedded['related_deals'] = 1;
+                    embedded['deal_brands'] = 1;
+                    embedded['deal_category'] = 1;
+                    embedded['stores.store'] = 1;
+
+                    var where = {
+                        "store_temp": $scope.store._id
+                    },
+                        random = new Date().getDate(),
+                        url = '/api/1.0/deals'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + random;
+                    $http({
+                        url: url,
+                        method: "GET"
+                    }).then(function (data) {
+                        if(data['data']) {
+                            $scope.deals = data.data._items;
+                        }
+                    }, function (error) {
+                        console.log(error);
+                    });
                 }
                 // Get the top banner from banners table
                 $scope.top_banner = {};

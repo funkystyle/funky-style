@@ -14,6 +14,22 @@
     color: #fff;
     line-height: 25px;
 }
+.coupon-of-the-day {
+    border: 2px solid orange;
+}
+.coupon-of-the-day-tile {
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: orange;
+    color: #000;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
 .suggest-store-logo {
     height: 40px;
     width: 120px;

@@ -94,7 +94,7 @@ angular.module("brandPageModule", ["Directives"])
                     }
                     console.log("Deal brand is: ", data.data._items[0]);
                     $scope.deal = data.data._items[0];
-                    $scope.deal.date = new Date();
+                    $scope.deal.toDayDate= new Date();
 
                     // get the list of deals related to selected deal brand
                     var embedded = {};
