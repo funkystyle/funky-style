@@ -260,7 +260,7 @@
                 </div>
                 <!-- end of top banner area -->
                 <div class="tab-pane active" id="all-tab">
-                    <span ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
+                    <span ng-repeat="item in filterCoupons | orderBy: ['deal_of_the_day', 'coupon_sorting', '_updated']: true">
                         <div ng-if="item.deal_of_the_day" class="coupon-of-the-day-tile">
                             {{ item.coupon_type == 'offer' ? "Deal" : "Coupon"}} of the Day
                         </div>
@@ -371,7 +371,7 @@
                 </div> <!-- tab-1 -->
 
                 <div class="tab-pane" id="deals-tab">
-                    <span ng-if="item.coupon_type == 'offer'" ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
+                    <span ng-if="item.coupon_type == 'offer'" ng-repeat="item in filterCoupons | orderBy: ['deal_of_the_day', 'coupon_sorting', '_updated']: true">
                         <div ng-if="item.deal_of_the_day" class="coupon-of-the-day-tile">
                             {{ item.coupon_type == 'offer' ? "Deal" : "Coupon"}} of the Day
                         </div>
@@ -466,7 +466,7 @@
                     </span>
                 </div> <!-- tab-2 -->
                 <div class="tab-pane" id="coupons-tab">
-                    <span ng-if="item.coupon_type == 'coupon'" ng-repeat="item in filterCoupons | orderBy: 'coupon_sorting': true">
+                    <span ng-if="item.coupon_type == 'coupon'" ng-repeat="item in filterCoupons | orderBy: ['deal_of_the_day', 'coupon_sorting', '_updated']: true">
                         <div ng-if="item.deal_of_the_day" class="coupon-of-the-day-tile">
                             {{ item.coupon_type == 'offer' ? "Deal" : "Coupon"}} of the Day
                         </div>
