@@ -59,9 +59,10 @@
 .show_copan_code {
     height: 40px;
 }
-@media (min-width: 992px) {
-    #myCarousel {padding-right:23.3333%;}
-    #myCarousel .carousel-controls {display:none;}
+.carousel-inner>.item>a>img, .carousel-inner>.item>img {
+    width: 100%;
+    max-height: 295px;
+    height: 295px;
 }
 @media (max-width: 991px) {
     .carousel-caption p,
