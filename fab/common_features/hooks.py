@@ -175,7 +175,7 @@ def before_create(resource, request):
 
 
 @admin_or_editor_login_required
-def before_edit_deal(resource, update, original):
+def before_edit_deal(*args, **kwargs):
     LOGGER.info("before edit deal")
 
 def before_update(resource, update, original):

@@ -5,7 +5,7 @@ from settings import CONFIG_DATA, LOGGER
 def check_token(client_token, server_token):
     splitted_token = client_token.split(" ")
     LOGGER.info("splitted_token:{}".format(splitted_token))
-    if len(splitted_token) >= 2:
+    if not len(splitted_token) >= 2:
         LOGGER.info("token length not greater than 2")
         return False
     if server_token != splitted_token[-1]:
