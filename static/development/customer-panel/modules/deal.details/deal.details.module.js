@@ -1,5 +1,5 @@
 angular.module("dealDetailsModule", ["Directives"])
-    .controller("dealDetailsCtrl", function ($scope, $ocLazyLoad, $http, $state, $stateParams, $sce) {
+    .controller("dealDetailsCtrl", function ($scope, $ocLazyLoad, $http, $state, $stateParams, $sce, Query) {
         console.log("deal Details controller!");
 
         $scope.deal = {};
@@ -33,6 +33,29 @@ angular.module("dealDetailsModule", ["Directives"])
             $scope.deal_brands = data.data._items;
         }, function (error) {
             console.log(error);
+        });
+
+
+        // Get the top banner from banners table
+        $scope.top_banner = {};
+        var where = JSON.stringify({
+            "top_banner_string": 'deal_individual'
+        });
+        var url = "/api/1.0/banner?where="+where;
+        Query.get(url).then(function (banner) {
+            console.log("banner Details: ", banner.data._items);
+            $scope.top_banner = banner.data._items[0];
+        });
+
+        // Get the Side banner from banners table
+        $scope.side_banner = {};
+        var where = JSON.stringify({
+            "side_banner_string": 'deal_individual'
+        });
+        var url = "/api/1.0/banner?where="+where;
+        Query.get(url).then(function (banner) {
+            console.log("banner Details: ", banner.data._items);
+            $scope.side_banner = banner.data._items[0];
         });
 
         // if stateParams of url found the call http request to get the deal details from ther server
@@ -119,4 +142,20 @@ angular.module("dealDetailsModule", ["Directives"])
 
             return object;
         }
-    });
+    })
+    .factory("Query", function ($http, $q) {
+        return {
+            get: function (url) {
+                var d = $q.defer();
+                $http({
+                    url: url+"&r="+Math.random(),
+                    method: "GET"
+                }).then(function (data) {
+                    d.resolve(data);
+                }, function (error) {
+                    d.reject(error);
+                });
+                return d.promise;
+            }
+        }
+    })

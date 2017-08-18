@@ -10,10 +10,18 @@ angular.module("addBlogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toa
         $scope.categories = [];
         $scope.blogs = [];
         // get all categories
+        $scope.breadcrumbs = [];
         categoryFactory.get().then(function (data) {
             console.log(data);
             if(data['data']) {
                 $scope.categories = data.data._items;
+                angular.forEach($scope.categories, function (item) {
+                    $scope.breadcrumbs.push({
+                        name: item.name,
+                        url: item.url,
+                        _id: item._id
+                    });
+                });
             }
         }, function (error) {
             console.log(error);

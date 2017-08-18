@@ -104,14 +104,11 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="breadcrumb">Breadcrumb</label>
-                        <ui-select id="breadcrumb" multiple ng-model="blog.breadcrumb" theme="bootstrap"
-                                   close-on-select="false" title="Related Stores">
-                            <ui-select-match placeholder="Select Breadcrumb">{{$item.title}}</ui-select-match>
-                            <ui-select-choices repeat="item._id as item in blogs | propsFilter: {title: $select.search}">
-                                <div ng-bind-html="item.title | highlight: $select.search"></div>
-                                <small>
-                                    <span ng-bind-html="''+item.h1 | highlight: $select.search"></span>
-                                </small>
+                        ui-select multiple ng-model="blog.breadcrumb" theme="bootstrap"
+                                   close-on-select="false" title="Related Categories" id="breadcrumbs">
+                            <ui-select-match placeholder="Select Breadcrumb">{{$item.name}}</ui-select-match>
+                            <ui-select-choices repeat="item in breadcrumbs | propsFilter: {name: $select.search}">
+                                <div ng-bind-html="item.name | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
                     </div>

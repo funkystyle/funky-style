@@ -1,7 +1,7 @@
 angular.module("activateEmailModule", ["constantModule", "satellizer", "toastr"])
-    .controller("activateEmailCtrl", function($scope, $http, URL, mainURL, $state, $stateParams, $auth, toastr) {
+    .controller("activateEmailCtrl", function($scope, $http, URL, $location, mainURL, $state, $stateParams, $auth, toastr) {
         
-        console.log($stateParams);
+        console.log('Activate email controller');
         $scope.message = {
             text: "Please wait..."
         }
@@ -24,15 +24,8 @@ angular.module("activateEmailModule", ["constantModule", "satellizer", "toastr"]
             }, function (error) {
                 console.log(error);
 
-                $scope.message = {
-                    text: "We are Sorry.!",
-                    type: "error",
-                    message: error.data.error
-                };
-
-                setTimeout(function () {
-                    $state.go('main.login');
-                }, 2800);
+                toastr.success("Please login!");
+                $location.path('/')
             });
         };
 

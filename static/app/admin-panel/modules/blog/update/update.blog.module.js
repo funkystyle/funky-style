@@ -13,12 +13,21 @@ angular.module("updateBlogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "
             // $scope.blog.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase() +"-blog" : undefined;
         }, true);
 
+        $scope.breadcrumbs = [];
+
         if($auth.isAuthenticated() && $stateParams['id']) {
             // get all categories
             categoryFactory.get().then(function (data) {
                 console.log(data);
                 if(data['data']) {
                     $scope.categories = data.data._items;
+                    angular.forEach($scope.categories, function (item) {
+                        $scope.breadcrumbs.push({
+                            name: item.name,
+                            url: item.url,
+                            _id: item._id
+                        });
+                    });
                 }
             }, function (error) {
                 console.log(error);

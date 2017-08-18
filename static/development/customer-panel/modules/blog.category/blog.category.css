@@ -331,6 +331,26 @@ h4{
 }
 .word_press{
     margin-left: 0;
+    height: 100px;
+    margin-bottom: 10px;
+}
+.word_press a {
+    display: block;
+    height: 100px;
+    overflow: hidden;
+}
+.word_press a img, .blog-side-banner a img {
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+}
+.blog-side-banner {
+    height: 300px;
+    margin: 10px 0;
+}
+.blog-side-banner a {
+    height: 300px;
+    overflow: hidden;
 }
 /*footer started*/
 .last_cont_1{

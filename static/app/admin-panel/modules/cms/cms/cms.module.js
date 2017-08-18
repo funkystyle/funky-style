@@ -2,7 +2,7 @@
 angular.module("cmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy",
     "couponFactoryModule", "categoryFactoryModule", "constantModule", "cmsFactoryModule", "angular-table"])
-    .controller("cmsCtrl", function($scope, $q, $timeout, toastr, storeFactory,
+    .controller("cmsCtrl", function($scope, $q, $timeout, toastr, storeFactory, $state,
                                      $auth, personFactory, $log, couponFactory, categoryFactory, URL, cmsFactory, $sce) {
         $scope.cms = [];
         $scope.filterCms = [];
@@ -88,6 +88,7 @@ angular.module("cmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr"
 
             $q.all(items).then(function (data) {
                 toastr.success("Deleted all selected records!", "SUCCESS!");
+                $state.reload();
             }, function (error) {
                 console.log(error);
             });

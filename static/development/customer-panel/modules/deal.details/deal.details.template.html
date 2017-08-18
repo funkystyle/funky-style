@@ -109,6 +109,12 @@
     </div>
     <!-- end of deal details -->
 
+    <div class="word_press" ng-if="top_banner">
+        <a target="_blank" href="{{ top_banner.destination_url }}">
+            <img ng-src="{{ top_banner.image }}" alt="" class="img-responsve"/>
+        </a>
+    </div>
+
     <div class="row specifications-main">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <button ng-click="goScroll('specifications')" class="btn btn-md btn-grey">Specifications</button>
@@ -203,6 +209,12 @@
                 </li>
             </div>
 
+            <div class="blog-side-banner" ng-if="side_banner">
+                <a target="_blank" href="{{ side_banner.destination_url }}">
+                    <img ng-src="{{ side_banner.image }}" alt="" class="img-responsve"/>
+                </a>
+            </div>
+
         </div> <!-- end of col-lg-3 -->
     </div> <!-- End row -->
 
@@ -247,7 +259,7 @@
                     </div> <!-- end div -->
                     <h3 class="margin-top-0 h3-heading">{{ deal.h1 }}</h3>
                     <div style="width: 100%;" ng-click="show = !show" class="para_small top-desc-from-top top-desc"
-                       ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(deal.description)"></div>
+                       ng-class="{'show-desc': show, 'top-desc-from-top': !show}" data-ng-bind-html="trustAsHtml(deal.description)"></div>
                     <div>
                         <a href="{{ deal.destination_url }}" target="_blank" class="btn btn-md btn-info">
                             <b>ACTIVATE OFFER &nbsp;</b>

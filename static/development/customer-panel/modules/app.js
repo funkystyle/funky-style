@@ -172,20 +172,6 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     }
                 })
 
-                // activate email link
-                .state('main.activate', {
-                    url: '/confirm_account/users/:user_id/confirm/:token',
-                    templateUrl: 'static/app/customer-panel/modules/activate.email/activate.email.template.html',
-                    controller: "activateEmailCtrl",
-                    resolve: {
-                        activateEmail: function($ocLazyLoad) {
-                            return $ocLazyLoad.load({
-                                name: 'activateEmailModule',
-                                files: ['static/app/customer-panel/modules/activate.email/activate.email.module.js']
-                            })
-                        }
-                    }
-                })
                 //  change password
                 .state('main.change_password', {
                     url: '/change-password',
@@ -200,6 +186,20 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })*/
+                // activate email link
+                .state('main.activate', {
+                    url: '/confirm_account/users/:user_id/confirm/:token',
+                    templateUrl: 'static/app/customer-panel/modules/activate.email/activate.email.template.html',
+                    controller: "activateEmailCtrl",
+                    resolve: {
+                        activateEmail: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'activateEmailModule',
+                                files: ['static/app/customer-panel/modules/activate.email/activate.email.module.js']
+                            })
+                        }
+                    }
+                })
                 // store state
                 .state('main.store', {
                     url: '/stores',
@@ -458,8 +458,8 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     title: undefined,
                     description: undefined
                 };
-                replacement.title = item.meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-                replacement.description = item.meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+                replacement.title = item.meta_title.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+                replacement.description = item.meta_description.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
 
                 console.log("SEO replacement Data: ", replacement);
                 return replacement;
