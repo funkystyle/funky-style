@@ -9,7 +9,7 @@ class SiteMinder(object):
 
     def __init__(self, date_time, resource_name):
         self.resource_name = resource_name
-        self.replaced_resource = resource_name.replace("_", "-")
+        self.replaced_resource = resource_name.replace("-", "_")
         self.date_time = "{}+5.30".format(date_time)
 
         self.base_url = "{server_name}/{xml_file_path}".format(
@@ -65,7 +65,7 @@ def generate_sitemap_index_file():
         )
         loc = "{server_url}/sitemap_{resource_name}.xml".format(
             server_url=SERVER_URL,
-            resource_name=schema_name.replace("_", "-")
+            resource_name=schema_name.replace("-", "_")
         )
         lastmod = "{}+5.30".format(datetime.now().strftime('%Y-%m-%dT%H-%M-%S'))
         element += "<sitemap>" \
