@@ -5,10 +5,6 @@ from settings import SERVER_URL, \
     SCHEMAS, IGNORE_COLLECTION_NAMES, BASE_DIR, INDEX_XML_TEMPLATE, \
     SUB_FILE_TEMPLATE, LOOK_UP_FIELDS, PRIORITY,XML_FILES_FOLDER
 
-
-
-
-
 class SiteMinder(object):
 
     def __init__(self, date_time, resource_name):
