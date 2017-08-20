@@ -156,22 +156,25 @@ app.on_update_item_coupons += before_edit_deal
 app.on_delete_item_coupons += before_edit_deal
 
 # master seo
-app.on_fetched_resource_master_seo += before_returning_master_seo
-app.on_fetched_item_master_seo += before_returning_master_seo
+#app.on_fetched_resource_master_seo += before_returning_master_seo
+#app.on_fetched_item_master_seo += before_returning_master_seo
+
 app.on_update_resource_master_seo += before_returning_master_seo
 app.on_update_item_master_seo += before_returning_master_seo
 app.on_delete_item_master_seo += before_returning_master_seo
 
 #banner
-app.on_fetched_resource_banner += before_returning_master_seo
-app.on_fetched_item_banner += before_returning_master_seo
+#app.on_fetched_resource_banner += before_returning_master_seo
+#app.on_fetched_item_banner += before_returning_master_seo
+
 app.on_update_resource_banner += before_returning_master_seo
 app.on_update_item_banner += before_returning_master_seo
 app.on_delete_item_banner += before_returning_master_seo
 
 #cms_pages
-app.on_fetched_resource_banner += before_returning_cms_pages
-app.on_fetched_item_banner += before_returning_cms_pages
+#app.on_fetched_resource_cms_pages += before_returning_cms_pages
+#app.on_fetched_item_cms_pages += before_returning_cms_pages
+
 app.on_update_resource_cms_pages += before_returning_master_seo
 app.on_update_item_cms_pages += before_returning_master_seo
 app.on_delete_item_cms_pages += before_returning_master_seo

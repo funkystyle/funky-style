@@ -11,8 +11,10 @@
                     <a class="deal-title" ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
                 </div>
             </div>
+
             <div class="row" style="padding: 15px;">
                 <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div star-rating rating-value="item.rating" max="5"></div>
                     <h4 class="disc-price"><strong>Rs. {{ item.discount_price }}</strong></h4>
                     <strike>Rs. {{ item.actual_price }}</strike>
                 </div>

@@ -31,7 +31,7 @@ gulp.task('minify_js', function() {
     console.log("-----------Mifiying JS files-----------", new Date());
     gulp.src(['development/customer-panel/modules/*/*.js', 'development/customer-panel/modules/*.js'])
         .pipe(ngAnnotate())
-        // .pipe(stripDebug())
+        .pipe(stripDebug())
         .pipe(minifyJs())
         .pipe(gulp.dest('app/customer-panel/modules'));
     // Minify Bower components and concatinate bower files into one file

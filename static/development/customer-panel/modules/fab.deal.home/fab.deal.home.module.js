@@ -61,6 +61,42 @@ angular.module("allDealsModule", ["Directives"])
             console.log(error);
         });
 
+        // get the slider banners
+        $scope.banners = [];
+        var where = JSON.stringify({
+            "top_banner_string": 'deal'
+        });
+        var projection = {
+            "top_banner_string": 1,
+            "image": 1,
+            "title": 1,
+            "image_text": 1,
+            "destination_url": 1
+        };
+
+        url = '/api/1.0/banner'+'?where='+where+'&projection='+JSON.stringify(projection)+'&rand_number' + new Date().getTime();
+        $http({
+            url: url,
+            method: "GET",
+            headers: {
+                "Content-Encoding": "gzip"
+            }
+        }).then(function (data) {
+            console.log(data);
+            if(data['data']) {
+                console.log("Banners: ", data.data._items);
+                $scope.banners = data.data._items;
+
+                $('#myCarousel').carousel({
+                    interval: 4000,
+                    pause: "hover",
+                    loop: true
+                });
+            }
+        }, function (error) {
+            console.log(error);
+        });
+
 
         // get the list of featured stores
         var store = {};

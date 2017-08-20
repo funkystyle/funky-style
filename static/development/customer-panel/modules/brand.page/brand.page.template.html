@@ -4,20 +4,11 @@
 
     <!-- deal category information -->
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-body bottom-5">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 thumb deal-cat-left">
-                    <div class="thumbnail store-logo">
-                        <img ng-src="{{ deal.image }}" alt="Flipkart logo" title="Flip cart logo">
-                    </div> <!-- end thumbnail -->
-                    <div class="text-center" star-rating rating-value="deal.rating" max="5"></div>
-                    <p class="text-center">
-                        {{ deal.rating }}/5 Based on {{ deal.voting }} Votes
-                    </p>
-                </div>
-                <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
-                    <div style="width: 100%; min-height: 20px;">
-                        <ol class="breadcrumb pull-right">
+                <div class="col-md-12">
+                    <div class="breadcrumb-sec">
+                        <ol class="breadcrumb pull-left">
                             <li><a href="/">Home</a></li>
                             <li><a>Brands</a></li>
                             <li ng-repeat="item in deal.breadcrumb">
@@ -25,41 +16,56 @@
                             </li>
                             <li class="active">{{ deal.name }}</li>
                         </ol>
-                    </div> <!-- end div -->
-                    <h1 class="margin-top-0 h3-heading">{{ deal.name }}</h1>
-                    <p ng-click="show = !show" class="para_small top-desc"
-                       ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(deal.top_description)"></p>
+
+                        <div>
+                            <p>Updated on: {{ deal.toDayDate | date: "dd MMM yyyy" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row other-brands-row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 thumb deal-cat-left">
+                    <div class="thumbnail store-logo">
+                        <img ng-src="{{ deal.image }}" alt="{{ deal.name }}" title="{{ deal.name }}">
+                    </div> <!-- end thumbnail -->
+                    <div class="text-center" star-rating rating-value="deal.rating" max="5"></div>
+                    <p class="text-center">
+                        {{ deal.rating }}/5 Based on {{ deal.voting }} Votes
+                    </p>
+                </div>
+                <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
+                    <h1 class="margin-top-5 h3-heading">{{ deal.name }}</h1>
+                    <p ng-click="show = !show" class="para_small top-desc top-info-desc"
+                       ng-class="{'show-desc': show, 'top-info-desc': !show}" data-ng-bind-html="trustAsHtml(deal.top_description)"></p>
                 </div>
             </div> <!-- end row -->
+
+            <!-- Other brands you may like -->
+            <div class="row other-brands-row">
+                <div class="col-md-3 col-sm-12">
+                    <div class="other-brands-may-like">
+                        <div style="margin-top: 5px;">
+                            <h3 class="h3-heading margin-0">
+                                Other Brands
+                            </h3>
+                        </div>
+                        <div>
+                            <h5 class="you-may-like">You may like</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                    <div class="repeat-brands">
+                        <a class="repeat-brands-item" ng-repeat="item in deal.related_brands | limitTo: 5"
+                           ui-sref="main.deal_brand_page({url: item.url})">
+                            <img ng-src="{{ item.image }}" alt="{{ item.image }} Logo">
+                        </a>
+                    </div>
+                </div>
+            </div> <!-- end of Other brands you may like -->
         </div> <!-- end panel body -->
     </div> <!-- end panel -->
     <!-- end of deal category information -->
-
-    <!-- other brands -->
-    <h3 class="h3-heading">Other Brands You May Like</h3>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 cat-area">
-            <div class="deal-tile cat-tile panel" ng-repeat="item in deal.related_brands">
-                <!-- Right-aligned -->
-                <div class="media">
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                            <a ui-sref="main.deal_brand_page({url: item.url})">{{ item.name }}</a>
-                        </h4>
-                    </div>
-                    <div class="media-right image-block deal-tile">
-                        <img ng-src="{{ item.image }}" class="media-object media-image">
-                    </div>
-                </div>
-                <h5>
-                    <a ui-sref="main.deal_brand_page({url: item.url})">
-                        See All {{ item.name }} Price list
-                    </a>
-                </h5>
-            </div>
-        </div>
-    </div>
-    <!-- End of deal related categories -->
 
     <div class="row">
         <div class="col-md-3 col-xs-12 col-sm-12">
@@ -117,17 +123,16 @@
             </div>
             <!--end panel-->
         </div>
-        <div class="col-md-9 col_md_9_pad col-xs-12 col-sm-12">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <h3 class="h3-heading">List of All Deals</h3>
-                </div>
-            </div> <!-- end row -->
+        <div class="col-md-9 col_md_9_pad col-xs-12 col-sm-12 pad-5">
             <deal-tile-directive class-name="col-lg-4 col-md-4 col-sm-12 pad-5" items="filterDeals"></deal-tile-directive>
             <!-- footer description -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div ng-bind-html="trustAsHtml(deal.footer_description)"></div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div ng-bind-html="trustAsHtml(deal.footer_description)"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

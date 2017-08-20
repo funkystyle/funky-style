@@ -5,7 +5,56 @@
     font-weight: bold;
     text-align: center;
 }
-
+.other-brands-may-like, .other-brands-may-like div, .repeat-brands-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.other-brands-may-like div {
+    width: 100%;
+}
+.repeat-brands {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.breadcrumb-sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.repeat-brands-item{
+    height: 60px;
+    width: 150px;
+    border-right: 1px solid #DDDDDD;
+}
+.repeat-brands-item:last-child {
+    border-right: none !important;
+}
+.margin-top-5 {
+    margin-top: 5px;
+}
+.margin-0 {
+    margin: 0;
+}
+.repeat-brands-item img {
+    height: auto;
+    max-height: 100px;
+    width: auto;
+    max-width: 100px;
+}
+.other-brands-row {
+    margin: 3px 0;
+    padding-top: 5px;
+    border-top: 1px solid #DDDDDD;
+}
+.top-info-desc {
+    height: 90px !important;
+}
+.you-may-like {
+    font-weight: 400;
+}
 .store-logo {
     border-style: solid;
     border-color: #DDD;

@@ -156,8 +156,13 @@ def before_create_deal(resource, request):
 # hooks for stores
 def before_create(resource, request):
     LOGGER.info("called for create image resource:{}".format(resource))
+<<<<<<< HEAD
     if resource == 'persons' or resource == 'deal_categories' or resource == 'deal_brands' \
             or resoure == 'coupon_reports' or resource == 'blog' or resource == 'deep_link':
+=======
+    if resource == 'persons' or resource == 'deal_categories' or resource == 'deal_brands'\
+            or resource == 'coupon_reports' or resource == 'blog' or resource == 'deep_link':
+>>>>>>> 30b3e5da8b54db132e9026f4146e056eac212fc7
         before_create_person(resource, request)
     elif resource == 'stores' or resource == 'categories':
         before_create_store(resource, request)
@@ -175,7 +180,7 @@ def before_create(resource, request):
 
 
 @admin_or_editor_login_required
-def before_edit_deal(resource, update, original):
+def before_edit_deal(*args, **kwargs):
     LOGGER.info("before edit deal")
 
 def before_update(resource, update, original):
