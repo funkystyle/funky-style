@@ -47,12 +47,14 @@ header {
     padding: 5px 20px;
     margin-left: -2px;
 }
-.bottom-header {
-    position: absolute;
-    width: 100%;
-    z-index: 9;
-    top: -12px;
-    height: 40px;
+@media only screen and (min-device-width: 720px) {
+    .bottom-header {
+        position: absolute;
+        width: 100%;
+        z-index: 9;
+        top: -12px;
+        height: 40px;
+    }
 }
 .bottom-header ul {
     padding: 0 15px;
@@ -358,7 +360,6 @@ ul.nav li.dropdown ul.dropdown-menu {
         display: none;
     }
     .custom-popup-wrapper {
-        width: 292px;
         height: 300px;
     }
     .row2 {

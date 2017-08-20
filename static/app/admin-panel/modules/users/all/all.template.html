@@ -91,6 +91,13 @@
                     <label for="mobile_number">MOBILE NUMBER</label>
                     <input type="text" only-digits class="form-control" id="mobile_number" ng-model="u_user.mobile_number" placeholder="MOBILE NUMBER" autocomplete="off">
                 </div>
+
+                <div class="form-group col-md-12">
+                    <label for="password">Password</label>
+                    <input type="text" class="form-control" id="password"
+                           ng-model="u_user.password.password" placeholder="Password"
+                           autocomplete="off">
+                </div>
                 <div class="form-group col-md-12">
                     <label style="width: 100%;">Status</label>
                     <label class="radio-inline"><input type="radio" name="status" value="active" ng-model="u_user.status">Active</label>

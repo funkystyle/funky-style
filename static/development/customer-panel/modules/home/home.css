@@ -123,9 +123,15 @@ a.right span {
     padding: 0 25px 25px 0;
     text-align: right;
 }
-
+@media only screen and (min-device-width: 720px) {
+    .store-thumbnail {
+        width: 14%;
+    }
+    .coupon-title-heading {
+        min-height: 50px;
+    }
+}
 .store-thumbnail {
-    width: 14%;
     float: left;
     position: relative;
     overflow: hidden;
@@ -208,7 +214,6 @@ a.right span {
     width: 100%;
 }
 .coupon-title-heading {
-    min-height: 50px;
     max-height: 40px;
     overflow: hidden;
     color: #000;

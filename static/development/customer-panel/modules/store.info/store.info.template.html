@@ -6,6 +6,16 @@
 <div class="container pad top-container">
     <div class="panel panel-default heading-content-panel">
         <div class="panel-body">
+            <div style="width: 100%; min-height: 20px;" class="breadcrumb-area">
+                <ol class="breadcrumb pull-right">
+                    <li><a ui-sref="main.home">Home</a></li>
+                    <li><a ui-sref="main.store">Stores</a></li>
+                    <li ng-repeat="item in store.breadcrumb">
+                        <a ui-sref="main.categoryinfo({url: item.url})">{{ item.name }}</a>
+                    </li>
+                    <li class="active">{{ store.url }}</li>
+                </ol>
+            </div> <!-- end breadcrumb -->
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 thumb">
                     <div class="thumbnail store-logo">
@@ -21,16 +31,6 @@
                     </p>
                 </div>
                 <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
-                    <div style="width: 100%; min-height: 20px;">
-                        <ol class="breadcrumb pull-right">
-                            <li><a ui-sref="main.home">Home</a></li>
-                            <li><a ui-sref="main.store">Stores</a></li>
-                            <li ng-repeat="item in store.breadcrumb">
-                                <a ui-sref="main.categoryinfo({url: item.url})">{{ item.name }}</a>
-                            </li>
-                            <li class="active">{{ store.url }}</li>
-                        </ol>
-                    </div> <!-- end div -->
                     <h1 class="margin-top-0 h3-heading">{{ store.h1 }}</h1>
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(store.top_description)"></p>
@@ -39,7 +39,7 @@
                         <time datetime="{{ store.toDayDate | date: 'dd MMM yyyy hh:mm' }}">{{ store.toDayDate | date: "dd MMM yyyy hh:mm a" }}</time>
                     </p>
                 </div>
-            </div>
+            </div> <!-- end row -->
         </div> <!-- end panel body -->
     </div> <!-- end panel -->
     <!--row-->
@@ -229,17 +229,17 @@
         <div class="col-lg-9 col-md-9 col-sm-12">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active col-lg-2 col-xs-2 pad-0 text-center pad_nav_right">
+                <li role="presentation" class="active col-lg-2 col-xs-4 pad-0 text-center pad_nav_right">
                     <a href="" data-target="#all-tab" aria-controls="home" role="tab" data-toggle="tab">All &nbsp;
                         <span> ({{ filterCoupons.length }})</span>
                     </a>
                 </li>
-                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-2 pad_nav_right pad_nav_left">
+                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-4 pad_nav_right pad_nav_left">
                     <a href="" data-target="#deals-tab" aria-controls="profile" role="tab" data-toggle="tab">Deals&nbsp;
                         <span> ({{ dealsLength.length }})</span>
                     </a>
                 </li>
-                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-2 pad_nav_left">
+                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-4 pad_nav_left">
                     <a href="" data-target="#coupons-tab" aria-controls="messages" role="tab" data-toggle="tab">
                         Coupons&nbsp;
                         <span> ({{ couponsLength.length }})</span>
@@ -281,7 +281,7 @@
                                                 </span>
                                             </div>
                                         </div> <!-- end deal-price -->
-                                        <div class="col-xs-12 hidden-lg hidden-md">
+                                        <div class="hidden-lg hidden-md">
                                             <p class="fifty_cashback">
                                                 {{ item.discount_type }} {{ item.discount }}
                                             </p>
@@ -321,19 +321,19 @@
                             <!--panel footer-->
                             <div class="panel-footer coupon-footer">
                                 <div class="row vari_pad">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_right text-center">
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left text-center">
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
+                                    <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-12">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right"></i>
@@ -392,7 +392,7 @@
                                                 </span>
                                             </div>
                                         </div> <!-- end deal-price -->
-                                        <div class="col-xs-12 hidden-lg hidden-md">
+                                        <div class="hidden-lg hidden-md">
                                             <p class="fifty_cashback">
                                                 {{ item.discount_type }} {{ item.discount }}
                                             </p>
@@ -434,19 +434,19 @@
                             <!--panel footer-->
                             <div class="panel-footer coupon-footer">
                                 <div class="row vari_pad">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_right text-center">
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left text-center">
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
+                                    <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-12">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right"></i>
@@ -487,7 +487,7 @@
                                                 </span>
                                             </div>
                                         </div> <!-- end deal-price -->
-                                        <div class="col-xs-12 hidden-lg hidden-md">
+                                        <div class="hidden-lg hidden-md">
                                             <p class="fifty_cashback">
                                                 {{ item.discount_type }} {{ item.discount }}
                                             </p>
@@ -527,19 +527,19 @@
                                 <!--panel footer-->
                             <div class="panel-footer coupon-footer">
                                 <div class="row vari_pad">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_right text-center">
                                         <i class="fa fa-heart-o"></i>
                                         {{ item.status }}
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left pad_nav_right text-center">
                                         <i class="fa fa-comment-o"></i> &nbsp;
                                         Comment
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left text-center">
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
+                                    <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-12">
                                         <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right"></i>
@@ -648,7 +648,7 @@
                                         <img ng-src="{{ item.related_stores[0].image }}">
                                     </div>
                                 </div> <!-- end deal-price -->
-                                <div class="col-xs-12 hidden-lg hidden-md">
+                                <div class="hidden-lg hidden-md">
                                     <p class="fifty_cashback">
                                         {{ item.discount_type }} {{ item.discount }}
                                     </p>
@@ -686,19 +686,19 @@
                     <!--panel footer-->
                     <div class="panel-footer coupon-footer">
                         <div class="row vari_pad">
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_right text-center">
                                 <i class="fa fa-heart-o"></i>
                                 {{ item.status }}
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
                                 Comment
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left text-center">
                                 <i class="fa fa-bug"></i> &nbsp;
                                 Report
                             </div>
-                            <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
+                            <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-12">
                                 <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                     <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                     <i class="pull-right fa fa-arrow-right"></i>
@@ -735,7 +735,7 @@
                                                 </span>
                                     </div>
                                 </div> <!-- end deal-price -->
-                                <div class="col-xs-12 hidden-lg hidden-md">
+                                <div class="hidden-lg hidden-md">
                                     <p class="fifty_cashback">
                                         {{ item.discount_type }} {{ item.discount }}
                                     </p>
@@ -773,19 +773,19 @@
                     <!--panel footer-->
                     <div class="panel-footer coupon-footer">
                         <div class="row vari_pad">
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_right text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_right text-center">
                                 <i class="fa fa-heart-o"></i>
                                 {{ item.status }}
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left pad_nav_right text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left pad_nav_right text-center">
                                 <i class="fa fa-comment-o"></i> &nbsp;
                                 Comment
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pad_nav_left text-center">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pad_nav_left text-center">
                                 <i class="fa fa-bug"></i> &nbsp;
                                 Report
                             </div>
-                            <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-9">
+                            <div class="col-lg-5 col-md-6 col-sm-6 col-lg-offset-1 col-xs-12">
                                 <a ng-click="openCouponCode(store, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                     <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                     <i class="pull-right fa fa-arrow-right"></i>

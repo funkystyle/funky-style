@@ -570,3 +570,135 @@ ul.rating {
     margin-top:20px;
 }
 /* rating module css */
+
+
+
+
+/* ---------- media query for mobile ------------ */
+@media only screen and (max-device-width: 480px) {
+    .navbar-header {
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .navbar-toggle {
+        margin-top: 0;
+        float: left !important;
+    }
+    .flipkart-navbar-search {
+        width: 230px;
+    }
+    .store-thumbnail {
+        width: 30%;
+    }
+    .rupee {
+        padding: 0 !important;
+    }
+    .coupon-title-heading {
+        min-height: 40px;
+    }
+    .panel-footer .row {
+        display: block !important;
+    }
+    .deal-directive-tile {
+        width: 290px;
+        height: auto;
+        margin: 0 auto;
+    }
+    .breadcrumb-area {
+        display: none;
+    }
+    .custom-popup-wrapper {
+        left: -59px !important;
+        width: 335px !important;
+    }
+    .custom-popup-wrapper .media-body p {
+        font-size: 13px;
+    }
+    .modal-dialog {
+        width: 300px;
+    }
+    .popup-close {
+        position: absolute;
+        top: -10px;
+        right: 10px;
+    }
+    .popup-coupon-heading .popup-heading .modal-title {
+        font-size: 16px;
+    }
+    .popup-coupon-code > .form-inline {
+        width: 100%;
+    }
+    .popup-coupon-code > .form-inline > .form-group {
+        width: 60%;
+        float: left;
+    }
+    .popup-coupon-code .popup-btn {
+        height: 38px;
+    }
+    .coupon-well {
+        max-height: 280px;
+        margin-bottom: 10px;
+    }
+    .coupon-well h4 {
+        height: 90px !important;
+    }
+    .pad {
+        padding: 0 15px !important;
+    }
+    .pad-right-0 {
+        padding-right: 15px !important;
+    }
+    .nav-tabs > li > a {
+        padding: 10px 5px;
+    }
+    .coupon-heading {
+        font-size: 18px !important;
+    }
+    .fifty_cashback {
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    .pad_nav_right, .pad_nav_left {
+        padding: 10px 0;
+    }
+    .vari_pad > .col-xs-12 {
+        padding-left: 0;
+    }
+    .navbar-collapse {
+        width: 350px;
+        margin: 0 auto;
+        position: absolute;
+        left: -15px;
+        top: 48px;
+    }
+    .navbar-default .navbar-collapse {
+        border-color: transparent;
+    }
+    .bottom-header ul {
+        margin-top: 0;
+    }
+    #foo {
+        font-size: 16px !important;
+    }
+    .popup-btn {
+        width: 100px;
+        font-size: 12px;
+        min-width: initial;
+    }
+    .navbar-brand {
+        max-width: none;
+        margin-top: 0;
+    }
+    .header button {
+        display: none;
+    }
+    .bottom-header {
+        position: relative !important;
+        height: 50px;
+    }
+    .top-container {
+        margin-top: 137px;
+    }
+}

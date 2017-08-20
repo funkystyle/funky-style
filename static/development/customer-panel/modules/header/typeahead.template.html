@@ -3,16 +3,13 @@
         <li class="uib-typeahead-match" ng-repeat="match in matches track by $index"
             ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)"
             role="option" id="{{::match.id}}">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3" style="width: 30%;">
-                    <div class="thumbnail search-thumbnail" style="margin-bottom: 0;">
-                        <img ng-src="{{ match.model.image }}" alt="">
-                    </div>
+            <!-- Left-aligned -->
+            <div class="media">
+                <div class="media-left">
+                    <img ng-src="{{ match.model.image }}" class="media-object" style="width:60px">
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-9">
-                    <h4 class="font_style">
-                        {{ match.model.name }}
-                    </h4>
+                <div class="media-body">
+                    <p>{{ match.model.name }}</p>
                 </div>
             </div>
         </li>

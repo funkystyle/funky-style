@@ -58,8 +58,11 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
                     $scope.category.h2 = data.h2;
                 }
             }
-            $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-offers" : undefined;
         }, true);
+
+        $scope.changeUrl = function (newVal) {
+            $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-offers" : undefined;
+        };
 
         // get all stores into the array
         if($auth.isAuthenticated() && $stateParams['categoryId']) {
