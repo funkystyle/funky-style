@@ -87,6 +87,7 @@
   },
   "XML_GENERATOR_FILE_PATH": "sitemap_xml_files",
   "INDEX_XML_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_main_index.xml",
-  "SUB_FILE_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_sub_file.xml"
+  "SUB_FILE_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_sub_file.xml",
+  "IGNORE_SITEMAP_COLLECTIONS": [""]
 
 }
