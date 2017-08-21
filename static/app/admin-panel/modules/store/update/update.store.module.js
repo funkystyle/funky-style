@@ -41,8 +41,12 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
 
                 console.log("SEO details:  ", data);
             }
-            $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-coupons" : undefined;
+
         }, true);
+
+        $scope.changeUrl = function (newVal) {
+            $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-coupons" : undefined;
+        };
 
         // get all stores into the array
         if($auth.isAuthenticated() && $stateParams['storeId']) {

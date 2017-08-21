@@ -17,7 +17,7 @@
                 <div class="col-lg-9 col-md-9">
                     <div class="form-group">
                         <label for="deal_name">Name*</label>
-                        <input required type="text" class="form-control input-sm" id="deal_name"
+                        <input ng-keyup="changeUrl(deal.name)" required type="text" class="form-control input-sm" id="deal_name"
                                placeholder="Deal Name" ng-model="deal.name">
                     </div>
                     <div class="form-group">

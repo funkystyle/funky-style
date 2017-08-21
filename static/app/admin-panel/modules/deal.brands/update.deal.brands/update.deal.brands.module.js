@@ -21,8 +21,11 @@ angular.module("updateDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstr
                     $scope.deal.h2 = data.h2;
                 }
             }
-            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-deals" : undefined;
         }, true);
+
+        $scope.changeUrl = function (newVal) {
+            $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-deals" : undefined;
+        };
 
         if($auth.isAuthenticated() && $stateParams['id']) {
             var embedded = {
