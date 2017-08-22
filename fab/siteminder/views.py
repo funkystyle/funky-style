@@ -52,6 +52,9 @@ def generate_sitemap_index_file():
     for ignore_schema_name in IGNORE_COLLECTION_NAMES:
         if ignore_schema_name in SCHEMAS.keys():
             schema_names.remove(ignore_schema_name)
+    schema_names.remove("deal_categories_collection")
+    schema_names.remove("user_favourites")
+    schema_names.append("deal_categories")
     file_path = BASE_DIR+"/"+INDEX_XML_TEMPLATE
     with open(file_path) as _file:
         template = _file.read()

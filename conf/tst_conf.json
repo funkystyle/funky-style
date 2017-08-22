@@ -70,7 +70,9 @@
     "deal_brands": {"changefreq": "daily", "priority": 0.8, "prefix": "brands"},
     "deal_categories": {"changefreq": "daily", "priority": 0.8, "prefix": "categories"},
     "deals": {"changefreq": "daily", "priority": 0.8, "prefix": "deals"},
-    "stores": {"changefreq": "daily", "priority": 0.8, "prefix": "store"}
+    "stores": {"changefreq": "daily", "priority": 0.8, "prefix": "store"},
+    "cms_pages": {"changefreq": "daily", "priority": 0.8, "prefix": ""}
+
   },
 
   "LOOK_UP_FIELDS":{
@@ -80,14 +82,12 @@
     "deal_brands": "url",
     "deal_categories": "url",
     "deals": "url",
-    "stores": "url"
+    "stores": "url",
+    "cms_pages": "url"
   },
   "XML_GENERATOR_FILE_PATH": "sitemap_xml_files",
-
   "INDEX_XML_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_main_index.xml",
-
-
-
-  "SUB_FILE_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_sub_file.xml"
+  "SUB_FILE_TEMPLATE": "static/sitemap_xml_files/sitemap_xml_generator_templates/sitemap_sub_file.xml",
+  "IGNORE_SITEMAP_COLLECTIONS": [""]
 
 }
