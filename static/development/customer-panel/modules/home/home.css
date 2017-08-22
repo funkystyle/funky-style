@@ -142,11 +142,17 @@ a.right span {
     max-height: 70px;
 }
 
+.store-thumbnail a {
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
 .store-thumbnail a img,
 .store-thumbnail img {
-    display: list-item;
-    height: 50px;
-    max-width: 70%;
+    /* height: 50px; */
+    /* max-width: 70%; */
+    width: auto;
+    height: auto;
 }
 .store-thumbnail .description-area {
     position: absolute;
@@ -382,5 +388,15 @@ ul.unstyled li a {
     }
     .update-nag > .update-text {
         line-height: 26px;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .store-thumbnail .description-area {
+        padding: 0 !important;
+    }
+    .description-area a {
+        font-size: 13px !important;
+        justify-content: center;
     }
 }

@@ -18,7 +18,7 @@
 					</p>
 				</div>
 				<div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
-					<div style="width: 100%; min-height: 20px;">
+					<div style="width: 100%; min-height: 20px;" class="breadcrumb-area">
 						<ol class="breadcrumb pull-right">
 							<li><a ui-sref="main.home">Home</a></li>
 							<li><a ui-sref="main.category">categories</a></li>
@@ -173,17 +173,17 @@
 		<div class="col-lg-9 col-md-9 col-sm-12">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active col-lg-2 col-xs-2 pad-0 text-center pad_nav_right">
+                <li role="presentation" class="active col-lg-2 col-xs-4 pad-0 text-center pad_nav_right">
                     <a href="" data-target="#all-tab" aria-controls="home" role="tab" data-toggle="tab">All &nbsp;
                         <span> ({{ filterCoupons.length }})</span>
                     </a>
                 </li>
-                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-2 pad_nav_right pad_nav_left">
+                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-4 pad_nav_right pad_nav_left">
                     <a href="" data-target="#deals-tab" aria-controls="profile" role="tab" data-toggle="tab">Deals&nbsp;
                         <span> ({{ dealsLength.length }})</span>
                     </a>
                 </li>
-                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-2 pad_nav_left">
+                <li role="presentation" class="col-lg-2 pad-0 text-center col-xs-4 pad_nav_left">
                     <a href="" data-target="#coupons-tab" aria-controls="messages" role="tab" data-toggle="tab">
                         Coupons&nbsp;
                         <span> ({{ couponsLength.length }})</span>
@@ -275,7 +275,7 @@
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12  pull-right">
                                         <a ng-click="openCouponCode(category, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
@@ -370,7 +370,7 @@
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12  pull-right">
                                         <a ng-click="openCouponCode(category, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>
@@ -455,7 +455,7 @@
                                         <i class="fa fa-bug"></i> &nbsp;
                                         Report
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-9  pull-right">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12  pull-right">
                                         <a ng-click="openCouponCode(category, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                             <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                             <i class="pull-right fa fa-arrow-right" style="line-height: 20px;"></i>

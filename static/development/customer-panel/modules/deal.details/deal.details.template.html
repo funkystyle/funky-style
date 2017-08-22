@@ -7,9 +7,9 @@
     <div class="panel panel-default">
         <div class="panel-body product-panel">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 col-xs-12">
                     <div class="breadcrumb-sec">
-                        <ol class="breadcrumb pull-left">
+                        <ol class="breadcrumb pull-left breadcrumb-area">
                             <li><a ui-sref="main.home">Home</a></li>
                             <li><a ui-sref="main.all_deals">Deals</a></li>
                             <li ng-repeat="item in deal.breadcrumb">
@@ -26,7 +26,7 @@
             </div>
             <div class="row">
                 <div class="mobileprice-body-main col-md-12 col-xs-12 col-sm-12" ng-init="imageShow.image = deal.images[0]">
-                    <div class="mobileprice-logo col-md-3 col-xs-4 col-sm-4">
+                    <div class="mobileprice-logo col-md-3 col-xs-12 col-sm-4">
                         <div class="thumbnail showcase-img"><img ng-src="{{ imageShow.image }}"></div>
                         <div class="rolloverimage">
                             <a href="" ng-repeat="item in deal.images" ng-click="imageShow.image = item;">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-9 col-xs-8 col-sm-8 border-left">
+                    <div class="col-md-9 col-xs-12 col-sm-8 border-left">
                         <h3 class="h3-heading h3-main-heading">{{ deal.h1 }}</h3>
 
                         <div class="rating-section">
@@ -130,7 +130,44 @@
             <h3 class="h3-heading">
                 {{ deal.h2 }}
             </h3>
-            <div class="stores-description stores-section" ng-repeat="item in deal.stores">
+            <div class="stores-description stores-section only-desktop" ng-repeat="item in deal.stores">
+                <div class="stores-description-inner col-xs-6 text-left">
+                    <div class="amazon-logo">
+                        <a ui-sref="main.store-info({url: item.store.url})">
+                            <img ng-src="{{ item.store.image }}">
+                        </a>
+                    </div>
+                </div>
+                <div class="stores-description-inner col-xs-6 text-left">
+                    <p>
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>&nbsp;
+                        2 - 4 Days Delivery
+                    </p>
+                    <p>
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>&nbsp;
+                        EMI Available
+                    </p>
+                </div>
+                <div class="stores-description-inner">
+                    <h4><b>Rs. {{ item.discount_price }}</b></h4>
+                    <p><b>Free</b> Shipping</p>
+                </div>
+                <div class="stores-description-inner">
+                    <a target="_blank" href="{{ item.landing_page }}" class="btn btn-info btn-block">
+                        GO TO STORE
+                        <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="stores-description-inner" style="width: 30% !important;">
+                    <h5 class="text-capitalize store-name"><strong>{{ item.store.name }} Coupons</strong> &nbsp;</h5>
+                    <a target="_blank" ui-sref="main.store-info({url: item.store.url})" class="btn btn-info">
+                        <b>Get Coupons</b>
+                        <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div> <!-- end of Stores Description -->
+
+            <div class="mobile-store-description only-mobile" ng-repeat="item in deal.stores">
                 <div class="stores-description-inner text-left">
                     <div class="amazon-logo">
                         <a ui-sref="main.store-info({url: item.store.url})">
@@ -158,7 +195,7 @@
                         <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                     </a>
                 </div>
-                <div class="stores-description-inner" style="width: 30% !important;">
+                <div class="stores-description-inner">
                     <h5 class="text-capitalize store-name"><strong>{{ item.store.name }} Coupons</strong> &nbsp;</h5>
                     <a target="_blank" ui-sref="main.store-info({url: item.store.url})" class="btn btn-info">
                         <b>Get Coupons</b>
@@ -248,7 +285,7 @@
                 </div>
                 <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
                     <div style="width: 100%; min-height: 20px;">
-                        <ol class="breadcrumb pull-right">
+                        <ol class="breadcrumb pull-right breadcrumb-area">
                             <li><a href="/">Home</a></li>
                             <li><a ui-sref="main.all_deals">Deals</a></li>
                             <li ng-repeat="item in deal.breadcrumb">
@@ -291,7 +328,7 @@
                                     </span>
                                 </div>
                             </div> <!-- end deal-price -->
-                            <div class="col-xs-12 hidden-lg hidden-md">
+                            <div class="hidden-lg hidden-md">
                                 <p class="fifty_cashback">
                                     {{ item.discount_type }} {{ item.discount }}
                                 </p>
