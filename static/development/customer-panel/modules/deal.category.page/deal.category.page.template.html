@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-sec">
-                        <ol class="breadcrumb pull-left">
+                        <ol class="breadcrumb breadcrumb-area pull-left">
                             <li><a href="/">Home</a></li>
                             <li><a ui-sref="main.category">Categories</a></li>
                             <li ng-repeat="item in deal.breadcrumb">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-9 col-sm-12">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="repeat-brands">
                         <a class="repeat-brands-item" ng-repeat="item in deal.related_categories | limitTo: 5"
                            ui-sref="main.deal_category_page({url: item.url})">
@@ -124,7 +124,9 @@
             <!--end panel-->
         </div>
         <div class="col-md-9 col_md_9_pad col-xs-12 col-sm-12 pad-5">
-            <deal-tile-directive class-name="col-lg-4 col-md-4 col-sm-12 pad-5" items="filterDeals"></deal-tile-directive>
+            <div class="row">
+                <deal-tile-directive class="col-xs-12" items="filterDeals"></deal-tile-directive>
+            </div>
             <!-- footer description -->
             <div class="row">
                 <div class="col-lg-12">

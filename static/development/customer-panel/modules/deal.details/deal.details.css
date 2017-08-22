@@ -10,6 +10,13 @@
         width: auto !important;
         max-width: 100%;
     }
+    .pad-left-0 {
+        padding-left: 15px !important;
+    }
+    .h3-heading, .coupon-heading {
+        font-size: 17px !important;
+        line-height: 20px;
+    }
     .stores-description .stores-description-inner a.btn {
         width: 74px;
         font-size: 10px;

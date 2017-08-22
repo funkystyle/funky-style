@@ -153,6 +153,8 @@ a.right span {
     /* max-width: 70%; */
     width: auto;
     height: auto;
+    max-height: 100%;
+    max-width: 100%;
 }
 .store-thumbnail .description-area {
     position: absolute;

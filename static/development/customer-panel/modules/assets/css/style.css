@@ -575,7 +575,7 @@ ul.rating {
 
 
 /* ---------- media query for mobile ------------ */
-@media only screen and (max-device-width: 480px) {
+@media only screen and (max-device-width: 720px) {
     .navbar-header {
         padding: 0 15px;
         display: flex;
@@ -607,17 +607,20 @@ ul.rating {
         margin: 0 auto;
     }
     .breadcrumb-area {
-        display: none;
+        display: none !important;
     }
     .custom-popup-wrapper {
         left: -59px !important;
-        width: 335px !important;
+        width: 130% !important;
+    }
+    .custom-popup-wrapper>.dropdown-menu {
+        padding-right: 0 !important;
     }
     .custom-popup-wrapper .media-body p {
         font-size: 13px;
     }
     .modal-dialog {
-        width: 300px;
+        width: 95%;
     }
     .popup-close {
         position: absolute;
