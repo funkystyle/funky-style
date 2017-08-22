@@ -1,5 +1,7 @@
 <div class="{{ nClass }} blog-tile" ng-repeat="item in items | orderBy: '_updated': true">
-    <img ng-src="{{ item.image }}" alt="" class="img-responsive">
+    <a ui-sref="blogs.details({url: item.url})" class="blog-image-anchor">
+        <img ng-src="{{ item.image }}" alt="" class="img-responsive">
+    </a>
     <div class="cont_1">
         <p class="technoloy_txt">
             <span ng-repeat="i in item.related_categories | orderBy: 'name'">

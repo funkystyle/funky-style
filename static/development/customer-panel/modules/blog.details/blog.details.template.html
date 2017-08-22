@@ -1,6 +1,6 @@
 <div class="panel panel-default">
-    <div class="panel-body panel_pad">
-        <div class="text-center">
+    <div class="panel-body panel_pad padding-0">
+        <div class="text-center mobile-left">
             <ol class="breadcrumb">
                 <li><a ui-sref="blogs.blogs">Home</a></li>
                 <li ng-repeat="item in blog.breadcrumb">
@@ -14,7 +14,7 @@
             {{ blog._created | date: 'dd MMM yyyy' }}
         </p>
         <div class="row row_mar_1">
-            <div class="col-lg-12 col-sm-12 col-md-12 blog-tile">
+            <div class="col-lg-12 col-sm-12 col-md-12 blog-tile padding-0">
                 <img ng-src="{{ blog.image }}" alt="" class="img-responsive">
                 <div class="cont_1 blog-desc">
                     <p style="text-align: left;" class="para_last" ng-bind-html="trustAsHtml(blog.description)"></p>
