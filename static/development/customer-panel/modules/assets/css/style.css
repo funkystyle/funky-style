@@ -668,7 +668,7 @@ ul.rating {
         padding-left: 0;
     }
     .navbar-collapse {
-        width: 350px;
+        width: 130%;
         margin: 0 auto;
         position: absolute;
         left: -15px;

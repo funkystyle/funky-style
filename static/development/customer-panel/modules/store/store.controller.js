@@ -75,8 +75,6 @@ angular
             angular.forEach(data, function (item) {
                 if(item.selection_type.code == 'store') {
                     var data = SEO.seo("", item, 'store');
-                    $rootScope.pageTitle = data.title;
-                    $rootScope.pageDescription = data.description;
                 }
             });
         });

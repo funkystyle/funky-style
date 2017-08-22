@@ -441,48 +441,64 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
         }
     })
     .factory("SEO", function ($http, $q) {
-        return {
-            seo: function (newVal, item, from) {
-                var monthNames = ["January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
-                ];
-                var date = new Date();
-                var month = undefined;
-                var year = undefined;
+        var obj = {};
+        obj.meta_titles = function (object) {
+            console.log("Meta Titles object: ", object);
+            $("title").html(object.title);
+            $("meta[property='og\\:title'], meta[name='twitter\\:title']").attr('content', object.title);
+            $( "meta[name='description'], meta[property='og\\:description'], meta[name='twitter\\:description']")
+                .attr('content', object.description);
+            $( "link[rel='canonical'], meta[property='og\\:url']").attr('content', window.location.href);
+            $("meta[property='og\\:site_name']").attr('content', window.location.host);
 
-                date.setDate(date.getDate() + 3);
-                month = monthNames[date.getMonth()];
-                year = date.getFullYear();
-
-                var replacement = {
-                    title: undefined,
-                    description: undefined
-                };
-                replacement.title = item.meta_title.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-                replacement.description = item.meta_description.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-
-                console.log("SEO replacement Data: ", replacement);
-                return replacement;
-            },
-            getSEO: function () {
-                // get the seo information for home page
-                var def = $q.defer();
-                var url = '/api/1.0/master_seo'+'?rand' + new Date().getTime();
-                $http({
-                    url: url,
-                    method: "GET"
-                }).then(function (data) {
-                    console.log("SEO Data: ", data.data._items);
-                    var items = data.data._items;
-                    def.resolve(items);
-                }, function (error) {
-                    console.log(error);
-                    def.reject(error);
-                });
-
-                return def.promise;
-            }
+            return object;
         }
+        obj.seo = function (newVal, item, from) {
+            console.log("newVal: ", newVal, " Item: ", item, "From: ", from);
+            var monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            var date = new Date();
+            var month = undefined;
+            var year = undefined;
+
+            date.setDate(date.getDate() + 3);
+            month = monthNames[date.getMonth()];
+            year = date.getFullYear();
+
+            item.meta_title = (item.meta_title) ? item.meta_title: "";
+            item.meta_description = (item.meta_description) ? item.meta_description: "";
+
+            var replacement = {
+                title: undefined,
+                description: undefined
+            };
+            replacement.title = item.meta_title.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            replacement.description = item.meta_description.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+
+            console.log("SEO replacement Data: ", replacement);
+            obj.meta_titles(replacement);
+            return replacement;
+        }
+        obj.getSEO =  function () {
+            // get the seo information for home page
+            var def = $q.defer();
+            var url = '/api/1.0/master_seo'+'?rand' + new Date().getTime();
+            $http({
+                url: url,
+                method: "GET"
+            }).then(function (data) {
+                console.log("SEO Data: ", data.data._items);
+                var items = data.data._items;
+                def.resolve(items);
+            }, function (error) {
+                console.log(error);
+                def.reject(error);
+            });
+
+            return def.promise;
+        }
+        return obj;
     })
     .directive('starRating', function () {
         return {

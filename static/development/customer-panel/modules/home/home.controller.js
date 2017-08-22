@@ -40,8 +40,6 @@ angular.module('homeModule', ["headerModule", "Directives"])
             angular.forEach(data, function (item) {
                 if(item.selection_type.code == 'home') {
                     var data = SEO.seo("", item, 'home');
-                    $rootScope.pageTitle = data.title;
-                    $rootScope.pageDescription = data.description;
                 }
             });
         });
