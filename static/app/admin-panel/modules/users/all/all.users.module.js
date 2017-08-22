@@ -121,6 +121,7 @@ angular.module("allUsersModule", ['constantModule', 'toastr', 'personFactoryModu
 
         $scope.load = personFactory.delete('persons', deletedArray).then(function (data) {
             console.log(data);
+            $state.reload();
         }, function (error) {
             console.log(error);
 
