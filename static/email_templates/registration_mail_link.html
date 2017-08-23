@@ -12,8 +12,6 @@
 </head>
  
 <body bgcolor="#FFFFFF">
-first_name: {first_name}
-email: {email}
 <!-- HEADER -->
 <table class="head-wrap" bgcolor="#ffa73b">
 	<tr>
@@ -40,7 +38,7 @@ email: {email}
 				<table bgcolor="#fff">
 					<tr>
 						<td align="center">
-							<h2 align="center" style="margin-bottom: 0px;padding: 30px 0px;">Welcome! {user_id}</h2>
+							<h2 align="center" style="margin-bottom: 0px;padding: 30px 0px;">Welcome! {first_name}</h2>
 						</td>
 					</tr>
 				</table>
@@ -62,14 +60,18 @@ email: {email}
 						<p class="lead">we're excited to have get started. First, you need to confirm your account. Just press the button below.</p>
 						
 						<p class="btn" align="center">
-							<a href="http://{server_url}/confirm_account/users/{user_id}/confirm/{token}">
+							<a href="{server_url}/confirm_account/users/{user_id}/confirm/{token}">
 								Confirm Account!
 							</a>
 						</p>
 												
 						<p class="lead">If that doesn't work, copy and paste the follwing link in your browser:</p>		
 
-						<p style="padding: 10px 0px;"><a href="http://{server_url}/confirm_account/users/{user_id}/confirm/{token}">http://{server_url}/#/confirm_account/users/{user_id}/confirm/{token}</a></p>
+						<p style="padding: 10px 0px;">
+							<a href="{server_url}/confirm_account/users/{user_id}/confirm/{token}">
+								{server_url}/#/confirm_account/users/{user_id}/confirm/{token}
+							</a>
+						</p>
 
 						<p class="lead">If have any questions,just reply to this email-we're always happy to help out</p>								
 					

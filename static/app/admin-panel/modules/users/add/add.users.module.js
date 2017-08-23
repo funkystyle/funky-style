@@ -32,6 +32,7 @@ angular.module("addUsersModule", ['constantModule', 'toastr', 'ui.select', 'pers
         };
 
         $scope.createNow = function () {
+            console.log("Create now User: ", $scope.user);
             $scope.load = personFactory.create([$scope.user]).then(function (data) {
                 console.log(data);
                 toastr.success(data.statusText, "Success!");
