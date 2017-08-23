@@ -8,7 +8,8 @@ angular.module("updateDealCategoriesModule", ["ui.select", "ngSanitize", "ui.boo
         $scope.categories = [];
         $scope.persons = [];
 
-        $scope.$watch('deal.name', function(newVal, oldVal) {
+
+        $scope.changeUrl = function (newVal) {
             if(newVal && $scope.seoList.length) {
                 var data = replaceSeo(newVal, $scope.seoList, 'single_deal_category');
                 $scope.deal.seo_title = data.title;
@@ -21,9 +22,6 @@ angular.module("updateDealCategoriesModule", ["ui.select", "ngSanitize", "ui.boo
                     $scope.deal.h2 = data.h2;
                 }
             }
-        }, true);
-
-        $scope.changeUrl = function (newVal) {
             $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-deals" : undefined;
         };
 
