@@ -200,7 +200,6 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     destArray['All'] = $scope.coupons;
                     destArray['Expired Coupons'] = [];
                     angular.forEach($scope.coupons, function(item) {
-
                         // push categories into array for filtering
                         angular.forEach(item.related_categories, function (category) {
                             $scope.categories.push({
@@ -212,16 +211,20 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                             value: item.related_stores[0]._id,
                             label: item.related_stores[0].name
                         });
-                        $scope.persons.push({
-                            value: item.last_modified_by._id,
-                            label: item.last_modified_by.email
-                        });
+
+                        if(item['last_modified_by']) {
+                            $scope.persons.push({
+                                value: item.last_modified_by._id,
+                                label: item.last_modified_by.email
+                            });
+                        }
 
                         if(new Date(item.expire_date) < new Date()) {
                             destArray['Expired Coupons'].push(item);
                         }
                         item._created = new Date(item._created);
                         item._expire_date = new Date(item.expire_date);
+
                         $scope.gridOptions.data.push(item);
                     });
                     setTimeout(function () {

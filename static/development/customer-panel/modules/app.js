@@ -128,7 +128,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     }
                 })
                 .state('main.home', {
-                    url: '/?cc',
+                    url: '/?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/home/home.template.html',
                     controller: "homeCtrl",
                     resolve: {
@@ -216,7 +216,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // Store Info
                 .state('main.store-info', {
-                    url: '/store/:url?cc',
+                    url: '/store/:url?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/store.info/store.info.template.html',
                     controller: "storeinfoController",
                     resolve: {
@@ -244,7 +244,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // category info
                 .state('main.categoryinfo', {
-                    url: '/category/:url?cc',
+                    url: '/category/:url?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/category.info/category.info.template.html',
                     controller: "categoryinfoCtrl",
                     resolve: {
@@ -499,6 +499,27 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
             return def.promise;
         }
         return obj;
+    })
+    .factory("DestionationUrl", function ($http, $q) {
+        return {
+            destination_url: function (url) {
+                var d = $q.defer();
+
+                $http({
+                    url: "/api/1.0/get-output-deep-link-url",
+                    method: "POST",
+                    data: {
+                        url: url
+                    }
+                }).then(function (success) {
+                    d.resolve(success);
+                }, function (error) {
+                    d.reject(error);
+                });
+
+                return d.promise;
+            }
+        }
     })
     .directive('starRating', function () {
         return {
