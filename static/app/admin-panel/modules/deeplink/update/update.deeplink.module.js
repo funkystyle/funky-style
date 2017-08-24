@@ -1,5 +1,5 @@
 angular.module("updateDeeplinkModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr","cgBusy"])
-    .controller("updateDeeplinkCtrl", function($scope, $state, $timeout, toastr, $auth, $http) {
+    .controller("updateDeeplinkCtrl", function($scope, $state, $timeout, toastr, $auth, $http, $stateParams) {
         // true or false
         $scope.condition = [
             {
@@ -29,6 +29,19 @@ angular.module("updateDeeplinkModule", ["ui.select", "ngSanitize", "ui.bootstrap
             }]
         };
 
+        if($auth.isAuthenticated() && $stateParams['id']) {
+            $http({
+                url: " /api/1.0/deep_link/"+$stateParams.id,
+                method: "GET"
+            }).then(function (data) {
+                console.log("Success deeplink GET: ", data);
+                $scope.deeplink = data.data;
+            }, function (error) {
+                console.log("Error Deeplink Save: ", error);
+                toastr.error('Something went wrong!');
+            });
+        }
+
         // deeplinkReplace
         $scope.deeplinkReplace = function (value) {
             (value)? $scope.deeplink.replace.push({
@@ -39,17 +52,23 @@ angular.module("updateDeeplinkModule", ["ui.select", "ngSanitize", "ui.bootstrap
         };
 
         // Insert deeplink data to the database using addDeeplink()
-        $scope.addDeeplink = function (deeplink) {
-            console.log(deeplink);
+        $scope.updateDeeplink = function (deeplink) {
+            delete deeplink.$$hashKey;
+            delete deeplink._updated;
+            delete deeplink._created;
+            delete deeplink._links;
 
             $http({
-                url: "/api/1.0/deep_link",
-                method: "POST",
+                url: "/api/1.0/deep_link/"+$stateParams.id,
+                method: "PATCH",
                 data: deeplink
             }).then(function (data) {
-                console.log("Success deeplink Save: ", data);
+                console.log("Success deeplink Updated: ", data);
+                toastr.success("Successfully Updated Deeplink", deeplink.affiliate_network);
+                $state.go("header.deeplink");
             }, function (error) {
                 console.log("Error Deeplink Save: ", error);
+                toastr.error('Something went wrong!');
             });
         }
     });

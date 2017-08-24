@@ -19,10 +19,13 @@ angular.module("deeplinkModule", ['toastr', 'cgBusy', 'satellizer', 'ui.select',
             rowHeight: 35,
             columnDefs: [
                 {
-                    field: 'is_default', displayName: "Is Default"
+                    field: "affiliate_network", displayName: "Affiliate Network",
+                    cellTemplate: '<div style="padding: 5px;">' +
+                    '   <a ui-sref="header.update-deeplink({id: row.entity._id})">{{ row.entity.affiliate_network }}</a>' +
+                    '</div>'
                 },
                 {
-                    field: "affiliate_network", displayName: "Affiliate Network"
+                    field: 'is_default', displayName: "Is Default"
                 },
                 {
                     field: 'start_url.url', displayName: "Start URL"
