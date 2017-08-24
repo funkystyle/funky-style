@@ -40,7 +40,7 @@ angular.module("categoryModule", ['angular-table', 'constantModule', 'toastr', '
                 console.log(data);
                 if(data) {
                     $scope.categories = data.data._items;
-                    $scope.filterCategories = data.data._items;
+                    $scope.filterCategories = $filter("orderBy")(data.data._items, '_updated', true);
                     angular.forEach($scope.categories, function(item, index) {
                         $scope.categories[index].related_coupons = clearNullIds(item.related_coupons);
                         $scope.check.check[item._id] = false;

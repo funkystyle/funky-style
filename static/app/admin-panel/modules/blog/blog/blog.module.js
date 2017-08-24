@@ -3,7 +3,7 @@ angular.module("blogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy",
     "couponFactoryModule", "categoryFactoryModule", "constantModule", "blogFactoryModule", "angular-table"])
     .controller("blogCtrl", function($scope, $q, $timeout, toastr, storeFactory, $state, $http,
-                                        $auth, personFactory, $log, couponFactory, categoryFactory, URL, blogFactory) {
+                                        $auth, personFactory, $log, $filter, couponFactory, categoryFactory, URL, blogFactory) {
         $scope.blogs = [];
         $scope.filterBlogs = [];
         $scope.search = {
@@ -36,7 +36,7 @@ angular.module("blogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr
                 console.log("Blog Data:", data.data);
                 if(data['data']) {
                     $scope.blogs = data.data._items;
-                    $scope.filterBlogs = data.data._items;
+                    $scope.filterBlogs = $filter("orderBy")(data.data._items, '_updated', true);
                     angular.forEach($scope.blogs, function(item) {
                         $scope.check.check[item._id] = false;
                     })
