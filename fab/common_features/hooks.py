@@ -1,7 +1,9 @@
 from flask import abort, request
 import uuid, os
+from werkzeug.security import generate_password_hash, check_password_hash
 import base64
 import binascii
+from datetime import datetime
 from bson.objectid import ObjectId
 import multiprocessing
 from settings import CONFIG_DATA, BASE_DIR, LOGGER
@@ -18,6 +20,7 @@ from fab.siteminder import generate_sitemap_index_file
 @admin_login_required
 def before_create_store(*args, **kwargs):
     LOGGER.info("before created")
+
 
 @admin_login_required
 def before_returning_persons(*args, **kwargs):
@@ -37,10 +40,13 @@ def before_update_deal_categories(*args, **kwargs):
 
 
 @self_or_admin_login_required
-def before_update_person(*args, **kwargs):
-    LOGGER.info("person update permission check done.")
-
-
+def before_update_person(resource, update, original):
+    response = {
+        'password': str(generate_password_hash(update['password']['password_raw'])),
+        'password_raw': str(generate_password_hash(update['password']['password_raw'])),
+        'last_password_updated_date': datetime.now()
+    }
+    update.update({"password": response})
 
 @self_or_admin_login_required
 def before_returning_person(*args, **kwargs):

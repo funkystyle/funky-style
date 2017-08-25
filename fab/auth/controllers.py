@@ -272,17 +272,13 @@ def signup():
         # check logged user can assign role or not otherwise default role will be 'user'
         can_assign = False
         if 'user_level' in payload and 'user_level' in session:
-            for user_level in session['user_level']:
-                if user_level in CONFIG_DATA['CREATE_USER_ROLES']:
-                    can_assign = True
+            if session['user_level'] in CONFIG_DATA['CREATE_USER_ROLES']:
+                can_assign = True
         if not can_assign:
             payload['user_level'] = "user"
 
         if admin_creation_token and admin_creation_token == PASSWORD_CRYPTION_TOKEN:
             payload['user_level'] = "admin"
-
-
-        # initiated persons collections to create new user
 
         validation = Validations('persons')
         violations = validation.validate_schema(payload, ['default', 'unique'])
