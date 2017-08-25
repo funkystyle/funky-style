@@ -64,7 +64,7 @@
                     </a>
                 </p>
             </div>
-            <div class="panel panel-default cat-filters" ng-repeat="(key, items) in categories">
+            <div class="panel panel-default cat-filters only-desktop" ng-repeat="(key, items) in categories">
                 <div class="panel-heading">
                     <p class="font-bold h3-side-heading">{{ (key == 'Regular'? 'Category': key) }} Filters</p>
                 </div>
@@ -799,7 +799,7 @@
 
                 <!-- about description start here -->
                 <div class="panel panel-default">
-                    <div class="panel-body" ng-bind-html="trustAsHtml(store.footer_description)"></div>
+                    <div class="panel-body footer-desc" ng-bind-html="trustAsHtml(store.footer_description)"></div>
                 </div>
                 <!-- about description end here -->
             </div>

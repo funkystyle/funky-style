@@ -2,6 +2,13 @@
     .pad-right-0 {
         padding-right: 15px !important;
     }
+    .only-desktop {
+        display: none !important;
+    }
+    .footer-desc img {
+        width: auto;
+        max-width: 100%;
+    }
 }
 .related-coupon-deal {
     position: absolute;

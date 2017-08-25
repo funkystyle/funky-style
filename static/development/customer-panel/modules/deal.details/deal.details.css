@@ -68,6 +68,13 @@
     div.general-head table td {
         min-width: auto !important;
     }
+    .only-desktop {
+        display: none !important;
+    }
+    .footer-desc img {
+        width: auto;
+        max-width: 100%;
+    }
 }
 @media only screen and (min-device-width: 720px) {
     .only-mobile {

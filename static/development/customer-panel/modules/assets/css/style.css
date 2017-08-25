@@ -713,4 +713,8 @@ ul.rating {
         width: 100% !important;
         margin: 10px 0 !important;
     }
+    .coupon-well .thumbnail img {
+        height: auto !important;
+        width: auto !important;
+    }
 }

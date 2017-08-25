@@ -26,6 +26,13 @@
     .pad-5 {
         padding: 0 15px !important;
     }
+    .only-desktop {
+        display: none !important;
+    }
+    .footer-desc img {
+        width: auto;
+        max-width: 100%;
+    }
 }
 .main_content{
     background: #ffffff;

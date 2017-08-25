@@ -3,7 +3,7 @@ angular.module("categoryModule", ['angular-table', 'constantModule', 'toastr', '
     'storeFactoryModule', 'cgBusy', 'satellizer', 'ui.select', 'categoryFactoryModule'])
     .controller("categoryCtrl", function($scope, $filter, toastr,
                                          mainURL, URL, $state, $stateParams, personFactory, $auth,
-                                         storeFactory, categoryFactory, $q, $http) {
+                                         storeFactory, categoryFactory, $q, $http, $filter) {
         console.log("category controller!");
 
         $scope.categories = [];
