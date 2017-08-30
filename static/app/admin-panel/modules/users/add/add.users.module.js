@@ -1,6 +1,7 @@
 /* module for add users */
 angular.module("addUsersModule", ['constantModule', 'toastr', 'ui.select', 'personFactoryModule', 'cgBusy'])
-    .controller("addUsersCtrl", function (toastr, $scope, $state, mainURL, URL, personFactory, $location) {
+    .controller("addUsersCtrl", function (toastr, $auth, $scope, $state, mainURL, URL, personFactory, $location) {
+
         $scope.genders = [
             {
                 text: "Male",

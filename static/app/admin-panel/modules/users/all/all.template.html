@@ -46,6 +46,7 @@
                             at-title="Name" at-implicit at-sortable at-initial-sorting="asc"
                             at-attribute="first_name" width="250"></td>
                         <td at-title="Email" at-implicit at-sortable at-attribute="email" width="250"></td>
+                        <td at-title="Role" at-implicit at-sortable at-attribute="user_level" width="250"></td>
                         <td at-title="Status" at-implicit at-sortable at-attribute="status" width="250"></td>
                     </tr>
                     </tbody>
@@ -100,8 +101,10 @@
                         <div class="form-group col-md-6">
                             <label for="password">Password</label>
                             <input type="text" class="form-control" id="password"
-                                   ng-model="u_user.password.password_raw" placeholder="Password"
+                                   ng-model="password.password_raw" placeholder="Password"
                                    autocomplete="off">
+
+                            <p><b>Note</b>: An User can't see the old password, If you want to change password, Needs to be updated (Not mandatory)</p>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="user_level">User Level</label>

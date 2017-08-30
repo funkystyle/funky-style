@@ -29,12 +29,12 @@
                                 <label for="mobile_number">MOBILE NUMBER</label>
                                 <input type="text" only-digits class="form-control" id="mobile_number" ng-model="u_user.mobile_number" placeholder="MOBILE NUMBER" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-12" ng-if="user.user_level == 'admin'">
                                 <label style="width: 100%;">Status</label>
                                 <label class="radio-inline"><input type="radio" name="status" value="active" ng-model="u_user.status">Active</label>
                                 <label class="radio-inline"><input type="radio" name="status" value="inactive" ng-model="u_user.status">Inactive</label>
                             </div>
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-12" ng-if="user.user_level == 'admin'">
                                 <label for="user_level">User Level</label>
                                 <ui-select id="user_level" ng-model="u_user.user_level" theme="bootstrap">
                                     <ui-select-match placeholder="Select User Role">{{ $select.selected.text }}</ui-select-match>
