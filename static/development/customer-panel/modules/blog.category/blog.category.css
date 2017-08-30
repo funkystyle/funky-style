@@ -276,6 +276,7 @@ h4{
     max-height: 100%;
     height: auto;
     width: auto;
+    margin: 0 auto;
     max-width: 100%;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;

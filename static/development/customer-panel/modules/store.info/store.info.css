@@ -9,6 +9,9 @@
         width: auto;
         max-width: 100%;
     }
+    .store-logo img {
+        width: auto !important;
+    }
 }
 .related-coupon-deal {
     position: absolute;
