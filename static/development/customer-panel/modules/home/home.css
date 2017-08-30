@@ -393,9 +393,12 @@ ul.unstyled li a {
     }
 }
 
-@media only screen and (max-device-width: 480px) {
+@media only screen and (max-device-width: 720px) {
     .store-thumbnail .description-area {
         padding: 0 !important;
+    }
+    .mobile-carousel {
+        padding: 0;
     }
     .description-area a {
         font-size: 13px !important;

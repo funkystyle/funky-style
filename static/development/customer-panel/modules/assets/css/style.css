@@ -718,3 +718,16 @@ ul.rating {
         width: auto !important;
     }
 }
+@media only screen and (max-width: 600px) and (min-width: 375px)  {
+    .flipkart-navbar-search {
+        width: 150%;
+        max-width:  150%;
+    }
+    .mobile-text {
+        padding-right: 15px !important;
+    }
+    .custom-popup-wrapper {
+        left: -57px!important;
+        width: 116%!important;
+    }
+}
