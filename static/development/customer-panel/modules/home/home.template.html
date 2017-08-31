@@ -3,6 +3,14 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
 <span ng-if="!params">
     <div class="container top-container mobile-carousel">
+        <div class="row only-mobile">
+            <div class="col-xs-12">
+                <ul class="show-cats">
+                    <li><a ui-sref="main.home">Coupons</a></li>
+                    <li><a ui-sref="main.all_deals">Deals</a></li>
+                </ul>
+            </div>
+        </div>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
@@ -39,7 +47,7 @@
                         <img ng-src="{{ item.image }}" alt="{{ item.name }}" title="{{ item.name }}">
                     </a>
 
-                    <div class="description-area">
+                    <div class="description-area" ui-sref="main.store-info({url: item.url})">
                         <a ui-sref="main.store-info({url: item.url})" title="{{ item.name }}">
                             {{ item.related_coupons.length }} Offers
                         </a>
@@ -65,7 +73,7 @@
                     <a ui-sref="main.categoryinfo({url: item.url})" title="{{ item.title }}">
                         <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
                     </a>
-                    <div class="description-area">
+                    <div ui-sref="main.categoryinfo({url: item.url})" class="description-area">
                         <a ui-sref="main.categoryinfo({url: item.url})" title="{{ item.name }}">
                             {{ item.related_coupons.length }} Offers
                         </a>

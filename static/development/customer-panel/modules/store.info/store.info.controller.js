@@ -165,6 +165,7 @@ angular
                     StoreQuery.get(url).then(function (coupons) {
                         var items = coupons.data._items,
                             qItems = [];
+                        $scope.store.totalCouponsLength = items.length;
                         console.log("Stores Coupons Data: ", items);
                         angular.forEach(items, function (item) {
                             console.log($scope.user.fav_coupons);

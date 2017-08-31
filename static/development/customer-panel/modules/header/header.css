@@ -366,7 +366,7 @@ ul.nav li.dropdown ul.dropdown-menu {
         padding: 2% 0 2%;
     }
     .navbar-toggle {
-        margin-right: 0px;
+        margin-right: 0;
         float: none;
         margin-left: -9px;
     }
@@ -375,6 +375,7 @@ ul.nav li.dropdown ul.dropdown-menu {
     }
     .navbar-brand {
         padding:0;
+        margin: 0 auto;
     }
     .flipkart-navbar-input {
         font-size: 14px;

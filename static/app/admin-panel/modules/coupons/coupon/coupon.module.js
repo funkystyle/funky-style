@@ -1,5 +1,5 @@
 angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellizer', 'ui.select', 'couponFactoryModule'
-    , 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.exporter'])
+    , 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.resizeColumns', 'ui.grid.exporter'])
     .controller("couponCtrl", function($scope, $filter, toastr, $http, $q,
                                        mainURL, URL, $state, $stateParams, $auth, couponFactory, uiGridConstants, $templateCache) {
         $scope.coupons = [];
@@ -40,6 +40,9 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
         $scope.gridOptions = {
             data: [],
             exporterMenuCsv: false,
+            enableHorizontalScrollbar: uiGridConstants.scrollbars.ALWAYS,
+            enableVerticalScrollbar: uiGridConstants.scrollbars.ALWAYS,
+            enableColumnResizing: true,
             enableGridMenu: true,
             enableRowSelection: true,
             enableSelectAll: true,
@@ -60,7 +63,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     '</div>'
                 },
                 {
-                    field: "last_modified_by", displayName: "Submitted By", enableSorting: false,
+                    field: "last_modified_by", width: "20%", displayName: "Submitted By", enableSorting: false,
                     filter: {
                         condition: function (searchTerm, cellValue, row, column) {
                             console.log(cellValue, searchTerm);
@@ -74,7 +77,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     cellTemplate: "<div>{{ row.entity[col.field].email }}</div>"
                 },
                 {
-                    field: 'related_stores', displayName: "Store",
+                    field: 'related_stores', width: "20%", displayName: "Store",
                     enableSorting: false,
                     filter: {
                         condition: function (searchTerm, cellValue, row, column) {
@@ -93,7 +96,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     cellTemplate: "<div ng-repeat='item in row.entity[col.field]'>{{ item.name }}</div>"
                 },
                 {
-                    field: 'related_categories', displayName: "Category",
+                    field: 'related_categories', width: "20%", displayName: "Category",
                     enableSorting: false,
                     filter: {
                         condition: function (searchTerm, cellValue, row, column) {
@@ -112,9 +115,9 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     cellTemplate: "<div ng-repeat='item in row.entity[col.field]'>{{ item.name }}</div>"
                 },
                 {
-                    field: 'coupon_type', displayName: "Coupon Type"
+                    field: 'coupon_type', width: "20%", displayName: "Coupon Type"
                 },
-                { field: 'coupon_code', displayName: "Coupon Code"
+                { field: 'coupon_code', width: "20%", displayName: "Coupon Code"
                 },
                 {
                     field: '_created', displayName: "Created Date", type: 'date', cellFilter: 'date', width: '15%',
@@ -150,7 +153,10 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     headerCellClass: $scope.highlightFilteredHeader
                 },
                 {
-                    field: 'number_of_clicks', displayName: "Clicks"
+                    field: 'number_of_clicks', width: "20%", displayName: "Clicks"
+                },
+                {
+                    field: 'status', width: "20%", displayName: "Status"
                 }
             ]
         };

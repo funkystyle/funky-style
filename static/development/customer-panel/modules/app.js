@@ -10,12 +10,16 @@ function clearNullIds (items) {
     });
     return array;
 }
+$(document).ready(function () {
+    setTimeout(function () {
+        $("html, body").animate({ scrollTop: 0 }, 100);
+    }, 3000);
+});
 angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
     .run(["$rootScope", function($rootScope) {
         $rootScope.$on('$stateChangeSuccess', function() {
             document.body.scrollTop = document.documentElement.scrollTop = 0;
         });
-
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {
                 $('.goToTop').fadeIn();

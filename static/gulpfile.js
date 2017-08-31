@@ -31,7 +31,7 @@ gulp.task('minify_js', function() {
     console.log("-----------Mifiying JS files-----------", new Date());
     gulp.src(['development/customer-panel/modules/*/*.js', 'development/customer-panel/modules/*.js'])
         .pipe(ngAnnotate())
-        .pipe(stripDebug())
+        // .pipe(stripDebug())
         .pipe(minifyJs())
         .pipe(gulp.dest('app/customer-panel/modules'));
     // Minify Bower components and concatinate bower files into one file
@@ -41,7 +41,7 @@ gulp.task('minify_js', function() {
         'bower_components/angular-ui-router/release/angular-ui-router.min.js', 'bower_components/oclazyload/dist/ocLazyLoad.min.js',
         'app/customer-panel/modules/app.js'])
         .pipe(concat('bower_scripts.js'))
-        .pipe(stripDebug())
+        // .pipe(stripDebug())
         .pipe(gulp.dest('app/customer-panel/modules'));
 });
 

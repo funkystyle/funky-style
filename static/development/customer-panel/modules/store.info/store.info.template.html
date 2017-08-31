@@ -35,7 +35,7 @@
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(store.top_description)"></p>
                     <p class="para_small">
-                        {{ store.related_coupons.length }} Verified Coupons -
+                        {{ store.totalCouponsLength }} Verified Coupons -
                         <time datetime="{{ store.toDayDate | date: 'dd MMM yyyy hh:mm' }}">{{ store.toDayDate | date: "dd MMM yyyy hh:mm a" }}</time>
                     </p>
                 </div>
@@ -45,7 +45,7 @@
     <!--row-->
     <div class="row">
         <!--col-->
-        <div class="col-lg-3 col-md-3 col-sm-3 pad-right-0">
+        <div class="col-lg-3 col-md-3 col-sm-3 pad-right-0 only-desktop">
             <div class="well social-well">
                 <p class="social-icons">
                     <a target="_blank" href="https://www.facebook.com/FabPromoCodes/">
