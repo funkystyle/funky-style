@@ -104,7 +104,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="breadcrumb">Breadcrumb</label>
-                        ui-select multiple ng-model="blog.breadcrumb" theme="bootstrap"
+                        <ui-select id="breadcrumb" multiple ng-model="blog.breadcrumb" theme="bootstrap"
                                    close-on-select="false" title="Related Categories" id="breadcrumbs">
                             <ui-select-match placeholder="Select Breadcrumb">{{$item.name}}</ui-select-match>
                             <ui-select-choices repeat="item in breadcrumbs | propsFilter: {name: $select.search}">

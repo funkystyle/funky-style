@@ -12,7 +12,6 @@ angular.module("addBlogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toa
         // get all categories
         $scope.breadcrumbs = [];
         categoryFactory.get().then(function (data) {
-            console.log(data);
             if(data['data']) {
                 $scope.categories = data.data._items;
                 angular.forEach($scope.categories, function (item) {

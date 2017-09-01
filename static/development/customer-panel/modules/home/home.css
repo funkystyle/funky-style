@@ -313,6 +313,9 @@ ul.unstyled li a {
 /*  --============== // media queries for mobiles ===========----- */
 
 @media screen and (max-width: 768px) {
+    .hide-in-mobile {
+        display: none !important;
+    }
     .category-wise-home h2 {
         font-size: 23px;
         line-height: 34px;
@@ -320,11 +323,18 @@ ul.unstyled li a {
     .carousel-indicators {
         text-align: center;
     }
+    .carousel-inner .item a, .carousel-inner .item {
+        height: 200px;
+        display: flex;
+        align-items: center;
+        background: #ffffff;
+    }
     .carousel-inner>.item>img,
     .carousel-inner>.item>a>img {
-        width: 100%;
-        max-height: 200px;
-        height: 200px;
+        max-height: 100%;
+        height: auto;
+        width: auto;
+        max-width: 100%;
     }
     .carousel {
         height: 200px;

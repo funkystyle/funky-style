@@ -115,6 +115,7 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
                     delete store._created;
                     delete store._updated;
                     delete store._links;
+                    delete store.last_modified_by;
                     console.log(store);
                     finalItems.push(storeFactory.update(store, $auth.getToken()).then(function (store_data) {
                         console.log(store_data);
@@ -129,6 +130,7 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
                     category.related_coupons.push(responseCouponId);
                     delete category._created;
                     delete category._updated;
+                    delete category.last_modified_by;
                     delete category._links;
                     console.log(category);
                     finalItems.push(categoryFactory.update(category, $auth.getToken()).then(function (category_data) {

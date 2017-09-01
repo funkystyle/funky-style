@@ -11,8 +11,13 @@ angular.module('homeModule', ["headerModule", "Directives"])
         var embedded = {};
         embedded['related_categories'] = 1;
         embedded['related_stores'] = 1;
+
+        // get the list of top deal categories
+        var featured = JSON.stringify({
+            featured_coupon: true
+        });
         
-        var url = '/api/1.0/coupons'+'?sort=-_created&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
+        var url = '/api/1.0/coupons'+'?where='+featured+'&max_results=10&sort=-_created&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
         $http({
             url: url,
             method: "GET",

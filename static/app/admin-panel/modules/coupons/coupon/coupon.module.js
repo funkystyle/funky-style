@@ -157,6 +157,9 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 },
                 {
                     field: 'status', width: "20%", displayName: "Status"
+                },
+                {
+                    field: 'featured_coupon', width: "20%", displayName: "Featured"
                 }
             ]
         };
