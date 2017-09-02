@@ -609,8 +609,12 @@ ul.rating {
         height: auto;
         margin: 0 auto;
     }
-    .breadcrumb-area {
-        display: none !important;
+    .breadcrumb {
+        margin-bottom: 5px !important;
+        padding: 0 !important;
+    }
+    .breadcrumb>li+li:before {
+        padding: 0 2px !important;
     }
     .custom-popup-wrapper {
         left: -59px !important;

@@ -146,7 +146,7 @@
                     </div>
                     <div class="form-group">
                         <label>Last Modified By</label>
-                        <ui-select ng-model="selected_user.user" theme="bootstrap">
+                        <ui-select ng-model="coupon.last_modified_by" theme="bootstrap">
                             <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
                             <ui-select-choices repeat="person._id as person in persons | filter: $select.search">
                                 <small>

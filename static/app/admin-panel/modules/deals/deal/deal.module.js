@@ -178,13 +178,14 @@ angular.module("dealModule", ['constantModule', 'toastr', 'cgBusy',
                 $scope.gridOptions.data = data.data._items;
                 $scope.deals = data.data._items;
                 angular.forEach($scope.deals, function(item) {
-                    console.log(item);
                     // push categories into array for filtering
                     angular.forEach(item.deal_category, function (category) {
-                        $scope.categories.push({
-                            value: category._id,
-                            label: category.name
-                        });
+                        if(category) {
+                            $scope.categories.push({
+                                value: category._id,
+                                label: category.name
+                            });
+                        }
                     });
                     if(item.store) {
                         $scope.stores.push({
@@ -192,10 +193,12 @@ angular.module("dealModule", ['constantModule', 'toastr', 'cgBusy',
                             label: item.store.name
                         });
                     }
-                    $scope.persons.push({
-                        value: item.last_modified_by._id,
-                        label: item.last_modified_by.email
-                    });
+                    if(item['last_modified_by']) {
+                        $scope.persons.push({
+                            value: item.last_modified_by._id,
+                            label: item.last_modified_by.email
+                        });
+                    }
                 });
                 setTimeout(function () {
                     $scope.categories = _.uniq($scope.categories, function (item) {

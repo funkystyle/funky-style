@@ -325,7 +325,7 @@ ul.unstyled li a {
     }
     .carousel-inner .item a, .carousel-inner .item {
         height: 200px;
-        display: flex;
+        /*display: flex;*/
         align-items: center;
         background: #ffffff;
     }

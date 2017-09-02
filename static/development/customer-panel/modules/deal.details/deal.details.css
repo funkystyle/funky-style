@@ -476,6 +476,8 @@ table {
     background: #FFFFFF;
     border: 1px solid #ddd;
     border-radius: 2px;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
 
 }
 .h3-main-heading {

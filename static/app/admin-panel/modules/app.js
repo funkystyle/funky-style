@@ -6,6 +6,7 @@ function clearNullIds (items) {
     console.log("Before deleting null items: ", items," -- after deleting null items: ", array);
     return array;
 }
+
 var monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];

@@ -349,12 +349,14 @@ ul.nav li.dropdown ul.dropdown-menu {
 /*   ====================== for mobile view =====================*/
 
 @media screen and (max-width: 768px) {
+    .header .navbar-header {
+        width: 100%;
+        padding: 0 15px 0 25px;
+    }
     .header .navbar-brand {
         display: flex;
-        /* margin: 0 auto; */
         align-items: center;
         justify-content: center;
-        margin-left: 10px;
     }
     .largenav {
         display: block;

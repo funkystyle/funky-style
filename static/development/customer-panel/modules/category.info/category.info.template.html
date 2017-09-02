@@ -5,7 +5,18 @@
 <div class="container pad top-container">
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<div class="row">
+            <div style="width: 100%; min-height: 20px;" class="breadcrumb-area">
+                <ol class="breadcrumb pull-right">
+                    <li><a ui-sref="main.home">Home</a></li>
+                    <li><a ui-sref="main.category">categories</a></li>
+                    <li ng-repeat="item in category.breadcrumb">
+                        <a ng-if="!$last" ui-sref="main.categoryinfo({url: item.url})">{{ item.name }}</a>
+                        <span ng-if="$last">{{ item.name }}</span>
+                    </li>
+                    <li class="active">{{ category.url }}</li>
+                </ol>
+            </div> <!-- end div -->
+            <div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 thumb">
 					<div class="thumbnail store-logo">
 						<img ng-src="{{ category.image }}" alt="{{ category.name }}" title="{{ category.name }}">
@@ -18,17 +29,6 @@
 					</p>
 				</div>
 				<div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
-					<div style="width: 100%; min-height: 20px;" class="breadcrumb-area">
-						<ol class="breadcrumb pull-right">
-							<li><a ui-sref="main.home">Home</a></li>
-							<li><a ui-sref="main.category">categories</a></li>
-							<li ng-repeat="item in category.breadcrumb">
-                                <a ng-if="!$last" ui-sref="main.categoryinfo({url: item.url})">{{ item.name }}</a>
-                                <span ng-if="$last">{{ item.name }}</span>
-                            </li>
-                            <li class="active">{{ category.url }}</li>
-						</ol>
-					</div> <!-- end div -->
 					<h3 class="margin-top-0 h3-heading">{{ category.h1 }}</h3>
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(category.top_description)"></p>

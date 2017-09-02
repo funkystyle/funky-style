@@ -70,8 +70,6 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
 
             personFactory.me().then(function (data) {
                 $scope.persons.push(data.data.data);
-                $scope.selected_user.user = $scope.persons[0];
-                $scope.coupon.last_modified_by = $scope.persons[0]._id;
             }, function (error) {
                 console.log(error);
             });
@@ -116,7 +114,7 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                                 item.related_stores = clearNullIds(item.related_stores);
                                 item.related_categories = clearNullIds(item.related_categories);
                                 item.recommended_stores = clearNullIds(item.recommended_stores);
-                                item.last_modified_by = (item.last_modified_by) ? item.last_modified_by: undefined
+                                item.last_modified_by = (item.last_modified_by) ? item.last_modified_by: $scope.persons[0]._id;
 
                                 $scope.coupon = item;
                                 console.log(item);
@@ -169,6 +167,8 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             delete coupon._created;
             delete coupon._updated;
             delete coupon._links;
+
+            console.log("Coupon Last modified by: ", coupon.last_modified_by, $scope.selected_user.user);
 
             console.log(coupon);
             couponFactory.update(coupon, $auth.getToken()).then(function (data) {

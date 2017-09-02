@@ -41,7 +41,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
             data: [],
             exporterMenuCsv: false,
             enableHorizontalScrollbar: uiGridConstants.scrollbars.ALWAYS,
-            enableVerticalScrollbar: uiGridConstants.scrollbars.ALWAYS,
+            // enableVerticalScrollbar: uiGridConstants.scrollbars.ALWAYS,
             enableColumnResizing: true,
             enableGridMenu: true,
             enableRowSelection: true,
@@ -210,16 +210,24 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     destArray['Expired Coupons'] = [];
                     angular.forEach($scope.coupons, function(item) {
                         // push categories into array for filtering
+                        // console.log(item.related_categories, item.related_stores);
                         angular.forEach(item.related_categories, function (category) {
-                            $scope.categories.push({
-                                value: category._id,
-                                label: category.name
-                            });
+                            if(category) {
+                                $scope.categories.push({
+                                    value: category._id,
+                                    label: category.name
+                                });
+                            }
                         });
-                        $scope.stores.push({
-                            value: item.related_stores[0]._id,
-                            label: item.related_stores[0].name
-                        });
+
+                        if(item.related_stores.length) {
+                            if(item.related_stores[0]) {
+                                $scope.stores.push({
+                                    value: item.related_stores[0]._id,
+                                    label: item.related_stores[0].name
+                                });
+                            }
+                        }
 
                         if(item['last_modified_by']) {
                             $scope.persons.push({
