@@ -1,3 +1,39 @@
+@media only screen and (max-device-width: 720px) {
+    div.repeat-brands {
+        background: #fff;
+        padding: 15px;
+        overflow-x: scroll;
+        width: 100%;
+        display: inline-block;
+        align-items: center;
+        white-space: nowrap;
+        justify-content: flex-start;
+    }
+    .repeat-brands .repeat-brands-item {
+        height: 50px;
+        width: 95px;
+        display: inline-flex;
+        border-right: 1px solid #ddd;
+        align-items: center;
+        justify-content: center;
+        padding-right: 5px;
+        margin-right: 5px;
+    }
+    .repeat-brands-item img {
+        max-height: 100% !important;
+        max-width: 100% !important;
+    }
+    .pad-5 {
+        padding: 0 15px !important;
+    }
+    .only-desktop {
+        display: none !important;
+    }
+    .footer-desc img {
+        width: auto;
+        max-width: 100%;
+    }
+}
 .main_content{
     background: #ffffff;
 }

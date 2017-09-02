@@ -4,7 +4,7 @@ angular.module('cmsFactoryModule', ['constantModule'])
 		get: function (url) {
 			var def = $q.defer();
 			$http({
-				url: URL.cms_pages,
+				url: URL.cms_pages+"?rand="+Math.random(),
 				method: "GET"
 			}).then(function (data) {
 				def.resolve(data);

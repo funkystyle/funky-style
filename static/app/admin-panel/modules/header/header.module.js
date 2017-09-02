@@ -1,5 +1,5 @@
 angular.module("headerModule", ["constantModule", "satellizer", "toastr", "personFactoryModule"])
-    .controller("headerCtrl", function($scope, $state, mainURL, URL, $state, $auth, $http, toastr, personFactory) {
+    .controller("headerCtrl", function($scope, $rootScope, mainURL, URL, $state, $auth, $http, toastr, personFactory) {
         $scope.state = $state;
         $scope.user = {};
         $scope.selected_user = {};

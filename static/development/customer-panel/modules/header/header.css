@@ -47,12 +47,14 @@ header {
     padding: 5px 20px;
     margin-left: -2px;
 }
-.bottom-header {
-    position: absolute;
-    width: 100%;
-    z-index: 9;
-    top: -12px;
-    height: 40px;
+@media only screen and (min-device-width: 720px) {
+    .bottom-header {
+        position: absolute;
+        width: 100%;
+        z-index: 9;
+        top: -12px;
+        height: 40px;
+    }
 }
 .bottom-header ul {
     padding: 0 15px;
@@ -347,6 +349,13 @@ ul.nav li.dropdown ul.dropdown-menu {
 /*   ====================== for mobile view =====================*/
 
 @media screen and (max-width: 768px) {
+    .header .navbar-brand {
+        display: flex;
+        /* margin: 0 auto; */
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+    }
     .largenav {
         display: block;
         margin-left: 10px;
@@ -358,14 +367,13 @@ ul.nav li.dropdown ul.dropdown-menu {
         display: none;
     }
     .custom-popup-wrapper {
-        width: 292px;
         height: 300px;
     }
     .row2 {
         padding: 2% 0 2%;
     }
     .navbar-toggle {
-        margin-right: 0px;
+        margin-right: 0;
         float: none;
         margin-left: -9px;
     }
@@ -374,6 +382,7 @@ ul.nav li.dropdown ul.dropdown-menu {
     }
     .navbar-brand {
         padding:0;
+        margin: 0 auto;
     }
     .flipkart-navbar-input {
         font-size: 14px;

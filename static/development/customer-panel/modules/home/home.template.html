@@ -2,12 +2,20 @@
 <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="static/app/customer-panel/modules/category.info/coupon.popup.css"/>
 <span ng-if="!params">
-    <div class="container top-container">
+    <div class="container top-container mobile-carousel">
+        <div class="row only-mobile">
+            <div class="col-xs-12">
+                <ul class="show-cats">
+                    <li><a ui-sref="main.home">Coupons</a></li>
+                    <li><a ui-sref="main.all_deals">Deals</a></li>
+                </ul>
+            </div>
+        </div>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item" ng-class="{'active': $index == 0}" ng-repeat="item in banners">
-                    <a href="{{ item.destination_url }}">
+                    <a target="_blank" href="{{ item.destination_url }}">
                         <img ng-src="{{ item.image }}">
                     </a>
                 </div><!-- End Item -->
@@ -39,7 +47,7 @@
                         <img ng-src="{{ item.image }}" alt="{{ item.name }}" title="{{ item.name }}">
                     </a>
 
-                    <div class="description-area">
+                    <div class="description-area" ui-sref="main.store-info({url: item.url})">
                         <a ui-sref="main.store-info({url: item.url})" title="{{ item.name }}">
                             {{ item.related_coupons.length }} Offers
                         </a>
@@ -65,7 +73,7 @@
                     <a ui-sref="main.categoryinfo({url: item.url})" title="{{ item.title }}">
                         <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
                     </a>
-                    <div class="description-area">
+                    <div ui-sref="main.categoryinfo({url: item.url})" class="description-area">
                         <a ui-sref="main.categoryinfo({url: item.url})" title="{{ item.name }}">
                             {{ item.related_coupons.length }} Offers
                         </a>
@@ -77,7 +85,7 @@
         <!-- end of popular Categories -->
 
         <!-- coupons by category wise -->
-    <div class="container category-wise-home">
+    <div class="container category-wise-home hide-in-mobile">
         <div class="row">
             <div class="col-lg-12 col-sm-12 col-md-12">
                 <div class="panel panel-default panel_deft">
@@ -127,8 +135,7 @@
         </div>
         <!-- coupons div starts here -->
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12" ng-if="item.featured_coupon == true"
-                 ng-repeat="item in coupons | limitTo: 10">
+            <div class="col-lg-6 col-md-6 col-sm-12" ng-repeat="item in coupons | limitTo: 10">
                 <div class="panel panel-default deal-tile">
                     <div class="panel-heading">
                         <div class="row">
@@ -159,13 +166,13 @@
                     </div>
                     <div class="panel-footer">
                         <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-4 text-left col-xs-8 txt_small">
+                            <div class="col-lg-4 col-md-4 col-sm-12 text-left col-xs-6 txt_small">
                                 <a href="" ng-click="showDescription(item._id)">Show Description</a>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 txt_small text-right">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-6 txt_small text-right">
                                 <a href=""><span class="glyphicon glyphicon-check gly"></span>Verified</a>
                             </div>
-                            <div class="col-lg-5 col-md-5 col-sm-5 pad-right-0 col-xs-12 btn_mobile">
+                            <div class="col-lg-5 col-md-5 col-sm-12 pad-right-0 col-xs-12 btn_mobile">
                                 <a ng-click="openCouponCode(undefined, item)" class="btn btn-md btn-block btn-info show_copan_code">
                                     <span>{{ (item.coupon_type == 'coupon') ? "SHOW COUPON CODE": "GET OFFER" }}</span>
                                     <i class="pull-right fa fa-arrow-right"></i>
@@ -199,7 +206,7 @@
             </div>
         </div>
         <div class="row">
-            <deal-tile-directive class-name="col-lg-3 col-md-3 col-sm-12" items="deals" limit="8"></deal-tile-directive>
+            <deal-tile-directive class="col-sm-12" items="deals" limit="8"></deal-tile-directive>
         </div>
     </div>
     <!-- Top deal of the week End Here  -->

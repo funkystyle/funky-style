@@ -1,4 +1,18 @@
-
+@media only screen and (max-device-width: 720px) {
+    .pad-right-0 {
+        padding-right: 15px !important;
+    }
+    .only-desktop {
+        display: none !important;
+    }
+    .footer-desc img {
+        width: auto;
+        max-width: 100%;
+    }
+    .store-logo img {
+        width: auto !important;
+    }
+}
 .related-coupon-deal {
     position: absolute;
     bottom: -20px;

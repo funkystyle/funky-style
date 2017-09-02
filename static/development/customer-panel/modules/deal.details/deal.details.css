@@ -1,3 +1,115 @@
+/* ---------- media query for mobile ------------ */
+@media only screen and (max-device-width: 480px) {
+    div.stores-description-inner div.amazon-logo {
+        width: 55px !important;
+    }
+    .stores-description div.stores-description-inner {
+        width: 23% !important;
+    }
+    div.stores-description-inner div.amazon-logo img {
+        width: auto !important;
+        max-width: 100%;
+    }
+    .pad-left-0 {
+        padding-left: 15px !important;
+    }
+    .h3-heading, .coupon-heading {
+        font-size: 17px !important;
+        line-height: 20px;
+    }
+    .stores-description .stores-description-inner a.btn {
+        width: 74px;
+        font-size: 10px;
+    }
+    div.stores-description-inner h4, div.stores-description-inner p {
+        font-size: 12px;
+    }
+    .btn-grey {
+        width: 45% !important;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+    ul.dynamic-fields {
+        padding: 10px 20px !important;
+    }
+    ul.dynamic-fields li {
+        width: 100% !important;
+    }
+    .only-desktop {
+        display: none !important;
+    }
+    .mobile-store-description {
+        background: #fff;
+        padding: 15px;
+        overflow-x: scroll;
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        justify-content: flex-start;
+    }
+    .deal-store-logo {
+        height: 150px !important;
+        margin: 0 auto;
+    }
+    .blog-side-banner a img, .word_press a img {
+        height: auto;
+        width: auto;
+        border-radius: 3px;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .pad-right-0 {
+        padding-right: 15px !important;
+    }
+    .showcase-img, .deal-store-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .mobileprice-logo img {
+        width: auto !important;
+        height: auto !important;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .stores-description-inner .btn {
+        font-size: 13px;
+    }
+    .mobile-store-description .stores-description-inner {
+        margin-right: 15px;
+    }
+    .mobile-store-description .stores-description-inner:last-child {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .amazon-logo a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+    }
+    table {
+        width: 100% !important;
+    }
+    div.general-head table td {
+        min-width: auto !important;
+    }
+    .only-desktop {
+        display: none !important;
+    }
+    .footer-desc img {
+        width: auto;
+        max-width: 100%;
+    }
+}
+@media only screen and (min-device-width: 720px) {
+    .only-mobile {
+        display: none;
+    }
+}
+
 .deal-cat-left {
     border-right: 1px solid #ddd;
 }
@@ -13,6 +125,29 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+.word_press{
+    margin-left: 0;
+    height: 100px;
+    margin-bottom: 10px;
+}
+.word_press a {
+    display: block;
+    height: 100px;
+    overflow: hidden;
+}
+.word_press a img, .blog-side-banner a img {
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+}
+.blog-side-banner {
+    height: 300px;
+    margin: 10px 0;
+}
+.blog-side-banner a {
+    height: 300px;
+    overflow: hidden;
 }
 .coupon-footer .vari_pad {
     justify-content: flex-end;
@@ -918,7 +1053,6 @@ div.general-head table td {
         margin-left: 0px;
         width: 100%;
         margin-right: 0px;
-        padding-right: 0;
     }
     .row_mar {
         margin: 0 0px 0 15px;
@@ -1154,9 +1288,6 @@ div.general-head table td {
         margin: 0px 0px 5px 0px;
     }
     .discounttext-main .col-md-6 {
-        padding: 0px;
-    }
-    .mobilespecifications-left {
         padding: 0px;
     }
     .mobilespecifications-head {
@@ -1422,9 +1553,6 @@ div.general-head table td {
         margin: 0px 0px 5px 0px;
     }
     .discounttext-main .col-md-6 {
-        padding: 0px;
-    }
-    .mobilespecifications-left {
         padding: 0px;
     }
     .mobilespecifications-head {
@@ -1696,9 +1824,6 @@ div.general-head table td {
         margin: 0px 0px 5px 0px;
     }
     .discounttext-main .col-md-6 {
-        padding: 0px;
-    }
-    .mobilespecifications-left {
         padding: 0px;
     }
     .mobilespecifications-head {

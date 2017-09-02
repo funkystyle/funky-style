@@ -42,6 +42,17 @@ var blog = angular.module("blogModule", [])
             $scope.top_banner = banner.data._items[0];
         });
 
+        // Get the Side banner from banners table
+        $scope.side_banner = {};
+        var where = JSON.stringify({
+            "side_banner_string": 'blog'
+        });
+        var url = "/api/1.0/banner?where="+where;
+        Query.get(url).then(function (banner) {
+            console.log("banner Details: ", banner.data._items);
+            $scope.side_banner = banner.data._items[0];
+        });
+
         // get the list of all blogs
         var embedded = JSON.stringify({
             "last_modified_by": 1,

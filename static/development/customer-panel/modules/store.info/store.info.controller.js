@@ -1,7 +1,7 @@
 angular
     .module("storeinfoModule", ["Directives", "satellizer"])
     .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth, $filter, $sce, $ocLazyLoad,
-                                                 $rootScope, $compile, StoreQuery, $q) {
+                                                 $rootScope, $compile, StoreQuery, $q, DestionationUrl) {
         $scope.favorites = {};
         $scope.comment = {};
         $scope.filter = {
@@ -90,14 +90,16 @@ angular
             var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
             StoreQuery.get(url);
 
-            if(store.store_url) {
-                setTimeout(function () {
-                    // window.location.href = store.store_url;
-                }, 500);
-            }
+            // get the Deeplink destionation URL for it
+            DestionationUrl.destination_url(item.destination_url).then(function (data) {
+                $scope.destionationUrl = data['data']['data']['output_url'];
+                url = $state.href('main.store-info', {url: store.url, cc: item._id, destionationUrl: $scope.destionationUrl});
+                window.open(url,'_blank');
 
-            url = $state.href('main.store-info', {url: store.url, cc: item._id});
-            window.open(url,'_blank');
+                window.location.href = $scope.destionationUrl;
+            }, function (error) {
+                console.log(error);
+            });
         };
         $("#top_banner_area").hide();
         if($stateParams['url']) {
@@ -163,6 +165,7 @@ angular
                     StoreQuery.get(url).then(function (coupons) {
                         var items = coupons.data._items,
                             qItems = [];
+                        $scope.store.totalCouponsLength = items.length;
                         console.log("Stores Coupons Data: ", items);
                         angular.forEach(items, function (item) {
                             console.log($scope.user.fav_coupons);

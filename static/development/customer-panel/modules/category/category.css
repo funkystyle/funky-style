@@ -15,7 +15,7 @@
     display: inline-block;
     width: 130px;
     height: 100px;
-    margin: 0 15px 5px 0;
+    margin: 0 15px 20px 0;
 }
 div.thumb {
     -webkit-animation: fade 1s;
@@ -25,11 +25,14 @@ div.thumb {
     -moz-border-radius: 2px;
     border-radius: 2px;
     margin-bottom: 0;
+    height: 70px;
 }
 div.thumb img {
-    height: 50px;
-    width: 100%;
+    height: auto;
+    width: auto;
     border-radius: 3px;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 /* -fail- */
@@ -118,7 +121,7 @@ div.thumb img {
     margin-top:10px;
     margin-bottom: 10px;
 }
-@media screen and (max-width: 359px){
+@media screen and (max-width: 720px){
     .overlay-on-image {
         height: 96px;
     }
@@ -144,7 +147,16 @@ div.thumb img {
         margin-bottom: 10px;
     }
     div.thumb {
-        margin-bottom: 15px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .store-tile {
+        display: block;
+        width: 130px;
+        height: 120px;
+        margin: 0 15px 10px 0;
     }
 }
 @media screen and (min-width: 360px) and (max-width: 374px){

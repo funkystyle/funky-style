@@ -105,6 +105,7 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 embedded['related_categories'] = 1;
                 embedded['related_stores'] = 1;
                 embedded['recommended_stores'] = 1;
+                embedded['last_modified_by'] = 1;
                 $http({
                     url: URL.coupons+"?embedded="+JSON.stringify(embedded)+"&rand_number="+Math.random(),
                     method: "GET"
@@ -115,6 +116,7 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                                 item.related_stores = clearNullIds(item.related_stores);
                                 item.related_categories = clearNullIds(item.related_categories);
                                 item.recommended_stores = clearNullIds(item.recommended_stores);
+                                item.last_modified_by = (item.last_modified_by) ? item.last_modified_by: undefined
 
                                 $scope.coupon = item;
                                 console.log(item);

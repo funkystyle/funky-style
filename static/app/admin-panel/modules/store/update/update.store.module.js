@@ -25,8 +25,7 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
             }
         ];
 
-        $scope.$watch('store.name', function(newVal, oldVal) {
-            console.log("Selected SEO details: ", $scope.seoList);
+        $scope.changeUrl = function (newVal) {
             if(newVal && $scope.seoList.length) {
                 var data = replaceSeo(newVal, $scope.seoList, 'single_store');
                 $scope.store.meta_title = data.title;
@@ -42,7 +41,7 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
                 console.log("SEO details:  ", data);
             }
             $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-coupons" : undefined;
-        }, true);
+        };
 
         // get all stores into the array
         if($auth.isAuthenticated() && $stateParams['storeId']) {

@@ -4,7 +4,7 @@ angular.module("personFactoryModule", ['constantModule'])
         getAll: function (token) {
             var d = $q.defer();
             $http({
-                url: URL.persons,
+                url: URL.persons+"?rand"+Math.random(),
                 headers: {
                     authorization: token
                 },

@@ -239,6 +239,20 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'
                         }
                     }
                 })
+                // activate email link
+                .state('main.activate', {
+                    url: '/confirm_account/users/:user_id/confirm/:token',
+                    templateUrl: '/static/app/customer-panel/modules/activate.email/activate.email.template.html',
+                    controller: "activateEmailCtrl",
+                    resolve: {
+                        activateEmail: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'activateEmailModule',
+                                files: ['/static/app/customer-panel/modules/activate.email/activate.email.module.js']
+                            })
+                        }
+                    }
+                })
                 .state('forgot_password', {
                     url: '/forgot-password',
                     templateUrl: '/static/app/admin-panel/modules/forgot.password/forgot.password.template.html',

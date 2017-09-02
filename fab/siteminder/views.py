@@ -5,6 +5,7 @@ from settings import SERVER_URL, \
     SCHEMAS, IGNORE_COLLECTION_NAMES, BASE_DIR, INDEX_XML_TEMPLATE, \
     SUB_FILE_TEMPLATE, LOOK_UP_FIELDS, PRIORITY,XML_FILES_FOLDER
 
+
 class SiteMinder(object):
 
     def __init__(self, date_time, resource_name):
@@ -51,6 +52,9 @@ def generate_sitemap_index_file():
     for ignore_schema_name in IGNORE_COLLECTION_NAMES:
         if ignore_schema_name in SCHEMAS.keys():
             schema_names.remove(ignore_schema_name)
+    schema_names.remove("deal_categories_collection")
+    schema_names.remove("user_favourites")
+    schema_names.append("deal_categories")
     file_path = BASE_DIR+"/"+INDEX_XML_TEMPLATE
     with open(file_path) as _file:
         template = _file.read()
@@ -89,11 +93,19 @@ def generate_sub_xml_file(resource_name, app):
         base_url = "{server_name}".format(
             server_name=SERVER_URL
         )
-        loc = "{base_url}/{prefix_collcection}/{field_string}".format(
-            base_url=base_url,
-            prefix_collcection=PRIORITY[resource_name]['prefix'],
-            field_string=str(item[LOOK_UP_FIELDS[resource_name]])
-        )
+
+        if PRIORITY[resource_name]['prefix']:
+            loc = "{base_url}/{prefix_collcection}/{field_string}".format(
+                base_url=base_url,
+                prefix_collcection=PRIORITY[resource_name]['prefix'],
+                field_string=str(item[LOOK_UP_FIELDS[resource_name]])
+            )
+        else:
+            loc = "{base_url}/{field_string}".format(
+                base_url=base_url,
+                field_string=str(item[LOOK_UP_FIELDS[resource_name]])
+            )
+
         lastmod = _updated
         changefreq = PRIORITY[resource_name]['changefreq']
         priority = PRIORITY[resource_name]['priority']

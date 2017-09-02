@@ -1,3 +1,9 @@
+<style>
+    input.ng-invalid-maxlength, textarea.ng-invalid-maxlength {
+        border: 1px solid red;
+    }
+</style>
+
 <div class="panel panel-default" style="margin-top: 90px;">
     <div class="panel-heading">
         <div class="row">
@@ -82,14 +88,26 @@
                         <div class="col-lg-11 col-md-11">
                             <div class="form-group col-md-12">
                                 <label for="title">Meat Title</label>
-                                <input required type="text" id="title" class="form-control"
+                                <input ng-class="{'red': seo.meta_title.length >65 }" ng-maxlength="65" required type="text" id="title" class="form-control"
                                        ng-model="seo.meta_title" placeholder="Meta Title" />
                             </div>
+                            <div class="form-group col-md-12" ng-if="seo.meta_title">
+                                <p>
+                                    Characters count {{ seo.meta_title.length }}
+                                </p>
+                            </div>
+
                             <div class="form-group col-md-12">
                                 <label for="description">Meta Description</label>
-                                <textarea required ng-click="textEditor($event)" class="form-control input-md" name="description"
+                                <textarea ng-maxlength="155" required class="form-control input-md" name="description"
                                           id="description" ng-model="seo.meta_description" cols="30" rows="3"
                                           placeholder="Meta Description"></textarea>
+                            </div>
+
+                            <div class="form-group col-md-12" ng-if="seo.meta_description">
+                                <p>
+                                    Characters count {{ seo.meta_description.length }}
+                                </p>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="related_seos">Selection Types</label>

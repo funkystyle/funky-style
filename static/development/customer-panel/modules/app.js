@@ -10,12 +10,16 @@ function clearNullIds (items) {
     });
     return array;
 }
+$(document).ready(function () {
+    setTimeout(function () {
+        $("html, body").animate({ scrollTop: 0 }, 100);
+    }, 3000);
+});
 angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
     .run(["$rootScope", function($rootScope) {
         $rootScope.$on('$stateChangeSuccess', function() {
             document.body.scrollTop = document.documentElement.scrollTop = 0;
         });
-
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {
                 $('.goToTop').fadeIn();
@@ -128,7 +132,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     }
                 })
                 .state('main.home', {
-                    url: '/?cc',
+                    url: '/?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/home/home.template.html',
                     controller: "homeCtrl",
                     resolve: {
@@ -172,20 +176,6 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     }
                 })
 
-                // activate email link
-                .state('main.activate', {
-                    url: '/confirm_account/users/:user_id/confirm/:token',
-                    templateUrl: 'static/app/customer-panel/modules/activate.email/activate.email.template.html',
-                    controller: "activateEmailCtrl",
-                    resolve: {
-                        activateEmail: function($ocLazyLoad) {
-                            return $ocLazyLoad.load({
-                                name: 'activateEmailModule',
-                                files: ['static/app/customer-panel/modules/activate.email/activate.email.module.js']
-                            })
-                        }
-                    }
-                })
                 //  change password
                 .state('main.change_password', {
                     url: '/change-password',
@@ -200,6 +190,20 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })*/
+                // activate email link
+                .state('main.activate', {
+                    url: '/confirm_account/users/:user_id/confirm/:token',
+                    templateUrl: 'static/app/customer-panel/modules/activate.email/activate.email.template.html',
+                    controller: "activateEmailCtrl",
+                    resolve: {
+                        activateEmail: function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'activateEmailModule',
+                                files: ['static/app/customer-panel/modules/activate.email/activate.email.module.js']
+                            })
+                        }
+                    }
+                })
                 // store state
                 .state('main.store', {
                     url: '/stores',
@@ -216,7 +220,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // Store Info
                 .state('main.store-info', {
-                    url: '/store/:url?cc',
+                    url: '/store/:url?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/store.info/store.info.template.html',
                     controller: "storeinfoController",
                     resolve: {
@@ -244,7 +248,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // category info
                 .state('main.categoryinfo', {
-                    url: '/category/:url?cc',
+                    url: '/category/:url?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/category.info/category.info.template.html',
                     controller: "categoryinfoCtrl",
                     resolve: {
@@ -441,46 +445,83 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
         }
     })
     .factory("SEO", function ($http, $q) {
+        var obj = {};
+        obj.meta_titles = function (object) {
+            console.log("Meta Titles object: ", object);
+            $("title").html(object.title);
+            $("meta[property='og\\:title'], meta[name='twitter\\:title']").attr('content', object.title);
+            $( "meta[name='description'], meta[property='og\\:description'], meta[name='twitter\\:description']")
+                .attr('content', object.description);
+            $( "link[rel='canonical'], meta[property='og\\:url']").attr('content', window.location.href);
+            $("meta[property='og\\:site_name']").attr('content', window.location.host);
+
+            return object;
+        }
+        obj.seo = function (newVal, item, from) {
+            console.log("newVal: ", newVal, " Item: ", item, "From: ", from);
+            var monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            var date = new Date();
+            var month = undefined;
+            var year = undefined;
+
+            date.setDate(date.getDate() + 3);
+            month = monthNames[date.getMonth()];
+            year = date.getFullYear();
+
+            item.meta_title = (item.meta_title) ? item.meta_title: "";
+            item.meta_description = (item.meta_description) ? item.meta_description: "";
+
+            var replacement = {
+                title: undefined,
+                description: undefined
+            };
+            replacement.title = item.meta_title.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            replacement.description = item.meta_description.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+
+            console.log("SEO replacement Data: ", replacement);
+            obj.meta_titles(replacement);
+            return replacement;
+        }
+        obj.getSEO =  function () {
+            // get the seo information for home page
+            var def = $q.defer();
+            var url = '/api/1.0/master_seo'+'?rand' + new Date().getTime();
+            $http({
+                url: url,
+                method: "GET"
+            }).then(function (data) {
+                console.log("SEO Data: ", data.data._items);
+                var items = data.data._items;
+                def.resolve(items);
+            }, function (error) {
+                console.log(error);
+                def.reject(error);
+            });
+
+            return def.promise;
+        }
+        return obj;
+    })
+    .factory("DestionationUrl", function ($http, $q) {
         return {
-            seo: function (newVal, item, from) {
-                var monthNames = ["January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
-                ];
-                var date = new Date();
-                var month = undefined;
-                var year = undefined;
+            destination_url: function (url) {
+                var d = $q.defer();
 
-                date.setDate(date.getDate() + 3);
-                month = monthNames[date.getMonth()];
-                year = date.getFullYear();
-
-                var replacement = {
-                    title: undefined,
-                    description: undefined
-                };
-                replacement.title = item.meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-                replacement.description = item.meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-
-                console.log("SEO replacement Data: ", replacement);
-                return replacement;
-            },
-            getSEO: function () {
-                // get the seo information for home page
-                var def = $q.defer();
-                var url = '/api/1.0/master_seo'+'?rand' + new Date().getTime();
                 $http({
-                    url: url,
-                    method: "GET"
-                }).then(function (data) {
-                    console.log("SEO Data: ", data.data._items);
-                    var items = data.data._items;
-                    def.resolve(items);
+                    url: "/api/1.0/get-output-deep-link-url",
+                    method: "POST",
+                    data: {
+                        url: url
+                    }
+                }).then(function (success) {
+                    d.resolve(success);
                 }, function (error) {
-                    console.log(error);
-                    def.reject(error);
+                    d.reject(error);
                 });
 
-                return def.promise;
+                return d.promise;
             }
         }
     })

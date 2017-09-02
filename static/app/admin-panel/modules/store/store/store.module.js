@@ -49,7 +49,7 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                 console.log("Stores: ", data._items);
                 if(data) {
                     $scope.stores = data._items;
-                    $scope.filterStores = data._items;
+                    $scope.filterStores = $filter("orderBy")(data._items, '_updated', true);
                     angular.forEach($scope.stores, function(item, index) {
                         // check related coupons null ids
                         $scope.stores[index].related_coupons = clearNullIds(item.related_coupons);

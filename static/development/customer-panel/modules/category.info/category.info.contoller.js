@@ -1,7 +1,7 @@
 angular
     .module("categoryinfoModule", ["Directives", "satellizer"])
     .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce, Query, $q,
-                                              $stateParams, $http, $rootScope, $compile, $auth) {
+                                              $stateParams, $http, $rootScope, $compile, $auth, DestionationUrl) {
         $scope.favorites = {};
         $scope.filter = {
             store: {},
@@ -69,8 +69,17 @@ angular
             var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
             Query.get(url);
 
-            url = $state.href('main.categoryinfo', {url: category.url, cc: item._id});
-            window.open(url,'_blank');
+            // get the Deeplink destionation URL for it
+            DestionationUrl.destination_url(item.destination_url).then(function (data) {
+                $scope.destionationUrl = data['data']['data']['output_url'];
+                url = $state.href('main.categoryinfo', {url: category.url, cc: item._id, destionationUrl: $scope.destionationUrl});
+                window.open(url,'_blank');
+
+                window.location.href = $scope.destionationUrl;
+            }, function (error) {
+                console.log(error);
+            });
+
         };
 
         if($stateParams['url']) {

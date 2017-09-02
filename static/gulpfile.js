@@ -39,8 +39,10 @@ gulp.task('minify_js', function() {
         'bower_components/jquery/dist/jquery.min.js', 'bower_components/bootstrap/dist/js/bootstrap.min.js',
         'bower_components/angular/angular.min.js', 'bower_components/angular-sanitize/angular-sanitize.min.js',
         'bower_components/angular-ui-router/release/angular-ui-router.min.js', 'bower_components/oclazyload/dist/ocLazyLoad.min.js',
-        'app/customer-panel/modules/app.js'
-    ]).pipe(concat('bower_scripts.js')).pipe(stripDebug()).pipe(gulp.dest('app/customer-panel/modules'));
+        'app/customer-panel/modules/app.js'])
+        .pipe(concat('bower_scripts.js'))
+        .pipe(stripDebug())
+        .pipe(gulp.dest('app/customer-panel/modules'));
 });
 
 // watching static files

@@ -12,22 +12,28 @@ angular.module("updateBannersModule", ["ui.select", "ngSanitize",
                 code: "home"
             },
             {
-                text: "All Categories",
+                text: "Category Page",
                 code: "category"
             },
             {
-                text: "All Stores",
+                text: "Store Page",
                 code: "store"
             },
             {
-                text: "All Deals",
+                text: "Deal Home Page",
                 code: "deal"
+            },
+            {
+                text: "Individual Deal",
+                code: "deal_individual"
             },
             {
                 text: "All Blogs",
                 code: "blog"
             }
         ];
+        $scope.side_banner_array = angular.copy($scope.selection_type);
+        $scope.side_banner_array.splice(1,1);
         $scope.status = [
             {
                 text: "Active",

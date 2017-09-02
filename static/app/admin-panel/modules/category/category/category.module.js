@@ -3,7 +3,7 @@ angular.module("categoryModule", ['angular-table', 'constantModule', 'toastr', '
     'storeFactoryModule', 'cgBusy', 'satellizer', 'ui.select', 'categoryFactoryModule'])
     .controller("categoryCtrl", function($scope, $filter, toastr,
                                          mainURL, URL, $state, $stateParams, personFactory, $auth,
-                                         storeFactory, categoryFactory, $q, $http) {
+                                         storeFactory, categoryFactory, $q, $http, $filter) {
         console.log("category controller!");
 
         $scope.categories = [];
@@ -40,7 +40,7 @@ angular.module("categoryModule", ['angular-table', 'constantModule', 'toastr', '
                 console.log(data);
                 if(data) {
                     $scope.categories = data.data._items;
-                    $scope.filterCategories = data.data._items;
+                    $scope.filterCategories = $filter("orderBy")(data.data._items, '_updated', true);
                     angular.forEach($scope.categories, function(item, index) {
                         $scope.categories[index].related_coupons = clearNullIds(item.related_coupons);
                         $scope.check.check[item._id] = false;

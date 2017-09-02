@@ -86,6 +86,14 @@ angular.module("allUsersModule", ['constantModule', 'toastr', 'personFactoryModu
     // view user
     $scope.viewUser = function (obj) {
         $scope.u_user = obj;
+
+        console.log($scope.u_user)
+
+        $("#myModal").modal("show");
+    };
+
+    $scope.password = {
+        password_raw: undefined
     };
 
     // updateUser
@@ -94,10 +102,13 @@ angular.module("allUsersModule", ['constantModule', 'toastr', 'personFactoryModu
         delete $scope.u_user._created;
         delete $scope.u_user._links;
         delete $scope.u_user._updated;
+        $scope.u_user.password.password_raw = (password.password_raw) ? password.password_raw: $scope.u_user.password.password_raw;
         personFactory.update($scope.u_user, $scope.u_user.tokens.token).then(function (data) {
             console.log(data);
             toastr.success("Updated!", "Success!");
-            $scope.toggleSidebar('sidebar-affix');
+            $("#mymodal").modal('hide');
+            $("body").removeClass('modal-open');
+            $(".modal-backdrop").remove();
             $state.reload();
         }, function (error) {
             console.log(error);
@@ -121,6 +132,7 @@ angular.module("allUsersModule", ['constantModule', 'toastr', 'personFactoryModu
 
         $scope.load = personFactory.delete('persons', deletedArray).then(function (data) {
             console.log(data);
+            $state.reload();
         }, function (error) {
             console.log(error);
 

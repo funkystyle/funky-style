@@ -1,5 +1,6 @@
 angular.module('homeModule', ["headerModule", "Directives"])
-    .controller('homeCtrl', function ($scope, $sce, $http, $filter, $ocLazyLoad, $state, $stateParams, $rootScope, SEO, $compile, Query) {
+    .controller('homeCtrl', function ($scope, $sce, $http, $filter, $ocLazyLoad, $state,
+                                      $stateParams, $rootScope, SEO, $compile, Query, DestionationUrl) {
         console.log("home controller");
         $scope.params = undefined;
         $scope.deals = [];
@@ -10,8 +11,13 @@ angular.module('homeModule', ["headerModule", "Directives"])
         var embedded = {};
         embedded['related_categories'] = 1;
         embedded['related_stores'] = 1;
+
+        // get the list of top deal categories
+        var featured = JSON.stringify({
+            featured_coupon: true
+        });
         
-        var url = '/api/1.0/coupons'+'?sort=-_created&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
+        var url = '/api/1.0/coupons'+'?where='+featured+'&max_results=10&sort=-_created&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
         $http({
             url: url,
             method: "GET",
@@ -40,8 +46,6 @@ angular.module('homeModule', ["headerModule", "Directives"])
             angular.forEach(data, function (item) {
                 if(item.selection_type.code == 'home') {
                     var data = SEO.seo("", item, 'home');
-                    $rootScope.pageTitle = data.title;
-                    $rootScope.pageDescription = data.description;
                 }
             });
         });
@@ -84,13 +88,21 @@ angular.module('homeModule', ["headerModule", "Directives"])
 
         // open coupon popup code
         $scope.openCouponCode = function (store, item) {
-
             // put a request to update the no of clicks into the particular coupon document
             var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
             Query.get(url);
 
-            url = $state.href('main.home', {cc: item._id});
-            window.open(url,'_blank');
+            // get the Deeplink destionation URL for it
+            DestionationUrl.destination_url(item.destination_url).then(function (data) {
+                $scope.destionationUrl = data['data']['data']['output_url'];
+                url = $state.href('main.home', {cc: item._id, destionationUrl: $scope.destionationUrl});
+                console.log("Destination: ", data, $scope.destionationUrl);
+                window.open(url,'_blank');
+
+                window.location.href = $scope.destionationUrl;
+            }, function (error) {
+                console.log(error);
+            });
         };
 
         // get the list of featured stores

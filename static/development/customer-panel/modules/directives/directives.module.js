@@ -96,6 +96,8 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
 
             $scope.showMore = {};
 
+            $scope.stateUrls = $stateParams;
+
             $scope.trustAsHtml = function(string) {
                 if(string) {
                     return $sce.trustAsHtml(string);
@@ -103,7 +105,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
             };
 
             $('#couponPopup').on('hidden.bs.modal', function () {
-                $state.go(".", {cc: undefined});
+                $state.go(".", {cc: undefined, destionationUrl: undefined});
             });
 
             var clipboard = new Clipboard('.btn');

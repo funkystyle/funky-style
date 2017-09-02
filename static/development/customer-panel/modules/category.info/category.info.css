@@ -1,4 +1,32 @@
+@media only screen and (max-device-width: 720px) {
+    .pad-right-0 {
+        padding-right: 15px !important;
+    }
+    .only-desktop {
+        display: none !important;
+    }
+    .footer-desc img {
+        width: auto;
+        max-width: 100%;
+    }
+    .store-logo img {
+        width: auto !important;
+    }
+    .cat-top-stores a img {
+        width: auto !important;
+        height: auto !important;
+        max-height: 100%;
+        max-width: 100%;
+    }
 
+    .cat-top-stores a {
+        height: 50px;
+        width: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
 .related-coupon-deal {
     position: absolute;
     bottom: -47px;

@@ -19,10 +19,13 @@ angular.module("deeplinkModule", ['toastr', 'cgBusy', 'satellizer', 'ui.select',
             rowHeight: 35,
             columnDefs: [
                 {
-                    field: 'is_default', displayName: "Is Default"
+                    field: "affiliate_network", displayName: "Affiliate Network",
+                    cellTemplate: '<div style="padding: 5px;">' +
+                    '   <a ui-sref="header.update-deeplink({id: row.entity._id})">{{ row.entity.affiliate_network }}</a>' +
+                    '</div>'
                 },
                 {
-                    field: "affiliate_network", displayName: "Affiliate Network"
+                    field: 'is_default', displayName: "Is Default"
                 },
                 {
                     field: 'start_url.url', displayName: "Start URL"
@@ -105,7 +108,7 @@ angular.module("deeplinkModule", ['toastr', 'cgBusy', 'satellizer', 'ui.select',
         };
 
         $http({
-            url: "/api/1.0/deep_link/",
+            url: "/api/1.0/deep_link?rand="+Math.random(),
             method: "GET"
         }).then(function (data) {
             console.log("List of deep links list: ", data.data._items);
@@ -120,7 +123,7 @@ angular.module("deeplinkModule", ['toastr', 'cgBusy', 'satellizer', 'ui.select',
                 var def = $q.defer();
 
                 $http({
-                    url: "/api/1.0/deep_link/"+id+'?rand_number' + new Date().getTime(),
+                    url: "/api/1.0/deep_link/"+id+'?rand_number=' + new Date().getTime(),
                     method: "DELETE"
                 }).then(function (data) {
                     def.resolve(data);

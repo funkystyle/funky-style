@@ -1,3 +1,42 @@
+@media only screen and (max-device-width: 720px) {
+    ul.navbar-nav {
+        width: 100%;
+    }
+    ul.navbar-nav li {
+        width: 48%;
+        float: left;
+    }
+    .h3-heading {
+        line-height: 25px;
+    }
+    .col_3_border_top {
+        padding-left: 15px !important;
+    }
+    .blog-tile {
+        margin-bottom: 15px;
+    }
+    .blog-image-anchor {
+        max-height: 200px;
+        min-height: 200px;
+    }
+    .mobile-left {
+        text-align: left !important;
+    }
+    .blog-desc, .padding-0 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+.blog-image-anchor {
+    display: flex;
+    max-height: 250px;
+    width: 100%;
+    min-height: 250px;
+    background: #FFF;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+}
 .technoloy_txt a {
     color: #858ac5 !important;
 }
@@ -234,9 +273,11 @@ h4{
     font-weight: normal;
 }
 .blog-tile img {
-    max-height:250px;
-    width: 100%;
-    min-height: 250px;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    margin: 0 auto;
+    max-width: 100%;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -331,6 +372,26 @@ h4{
 }
 .word_press{
     margin-left: 0;
+    height: 100px;
+    margin-bottom: 10px;
+}
+.word_press a {
+    display: block;
+    height: 100px;
+    overflow: hidden;
+}
+.word_press a img, .blog-side-banner a img {
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+}
+.blog-side-banner {
+    height: 300px;
+    margin: 10px 0;
+}
+.blog-side-banner a {
+    height: 300px;
+    overflow: hidden;
 }
 /*footer started*/
 .last_cont_1{

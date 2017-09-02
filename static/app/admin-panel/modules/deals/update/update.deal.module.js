@@ -37,7 +37,8 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 }
             });
         };
-        $scope.$watch('deal.name', function(newVal, oldVal) {
+
+        $scope.changeUrl = function (newVal) {
             if(newVal && $scope.seoList.length) {
                 var data = replaceSeo(newVal, $scope.seoList, 'single_deal');
                 $scope.deal.seo_title = data.title;
@@ -51,7 +52,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 }
             }
             $scope.deal.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase() : undefined;
-        }, true);
+        };
 
         $scope.oldStore = undefined;
         $scope.newStore = undefined;

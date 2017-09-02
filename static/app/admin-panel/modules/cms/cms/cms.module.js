@@ -2,8 +2,8 @@
 angular.module("cmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr",
     "storeFactoryModule", "satellizer", "personFactoryModule", "cgBusy",
     "couponFactoryModule", "categoryFactoryModule", "constantModule", "cmsFactoryModule", "angular-table"])
-    .controller("cmsCtrl", function($scope, $q, $timeout, toastr, storeFactory,
-                                     $auth, personFactory, $log, couponFactory, categoryFactory, URL, cmsFactory, $sce) {
+    .controller("cmsCtrl", function($scope, $q, $timeout, toastr, storeFactory, $state,
+                                     $auth, personFactory, $log, couponFactory, $filter, categoryFactory, URL, cmsFactory, $sce) {
         $scope.cms = [];
         $scope.filterCms = [];
         $scope.search = {
@@ -37,7 +37,7 @@ angular.module("cmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr"
                 console.log(data,'---------------');
                 if(data['data']) {
                     $scope.cms = data.data._items;
-                    $scope.filterCms = data.data._items;
+                    $scope.filterCms = $filter("orderBy")(data.data._items, '_updated', true);
                     angular.forEach($scope.cms, function(item) {
                         $scope.check.check[item._id] = false;
                     });
@@ -88,6 +88,7 @@ angular.module("cmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "toastr"
 
             $q.all(items).then(function (data) {
                 toastr.success("Deleted all selected records!", "SUCCESS!");
+                $state.reload();
             }, function (error) {
                 console.log(error);
             });

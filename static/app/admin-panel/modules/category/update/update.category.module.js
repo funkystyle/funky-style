@@ -45,7 +45,8 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
             }
         ];
 
-        $scope.$watch('category.name', function(newVal, oldVal) {
+
+        $scope.changeUrl = function (newVal) {
             if(newVal && $scope.seoList.length) {
                 var data = replaceSeo(newVal, $scope.seoList, 'single_category');
                 $scope.category.seo_title = data.title;
@@ -59,7 +60,7 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
                 }
             }
             $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-offers" : undefined;
-        }, true);
+        };
 
         // get all stores into the array
         if($auth.isAuthenticated() && $stateParams['categoryId']) {

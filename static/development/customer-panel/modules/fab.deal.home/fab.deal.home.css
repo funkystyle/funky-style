@@ -1,3 +1,6 @@
+.top-container {
+    margin-top: 115px;
+}
 .h3-heading a, .media-heading a {
     color: #000000;
     text-transform: capitalize;
@@ -161,4 +164,27 @@
 .about_raja{ border-bottom: 1px solid #eeeeee; font-weight: bold; padding-bottom: 1%; }
 .row_bot_pad{
     padding-bottom: 2%
+}
+
+
+@media screen and (max-device-width: 720px) {
+    .cat-tile .media {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .cat-tile .media .media-body {
+        width: auto !important;
+    }
+    .cat-tile .media .image-block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .cat-tile .media .media-image {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
 }
