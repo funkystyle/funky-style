@@ -236,12 +236,12 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                             });
                         }
 
-                        if(new Date(item.expire_date) < new Date()) {
-                            destArray['Expired Coupons'].push(item);
-                        }
                         item._created = new Date(item._created);
                         item._expire_date = new Date(item.expire_date);
 
+                        if(item.expire_date < new Date()) {
+                            destArray['Expired Coupons'].push(item);
+                        }``
                         $scope.gridOptions.data.push(item);
                     });
                     setTimeout(function () {
@@ -258,7 +258,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                         $scope.gridApi.grid.columns[3].filter.selectOptions = $scope.stores;
                         $scope.gridApi.grid.columns[2].filter.selectOptions = $scope.persons;
                         $scope.gridApi.grid.refresh();
-                    }, 1000);
+                    }, 2000);
 
                     // Sort by keys
                     var keys = Object.keys( destArray );
