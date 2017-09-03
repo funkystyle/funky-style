@@ -39,8 +39,13 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
 
         $scope.gridOptions = {
             data: [],
-            paginationPageSizes : [ 25, 50, 75, 100, 200, 300, 500, 1000],
-            paginationPageSize : 25,
+            paginationPageSizes: [30, 60],
+            totalItems: 10000,
+            paginationPageSize: 30,
+            paginationCurrentPage: 1,
+            useExternalPagination: true,
+            enablePaging: true,
+            totalServerItems: 'totalServerItems',
             exporterMenuCsv: false,
             enableHorizontalScrollbar: uiGridConstants.scrollbars.ALWAYS,
             // enableVerticalScrollbar: uiGridConstants.scrollbars.ALWAYS,
@@ -180,20 +185,15 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 var msg = 'rows changed ' + rows;
                 $scope.getSelectedRows();
             });
-        };
 
-        $scope.autoRefresh = function () {
-            // refresh function no longer triggers custom filter function
-            $scope.gridApi.grid.columns[4].filter.selectOptions = $scope.categories;
-            $scope.gridApi.grid.refresh();
+            // pagination results
+            gridApi.pagination.on.paginationChanged($scope, function (pageNumber, pageSize) {
+                console.log('pager get data: pageNumber, pageSize', pageNumber, pageSize);
+                // getPager(pageNumber, pageSize);
+                getResults({max_results: pageSize, page: pageNumber});
+            });
         };
-
-
-        $scope.statusOptions = {};
-        $scope.filterByStatus = function (array) {
-            $scope.gridOptions.data = array;
-        };
-        if ($auth.isAuthenticated()) {
+        function getResults (pagination) {
             var embedded = {
                 "recommended_stores":1,
                 "related_categories":1,
@@ -201,10 +201,11 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 "last_modified_by": 1
             };
             $scope.load = $http({
-                url: '/api/1.0/coupons?embedded='+JSON.stringify(embedded)+'&max_results=1000&rand_number=' + new Date().getTime(),
+                url: '/api/1.0/coupons?embedded='+JSON.stringify(embedded)+'&sort=-_created&page='+pagination.page+'&max_results='+pagination.max_results+'&rand_number=' + new Date().getTime(),
                 method: "GET"
             }).then(function (data) {
                 if(data['data']) {
+                    $scope.gridOptions.data = [];
                     $scope.coupons = data.data._items;
                     var destArray = _.groupBy(data.data._items, 'status');
                     destArray['All'] = $scope.coupons;
@@ -242,7 +243,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
 
                         if(item.expire_date < new Date()) {
                             destArray['Expired Coupons'].push(item);
-                        }``
+                        }
                         $scope.gridOptions.data.push(item);
                     });
                     setTimeout(function () {
@@ -272,6 +273,25 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 console.log(error);
                 toastr.error(error.data._error.message, "Error!");
             });
+        }
+
+        $scope.autoRefresh = function () {
+            // refresh function no longer triggers custom filter function
+            $scope.gridApi.grid.columns[4].filter.selectOptions = $scope.categories;
+            $scope.gridApi.grid.refresh();
+        };
+
+
+        $scope.statusOptions = {};
+        $scope.filterByStatus = function (array) {
+            $scope.gridOptions.data = array;
+        };
+        if ($auth.isAuthenticated()) {
+            var pagination = {
+                max_results: 30,
+                page: 1
+            };
+            getResults(pagination);
         } else {
             $state.go("login");
         }
