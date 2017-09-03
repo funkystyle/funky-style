@@ -114,7 +114,7 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                                 item.related_stores = clearNullIds(item.related_stores);
                                 item.related_categories = clearNullIds(item.related_categories);
                                 item.recommended_stores = clearNullIds(item.recommended_stores);
-                                item.last_modified_by = (item.last_modified_by) ? item.last_modified_by: $scope.persons[0]._id;
+                                item.last_modified_by = (item.last_modified_by) ? (typeof item.last_modified_by == 'object') ? item.last_modified_by._id : item.last_modified_by: $scope.persons[0]._id;
 
                                 $scope.coupon = item;
                                 console.log(item);

@@ -39,6 +39,8 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
 
         $scope.gridOptions = {
             data: [],
+            paginationPageSizes : [ 25, 50, 75, 100, 200, 300, 500, 1000],
+            paginationPageSize : 25,
             exporterMenuCsv: false,
             enableHorizontalScrollbar: uiGridConstants.scrollbars.ALWAYS,
             // enableVerticalScrollbar: uiGridConstants.scrollbars.ALWAYS,
@@ -48,7 +50,6 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
             enableSelectAll: true,
             selectionRowHeaderWidth: 35,
             enablePaginationControls: true,
-            paginationPageSize: 25,
             showGridFooter:true,
             enableFiltering: true,
             rowHeight: 35,
@@ -200,7 +201,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 "last_modified_by": 1
             };
             $scope.load = $http({
-                url: '/api/1.0/coupons?embedded='+JSON.stringify(embedded)+'&rand_number=' + new Date().getTime(),
+                url: '/api/1.0/coupons?embedded='+JSON.stringify(embedded)+'&max_results=1000&rand_number=' + new Date().getTime(),
                 method: "GET"
             }).then(function (data) {
                 if(data['data']) {
