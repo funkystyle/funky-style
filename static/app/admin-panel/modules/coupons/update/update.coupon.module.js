@@ -105,25 +105,25 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 embedded['recommended_stores'] = 1;
                 embedded['last_modified_by'] = 1;
                 $http({
-                    url: URL.coupons+"?embedded="+JSON.stringify(embedded)+"&rand_number="+Math.random(),
+                    url: URL.coupons+"/"+$stateParams.couponId+"?embedded="+JSON.stringify(embedded)+"&rand_number="+Math.random(),
                     method: "GET"
                 }).then(function (data) {
-                    if(data['data']) {
-                        angular.forEach(data.data._items, function (item) {
-                            if(item._id == $stateParams.couponId) {
-                                item.related_stores = clearNullIds(item.related_stores);
-                                item.related_categories = clearNullIds(item.related_categories);
-                                item.recommended_stores = clearNullIds(item.recommended_stores);
-                                item.last_modified_by = (item.last_modified_by) ? (typeof item.last_modified_by == 'object') ? item.last_modified_by._id : item.last_modified_by: $scope.persons[0]._id;
+                    if(data['data'] && typeof data['data'] == 'object') {
+                        var item = data.data;
+                        item.related_stores = clearNullIds(item.related_stores);
+                        item.related_categories = clearNullIds(item.related_categories);
+                        item.recommended_stores = clearNullIds(item.recommended_stores);
+                        item.last_modified_by = (item.last_modified_by) ? (typeof item.last_modified_by == 'object') ? item.last_modified_by._id : item.last_modified_by: $scope.persons[0]._id;
 
-                                $scope.coupon = item;
-                                console.log(item);
-                                $("#datetimepicker1").find("input").val(item.expire_date);
-                            }
-                        });
+                        $scope.coupon = item;
+                        console.log(item);
+                        $("#datetimepicker1").find("input").val(item.expire_date);
+                    } else {
+                        $state.go('header.coupon');
                     }
                 }, function (error) {
                     console.log(error);
+                    $state.go('header.coupon');
                 });
             })
         }

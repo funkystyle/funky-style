@@ -94,8 +94,8 @@ angular
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
                 $scope.destionationUrl = data['data']['data']['output_url'];
                 url = $state.href('main.store-info', {url: store.url, cc: item._id, destionationUrl: $scope.destionationUrl});
-                window.open(url,'_blank');
-
+                //window.open(url,'_blank');
+                $('<a href="'+url+'" target="_blank">&nbsp;</a>')[0].click();
                 window.location.href = $scope.destionationUrl;
             }, function (error) {
                 console.log(error);

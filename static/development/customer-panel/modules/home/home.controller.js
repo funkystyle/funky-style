@@ -97,7 +97,8 @@ angular.module('homeModule', ["headerModule", "Directives"])
                 $scope.destionationUrl = data['data']['data']['output_url'];
                 url = $state.href('main.home', {cc: item._id, destionationUrl: $scope.destionationUrl});
                 console.log("Destination: ", data, $scope.destionationUrl);
-                window.open(url,'_blank');
+                // window.open(url,'_blank');
+                $('<a href="'+url+'" target="_blank">&nbsp;</a>')[0].click();
 
                 window.location.href = $scope.destionationUrl;
             }, function (error) {
