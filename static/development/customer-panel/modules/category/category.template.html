@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="static/app/customer-panel/modules/category/category.css" />
+<link rel="stylesheet" href="static/app/customer-panel/modules/store/store.css" />
 <div class="container top-container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
@@ -25,7 +25,9 @@
             </div>
             <!-- end thumbnail -->
             <div class="well social-well">
-                <h4 class="text-center">{{ item.name }} ({{ item.related_coupons.length }})</h4>
+                <h4 class="text-center" title="{{ item.name }}">
+                    {{ item.name | limitTo: 8 }}{{ item.name.length > 8 ? '..' : ''}} ({{ item.related_coupons.length }})
+                </h4>
             </div>
         </a>
     </div>

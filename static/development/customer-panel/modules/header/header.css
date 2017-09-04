@@ -346,9 +346,50 @@ ul.nav li.dropdown ul.dropdown-menu {
     line-height: 19px;
 }
 
+@media screen and (min-device-width: 970px) and (max-device-width: 1370px){
+    .custom-popup-wrapper {
+        top: 37px !important;
+        left: 0 !important;
+        width: 120% !important;
+    }
+}
+
+@media screen and (min-device-width: 1370px) and (max-device-width: 1600px){
+    .custom-popup-wrapper {
+        top: 37px !important;
+        left: 0 !important;
+        width: 115% !important;
+    }
+}
+
+.uib-typeahead-match .media .media-left {
+    flex: 1;
+}
+.uib-typeahead-match .media .media-left a.media-type-logo {
+    display: flex;
+    height: 65px;
+    width: 120px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 15px;
+    padding: 5px 0;
+}
+.uib-typeahead-match .media .media-left a.media-type-logo img {
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
+.uib-typeahead-match .media .media-body {
+    flex: 3;
+}
+
 /*   ====================== for mobile view =====================*/
 
 @media screen and (max-width: 768px) {
+    .uib-typeahead-match .media .media-left a.media-type-logo {
+        width: 90px !important;
+    }
     .header .navbar-header {
         width: 100%;
         padding: 0 15px 0 25px;

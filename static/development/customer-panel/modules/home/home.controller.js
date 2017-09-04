@@ -4,7 +4,6 @@ angular.module('homeModule', ["headerModule", "Directives"])
         console.log("home controller");
         $scope.params = undefined;
         $scope.deals = [];
-        $scope.coupons = [];
         $scope.categories = [];
 
         // get the list of coupons
@@ -12,33 +11,47 @@ angular.module('homeModule', ["headerModule", "Directives"])
         embedded['related_categories'] = 1;
         embedded['related_stores'] = 1;
 
-        // get the list of top deal categories
-        var featured = JSON.stringify({
-            featured_coupon: true
-        });
-        
-        var url = '/api/1.0/coupons'+'?where='+featured+'&max_results=10&sort=-_created&embedded='+JSON.stringify(embedded)+'&rand_number' + new Date().getTime();
-        $http({
-            url: url,
-            method: "GET",
-            headers: {
-                "Content-Encoding": "gzip"
-            }
-        }).then(function (data) {
-            console.log(data);
-            if(data['data']) {
-                var coupons = data.data._items;
-                angular.forEach(coupons, function (item) {
-                    if(new Date(item.expire_date) > new Date()) {
-                        if($scope.coupons.indexOf(item) == -1) {
-                            $scope.coupons.push(item);
+        $scope.fillCoupons = function (url) {
+            $scope.coupons = [];
+            $http({
+                url: url,
+                method: "GET",
+                headers: {
+                    "Content-Encoding": "gzip"
+                }
+            }).then(function (data) {
+                console.log(data);
+                if(data['data']) {
+                    var coupons = data.data._items;
+                    angular.forEach(coupons, function (item) {
+                        if(new Date(item.expire_date) > new Date()) {
+                            if($scope.coupons.indexOf(item) == -1) {
+                                $scope.coupons.push(item);
+                            }
                         }
-                    }
-                });
-            }
-        }, function (error) {
-            console.log(error);
-        });
+                    });
+                }
+            }, function (error) {
+                console.log(error);
+            });
+        };
+
+        $scope.featuredResults = function () {
+            // get the list of top deal categories
+            var featured = JSON.stringify({
+                featured_coupon: true
+            });
+            var url = '/api/1.0/coupons'+'?where='+featured+'&max_results=10&sort=-_created&embedded='+JSON.stringify(embedded)+'&rand=' + Math.random();
+            $scope.fillCoupons(url);
+        };
+
+        $scope.featuredResults();
+
+        // Get the most used, top coupons from the server
+        $scope.fetchCoupons = function (sort) {
+            var url = '/api/1.0/coupons'+'?max_results=10&sort=-'+sort+'&embedded='+JSON.stringify(embedded)+'&rand=' + Math.random();
+            $scope.fillCoupons(url);
+        };
 
 
         // get the list of SEO

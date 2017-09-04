@@ -194,23 +194,25 @@ angular
         //  ======== if stateParams having the coupon code
         if($stateParams['cc']) {
             $("coupon-info-popup").remove();
-            $scope.$watch('coupons', function (newVal, oldVal) {
-                console.log(newVal, oldVal);
-                if(newVal) {
-                    angular.forEach(newVal, function (item) {
-                        if(item._id == $stateParams.cc) {
-                            $scope.couponInfo = item;
-                            // open directive popup
-                            var el = $compile( "<coupon-info-popup parent='category' type='category' coupon='couponInfo'></coupon-info-popup>" )( $scope );
-                            $("body").append(el);
-                            setTimeout(function () {
-                                $("#couponPopup").modal("show");
-                            }, 1000);
-                            console.log(el)
-                        }
-                    });
-                }
-            }, true);
+            embedded = JSON.stringify({
+                'related_stores': 1,
+                'related_categories': 1
+            });
+            url = "/api/1.0/coupons/"+$stateParams['cc']+"?embedded="+embedded+"&rand="+Math.random();
+            $http.get(url).then(function (data) {
+                console.log("$stateParams CC Data: ", data.data)
+                $scope.couponInfo = data['data'];
+                // open directive popup
+                var el = $compile( "<coupon-info-popup parent='category' type='category' coupon='couponInfo'></coupon-info-popup>" )( $scope );
+                $("body").append(el);
+                setTimeout(function () {
+                    $("#couponPopup").modal("show");
+                }, 1000);
+                console.log(el)
+            }, function (error) {
+                console.log("$stateParams CC: ", error);
+                $state.go("main.categoryinfo", {cc: undefined, destionationUrl: undefined});
+            });
         }
     })
 

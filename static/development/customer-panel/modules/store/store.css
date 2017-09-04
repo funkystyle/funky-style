@@ -13,7 +13,7 @@
 }
 .store-tile {
     display: inline-block;
-    width: 130px;
+    width: 150px;
     height: 100px;
     margin: 0 15px 20px 0;
 }
@@ -26,6 +26,9 @@ div.thumb {
     border-radius: 2px;
     margin-bottom: 0;
     height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 div.thumb img {
     height: auto;

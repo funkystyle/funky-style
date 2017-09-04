@@ -25,7 +25,9 @@
             </div>
             <!-- end thumbnail -->
             <div class="well social-well">
-                <h4 class="text-center">{{ item.name }} ({{ item.related_coupons.length }})</h4>
+                <h4 class="text-center" title="{{ item.name }}">
+                    {{ item.name | limitTo: 8 }}{{ item.name.length > 8 ? '..' : ''}} ({{ item.related_coupons.length }})
+                </h4>
             </div>
         </a>
         <!-- end col -->
