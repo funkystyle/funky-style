@@ -15,18 +15,16 @@
 }
 .related-coupon-deal {
     position: absolute;
-    bottom: -47px;
     background: #fff;
     border: 1px solid #eee;
     min-height: 55px;
     padding: 5px;
-    z-index: 99;
     width: 140px;
     height: 50px;
     border-radius: 5px;
     max-height: 50px;
-    left: -7px;
     color: #fff;
+    margin: -2px 2px 0 2px;
     line-height: 25px;
     display: flex;
     justify-content: center;
@@ -183,19 +181,21 @@ div.coupon {
 .deal-price {
     font-size: 12px;
     background: #fff;
-    display: block;
     border-radius: 2px;
     position: relative;
     width: 125px;
-    min-height: 80px;
+    min-height: 90px;
     margin: 0 auto;
     box-shadow: 0 0 6px rgba(34,34,34,.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .deal-price h3 {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: bold;
     padding: 10px 3px;
-    line-height: 20px;
+    line-height: 25px;
     margin: 0;
     display: block;
     text-transform: uppercase;

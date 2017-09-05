@@ -588,8 +588,8 @@ ul.rating {
 
 
 @media screen and (min-device-width: 900px){
-    .coupon.all .panel-body {
-        min-height: 160px;
+    .tab-pane .deal-tile .panel-body, .coupon .panel-body {
+        min-height: 170px;
     }
 }
 

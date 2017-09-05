@@ -271,15 +271,15 @@
                                             <h3>
                                                 {{ item.discount_type }} <br> {{ item.discount }}
                                             </h3>
-                                            <div class="deal">
-                                                <span ng-if="item.coupon_type == 'coupon'">
-                                                    COUPON
-                                                </span>
-                                                <span ng-if="item.coupon_type == 'offer'">
-                                                    DEAL
-                                                </span>
-                                            </div>
                                         </div> <!-- end deal-price -->
+                                        <div class="deal f-coupon-type hidden-xs">
+                                            <b ng-if="item.coupon_type == 'coupon'">
+                                                COUPON
+                                            </b>
+                                            <b ng-if="item.coupon_type == 'offer'">
+                                                DEAL
+                                            </b>
+                                        </div>
                                         <div class="hidden-lg hidden-md">
                                             <p class="fifty_cashback">
                                                 {{ item.discount_type }} {{ item.discount }}
@@ -374,16 +374,16 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
                                             <h3>
-                                                {{ item.discount_type }} {{ item.discount }}
+                                                {{ item.discount_type }} <br> {{ item.discount }}
                                             </h3>
-                                            <div class="deal">
-                                                <span ng-if="item.coupon_type == 'coupon'">
-                                                    COUPON
-                                                </span>
-                                                <span ng-if="item.coupon_type == 'offer'">
-                                                    DEAL
-                                                </span>
-                                            </div>
+                                        </div> <!-- end deal-price -->
+                                        <div class="deal f-coupon-type hidden-xs">
+                                            <b ng-if="item.coupon_type == 'coupon'">
+                                                COUPON
+                                            </b>
+                                            <b ng-if="item.coupon_type == 'offer'">
+                                                DEAL
+                                            </b>
                                         </div> <!-- end deal-price -->
                                         <div class="hidden-lg hidden-md">
                                             <p class="fifty_cashback">
@@ -461,16 +461,16 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
                                             <h3>
-                                                {{ item.discount_type }} {{ item.discount }}
+                                                {{ item.discount_type }} <br> {{ item.discount }}
                                             </h3>
-                                            <div class="deal">
-                                                <span ng-if="item.coupon_type == 'coupon'">
-                                                    COUPON
-                                                </span>
-                                                <span ng-if="item.coupon_type == 'offer'">
-                                                    DEAL
-                                                </span>
-                                            </div>
+                                        </div> <!-- end deal-price -->
+                                        <div class="deal f-coupon-type hidden-xs">
+                                            <b ng-if="item.coupon_type == 'coupon'">
+                                                COUPON
+                                            </b>
+                                            <b ng-if="item.coupon_type == 'offer'">
+                                                DEAL
+                                            </b>
                                         </div> <!-- end deal-price -->
                                         <div class="hidden-lg hidden-md">
                                             <p class="fifty_cashback">
@@ -615,7 +615,7 @@
                         </h4>
                     </div><!-- end col -->
                 </div><!-- end row -->
-                <div class="panel panel-default deal-tile" ng-repeat="item in relatedCoupons | orderBy: '_updated': true">
+                <div class="panel panel-default deal-tile coupon" ng-repeat="item in relatedCoupons | orderBy: '_updated': true">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
@@ -623,10 +623,10 @@
                                     <h3>
                                         {{ item.discount_type }} <br>{{ item.discount }}
                                     </h3>
-                                    <div class="related-coupon-deal">
-                                        <img ng-src="{{ item.related_stores[0].image }}">
-                                    </div>
                                 </div> <!-- end deal-price -->
+                                <div class="related-coupon-deal hidden-xs">
+                                    <img ng-src="{{ item.related_stores[0].image }}">
+                                </div>
                                 <div class="hidden-lg hidden-md">
                                     <p class="fifty_cashback">
                                         {{ item.discount_type }} {{ item.discount }}
@@ -699,15 +699,15 @@
                                     <h3>
                                         {{ item.discount_type }} <br> {{ item.discount }}
                                     </h3>
-                                    <div class="deal">
-                                                <span ng-if="item.coupon_type == 'coupon'">
-                                                    COUPON
-                                                </span>
-                                        <span ng-if="item.coupon_type == 'offer'">
-                                                    DEAL
-                                                </span>
-                                    </div>
                                 </div> <!-- end deal-price -->
+                                <div class="deal hidden-xs f-coupon-type">
+                                    <b ng-if="item.coupon_type == 'coupon'">
+                                        COUPON
+                                    </b>
+                                    <b ng-if="item.coupon_type == 'offer'">
+                                        DEAL
+                                    </b>
+                                </div>
                                 <div class="hidden-lg hidden-md">
                                     <p class="fifty_cashback">
                                         {{ item.discount_type }} {{ item.discount }}
