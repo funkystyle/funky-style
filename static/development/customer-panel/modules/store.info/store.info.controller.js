@@ -161,19 +161,12 @@ angular
                         }
                     };
                     url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
-                    console.log("url ------------------------------ ",url)
+                    console.log("url ------------------------------ ",url);
                     StoreQuery.get(url).then(function (coupons) {
-                        var items = coupons.data._items,
-                            qItems = [];
+                        var items = coupons.data._items;
                         $scope.store.totalCouponsLength = items.length;
                         console.log("Stores Coupons Data: ", items);
                         angular.forEach(items, function (item) {
-                            console.log($scope.user.fav_coupons);
-                            angular.forEach($scope.user.fav_coupons, function (coupon_id) {
-                                if(coupon_id == item._id) {
-                                    $scope.favorites[item._id] = true;
-                                }
-                            });
                             // get related categories of each coupon
                             angular.forEach(item.related_categories, function (category) {
                                 if(category == null) return true;
@@ -195,49 +188,12 @@ angular
                                     $scope.filterCoupons.push(item);
                                     $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
                                     $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
-
-                                    // get the Coupon comments
-                                    var embedded = JSON.stringify({
-                                        "user":1
-                                    });
-                                    temp = JSON.stringify({
-                                        "coupon": item._id,
-                                        "status": true
-                                    });
-                                    url = "/api/1.0/coupons_comments?embedded="+embedded+"&where="+temp;
-                                    qItems.push(StoreQuery.get(url).then(function (comment) {
-                                        console.log(comment.data._items);
-                                        return comment;
-                                    }));
                                 }
                             } else {
                                 if($scope.expiredCoupons.indexOf(item) == -1) {
                                     $scope.expiredCoupons.push(item);
                                 }
                             }
-                        });
-
-                        // after getting all the coupons comments
-                        $q.all(qItems).then(function (fComments) {
-                            console.log("Comments Are: ", fComments, "Coupons: ", $scope.coupons);
-                            var comments = [];
-                            // push comments to coupons document
-                            angular.forEach(fComments, function (fComment) {
-                                angular.forEach(fComment.data._items, function (com) {
-                                    comments.push(com);
-                                });
-                            });
-                            // push comments items into coupon obj
-                            angular.forEach($scope.coupons, function (item) {
-                                item['comments'] = [];
-                                angular.forEach(comments, function (comment) {
-                                    comment._created = new Date(comment._created);
-                                    if(comment.coupon == item._id) {
-                                        item.comments.push(comment);
-                                    }
-                                });
-                            });
-                            $scope.filterComments = angular.copy($scope.coupons);
                         });
                     });
 
@@ -264,25 +220,15 @@ angular
                     });
 
                     // if top stores length is zero StoreQuery to stores for fetching featured stores
-                    if($scope.store.top_stores.length == 0) {
-                        var top_store_url = '/api/1.0/stores?where={"featured_store": true}&max_results=2';
-                        StoreQuery.get(top_store_url).then(function (top_stores) {
-                            console.log(top_stores);
-                            if(top_stores.data['_items']) {
-                                $scope.store.top_stores = top_stores.data._items;
-
-                                angular.forEach($scope.store.related_stores, function (related_store) {
-                                    angular.forEach($scope.store.top_stores, function (item, index) {
-                                        if(item._id == related_store._id) {
-                                            $scope.store.top_stores.splice(index, 1);
-                                        }
-                                    })
-                                });
-                            }
-                        }, function (error) {
-                            console.log(error);
-                        })
-                    }
+                    var top_store_url = '/api/1.0/stores?where={"featured_store": true}&max_results=10';
+                    StoreQuery.get(top_store_url).then(function (top_stores) {
+                        console.log(top_stores);
+                        if(top_stores.data['_items']) {
+                            $scope.store.top_stores = top_stores.data._items;
+                        }
+                    }, function (error) {
+                        console.log(error);
+                    });
 
 
                     // get the list of deals related to selected deal brand
@@ -292,11 +238,11 @@ angular
                     embedded['deal_category'] = 1;
                     embedded['stores.store'] = 1;
 
-                    var where = {
+                    where = JSON.stringify({
                         "store_temp": $scope.store._id
-                    },
-                        random = new Date().getDate(),
-                        url = '/api/1.0/deals'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + random;
+                    });
+                    var random = new Date().getDate();
+                    url = '/api/1.0/deals'+'?where='+where+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + random;
                     $http({
                         url: url,
                         method: "GET"
@@ -452,4 +398,58 @@ angular
                 return d.promise;
             }
         }
-    });
+    })
+    .directive('ddTextCollapse', ['$compile', '$sce', function($compile, $sce) {
+
+        return {
+            restrict: 'A',
+            scope: true,
+            link: function(scope, element, attrs) {
+
+                /* start collapsed */
+                scope.collapsed = false;
+
+                /* create the function to toggle the collapse */
+                scope.toggle = function() {
+                    scope.collapsed = !scope.collapsed;
+                };
+
+                function htmlToPlaintext(text) {
+                    return text ? String(text).replace(/<[^>]+>/gm, '') : '';
+                }
+
+                /* wait for changes on the text */
+                attrs.$observe('ddTextCollapseText', function(text) {
+
+                    text = htmlToPlaintext(text);
+                    /* get the length from the attributes */
+                    var maxLength = scope.$eval(attrs.ddTextCollapseMaxLength);
+                    if (text.length > maxLength) {
+                        /* split the text in two parts, the first always showing */
+                        var firstPart = String(text).substring(0, maxLength);
+                        var secondPart = String(text).substring(maxLength, text.length);
+
+                        /* create some new html elements to hold the separate info */
+                        var firstSpan = $compile('<span>' + firstPart + '</span>')(scope);
+                        var secondSpan = $compile('<span ng-if="collapsed">' + secondPart + '</span>')(scope);
+                        var moreIndicatorSpan = $compile('<span ng-if="!collapsed">... </span>')(scope);
+                        var lineBreak = $compile('<br ng-if="collapsed">')(scope);
+                        var toggleButton = $compile('<span style="cursor: pointer; color: #165ba8;" class="collapse-text-toggle" ng-click="toggle()">{{collapsed ? "Show Less" : "Show More"}}</span>')(scope);
+
+                        /* remove the current contents of the element
+                         and add the new ones we created */
+                        element.empty();
+                        element.append(firstSpan);
+                        element.append(secondSpan);
+                        element.append(moreIndicatorSpan);
+                        element.append(lineBreak);
+                        element.append(toggleButton);
+                    }
+                    else {
+                        element.empty();
+                        element.append(text);
+                    }
+                });
+            }
+        };
+    }]);

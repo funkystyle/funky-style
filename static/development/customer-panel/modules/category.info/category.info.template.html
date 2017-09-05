@@ -130,11 +130,12 @@
 				<!--panel heading-->
 				<div class="panel-body">
 					<div class="check-box-filter-area rel-stores">
-                        <a class="pull-left" ng-repeat="item in category.related_categories"
-                           ui-sref="main.categoryinfo({url: item.url, cc: undefined})">
-                            <img ng-src="{{ item.image }}" alt="64x64">
+                        <span ng-repeat="item in category.related_categories">
+                            <a class="pull-left" ui-sref="main.categoryinfo({url: item.url, cc: undefined})">
+                                <img ng-src="{{ item.image }}" alt="64x64">
+                            </a>
                             <p>{{ item.name }}</p>
-                        </a>
+                        </span>
                     </div>
 				</div>
 				<!--end panel body-->
@@ -157,11 +158,12 @@
 				<!--panel heading-->
 				<div class="panel-body">
                     <div class="check-box-filter-area rel-stores">
-                        <a class="pull-left" ng-repeat="item in category.top_stores"
-                           ui-sref="main.store-info({url: item.url, cc: undefined})">
-                            <img  ng-src="{{ item.image }}" alt="64x64">
+                        <span ng-repeat="item in category.top_stores">
+                            <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
+                                <img  ng-src="{{ item.image }}" alt="64x64">
+                            </a>
                             <p>{{ item.name }}</p>
-                        </a>
+                        </span>
                     </div>
 				</div>
 				<!--end panel body-->
@@ -243,13 +245,7 @@
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                            <p class="top-desc" ng-class="{'show-desc': showMore.all[item._id]}"
-                                                  data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                            <span class="pull-right">
-                                                <a ng-click="showMore.all[item._id] = !showMore.all[item._id]" href="" class="btn btn-link">
-                                                    Show {{ (showMore.all[item._id]) ? "Less": "More" }}
-                                                </a>
-                                            </span>
+                                            <p dd-text-collapse dd-text-collapse-max-length="260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
                                         </p>
                                         <p>
                                             <a ui-sref="main.store-info({url: item.related_stores[0].url})">
@@ -336,15 +332,7 @@
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                            <p class="top-desc" ng-class="{'show-desc': showMore.deals[item._id]}"
-                                               data-ng-bind-html="trustAsHtml(item.description)">
-
-                                            </p>
-                                            <span class="pull-right">
-                                                <a ng-click="showMore.deals[item._id] = !showMore.deals[item._id]" href="" class="btn btn-link">
-                                                    Show {{ (showMore.deals[item._id]) ? "Less": "More" }}
-                                                </a>
-                                            </span>
+                                            <p dd-text-collapse dd-text-collapse-max-length="260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
                                         </p>
                                         <p>
                                             <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
@@ -423,13 +411,7 @@
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                            <p class="top-desc" ng-class="{'show-desc': showMore.coupons[item._id]}"
-                                               data-ng-bind-html="trustAsHtml(item.description)"></p>
-                                            <span class="pull-right">
-                                                <a ng-click="showMore.coupons[item._id] = !showMore.coupons[item._id]" href="" class="btn btn-link">
-                                                    Show {{ (showMore.coupons[item._id]) ? "Less": "More" }}
-                                                </a>
-                                            </span>
+                                            <p dd-text-collapse dd-text-collapse-max-length="260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
                                         </p>
                                         <p>
                                             <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">

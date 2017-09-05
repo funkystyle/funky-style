@@ -118,20 +118,31 @@ ol > li > a {
     width: 100%;
     flex-wrap: wrap;
 }
+.rel-stores span {
+    text-align: center;
+    font-size: 12px;
+    width: 120px;
+    display: block;
+}
 .rel-stores a {
     width: 110px;
-    display: block;
+    display: flex;
+    height: 60px;
     margin: 5px;
     padding: 2px;
+    border: 1px solid #DDD;
+    align-items: center;
+    justify-content: center;
 }
 .rel-stores a img {
-    width: inherit;
-    height: 50px;
+    width: auto;
+    height: auto;
     padding: 2px;
     border-radius: 2px;
-    border: 1px solid rgba(128,128,128,.31);
+    max-width: 100%;
+    max-height: 100%;
 }
-.rel-stores a p {
+.rel-stores span p {
     font-size: 10px;
     color: #666666;
     text-align: center;
@@ -166,7 +177,6 @@ ol > li > a {
 .coupon-well {
     border: 1px solid #DDDDDD;
     padding: 15px;
-    max-height: 230px;
     min-height: 230px;
 }
 .coupon-well .thumbnail img {
