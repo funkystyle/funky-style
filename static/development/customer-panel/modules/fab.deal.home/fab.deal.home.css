@@ -1,3 +1,8 @@
+@media screen  and (min-device-width: 900px){
+    .media {
+        display: block !important;
+    }
+}
 .top-container {
     margin-top: 115px;
 }
@@ -94,8 +99,18 @@
     border-radius: 3px;
 }
 .cat-top-stores a img {
+    width: auto !important;
+    height: auto !important;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.cat-top-stores a {
     height: 50px;
     width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .para1{ font-size: 12px; }
 .set_position{
