@@ -39,9 +39,9 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
 
         $scope.gridOptions = {
             data: [],
-            paginationPageSizes: [30, 60],
+            paginationPageSizes: [100, 200],
             totalItems: 10000,
-            paginationPageSize: 30,
+            paginationPageSize: 100,
             paginationCurrentPage: 1,
             useExternalPagination: true,
             enablePaging: true,
@@ -140,7 +140,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                         {
                             condition: function(term, value, row, column){
                                 if (!term) return true;
-                                var term = term.replace(/\\/g, '');
+                                term = term.replace(/\\/g, '');
                                 var valueDate = new Date(value);
                                 return valueDate >= new Date(term);
                             },
@@ -149,7 +149,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                         {
                             condition: function(term, value, row, column){
                                 if (!term) return true;
-                                var term = term.replace(/\\/g, '');
+                                term = term.replace(/\\/g, '');
                                 var valueDate = new Date(value);
                                 return valueDate <= new Date(term);
                             },
@@ -288,7 +288,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
         };
         if ($auth.isAuthenticated()) {
             var pagination = {
-                max_results: 30,
+                max_results: 100,
                 page: 1
             };
             getResults(pagination);

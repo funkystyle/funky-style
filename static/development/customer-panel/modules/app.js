@@ -456,7 +456,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
             $("meta[property='og\\:site_name']").attr('content', window.location.host);
 
             return object;
-        }
+        };
         obj.seo = function (newVal, item, from) {
             console.log("newVal: ", newVal, " Item: ", item, "From: ", from);
             var monthNames = ["January", "February", "March", "April", "May", "June",
@@ -483,7 +483,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
             console.log("SEO replacement Data: ", replacement);
             obj.meta_titles(replacement);
             return replacement;
-        }
+        };
         obj.getSEO =  function () {
             // get the seo information for home page
             var def = $q.defer();
@@ -501,7 +501,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
             });
 
             return def.promise;
-        }
+        };
         return obj;
     })
     .factory("DestionationUrl", function ($http, $q) {

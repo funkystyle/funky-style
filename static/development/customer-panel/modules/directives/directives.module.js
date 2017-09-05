@@ -194,4 +194,4 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
                 return d.promise;
             }
         }
-    })
+    });

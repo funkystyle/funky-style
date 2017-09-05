@@ -1,7 +1,6 @@
 angular.module('homeModule', ["headerModule", "Directives"])
     .controller('homeCtrl', function ($scope, $sce, $http, $filter, $ocLazyLoad, $state,
                                       $stateParams, $rootScope, SEO, $compile, Query, DestionationUrl) {
-        console.log("home controller");
         $scope.params = undefined;
         $scope.deals = [];
         $scope.categories = [];
@@ -13,13 +12,7 @@ angular.module('homeModule', ["headerModule", "Directives"])
 
         $scope.fillCoupons = function (url) {
             $scope.coupons = [];
-            $http({
-                url: url,
-                method: "GET",
-                headers: {
-                    "Content-Encoding": "gzip"
-                }
-            }).then(function (data) {
+            Query.get(url).then(function (data) {
                 console.log(data);
                 if(data['data']) {
                     var coupons = data.data._items;
@@ -58,7 +51,7 @@ angular.module('homeModule', ["headerModule", "Directives"])
         SEO.getSEO().then(function (data) {
             angular.forEach(data, function (item) {
                 if(item.selection_type.code == 'home') {
-                    var data = SEO.seo("", item, 'home');
+                    SEO.seo("", item, 'home');
                 }
             });
         });
@@ -68,7 +61,7 @@ angular.module('homeModule', ["headerModule", "Directives"])
         var where = JSON.stringify({
             "top_banner_string": 'home'
         });
-        var projection = {
+        projection = {
             "top_banner_string": 1,
             "image": 1,
             "title": 1,
@@ -76,14 +69,8 @@ angular.module('homeModule', ["headerModule", "Directives"])
             "destination_url": 1
         };
 
-        url = '/api/1.0/banner'+'?where='+where+'&projection='+JSON.stringify(projection)+'&rand_number' + new Date().getTime();
-        $http({
-            url: url,
-            method: "GET",
-            headers: {
-                "Content-Encoding": "gzip"
-            }
-        }).then(function (data) {
+        url = '/api/1.0/banner'+'?where='+where+'&projection='+JSON.stringify(projection);
+        Query.get(url).then(function (data) {
             console.log(data);
             if(data['data']) {
                 console.log("Banners: ", data.data._items);
@@ -101,10 +88,6 @@ angular.module('homeModule', ["headerModule", "Directives"])
 
         // open coupon popup code
         $scope.openCouponCode = function (store, item) {
-            // put a request to update the no of clicks into the particular coupon document
-            var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
-            Query.get(url);
-
             // get the Deeplink destionation URL for it
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
                 $scope.destionationUrl = data['data']['data']['output_url'];
@@ -123,19 +106,14 @@ angular.module('homeModule', ["headerModule", "Directives"])
         var store = {};
         store['featured_store'] = true;
 
-        var projection = {};
+        projection = {};
         projection['name'] = 1;
         projection['url'] = 1;
         projection['image'] = 1;
         projection['menu'] = 1;
         projection['related_coupons'] = 1;
-        $http({
-            url: "/api/1.0/stores/?where="+JSON.stringify(store)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
-            mathod: "GET",
-            headers: {
-                "Content-Encoding": "gzip"
-            }
-        }).then(function (data) {
+        url = "/api/1.0/stores/?where="+JSON.stringify(store)+"&max_results=24&projection="+JSON.stringify(projection);
+        Query.get(url).then(function (data) {
             console.log(data);
             if(data['data']) {
                 $scope.stores = data.data._items;
@@ -148,19 +126,8 @@ angular.module('homeModule', ["headerModule", "Directives"])
         // get the list of Categories
         var cat = {};
         cat['featured_category'] = true;
-
-        var projection = {};
-        projection['name'] = 1;
-        projection['url'] = 1;
-        projection['image'] = 1;
-        projection['related_coupons'] = 1;
-        $http({
-            url: "/api/1.0/categories/?where="+JSON.stringify(cat)+"&max_results="+24+"&projection="+JSON.stringify(projection)+"&rand_number" + new Date().getTime(),
-            mathod: "GET",
-            headers: {
-                "Content-Encoding": "gzip"
-            }
-        }).then(function (data) {
+        url = "/api/1.0/categories/?where="+JSON.stringify(cat)+"&max_results=24&projection="+JSON.stringify(projection);
+        Query.get(url).then(function (data) {
             console.log(data);
             if(data['data']) {
                 $scope.categories = data.data._items;
@@ -170,13 +137,8 @@ angular.module('homeModule', ["headerModule", "Directives"])
         });
 
         // get the list of featured stores
-        $http({
-            url: "/api/1.0/deals?max_results=24&rand_number" + new Date().getTime(),
-            mathod: "GET",
-            headers: {
-                "Content-Encoding": "gzip"
-            }
-        }).then(function (data) {
+        url = "/api/1.0/deals?max_results=24";
+        Query.get(url).then(function (data) {
             console.log(data);
             if(data['data']) {
                 $scope.deals = data.data._items;
@@ -189,22 +151,24 @@ angular.module('homeModule', ["headerModule", "Directives"])
         //  ======== if stateParams having the coupon code
         if($stateParams['cc']) {
             $("coupon-info-popup").remove();
-            $scope.$watch('coupons', function (newVal, oldVal) {
-                if(newVal) {
-                    angular.forEach(newVal, function (item) {
-                        if(item._id == $stateParams.cc) {
-                            $scope.couponInfo = item;
-                            console.log("Coupon Info: ", $scope.couponInfo);
-                            // open directive popup
-                            var el = $compile( "<coupon-info-popup type='home' coupon='couponInfo'></coupon-info-popup>" )( $scope );
-                            $("body").append(el);
-                            setTimeout(function () {
-                                $("#couponPopup").modal("show");
-                            }, 1000);
-                        }
-                    });
-                }
-            }, true);
+            embedded = JSON.stringify({
+                'related_stores': 1,
+                'related_categories': 1
+            });
+            url = "/api/1.0/coupons/"+$stateParams['cc']+"?number_of_clicks=1&embedded="+embedded+"&rand="+Math.random();
+            Query.get(url).then(function (data) {
+                console.log("$stateParams CC Data: ", data.data);
+                $scope.couponInfo = data['data'];
+                // open directive popup
+                var el = $compile( "<coupon-info-popup type='home' coupon='couponInfo'></coupon-info-popup>" )( $scope );
+                $("body").append(el);
+                setTimeout(function () {
+                    $("#couponPopup").modal("show");
+                }, 1000);
+            }, function (error) {
+                console.log("$stateParams CC: ", error);
+                $state.go("main.home", {cc: undefined, destionationUrl: undefined});
+            });
         }
 
         $scope.trustAsHtml = function(string) {

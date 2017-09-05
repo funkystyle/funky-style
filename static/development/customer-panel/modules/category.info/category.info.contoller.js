@@ -1,7 +1,7 @@
 angular
-    .module("categoryinfoModule", ["Directives", "satellizer"])
+    .module("categoryinfoModule", ["Directives", "satellizer", "APP"])
     .controller("categoryinfoCtrl", function ($scope, $state, $filter, $ocLazyLoad, $sce, Query, $q,
-                                              $stateParams, $http, $rootScope, $compile, $auth, DestionationUrl) {
+                                              $stateParams, $http, $rootScope, $compile, $auth, DestionationUrl, SEO) {
         $scope.favorites = {};
         $scope.filter = {
             store: {},
@@ -29,7 +29,7 @@ angular
             if(!$auth.isAuthenticated()) {
                 return true;
             }
-            console.log(where, $scope.user[where], id)
+            console.log(where, $scope.user[where], id);
             var object = {
                 url: "/api/1.0/persons/"+$scope.user._id,
                 method: "PATCH",
@@ -37,7 +37,7 @@ angular
             };
             var index = $scope.user[where].indexOf(id);
             if(status) {
-                if(index == -1) {
+                if(index === -1) {
                     $scope.user[where].push(id);
                 }
             } else {
@@ -113,10 +113,11 @@ angular
                     $scope.category.related_coupons = clearNullIds($scope.category.related_coupons);
 
                     // SEO title and description
-                    $rootScope.pageTitle = $scope.category.seo_title;
-                    $rootScope.pageDescription = $scope.category.seo_description;
-
-                    console.log("Final Category details: ", $scope.category);
+                    var obj = {
+                        meta_title: $scope.category.seo_title,
+                        meta_description: $scope.category.seo_description
+                    };
+                    SEO.seo({}, obj, '');
 
                     // ==================== get the list of coupons related to this category
                     var temp = {
@@ -273,55 +274,55 @@ angular
     })
     .directive('ddTextCollapse', ['$compile', '$sce', function($compile, $sce) {
 
-    return {
-        restrict: 'A',
-        scope: true,
-        link: function(scope, element, attrs) {
+        return {
+            restrict: 'A',
+            scope: true,
+            link: function(scope, element, attrs) {
 
-            /* start collapsed */
-            scope.collapsed = false;
+                /* start collapsed */
+                scope.collapsed = false;
 
-            /* create the function to toggle the collapse */
-            scope.toggle = function() {
-                scope.collapsed = !scope.collapsed;
-            };
+                /* create the function to toggle the collapse */
+                scope.toggle = function() {
+                    scope.collapsed = !scope.collapsed;
+                };
 
-            function htmlToPlaintext(text) {
-                return text ? String(text).replace(/<[^>]+>/gm, '') : '';
+                function htmlToPlaintext(text) {
+                    return text ? String(text).replace(/<[^>]+>/gm, '') : '';
+                }
+
+                /* wait for changes on the text */
+                attrs.$observe('ddTextCollapseText', function(text) {
+
+                    text = htmlToPlaintext(text);
+                    /* get the length from the attributes */
+                    var maxLength = scope.$eval(attrs.ddTextCollapseMaxLength);
+                    if (text.length > maxLength) {
+                        /* split the text in two parts, the first always showing */
+                        var firstPart = String(text).substring(0, maxLength);
+                        var secondPart = String(text).substring(maxLength, text.length);
+
+                        /* create some new html elements to hold the separate info */
+                        var firstSpan = $compile('<span>' + firstPart + '</span>')(scope);
+                        var secondSpan = $compile('<span ng-if="collapsed">' + secondPart + '</span>')(scope);
+                        var moreIndicatorSpan = $compile('<span ng-if="!collapsed">... </span>')(scope);
+                        var lineBreak = $compile('<br ng-if="collapsed">')(scope);
+                        var toggleButton = $compile('<span style="cursor: pointer; color: #165ba8;" class="collapse-text-toggle" ng-click="toggle()">{{collapsed ? "Show Less" : "Show More"}}</span>')(scope);
+
+                        /* remove the current contents of the element
+                         and add the new ones we created */
+                        element.empty();
+                        element.append(firstSpan);
+                        element.append(secondSpan);
+                        element.append(moreIndicatorSpan);
+                        element.append(lineBreak);
+                        element.append(toggleButton);
+                    }
+                    else {
+                        element.empty();
+                        element.append(text);
+                    }
+                });
             }
-
-            /* wait for changes on the text */
-            attrs.$observe('ddTextCollapseText', function(text) {
-
-                text = htmlToPlaintext(text);
-                /* get the length from the attributes */
-                var maxLength = scope.$eval(attrs.ddTextCollapseMaxLength);
-                if (text.length > maxLength) {
-                    /* split the text in two parts, the first always showing */
-                    var firstPart = String(text).substring(0, maxLength);
-                    var secondPart = String(text).substring(maxLength, text.length);
-
-                    /* create some new html elements to hold the separate info */
-                    var firstSpan = $compile('<span>' + firstPart + '</span>')(scope);
-                    var secondSpan = $compile('<span ng-if="collapsed">' + secondPart + '</span>')(scope);
-                    var moreIndicatorSpan = $compile('<span ng-if="!collapsed">... </span>')(scope);
-                    var lineBreak = $compile('<br ng-if="collapsed">')(scope);
-                    var toggleButton = $compile('<span style="cursor: pointer; color: #165ba8;" class="collapse-text-toggle" ng-click="toggle()">{{collapsed ? "Show Less" : "Show More"}}</span>')(scope);
-
-                    /* remove the current contents of the element
-                     and add the new ones we created */
-                    element.empty();
-                    element.append(firstSpan);
-                    element.append(secondSpan);
-                    element.append(moreIndicatorSpan);
-                    element.append(lineBreak);
-                    element.append(toggleButton);
-                }
-                else {
-                    element.empty();
-                    element.append(text);
-                }
-            });
-        }
-    };
-}]);
+        };
+    }]);

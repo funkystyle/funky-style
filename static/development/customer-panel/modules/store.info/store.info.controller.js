@@ -1,7 +1,7 @@
 angular
-    .module("storeinfoModule", ["Directives", "satellizer"])
+    .module("storeinfoModule", ["Directives", "satellizer", "APP"])
     .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth, $filter, $sce, $ocLazyLoad,
-                                                 $rootScope, $compile, StoreQuery, $q, DestionationUrl) {
+                                                 $rootScope, $compile, StoreQuery, $q, DestionationUrl, SEO) {
         $scope.favorites = {};
         $scope.comment = {};
         $scope.filter = {
@@ -48,34 +48,6 @@ angular
             $(".show-description").fadeOut();
         };
 
-        // manageFavorite function
-        $scope.manageFavorite = function (where, id) {
-            var status = !$scope.favorites[id];
-            if(!$auth.isAuthenticated()) {
-                return true;
-            }
-            var object = {
-                url: "/api/1.0/persons/"+$scope.user._id,
-                method: "PATCH",
-                data: {}
-            };
-            var index = $scope.user[where].indexOf(id);
-            if(status) {
-                if(index == -1) {
-                    $scope.user[where].push(id);
-                }
-            } else {
-                $scope.user[where].splice(index, 1);
-            }
-            object.data[where] = $scope.user[where];
-            StoreQuery.postFav(object).then(function (success) {
-                console.log("Success Store Favorite: ", success);
-                $scope.favorites[id] = status;
-            }, function (error) {
-                console.log(error);
-            });
-        };
-
         // apply filter for coupons array
         $scope.applyFilter = function () {
             $scope.filterCoupons = $filter("couponFilter")($scope.coupons, $scope.filter);
@@ -85,11 +57,6 @@ angular
 
         // open coupon popup code
         $scope.openCouponCode = function (store, item) {
-
-            // put a request to update the no of clicks into the particular coupon document
-            var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
-            StoreQuery.get(url);
-
             // get the Deeplink destionation URL for it
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
                 $scope.destionationUrl = data['data']['data']['output_url'];
@@ -107,43 +74,29 @@ angular
             var embedded = {};
             embedded['recommended_stores'] = 1;
             embedded['related_categories'] = 1;
-            embedded['top_stores'] = 1;
             embedded['related_stores'] = 1;
             var url = '/api/1.0/stores/'+$stateParams.url+'?embedded='+
                 JSON.stringify(embedded)+"&number_of_clicks=1";
             StoreQuery.get(url).then(function (store) {
-                console.log(store)
-                if(store.data) {
-                    if(!store.data) {
-                        $state.go('404');
-                    }
+                console.log(store);
+                if(store.data && typeof store.data === 'object') {
                     $scope.store = store.data;
                     $scope.store.related_stores = clearNullIds($scope.store.related_stores);
-                    $scope.store.top_stores = clearNullIds($scope.store.top_stores);
                     $scope.store.related_deals = clearNullIds($scope.store.related_deals);
                     $scope.store.toDayDate = new Date();
                     $scope.store.voting = Math.floor(Math.random() * (500 - 300 + 1)) + 300;
-                    $rootScope.pageTitle = $scope.store.meta_title;
-                    $("title").text($scope.store.meta_title);
-                    $rootScope.pageDescription = $scope.store.meta_description;
 
-                    // mark store favorite
-                    $scope.favorites[$scope.store._id] = false;
-                    console.log($scope.user.fav_stores);
-                    angular.forEach($scope.user.fav_stores, function (item) {
-                        if(item == $scope.store._id) {
-                            $scope.favorites[$scope.store._id] = true;
-                        }
-                    });
-
-                    console.log($scope.store);
+                    var obj = {
+                        meta_title: $scope.store.meta_title,
+                        meta_description: $scope.store.meta_description
+                    };
+                    SEO.seo({}, obj, '');
 
                     // get the suggested coupons from coupons table, from recommended stores field
-                    embedded = {
+                    embedded = JSON.stringify({
                         "related_categories": 1,
                         "related_stores": 1
-                    };
-                    embedded = JSON.stringify(embedded);
+                    });
                     var temp = {};
                     temp["recommended_stores"] = {
                         "$in": [$scope.store._id]
@@ -253,6 +206,8 @@ angular
                     }, function (error) {
                         console.log(error);
                     });
+                } else {
+                    $state.go('404');
                 }
                 // Get the top banner from banners table
                 $scope.top_banner = {};
@@ -272,48 +227,6 @@ angular
             $state.go('main.home');
         }
 
-        // oepn comment section
-        $scope.openComment = function (item) {
-            console.log("Comment Coupon Item: ", item);
-            $("comments").remove();
-            if($auth.isAuthenticated()) {
-                $scope.info = {
-                    item: item,
-                    token: $auth.getToken()
-                };
-                // open directive popup
-                var el = $compile( "<comments info='info'></comments>" )( $scope );
-                $("body").append(el);
-                setTimeout(function () {
-                    $("#commentPopup").modal("show");
-                }, 1000);
-                console.log(el)
-            } else {
-                $state.go('main.login');
-            }
-        };
-
-        // oepn Report section
-        $scope.openReport = function (item) {
-            console.log("Report Coupon Item: ", item);
-            $("reports").remove();
-            if($auth.isAuthenticated()) {
-                $scope.info = {
-                    item: item,
-                    token: $auth.getToken()
-                };
-                // open directive popup
-                var el = $compile( "<reports info='info'></reports>" )( $scope );
-                $("body").append(el);
-                setTimeout(function () {
-                    $("#reportPopup").modal("show");
-                }, 1000);
-                console.log(el)
-            } else {
-                $state.go('main.login');
-            }
-        };
-
         //  ======== if stateParams having the coupon code
         if($stateParams['cc']) {
             $("coupon-info-popup").remove();
@@ -321,7 +234,7 @@ angular
                 'related_stores': 1,
                 'related_categories': 1
             });
-            url = "/api/1.0/coupons/"+$stateParams['cc']+"?embedded="+embedded+"&rand="+Math.random();
+            url = "/api/1.0/coupons/"+$stateParams['cc']+"?number_of_clicks=1&embedded="+embedded+"&rand="+Math.random();
             $http.get(url).then(function (data) {
                 console.log("$stateParams CC Data: ", data.data);
                 $scope.couponInfo = data['data'];
