@@ -56,9 +56,12 @@
 .suggest-store-logo {
     height: 40px;
     width: 120px;
-    display: inline-block;
+    display: flex;
     max-height: 40px;
     padding-bottom: 0;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
 }
 .suggest-store-logo img {
     max-width: 100%;

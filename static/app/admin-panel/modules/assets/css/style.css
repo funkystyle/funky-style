@@ -117,6 +117,7 @@ thead tr th {
     padding-bottom: 20px;
     line-height: 20px;
     color: #fff;
+    text-transform: capitalize;
 }
 
 .top-nav>li>a:hover,
