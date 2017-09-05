@@ -21,11 +21,11 @@
     min-height: 55px;
     padding: 5px;
     z-index: 99;
-    width: 120px;
+    width: 140px;
     height: 50px;
     border-radius: 5px;
     max-height: 50px;
-    left: -5px;
+    left: -7px;
     color: #fff;
     line-height: 25px;
     display: flex;
@@ -186,8 +186,8 @@ div.coupon {
     display: block;
     border-radius: 2px;
     position: relative;
-    width: 110px;
-    min-height: 70px;
+    width: 125px;
+    min-height: 80px;
     margin: 0 auto;
     box-shadow: 0 0 6px rgba(34,34,34,.2);
 }
@@ -198,7 +198,7 @@ div.coupon {
     line-height: 20px;
     margin: 0;
     display: block;
-    text-transform: capitalize;
+    text-transform: uppercase;
 }
 .deal-price .deal {
     display: block;

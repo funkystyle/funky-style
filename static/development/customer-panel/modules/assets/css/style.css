@@ -146,6 +146,7 @@ ol > li > a {
     font-size: 10px;
     color: #666666;
     text-align: center;
+    text-transform: capitalize;
 }
 .coupon-footer {
     line-height: 35px;
