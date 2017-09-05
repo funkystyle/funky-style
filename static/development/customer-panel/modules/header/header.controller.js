@@ -1,6 +1,13 @@
 angular.module("headerModule", ["ui.bootstrap", "APP"])
-    .controller("headerCtrl", function ($scope, auth, $state, $http, $filter, $q, HTTP, $location) {
+    .controller("headerCtrl", function ($scope, auth, $state, $http, $filter, $q, HTTP, $location, $ocLazyLoad) {
         console.log("header controller!");
+
+        // Load CSS files
+        $ocLazyLoad.load({
+            files: [
+                {type: 'css', path: 'static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css'},
+            ]
+        });
         // declaring the scope variables
         $scope.user = {};
         $scope.featuredStores = [];

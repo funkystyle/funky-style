@@ -745,4 +745,7 @@ ul.rating {
         left: -57px!important;
         width: 116%!important;
     }
+    .goToTop {
+        right: 20px;
+    }
 }

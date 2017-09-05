@@ -139,7 +139,10 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         home: function($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'homeModule',
-                                files: ['static/app/customer-panel/modules/home/home.controller.js']
+                                files: [
+                                    {type: 'css', path: 'static/app/customer-panel/modules/home/home.css'},
+                                    'static/app/customer-panel/modules/home/home.controller.js'
+                                ]
                             })
                         }
                     }
@@ -456,7 +459,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
             $("meta[property='og\\:site_name']").attr('content', window.location.host);
 
             return object;
-        };
+        }
         obj.seo = function (newVal, item, from) {
             console.log("newVal: ", newVal, " Item: ", item, "From: ", from);
             var monthNames = ["January", "February", "March", "April", "May", "June",
@@ -501,7 +504,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
             });
 
             return def.promise;
-        };
+        }
         return obj;
     })
     .factory("DestionationUrl", function ($http, $q) {

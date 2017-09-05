@@ -221,3 +221,24 @@
     	margin: 7px 0 16px;
 	}
 }
+.popup-coupon-heading .popup-heading .store-logo {
+    height: 70px;
+    max-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.coupon-well .store-logo {
+    height: 70px;
+    width: 120px;
+    margin: 0 auto !important;
+    max-height: none !important;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.coupon-well .thumbnail img {
+    height: auto !important;
+    width: auto !important;
+}

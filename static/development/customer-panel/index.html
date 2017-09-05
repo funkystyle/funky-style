@@ -18,18 +18,16 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
-
-    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/minified_boot.min.css" />
-    <link rel="stylesheet" href="static/app/customer-panel/modules/global_minified.css" />
-    <link rel="stylesheet" href="static/bower_components/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/minified_boot.min.css">
+    <link rel="stylesheet" href="static/app/customer-panel/modules/global_minified.css">
 </head>
 
 <body>
 
     <ui-view autoscroll="true"></ui-view>
-    <div class="loading" ng-if="false">
+    <!--<div class="loading">
         <div class="spinner"></div>
-    </div>
+    </div>-->
     <!-- footer -->
     <div ng-include="'static/app/customer-panel/modules/footer/footer.template.html'"></div>
     <div class="goToTop">
