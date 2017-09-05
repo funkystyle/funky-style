@@ -586,7 +586,11 @@ ul.rating {
 /* rating module css */
 
 
-
+@media screen and (min-device-width: 900px){
+    .coupon.all .panel-body {
+        min-height: 160px;
+    }
+}
 
 /* ---------- media query for mobile ------------ */
 @media only screen and (max-device-width: 720px) {
