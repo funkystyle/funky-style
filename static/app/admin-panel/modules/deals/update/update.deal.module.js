@@ -31,8 +31,6 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
             angular.forEach($scope.categories, function (category) {
                 if(category._id == item._id) {
                     $scope.dynamicFields = category.fields;
-
-
                     console.log($scope.dynamicFields)
                 }
             });

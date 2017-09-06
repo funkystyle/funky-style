@@ -52,14 +52,36 @@ body {
 deal-tile-directive {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     flex-wrap: wrap;
+    flex-flow: row wrap;
 }
-.deal-directive-tile {
-    width: 250px;
-    height: auto;
-    margin: 0 15px 10px 0;;
+.space-between {
+    justify-content: space-between;
 }
+.flex-start {
+    justify-content: flex-start;
+}
+
+@media screen and (min-device-width: 1100px) {
+    deal-tile-directive:after {
+        content: "";
+        width: 24%;
+    }
+    .deal-directive-tile {
+        width: 24%;
+    }
+    .flex-start .deal-directive-tile {
+        margin-right: 20px;
+    }
+    .col-9-deal-sect:after {
+        content: "";
+        width: 32%;
+    }
+    .col-9-deal-sect .deal-directive-tile {
+        width: 32%;
+    }
+}
+
 .products-list{
     border: 1px solid #eee;
     padding: 0;

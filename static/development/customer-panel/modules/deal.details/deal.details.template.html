@@ -258,7 +258,8 @@
     <!-- Show list of deals from here -->
     <h3 id="best-selling" class="h3-heading">Related Deals</h3>
     <div class="row">
-        <deal-tile-directive order-by="_updated" class="col-xs-12" items="deal.related_deals"></deal-tile-directive>
+        <deal-tile-directive ng-class="{ 'space-between': deal.related_deals.length >= 4, 'flex-start': deal.related_deals.length < 4 }"
+                             order-by="_updated" class="col-xs-12" items="deal.related_deals"></deal-tile-directive>
     </div>
     <!-- End of List of all Deals -->
 </div>

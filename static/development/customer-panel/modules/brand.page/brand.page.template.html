@@ -124,9 +124,8 @@
             <!--end panel-->
         </div>
         <div class="col-md-9 col_md_9_pad col-xs-12 col-sm-12 pad-5">
-            <div class="row">
-                <deal-tile-directive class="col-xs-12" items="filterDeals"></deal-tile-directive>
-            </div>
+            <deal-tile-directive ng-class="{'space-between': filterDeals.length >= 3, 'flex-start': filterDeals.length < 3}"
+                                 class="col-9-deal-sect" items="filterDeals"></deal-tile-directive>
             <!-- footer description -->
             <div class="row">
                 <div class="col-lg-12">

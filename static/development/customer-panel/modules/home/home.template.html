@@ -203,7 +203,8 @@
             </div>
         </div>
         <div class="row">
-            <deal-tile-directive class="col-sm-12" items="deals" limit="8"></deal-tile-directive>
+            <deal-tile-directive ng-class="{ 'space-between': deals.length >= 4, 'flex-start': deals.length < 4 }"
+                                 class="col-sm-12" items="deals" limit="8"></deal-tile-directive>
         </div>
     </div>
     <!-- Top deal of the week End Here  -->
