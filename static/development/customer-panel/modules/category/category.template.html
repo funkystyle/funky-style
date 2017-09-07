@@ -17,7 +17,8 @@
             </div>
         </div>
     </div>
-    <div class="main-popular-grids row_style">
+    <div class="main-popular-grids row_style"
+         ng-class="{'space-between': categoryAlphabet[sorting.sorting].array.length > 6, 'flex-start': categoryAlphabet[sorting.sorting].array.length <= 6}">
         <a class="store-tile" ui-sref="main.categoryinfo({url: item.url})"
            ng-repeat="item in categoryAlphabet[sorting.sorting].array | orderBy: 'name'">
             <div class="thumbnail thumb" style="position: relative;">

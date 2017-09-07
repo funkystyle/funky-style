@@ -49,7 +49,7 @@ body {
     -moz-box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
     box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
 }
-deal-tile-directive {
+deal-tile-directive, .flex-align {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -70,7 +70,7 @@ deal-tile-directive {
     .deal-directive-tile {
         width: 24%;
     }
-    .flex-start .deal-directive-tile {
+    .flex-start .deal-directive-tile, .flex-start .store-thumbnail {
         margin-right: 20px;
     }
     .col-9-deal-sect:after {

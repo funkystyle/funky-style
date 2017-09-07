@@ -38,7 +38,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 flex-align" ng-class="{'space-between': stores.length > 6, 'flex-start': stores.length <= 6}">
                 <div class="thumbnail store-thumbnail" ng-repeat="item in stores | limitTo: 24">
                     <a ui-sref="main.store-info({url: item.url})" title="{{ item.name }}">
                         <img ng-src="{{ item.image }}" alt="{{ item.name }}" title="{{ item.name }}">
@@ -50,6 +50,7 @@
                         </a>
                     </div>
                 </div>
+                <div class="item placeholder" ng-repeat="item in stores | limitTo: 24"></div>
             </div>
         </div>
     </div>
@@ -65,7 +66,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 flex-align" ng-class="{'space-between': categories.length > 6, 'flex-start': categories.length <= 6}">
                 <div class="thumbnail store-thumbnail" ng-repeat="item in categories | limitTo: 24">
                     <a ui-sref="main.categoryinfo({url: item.url})" title="{{ item.title }}">
                         <img ng-src="{{ item.image }}" alt="{{ item.title }}" title="{{ item.title }}">
@@ -76,6 +77,7 @@
                         </a>
                     </div>
                 </div>
+                <div class="item placeholder" ng-repeat="item in categories | limitTo: 24"></div>
             </div>
         </div>
     </div>

@@ -134,12 +134,23 @@ a.right span {
         min-height: 50px;
     }
 }
+.flex-align:after {
+    width: 13%;
+    content: '';
+}
+.placeholder {
+    visibility: hidden;
+    height: 0;
+    width: 13%;
+    padding: 0;
+    margin: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
 .store-thumbnail {
-    float: left;
     position: relative;
     overflow: hidden;
     margin-bottom: 7px;
-    margin-right: 11px;
     border: 1px solid #ddd;
     padding: 5px;
     max-height: 70px;

@@ -7,15 +7,22 @@
 }
 .row_style {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
 }
+.row_style:after {
+    content: '';
+    width: 13%;
+}
+.flex-start .store-tile {
+    margin-right: 15px;
+}
 .store-tile {
     display: inline-block;
-    width: 150px;
+    width: 13%;
     height: 100px;
-    margin: 0 15px 20px 0;
+    /* margin: 0 15px 20px 0; */
+    margin-bottom: 30px;
 }
 div.thumb {
     -webkit-animation: fade 1s;
