@@ -21,6 +21,9 @@ from fab.siteminder import generate_sitemap_index_file
 def before_create_store(*args, **kwargs):
     LOGGER.info("before created")
 
+@admin_or_editor_or_submitor_login_required
+def before_update_store(*args, **kwargs):
+    LOGGER.info("before created")
 
 @admin_login_required
 def before_returning_persons(*args, **kwargs):
@@ -32,6 +35,10 @@ def before_returning_master_seo(*args, **kwargs):
 
 @admin_login_required
 def before_create_person(*args, **kwargs):
+    LOGGER.info("person creatin permission check done.")
+
+@admin_or_editor_or_submitor_login_required
+def before_create_some_collections(*args, **kwargs):
     LOGGER.info("person creatin permission check done.")
 
 @admin_login_required
@@ -162,17 +169,19 @@ def before_create_deal(resource, request):
 # hooks for stores
 def before_create(resource, request):
     LOGGER.info("called for create image resource:{}".format(resource))
-    if resource == 'persons' or resource == 'deal_categories' or resource == 'deal_brands'\
-            or resource == 'coupon_reports' or resource == 'blog' or resource == 'deep_link':
+    if resource == 'persons':
         before_create_person(resource, request)
+    elif resource == 'deal_categories' or resource == 'deal_brands'\
+            or resource == 'coupon_reports' or resource == 'blog' or resource == 'deep_link':
+        before_create_some_collections(resource, request)
     elif resource == 'stores' or resource == 'categories':
-        before_create_store(resource, request)
+        before_create_some_collections(resource, request)
     elif resource == 'deals' or resource == 'coupons':
-        before_create_deal(resource, request)
+        before_create_some_collections(resource, request)
     elif resource == 'master_seo' or resource == 'banner' or resource == 'cms_pages':
-        before_returning_master_seo(resource, request)
+        before_create_some_collections(resource, request)
     elif resource == 'coupon_comments':
-        before_returning_cms_pages(resource, request)
+        before_create_some_collections(resource, request)
 
     if resource == 'deep_link':
         request = find_netloc(request)
@@ -188,17 +197,20 @@ def before_update(resource, update, original):
     if resource == 'persons':
         before_update_person(resource, update, original)
     elif resource == 'stores' or resource == 'categories':
-        before_create_store(resource, update, original)
+        before_update_store(resource, update, original)
 
     elif resource == 'deals' or resource == 'coupons':
-        before_edit_deal(resource, update, original)
+        before_update_store(resource, update, original)
+
     elif resource == 'master_seo' or resource == 'banner' or resource == 'cms_pages':
-        before_returning_master_seo(resource, update, original)
+        before_update_store(resource, update, original)
+
     elif resource == 'deal_categories' or resource == 'deal_brands' or resource == 'coupon_reports'\
             or resource == 'blog' or resource == 'deep_link':
-        before_update_deal_categories(resource, update, original)
+        before_update_store(resource, update, original)
+
     elif resource == 'coupon_comments':
-        before_returning_cms_pages(resource, update, original)
+        before_update_store(resource, update, original)
 
     # getting all image fields of all tables from config file
     for image_field in CONFIG_DATA['IMAGE_FIELDS']:
