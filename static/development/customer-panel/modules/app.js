@@ -279,7 +279,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // deals brand page
                 .state('main.deal_post_details', {
-                    url: '/deals/:url',
+                    url: '/deals/:url?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/deal.details/deal.details.template.html',
                     controller: "dealDetailsCtrl",
                     resolve: {
@@ -504,7 +504,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
             });
 
             return def.promise;
-        }
+        };
         return obj;
     })
     .factory("DestionationUrl", function ($http, $q) {

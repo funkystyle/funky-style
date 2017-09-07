@@ -320,15 +320,15 @@
                                 <h3>
                                     {{ item.discount_type }} <br> {{ item.discount }}
                                 </h3>
-                                <div class="deal">
-                                    <span ng-if="item.coupon_type == 'coupon'">
-                                        COUPON
-                                    </span>
-                                    <span ng-if="item.coupon_type == 'offer'">
-                                        DEAL
-                                    </span>
-                                </div>
                             </div> <!-- end deal-price -->
+                            <div class="deal f-coupon-type hidden-xs">
+                                <b ng-if="item.coupon_type == 'coupon'">
+                                    COUPON
+                                </b>
+                                <b ng-if="item.coupon_type == 'offer'">
+                                    DEAL
+                                </b>
+                            </div>
                             <div class="hidden-lg hidden-md">
                                 <p class="fifty_cashback">
                                     {{ item.discount_type }} {{ item.discount }}

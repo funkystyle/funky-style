@@ -201,13 +201,14 @@ div.coupon {
     color: #fff;
     background: #8a438c;
     text-transform: uppercase;
-    width: 128px;
+    width: 126px;
     display: flex;
     align-items: center;
+    position: relative;
     justify-content: center;
-    margin: 0px 7px;
+    margin: 0 auto;
+    height: 30px;
     border-bottom-left-radius: 3px;
-    height: 25px;
     border-bottom-right-radius: 3px;
 }
 .coupon-heading span i {

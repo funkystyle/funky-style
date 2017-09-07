@@ -211,16 +211,21 @@ ul.dynamic-fields li {
     justify-content: space-between;
     align-items: center;
 }
+.coupon .panel-body, .tab-pane .deal-tile .panel-body {
+    min-height: 150px;
+}
 .deal-price {
     font-size: 12px;
     background: #fff;
-    display: block;
     border-radius: 2px;
-    overflow: hidden;
-    width: 110px;
-    min-height: 100px;
+    position: relative;
+    width: 125px;
+    min-height: 90px;
     margin: 0 auto;
     box-shadow: 0 0 6px rgba(34,34,34,.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .deal-price h3 {
     font-size: 16px;
@@ -231,17 +236,19 @@ ul.dynamic-fields li {
     display: block;
     text-transform: uppercase;
 }
-.deal-price .deal {
-    display: block;
-    padding-top: 4px;
-    margin-top: 4px;
+.f-coupon-type {
     color: #fff;
-    padding-bottom: 4px;
     background: #8a438c;
     text-transform: uppercase;
-    position: absolute;
-    width: inherit;
-    bottom: 0;
+    width: 126px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    margin: 0 auto;
+    height: 30px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 .store-logo {
     border-style: solid;

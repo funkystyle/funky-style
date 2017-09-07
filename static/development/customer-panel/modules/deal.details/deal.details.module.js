@@ -1,5 +1,5 @@
 angular.module("dealDetailsModule", ["Directives"])
-    .controller("dealDetailsCtrl", function ($scope, $ocLazyLoad, $http, $state, $stateParams, $sce, Query) {
+    .controller("dealDetailsCtrl", function ($scope, $ocLazyLoad, $http, $compile, $state, $stateParams, $sce, Query, DestionationUrl) {
         console.log("deal Details controller!");
 
         $scope.deal = {};
@@ -13,11 +13,12 @@ angular.module("dealDetailsModule", ["Directives"])
         };
 
         $scope.goScroll = function (id) {
-            console.log($("#"+id).position().top + 150)
+            var selector = $("#"+id);
+            console.log(selector.position().top + 150);
             $('html, body').animate({
-                'scrollTop' : $("#"+id).offset().top - 150
+                'scrollTop' : selector.offset().top - 150
             });
-        }
+        };
 
         var random = new Date().getDate();
 
@@ -49,10 +50,10 @@ angular.module("dealDetailsModule", ["Directives"])
 
         // Get the Side banner from banners table
         $scope.side_banner = {};
-        var where = JSON.stringify({
+        where = JSON.stringify({
             "side_banner_string": 'deal_individual'
         });
-        var url = "/api/1.0/banner?where="+where;
+        url = "/api/1.0/banner?where="+where;
         Query.get(url).then(function (banner) {
             console.log("banner Details: ", banner.data._items);
             $scope.side_banner = banner.data._items[0];
@@ -61,7 +62,7 @@ angular.module("dealDetailsModule", ["Directives"])
         // if stateParams of url found the call http request to get the deal details from ther server
         if($stateParams['url']) {
             // get the list of coupons
-            var where = JSON.stringify({
+            where = JSON.stringify({
                 url: $stateParams.url
             });
 
@@ -74,7 +75,7 @@ angular.module("dealDetailsModule", ["Directives"])
                 'store_temp': 1
             });
 
-            var url = '/api/1.0/deals'+'?where='+where+'&number_of_clicks=1&embedded='+embedded+'&rand_number'+Math.random();
+            url = '/api/1.0/deals'+'?where='+where+'&number_of_clicks=1&embedded='+embedded+'&rand_number'+Math.random();
             $http({
                 url: url,
                 method: "GET"
@@ -88,7 +89,7 @@ angular.module("dealDetailsModule", ["Directives"])
                     $scope.deal.expired_date = new Date($scope.deal.expired_date);
 
                     // get the related coupons of selected store
-                    if($scope.deal.deal_type == 'store') {
+                    if($scope.deal.deal_type === 'store') {
                         var temp = {};
                         temp["related_stores"] = {
                             "$in": [$scope.deal.store_temp._id]
@@ -128,6 +129,44 @@ angular.module("dealDetailsModule", ["Directives"])
                 }
             }, function (error) {
                 console.log(error);
+            });
+        }
+
+        // open coupon popup code
+        $scope.openCouponCode = function (store, item) {
+            // get the Deeplink destionation URL for it
+            DestionationUrl.destination_url(item.destination_url).then(function (data) {
+                $scope.destionationUrl = data['data']['data']['output_url'];
+                url = $state.href('main.deal_post_details', {url: $stateParams['url'], cc: item._id, destionationUrl: $scope.destionationUrl});
+                //window.open(url,'_blank');
+                $('<a href="'+url+'" target="_blank">&nbsp;</a>')[0].click();
+                window.location.href = $scope.destionationUrl;
+            }, function (error) {
+                console.log(error);
+            });
+        };
+
+        //  ======== if stateParams having the coupon code
+        if($stateParams['cc']) {
+            $("coupon-info-popup").remove();
+            embedded = JSON.stringify({
+                'related_stores': 1,
+                'related_categories': 1
+            });
+            url = "/api/1.0/coupons/"+$stateParams['cc']+"?number_of_clicks=1&embedded="+embedded+"&rand="+Math.random();
+            $http.get(url).then(function (data) {
+                console.log("$stateParams CC Data: ", data.data);
+                $scope.couponInfo = data['data'];
+                // open directive popup
+                var el = $compile( "<coupon-info-popup parent='store' type='store' coupon='couponInfo'></coupon-info-popup>" )( $scope );
+                $("body").append(el);
+                setTimeout(function () {
+                    $("#couponPopup").modal("show");
+                }, 1000);
+                console.log(el)
+            }, function (error) {
+                console.log("$stateParams CC: ", error);
+                $state.go("main.deal_post_details", {url: $stateParams['url'], cc: undefined, destionationUrl: undefined});
             });
         }
     }).filter("quickLimit", function () {

@@ -247,7 +247,7 @@ angular
                 console.log(el)
             }, function (error) {
                 console.log("$stateParams CC: ", error);
-                $state.go("main.store-info", {cc: undefined, destionationUrl: undefined});
+                $state.go("main.store-info", {url: $stateParams['url'], cc: undefined, destionationUrl: undefined});
             });
         }
     })
