@@ -61,7 +61,9 @@ deal-tile-directive, .flex-align {
 .flex-start {
     justify-content: flex-start;
 }
-
+.flex-start .deal-directive-tile, .flex-start .store-thumbnail {
+    margin-right: 20px;
+}
 @media screen and (min-device-width: 1100px) {
     deal-tile-directive:after {
         content: "";
@@ -70,9 +72,7 @@ deal-tile-directive, .flex-align {
     .deal-directive-tile {
         width: 24%;
     }
-    .flex-start .deal-directive-tile, .flex-start .store-thumbnail {
-        margin-right: 20px;
-    }
+
     .col-9-deal-sect:after {
         content: "";
         width: 32%;
@@ -631,7 +631,7 @@ ul.rating {
         width: 230px;
     }
     .store-thumbnail {
-        width: 29.3%;
+        width: 30.3%;
     }
     .rupee {
         padding: 0 !important;

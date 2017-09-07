@@ -150,7 +150,7 @@ a.right span {
 .store-thumbnail {
     position: relative;
     overflow: hidden;
-    margin-bottom: 7px;
+    margin-bottom: 15px;
     border: 1px solid #ddd;
     padding: 5px;
     max-height: 70px;
@@ -441,5 +441,21 @@ ul.unstyled li a {
     .show-cats li a {
         color: #000;
         font-size: 14px;
+    }
+    .flex-start {
+        justify-content: space-between !important;
+    }
+    .flex-start .store-thumbnail {
+        margin-right: 0 !important;
+    }
+    .placeholder {
+        width: 30.3%;
+    }
+    .carousel-inner .item.active a {
+        display: flex;
+        align-items: center;
+    }
+    .store-logo {
+        width: 110px !important;
     }
 }
