@@ -670,10 +670,6 @@ ul.rating {
     .breadcrumb>li+li:before {
         padding: 0 2px !important;
     }
-    .custom-popup-wrapper {
-        left: -59px !important;
-        width: 130% !important;
-    }
     .custom-popup-wrapper>.dropdown-menu {
         padding-right: 0 !important;
     }
@@ -759,6 +755,7 @@ ul.rating {
     .bottom-header {
         position: relative !important;
         height: 50px;
+        padding: 0 !important;
     }
     .top-container {
         margin-top: 137px;
@@ -776,10 +773,12 @@ ul.rating {
         width: auto !important;
     }
 }
-@media only screen and (max-width: 600px) and (min-width: 375px)  {
-    .flipkart-navbar-search {
-        width: 150%;
-        max-width:  150%;
+@media only screen and (max-width: 600px) and (min-width: 320px)  {
+    .headerbar_pad .row {
+        width: 100%;
+    }
+    .headerbar_pad .flipkart-navbar-search {
+        width: 110%;
     }
     .mobile-text {
         padding-right: 15px !important;
@@ -789,6 +788,7 @@ ul.rating {
         width: 116%!important;
     }
     .goToTop {
-        right: 20px;
+        bottom: -3px;
+        right: 15px;
     }
 }

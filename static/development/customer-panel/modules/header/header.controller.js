@@ -1,7 +1,10 @@
 angular.module("headerModule", ["ui.bootstrap", "APP"])
     .controller("headerCtrl", function ($scope, auth, $state, $http, $filter, $q, HTTP, $location, $ocLazyLoad) {
         console.log("header controller!");
-
+        $scope.isMobile = (window.innerWidth < 500);
+        $scope.selectedSearch = {
+            search: undefined
+        };
         // Load CSS files
         $ocLazyLoad.load({
             files: [
@@ -42,7 +45,7 @@ angular.module("headerModule", ["ui.bootstrap", "APP"])
         $scope.goClick = function (item) {
             console.log("Header search: ", item, "main."+item.type, {url: item.url, cc: item['cc']});
             $state.go("main."+item.type, {url: item.url, cc: item['cc']});
-            $scope.customPopupSelected = undefined;
+            $scope.selectedSearch.search = undefined;
         };
 
         // get the stores

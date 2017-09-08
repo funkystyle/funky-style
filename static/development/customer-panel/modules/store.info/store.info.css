@@ -175,7 +175,10 @@ div.coupon {
     margin-bottom: 0;
 }
 
-
+.top_banner_area .thumbnail {
+    border-bottom: 0 solid !important;
+    background: transparent !important;
+}
 /* coupons, deals */
 .deal-price {
     font-size: 12px;

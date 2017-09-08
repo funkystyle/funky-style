@@ -29,8 +29,9 @@
     -o-transition-property: opacity;
     transition-property: opacity;
 }
-
-
+.cat-tile-placeholder {
+    width: 24% !important;
+}
 #myCarousel .carousel-caption {
     left:0;
     right:0;
@@ -119,7 +120,9 @@
 .cat-area {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    /* width: 100%; */
+    align-items: center;
+    flex-wrap: wrap;
 }
 .cat-tile {
     width: 24%;

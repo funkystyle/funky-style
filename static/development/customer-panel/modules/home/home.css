@@ -441,7 +441,7 @@ ul.unstyled li a {
         margin-right: 0 !important;
     }
     .placeholder {
-        width: 30.3%;
+        width: 30.3% !important;
     }
     .carousel-inner .item.active a {
         display: flex;

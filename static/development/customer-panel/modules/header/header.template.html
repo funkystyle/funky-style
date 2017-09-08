@@ -31,7 +31,7 @@
                 </ul>
                 <form class="navbar-form navbar-left">
                     <div class="form-group" style="width: 80%; position: relative;">
-                        <input type="text" ng-model="customPopupSelected" placeholder="Search Stores, Categories or Coupons"
+                        <input type="text" ng-model="selectedSearch.search" placeholder="Search Stores, Categories or Coupons"
                                uib-typeahead="address for address in searchResults($viewValue)"
                                typeahead-loading="loadingLocations" typeahead-no-results="noResults"
                                typeahead-popup-template-url="static/app/customer-panel/modules/header/typeahead.template.html"
@@ -47,43 +47,32 @@
                             Login
                         </a>
                     </li>
-                    <!--<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user-circle-o"></i>
-                            Account <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>-->
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
 
-    <div class="container pad-0" style="position: relative;">
+    <div class="container pad-0 only-desktop" ng-if="!isMobile" style="position: relative;">
         <nav class="navbar navbar-default bottom-header" role="navigation">
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-header headerbar_pad">
                 <div class="row">
-                    <button type="button" class="navbar-toggle col-xs-2" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <div class="navbar-brand hidden-md hidden-lg col-xs-10">
-                        <div class="flipkart-navbar-search">
-                            <div class="row">
-                                <div class="col-xs-12 search_bar pad-right-0 mobile-text">
-                                    <input type="text" ng-model="customPopupSelected" placeholder="Search Stores, Categories or Coupons"
-                                           uib-typeahead="address for address in searchResults($viewValue)"
-                                           typeahead-loading="loadingLocations" typeahead-no-results="noResults"
-                                           typeahead-popup-template-url="static/app/customer-panel/modules/header/typeahead.template.html"
-                                           class="flipkart-navbar-input" style="width: 100%;" typeahead-on-select="goClick($item, $model, $label)">
+                    <div class="col-lg-12 col-xs-12 col-md-12">
+                        <button type="button" class="navbar-toggle col-xs-2" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="navbar-brand hidden-md hidden-lg col-xs-10">
+                            <div class="flipkart-navbar-search">
+                                <div class="row">
+                                    <div class="col-xs-12 search_bar pad-right-0 mobile-text">
+                                        <input type="text" ng-model="selectedSearch.search" placeholder="Search Stores, Categories or Coupons"
+                                               uib-typeahead="address for address in searchResults($viewValue)"
+                                               typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                                               typeahead-popup-template-url="static/app/customer-panel/modules/header/typeahead.template.html"
+                                               class="flipkart-navbar-input" style="width: 100%;" typeahead-on-select="goClick($item, $model, $label)">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -131,6 +120,21 @@
             <!-- /.navbar-collapse -->
         </nav>
         <!-- /.container-fluid -->
+    </div> <!-- end of container -->
+
+    <div class="only-mobile bottom-header-mobi" ng-if="isMobile">
+        <div class="inner-padding">
+            <div class="menu-icon-sec">
+                <i class="fa fa-bars"></i>
+            </div>
+            <div class="search-typeheader-section">
+                <input type="text" ng-model="selectedSearch.search" placeholder="Search Stores, Categories or Coupons"
+                       uib-typeahead="address for address in searchResults($viewValue)"
+                       typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                       typeahead-popup-template-url="static/app/customer-panel/modules/header/typeahead.template.html"
+                       class="flipkart-navbar-input" typeahead-on-select="goClick($item, $model, $label)">
+            </div>
+        </div>
     </div>
 </header>
 

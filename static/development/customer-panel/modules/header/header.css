@@ -390,11 +390,17 @@ ul.nav li.dropdown ul.dropdown-menu {
 
 @media screen and (max-width: 768px) {
     .uib-typeahead-match .media .media-left a.media-type-logo {
-        width: 90px !important;
+        width: 75px !important;
+        height: 50px;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 5px;
     }
-    .header .navbar-header {
-        width: 100%;
-        padding: 0 15px 0 25px;
+    .uib-typeahead-match {
+        padding: 5px 10px;
+    }
+    header {
+        width: 96% !important;
     }
     .header .navbar-brand {
         display: flex;
@@ -413,6 +419,8 @@ ul.nav li.dropdown ul.dropdown-menu {
     }
     .custom-popup-wrapper {
         height: 300px;
+        left: 0 !important;
+        width: 99.7% !important;
     }
     .row2 {
         padding: 2% 0 2%;
@@ -439,7 +447,7 @@ ul.nav li.dropdown ul.dropdown-menu {
         margin-left: -4px;
     }
     .search_bar{
-        margin: 0% 0% 0% 3%;
+        margin: 0 0 0 3%;
     }
     .custom-popup-wrapper>.message {
         padding: 10px 13px;
@@ -449,10 +457,45 @@ ul.nav li.dropdown ul.dropdown-menu {
         margin-bottom: 4%;
         margin-left: -3%;
     }
-    .headerbar_pad{
-        padding-bottom: 1%;
-    }
     .top-store-ul {
         width: 302px !important;
+    }
+    .only-desktop {
+        display: none !important;
+    }
+    header nav.header {
+        display: flex;
+        align-items: center;
+    }
+    header .header .container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    /* ========= custom bottom header for mobile ======== */
+    .bottom-header-mobi {
+        background-color: #7e70a1 !important;
+        border-color: #7e70a1 !important;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .bottom-header-mobi .inner-padding {
+        padding: 5px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .bottom-header-mobi .inner-padding .menu-icon-sec .fa.fa-bars {
+        font-size: 25px;
+        color: #FFF;
+        cursor: pointer;
+    }
+    .bottom-header-mobi .inner-padding .search-typeheader-section {
+        width: 90%;
+    }
+    .bottom-header-mobi .inner-padding .search-typeheader-section input {
+        width: 100%;
     }
 }
