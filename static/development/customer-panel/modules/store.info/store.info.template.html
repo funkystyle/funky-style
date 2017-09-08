@@ -105,6 +105,9 @@
                             </a>
                             <p>{{ item.name }} Coupons</p>
                         </span>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in store.related_stores"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in store.related_stores"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in store.related_stores"></div>
                     </div>
                 </div>
                 <!--end panel body-->
@@ -132,6 +135,9 @@
                             </a>
                             <p>{{ item.name }} Coupons</p>
                         </span>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in store.top_stores"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in store.top_stores"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in store.top_stores"></div>
                     </div>
                 </div>
                 <!--end panel body-->
@@ -621,13 +627,15 @@
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
-                                    <h3>
-                                        {{ item.discount_type }} <br>{{ item.discount }}
-                                    </h3>
+                                    <div class="deal-price-text">
+                                        <h3>
+                                            {{ item.discount_type }} <br> {{ item.discount }}
+                                        </h3>
+                                    </div>
+                                    <div class="related-coupon-deal hidden-xs">
+                                        <img ng-src="{{ item.related_stores[0].image }}">
+                                    </div>
                                 </div> <!-- end deal-price -->
-                                <div class="related-coupon-deal hidden-xs">
-                                    <img ng-src="{{ item.related_stores[0].image }}">
-                                </div>
                                 <div class="hidden-lg hidden-md">
                                     <p class="fifty_cashback">
                                         {{ item.discount_type }} {{ item.discount }}

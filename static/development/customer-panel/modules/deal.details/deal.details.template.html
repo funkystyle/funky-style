@@ -377,6 +377,9 @@
                             </a>
                             <p>{{ item.name }} Coupons</p>
                         </span>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in top_stores"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in top_stores"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in top_stores"></div>
                     </div>
                 </div>
                 <!--end panel body-->
@@ -390,11 +393,15 @@
                 <!--panel heading-->
                 <div class="panel-body">
                     <div class="check-box-filter-area rel-stores">
-                        <a class="pull-left" ng-repeat="item in deal.related_deals"
-                           ui-sref="main.deal_post_details({url: item.url})">
-                            <img  ng-src="{{ item.images[0] }}" alt="64x64">
+                        <span ng-repeat="item in deal.related_deals">
+                            <a class="pull-left" ui-sref="main.deal_post_details({url: item.url})">
+                                <img  ng-src="{{ item.images[0] }}" alt="64x64">
+                            </a>
                             <p>{{ item.name }}</p>
-                        </a>
+                        </span>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in deal.related_deals"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in deal.related_deals"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in deal.related_deals"></div>
                     </div>
                 </div>
                 <!--end panel body-->

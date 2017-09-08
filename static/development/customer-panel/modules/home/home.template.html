@@ -220,11 +220,11 @@
                 <h4><b>More Top Stores</b></h4>
             </div>
         </div>
-        <div class="row bottom-more">
+        <div class="row">
             <div class="col-lg-2 col-sm-12 col-md-2"
                  ng-if="item.menu == 'bottom'" ng-repeat="item in stores">
                 <ul class="unstyled">
-                    <li><a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a></li>
+                    <li class="bottom-more"><a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a></li>
                 </ul>
             </div>
         </div>
