@@ -399,9 +399,6 @@ ul.nav li.dropdown ul.dropdown-menu {
     .uib-typeahead-match {
         padding: 5px 10px;
     }
-    header {
-        width: 96% !important;
-    }
     .header .navbar-brand {
         display: flex;
         align-items: center;
@@ -493,7 +490,7 @@ ul.nav li.dropdown ul.dropdown-menu {
         cursor: pointer;
     }
     .bottom-header-mobi .inner-padding .search-typeheader-section {
-        width: 90%;
+        width: 89%;
     }
     .bottom-header-mobi .inner-padding .search-typeheader-section input {
         width: 100%;

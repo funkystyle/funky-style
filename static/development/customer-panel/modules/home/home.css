@@ -440,6 +440,9 @@ ul.unstyled li a {
     .flex-start .store-thumbnail {
         margin-right: 0 !important;
     }
+    header {
+        width: 96% !important;
+    }
     .placeholder {
         width: 30.3% !important;
     }

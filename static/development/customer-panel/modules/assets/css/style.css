@@ -662,6 +662,13 @@ ul.rating {
         width: 100%;
         height: auto;
         margin: 0 auto;
+        margin-right: 0 !important;
+    }
+    ul.unstyled {
+        padding-left: 0;
+    }
+    header {
+        width: 100%;
     }
     .breadcrumb {
         margin-bottom: 5px !important;

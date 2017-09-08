@@ -139,10 +139,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         home: function($ocLazyLoad) {
                             return $ocLazyLoad.load({
                                 name: 'homeModule',
-                                files: [
-                                    {type: 'css', path: 'static/app/customer-panel/modules/home/home.css'},
-                                    'static/app/customer-panel/modules/home/home.controller.js'
-                                ]
+                                files: ['static/app/customer-panel/modules/home/home.controller.js']
                             })
                         }
                     }
