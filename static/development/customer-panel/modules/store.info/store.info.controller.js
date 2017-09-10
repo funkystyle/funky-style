@@ -113,7 +113,7 @@ angular
                             "$in": [$scope.store._id]
                         }
                     };
-                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&max_results=1000&embedded="+embedded;
                     console.log("url ------------------------------ ",url);
                     StoreQuery.get(url).then(function (coupons) {
                         var items = coupons.data._items;
@@ -122,7 +122,7 @@ angular
                         angular.forEach(items, function (item) {
                             // get related categories of each coupon
                             angular.forEach(item.related_categories, function (category) {
-                                if(category == null) return true;
+                                if(category === null) return true;
                                 if(!$scope.categories[category.category_type]) {
                                     $scope.categories[category.category_type] = [];
                                     $scope.categories[category.category_type].push(category);
@@ -136,14 +136,14 @@ angular
 
                             if(new Date(item.expire_date) > new Date()) {
                                 item._updated = new Date(item._updated);
-                                if($scope.coupons.indexOf(item) == -1) {
+                                if($scope.coupons.indexOf(item) === -1) {
                                     $scope.coupons.push(item);
                                     $scope.filterCoupons.push(item);
                                     $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
                                     $scope.couponsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'coupon'});
                                 }
                             } else {
-                                if($scope.expiredCoupons.indexOf(item) == -1) {
+                                if($scope.expiredCoupons.indexOf(item) === -1) {
                                     $scope.expiredCoupons.push(item);
                                 }
                             }
@@ -206,20 +206,21 @@ angular
                     }, function (error) {
                         console.log(error);
                     });
+
+                    // Get the top banner from banners table if no top_banner available
+                    $scope.top_banner = {};
+                    var where = JSON.stringify({
+                        "top_banner_string": 'store'
+                    });
+                    var url = "/api/1.0/banner?where="+where;
+                    StoreQuery.get(url).then(function (banner) {
+                        console.log("banner Details: ", banner.data._items);
+                        $scope.top_banner = banner.data._items[0];
+                        $("#top_banner_area").show();
+                    });
                 } else {
                     $state.go('404');
                 }
-                // Get the top banner from banners table
-                $scope.top_banner = {};
-                var where = JSON.stringify({
-                    "top_banner_string": 'store'
-                });
-                var url = "/api/1.0/banner?where="+where;
-                StoreQuery.get(url).then(function (banner) {
-                    console.log("banner Details: ", banner.data._items);
-                    $scope.top_banner = banner.data._items[0];
-                    $("#top_banner_area").show();
-                });
             }, function (error) {
                 console.log(error);
             }); // end of getting store

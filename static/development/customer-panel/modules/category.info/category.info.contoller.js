@@ -64,11 +64,6 @@ angular
 
         // open coupon popup code
         $scope.openCouponCode = function (category, item) {
-
-            // put a request to update the no of clicks into the particular coupon document
-            var url = "/api/1.0/coupons/"+item._id+"?number_of_clicks=1";
-            Query.get(url);
-
             // get the Deeplink destionation URL for it
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
                 $scope.destionationUrl = data['data']['data']['output_url'];
@@ -129,7 +124,7 @@ angular
                         'related_stores': 1,
                         'related_categories': 1
                     });
-                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&sort=-_updated&embedded="+embedded;
+                    url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&max_results=1000&&sort=-_updated&embedded="+embedded;
                     $http.get(url).then(function (data) {
                         var items = data['data']['_items'];
 
@@ -199,9 +194,9 @@ angular
                 'related_stores': 1,
                 'related_categories': 1
             });
-            url = "/api/1.0/coupons/"+$stateParams['cc']+"?embedded="+embedded+"&rand="+Math.random();
+            url = "/api/1.0/coupons/"+$stateParams['cc']+"?number_of_clicks=1&&embedded="+embedded+"&rand="+Math.random();
             $http.get(url).then(function (data) {
-                console.log("$stateParams CC Data: ", data.data)
+                console.log("$stateParams CC Data: ", data.data);
                 $scope.couponInfo = data['data'];
                 // open directive popup
                 var el = $compile( "<coupon-info-popup parent='category' type='category' coupon='couponInfo'></coupon-info-popup>" )( $scope );
