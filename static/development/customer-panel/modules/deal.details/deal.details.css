@@ -273,7 +273,6 @@ ul.dynamic-fields li {
     padding-bottom: 0;
 }
 .rolloverimage a {
-    display: inline-flex;
     width: 60px;
     height: 40px;
     border: 1px solid #DDDDDD;
@@ -283,8 +282,10 @@ ul.dynamic-fields li {
     border-radius: 3px;
 }
 .rolloverimage a img {
-    width: inherit;
-    height: inherit;
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
     padding: 3px;
 }
 
@@ -346,7 +347,7 @@ div.stores-description-inner div.amazon-logo {
     padding: 3px;
     margin-bottom: 5px;
 }
-div.stores-description-inner div.amazon-logo img {
+div.stores-description-inner div.amazon-logo a {
     height: 40px;
     width: 120px;
 }

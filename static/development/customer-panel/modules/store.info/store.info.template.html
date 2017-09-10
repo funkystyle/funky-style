@@ -146,7 +146,7 @@
 
             <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
-                    <h5 class="font-bold">{{ store.name }} Contact Info</h5>
+                    <h3 class="font-bold side-h3-heading">{{ store.name }} Contact Info</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -171,7 +171,7 @@
 
             <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
-                    <h5 class="font-bold">{{ store.name }} Social Links</h5>
+                    <h3 class="font-bold side-h3-heading">{{ store.name }} Social Links</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body panel-body_fa">
@@ -205,7 +205,7 @@
             <!-- ola cab address start here -->
             <div class="panel panel-default cat-filters">
                 <div class="panel-heading">
-                    <h5 class="font-bold">{{ store.name }} Address</h5>
+                    <h3 class="font-bold side-h3-heading">{{ store.name }} Address</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -219,7 +219,7 @@
             <!-- latest tweets start here -->
             <div class="panel panel-default cat-filters">
                 <div class="panel-heading" style="border-bottom: 2px dotted #9954bb;">
-                    <h5 class="font-bold latest-tweet">Latest Tweets From {{ store.twitter_id }}</h5>
+                    <h3 class="font-bold latest-tweet side-h3-heading">Latest Tweets From {{ store.twitter_id }}</h3>
                     <a class="twitter-timeline" href="https://twitter.com/{{ store.twitter_id }}" data-tweet-limit="3">
                         Tweets by {{ store.twitter_id }}
                     </a>
@@ -273,10 +273,10 @@
                             <div class="panel-body bottom-5">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
-                                        <div class="deal-price text-center hidden-xs">
-                                            <h3>
+                                        <div class="deal-price flex-justify-center text-center hidden-xs">
+                                            <p>
                                                 {{ item.discount_type }} <br> {{ item.discount }}
-                                            </h3>
+                                            </p>
                                         </div> <!-- end deal-price -->
                                         <div class="deal f-coupon-type hidden-xs">
                                             <b ng-if="item.coupon_type == 'coupon'">
@@ -356,9 +356,9 @@
                     <!-- Deals carousel starts here -->
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h4 class="ola_mar h3-heading">
+                            <h2 class="ola_mar h3-heading">
                                 {{ store.name }} Deals
-                            </h4>
+                            </h2>
                         </div><!-- end col -->
                     </div><!-- end row -->
                     <div class="row">
@@ -379,10 +379,10 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
-                                        <div class="deal-price text-center hidden-xs">
-                                            <h3>
+                                        <div class="deal-price flex-justify-center text-center hidden-xs">
+                                            <p>
                                                 {{ item.discount_type }} <br> {{ item.discount }}
-                                            </h3>
+                                            </p>
                                         </div> <!-- end deal-price -->
                                         <div class="deal f-coupon-type hidden-xs">
                                             <b ng-if="item.coupon_type == 'coupon'">
@@ -466,10 +466,10 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2">
-                                        <div class="deal-price text-center hidden-xs">
-                                            <h3>
+                                        <div class="deal-price flex-justify-center text-center hidden-xs">
+                                            <p>
                                                 {{ item.discount_type }} <br> {{ item.discount }}
-                                            </h3>
+                                            </p>
                                         </div> <!-- end deal-price -->
                                         <div class="deal f-coupon-type hidden-xs">
                                             <b ng-if="item.coupon_type == 'coupon'">
@@ -565,9 +565,9 @@
                                         </a>
                                     </div>
                                     <div class="col-lg-5 col-sm-5 col-md-5 pull-right">
-                                        <h4 style="font-weight: bold;" class="text-right rupee">
+                                        <p style="font-weight: bold;" class="text-right rupee suggest-coupon-discount">
                                             {{ item.discount_type }} {{ item.discount }}
-                                        </h4>
+                                        </p>
                                     </div>
                                 </div>
                                 <p style="min-height: 40px;">{{ item.title }}</p>
@@ -628,9 +628,9 @@
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <div class="deal-price text-center hidden-xs">
                                     <div class="deal-price-text">
-                                        <h3>
+                                        <p>
                                             {{ item.discount_type }} <br> {{ item.discount }}
-                                        </h3>
+                                        </p>
                                     </div>
                                     <div class="related-coupon-deal hidden-xs">
                                         <img ng-src="{{ item.related_stores[0].image }}">
@@ -695,19 +695,19 @@
                 <!-- Related Coupons start here -->
                 <div class="row" ng-if="expiredCoupons.length">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <h4 class="ola_mar h3-heading">
+                        <h3 class="ola_mar h3-heading">
                             Expired Coupons
-                        </h4>
+                        </h3>
                     </div><!-- end col -->
                 </div><!-- end row -->
                 <div class="panel panel-default coupon all deal-tile" ng-repeat="item in expiredCoupons">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2">
-                                <div class="deal-price text-center hidden-xs">
-                                    <h3>
+                                <div class="deal-price flex-justify-center text-center hidden-xs">
+                                    <p>
                                         {{ item.discount_type }} <br> {{ item.discount }}
-                                    </h3>
+                                    </p>
                                 </div> <!-- end deal-price -->
                                 <div class="deal hidden-xs f-coupon-type">
                                     <b ng-if="item.coupon_type == 'coupon'">

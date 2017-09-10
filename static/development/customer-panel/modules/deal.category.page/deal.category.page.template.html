@@ -56,9 +56,9 @@
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="repeat-brands">
-                        <a class="repeat-brands-item" ng-repeat="item in deal.related_categories | limitTo: 5"
+                        <a class="repeat-brands-item flex-justify-center" ng-repeat="item in deal.related_categories | limitTo: 5"
                            ui-sref="main.deal_category_page({url: item.url})">
-                            <img ng-src="{{ item.image }}" alt="{{ item.image }} Logo">
+                            <img class="img-auto" ng-src="{{ item.image }}" alt="{{ item.image }} Logo">
                         </a>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
         <div class="col-md-3 col-xs-12 col-sm-12">
             <div class="panel panel-default only-desktop">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Price Range</h5>
+                    <h3 class="font-bold side-h3-heading">Price Range</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -94,7 +94,7 @@
 
             <div class="panel panel-default only-desktop">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Categories</h5>
+                    <h3 class="font-bold side-h3-heading">Categories</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -124,6 +124,7 @@
             <!--end panel-->
         </div>
         <div class="col-md-9 col_md_9_pad col-xs-12 col-sm-12 pad-5">
+            <h1 class="h3-heading">{{ deal.h2 }}</h1>
             <deal-tile-directive ng-class="{'space-between': filterDeals.length >= 3, 'flex-start': filterDeals.length < 3}"
                                  class="col-9-deal-sect" items="filterDeals"></deal-tile-directive>
             <!-- footer description -->
@@ -131,7 +132,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-body footer-desc">
-                            <div ng-bind-html="trustAsHtml(deal.footer_description)"></div>
+                            <p ng-bind-html="trustAsHtml(deal.footer_description)"></p>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,18 @@
 .click-link {
     color: #165ba8 !important;
 }
+.side-h3-heading {
+    margin-bottom: 10px;
+    color: #151313;
+    font-weight: 700;
+    margin-top: 10px;
+    font-size: 15px;
+}
+#top_banner_area .thumbnail {
+    background: transparent !important;
+    border-bottom: 0 solid !important;
+}
+
 body {
     background-color: #f3f3f3;
     font-family: "Open Sans", Arial, sans-serif !important;
@@ -48,6 +60,17 @@ body {
     -webkit-box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
     -moz-box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
     box-shadow: 0 2px 23px 0 rgba(0,0,0,.2);
+}
+.flex-justify-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-auto {
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
 }
 deal-tile-directive, .flex-align {
     display: flex;

@@ -28,7 +28,7 @@
 					</p>
 				</div>
 				<div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
-					<h3 class="margin-top-0 h3-heading">{{ category.h1 }}</h3>
+					<h1 class="margin-top-0 h3-heading">{{ category.h1 }}</h1>
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(category.top_description)"></p>
                     <p class="para_small">
@@ -94,7 +94,7 @@
 
 			<div class="panel panel-default cat-filters only-desktop" ng-repeat="(key, items) in categories">
                 <div class="panel-heading">
-                    <h5 class="font-bold">{{ (key == 'Regular'? 'Category': key) }} Filters</h5>
+                    <h3 class="font-bold side-h3-heading">{{ (key == 'Regular'? 'Category': key) }} Filters</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -125,7 +125,7 @@
 
 			<div class="panel panel-default cat-filters">
 				<div class="panel-heading">
-					<h5 class="font-bold">Related Categories</h5>
+					<h3 class="font-bold side-h3-heading">Related Categories</h3>
 				</div>
 				<!--panel heading-->
 				<div class="panel-body">
@@ -156,7 +156,7 @@
 
 			<div class="panel panel-default cat-filters">
 				<div class="panel-heading">
-					<h5 class="font-bold">Top Stores</h5>
+					<h3 class="font-bold side-h3-heading">Top Stores</h3>
 				</div>
 				<!--panel heading-->
 				<div class="panel-body">
@@ -299,7 +299,7 @@
                         <!-- promo codes starts here --> <!-- panel -->
                         <div class="row" ng-if="$index == 2">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <h3 class="h3-heading">{{ category.h2 }}</h3>
+                                <h2 class="h3-heading">{{ category.h2 }}</h2>
                             </div>
                         </div>
                     </span>

@@ -1,7 +1,4 @@
 <link rel="stylesheet" href="static/app/customer-panel/modules/deal.details/deal.details.css" />
-
-
-
 <div class="container top-container" ng-if="deal.deal_type == 'product'">
     <!-- deal details -->
     <div class="panel panel-default">
@@ -29,7 +26,7 @@
                     <div class="mobileprice-logo col-md-3 col-xs-12 col-sm-4">
                         <div class="thumbnail showcase-img"><img ng-src="{{ imageShow.image }}"></div>
                         <div class="rolloverimage">
-                            <a href="" ng-repeat="item in deal.images" ng-click="imageShow.image = item;">
+                            <a href="" class="flex-justify-center" ng-repeat="item in deal.images" ng-click="imageShow.image = item;">
                                 <img ng-src="{{ item }}">
                             </a>
                         </div>
@@ -55,7 +52,7 @@
                     </div>
 
                     <div class="col-md-9 col-xs-12 col-sm-8 border-left">
-                        <h3 class="h3-heading h3-main-heading">{{ deal.h1 }}</h3>
+                        <h1 class="h3-heading h3-main-heading">{{ deal.h1 }}</h1>
 
                         <div class="rating-section">
                             <div star-rating rating-value="deal.rating" max="5"></div>
@@ -69,8 +66,8 @@
                         <div class="stores-description">
                             <div class="stores-description-inner text-center">
                                 <div class="amazon-logo">
-                                    <a ui-sref="main.store-info({url: deal.stores[0].store.url})">
-                                        <img ng-src="{{ deal.stores[0].store.image }}">
+                                    <a class="flex-justify-center" ui-sref="main.store-info({url: deal.stores[0].store.url})">
+                                        <img class="img-auto" ng-src="{{ deal.stores[0].store.image }}">
                                     </a>
                                 </div>
                             </div>
@@ -91,7 +88,7 @@
                         </div> <!-- end of Stores Description -->
 
                         <div class="quickspecifications-main">
-                            <h5><b>Quick Specifications</b></h5>
+                            <h3 class="h3-heading"><b>Quick Specifications</b></h3>
                             <div class="general-head-main">
                                 <div class="general-head">
                                     <ul class="dynamic-fields" style="background: none;">
@@ -127,14 +124,14 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h3 class="h3-heading">
+            <h2 class="h3-heading">
                 {{ deal.h2 }}
-            </h3>
+            </h2>
             <div class="stores-description stores-section only-desktop" ng-repeat="item in deal.stores">
                 <div class="stores-description-inner col-xs-6 text-left">
                     <div class="amazon-logo">
-                        <a ui-sref="main.store-info({url: item.store.url})">
-                            <img ng-src="{{ item.store.image }}">
+                        <a class="flex-justify-center" ui-sref="main.store-info({url: item.store.url})">
+                            <img class="img-auto" ng-src="{{ item.store.image }}">
                         </a>
                     </div>
                 </div>
@@ -229,10 +226,9 @@
                 <h3 class="h3-heading">{{ deal.name }} Unboxing Video</h3>
                 <div ng-bind-html="trustAsHtml(deal.deal_video)"></div>
             </div>
-
             <br>
             <div class="deal-description-area">
-                {{ deal.description }}
+                <p>{{ deal.description }}</p>
             </div>
         </div> <!-- end of Col-md-9 -->
 
@@ -295,9 +291,9 @@
                             <li class="active">{{ deal.name }}</li>
                         </ol>
                     </div> <!-- end div -->
-                    <h3 class="margin-top-0 h3-heading">{{ deal.h1 }}</h3>
-                    <div style="width: 100%;" ng-click="show = !show" class="para_small top-desc-from-top top-desc"
-                       ng-class="{'show-desc': show, 'top-desc-from-top': !show}" data-ng-bind-html="trustAsHtml(deal.description)"></div>
+                    <h1 class="margin-top-0 h3-heading">{{ deal.h1 }}</h1>
+                    <p style="width: 100%;" ng-click="show = !show" class="para_small top-desc-from-top top-desc"
+                       ng-class="{'show-desc': show, 'top-desc-from-top': !show}" data-ng-bind-html="trustAsHtml(deal.description)"></p>
                     <div>
                         <a href="{{ deal.destination_url }}" target="_blank" class="btn btn-md btn-info">
                             <b>ACTIVATE OFFER &nbsp;</b>
@@ -366,7 +362,7 @@
         <div class="col-lg-3 col-md-3 col-sm-3 pad-left-0">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Top Stores</h5>
+                    <h3 class="font-bold side-h3-heading">Top Stores</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
@@ -388,7 +384,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h5 class="font-bold">Related Deals</h5>
+                    <h3 class="font-bold side-h3-heading">Related Deals</h3>
                 </div>
                 <!--panel heading-->
                 <div class="panel-body">
