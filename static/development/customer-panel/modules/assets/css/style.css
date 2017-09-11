@@ -679,7 +679,7 @@ ul.rating {
         min-height: 40px;
     }
     .panel-footer .row {
-        display: block !important;
+        display: block;
     }
     .deal-directive-tile {
         width: 100%;
@@ -694,7 +694,7 @@ ul.rating {
         width: 100%;
     }
     .breadcrumb {
-        margin-bottom: 5px !important;
+        margin-bottom: 15px !important;
         padding: 0 !important;
     }
     .breadcrumb>li+li:before {

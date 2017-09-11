@@ -12,6 +12,20 @@
     .store-logo img {
         width: auto !important;
     }
+    .desc-area {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .desc-area div {
+        width: 50%;
+        margin-left: 0 !important;
+    }
+    .desc-area div:last-child {
+        margin-top: 15px;
+        width: 100%;
+    }
 }
 
 .related-coupon-deal {

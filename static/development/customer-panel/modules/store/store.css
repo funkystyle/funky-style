@@ -164,9 +164,9 @@ div.thumb img {
     }
     .store-tile {
         display: block;
-        width: 130px;
+        width: 48%;
         height: 120px;
-        margin: 0 15px 10px 0;
+        margin-bottom: 10px;
     }
 }
 @media screen and (min-width: 360px) and (max-width: 374px){
@@ -202,7 +202,7 @@ div.thumb img {
         width: 1000px
     }
 }
-@media screen and (min-width: 375px) and (max-width: 411px){
+@media screen and (min-width: 320px) and (max-width: 720px){
     .overlay-on-image {
         height: 115px;
     }
@@ -228,7 +228,7 @@ div.thumb img {
         margin-bottom: 10px;
     }
     div.thumb {
-        margin-bottom: 15px;
+        margin-bottom: 2px;
     }
 }
 @media screen and (min-width: 412px) and (max-width: 414px){

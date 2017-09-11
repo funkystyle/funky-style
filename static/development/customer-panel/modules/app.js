@@ -549,6 +549,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 };
 
                 scope.toggle = function (index) {
+                    return true;
                     scope.ratingValue = index + 1;
                     scope.onRatingSelected({
                         rating: index + 1

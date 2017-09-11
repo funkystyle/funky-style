@@ -15,7 +15,7 @@
                             <li class="active">{{ deal.url }}</li>
                         </ol>
 
-                        <div>
+                        <div class="only-desktop">
                             <p>Updated on: {{ deal.toDayDate | date: "dd MMM yyyy" }}</p>
                         </div>
                     </div>
@@ -112,8 +112,8 @@
         </a>
     </div>
 
-    <div class="row specifications-main">
-        <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="row specifications-main quick-specification">
+        <div class="col-lg-12 col-md-12 col-sm-12 flex-justify-between">
             <button ng-click="goScroll('specifications')" class="btn btn-md btn-grey">Specifications</button>
             <button class="btn btn-md btn-grey">Overview</button>
             <button class="btn btn-md btn-grey">Best Price</button>
@@ -270,6 +270,20 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
+                <div class="col-lg-12 col-xs-12">
+                    <div style="width: 100%; min-height: 20px;">
+                        <ol class="breadcrumb breadcrumb-area">
+                            <li><a href="/">Home</a></li>
+                            <li><a ui-sref="main.all_deals">Deals</a></li>
+                            <li ng-repeat="item in deal.breadcrumb">
+                                <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
+                            </li>
+                            <li class="active">{{ deal.name }}</li>
+                        </ol>
+                    </div> <!-- end div -->
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 deal-cat-left">
                     <div class="thumbnail deal-store-logo">
                         <img ng-src="{{ deal.images[0] }}" alt="">
@@ -281,16 +295,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
-                    <div style="width: 100%; min-height: 20px;">
-                        <ol class="breadcrumb pull-right breadcrumb-area">
-                            <li><a href="/">Home</a></li>
-                            <li><a ui-sref="main.all_deals">Deals</a></li>
-                            <li ng-repeat="item in deal.breadcrumb">
-                                <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
-                            </li>
-                            <li class="active">{{ deal.name }}</li>
-                        </ol>
-                    </div> <!-- end div -->
+                    <br />
                     <h1 class="margin-top-0 h3-heading">{{ deal.h1 }}</h1>
                     <p style="width: 100%;" ng-click="show = !show" class="para_small top-desc-from-top top-desc"
                        ng-class="{'show-desc': show, 'top-desc-from-top': !show}" data-ng-bind-html="trustAsHtml(deal.description)"></p>

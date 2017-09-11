@@ -1,7 +1,7 @@
 /* ---------- media query for mobile ------------ */
 @media only screen and (max-device-width: 480px) {
-    div.stores-description-inner div.amazon-logo {
-        width: 55px !important;
+    div.stores-description-inner div.amazon-logo, div.stores-description-inner div.amazon-logo a {
+        width: 60px !important;
     }
     .stores-description div.stores-description-inner {
         width: 23% !important;
@@ -9,6 +9,8 @@
     div.stores-description-inner div.amazon-logo img {
         width: auto !important;
         max-width: 100%;
+        max-height: 100%;
+        height: auto;
     }
     .pad-left-0 {
         padding-left: 15px !important;
@@ -38,6 +40,19 @@
     .only-desktop {
         display: none !important;
     }
+    .flex-justify-between {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .flex-justify-between .btn-grey {
+        width: 48.5% !important;
+        margin-right: 0;
+    }
+    .flex-justify-between .btn-grey:last-child {
+        width: 100% !important;
+    }
     .mobile-store-description {
         background: #fff;
         padding: 15px;
@@ -46,11 +61,13 @@
         display: inline-flex;
         align-items: center;
         white-space: nowrap;
-        justify-content: flex-start;
+        justify-content: space-between;
     }
     .deal-store-logo {
         height: 150px !important;
         margin: 0 auto;
+        border: 0 solid !important;
+        border-bottom: 1px solid rgba(0,0,0,.09) !important;
     }
     .blog-side-banner a img, .word_press a img {
         height: auto;
