@@ -8,7 +8,6 @@ angular.module("allDealsModule", ["Directives"])
         $scope.stores = [];
 
         var random = new Date().getDate();
-
         // get the list of top deal categories
         var featured = JSON.stringify({
             featured: true
@@ -34,7 +33,7 @@ angular.module("allDealsModule", ["Directives"])
         });
 
         // get the list of Best selling deals based on number of clicks
-        var url = '/api/1.0/deals'+'?sort=-number_of_clicks&rand_number=' + random;
+        url = '/api/1.0/deals'+'?sort=-number_of_clicks&rand_number=' + random;
         $http({
             url: url,
             method: "GET"
@@ -66,7 +65,7 @@ angular.module("allDealsModule", ["Directives"])
         var where = JSON.stringify({
             "top_banner_string": 'deal'
         });
-        var projection = {
+        projection = {
             "top_banner_string": 1,
             "image": 1,
             "title": 1,
@@ -102,7 +101,7 @@ angular.module("allDealsModule", ["Directives"])
         var store = {};
         store['featured_store'] = true;
 
-        var projection = {};
+        projection = {};
         projection['name'] = 1;
         projection['url'] = 1;
         projection['image'] = 1;
@@ -123,11 +122,11 @@ angular.module("allDealsModule", ["Directives"])
         // get the list of SEO
         SEO.getSEO().then(function (data) {
             angular.forEach(data, function (item) {
-                if(item.selection_type.code == 'deal') {
+                if(item.selection_type.code === 'deal') {
                     var data = SEO.seo("", item, 'deal');
                     $rootScope.pageTitle = data.title;
                     $rootScope.pageDescription = data.description;
                 }
             });
         });
-    })
+    });

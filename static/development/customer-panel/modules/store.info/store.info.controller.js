@@ -207,17 +207,32 @@ angular
                         console.log(error);
                     });
 
-                    // Get the top banner from banners table if no top_banner available
-                    $scope.top_banner = {};
-                    var where = JSON.stringify({
-                        "top_banner_string": 'store'
-                    });
-                    var url = "/api/1.0/banner?where="+where;
-                    StoreQuery.get(url).then(function (banner) {
-                        console.log("banner Details: ", banner.data._items);
-                        $scope.top_banner = banner.data._items[0];
-                        $("#top_banner_area").show();
-                    });
+                    if(!$scope.store.top_banner) {
+                        // Get the top banner from banners table if no top_banner available
+                        $scope.top_banner = {};
+                        where = JSON.stringify({
+                            "top_banner_string": 'store'
+                        });
+                        url = "/api/1.0/banner?where="+where;
+                        StoreQuery.get(url).then(function (banner) {
+                            console.log("banner Details: ", banner.data._items);
+                            $scope.top_banner = banner.data._items[0];
+                            $("#top_banner_area").show();
+                        });
+                    }
+
+                    if (!$scope.store.side_banner) {
+                        // Get the Side banner from banners table if no top_banner available
+                        $scope.side_banner = {};
+                        where = JSON.stringify({
+                            "side_banner_string": 'store'
+                        });
+                        url = "/api/1.0/banner?where="+where;
+                        StoreQuery.get(url).then(function (banner) {
+                            console.log("Side banner Details: ", banner.data._items);
+                            $scope.side_banner = banner.data._items[0];
+                        });
+                    }
                 } else {
                     $state.go('404');
                 }

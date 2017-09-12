@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="seo_description">Seo Description</label>
-                        <textarea ng-click="textEditor($event)" id="seo_description"
+                        <textarea id="seo_description"
                                   class="form-control" ng-model="blog.seo_description" placeholder="Seo Description" ></textarea>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                         <label for="h2">H2</label>
                         <input required type="text" class="form-control input-md" ng-model="blog.h2" placeholder="H2" id="h2">
                     </div>
-                    <div class="form-group col-md-12">
+                    <!--<div class="form-group col-md-12">
                         <label for="status">Status</label>
                         <ui-select id="status" required ng-model="blog.status" theme="bootstrap">
                             <ui-select-match placeholder="Select Status">{{ $select.selected }}</ui-select-match>
@@ -84,7 +84,7 @@
                                 <div ng-bind-html="item | highlight: $select.search"></div>
                             </ui-select-choices>
                         </ui-select>
-                    </div>
+                    </div>-->
                     <div class="form-group col-md-12">
                         <label for="last_modified_by">Last Modified By</label>
                         <input type="text" id="last_modified_by" class="form-control input-md" value="{{ user.first_name }} {{ user.last_name }}" disabled />

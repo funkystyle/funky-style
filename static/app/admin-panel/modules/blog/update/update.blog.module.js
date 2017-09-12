@@ -7,12 +7,6 @@ angular.module("updateBlogModule", ["ui.select", "ngSanitize", "ui.bootstrap", "
         $scope.status = ["Pending", "Draft", "Trash", "Verified", "Publish"];
         $scope.categories = [];
         $scope.blogs = [];
-
-
-        $scope.$watch('blog.title', function(newVal, oldVal) {
-            // $scope.blog.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase() +"-blog" : undefined;
-        }, true);
-
         $scope.breadcrumbs = [];
 
         if($auth.isAuthenticated() && $stateParams['id']) {

@@ -25,11 +25,15 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
             }
         ];
 
-        $scope.changeUrl = function (newVal) {
-            if(newVal && $scope.seoList.length) {
-                var data = replaceSeo(newVal, $scope.seoList, 'single_store');
-                $scope.store.meta_title = data.title;
-                $scope.store.meta_description = data.description;
+        $scope.changeUrl = function (storeName) {
+            if(storeName && $scope.seoList.length) {
+                var data = replaceSeo(storeName, $scope.seoList, 'single_store');
+                if (data.title) {
+                    $scope.store.meta_title = data.title;
+                }
+                if(data.description) {
+                    $scope.store.meta_description = data.description;
+                }
 
                 if(data.h1) {
                     $scope.store.h1 = data.h1;
@@ -40,7 +44,7 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
 
                 console.log("SEO details:  ", data);
             }
-            $scope.store.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-coupons" : undefined;
+            $scope.store.url = (storeName) ? storeName.replace(/\s/g, "-").toLowerCase()+"-coupons" : undefined;
         };
 
         // get all stores into the array
@@ -72,6 +76,7 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
                             $scope.modified_user = item.last_modified_by;
                             $scope.store = item;
                             $scope.store.last_modified_by = item.last_modified_by._id;
+                            $scope.changeUrl(item.name);
                             console.log("selected store ------- ", $scope.store);
                         }
                     });

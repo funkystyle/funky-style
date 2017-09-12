@@ -12,7 +12,7 @@ angular.module("updateCmsModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
                 if(data['data']) {
                     var items = data.data._items;
                     angular.forEach(items, function (item) {
-                        if(item._id == $stateParams.id) {
+                        if(item._id === $stateParams.id) {
                             $scope.cms = item;
                         }
                     });

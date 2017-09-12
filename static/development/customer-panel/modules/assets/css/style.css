@@ -209,7 +209,7 @@ ol > li > a {
 }
 .placeholder {
     visibility: hidden;
-    height: 0;
+    height: 0 !important;
     width: 13%;
     padding: 0;
     margin: 0;

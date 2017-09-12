@@ -46,11 +46,15 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
         ];
 
 
-        $scope.changeUrl = function (newVal) {
-            if(newVal && $scope.seoList.length) {
-                var data = replaceSeo(newVal, $scope.seoList, 'single_category');
-                $scope.category.seo_title = data.title;
-                $scope.category.seo_description = data.description;
+        $scope.changeUrl = function (storeName) {
+            if(storeName && $scope.seoList.length) {
+                var data = replaceSeo(storeName, $scope.seoList, 'single_category');
+                if(data.title) {
+                    $scope.category.seo_title = data.title;
+                }
+                if(data.description) {
+                    $scope.category.seo_description = data.description;
+                }
 
                 if(data.h1) {
                     $scope.category.h1 = data.h1;
@@ -59,7 +63,7 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
                     $scope.category.h2 = data.h2;
                 }
             }
-            $scope.category.url = (newVal) ? newVal.replace(/\s/g, "-").toLowerCase()+"-offers" : undefined;
+            $scope.category.url = (storeName) ? storeName.replace(/\s/g, "-").toLowerCase()+"-offers" : undefined;
         };
 
         // get all stores into the array
@@ -115,6 +119,7 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
                             item.related_deals = clearNullIds(item.related_deals);
 
                             $scope.category = item;
+                            $scope.changeUrl(item.name);
 
                             console.log("Updated category: ", $scope.category);
                         }

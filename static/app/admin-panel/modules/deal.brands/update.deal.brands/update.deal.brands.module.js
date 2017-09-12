@@ -12,8 +12,12 @@ angular.module("updateDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstr
         $scope.changeUrl = function (newVal) {
             if(newVal && $scope.seoList.length) {
                 var data = replaceSeo(newVal, $scope.seoList, 'single_deal_brand');
-                $scope.deal.seo_title = data.title;
-                $scope.deal.seo_description = data.description;
+                if(data.title) {
+                    $scope.deal.seo_title = data.title;
+                }
+                if(data.description) {
+                    $scope.deal.seo_description = data.description;
+                }
 
                 if(data.h1) {
                     $scope.deal.h1 = data.h1;
@@ -47,6 +51,7 @@ angular.module("updateDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstr
                         item.related_brands = clearNullIds(item.related_brands);
                         if(item._id == $stateParams.id) {
                             $scope.deal = item;
+                            $scope.changeUrl(item.name);
                         }
                     });
                 }

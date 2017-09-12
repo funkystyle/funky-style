@@ -19,12 +19,14 @@ month = monthNames[date.getMonth()];
 year = date.getFullYear();
 
 function replaceSeo(newVal, items, from) {
-    var replacement = {
-        title: undefined,
-        description: undefined
-    };
     for(i=0; i<items.length; i++) {
-        if(from == items[i].selection_type.code) {
+        if(from === items[i].selection_type.code) {
+            var replacement = {
+                title: undefined,
+                description: undefined,
+                h1: undefined,
+                h2: undefined
+            };
             replacement.title = items[i].meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
             replacement.description = items[i].meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
             if(items[i]['h1']) {
@@ -33,10 +35,12 @@ function replaceSeo(newVal, items, from) {
             if(items[i]['h2']) {
                 replacement.h2 = items[i].h2.replace("%%title%%", newVal);
             }
+
+            console.log("SEO replacement Data: ", replacement);
+            return replacement;
         }
+        return false;
     }
-    console.log("SEO replacement Data: ", replacement);
-    return replacement;
 }
 
 var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'])

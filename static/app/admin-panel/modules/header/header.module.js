@@ -29,7 +29,7 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
                 method: "GET"
             }).then(function (data) {
                 console.log("SEO data: ", data);
-                if(data.data._items.length != 0) {
+                if(data.data._items.length !== 0) {
                     $scope.seoList = data.data._items;
                 }
             }, function (error) {

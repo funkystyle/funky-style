@@ -39,8 +39,12 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         $scope.changeUrl = function (newVal) {
             if(newVal && $scope.seoList.length) {
                 var data = replaceSeo(newVal, $scope.seoList, 'single_deal');
-                $scope.deal.seo_title = data.title;
-                $scope.deal.seo_description = data.description;
+                if(data.title) {
+                    $scope.deal.seo_title = data.title;
+                }
+                if(data.description) {
+                    $scope.deal.seo_description = data.description;
+                }
 
                 if(data.h1) {
                     $scope.deal.h1 = data.h1;
@@ -130,6 +134,7 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                             if(item._id == $stateParams.id) {
                                 console.log("selected deal: ", item);
                                 $scope.deal = item;
+                                $scope.changeUrl(item.name);
                                 $scope.getDynamicFields({_id: item.deal_category}, undefined);
                                 $scope.productLists = ($scope.deal.stores) ? $scope.deal.stores: $scope.productLists;
                                 $scope.deal_images = $scope.deal.images;

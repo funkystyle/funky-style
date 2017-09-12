@@ -34,6 +34,7 @@ angular.module("updateBannersModule", ["ui.select", "ngSanitize",
         ];
         $scope.side_banner_array = angular.copy($scope.selection_type);
         $scope.side_banner_array.splice(1,1);
+        $scope.side_banner_array.splice(3,1);
         $scope.status = [
             {
                 text: "Active",

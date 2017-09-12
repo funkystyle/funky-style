@@ -5,7 +5,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item" ng-class="{'active': $index == 0}" ng-repeat="item in banners">
-                <a href="{{ item.destination_url }}">
+                <a target="_blank" href="{{ item.destination_url }}">
                     <img ng-src="{{ item.image }}">
                 </a>
             </div><!-- End Item -->
