@@ -16,8 +16,8 @@ def find_db_affiliate_network(url):
     for deep_link in deep_links:
         if deep_link['affiliate_network'] in url:
             return deep_link
-        if deep_link['is_default']:
-            default_deep_link = deep_link
+        #if deep_link['is_default']:
+        #    default_deep_link = deep_link
     if not default_deep_link:
         raise Exception("no affiliated_network found")
     return default_deep_link
@@ -135,9 +135,6 @@ class DeepLink(object):
             if item['replace_string'] not in self.output_url:
                 self.output_url = self.output_url.replace(item['find_string'], item['replace_string'])
 
-
-
-
     def process_output_url(self):
         self.add_or_replace_tags()
         self.process_main_url_encode()
@@ -214,6 +211,9 @@ def get_output_deeplink_url():
 
     except Exception as e:
         LOGGER.error(str(e))
+        response = jsonify(error=str(e), data={"output_url": False})
+        response.status_code = 200
+        return response
         abort(401, str(e))
 
 
