@@ -40,7 +40,10 @@ angular.module("dealDetailsModule", ["Directives"])
         // Get the top banner from banners table
         $scope.top_banner = {};
         var where = JSON.stringify({
-            "top_banner_string": 'deal_individual'
+            "top_banner_string": 'deal_individual',
+            "expired_date": {
+                "$gte": new Date().toGMTString()
+            }
         });
         var url = "/api/1.0/banner?where="+where;
         Query.get(url).then(function (banner) {

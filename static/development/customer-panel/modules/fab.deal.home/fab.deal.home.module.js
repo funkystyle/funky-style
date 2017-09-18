@@ -63,7 +63,10 @@ angular.module("allDealsModule", ["Directives"])
         // get the slider banners
         $scope.banners = [];
         var where = JSON.stringify({
-            "top_banner_string": 'deal'
+            "top_banner_string": 'deal',
+            "expired_date": {
+                "$gte": new Date().toGMTString()
+            }
         });
         projection = {
             "top_banner_string": 1,

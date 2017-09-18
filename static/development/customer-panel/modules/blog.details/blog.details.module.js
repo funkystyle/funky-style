@@ -17,7 +17,7 @@ angular.module("blogDetailsModule", [])
             method: "GET"
         }).then(function (blogs) {
             var items = blogs.data._items;
-            if(items.length == 0) {
+            if(items.length === 0) {
                 $state.go('404');
             }
             console.log("Blog details: ", items[0]);

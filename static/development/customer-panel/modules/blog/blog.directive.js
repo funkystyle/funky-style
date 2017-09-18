@@ -34,7 +34,10 @@ var blog = angular.module("blogModule", [])
         // Get the top banner from banners table
         $scope.top_banner = {};
         var where = JSON.stringify({
-            "top_banner_string": 'blog'
+            "top_banner_string": 'blog',
+            "expired_date": {
+                "$gte": new Date().toGMTString()
+            }
         });
         var url = "/api/1.0/banner?where="+where;
         Query.get(url).then(function (banner) {
@@ -44,10 +47,13 @@ var blog = angular.module("blogModule", [])
 
         // Get the Side banner from banners table
         $scope.side_banner = {};
-        var where = JSON.stringify({
-            "side_banner_string": 'blog'
+        where = JSON.stringify({
+            "side_banner_string": 'blog',
+            "expired_date": {
+                "$gte": new Date().toGMTString()
+            }
         });
-        var url = "/api/1.0/banner?where="+where;
+        url = "/api/1.0/banner?where="+where;
         Query.get(url).then(function (banner) {
             console.log("banner Details: ", banner.data._items);
             $scope.side_banner = banner.data._items[0];
@@ -68,7 +74,7 @@ var blog = angular.module("blogModule", [])
                 // get related categories
                 angular.forEach(item.related_categories, function (cat) {
                     var length = $filter("filter")($scope.categories, {_id: cat._id}).length;
-                    if(length == 0) {
+                    if(length === 0) {
                         cat.blog = {
                             url: item.url,
                             title: item.title
@@ -86,7 +92,7 @@ var blog = angular.module("blogModule", [])
                 });
 
                 $('.fdi-Carousel .item').each(function (index, item) {
-                    if (index == 0) {
+                    if (index === 0) {
                         $(this).addClass('active');
                     }
                     var next = $(this).next();
@@ -120,4 +126,4 @@ var blog = angular.module("blogModule", [])
                 return d.promise;
             }
         }
-    })
+    });

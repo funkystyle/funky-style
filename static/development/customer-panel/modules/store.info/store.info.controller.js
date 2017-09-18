@@ -211,7 +211,10 @@ angular
                         // Get the top banner from banners table if no top_banner available
                         $scope.top_banner = {};
                         where = JSON.stringify({
-                            "top_banner_string": 'store'
+                            "top_banner_string": 'store',
+                            "expired_date": {
+                                "$gte": new Date().toGMTString()
+                            }
                         });
                         url = "/api/1.0/banner?where="+where;
                         StoreQuery.get(url).then(function (banner) {
@@ -225,7 +228,10 @@ angular
                         // Get the Side banner from banners table if no top_banner available
                         $scope.side_banner = {};
                         where = JSON.stringify({
-                            "side_banner_string": 'store'
+                            "side_banner_string": 'store',
+                            "expired_date": {
+                                "$gte": new Date().toGMTString()
+                            }
                         });
                         url = "/api/1.0/banner?where="+where;
                         StoreQuery.get(url).then(function (banner) {

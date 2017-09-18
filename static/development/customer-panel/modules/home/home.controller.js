@@ -18,7 +18,7 @@ angular.module('homeModule', ["headerModule", "Directives"])
                     var coupons = data.data._items;
                     angular.forEach(coupons, function (item) {
                         if(new Date(item.expire_date) > new Date()) {
-                            if($scope.coupons.indexOf(item) == -1) {
+                            if($scope.coupons.indexOf(item) === -1) {
                                 $scope.coupons.push(item);
                             }
                         }
@@ -50,7 +50,7 @@ angular.module('homeModule', ["headerModule", "Directives"])
         // get the list of SEO
         SEO.getSEO().then(function (data) {
             angular.forEach(data, function (item) {
-                if(item.selection_type.code == 'home') {
+                if(item.selection_type.code === 'home') {
                     SEO.seo("", item, 'home');
                 }
             });
@@ -59,7 +59,10 @@ angular.module('homeModule', ["headerModule", "Directives"])
         // get the slider banners
         $scope.banners = [];
         var where = JSON.stringify({
-            "top_banner_string": 'home'
+            "top_banner_string": 'home',
+            "expired_date": {
+                "$gte": new Date().toGMTString()
+            }
         });
         projection = {
             "top_banner_string": 1,

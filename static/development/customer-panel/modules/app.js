@@ -119,7 +119,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     controller: "headerCtrl",
                     resolve: {
                         redirect: function($location) {
-                            if ($location.path() == undefined || $location.path() == null || $location.path() == '') {
+                            if ($location.path() === undefined || $location.path() === null || $location.path() === '') {
                                 $location.path('/');
                             }
                         },
@@ -144,52 +144,6 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })
-                /*.state('main.login', {
-                    url: '/login',
-                    templateUrl: 'static/app/customer-panel/modules/login/login.template.html',
-                    controller: "loginCtrl",
-                    resolve: {
-                        checkLogin: function (auth, $location) {
-                            if(auth.checkLogin()) {
-                                $location.path('/');
-                            }
-                        },
-                        authentication: function($ocLazyLoad) {
-                            return $ocLazyLoad.load({
-                                name: 'loginModule',
-                                files: ['static/app/customer-panel/modules/login/login.module.js']
-                            })
-                        }
-                    }
-                })
-                .state('main.forgot_password', {
-                    url: '/forgot-password',
-                    templateUrl: 'static/app/customer-panel/modules/forgot.password/forgot.password.template.html',
-                    controller: "forgotPasswordCtrl",
-                    resolve: {
-                        forgotPassword: function($ocLazyLoad) {
-                            return $ocLazyLoad.load({
-                                name: 'forgotPasswordModule',
-                                files: ['static/app/customer-panel/modules/forgot.password/forgot.password.module.js']
-                            })
-                        }
-                    }
-                })
-
-                //  change password
-                .state('main.change_password', {
-                    url: '/change-password',
-                    templateUrl: 'static/app/customer-panel/modules/change.password/change.password.template.html',
-                    controller: "changePasswordCtrl",
-                    resolve: {
-                        changePassword: function($ocLazyLoad) {
-                            return $ocLazyLoad.load({
-                                name: 'changePasswordModule',
-                                files: ['static/app/customer-panel/modules/change.password/change.password.module.js']
-                            })
-                        }
-                    }
-                })*/
                 // activate email link
                 .state('main.activate', {
                     url: '/confirm_account/users/:user_id/confirm/:token',
@@ -206,7 +160,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // store state
                 .state('main.store', {
-                    url: '/stores',
+                    url: '/stores/',
                     templateUrl: 'static/app/customer-panel/modules/store/store.template.html',
                     controller: "storeCtrl",
                     resolve: {
@@ -220,7 +174,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // Store Info
                 .state('main.store-info', {
-                    url: '/store/:url?cc&destionationUrl',
+                    url: '/store/:url/?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/store.info/store.info.template.html',
                     controller: "storeinfoController",
                     resolve: {
@@ -234,7 +188,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // category info
                 .state('main.category', {
-                    url: '/category',
+                    url: '/category/',
                     templateUrl: 'static/app/customer-panel/modules/category/category.template.html',
                     controller: "categoryCtrl",
                     resolve: {
@@ -248,7 +202,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // category info
                 .state('main.categoryinfo', {
-                    url: '/category/:url?cc&destionationUrl',
+                    url: '/category/:url/?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/category.info/category.info.template.html',
                     controller: "categoryinfoCtrl",
                     resolve: {
@@ -262,7 +216,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // all deals page
                 .state('main.all_deals', {
-                    url: '/deals',
+                    url: '/deals/',
                     templateUrl: 'static/app/customer-panel/modules/fab.deal.home/fab.deal.home.template.html',
                     controller: "allDealsCtrl",
                     resolve: {
@@ -276,7 +230,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
                 // deals brand page
                 .state('main.deal_post_details', {
-                    url: '/deals/:url?cc&destionationUrl',
+                    url: '/deals/:url/?cc&destionationUrl',
                     templateUrl: 'static/app/customer-panel/modules/deal.details/deal.details.template.html',
                     controller: "dealDetailsCtrl",
                     resolve: {
@@ -290,7 +244,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
 
                 .state('main.deal_brand_page', {
-                    url: '/brands/:url',
+                    url: '/brands/:url/',
                     templateUrl: 'static/app/customer-panel/modules/brand.page/brand.page.template.html',
                     controller: "brandPageCtrl",
                     resolve: {
@@ -303,7 +257,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     }
                 })
                 .state('main.deal_category_page', {
-                    url: '/categories/:url',
+                    url: '/categories/:url/',
                     templateUrl: 'static/app/customer-panel/modules/deal.category.page/deal.category.page.template.html',
                     controller: "dealCategoryPageCtrl",
                     resolve: {
@@ -400,7 +354,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
 
                 .state("main.cms", {
-                    url: "/:url",
+                    url: "/:url/",
                     templateUrl: "static/app/customer-panel/modules/cms/cms.template.html",
                     controller: "cmsCtrl",
                     resolve: {
@@ -456,7 +410,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
             $("meta[property='og\\:site_name']").attr('content', window.location.host);
 
             return object;
-        }
+        };
         obj.seo = function (newVal, item, from) {
             console.log("newVal: ", newVal, " Item: ", item, "From: ", from);
             var monthNames = ["January", "February", "March", "April", "May", "June",
