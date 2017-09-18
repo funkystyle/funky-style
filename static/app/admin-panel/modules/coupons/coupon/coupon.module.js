@@ -65,7 +65,9 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     '<p>{{ row.entity.title }}</p>' +
                     '<p class="coupon-options">' +
                     '<span><a href="/store/{{ row.entity.related_stores[0].url }}" target="_blank">View</a></span> &nbsp;&nbsp;' +
-                    '<span><a ui-sref="header.update-coupon({couponId: row.entity._id})">Edit</a></span></p>' +
+                    '<span>' +
+                    '   <a ng-if="grid.appScope.checkRole()" ui-sref="header.update-coupon({couponId: row.entity._id})">Edit</a>' +
+                    '</span></p>' +
                     '</div>'
                 },
                 {

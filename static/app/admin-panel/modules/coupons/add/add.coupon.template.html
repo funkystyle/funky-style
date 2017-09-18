@@ -132,7 +132,7 @@
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <ui-select ng-required="true" ng-model="coupon.status" theme="bootstrap">
+                        <ui-select ng-disabled="true" ng-required="true" ng-model="coupon.status" theme="bootstrap">
                             <ui-select-match placeholder="Select User Level">{{ $select.selected }}</ui-select-match>
                             <ui-select-choices repeat="st in status | filter: $select.search">
                                 <div ng-bind-html="st | highlight: $select.search"></div>

@@ -20,6 +20,10 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
             });
         }
 
+        $scope.checkRole = function () {
+            return $scope.user.user_level !== 'submitter';
+        };
+
         // get the seo details
         $scope.seoList = [];
         $scope.getSeoDetails = function () {

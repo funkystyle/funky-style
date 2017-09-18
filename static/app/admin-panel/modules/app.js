@@ -52,8 +52,9 @@ var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'
             $("#editorModal").modal("show");
             id = event.currentTarget;
             setTimeout(function () {
-                $("#textEditor").Editor();
-                $("#textEditor").Editor('setText', $(id).val());
+                var id = $("#textEditor");
+                id.Editor();
+                id.Editor('setText', $(id).val());
             }, 1000);
         };
 
