@@ -192,7 +192,8 @@ angular
                     embedded['stores.store'] = 1;
 
                     where = JSON.stringify({
-                        "store_temp": $scope.store._id
+                        "store_temp": $scope.store._id,
+                        "status": true
                     });
                     var random = new Date().getDate();
                     url = '/api/1.0/deals'+'?where='+where+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + random;

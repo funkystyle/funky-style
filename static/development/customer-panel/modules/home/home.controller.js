@@ -139,8 +139,11 @@ angular.module('homeModule', ["headerModule", "Directives"])
             console.log(error);
         });
 
+        where = JSON.stringify({
+            "status": true
+        });
         // get the list of featured stores
-        url = "/api/1.0/deals?max_results=24";
+        url = "/api/1.0/deals?where="+where+"&max_results=24";
         Query.get(url).then(function (data) {
             console.log(data);
             if(data['data']) {

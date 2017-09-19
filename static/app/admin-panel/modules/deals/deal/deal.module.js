@@ -54,7 +54,10 @@ angular.module("dealModule", ['constantModule', 'toastr', 'cgBusy',
                 {
                     field: 'name', displayName: "Name", width: "25%",
                     cellTemplate: '<div class="coupon-name" style="padding: 5px;">' +
-                    '<p><a ui-sref="header.update-deal({id: row.entity._id})">{{ row.entity.name }}</a></p>' +
+                    '<p>' +
+                    '   <a ng-if="grid.appScope.checkRole()" ui-sref="header.update-deal({id: row.entity._id})">{{ row.entity.name }}</a>' +
+                    '   <a style="color: #000000;" ng-if="!grid.appScope.checkRole()">{{ row.entity.name }}</a>' +
+                    '</p>' +
                     '</div>'
                 },
                 {
@@ -124,6 +127,10 @@ angular.module("dealModule", ['constantModule', 'toastr', 'cgBusy',
                 },
                 {
                     field: 'number_of_clicks', displayName: "Clicks"
+                },
+                {
+                    field: "status", displayName: "Status",
+                    cellTemplate: "<div>{{ (row.entity.status)? 'Active': 'Pending' }}</div>"
                 }
             ]
         };

@@ -16,7 +16,7 @@
         </div>
         <!-- end row -->
         <div class="row" style="margin-bottom: 30px;">
-            <div class="col-lg-1 col-md-1" ng-if="mySelectedRows.length">
+            <div class="col-lg-1 col-md-1" ng-if="checkRole() && mySelectedRows.length">
                 <button class="btn btn-sm btn-primary"  ng-click="deleteSelected(mySelectedRows)">Delete Selected <b>{{ mySelectedRows.length }}</b> Item(s)</button>
             </div>
         </div> <!-- end row -->

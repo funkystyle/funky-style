@@ -22,14 +22,14 @@ angular.module("updateDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         ];
 
         $scope.changeDealType = function (item, model) {
-            if ($scope.deal.deal_type == 'product') {
+            if ($scope.deal.deal_type === 'product') {
                 $scope.deal.store_temp = undefined;
             }
         };
         // get dynamic fields based on deal category selection
         $scope.getDynamicFields = function (item, model) {
             angular.forEach($scope.categories, function (category) {
-                if(category._id == item._id) {
+                if(category._id === item._id) {
                     $scope.dynamicFields = category.fields;
                     console.log($scope.dynamicFields)
                 }

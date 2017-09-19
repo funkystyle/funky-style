@@ -23,6 +23,17 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 code: "store"
             }
         ];
+        $scope.status = [
+            {
+                code: true,
+                text: "Active"
+            },
+            {
+                code: false,
+                text: "Pending"
+            }
+        ];
+        $scope.deal.status = $scope.checkRole();
         $scope.deal.deal_type = $scope.dealTypes[1].code;
 
         $scope.$watch('deal.name', function(newVal, oldVal) {
@@ -170,7 +181,7 @@ angular.module("addDealModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         $scope.addDeal = function (deal) {
             deal.last_modified_by = $scope.user._id;
             // if product selected as deal_type
-            if(deal.deal_type == 'product') {
+            if(deal.deal_type === 'product') {
                 deal.stores = $scope.productLists;
             }
 

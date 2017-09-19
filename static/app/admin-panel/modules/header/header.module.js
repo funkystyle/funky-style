@@ -24,6 +24,10 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
             return $scope.user.user_level !== 'submitter';
         };
 
+        $scope.onlyForAdmin = function () {
+           return $scope.user.user_level === 'admin';
+        };
+
         // get the seo details
         $scope.seoList = [];
         $scope.getSeoDetails = function () {

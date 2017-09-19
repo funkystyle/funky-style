@@ -7,7 +7,10 @@ angular.module("allDealsModule", ["Directives"])
         $scope.deal_brands = [];
         $scope.stores = [];
 
-        var random = new Date().getDate();
+        var random = new Date().getDate(),
+            where = JSON.stringify({
+                "status": true
+            });
         // get the list of top deal categories
         var featured = JSON.stringify({
             featured: true
@@ -31,9 +34,8 @@ angular.module("allDealsModule", ["Directives"])
         }, function (error) {
             console.log(error);
         });
-
         // get the list of Best selling deals based on number of clicks
-        url = '/api/1.0/deals'+'?sort=-number_of_clicks&rand_number=' + random;
+        url = '/api/1.0/deals'+'?where='+where+'&sort=-number_of_clicks&rand_number=' + random;
         $http({
             url: url,
             method: "GET"
@@ -47,7 +49,7 @@ angular.module("allDealsModule", ["Directives"])
         });
 
         // get the list of deals based on upcoming field in database
-        var url = '/api/1.0/deals'+'?sort=-upcoming&rand_number=' + random;
+        var url = '/api/1.0/deals?where='+where+'&sort=-upcoming&rand_number=' + random;
         $http({
             url: url,
             method: "GET"
@@ -62,7 +64,7 @@ angular.module("allDealsModule", ["Directives"])
 
         // get the slider banners
         $scope.banners = [];
-        var where = JSON.stringify({
+        where = JSON.stringify({
             "top_banner_string": 'deal',
             "expired_date": {
                 "$gte": new Date().toGMTString()

@@ -123,7 +123,8 @@ angular.module("dealCategoryPageModule", ["Directives"])
                     embedded['stores.store'] = 1;
 
                     var where = {
-                        "deal_category": $scope.deal._id
+                        "deal_category": $scope.deal._id,
+                        "status": true
                     };
 
                     var url = '/api/1.0/deals'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + random;
@@ -139,7 +140,7 @@ angular.module("dealCategoryPageModule", ["Directives"])
                             angular.forEach($scope.deals, function (item) {
                                angular.forEach(item.deal_category, function (brand) {
                                    var items = $filter('filter')($scope.categories, {_id: brand._id});
-                                   if(items.length == 0) {
+                                   if(items.length === 0) {
                                        $scope.categories.push(brand);
                                    }
                                });
@@ -164,12 +165,12 @@ angular.module("dealCategoryPageModule", ["Directives"])
             var count = 0;
             angular.forEach(filter, function (values, keys) {
                 angular.forEach(values, function (val, key) {
-                    if(val == true) {
+                    if(val === true) {
                         count ++;
                     }
                 });
             });
-            if(count == 0) {
+            if(count === 0) {
                 return items;
             }
             angular.forEach(items, function (item) {
@@ -177,9 +178,9 @@ angular.module("dealCategoryPageModule", ["Directives"])
                 angular.forEach(filter.priceRange, function (val, key) {
                     var min = key.split('-')[0],
                         max = key.split('-')[1];
-                    if(val == true && (item.actual_price > min && item.actual_price < max)) {
+                    if(val === true && (item.actual_price > min && item.actual_price < max)) {
                         var length = $filter("filter")(list, {_id: item._id}).length;
-                        if(length == 0) {
+                        if(length === 0) {
                             list.push(item);
                         }
                     }
@@ -188,9 +189,9 @@ angular.module("dealCategoryPageModule", ["Directives"])
                 // filter by brand wise
                 angular.forEach(filter.categories, function (val, key) {
                     angular.forEach(item.deal_category, function (deal_brand) {
-                        if(val == true && key == deal_brand._id) {
+                        if(val === true && key === deal_brand._id) {
                             var length = $filter("filter")(list, {_id: item._id}).length;
-                            if(length == 0) {
+                            if(length === 0) {
                                 list.push(item);
                             }
                         }

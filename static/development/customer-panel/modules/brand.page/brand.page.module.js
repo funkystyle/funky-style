@@ -89,7 +89,7 @@ angular.module("brandPageModule", ["Directives"])
                     url: "/api/1.0/deal_brands?where="+JSON.stringify(where)+"&rand="+random+"&embedded="+JSON.stringify(embedded),
                     method: "GET"
                 }).then(function (data) {
-                    if(data.data._items.length == 0) {
+                    if(data.data._items.length === 0) {
                         $state.go('404');
                     }
                     console.log("Deal brand is: ", data.data._items[0]);
@@ -104,7 +104,8 @@ angular.module("brandPageModule", ["Directives"])
                     embedded['stores.store'] = 1;
 
                     var where = {
-                        "deal_brands": $scope.deal._id
+                        "deal_brands": $scope.deal._id,
+                        "status": true
                     };
 
                     var url = '/api/1.0/deals'+'?where='+JSON.stringify(where)+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + random;
@@ -120,7 +121,7 @@ angular.module("brandPageModule", ["Directives"])
                             angular.forEach($scope.deals, function (item) {
                                angular.forEach(item.deal_brands, function (brand) {
                                    var length = $filter('filter')($scope.brands, {_id: brand._id}).length;
-                                   if(length == 0) {
+                                   if(length === 0) {
                                        $scope.brands.push(brand);
                                    }
                                });
