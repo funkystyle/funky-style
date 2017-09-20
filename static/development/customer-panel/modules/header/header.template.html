@@ -124,7 +124,7 @@
 
     <div class="only-mobile bottom-header-mobi" ng-if="isMobile">
         <div class="inner-padding">
-            <div class="menu-icon-sec">
+            <div class="menu-icon-sec" ng-click="toggleMenu()">
                 <i class="fa fa-bars"></i>
             </div>
             <div class="search-typeheader-section">
@@ -135,6 +135,9 @@
                        class="flipkart-navbar-input" typeahead-on-select="goClick($item, $model, $label)">
             </div>
         </div>
+    </div>
+    <div class="menu-for-mobile" ng-if="false">
+        <h1>Baby doll</h1>
     </div>
 </header>
 

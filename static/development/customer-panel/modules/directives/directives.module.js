@@ -106,7 +106,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
             };
 
             $('#couponPopup').on('hidden.bs.modal', function () {
-                $state.go(".", {cc: undefined, destionationUrl: undefined});
+                $state.go(".", {cc: undefined, destionationUrl: undefined}, {reloadOnSearch: false, notify: false});
             });
 
             var clipboard = new Clipboard('.btn');

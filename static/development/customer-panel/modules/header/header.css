@@ -55,6 +55,13 @@ header {
         top: -12px;
         height: 40px;
     }
+    .menu-for-mobile {
+        display: flex;
+        height: 250px;
+        background: #ddd;
+        z-index: 9999;
+        padding: 5px 15px;
+    }
 }
 .bottom-header ul {
     padding: 0 15px;
