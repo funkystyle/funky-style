@@ -2,57 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01a2861f-7cb8-4019-98a0-3dca60563dd8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/app.js" afterPath="$PROJECT_DIR$/app/admin-panel/modules/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js" afterPath="$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/store/add/add.store.module.js" afterPath="$PROJECT_DIR$/app/admin-panel/modules/store/add/add.store.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/index.html" afterPath="$PROJECT_DIR$/app/customer-panel/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/activate.email/activate.email.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/activate.email/activate.email.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/app.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/assets/css/style.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/assets/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/blog.category/blog.category.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/blog.category/blog.category.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/blog.details/blog.details.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/blog.details/blog.details.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/blog/blog.directive.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/blog/blog.directive.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/blog/blog.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/blog/blog.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/bower_scripts.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/bower_scripts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.contoller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.contoller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category/category.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category/category.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/change.password/change.password.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/change.password/change.password.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/cms/cms.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/cms/cms.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/dashboard/dashboard.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/dashboard/dashboard.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.directive.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.directive.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/directives/directives.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/directives/directives.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/fab.deal.home/fab.deal.home.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/fab.deal.home/fab.deal.home.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/forgot.password/forgot.password.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/forgot.password/forgot.password.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/global_minified.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/global_minified.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/header/header.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/header/header.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/home/home.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/home/home.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/login/login.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/login/login.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/store/store.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/store/store.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/index.html" afterPath="$PROJECT_DIR$/development/customer-panel/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css" afterPath="$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.contoller.js" afterPath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.contoller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.css" afterPath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.css" afterPath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.directive.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.directive.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/directives/directives.module.js" afterPath="$PROJECT_DIR$/development/customer-panel/modules/directives/directives.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.controller.js" afterPath="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.template.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -103,11 +52,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="brand.page.template.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="brand.page.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.template.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
               <caret line="10" column="65" lean-forward="false" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gulpfile.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gulpfile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="64" column="22" lean-forward="false" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -163,7 +122,6 @@
         <option value="$PROJECT_DIR$/app/admin-panel/modules/store/add/add.store.module.js" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/app.js" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.directive.template.html" />
-        <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/directives/directives.module.js" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.contoller.js" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.controller.js" />
@@ -176,6 +134,7 @@
         <option value="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.css" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.template.html" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.template.html" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
       </list>
     </option>
   </component>
@@ -419,12 +378,12 @@
       <workItem from="1505713830149" duration="379000" />
       <workItem from="1505805399350" duration="6407000" />
       <workItem from="1505884061153" duration="23000" />
-      <workItem from="1505912549238" duration="3921000" />
+      <workItem from="1505912549238" duration="3992000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11150000" />
+    <option name="totallyTimeSpent" value="11221000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="24" width="1549" height="815" extended-state="6" />
@@ -813,14 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gulpfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="64" column="22" lean-forward="false" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -857,6 +808,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="65" lean-forward="false" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="64" column="22" lean-forward="false" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
           <folding />
         </state>
       </provider>
