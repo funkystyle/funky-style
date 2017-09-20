@@ -8,7 +8,8 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
                 limit: "@",
                 orderBy: "@"
             },
-            templateUrl: "static/app/customer-panel/modules/deal.details/deal.details.directive.template.html"
+            templateUrl: "static/app/customer-panel/modules/deal.details/deal.details.directive.template.html",
+            controller: "dealDetailsDirectiveCtrl"
         }
     })
     .directive("comments", function () {
@@ -147,6 +148,21 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize', 'satellizer'])
                 $scope.moreCoupons = items;
             });
         });
+    })
+    .controller("dealDetailsDirectiveCtrl", function ($http, $scope, $stateParams, $state, DestionationUrl) {
+        // open openDestinationUrl
+        $scope.openDestinationUrl = function (item) {
+            console.log(item.destination_url)
+            // get the Deeplink destionation URL for it
+            DestionationUrl.destination_url(item.destination_url).then(function (data) {
+                var output_url = data['data']['data']['output_url'];
+                url = $state.href($state.current.name, $state.params);
+                $('<a href="'+url+'" target="_blank">&nbsp;</a>')[0].click();
+                window.location.href = output_url ? output_url: item.destination_url;
+            }, function (error) {
+                console.log(error);
+            });
+        };
     })
     // comments controller
     .controller("commentsCtrl", function ($scope, $state, $stateParams, auth, $auth, $http) {

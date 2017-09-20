@@ -318,9 +318,9 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2">
                             <div class="deal-price text-center hidden-xs">
-                                <h3>
+                                <p>
                                     {{ item.discount_type }} <br> {{ item.discount }}
-                                </h3>
+                                </p>
                             </div> <!-- end deal-price -->
                             <div class="deal f-coupon-type hidden-xs">
                                 <b ng-if="item.coupon_type == 'coupon'">
@@ -376,7 +376,7 @@
                             <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
                                 <img  ng-src="{{ item.image }}" alt="64x64">
                             </a>
-                            <p>{{ item.name }} Coupons</p>
+                            <p ui-sref="main.store-info({url: item.url, cc: undefined})">{{ item.name }} Coupons</p>
                         </span>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in top_stores"></div>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in top_stores"></div>

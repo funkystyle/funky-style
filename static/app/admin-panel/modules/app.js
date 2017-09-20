@@ -19,28 +19,28 @@ month = monthNames[date.getMonth()];
 year = date.getFullYear();
 
 function replaceSeo(newVal, items, from) {
-    for(i=0; i<items.length; i++) {
-        if(from === items[i].selection_type.code) {
-            var replacement = {
-                title: undefined,
-                description: undefined,
-                h1: undefined,
-                h2: undefined
-            };
-            replacement.title = items[i].meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-            replacement.description = items[i].meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-            if(items[i]['h1']) {
-                replacement.h1 = items[i].h1.replace("%%title%%", newVal);
+    var replacement = {
+        title: undefined,
+        description: undefined,
+        h1: undefined,
+        h2: undefined
+    };
+    angular.forEach(items, function (item, index) {
+        if(from === item['selection_type']['code']) {
+            replacement.title = item.meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            replacement.description = item.meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            if(item['h1']) {
+                replacement.h1 = item.h1.replace("%%title%%", newVal);
             }
-            if(items[i]['h2']) {
-                replacement.h2 = items[i].h2.replace("%%title%%", newVal);
+            if(item['h2']) {
+                replacement.h2 = item.h2.replace("%%title%%", newVal);
             }
 
             console.log("SEO replacement Data: ", replacement);
             return replacement;
         }
-        return false;
-    }
+    });
+    return replacement;
 }
 
 var adminApp = angular.module("ADMIN", ['ui.router', 'oc.lazyLoad', 'satellizer'])

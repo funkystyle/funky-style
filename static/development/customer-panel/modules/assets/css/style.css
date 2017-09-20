@@ -194,9 +194,13 @@ ol > li > a {
 }
 .rel-stores span p {
     font-size: 10px;
+    cursor: pointer;
     color: #666666;
     text-align: center;
     text-transform: capitalize;
+}
+.rel-stores span p:hover {
+    color: #2780e3;
 }
 .coupon-footer {
     line-height: 35px;

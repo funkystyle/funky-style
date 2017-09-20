@@ -134,7 +134,7 @@
                             <a class="pull-left" ui-sref="main.categoryinfo({url: item.url, cc: undefined})">
                                 <img ng-src="{{ item.image }}" alt="64x64">
                             </a>
-                            <p>{{ item.name }}</p>
+                            <p ui-sref="main.categoryinfo({url: item.url, cc: undefined})">{{ item.name }}</p>
                         </span>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in category.related_categories"></div>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in category.related_categories"></div>
@@ -165,7 +165,7 @@
                             <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
                                 <img  ng-src="{{ item.image }}" alt="64x64">
                             </a>
-                            <p>{{ item.name }}</p>
+                            <p ui-sref="main.store-info({url: item.url, cc: undefined})">{{ item.name }}</p>
                         </span>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in category.top_stores"></div>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in category.top_stores"></div>
@@ -224,9 +224,9 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
                                             <div class="deal-price-text">
-                                                <h3>
+                                                <p>
                                                     {{ item.discount_type }} <br> {{ item.discount }}
-                                                </h3>
+                                                </p>
                                             </div>
                                             <div class="related-coupon-deal hidden-xs">
                                                 <img ng-src="{{ item.related_stores[0].image }}">
@@ -239,14 +239,14 @@
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h4 class="margin-top-0 coupon-heading">
+                                        <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                        </h4>
+                                        </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;&nbsp;
@@ -313,9 +313,9 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
                                             <div class="deal-price-text">
-                                                <h3>
+                                                <p>
                                                     {{ item.discount_type }} <br> {{ item.discount }}
-                                                </h3>
+                                                </p>
                                             </div>
                                             <div class="related-coupon-deal hidden-xs">
                                                 <img ng-src="{{ item.related_stores[0].image }}">
@@ -328,14 +328,14 @@
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h4 class="margin-top-0 coupon-heading">
+                                        <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                        </h4>
+                                        </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;&nbsp;
@@ -394,9 +394,9 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2">
                                         <div class="deal-price text-center hidden-xs">
                                             <div class="deal-price-text">
-                                                <h3>
+                                                <p>
                                                     {{ item.discount_type }} <br> {{ item.discount }}
-                                                </h3>
+                                                </p>
                                             </div>
                                             <div class="related-coupon-deal hidden-xs">
                                                 <img ng-src="{{ item.related_stores[0].image }}">
@@ -409,14 +409,14 @@
                                         </div>
                                     </div> <!-- end col -->
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h4 class="margin-top-0 coupon-heading">
+                                        <h3 class="margin-top-0 coupon-heading">
                                             {{ item.title }}
                                             <span class="pull-right hidden-xs" style="display: none;">
                                                 <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                    ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;&nbsp;
                                                 <i class="fa fa-share-alt"></i>
                                             </span>
-                                        </h4>
+                                        </h3>
                                         <span class="pull-right col-xs-12 hidden-lg hidden-md pad_nav_left" style="display: none;">
                                             <i class="fa" ng-class="{'fa-heart-o': !favorites[item._id], 'fa-heart': favorites[item._id]}"
                                                ng-click="manageFavorite('fav_coupons', item._id)"></i>&nbsp;&nbsp;

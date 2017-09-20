@@ -3,7 +3,57 @@
   <component name="ChangeListManager">
     <list default="true" id="01a2861f-7cb8-4019-98a0-3dca60563dd8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js" afterPath="$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/app.js" afterPath="$PROJECT_DIR$/app/admin-panel/modules/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js" afterPath="$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/store/add/add.store.module.js" afterPath="$PROJECT_DIR$/app/admin-panel/modules/store/add/add.store.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/index.html" afterPath="$PROJECT_DIR$/app/customer-panel/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/activate.email/activate.email.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/activate.email/activate.email.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/app.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/assets/css/style.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/assets/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/blog.category/blog.category.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/blog.category/blog.category.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/blog.details/blog.details.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/blog.details/blog.details.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/blog/blog.directive.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/blog/blog.directive.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/blog/blog.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/blog/blog.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/bower_scripts.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/bower_scripts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.contoller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.contoller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category/category.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category/category.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/change.password/change.password.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/change.password/change.password.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/cms/cms.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/cms/cms.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/dashboard/dashboard.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/dashboard/dashboard.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.directive.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.directive.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/directives/directives.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/directives/directives.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/fab.deal.home/fab.deal.home.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/fab.deal.home/fab.deal.home.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/forgot.password/forgot.password.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/forgot.password/forgot.password.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/global_minified.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/global_minified.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/header/header.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/header/header.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/home/home.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/home/home.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/login/login.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/login/login.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/store/store.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/store/store.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/index.html" afterPath="$PROJECT_DIR$/development/customer-panel/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css" afterPath="$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.contoller.js" afterPath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.contoller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.css" afterPath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.css" afterPath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.directive.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.directive.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/directives/directives.module.js" afterPath="$PROJECT_DIR$/development/customer-panel/modules/directives/directives.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.controller.js" afterPath="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,44 +73,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="deal.module.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/deals/deal/deal.module.js">
+      <file leaf-file-name="deal.details.template.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2376">
-              <caret line="132" column="93" lean-forward="false" selection-start-line="132" selection-start-column="93" selection-end-line="132" selection-end-column="93" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <marker date="1505820558730" expanded="true" signature="1127:1162" ph="..." />
-                <marker date="1505820558730" expanded="true" signature="2460:2473" ph="..." />
-                <marker date="1505820558730" expanded="true" signature="2682:2697" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.module.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+            <state relative-caret-position="126">
+              <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.template.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/header/header.template.html">
+      <file leaf-file-name="deal.category.page.template.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="26" lean-forward="false" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-              <folding>
-                <marker date="1505826558200" expanded="true" signature="6324:6555" ph="{...}" />
-                <marker date="1505826558200" expanded="true" signature="6653:6750" ph="{...}" />
-                <marker date="1505826558200" expanded="true" signature="7398:7799" ph="{...}" />
-                <marker date="1505826558200" expanded="true" signature="7935:8104" ph="{...}" />
-                <marker date="1505826558200" expanded="true" signature="9049:9426" ph="{...}" />
-                <marker date="1505826558200" expanded="true" signature="9558:9715" ph="{...}" />
-              </folding>
+            <state relative-caret-position="216">
+              <caret line="12" column="58" lean-forward="false" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="245" column="44" lean-forward="true" selection-start-line="245" selection-start-column="24" selection-end-line="245" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="brand.page.template.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.template.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" column="65" lean-forward="false" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -71,7 +119,23 @@
     <findStrings>
       <find>person</find>
       <find>status</find>
+      <find>show coup</find>
       <find>deals</find>
+      <find>show coupons</find>
+      <find>openC</find>
+      <find>related store</find>
+      <find>related sto</find>
+      <find>.rel-stores span p</find>
+      <find>related ca</find>
+      <find>item.title</find>
+      <find>item.disc</find>
+      <find>deal-price-text</find>
+      <find>top store</find>
+      <find>item.discount</find>
+      <find>deal-price</find>
+      <find>breadc</find>
+      <find>brands</find>
+      <find>breadcru</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -86,17 +150,32 @@
         <option value="$PROJECT_DIR$/app/admin-panel/modules/deals/add/add.deal.template.html" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/deals/add/add.deal.module.js" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/deals/deal/deal.template.html" />
-        <option value="$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/settings/change.password/change.password.template.html" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/deals/update/update.deal.module.js" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/home/home.controller.js" />
-        <option value="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.controller.js" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/fab.deal.home/fab.deal.home.module.js" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.module.js" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.module.js" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/deals/deal/deal.module.js" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/header/header.template.html" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js" />
+        <option value="$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js" />
+        <option value="$PROJECT_DIR$/app/admin-panel/modules/store/add/add.store.module.js" />
+        <option value="$PROJECT_DIR$/app/admin-panel/modules/app.js" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.directive.template.html" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/directives/directives.module.js" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.contoller.js" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.controller.js" />
+        <option value="$PROJECT_DIR$/development/customer-panel/index.html" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.template.html" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.template.html" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.css" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.template.html" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.css" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.template.html" />
+        <option value="$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.template.html" />
       </list>
     </option>
   </component>
@@ -143,6 +222,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -160,7 +240,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -324,6 +403,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="01a2861f-7cb8-4019-98a0-3dca60563dd8" name="Default" comment="" />
@@ -337,11 +419,12 @@
       <workItem from="1505713830149" duration="379000" />
       <workItem from="1505805399350" duration="6407000" />
       <workItem from="1505884061153" duration="23000" />
+      <workItem from="1505912549238" duration="3921000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7229000" />
+    <option name="totallyTimeSpent" value="11150000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="24" width="1549" height="815" extended-state="6" />
@@ -351,20 +434,20 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21784776" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -379,118 +462,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/header/header.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/dashboard/dashboard.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/category.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="56" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/category/category.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.contoller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="51" lean-forward="false" selection-start-line="0" selection-start-column="51" selection-end-line="0" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/banners/add/add.banners.module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="119" lean-forward="false" selection-start-line="2" selection-start-column="119" selection-end-line="2" selection-end-column="119" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/directive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/constant.module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2058">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/store/store.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/header/header.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/dashboard/dashboard.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/category.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="56" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/category/category.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="75" column="23" lean-forward="false" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.contoller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="51" lean-forward="false" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/coupons/coupon/coupon.template.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -537,13 +508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1278">
-          <caret line="71" column="40" lean-forward="false" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -659,13 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/settings/change.password/change.password.template.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -677,13 +634,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-630">
           <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="195" column="38" lean-forward="false" selection-start-line="195" selection-start-column="38" selection-end-line="195" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -717,10 +667,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/deals/deal/deal.module.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2376">
+        <state relative-caret-position="18">
           <caret line="132" column="93" lean-forward="false" selection-start-line="132" selection-start-column="93" selection-end-line="132" selection-end-column="93" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
             <marker date="1505820558730" expanded="true" signature="1127:1162" ph="..." />
             <marker date="1505820558730" expanded="true" signature="2460:2473" ph="..." />
             <marker date="1505820558730" expanded="true" signature="2682:2697" ph="..." />
@@ -730,7 +680,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/header/header.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="18">
           <caret line="17" column="26" lean-forward="false" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
           <folding>
             <marker date="1505826558200" expanded="true" signature="6324:6555" ph="{...}" />
@@ -747,6 +697,166 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="65">
           <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="32" column="8" lean-forward="false" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/store/add/add.store.module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="33" column="74" lean-forward="false" selection-start-line="33" selection-start-column="74" selection-end-line="33" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/store/add/add.store.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="19" column="30" lean-forward="true" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/directives/directives.module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="149" column="11" lean-forward="false" selection-start-line="149" selection-start-column="11" selection-end-line="149" selection-end-column="11" />
+          <folding>
+            <marker date="1505914920099" expanded="true" signature="5943:5949" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.directive.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="57" lean-forward="false" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="66" column="52" lean-forward="false" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
+          <folding>
+            <marker date="1505915307277" expanded="true" signature="2523:2529" ph=" " />
+            <marker date="1505915307277" expanded="true" signature="17318:17350" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.contoller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="69" column="75" lean-forward="true" selection-start-line="68" selection-start-column="16" selection-end-line="69" selection-end-column="75" />
+          <folding>
+            <marker date="1505915307265" expanded="true" signature="2981:2987" ph=" " />
+            <marker date="1505915307265" expanded="true" signature="14899:14931" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="198" column="13" lean-forward="false" selection-start-line="198" selection-start-column="13" selection-end-line="198" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/category.info/category.info.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="314" column="71" lean-forward="false" selection-start-line="314" selection-start-column="56" selection-end-line="314" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="202" column="18" lean-forward="false" selection-start-line="202" selection-start-column="18" selection-end-line="202" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/store.info/store.info.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="277" column="60" lean-forward="false" selection-start-line="277" selection-start-column="51" selection-end-line="277" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="64" column="22" lean-forward="false" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="246" column="13" lean-forward="false" selection-start-line="246" selection-start-column="13" selection-end-line="246" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/deal.details/deal.details.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="58" lean-forward="false" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="245" column="44" lean-forward="true" selection-start-line="245" selection-start-column="24" selection-end-line="245" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="65" lean-forward="false" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
           <folding />
         </state>
       </provider>

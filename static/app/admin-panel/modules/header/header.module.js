@@ -31,13 +31,16 @@ angular.module("headerModule", ["constantModule", "satellizer", "toastr", "perso
         // get the seo details
         $scope.seoList = [];
         $scope.getSeoDetails = function () {
+            var where = JSON.stringify({
+                "status": true
+            });
             $http({
                 // TODO
-                url: URL.master_seo+"?rand="+Math.random(),
+                url: URL.master_seo+"?where="+where+"&rand="+Math.random(),
                 method: "GET"
             }).then(function (data) {
                 console.log("SEO data: ", data);
-                if(data.data._items.length !== 0) {
+                if(data.data._items.length) {
                     $scope.seoList = data.data._items;
                 }
             }, function (error) {

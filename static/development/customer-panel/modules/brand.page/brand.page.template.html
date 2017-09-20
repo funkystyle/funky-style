@@ -8,7 +8,7 @@
                     <div class="breadcrumb-sec">
                         <ol class="breadcrumb breadcrumb-area pull-left">
                             <li><a href="/">Home</a></li>
-                            <li><a>Brands</a></li>
+                            <li><a ui-sref="main.all_deals">Deals</a></li>
                             <li ng-repeat="item in deal.breadcrumb">
                                 <a ui-sref="main.categoryinfo({url: item.url})">{{ deal.name }}</a>
                             </li>

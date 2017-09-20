@@ -27,12 +27,11 @@ angular.module("addStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", "to
             $scope.store.relatedStore = undefined;
         };
 
-        // get seo details
-        $scope.getSeoDetails("store");
-
         $scope.$watch('store.name', function(newVal, oldVal) {
             if(newVal && $scope.seoList.length) {
                 var data = replaceSeo(newVal, $scope.seoList, 'single_store');
+
+                console.log("After done with SEO from add store: ", data);
                 $scope.store.meta_title = data.title;
                 $scope.store.meta_description = data.description;
 

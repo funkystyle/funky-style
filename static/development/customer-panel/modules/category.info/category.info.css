@@ -196,7 +196,7 @@ div.coupon {
     justify-content: center;
     min-height: 90px;
 }
-.deal-price h3 {
+.deal-price p {
     font-size: 16px;
     font-weight: bold;
     padding: 10px 3px;
