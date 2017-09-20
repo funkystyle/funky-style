@@ -12,10 +12,6 @@ angular.module("loginModule", ["Directives", "cgBusy", "constantModule", "satell
             }).then(function(data) {
                 console.log("After user try to login in succeess: ", data.data);
                 var userLoggedData = data['data']['data'];
-                if(userLoggedData.status !== 'active') {
-                    toastr.error("Your are Inactive.", "Ask your admin to activate your account");
-                    return true;
-                }
                 if(userLoggedData) {
                     $auth.setToken(data.data.data.login_token);
                 } else {
