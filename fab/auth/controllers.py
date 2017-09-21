@@ -184,6 +184,10 @@ def login():
         message='Email is not confirmed'
         abort(401, message)
 
+    if user['status'] == 'inactive':
+        message = user['first_name']+" you are Inactive, Please contact your Admin."
+        abort(401, message)
+
     if 'user_id' in session:
         message='User already logged in.'
         abort(401, message)

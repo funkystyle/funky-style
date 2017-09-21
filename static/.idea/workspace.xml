@@ -3,35 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="01a2861f-7cb8-4019-98a0-3dca60563dd8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/index.html" afterPath="$PROJECT_DIR$/app/customer-panel/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/app.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/assets/css/style.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/assets/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/blog.category/blog.category.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/blog.category/blog.category.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/bower_scripts.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/bower_scripts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/brand.page/brand.page.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.contoller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category.info/category.info.contoller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/category/category.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/category/category.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/change.password/change.password.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/change.password/change.password.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/cms/cms.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/cms/cms.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/dashboard/dashboard.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/dashboard/dashboard.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.category.page/deal.category.page.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/deal.details/deal.details.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/directives/directives.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/directives/directives.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/fab.deal.home/fab.deal.home.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/fab.deal.home/fab.deal.home.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/forgot.password/forgot.password.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/forgot.password/forgot.password.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/global_minified.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/global_minified.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/header/header.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/header/header.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/header/header.css" afterPath="$PROJECT_DIR$/app/customer-panel/modules/header/header.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/header/header.template.html" afterPath="$PROJECT_DIR$/app/customer-panel/modules/header/header.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/home/home.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/home/home.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/login/login.module.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/login/login.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/store.info/store.info.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/customer-panel/modules/store/store.controller.js" afterPath="$PROJECT_DIR$/app/customer-panel/modules/store/store.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/index.html" afterPath="$PROJECT_DIR$/development/customer-panel/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css" afterPath="$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/directives/directives.module.js" afterPath="$PROJECT_DIR$/development/customer-panel/modules/directives/directives.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/header/header.css" afterPath="$PROJECT_DIR$/development/customer-panel/modules/header/header.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/development/customer-panel/modules/header/header.template.html" afterPath="$PROJECT_DIR$/development/customer-panel/modules/header/header.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/header/header.template.html" afterPath="$PROJECT_DIR$/app/admin-panel/modules/header/header.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js" afterPath="$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin-panel/modules/users/all/all.template.html" afterPath="$PROJECT_DIR$/app/admin-panel/modules/users/all/all.template.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -50,52 +24,22 @@
     <favorites_list name="static" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="header.template.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/header/header.template.html">
+    <leaf>
+      <file leaf-file-name="blog.template.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/blog/blog/blog.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="138" column="45" lean-forward="false" selection-start-line="138" selection-start-column="45" selection-end-line="138" selection-end-column="45" />
+            <state relative-caret-position="72">
+              <caret line="43" column="12" lean-forward="true" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/header/header.controller.js">
+      <file leaf-file-name="login.module.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="52" lean-forward="false" selection-start-line="3" selection-start-column="52" selection-end-line="3" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/development/customer-panel/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="29" column="14" lean-forward="false" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="587" column="30" lean-forward="false" selection-start-line="587" selection-start-column="30" selection-end-line="587" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="header.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/header/header.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="62" column="26" lean-forward="false" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
+            <state relative-caret-position="162">
+              <caret line="9" column="19" lean-forward="false" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -147,8 +91,6 @@
         <option value="$PROJECT_DIR$/development/customer-panel/modules/deal.category.page/deal.category.page.module.js" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/brand.page/brand.page.module.js" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/deals/deal/deal.module.js" />
-        <option value="$PROJECT_DIR$/app/admin-panel/modules/header/header.template.html" />
-        <option value="$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/store/add/add.store.module.js" />
         <option value="$PROJECT_DIR$/app/admin-panel/modules/app.js" />
@@ -168,6 +110,9 @@
         <option value="$PROJECT_DIR$/development/customer-panel/modules/header/header.template.html" />
         <option value="$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css" />
         <option value="$PROJECT_DIR$/development/customer-panel/index.html" />
+        <option value="$PROJECT_DIR$/app/admin-panel/modules/header/header.template.html" />
+        <option value="$PROJECT_DIR$/app/admin-panel/modules/users/all/all.template.html" />
+        <option value="$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js" />
       </list>
     </option>
   </component>
@@ -214,7 +159,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -232,6 +176,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -412,12 +357,13 @@
       <workItem from="1505805399350" duration="6407000" />
       <workItem from="1505884061153" duration="23000" />
       <workItem from="1505912549238" duration="4178000" />
-      <workItem from="1505924507090" duration="1411000" />
+      <workItem from="1505924507090" duration="1737000" />
+      <workItem from="1505990210806" duration="1452000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12818000" />
+    <option name="totallyTimeSpent" value="14596000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="24" width="1549" height="815" extended-state="6" />
@@ -427,9 +373,10 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21784776" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -440,7 +387,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -455,34 +401,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/coupons/coupon/coupon.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="31" lean-forward="false" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/coupons/coupon/coupon.module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/deal.categories/add.deal.categories/add.deal.categories.module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/banners/add/add.banners.module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/customer-panel/modules/constant.module.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -637,20 +555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/header/header.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="17" column="26" lean-forward="false" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/header/header.module.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -732,7 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="245" column="44" lean-forward="false" selection-start-line="245" selection-start-column="24" selection-end-line="245" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -740,7 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="10" column="65" lean-forward="false" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -748,7 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="63" column="14" lean-forward="true" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -756,7 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="12" column="58" lean-forward="false" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -764,7 +664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -772,7 +671,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -780,17 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="108" column="113" lean-forward="false" selection-start-line="108" selection-start-column="113" selection-end-line="108" selection-end-column="113" />
-          <folding>
-            <marker date="1505925054256" expanded="true" signature="5983:5989" ph=" " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/header/header.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="62" column="26" lean-forward="false" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -798,15 +685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="3" column="52" lean-forward="false" selection-start-line="3" selection-start-column="52" selection-end-line="3" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="587" column="30" lean-forward="false" selection-start-line="587" selection-start-column="30" selection-end-line="587" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -814,7 +692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="138" column="45" lean-forward="false" selection-start-line="138" selection-start-column="45" selection-end-line="138" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -822,6 +699,69 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
           <caret line="29" column="14" lean-forward="false" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/assets/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="587" column="30" lean-forward="false" selection-start-line="587" selection-start-column="30" selection-end-line="587" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/header/header.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="62" column="26" lean-forward="false" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/header/header.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/development/customer-panel/modules/blog/blog.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/users/users/users.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/users/all/all.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="46" column="95" lean-forward="false" selection-start-line="46" selection-start-column="95" selection-end-line="46" selection-end-column="95" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/blog/blog/blog.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="43" column="12" lean-forward="true" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin-panel/modules/login/login.module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="19" lean-forward="false" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
           <folding />
         </state>
       </provider>

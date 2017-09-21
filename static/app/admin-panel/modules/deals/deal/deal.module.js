@@ -227,20 +227,6 @@ angular.module("dealModule", ['constantModule', 'toastr', 'cgBusy',
                 toastr.error(error.data._error.message, "Error!");
             });
         }
-
-        // check for individual check boxes
-        $scope.checkBox = function(val) {
-            var count = 0;
-            angular.forEach($scope.check.check, function(val, key) {
-                if (val) {
-                    count++
-                }
-            });
-            $scope.check.all = (count == Object.keys($scope.check.check).length) ? true : false;
-            $scope.show = (count == 0) ? false : true;
-            $scope.check.count = count;
-        };
-
         // delete selected check boxes
         $scope.deleteSelected = function(array) {
             var items = [];

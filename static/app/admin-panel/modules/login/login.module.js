@@ -2,7 +2,6 @@ angular.module("loginModule", ["Directives", "cgBusy", "constantModule", "satell
     .controller("loginCtrl", function($scope, $http, mainURL, URL, $auth, $state, toastr) {
         // Declaring variables
         $scope.login = {};
-        console.log($scope.login);
         // login click function
         $scope.loginNow = function(login) {
             $scope.load = $http({
@@ -12,18 +11,23 @@ angular.module("loginModule", ["Directives", "cgBusy", "constantModule", "satell
             }).then(function(data) {
                 console.log("After user try to login in succeess: ", data.data);
                 var userLoggedData = data['data']['data'];
-                if(userLoggedData) {
-                    $auth.setToken(data.data.data.login_token);
+                if(userLoggedData.status === 'inactive') {
+                    toastr.error("Please contact your Admin.", "You are Inactive.");
+                    return true
                 } else {
-                    $auth.setToken(data.data.login_token);
+                    if(userLoggedData) {
+                        $auth.setToken(data.data.data.login_token);
+                    } else {
+                        $auth.setToken(data.data.login_token);
+                    }
                 }
-                toastr.success("Successfully Logged in", "Success!");
+                toastr.success("Successfully Logged in", "Great!");
                 setTimeout(function () {
                     $state.go("header.dashboard");
                 }, 1500);
             }, function(error) {
                 console.log("error", error);
-                toastr.error(error.data._error.message, "Error!");
+                toastr.error(error.data._error.message, "Alert!");
             });
         }
     });

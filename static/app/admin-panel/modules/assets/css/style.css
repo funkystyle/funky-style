@@ -17,6 +17,18 @@
 .coupon-options {
     display: none;
 }
+.image-store {
+    height: 100px; width:  150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-store img {
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+}
 .coupon-name:hover .coupon-options {
     display: block;
 }
