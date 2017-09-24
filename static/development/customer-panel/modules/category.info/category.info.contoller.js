@@ -119,7 +119,8 @@ angular
                     var temp = {
                         "related_categories": {
                             "$in": [$scope.category._id]
-                        }
+                        },
+                        "status": "Publish"
                     };
                     embedded = JSON.stringify({
                         'related_stores': 1,
@@ -134,7 +135,7 @@ angular
                         angular.forEach(items, function (item) {
                             item._updated = new Date(item._updated);
                             if(new Date(item.expire_date) > new Date()) {
-                                if($scope.coupons.indexOf(item) == -1) {
+                                if($scope.coupons.indexOf(item) === -1) {
                                     $scope.coupons.push(item);
                                     $scope.filterCoupons.push(item);
                                     $scope.dealsLength = $filter('filter')($scope.filterCoupons, {coupon_type: 'offer'});
@@ -144,7 +145,7 @@ angular
 
                             // get the list of categories under particular coupons
                             angular.forEach(item.related_categories, function (category) {
-                                if(category == null) return true;
+                                if(category === null) return true;
                                 if(!$scope.categories[category.category_type]) {
                                     $scope.categories[category.category_type] = [];
                                     $scope.categories[category.category_type].push(category);
@@ -246,25 +247,25 @@ angular
             var count = 0;
             angular.forEach(filter, function (values, keys) {
                 angular.forEach(values, function (val, key) {
-                    if(val == true) {
+                    if(val === true) {
                         count ++;
                     }
                 });
             });
-            if(count == 0) {
+            if(count === 0) {
                 return items;
             }
             angular.forEach(items, function (item) {
                 angular.forEach(filter, function (values, keys) {
                     angular.forEach(values, function (val, key) {
                         angular.forEach(item.related_stores, function (store) {
-                            if(store && val == true && key == store._id && list.indexOf(item) == -1) {
+                            if(store && val === true && key === store._id && list.indexOf(item) === -1) {
                                 list.push(item);
                             }
                         });
                         angular.forEach(item.related_categories, function (category) {
                             console.log("Related Category: ", category);
-                            if(category && val == true && key == category._id && list.indexOf(item) == -1) {
+                            if(category && val === true && key === category._id && list.indexOf(item) === -1) {
                                 list.push(item);
                             }
                         });

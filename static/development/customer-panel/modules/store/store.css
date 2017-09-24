@@ -22,7 +22,7 @@
     width: 13%;
     height: 100px;
     /* margin: 0 15px 20px 0; */
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 div.thumb {
     -webkit-animation: fade 1s;
@@ -32,7 +32,7 @@ div.thumb {
     -moz-border-radius: 2px;
     border-radius: 2px;
     margin-bottom: 0;
-    height: 70px;
+    height: 53px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,8 +81,8 @@ div.thumb img {
 }
 
 .social-well h4 {
-    margin: 0px;
-    font-size: 16px;
+    margin: 0;
+    font-size: 13px;
     color: #333;
     font-weight: 400;
 }
@@ -164,8 +164,8 @@ div.thumb img {
     }
     .store-tile {
         display: block;
-        width: 48%;
-        height: 120px;
+        width: 44%;
+        height: 110px;
         margin-bottom: 10px;
     }
 }

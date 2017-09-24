@@ -97,6 +97,7 @@ angular.module("dealDetailsModule", ["Directives"])
                         temp["related_stores"] = {
                             "$in": [$scope.deal.store_temp._id]
                         };
+                        temp["status"] = "Publish";
                         var sort = "&max_results=5&sort=[('_updated', -1)]";
                         url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+sort;
                         $http({

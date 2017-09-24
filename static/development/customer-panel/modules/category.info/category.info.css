@@ -12,6 +12,21 @@
     .store-logo img {
         width: auto !important;
     }
+    .show_store_image {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .show_store_image .image-area-store {
+        width: 30%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #DDD;
+        padding: 5px;
+        border-radius: 3px;
+    }
 }
 .related-coupon-deal {
     position: relative;

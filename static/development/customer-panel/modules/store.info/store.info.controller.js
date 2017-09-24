@@ -102,6 +102,7 @@ angular
                     temp["recommended_stores"] = {
                         "$in": [$scope.store._id]
                     };
+                    temp['status'] = 'Publish';
                     url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&embedded="+embedded;
                     StoreQuery.get(url).then(function (suggested) {
                         console.log("Suggested Coupons Data: ", suggested.data._items);
@@ -112,7 +113,8 @@ angular
                     temp = {
                         "related_stores": {
                             "$in": [$scope.store._id]
-                        }
+                        },
+                        "status": "Publish"
                     };
                     url = "/api/1.0/coupons"+"?where="+JSON.stringify(temp)+"&max_results=1000&embedded="+embedded;
                     console.log("url ------------------------------ ",url);
@@ -158,7 +160,8 @@ angular
                             },
                             "expire_date": {
                                 "$gte": new Date().toGMTString()
-                            }
+                            },
+                            "status": "Publish"
                         });
                         var sort = "&max_results=1&sort=[('_updated', -1)]";
                         url = "/api/1.0/coupons"+"?where="+temp+sort+"&embedded="+embedded;
@@ -291,12 +294,12 @@ angular
             var count = 0;
             angular.forEach(filter, function (values, keys) {
                 angular.forEach(values, function (val, key) {
-                    if(val == true) {
+                    if(val === true) {
                         count ++;
                     }
                 });
             });
-            if(count == 0) {
+            if(count === 0) {
                 return items;
             }
             angular.forEach(items, function (item) {

@@ -10,7 +10,7 @@
                             <li><a ui-sref="main.home">Home</a></li>
                             <li><a ui-sref="main.all_deals">Deals</a></li>
                             <li ng-repeat="item in deal.breadcrumb">
-                                <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
+                                <a ui-sref="main.deal_category_page({url: item.url})">{{ item.name }}</a>
                             </li>
                             <li class="active">{{ deal.url }}</li>
                         </ol>
@@ -276,7 +276,7 @@
                             <li><a href="/">Home</a></li>
                             <li><a ui-sref="main.all_deals">Deals</a></li>
                             <li ng-repeat="item in deal.breadcrumb">
-                                <a ui-sref="main.deal_post_details({url: item.url})">{{ item.name }}</a>
+                                <a ui-sref="main.deal_category_page({url: item.url})">{{ item.name }}</a>
                             </li>
                             <li class="active">{{ deal.name }}</li>
                         </ol>
@@ -310,6 +310,17 @@
         </div> <!-- end panel body -->
     </div> <!-- end panel -->
 
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <h2 class="h3-heading">{{ deal.h2 }}</h2>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <a class="btn btn-primary btn-block" ui-sref="main.store-info({url: deal.store_temp.url})">
+                <b>Back to {{ deal.store_temp.name }} Offers</b>
+            </a>
+        </div>
+    </div>
+
     <!--row-->
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12">
@@ -337,7 +348,7 @@
                             </div>
                         </div> <!-- end col -->
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                            <h3 class="margin-top-0 h3-heading">
+                            <h3 class="margin-top-0 h3-heading sep-coupon-sty">
                                 {{ item.title }}
                             </h3>
                             <p>

@@ -307,7 +307,7 @@
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                            <p dd-text-collapse dd-text-collapse-max-length="260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
+                                            <p dd-text-collapse dd-text-collapse-max-length="(isMobile)?100: 260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
                                         </p>
                                         <p>
                                             <a class="btn-link" ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
@@ -484,7 +484,7 @@
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                            <p dd-text-collapse dd-text-collapse-max-length="260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
+                                            <p dd-text-collapse dd-text-collapse-max-length="(isMobile)?100: 260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
                                         </p>
                                         <p>
                                             <a class="btn-link" ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
@@ -571,7 +571,7 @@
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                         <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                            <p dd-text-collapse dd-text-collapse-max-length="260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
+                                            <p dd-text-collapse dd-text-collapse-max-length="(isMobile)?100: 260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
                                         </p>
                                         <p>
                                             <a class="btn-link" ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
@@ -657,7 +657,7 @@
                                         <i class="fa fa-share-alt"></i>
                                     </span>
                                 <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                    <p dd-text-collapse dd-text-collapse-max-length="260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
+                                    <p dd-text-collapse dd-text-collapse-max-length="(isMobile)?100: 260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
                                 </p>
                                 <p>
                                     <a class="btn-link" ui-sref="main.store-info({url: item.related_stores[0].url})">
@@ -738,7 +738,7 @@
                                             <i class="fa fa-share-alt"></i>
                                         </span>
                                 <p style="opacity: 0.6; line-height: 25px;" class="para_small">
-                                    <p dd-text-collapse dd-text-collapse-max-length="260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
+                                    <p dd-text-collapse dd-text-collapse-max-length="(isMobile)?100: 260" dd-text-collapse-text="{{ item.description }}" class="top-descs"></p>
                                 </p>
                                 <p>
                                     <a class="btn-link" ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
@@ -774,7 +774,7 @@
                     <!--end panel footer -->
                 </div> <!-- end panel -->
                 <!-- Related Coupons ends here -->
-                <div class="footer_alt_image flex-justify-center">
+                <div class="footer_alt_image flex-justify-center" ng-if="store.all_tag_image">
                     <img class="img-auto" ng-src="{{ store.all_tag_image }}" alt="{{ store.name }} Coupons">
                 </div>
                 <!-- about description start here -->

@@ -1,5 +1,8 @@
 /* ---------- media query for mobile ------------ */
 @media only screen and (max-device-width: 480px) {
+    .sep-coupon-sty {
+        margin-top: 0 !important;
+    }
     div.stores-description-inner div.amazon-logo, div.stores-description-inner div.amazon-logo a {
         width: 60px !important;
     }
@@ -91,7 +94,7 @@
         max-height: 100%;
     }
     .stores-description-inner .btn {
-        font-size: 13px;
+        font-size: 10px;
     }
     .mobile-store-description .stores-description-inner {
         margin-right: 15px;
@@ -126,7 +129,12 @@
         display: none;
     }
 }
-
+.sep-coupon-sty {
+    margin-top: 25px;
+}
+.back-to {
+    color: #000;
+}
 .deal-cat-left {
     border-right: 1px solid #ddd;
 }

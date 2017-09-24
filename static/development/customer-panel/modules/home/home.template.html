@@ -6,6 +6,8 @@
                 <ul class="show-cats">
                     <li><a ui-sref="main.home">Coupons</a></li>
                     <li><a ui-sref="main.all_deals">Deals</a></li>
+                    <li><a ui-sref="main.store">Stores</a></li>
+                    <li><a ui-sref="main.category">Categories</a></li>
                 </ul>
             </div>
         </div>
@@ -13,8 +15,8 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item" ng-class="{'active': $index == 0}" ng-repeat="item in banners">
-                    <a target="_blank" href="{{ item.destination_url }}">
-                        <img ng-src="{{ item.image }}">
+                    <a class="flex-justify-center" target="_blank" href="{{ item.destination_url }}">
+                        <img class="img-auto" ng-src="{{ item.image }}">
                     </a>
                 </div><!-- End Item -->
             </div><!-- End Carousel Inner -->
@@ -215,17 +217,18 @@
     <!-- Top deal of the week End Here  -->
 
     <!-- more top stores starts here -->
-    <div class="container" ng-if="stores.length">
+    <div class="container bottom-more-stores" ng-if="stores.length">
         <div class="row">
             <div class="col-lg-12 margin-20 text-center">
                 <h4><b>More Top Stores</b></h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-2 col-sm-12 col-md-2"
-                 ng-if="item.menu == 'bottom'" ng-repeat="item in stores">
-                <ul class="unstyled">
-                    <li class="bottom-more"><a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a></li>
+            <div class="col-lg-12 col-sm-12 col-md-12">
+                <ul class="unstyled flex-start">
+                    <li class="bottom-more" ng-if="item.menu == 'bottom'" ng-repeat="item in stores">
+                        <a ui-sref="main.store-info({url: item.url})">{{ item.name }}</a>
+                    </li>
                 </ul>
             </div>
         </div>

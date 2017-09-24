@@ -44,7 +44,7 @@ body {
 .media-heading a {
     color: #151313;
 }
-.top-desc:hover {
+.top-desc:hover, .top-descs:hover {
     color: #060505;
 }
 .show-desc {
@@ -253,14 +253,6 @@ ol > li > a {
 }
 .coupon-well p {
     margin: 5px 0;
-}
-.bottom-more {
-    border: 1px solid #ddd;
-    padding: 10px;
-    background-color: #fff;
-    margin-bottom: 15px;
-    border-radius: 3px;
-    text-align: center;
 }
 .bottom-more .col-lg-2 {
     width: 12.66667%;

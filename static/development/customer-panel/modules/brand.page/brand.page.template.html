@@ -32,7 +32,7 @@
                     </p>
                 </div>
                 <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12 store-info">
-                    <h1 class="margin-top-5 h3-heading">{{ deal.name }}</h1>
+                    <h1 class="margin-top-5 h3-heading">{{ deal.h1 }}</h1>
                     <p ng-click="show = !show" class="para_small top-desc top-info-desc"
                        ng-class="{'show-desc': show, 'top-info-desc': !show}" data-ng-bind-html="trustAsHtml(deal.top_description)"></p>
                 </div>
@@ -128,8 +128,8 @@
             <!-- footer description -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="footer_alt_image flex-justify-center">
-                        <img class="img-auto" ng-src="{{ store.all_image }}" alt="{{ deal.name }} Coupons">
+                    <div class="footer_alt_image flex-justify-center" ng-if="deal.alt_image">
+                        <img class="img-auto" ng-src="{{ deal.alt_image }}" alt="{{ deal.name }} Coupons">
                     </div>
 
                     <div class="panel panel-default">

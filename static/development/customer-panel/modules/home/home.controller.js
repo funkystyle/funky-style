@@ -32,7 +32,8 @@ angular.module('homeModule', ["headerModule", "Directives"])
         $scope.featuredResults = function () {
             // get the list of top deal categories
             var featured = JSON.stringify({
-                featured_coupon: true
+                featured_coupon: true,
+                'status': 'Publish'
             });
             var url = '/api/1.0/coupons'+'?where='+featured+'&max_results=10&sort=-_created&embedded='+JSON.stringify(embedded)+'&rand=' + Math.random();
             $scope.fillCoupons(url);
@@ -42,7 +43,10 @@ angular.module('homeModule', ["headerModule", "Directives"])
 
         // Get the most used, top coupons from the server
         $scope.fetchCoupons = function (sort) {
-            var url = '/api/1.0/coupons'+'?max_results=10&sort=-'+sort+'&embedded='+JSON.stringify(embedded)+'&rand=' + Math.random();
+            var where = JSON.stringify({
+                'status': 'Publish'
+            });
+            var url = '/api/1.0/coupons'+'?where='+where+'&max_results=10&sort=-'+sort+'&embedded='+JSON.stringify(embedded)+'&rand=' + Math.random();
             $scope.fillCoupons(url);
         };
 

@@ -375,8 +375,8 @@ ul.nav li.dropdown ul.dropdown-menu {
 .uib-typeahead-match .media .media-left a.media-type-logo {
     display: flex;
     background: #FFF;
-    height: 65px;
-    width: 120px;
+    height: 45px;
+    width: 100px;
     align-items: center;
     justify-content: center;
     margin: 0 15px;

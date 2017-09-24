@@ -65,15 +65,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.carousel-inner .item a {
+    height: 300px;
+    max-height: 300px;
+}
+.bottom-more-stores {
+    background: #FFFFFF;
+}
 .carousel-fade .carousel-inner .active {
     opacity: 1;
-}
-
-.carousel-inner>.item>img,
-.carousel-inner>.item>a>img {
-    width: 100%;
-    max-height: 295px;
-    height: 295px;
 }
 
 .carousel-fade .carousel-inner .active.left,
@@ -243,11 +243,16 @@ h5 {
 
 ul.unstyled {
     padding-left: 5px;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
 }
 
 ul.unstyled li {
     list-style-type: none;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    width: 12%;
+    padding: 10px;
 }
 
 ul.unstyled li a {
@@ -412,9 +417,6 @@ ul.unstyled li a {
     .store-thumbnail .description-area {
         padding: 0 !important;
     }
-    .mobile-carousel {
-        padding: 0;
-    }
     .description-area a {
         font-size: 13px !important;
         justify-content: center;
@@ -428,7 +430,7 @@ ul.unstyled li a {
         justify-content: flex-start;
     }
     .show-cats li {
-        padding: 5px 15px;
+        padding: 5px 12px;
     }
     .show-cats li a {
         color: #000;
@@ -441,7 +443,7 @@ ul.unstyled li a {
         margin-right: 0 !important;
     }
     header {
-        width: 96% !important;
+        width: 100% !important;
     }
     .placeholder {
         width: 30.3% !important;
