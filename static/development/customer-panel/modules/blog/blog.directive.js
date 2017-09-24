@@ -70,7 +70,6 @@ var blog = angular.module("blogModule", [])
             $scope.blogs = data.data._items;
             angular.forEach($scope.blogs, function (item) {
                 item._updated = new Date(item._updated);
-
                 // get related categories
                 angular.forEach(item.related_categories, function (cat) {
                     var length = $filter("filter")($scope.categories, {_id: cat._id}).length;

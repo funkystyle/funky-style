@@ -244,7 +244,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 })
 
                 .state('main.deal_brand_page', {
-                    url: '/brands/:url/',
+                    url: '/deals/brands/:url/',
                     templateUrl: 'static/app/customer-panel/modules/brand.page/brand.page.template.html',
                     controller: "brandPageCtrl",
                     resolve: {
@@ -257,7 +257,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                     }
                 })
                 .state('main.deal_category_page', {
-                    url: '/categories/:url/',
+                    url: '/deals/category/:url/',
                     templateUrl: 'static/app/customer-panel/modules/deal.category.page/deal.category.page.template.html',
                     controller: "dealCategoryPageCtrl",
                     resolve: {
@@ -406,7 +406,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
             $("meta[property='og\\:title'], meta[name='twitter\\:title']").attr('content', object.title);
             $( "meta[name='description'], meta[property='og\\:description'], meta[name='twitter\\:description']")
                 .attr('content', object.description);
-            $( "link[rel='canonical'], meta[property='og\\:url']").attr('content', window.location.href);
+            $( "link[rel='canonical'], meta[property='og\\:url']").attr('href', window.location.href);
             $("meta[property='og\\:site_name']").attr('content', window.location.host);
 
             return object;

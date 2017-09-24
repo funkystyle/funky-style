@@ -67,9 +67,11 @@ angular.module("updateBannersModule", ["ui.select", "ngSanitize",
                 $scope.banners = data.data._items;
 
                 angular.forEach($scope.banners, function (item) {
-                    if(item._id == $stateParams.id) {
+                    if(item._id === $stateParams.id) {
                         $scope.banner = item;
-                        $("#datetimepicker1").find("input").val(item.expired_date);
+                        $("#datetimepicker1").datetimepicker({
+                            defaultDate: new Date(item.expired_date)
+                        });
                     }
                 });
             }, function (error) {

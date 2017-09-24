@@ -92,7 +92,7 @@
 			</div>
 			<!--end panel-->
 
-			<div class="panel panel-default cat-filters only-desktop" ng-repeat="(key, items) in categories">
+			<div ng-if="false" class="panel panel-default cat-filters only-desktop" ng-repeat="(key, items) in categories">
                 <div class="panel-heading">
                     <h3 class="font-bold side-h3-heading">{{ (key == 'Regular'? 'Category': key) }} Filters</h3>
                 </div>
@@ -134,7 +134,7 @@
                             <a class="pull-left" ui-sref="main.categoryinfo({url: item.url, cc: undefined})">
                                 <img ng-src="{{ item.image }}" alt="64x64">
                             </a>
-                            <p ui-sref="main.categoryinfo({url: item.url, cc: undefined})">{{ item.name }}</p>
+                            <p ui-sref="main.categoryinfo({url: item.url, cc: undefined})">{{ item.name }} Offers</p>
                         </span>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in category.related_categories"></div>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in category.related_categories"></div>
@@ -165,7 +165,7 @@
                             <a class="pull-left" ui-sref="main.store-info({url: item.url, cc: undefined})">
                                 <img  ng-src="{{ item.image }}" alt="64x64">
                             </a>
-                            <p ui-sref="main.store-info({url: item.url, cc: undefined})">{{ item.name }}</p>
+                            <p ui-sref="main.store-info({url: item.url, cc: undefined})">{{ item.name }} Offers</p>
                         </span>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in category.top_stores"></div>
                         <div class="placeholder rel-stores-placeholder" ng-repeat="item in category.top_stores"></div>
@@ -257,7 +257,7 @@
                                         </p>
                                         <p>
                                             <a ui-sref="main.store-info({url: item.related_stores[0].url})">
-                                                See all {{ item.related_stores[0].name }} Coupons
+                                                See all {{ item.related_stores[0].name }} Offers
                                             </a>
                                         </p>
                                     </div>
@@ -346,7 +346,7 @@
                                         </p>
                                         <p>
                                             <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
-                                                See all {{ item.related_categories[0].name }} Coupons
+                                                See all {{ item.related_categories[0].name }} Offers
                                             </a>
                                         </p>
                                     </div>
@@ -427,7 +427,7 @@
                                         </p>
                                         <p>
                                             <a ui-sref="main.categoryinfo({url: item.related_categories[0].url})">
-                                                See all {{ item.related_categories[0].name }} Coupons
+                                                See all {{ item.related_categories[0].name }} Offers
                                             </a>
                                         </p>
                                     </div>
@@ -467,6 +467,10 @@
                         </div> <!-- end panel -->
                     </span>
 				</div> <!-- tab-3 -->
+
+                <div class="footer_alt_image flex-justify-center">
+                    <img class="img-auto" ng-src="{{ category.alt_image }}" alt="{{ category.name }} Offers">
+                </div>
 
 				<!-- about description start here -->
                 <div class="panel panel-default">

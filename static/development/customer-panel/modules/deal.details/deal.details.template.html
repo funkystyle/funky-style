@@ -80,7 +80,7 @@
                                 <p>Discounted Price</p>
                             </div>
                             <div class="stores-description-inner">
-                                <a target="_blank" href="{{ deal.stores[0].landing_page }}" class="btn btn-info btn-block">
+                                <a ng-click="goDeeplink(deal.stores[0].landing_page)" class="btn btn-info btn-block">
                                     GO TO STORE
                                     <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                                 </a>
@@ -150,7 +150,7 @@
                     <p><b>Free</b> Shipping</p>
                 </div>
                 <div class="stores-description-inner">
-                    <a target="_blank" href="{{ item.landing_page }}" class="btn btn-info btn-block">
+                    <a ng-click="goDeeplink(item.landing_page)" class="btn btn-info btn-block">
                         GO TO STORE
                         <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                     </a>
@@ -187,7 +187,7 @@
                     <p><b>Free</b> Shipping</p>
                 </div>
                 <div class="stores-description-inner">
-                    <a target="_blank" href="{{ item.landing_page }}" class="btn btn-info btn-block">
+                    <a ng-click="goDeeplink(item.landing_page)" class="btn btn-info btn-block">
                         GO TO STORE
                         <i class="fa fa-chevron-right chevron_right" aria-hidden="true"></i>
                     </a>
@@ -300,7 +300,7 @@
                     <p style="width: 100%;" ng-click="show = !show" class="para_small top-desc-from-top top-desc"
                        ng-class="{'show-desc': show, 'top-desc-from-top': !show}" data-ng-bind-html="trustAsHtml(deal.description)"></p>
                     <div>
-                        <a href="{{ deal.destination_url }}" target="_blank" class="btn btn-md btn-info">
+                        <a ng-click="openCouponCode(deal, deal)" target="_blank" class="btn btn-md btn-info">
                             <b>ACTIVATE OFFER &nbsp;</b>
                             <i class="fa fa-arrow-right"></i>
                         </a>

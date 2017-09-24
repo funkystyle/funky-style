@@ -118,8 +118,6 @@ angular
                     console.log("url ------------------------------ ",url);
                     StoreQuery.get(url).then(function (coupons) {
                         var items = coupons.data._items;
-                        $scope.store.totalCouponsLength = items.length;
-                        console.log("Stores Coupons Data: ", items);
                         angular.forEach(items, function (item) {
                             // get related categories of each coupon
                             angular.forEach(item.related_categories, function (category) {
@@ -157,6 +155,9 @@ angular
                         temp = JSON.stringify(temp = {
                             "related_stores": {
                                 "$in": [item._id]
+                            },
+                            "expire_date": {
+                                "$gte": new Date().toGMTString()
                             }
                         });
                         var sort = "&max_results=1&sort=[('_updated', -1)]";
@@ -194,7 +195,8 @@ angular
 
                     where = JSON.stringify({
                         "store_temp": $scope.store._id,
-                        "status": true
+                        "status": true,
+                        "deal_type": 'store'
                     });
                     var random = new Date().getDate();
                     url = '/api/1.0/deals'+'?where='+where+'&embedded='+JSON.stringify(embedded)+'&rand_number=' + random;

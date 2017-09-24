@@ -14,7 +14,7 @@
             </div>
             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                 <ul class="footer-ul">
-                    <h6 class="footer-p" style="font-weight: bold; font-size: 14px;">Company</h6>
+                    <h6 class="footer-p" style="font-weight: bold; font-size: 14px;">Quick Links</h6>
                     <li ng-repeat="item in cms">
                         <i class="fa fa-angle-right"></i>&nbsp;
                         <a ui-sref="main.cms({url: item.url})">{{ item.name }}</a>
@@ -23,7 +23,7 @@
             </div>
             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                 <ul class="footer-ul">
-                    <h6 class="footer-p" style="font-weight: bold; font-size: 14px;">Company</h6>
+                    <h6 class="footer-p" style="font-weight: bold; font-size: 14px;">Quick Links</h6>
                     <li ng-repeat="item in cms">
                         <i class="fa fa-angle-right"></i>&nbsp;
                         <a ui-sref="main.cms({url: item.url})">{{ item.name }}</a>
@@ -32,10 +32,11 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                 <h6 class="footer-p" style="font-weight: bold; font-size: 14px;">FabPromo Premier</h6>
-                <form class="navbar-form pad-0 margin-10 footer-email-form" role="search" style="width: 100%;">
+                <form action="//fabpromocodes.us15.list-manage.com/subscribe/post?u=6656e9456c569987c5a7baeda&amp;id=1d15171ed5" method="post"
+                      class="navbar-form pad-0 margin-10 footer-email-form" role="search" style="width: 100%;">
                     <div class="input-group">
-                        <input type="text" class="form-control input-sm" style="outline: none; box-shadow: none; border: 0px solid;"
-                               placeholder="Enter Your Email" name="q" autocomplete="off">
+                        <input type="email" value="" name="EMAIL" class="form-control input-sm" style="outline: none; box-shadow: none; border: 0px solid;"
+                               placeholder="Enter Your Email" required autocomplete="off">
                         <div class="input-group-btn">
                             <button class="btn btn-info btn-sm" type="submit">Submit</button>
                         </div>
@@ -65,13 +66,10 @@
                 </p>
 
                 <ul class="list-inline">
-                    <li><a href="">Welcome</a></li>
-                    <li><a href="">Sitemap</a></li>
-                    <li><a href="">Partner</a></li>
-                    <li><a href="">Careers</a></li>
-                    <li><a href="">Terms Of Use</a></li>
-                    <li><a href="">Privacy Policy</a></li>
-                    <li><a href="">License</a></li>
+                    <li ng-repeat="item in cms | orderBy: 'name'">
+                        <a ui-sref="main.cms({url: item.url})">{{ item.name }}</a>
+                    </li>
+                    <li><a href="/sitemap_index.xml">Sitemap</a></li>
                 </ul>
             </div>
         </div>

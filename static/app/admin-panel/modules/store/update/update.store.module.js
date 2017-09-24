@@ -66,7 +66,7 @@ angular.module("updateStoreModule", ["ui.select", "ngSanitize", "ui.bootstrap", 
                 if(data) {
                     $scope.stores = data._items;
                     angular.forEach($scope.stores, function (item) {
-                        if(item._id == $stateParams.storeId) {
+                        if(item._id === $stateParams.storeId) {
                             item.related_stores = clearNullIds(item.related_stores);
                             item.top_stores = clearNullIds(item.top_stores);
                             item.top_catagory_store = clearNullIds(item.top_catagory_store);

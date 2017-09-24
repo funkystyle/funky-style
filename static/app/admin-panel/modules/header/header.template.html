@@ -75,12 +75,12 @@
                                 Add Coupon<i class="fa fa-angle-right pull-right"></i>
                             </a>
                         </li>
-                        <li ng-class="{active: state.includes('header.coupon-comments')}">
+                        <li ng-if="checkRole()" ng-class="{active: state.includes('header.coupon-comments')}">
                             <a ui-sref="header.coupon-comments">
                                 All Coupon Comments<i class="fa fa-angle-right pull-right"></i>
                             </a>
                         </li>
-                        <li ng-class="{active: state.includes('header.coupon-reports')}">
+                        <li ng-if="checkRole()" ng-class="{active: state.includes('header.coupon-reports')}">
                             <a ui-sref="header.coupon-reports">
                                 All Coupon Reports<i class="fa fa-angle-right pull-right"></i>
                             </a>
@@ -162,7 +162,7 @@
                     </ul>
                 </li>
 
-                <li>
+                <li ng-if="onlyForAdmin()">
                     <a href="" data-toggle="collapse" data-target="#submenu-cms">
                         CMS
                         <i class="fa fa-fw pull-right" ng-class="{'fa-angle-down': state.includes('header.cms') || state.includes('header.add-cms') || state.includes('header.update-cms'), 'fa-angle-right': !state.includes('header.cms') || !state.includes('header.add-cms') || !state.includes('header.update-cms')}"></i>
@@ -184,7 +184,7 @@
                     </ul>
                 </li>
                 <!-- for Master SEO Table -->
-                <li>
+                <li ng-if="onlyForAdmin()">
                     <a ui-sref="header.seo" data-toggle="collapse" data-target="#submenu-master-seo">
                         Master SEO
                         <i class="fa fa-fw pull-right"></i>

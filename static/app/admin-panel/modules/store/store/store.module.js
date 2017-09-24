@@ -41,7 +41,7 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                     field: 'name', displayName: "Name", width: "25%",
                     cellTemplate: '<div class="coupon-name" style="padding: 5px;">' +
                     '<p>' +
-                    '   <a ng-if="grid.appScope.checkRole()" ui-sref="header.update-deal({id: row.entity._id})">{{ row.entity.name }}</a>' +
+                    '   <a ng-if="grid.appScope.checkRole()" ui-sref="header.update-store({storeId: row.entity._id})">{{ row.entity.name }}</a>' +
                     '   <a style="color: #000000;" ng-if="!grid.appScope.checkRole()">{{ row.entity.name }}</a>' +
                     '</p>' +
                     '</div>'

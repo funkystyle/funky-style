@@ -60,9 +60,6 @@ angular.module("addDealBrandsModule", ["ui.select", "ngSanitize", "ui.bootstrap"
             // for an alt_image
             if(deal.alt_image && Object.keys(deal.alt_image).length) {
                 deal.alt_image = "data:image/jpeg;base64,"+deal.alt_image.base64;
-            } else {
-                toastr.error("Please select Alt Image", "Error!");
-                return false;
             }
 
 
