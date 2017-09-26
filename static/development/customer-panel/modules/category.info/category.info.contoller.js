@@ -70,10 +70,8 @@ angular
                     generated_url = output ? output : item.destination_url;
                 url = $state.href('main.categoryinfo', {url: category.url, cc: item._id, destionationUrl: generated_url});
                 // window.open(url,'_blank');
-                $('<a href="'+url+'" target="_blank">&nbsp;</a>')[0].click();
                 window.location.href = generated_url;
-            }, function (error) {
-                console.log(error);
+                $('<a href="'+url+'" target="_blank">&nbsp;</a>')[0].click();
             });
 
         };
@@ -206,6 +204,23 @@ angular
             }, function (error) {
                 console.log(error);
                 $state.go('404');
+            });
+
+            // get the latest Featured categories by default
+            // get the list of Categories
+            var projection = JSON.stringify({
+                name: 1,
+                url: 1,
+                image: 1
+            });
+            where = JSON.stringify({
+                featured_category: true
+            });
+            url = "/api/1.0/categories/?where="+where+"&projection="+projection;
+            $http.get(url).then(function (data) {
+                if(data['data']) {
+                    $scope.featured_categories = data.data._items;
+                }
             });
         } else {
             $state.go('main.category');

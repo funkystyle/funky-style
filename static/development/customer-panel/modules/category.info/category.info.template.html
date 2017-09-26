@@ -145,6 +145,28 @@
 			</div>
 			<!--end panel-->
 
+            <div class="panel panel-default cat-filters">
+                <div class="panel-heading">
+                    <h3 class="font-bold side-h3-heading">Top Categories</h3>
+                </div>
+                <!--panel heading-->
+                <div class="panel-body">
+                    <div class="check-box-filter-area rel-stores">
+                        <span ng-repeat="item in featured_categories">
+                            <a class="pull-left" ui-sref="main.categoryinfo({url: item.url, cc: undefined})">
+                                <img ng-src="{{ item.image }}" alt="64x64">
+                            </a>
+                            <p ui-sref="main.categoryinfo({url: item.url, cc: undefined})">{{ item.name }} Offers</p>
+                        </span>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in featured_categories"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in featured_categories"></div>
+                        <div class="placeholder rel-stores-placeholder" ng-repeat="item in featured_categories"></div>
+                    </div>
+                </div>
+                <!--end panel body-->
+            </div>
+            <!--end panel-->
+
             <!-- side banner area -->
             <div class="thumbnail" style="padding: 0; margin-bottom: 10px; border-bottom: 0;"
                  ng-if="category.side_banner || side_banner.side_banner_string != 'none'">

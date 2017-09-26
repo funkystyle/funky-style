@@ -39,9 +39,8 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
 
         $scope.gridOptions = {
             data: [],
-            paginationPageSizes: [100, 200],
-            totalItems: 10000,
-            paginationPageSize: 100,
+            paginationPageSizes: [20, 40, 60, 80, 100],
+            paginationPageSize: 20,
             paginationCurrentPage: 1,
             useExternalPagination: true,
             enablePaging: true,
@@ -187,13 +186,6 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 var msg = 'rows changed ' + rows;
                 $scope.getSelectedRows();
             });
-
-            // pagination results
-            gridApi.pagination.on.paginationChanged($scope, function (pageNumber, pageSize) {
-                console.log('pager get data: pageNumber, pageSize', pageNumber, pageSize);
-                // getPager(pageNumber, pageSize);
-                getResults({max_results: pageSize, page: pageNumber});
-            });
         };
         function getResults (pagination) {
             var embedded = {
@@ -203,7 +195,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 "last_modified_by": 1
             };
             $scope.load = $http({
-                url: '/api/1.0/coupons?embedded='+JSON.stringify(embedded)+'&sort=-_created&page='+pagination.page+'&max_results='+pagination.max_results+'&rand_number=' + new Date().getTime(),
+                url: '/api/1.0/coupons?embedded='+JSON.stringify(embedded)+'&sort=-_created&max_results=20000&rand_number=' + new Date().getTime(),
                 method: "GET"
             }).then(function (data) {
                 if(data['data']) {
@@ -242,8 +234,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
 
                         item._created = new Date(item._created);
                         item._expire_date = new Date(item.expire_date);
-
-                        if(item.expire_date < new Date()) {
+                        if(new Date(item.expire_date) < new Date()) {
                             destArray['Expired Coupons'].push(item);
                         }
                         $scope.gridOptions.data.push(item);

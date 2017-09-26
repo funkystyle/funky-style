@@ -97,15 +97,11 @@ angular.module('homeModule', ["headerModule", "Directives"])
         $scope.openCouponCode = function (store, item) {
             // get the Deeplink destionation URL for it
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
-                $scope.destionationUrl = data['data']['data']['output_url'];
-                url = $state.href('main.home', {cc: item._id, destionationUrl: $scope.destionationUrl});
-                console.log("Destination: ", data, $scope.destionationUrl);
-                // window.open(url,'_blank');
+                var output = data['data']['data']['output_url'],
+                    generated_url = output ? output : item.destination_url;
+                url = $state.href('main.home', {cc: item._id, destionationUrl: generated_url});
+                window.location.href = generated_url;
                 $('<a href="'+url+'" target="_blank">&nbsp;</a>')[0].click();
-
-                window.location.href = $scope.destionationUrl;
-            }, function (error) {
-                console.log(error);
             });
         };
 
