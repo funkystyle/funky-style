@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-5">
                     <div class="form-group">
-                        <label for="is_default">Is Default</label>
+                        <label>Is Default</label>
                         <ui-select  ng-model="deeplink.is_default" theme="bootstrap" id="is_default">
                             <ui-select-match placeholder="Is Default">{{ $select.selected.text }}</ui-select-match>
                             <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
@@ -36,7 +36,7 @@
                                    placeholder="URL" ng-model="deeplink.start_url.url">
                         </div>
                         <div class="form-group">
-                            <label for="start_url_encode">Encode</label>
+                            <label>Encode</label>
                             <ui-select  ng-model="deeplink.start_url.encode" theme="bootstrap" id="start_url_encode">
                                 <ui-select-match placeholder="Encode">{{ $select.selected.text }}</ui-select-match>
                                 <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
@@ -56,7 +56,7 @@
                                    placeholder="Tags" ng-model="deeplink.tags.tags">
                         </div>
                         <div class="form-group">
-                            <label for="tags_release">Encode</label>
+                            <label>Encode</label>
                             <ui-select  ng-model="deeplink.tags.replace" theme="bootstrap" id="tags_release">
                                 <ui-select-match placeholder="Release">{{ $select.selected.text }}</ui-select-match>
                                 <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
@@ -67,7 +67,7 @@
                     </div>
                     <!-- Encoded Main URL -->
                     <div class="form-group">
-                        <label for="encode_main_url">Encoded Main URL</label>
+                        <label>Encoded Main URL</label>
                         <ui-select  ng-model="deeplink.encode_main_url" theme="bootstrap" id="encode_main_url">
                             <ui-select-match placeholder="Encoded Main URL">{{ $select.selected.text }}</ui-select-match>
                             <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
@@ -89,8 +89,8 @@
                                    placeholder="Find String" ng-model="item.find_string">
                         </div>
                         <div class="form-group">
-                            <label for="is_default">Is Default</label>
-                            <ui-select  ng-model="deeplink.is_default" theme="bootstrap" id="is_default">
+                            <label>Is Default</label>
+                            <ui-select ng-model="deeplink.is_default" theme="bootstrap">
                                 <ui-select-match placeholder="Is Default">{{ $select.selected.text }}</ui-select-match>
                                 <ui-select-choices repeat="item.code as item in condition | filter: $select.search">
                                     <div ng-bind-html="item.text | highlight: $select.search"></div>
@@ -102,7 +102,6 @@
                         <a class="btn btn-xs btn-primary" ng-click="deeplinkReplace(true)">+</a> &nbsp;&nbsp;
                         <a class="btn btn-xs btn-primary" ng-click="deeplinkReplace(false)">-</a>
                     </div>
-                    <pre>{{ deeplink.replace | json }}</pre>
                 </div> <!-- end col -->
             </div> <!-- end row -->
 
