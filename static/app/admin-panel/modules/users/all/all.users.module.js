@@ -102,7 +102,9 @@ angular.module("allUsersModule", ['constantModule', 'toastr', 'personFactoryModu
         delete $scope.u_user._created;
         delete $scope.u_user._links;
         delete $scope.u_user._updated;
-        $scope.u_user.password.password_raw = (password.password_raw) ? password.password_raw: $scope.u_user.password.password_raw;
+        if($scope.password.password_raw) {
+            $scope.u_user.password.password_raw = $scope.password.password_raw;
+        }
         personFactory.update($scope.u_user, $scope.u_user.tokens.token).then(function (data) {
             console.log(data);
             toastr.success("Updated!", "Success!");
