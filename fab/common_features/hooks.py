@@ -48,12 +48,13 @@ def before_update_deal_categories(*args, **kwargs):
 
 @self_or_admin_login_required
 def before_update_person(resource, update, original):
-    response = {
-        'password': str(generate_password_hash(update['password']['password_raw'])),
-        'password_raw': str(generate_password_hash(update['password']['password_raw'])),
-        'last_password_updated_date': datetime.now()
-    }
-    update.update({"password": response})
+    if 'password' in update and 'password_raw' in  update['password']:
+        response = {
+            'password': str(generate_password_hash(update['password']['password_raw'])),
+            'password_raw': update['password']['password_raw'],
+            'last_password_updated_date': datetime.now()
+        }
+        update.update({"password": response})
 
 @self_or_admin_login_required
 def before_returning_person(*args, **kwargs):
