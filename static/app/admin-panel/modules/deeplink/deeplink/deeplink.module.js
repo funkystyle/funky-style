@@ -112,7 +112,11 @@ angular.module("deeplinkModule", ['toastr', 'cgBusy', 'satellizer', 'ui.select',
             method: "GET"
         }).then(function (data) {
             console.log("List of deep links list: ", data.data._items);
-            $scope.gridOptions.data = data.data._items;
+            var items = data.data._items;
+            angular.forEach(items, function (item) {
+                item.affiliate_network = (item.affiliate_network.indexOf('://') === -1) ? 'http://' + item.affiliate_network : item.affiliate_network;
+                $scope.gridOptions.data.push(item);
+            });
         }, function (error) {
             consol.log("Error: ", error);
         });

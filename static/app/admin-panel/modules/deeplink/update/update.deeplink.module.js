@@ -36,6 +36,7 @@ angular.module("updateDeeplinkModule", ["ui.select", "ngSanitize", "ui.bootstrap
             }).then(function (data) {
                 console.log("Success deeplink GET: ", data);
                 $scope.deeplink = data.data;
+                $scope.deeplink.affiliate_network = ($scope.deeplink.affiliate_network.indexOf('://') === -1) ? 'http://' + $scope.deeplink.affiliate_network : $scope.deeplink.affiliate_network;
             }, function (error) {
                 console.log("Error Deeplink Save: ", error);
                 toastr.error('Something went wrong!');

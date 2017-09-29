@@ -102,7 +102,11 @@ angular.module("allUsersModule", ['constantModule', 'toastr', 'personFactoryModu
         delete $scope.u_user._created;
         delete $scope.u_user._links;
         delete $scope.u_user._updated;
-        $scope.u_user.password.password_raw = (password.password_raw) ? password.password_raw: $scope.u_user.password.password_raw;
+        delete $scope.u_user.password.password_raw;
+        delete $scope.u_user.password.password;
+        if($scope.password.password_raw) {
+            $scope.u_user.password.password_raw = $scope.password.password_raw;
+        }
         personFactory.update($scope.u_user, $scope.u_user.tokens.token).then(function (data) {
             console.log(data);
             toastr.success("Updated!", "Success!");
@@ -139,16 +143,4 @@ angular.module("allUsersModule", ['constantModule', 'toastr', 'personFactoryModu
             toastr.error(error.data._error.message, 'Error!');
         });
     };
-
-    $scope.pageChangeHandler = function(num) {
-        console.log('drinks page changed to ' + num);
-    };
-
-    $scope.toggleSidebar = function(id) {
-        if ($("#"+id).css("right") == "0px") {
-            $("#"+id).animate({ "right": '-1000', 'display': 'none' }, 500);
-        } else {
-            $("#"+id).animate({ "right": '0', 'display': 'block' }, 500);
-        }
-    }
 });
