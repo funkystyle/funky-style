@@ -65,7 +65,7 @@
   "NUMBER_OF_CLICKS_COLLECTIONS": ["deal_brands","deal_categories","deals","stores","categories", "coupons"],
 
   "PRIORITY":{
-    "blog": {"changefreq": "daily", "priority": 0.4, "prefix": "blogs/category"},
+    "blog": {"changefreq": "daily", "priority": 0.4, "prefix": "blog"},
     "categories": {"changefreq": "daily", "priority": 0.8, "prefix": "category"},
     "cms": {"changefreq": "weekly", "priority": 0.4, "prefix": ""},
     "deal_brands": {"changefreq": "daily", "priority": 0.8, "prefix": "brands"},
@@ -75,6 +75,15 @@
     "cms_pages": {"changefreq": "daily", "priority": 0.8, "prefix": ""}
 
   },
+
+  "EXTRA_URLS": {
+    "categories":"",
+    "stores":"",
+    "deals":"",
+    "blog":"",
+    "":""
+  },
+
 
   "LOOK_UP_FIELDS":{
     "blog": "url",

@@ -3,7 +3,7 @@ from datetime import datetime
 from lxml import etree
 from settings import SERVER_URL, \
     SCHEMAS, IGNORE_COLLECTION_NAMES, BASE_DIR, INDEX_XML_TEMPLATE, \
-    SUB_FILE_TEMPLATE, LOOK_UP_FIELDS, PRIORITY,XML_FILES_FOLDER
+    SUB_FILE_TEMPLATE, LOOK_UP_FIELDS, PRIORITY,XML_FILES_FOLDER, EXTRA_URLS
 
 
 class SiteMinder(object):
@@ -30,17 +30,26 @@ class SiteMinder(object):
         self.parser(self.index_file)
         # update index file
         for child in self.root:
-            print(child.getchildren()[0].text, "{server_url}/sitemap_{resource_name}.xml".format(
+
+            if child.getchildren()[0].text == "{server_url}/".format(
                     server_url=SERVER_URL,
-                    resource_name=self.replaced_resource
-            ))
+                    resource_name=self.resource_name
+            ):
+                child.getchildren()[1].text = self.date_time
+
+            if self.resource_name in EXTRA_URLS.keys():
+                if child.getchildren()[0].text == "{server_url}/{resource_name}/".format(
+                        server_url=SERVER_URL,
+                        resource_name=self.resource_name
+                ):
+                    child.getchildren()[1].text = self.date_time
+
             if child.getchildren()[0].text == "{server_url}/sitemap_{resource_name}.xml".format(
                     server_url=SERVER_URL,
                     resource_name=self.replaced_resource
             ):
                 child.getchildren()[1].text = self.date_time
                 self.tree.write(self.file_path)
-                return True
         return False
 
 def write_to_file(out_file, data):
@@ -76,7 +85,23 @@ def generate_sitemap_index_file():
                   "<loc>{}</loc>" \
                   "<lastmod>{}</lastmod>\
                   </sitemap>".format(loc, lastmod)
+
+    element += "<sitemap>" \
+               "<loc>{}/</loc>" \
+               "<lastmod>{}</lastmod>\
+               </sitemap>".format(SERVER_URL, lastmod)
+
+    for key in EXTRA_URLS.keys():
+        if key:
+            element += "<sitemap>" \
+                       "<loc>{server_url}/{resource_name}/</loc>" \
+                       "<lastmod>{last_modified}</lastmod>\
+                       </sitemap>".format(server_url=SERVER_URL,
+                                          resource_name=key,
+                                          last_modified=lastmod)
+
     template = template.format(data=element)
+
     out_file = os.path.join(BASE_DIR, 'sitemap_xml_files', 'sitemap_index.xml')
     write_to_file(out_file, template)
 
@@ -95,13 +120,13 @@ def generate_sub_xml_file(resource_name, app):
         )
 
         if PRIORITY[resource_name]['prefix']:
-            loc = "{base_url}/{prefix_collcection}/{field_string}".format(
+            loc = "{base_url}/{prefix_collcection}/{field_string}/".format(
                 base_url=base_url,
                 prefix_collcection=PRIORITY[resource_name]['prefix'],
                 field_string=str(item[LOOK_UP_FIELDS[resource_name]])
             )
         else:
-            loc = "{base_url}/{field_string}".format(
+            loc = "{base_url}/{field_string}/".format(
                 base_url=base_url,
                 field_string=str(item[LOOK_UP_FIELDS[resource_name]])
             )
