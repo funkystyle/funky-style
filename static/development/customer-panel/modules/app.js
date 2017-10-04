@@ -36,6 +36,23 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
         function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
             $locationProvider.html5Mode(true).hashPrefix('');
 
+            // Deal with missing trailing slash
+            $urlRouterProvider.rule(function($injector, $location) {
+                var path = $location.path(), search = $location.search();
+                console.log("=======================", path, search)
+                if (path[path.length-1] !== '/') {
+                    if (search === {}) {
+                        return path + '/';
+                    } else {
+                        var params = [];
+                        angular.forEach(search, function(v, k){
+                            params.push(k + '=' + v);
+                        });
+                        return path + '/?' + params.join('&');
+                    }
+                }
+            });
+
             // configuring the lazyLoad angularjs files
             $ocLazyLoadProvider.config({
                 // debug: true,
