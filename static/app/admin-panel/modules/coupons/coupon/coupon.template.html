@@ -19,13 +19,13 @@
     <div class="panel-body" cg-busy="load">
         <div class="row" style="margin-bottom: 30px;">
             <div class="col-lg-2 col-md-2" ng-if="checkRole() && mySelectedRows.length">
-                <button class="btn btn-sm btn-primary btn-block"
+                <button class="btn btn-sm btn-primary"
                         ng-click="deleteSelected(mySelectedRows)">
                     Delete Selected
                     <b class="pull-right">( {{ mySelectedRows.length }} )</b>
                 </button>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-10 col-md-10">
                 <span ng-click="filterByStatus(val)" ng-repeat="(key, val) in statusOptions">
                     <a class="btn btn-sm btn-default" href="">
                         {{ key }}  (<b>{{ val.length }}</b>)

@@ -7,6 +7,16 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
         $scope.stores = [];
         $scope.persons = [];
 
+        var destArray = {
+            "All": [],
+            "Pending": [],
+            "Draft": [],
+            "Trash": [],
+            "Verified": [],
+            "Publish": [],
+            "Expired Coupons": []
+        };
+
         $templateCache.put('ui-grid/date-cell',
             "<div class='ui-grid-cell-contents'>{{COL_FIELD | date:'yyyy-MM-dd'}}</div>"
         );
@@ -201,12 +211,19 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 if(data['data']) {
                     $scope.gridOptions.data = [];
                     $scope.coupons = data.data._items;
-                    var destArray = _.groupBy(data.data._items, 'status');
                     destArray['All'] = $scope.coupons;
                     destArray['Expired Coupons'] = [];
+                    // Push items into destArray
+                    angular.forEach(destArray, function (val, key) {
+                        angular.forEach($scope.coupons, function (item) {
+                            if (item.status === key && new Date(item.expire_date) > new Date()) {
+                                destArray[key].push(item);
+                            }
+                        });
+                    });
+
                     angular.forEach($scope.coupons, function(item) {
                         // push categories into array for filtering
-                        // console.log(item.related_categories, item.related_stores);
                         angular.forEach(item.related_categories, function (category) {
                             if(category) {
                                 $scope.categories.push({
