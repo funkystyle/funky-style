@@ -27,8 +27,9 @@ function replaceSeo(newVal, items, from) {
     };
     angular.forEach(items, function (item, index) {
         if(from === item['selection_type']['code']) {
-            replacement.title = item.meta_title.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
-            replacement.description = item.meta_description.replace("%%title%%", newVal).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
+            // .replace("%%currentmonth%%", month).replace("%%currentyear%%", year)
+            replacement.title = item.meta_title.replace("%%title%%", newVal);
+            replacement.description = item.meta_description.replace("%%title%%", newVal);
             if(item['h1']) {
                 replacement.h1 = item.h1.replace("%%title%%", newVal);
             }

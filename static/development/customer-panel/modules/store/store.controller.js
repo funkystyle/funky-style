@@ -52,13 +52,13 @@ angular
                 $scope.storeAlphabet['ALL']['array'] = $scope.stores;
                 angular.forEach($scope.stores, function(item) {
                     if (parseInt(item.name.charAt(0))) {
-                        if ($scope.storeAlphabet['#'].array.indexOf(item) == -1) {
+                        if ($scope.storeAlphabet['#'].array.indexOf(item) === -1) {
                             $scope.storeAlphabet["#"].enable = true;
                             $scope.storeAlphabet["#"].array.push(item);
                         }
                     } else {
                         var key = item.name.charAt(0).toUpperCase();
-                        if ($scope.storeAlphabet[key].array.indexOf(item) == -1) {
+                        if ($scope.storeAlphabet[key].array.indexOf(item) === -1) {
                             $scope.storeAlphabet[key].enable = true;
                             $scope.storeAlphabet[key].array.push(item);
                         }
@@ -73,7 +73,7 @@ angular
         // get the list of SEO
         SEO.getSEO().then(function (data) {
             angular.forEach(data, function (item) {
-                if(item.selection_type.code == 'store') {
+                if(item.selection_type.code === 'store') {
                     var data = SEO.seo("", item, 'store');
                 }
             });

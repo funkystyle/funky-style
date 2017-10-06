@@ -286,20 +286,6 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                         }
                     }
                 })
-                // Dashboard
-                /*.state('main.dashboard', {
-                    url: '/dashboard',
-                    templateUrl: 'static/app/customer-panel/modules/dashboard/dashboard.template.html',
-                    controller: "dashboardCtrl",
-                    resolve: {
-                        dashboard: function($ocLazyLoad) {
-                            return $ocLazyLoad.load({
-                                name: 'dashboardModule',
-                                files: ['static/app/customer-panel/modules/dashboard/dashboard.controller.js']
-                            })
-                        }
-                    }
-                })*/
                 // 404
                 .state('404', {
                     url: '/404',
