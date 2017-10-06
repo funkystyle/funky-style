@@ -184,7 +184,7 @@ ol > li > a {
     height: 60px;
     /* margin: 5px; */
     padding: 2px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(221, 221, 221, 0.59);
     align-items: center;
     justify-content: center;
     /* margin-bottom: 10px; */
