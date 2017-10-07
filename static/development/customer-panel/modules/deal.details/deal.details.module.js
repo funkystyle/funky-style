@@ -142,10 +142,10 @@ angular.module("dealDetailsModule", ["Directives"])
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
                 var output = data['data']['data']['output_url'],
                     generated_url = output ? output : item.destination_url;
-                url = $state.href('main.deal_post_details', {url: $stateParams['url'], cc: item._id, destionationUrl: generated_url});
+                $state.go('main.deal_post_details', {url: $stateParams['url'], cc: item._id, destionationUrl: generated_url});
                 //window.open(url,'_blank');
-                $('<a href="'+url+'" target="_blank">&nbsp;</a>')[0].click();
-                window.location.href = generated_url;
+                $('<a href="'+generated_url+'" target="_blank">&nbsp;</a>')[0].click();
+                // window.location.href = generated_url;
             }, function (error) {
                 console.log(error);
             });

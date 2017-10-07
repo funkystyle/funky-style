@@ -99,9 +99,9 @@ angular.module('homeModule', ["headerModule", "Directives"])
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
                 var output = data['data']['data']['output_url'],
                     generated_url = output ? output : item.destination_url;
-                url = $state.href('main.home', {cc: item._id, destionationUrl: generated_url});
-                window.location.href = generated_url;
-                $('<a href="'+url+'" target="_blank">&nbsp;</a>')[0].click();
+                $state.go('main.home', {cc: item._id, destionationUrl: generated_url});
+                // window.location.href = generated_url;
+                $('<a href="'+generated_url+'" target="_blank">&nbsp;</a>')[0].click();
             });
         };
 

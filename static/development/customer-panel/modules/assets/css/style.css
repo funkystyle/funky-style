@@ -17,7 +17,12 @@
     background: transparent !important;
     border-bottom: 0 solid !important;
 }
-
+@-moz-document url-prefix() {
+    a.show_copan_code {
+        display: flex;
+        justify-content: space-between;
+    }
+}
 body {
     background-color: #f3f3f3;
     font-family: "Open Sans", Arial, sans-serif !important;
