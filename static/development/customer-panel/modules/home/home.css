@@ -9,7 +9,10 @@
     transition-property: opacity;
 }
 
-
+.deal-tile-directive-hidden {
+    width: 24%;
+    height: 0;
+}
 #myCarousel .carousel-caption {
     left:0;
     right:0;
