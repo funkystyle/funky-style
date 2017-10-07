@@ -15,6 +15,10 @@ def sitemap_stores():
 def sitemap_categories():
     return Response(open('sitemap_xml_files/sitemap_categories.xml').read(), mimetype='text/xml')
 
+@app.route('/google1214ac2f16488aa1.html/')
+def sitemap_verfication():
+    return Response(open('sitemap_xml_files/google1214ac2f16488aa1.html').read(), mimetype='text/html')
+
 @app.route('/sitemap_deals.xml')
 def sitemap_deals():
     return Response(open('sitemap_xml_files/sitemap_deals.xml').read(), mimetype='text/xml')
