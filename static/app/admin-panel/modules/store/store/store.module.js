@@ -44,6 +44,11 @@ angular.module("storeModule", ['angular-table', 'constantModule', 'toastr', 'per
                     '   <a ng-if="grid.appScope.checkRole()" ui-sref="header.update-store({storeId: row.entity._id})">{{ row.entity.name }}</a>' +
                     '   <a style="color: #000000;" ng-if="!grid.appScope.checkRole()">{{ row.entity.name }}</a>' +
                     '</p>' +
+                    '<p class="coupon-options">' +
+                    '<span><a href="/store/{{ row.entity.url }}" target="_blank">View</a></span> &nbsp;&nbsp;' +
+                    '<span>' +
+                    '   <a ng-if="grid.appScope.checkRole()" ui-sref="header.update-store({storeId: row.entity._id})">Edit</a>' +
+                    '</span></p>' +
                     '</div>'
                 },
                 {
