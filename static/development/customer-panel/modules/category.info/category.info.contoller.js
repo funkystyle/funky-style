@@ -71,7 +71,9 @@ angular
                 $state.go('main.categoryinfo', {url: category.url, cc: item._id, destionationUrl: generated_url});
                 // window.open(url,'_blank');
                 // window.location.href = generated_url;
-                $('<a href="'+generated_url+'" target="_blank">&nbsp;</a>')[0].click();
+                // $('<a href="'+generated_url+'" target="_blank">&nbsp;</a>')[0].click();
+                var tabOpen = window.open("about:blank", 'newtab');
+                tabOpen.location = generated_url;
             });
 
         };

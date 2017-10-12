@@ -62,9 +62,8 @@ angular
                 var output = data['data']['data']['output_url'],
                     generated_url = output ? output : item.destination_url;
                 $state.go('main.store-info', {url: store.url, cc: item._id, destionationUrl: generated_url});
-                //window.open(url,'_blank');
-                $('<a href="'+generated_url+'" target="_blank">&nbsp;</a>')[0].click();
-                // window.location.href = generated_url;
+                var tabOpen = window.open("about:blank", 'newtab');
+                tabOpen.location = generated_url;
             }, function (error) {
                 console.log(error);
             });

@@ -144,7 +144,9 @@ angular.module("dealDetailsModule", ["Directives"])
                     generated_url = output ? output : item.destination_url;
                 $state.go('main.deal_post_details', {url: $stateParams['url'], cc: item._id, destionationUrl: generated_url});
                 //window.open(url,'_blank');
-                $('<a href="'+generated_url+'" target="_blank">&nbsp;</a>')[0].click();
+                // $('<a href="'+generated_url+'" target="_blank">&nbsp;</a>')[0].click();
+                var tabOpen = window.open("about:blank", 'newtab');
+                tabOpen.location = generated_url;
                 // window.location.href = generated_url;
             }, function (error) {
                 console.log(error);
