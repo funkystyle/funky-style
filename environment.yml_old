@@ -1,13 +1,9 @@
 name: fab_env
 channels:
-- adam
 - defaults
 dependencies:
-- simple-crypt=3.0.2=py27_0
-- libgcc-ng=7.2.0=h7cc24e2_2
 - openssl=1.0.2l=0
 - pip=9.0.1=py27_1
-- pycrypto=2.6.1=py27h9abbf5c_1
 - python=2.7.13=0
 - readline=6.2=2
 - setuptools=27.2.0=py27_0
@@ -26,14 +22,17 @@ dependencies:
   - flask-cors==3.0.3
   - flask-mail==0.9.1
   - flask-pymongo==0.5.1
-  - gunicorn==19.7.1
   - itsdangerous==0.24
   - jinja2==2.9.6
   - lxml==3.8.0
   - markupsafe==0.23
+  - pycrypto==2.6.1
   - pyjwt==1.5.2
   - pymongo==3.4.0
   - pytz==2017.2
+  - simple-crypt==4.1.7
   - simplejson==3.11.1
   - six==1.10.0
   - werkzeug==0.11.15
+prefix: /home/satya/miniconda3/envs/fab_env
+

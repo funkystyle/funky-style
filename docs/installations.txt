@@ -1,42 +1,100 @@
-pip packages
-----------------------
-Eve==0.7.2
-Flask-Mail==0.9.1
-gunicorn==19.7.1
-Flask-Cors==3.0.2
-PyJWT==1.4.2
+$ wget -O miniconda_install.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+$ ./miniconda_install.sh
+Create Anaconda enviromment:
+
+$ conda env create -f environment.yml
+
+pip install simple-crypt==4.1.7
+
 
 system packages
 -----------------------
 sudo apt-get install gcc
 sudo apt-get install nginx
 
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+--> this if for ubuntu 16: echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo service mongod start
+
+use fb_db
+db.createUser({
+ user: "t",
+  pwd: "t",
+  roles: [
+    { role: "dbAdmin", db: "fb_db" }
+  ]
+})
+
+
+nginx
+------
+# Expires map
+map $sent_http_content_type $expires {
+    default                    off;
+    text/html                  epoch;
+    text/css                   max;
+    application/javascript     max;
+    application/woff2          max;
+    ~image/                    max;
+}
+
+
+server {
+        listen  80;
+        server_name 54.212.202.225;
+        expires $expires;
+        fastcgi_hide_header Set-Cookie;
+        location /static/ {
+            root /home/ubuntu/fab;
+        }
+
+        location / {
+                proxy_set_header Host $host;
+                proxy_pass http://127.0.0.1:8000/;
+                proxy_http_version 1.1;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+        }
+}
+
+nginx gzip
+-------------
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_buffers 16 8k;
+        gzip_http_version 1.1;
+        #gzip_types text/plain text/css application/json application/javascript text/xml appl$
+        gzip_types
+            text/plain
+            text/css
+            text/js
+            text/xml
+            text/javascript
+            application/javascript
+            application/x-javascript
+            application/json
+            application/xml
+            application/rss+xml
+            image/svg+xml
+            image/x-icon
+            image/bmp
+            image/png
+            image/gif
+            image/jpeg
+            font/woff2 woff
+            application/x-font-woff woff2
+            application/font-woff2 woff2
+            image/jpg;
+
+
+
+
+
 mongodb installation on ubuntu 16.04
+---------
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
-
-
-
-
-,
-        'url': {
-            'type': 'string',
-            'required': True,
-            'unique': True
-        },
-        'image': {
-            'type': 'string',
-            'required': True
-        },
-        'top_description':{
-            'type': 'string'
-        },
-        'footer_description':{
-            'type': 'string'
-        },
-        'h1':{
-            'type': 'string'
-        },
-        'h2': {
-            'type': 'string'
-        },

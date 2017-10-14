@@ -28,16 +28,3 @@ db.createUser(
 )
 
 
-db.createUser({
-  user: "u1",
-  pwd: "p1",
-  roles: [ { role: "userAdminAnyDatabase", db: "fab_db" } ]
-})
-
-db.createUser(
-   {
-     user: "tt",
-     pwd: "tt",
-     roles: [ "readWrite", "dbAdmin" ]
-   }
-)
