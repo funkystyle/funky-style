@@ -1,3 +1,6 @@
+Note: should not put code in root folder, it will generate 403
+put it in home folder.
+
 $ wget -O miniconda_install.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 $ ./miniconda_install.sh
 Create Anaconda enviromment:
