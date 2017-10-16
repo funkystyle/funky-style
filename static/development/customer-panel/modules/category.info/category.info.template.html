@@ -32,7 +32,7 @@
                     <p ng-click="show = !show" class="para_small top-desc"
                        ng-class="{'show-desc': show}" data-ng-bind-html="trustAsHtml(category.top_description)"></p>
                     <p class="para_small">
-                        {{ category.related_coupons.length }} Verified Coupons -
+                        {{ coupons.length }} Verified Coupons -
                         <time datetime="{{ category.toDayDate | date: 'dd MMM yyyy hh:mm' }}">{{ category.toDayDate | date: "dd MMM yyyy hh:mm a" }}</time>
                     </p>
 				</div>

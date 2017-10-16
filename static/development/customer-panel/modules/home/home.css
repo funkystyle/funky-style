@@ -415,6 +415,14 @@ ul.unstyled li a {
     .update-nag > .update-text {
         line-height: 26px;
     }
+    ul.unstyled li {
+      width: 48%;
+      background: #f1f1f1;
+      max-height: 50px;
+    }
+    ul.unstyled li a {
+      font-size: 12px;
+    }
 }
 @media only screen and (max-device-width: 720px) {
     .store-thumbnail .description-area {

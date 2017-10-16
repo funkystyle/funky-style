@@ -23,6 +23,15 @@
             <li ng-repeat="item in categories | limitTo: 5 | orderBy: 'name'">
                 <a ui-sref="blogs.category({url: item.url})" role="button">{{ item.name }}</a>
             </li>
+            <li class="hidden-li" ng-repeat="item in categories | limitTo: 5 | orderBy: 'name'">
+                <a ui-sref="blogs.category({url: item.url})" role="button">{{ item.name }}</a>
+            </li>
+            <li class="hidden-li" ng-repeat="item in categories | limitTo: 5 | orderBy: 'name'">
+                <a ui-sref="blogs.category({url: item.url})" role="button">{{ item.name }}</a>
+            </li>
+            <li class="hidden-li" ng-repeat="item in categories | limitTo: 5 | orderBy: 'name'">
+                <a ui-sref="blogs.category({url: item.url})" role="button">{{ item.name }}</a>
+            </li>
         </ul>
     </div>
 </div><!--Navbar end-->

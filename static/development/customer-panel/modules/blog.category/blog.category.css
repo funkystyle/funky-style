@@ -1,10 +1,31 @@
 @media only screen and (max-device-width: 720px) {
     ul.navbar-nav {
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
     }
     ul.navbar-nav li {
-        width: 48%;
-        float: left;
+        width: 33%;
+    }
+    ul.navbar-nav li.hidden-li {
+      height: 0;
+      width: 33%;
+      visibility: hidden;
+    }
+    .navbar-nav>li>a {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      line-height: 15px;
+      font-size: 12px;
+      color: #000;
+      background: #fff;
+      margin: 2px;
+      min-height: 30px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .h3-heading {
         line-height: 25px;
@@ -26,11 +47,11 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
-    .navbar-nav>li>a {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        line-height: 10px;
-        font-size: 13px;
+    .only-in-mobile-pad {
+      padding: 0 15px !important;
+    }
+    .cont_1 {
+      min-height: 0 !important;
     }
 }
 .blog-ui-view {
@@ -292,8 +313,13 @@ h4{
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
+ul.navbar-nav li.hidden-li {
+  visibility: hidden;
+  height: 0;
+}
 .para_last{
     color:#333333;
+    font-size: 15px;
     font-weight: normal;
     word-wrap: break-word;
 }

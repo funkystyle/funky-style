@@ -27,6 +27,20 @@
         padding: 5px;
         border-radius: 3px;
     }
+    .cat-top-store-area {
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+    .cat-top-stores {
+      width: 46.5% !important;
+      margin: 5px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .cat-top-stores a {
+        width: 100% !important;
+    }
 }
 .related-coupon-deal {
     position: relative;

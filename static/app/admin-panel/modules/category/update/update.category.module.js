@@ -147,6 +147,8 @@ angular.module("updateCategoryModule", ["ui.select", "ngSanitize", "ui.bootstrap
                 category.alt_image = "data:image/jpeg;base64,"+category.alt_image.base64;
             }
 
+            category.last_modified_by = $scope.user._id;
+
             delete category._created;
             delete category._updated;
             delete category._links;
