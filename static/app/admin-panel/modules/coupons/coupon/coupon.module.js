@@ -6,6 +6,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
         $scope.categories = [];
         $scope.stores = [];
         $scope.persons = [];
+        $scope.last_modified_by_persons = [];
 
         var destArray = {
             "All": [],
@@ -80,7 +81,7 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     '</div>'
                 },
                 {
-                    field: "last_modified_by", width: "20%", displayName: "Submitted By", enableSorting: false,
+                    field: "created_by", width: "10%", displayName: "Submitted By", enableSorting: false,
                     filter: {
                         condition: function (searchTerm, cellValue, row, column) {
                             console.log(cellValue, searchTerm);
@@ -94,7 +95,21 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                     cellTemplate: "<div>{{ row.entity[col.field].email }}</div>"
                 },
                 {
-                    field: 'related_stores', width: "20%", displayName: "Store",
+                    field: "last_modified_by", width: "10%", displayName: "Last Modified By", enableSorting: false,
+                    filter: {
+                        condition: function (searchTerm, cellValue, row, column) {
+                            console.log(cellValue, searchTerm);
+                            var filtered = false;
+                            filtered = cellValue._id === searchTerm;
+                            return filtered;
+                        },
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: $scope.last_modified_by_persons
+                    },
+                    cellTemplate: "<div>{{ row.entity[col.field].email }}</div>"
+                },
+                {
+                    field: 'related_stores', width: "10%", displayName: "Store",
                     enableSorting: false,
                     filter: {
                         condition: function (searchTerm, cellValue, row, column) {
@@ -202,7 +217,8 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                 "recommended_stores":1,
                 "related_categories":1,
                 "related_stores":1,
-                "last_modified_by": 1
+                "last_modified_by": 1,
+                "created_by": 1
             };
             $scope.load = $http({
                 url: '/api/1.0/coupons?embedded='+JSON.stringify(embedded)+'&sort=-_created&max_results=20000&rand_number=' + new Date().getTime(),
@@ -242,8 +258,14 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                             }
                         }
 
-                        if(item['last_modified_by']) {
+                        if(item['created_by']) {
                             $scope.persons.push({
+                                value: item.created_by._id,
+                                label: item.created_by.email
+                            });
+                        }
+                        if(item['last_modified_by']) {
+                            $scope.last_modified_by_persons.push({
                                 value: item.last_modified_by._id,
                                 label: item.last_modified_by.email
                             });
@@ -266,8 +288,12 @@ angular.module("couponModule", ['constantModule', 'toastr', 'cgBusy', 'satellize
                         $scope.persons = _.uniq($scope.persons, function (item) {
                             return item.value;
                         });
-                        $scope.gridApi.grid.columns[4].filter.selectOptions = $scope.categories;
-                        $scope.gridApi.grid.columns[3].filter.selectOptions = $scope.stores;
+                        $scope.last_modified_by_persons = _.uniq($scope.last_modified_by_persons, function (item) {
+                            return item.value;
+                        });
+                        $scope.gridApi.grid.columns[5].filter.selectOptions = $scope.categories;
+                        $scope.gridApi.grid.columns[4].filter.selectOptions = $scope.stores;
+                        $scope.gridApi.grid.columns[3].filter.selectOptions = $scope.last_modified_by_persons;
                         $scope.gridApi.grid.columns[2].filter.selectOptions = $scope.persons;
                         $scope.gridApi.grid.refresh();
                     }, 2000);

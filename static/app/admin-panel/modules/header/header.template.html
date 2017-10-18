@@ -15,7 +15,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#/">
-                <img src="//static/app/admin-panel/modules/assets/images/logo-png.png" alt="LOGO">
+                <img src="/static/app/admin-panel/modules/assets/images/logo-png.png" alt="LOGO">
             </a>
         </div>
         <!-- Top Menu Items -->
@@ -62,9 +62,9 @@
                     <a href="" data-toggle="collapse" data-target="#submenu-0">
                         Coupons
                         <i class="fa fa-fw pull-right"
-                           ng-class="{'fa-angle-down': state.includes('header.coupon') || state.includes('header.add-coupon'), 'fa-angle-right': !state.includes('header.coupon') || !state.includes('header.add-coupon')}"></i>
+                           ng-class="{'fa-angle-down': state.includes('header.coupon') || state.includes('header.add-coupon') || state.includes('header.update-coupon'), 'fa-angle-right': !state.includes('header.coupon') || !state.includes('header.add-coupon') || !state.includes('header.update-coupon')}"></i>
                     </a>
-                    <ul id="submenu-0" class="collapse" ng-class="{in: state.includes('header.coupon') || state.includes('header.add-coupon')}">
+                    <ul id="submenu-0" class="collapse" ng-class="{in: state.includes('header.coupon') || state.includes('header.add-coupon') || state.includes('header.update-coupon')}">
                         <li ng-class="{active: state.includes('header.coupon')}">
                             <a href="#/coupons">
                                 All Coupons<i class="fa fa-angle-right pull-right"></i>
