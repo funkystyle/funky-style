@@ -106,6 +106,8 @@ angular.module("addCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap", "t
         $scope.addCoupon = function (coupon) {
             var finalItems = [];
             coupon.expire_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
+            coupon.created_by = $scope.user._id;
+            coupon.last_modified_by = $scope.user._id;
             console.log(coupon.expire_date);
             couponFactory.post(coupon).then(function (data) {
                 console.log("Added coupon response data ---- ", data);

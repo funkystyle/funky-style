@@ -104,16 +104,16 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                 embedded['related_stores'] = 1;
                 embedded['recommended_stores'] = 1;
                 embedded['last_modified_by'] = 1;
+                embedded['created_by'] = 1;
                 $http({
                     url: URL.coupons+"/"+$stateParams.couponId+"?embedded="+JSON.stringify(embedded)+"&rand_number="+Math.random(),
                     method: "GET"
                 }).then(function (data) {
-                    if(data['data'] && typeof data['data'] == 'object') {
+                    if(data['data'] && typeof data['data'] === 'object') {
                         var item = data.data;
                         item.related_stores = clearNullIds(item.related_stores);
                         item.related_categories = clearNullIds(item.related_categories);
                         item.recommended_stores = clearNullIds(item.recommended_stores);
-                        item.last_modified_by = (item.last_modified_by) ? (typeof item.last_modified_by == 'object') ? item.last_modified_by._id : item.last_modified_by: $scope.persons[0]._id;
 
                         $scope.coupon = item;
                         console.log(item);
@@ -133,27 +133,27 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
         $scope.addedCategories = [];
         $scope.removeCategory = function (item, model) {
             console.log(item, model);
-            if($scope.removedCategories.indexOf(item) == -1) {
+            if($scope.removedCategories.indexOf(item) === -1) {
                 $scope.removedCategories.push(item);
             }
         };
 
         $scope.removeStore = function (item, model) {
             console.log(item, model);
-            if($scope.removedStores.indexOf(item) == -1) {
+            if($scope.removedStores.indexOf(item) === -1) {
                 $scope.removedStores.push(item);
             }
         };
         $scope.addCategory = function (item, model) {
             console.log(item, model);
-            if($scope.addedCategories.indexOf(item) == -1) {
+            if($scope.addedCategories.indexOf(item) === -1) {
                 $scope.addedCategories.push(item);
             }
         };
 
         $scope.addStore = function (item, model) {
             console.log(item, model);
-            if($scope.addedStores.indexOf(item) == -1) {
+            if($scope.addedStores.indexOf(item) === -1) {
                 $scope.addedStores.push(item);
             }
         };
@@ -164,8 +164,11 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
 
             // coupon.expire_date = new Date($("#datetimepicker1").find("input").val());
             coupon.expire_date = new Date(Date.parse($("#datetimepicker1").find("input").val())).toUTCString();
+            coupon.last_modified_by = $scope.user._id;
+
             delete coupon._created;
             delete coupon._updated;
+            delete coupon.created_by;
             delete coupon._links;
 
             console.log("Coupon Last modified by: ", coupon.last_modified_by, $scope.selected_user.user);
@@ -268,6 +271,7 @@ angular.module("updateCouponModule", ["ui.select", "ngSanitize", "ui.bootstrap",
                     $scope.addedStores = [];
                     $scope.addedCategories = [];
                     toastr.success(coupon.title+" Updated", "Success!");
+                    $state.reload();
                 });
             }, function (error) {
                 console.log(error);

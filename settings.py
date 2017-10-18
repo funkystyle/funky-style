@@ -183,6 +183,13 @@ SCHEMAS = {
                     'encode': {'type': 'boolean', 'default': False}
                  }
              }
+        },
+        'created_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
         }
     },
     'persons': {
@@ -474,142 +481,156 @@ SCHEMAS = {
                 'field': '_id'
             }
 
+        },
+        'created_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
         }
     },
     'categories':{
-            "number_of_clicks": {
-                "type": "integer",
-                "default": 0
-            },
-            'name': {
-                'type': 'string',
-                'required': True,
-                'unique': True
-            },
-            'url': {
-                'type': 'string',
-                'required': True,
-                'unique': True
-            },
-            'image': {
-                'type': 'string'
-            },
-            'top_description': {
-                'type': 'string'
-            },
-            'footer_description': {
-                'type': 'string'
-            },
-            'h1': {
-                'type': 'string'
-            },
-            'h2': {
-                'type': 'string'
-            },
-            'related_categories': {
-                'type': 'list',
-                'schema': {
-                    'type': 'objectid',
-                    'data_relation': {
-                        'resource': 'categories',
-                        'embeddable': True,
-                        'field': '_id'
-                    }
-                }
-            },
-            'related_coupons': {
-                'type': 'list',
-                'schema': {
-                    'type': 'objectid',
-                    'data_relation': {
-                        'resource': 'coupons',
-                        'embeddable': True,
-                        'field': '_id'
-                    }
-                }
-            },
-            'related_deals': {
-                'type': 'list',
-                'schema': {
-                    'type': 'objectid',
-                    'data_relation': {
-                        'resource': 'deals',
-                        'embeddable': True,
-                        'field': '_id'
-                    }
-                }
-            },
-            'top_stores': {
-                'type': 'list',
-                'schema': {
-                    'type': 'objectid',
-                    'data_relation': {
-                        'resource': 'stores',
-                        'embeddable': True,
-                        'field': '_id'
-                    }
-                }
-            },
-            'top_categories': {
-                'type': 'list',
-                'schema': {
-                    'type': 'objectid',
-                    'data_relation': {
-                        'resource': 'categories',
-                        'embeddable': True,
-                        'field': '_id'
-                    }
-                }
-            },
-            'side_banner': {
-                'type': 'string'
-            },
-            'side_banner_url': {
-                'type': 'string'
-            },
-            'top_banner': {
-                'type': 'string'
-            },
-            'top_banner_url': {
-                'type': 'string'
-            },
-            'featured_category':{
-                'type': 'boolean'
-            },
-            'seo_title':{
-                'type': 'string'
-            },
-            'seo_description':{
-                'type': 'string'
-            },
-            'alt_image':{
-                'type': 'string'
-            },
-            'image_text':{
-                'type': 'string'
-            },
-            'rating':{
-                'type': 'float'
-            },
-            'breadcrumb':{
-                'type': 'list'
-            },
-            'status':{
-                'type': 'boolean'
-            },
-            'category_type':{
-                'type': 'string'
-            },
-            'menu': {
-                'type': 'string'
-            },
-            'last_modified_by': {
+        "number_of_clicks": {
+            "type": "integer",
+            "default": 0
+        },
+        'name': {
+            'type': 'string',
+            'required': True,
+            'unique': True
+        },
+        'url': {
+            'type': 'string',
+            'required': True,
+            'unique': True
+        },
+        'image': {
+            'type': 'string'
+        },
+        'top_description': {
+            'type': 'string'
+        },
+        'footer_description': {
+            'type': 'string'
+        },
+        'h1': {
+            'type': 'string'
+        },
+        'h2': {
+            'type': 'string'
+        },
+        'related_categories': {
+            'type': 'list',
+            'schema': {
                 'type': 'objectid',
                 'data_relation': {
-                    'resource': 'persons',
-                    'embeddable': True
+                    'resource': 'categories',
+                    'embeddable': True,
+                    'field': '_id'
                 }
             }
+        },
+        'related_coupons': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'coupons',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'related_deals': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'deals',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'top_stores': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'stores',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'top_categories': {
+            'type': 'list',
+            'schema': {
+                'type': 'objectid',
+                'data_relation': {
+                    'resource': 'categories',
+                    'embeddable': True,
+                    'field': '_id'
+                }
+            }
+        },
+        'side_banner': {
+            'type': 'string'
+        },
+        'side_banner_url': {
+            'type': 'string'
+        },
+        'top_banner': {
+            'type': 'string'
+        },
+        'top_banner_url': {
+            'type': 'string'
+        },
+        'featured_category':{
+            'type': 'boolean'
+        },
+        'seo_title':{
+            'type': 'string'
+        },
+        'seo_description':{
+            'type': 'string'
+        },
+        'alt_image':{
+            'type': 'string'
+        },
+        'image_text':{
+            'type': 'string'
+        },
+        'rating':{
+            'type': 'float'
+        },
+        'breadcrumb':{
+            'type': 'list'
+        },
+        'status':{
+            'type': 'boolean'
+        },
+        'category_type':{
+            'type': 'string'
+        },
+        'menu': {
+            'type': 'string'
+        },
+        'last_modified_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
+        },
+        'created_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
+        }
     },
     "deals": {
         "number_of_clicks":{
@@ -753,6 +774,13 @@ SCHEMAS = {
                 'resource': 'persons',
                 'embeddable': True
             }
+        },
+        'created_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
         }
     },
     'coupons':{
@@ -837,6 +865,13 @@ SCHEMAS = {
                 'resource': 'persons',
                 'embeddable': True
             }
+        },
+        'created_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
         }
     },
     'master_seo':{
@@ -860,6 +895,13 @@ SCHEMAS = {
             "type": "boolean"
         },
         'last_modified_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
+        },
+        'created_by': {
             'type': 'objectid',
             'data_relation': {
                 'resource': 'persons',
@@ -903,6 +945,13 @@ SCHEMAS = {
                 'resource': 'persons',
                 'embeddable': True
             }
+        },
+        'created_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
         }
     },
     'cms_pages': {
@@ -932,6 +981,13 @@ SCHEMAS = {
             'type': 'boolean'
         },
         'last_modified_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
+        },
+        'created_by': {
             'type': 'objectid',
             'data_relation': {
                 'resource': 'persons',
@@ -999,6 +1055,13 @@ SCHEMAS = {
             }
         },
         'last_modified_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
+        },
+        'created_by': {
             'type': 'objectid',
             'data_relation': {
                 'resource': 'persons',
@@ -1077,6 +1140,13 @@ SCHEMAS = {
             }
         },
         'last_modified_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
+        },
+        'created_by': {
             'type': 'objectid',
             'data_relation': {
                 'resource': 'persons',
@@ -1199,6 +1269,13 @@ SCHEMAS = {
         'breadcrumb': {
             'type': 'list',
             'required': True
+        },
+        'created_by': {
+            'type': 'objectid',
+            'data_relation': {
+                'resource': 'persons',
+                'embeddable': True
+            }
         }
     },
     'user_favourites': {

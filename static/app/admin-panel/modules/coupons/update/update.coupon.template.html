@@ -4,9 +4,9 @@
     <div class="panel-heading">
         <div class="row">
             <div class="col-lg-9">
-                <h3 style="margin-top: 10px;">
-                    <b style="text-transform: capitalize;">{{ coupon.title }}</b> Coupon!
-                </h3>
+                <h4 style="margin-top: 10px;">
+                    <b style="text-transform: capitalize;">{{ coupon.title }}</b>
+                </h4>
             </div>
             <!-- end col -->
             <div class="col-lg-2 col-sm-2 pull-right">
@@ -56,6 +56,9 @@
                         <label for="coupon_sorting">Coupon Sorting</label>
                         <input id="coupon_sorting" type="number" placeholder="Coupon Sorting Number"
                                ng-model="coupon.coupon_sorting" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-md btn-info">Update Coupon</button>
                     </div>
                 </div>
                 <!-- end col -->
@@ -145,19 +148,6 @@
                         </ui-select>
                     </div>
                     <div class="form-group">
-                        <label>Last Modified By</label>
-                        <ui-select ng-model="coupon.last_modified_by" theme="bootstrap">
-                            <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
-                            <ui-select-choices repeat="person._id as person in persons | filter: $select.search">
-                                <small>
-                                    <span ng-bind-html="''+person.first_name | highlight: $select.search"></span>
-                                    <span ng-bind-html="''+person.last_name | highlight: $select.search"></span>
-                                </small>
-                                <div ng-bind-html="person.email | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                    <div class="form-group">
                         <label>Recommended Store</label>
                         <ui-select multiple ng-model="coupon.recommended_stores" theme="bootstrap" close-on-select="false" title="Recommended Stores">
                             <ui-select-match placeholder="Select Recommended Stores">{{$item.name}}</ui-select-match>
@@ -171,9 +161,52 @@
                     </div>
                 </div>
                 <!-- end col -->
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h5><b>Created</b> User Details:</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td><p>Created By: </p></td>
+                                            <td><p><b>{{ coupon.created_by.first_name }} {{ coupon.created_by.last_name }}</b></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><p>Role: </p></td>
+                                            <td><p><b class="text-uppercase">{{ coupon.created_by.user_level }}</b></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><p>Email: </p></td>
+                                            <td><p>{{ coupon.created_by.email }}</p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h5><b>Last Modified</b> User Details:</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td><p>Last Modified By: </p></td>
+                                        <td><p><b>{{ coupon.last_modified_by.first_name }} {{ coupon.last_modified_by.last_name }}</b></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p>Role: </p></td>
+                                        <td><p><b class="text-uppercase">{{ coupon.last_modified_by.user_level }}</b></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p>Email: </p></td>
+                                        <td><p>{{ coupon.last_modified_by.email }}</p></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end Col -->
             </div>
             <!-- end row -->
-            <button type="submit" class="btn btn-md btn-info">Update Coupon</button>
         </form>
         <br><br><br><br><br><br>
     </div>

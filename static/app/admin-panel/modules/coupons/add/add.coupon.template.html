@@ -140,19 +140,6 @@
                         </ui-select>
                     </div>
                     <div class="form-group">
-                        <label>Last Modified By</label>
-                        <ui-select ng-model="selected_user.user" theme="bootstrap">
-                            <ui-select-match placeholder="Select modified user">{{ $select.selected.email }}</ui-select-match>
-                            <ui-select-choices repeat="person._id as person in persons | filter: $select.search">
-                                <small>
-                                    <span ng-bind-html="''+person.first_name | highlight: $select.search"></span>
-                                    <span ng-bind-html="''+person.last_name | highlight: $select.search"></span>
-                                </small>
-                                <div ng-bind-html="person.email | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                    <div class="form-group">
                         <label>Recommended Store</label>
                         <ui-select multiple max-labels="1" ng-model="coupon.recommended_stores" theme="bootstrap" close-on-select="false" title="Recommended Stores">
                             <ui-select-match placeholder="Select Recommended Stores">{{$item.name}}</ui-select-match>
