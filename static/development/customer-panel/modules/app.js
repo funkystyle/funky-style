@@ -434,6 +434,7 @@ angular.module('APP', ['ui.router', 'oc.lazyLoad', 'ngSanitize'])
                 title: undefined,
                 description: undefined
             };
+            newVal = (newVal) ? newVal : '';
             replacement.title = item.meta_title.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
             replacement.description = item.meta_description.replace("%%title%%", newVal).replace('%%currentdate%%', date.getDate()).replace("%%currentmonth%%", month).replace("%%currentyear%%", year);
 
