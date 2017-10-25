@@ -1,5 +1,5 @@
-angular.module("dealDetailsModule", ["Directives"])
-    .controller("dealDetailsCtrl", function ($scope, $ocLazyLoad, $http, $compile, $state, $stateParams, $sce, Query, DestionationUrl) {
+angular.module("dealDetailsModule", ["Directives", "toastr"])
+    .controller("dealDetailsCtrl", function ($scope, toastr, $ocLazyLoad, $http, $compile, $state, $stateParams, $sce, Query, DestionationUrl) {
         console.log("deal Details controller!");
 
         $scope.deal = {};
@@ -141,13 +141,16 @@ angular.module("dealDetailsModule", ["Directives"])
             // get the Deeplink destionation URL for it
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
                 var output = data['data']['data']['output_url'],
-                    generated_url = output ? output : item.destination_url;
-                $state.go('main.deal_post_details', {url: $stateParams['url'], cc: item._id, destionationUrl: generated_url});
-                //window.open(url,'_blank');
-                // $('<a href="'+generated_url+'" target="_blank">&nbsp;</a>')[0].click();
-                var tabOpen = window.open("about:blank", 'newtab');
-                tabOpen.location = generated_url;
-                // window.location.href = generated_url;
+                    generated_url = output ? output : item.destination_url,
+                    href_link = $state.go('main.deal_post_details', {url: $stateParams['url'], cc: item._id, destionationUrl: generated_url});
+                var tabOpen = window.open(href_link, 'newtab');
+                if (tabOpen === null || typeof(tabOpen) === 'undefined') {
+                    toastr.error('Please disable your pop-up blocker and click the link again to copy your Coupon Code', "Disable Pop-Up Blocker!");
+                }
+                else {
+                    tabOpen.focus();
+                    window.location.href = generated_url;
+                }
             }, function (error) {
                 console.log(error);
             });

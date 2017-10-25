@@ -1,6 +1,16 @@
 angular
-    .module("storeinfoModule", ["Directives", "satellizer", "APP"])
-    .controller("storeinfoController", function ($scope, $stateParams, $http, $state, $auth, $filter, $sce, $ocLazyLoad,
+    .module("storeinfoModule", ["Directives", "satellizer", "APP", "toastr"])
+    .config(function(toastrConfig) {
+        angular.extend(toastrConfig, {
+            positionClass: 'toast-top-center',
+            target: 'body',
+            autoDismiss: false,
+            preventOpenDuplicates: false,
+            preventDuplicates: false,
+            maxOpened: 1
+        });
+    })
+    .controller("storeinfoController", function ($scope, $stateParams, toastr, $http, $state, $auth, $filter, $sce, $ocLazyLoad,
                                                  $rootScope, $compile, StoreQuery, $q, DestionationUrl, SEO) {
         $scope.favorites = {};
         $scope.comment = {};
@@ -60,10 +70,16 @@ angular
             // get the Deeplink destionation URL for it
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
                 var output = data['data']['data']['output_url'],
-                    generated_url = output ? output : item.destination_url;
-                $state.go('main.store-info', {url: store.url, cc: item._id, destionationUrl: generated_url});
-                var tabOpen = window.open("about:blank", 'newtab');
-                tabOpen.location = generated_url;
+                    generated_url = output ? output : item.destination_url,
+                    href_link = $state.href('main.store-info', {url: store.url, cc: item._id, destionationUrl: generated_url});
+                var tabOpen = window.open(href_link, 'newtab');
+                if (tabOpen === null || typeof(tabOpen) === 'undefined') {
+                    toastr.error('Please disable your pop-up blocker and click the link again to copy your Coupon Code', "Disable Pop-Up Blocker!");
+                }
+                else {
+                    tabOpen.focus();
+                    window.location.href = generated_url;
+                }
             }, function (error) {
                 console.log(error);
             });

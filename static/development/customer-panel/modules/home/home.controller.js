@@ -1,5 +1,5 @@
-angular.module('homeModule', ["headerModule", "Directives"])
-    .controller('homeCtrl', function ($scope, $sce, $http, $filter, $ocLazyLoad, $state,
+angular.module('homeModule', ["headerModule", "Directives", "toastr"])
+    .controller('homeCtrl', function ($scope, $sce, $http, $filter, toastr, $ocLazyLoad, $state,
                                       $stateParams, $rootScope, SEO, $compile, Query, DestionationUrl) {
         $scope.params = undefined;
         $scope.deals = [];
@@ -98,12 +98,16 @@ angular.module('homeModule', ["headerModule", "Directives"])
             // get the Deeplink destionation URL for it
             DestionationUrl.destination_url(item.destination_url).then(function (data) {
                 var output = data['data']['data']['output_url'],
-                    generated_url = output ? output : item.destination_url;
-                $state.go('main.home', {cc: item._id, destionationUrl: generated_url});
-                // window.location.href = generated_url;
-                // $('<a href="'+generated_url+'" target="_blank">&nbsp;</a>')[0].click();
-                var tabOpen = window.open("about:blank", 'newtab');
-                tabOpen.location = generated_url;
+                    generated_url = output ? output : item.destination_url,
+                    href_link = $state.go('main.home', {cc: item._id, destionationUrl: generated_url});
+                var tabOpen = window.open(href_link, 'newtab');
+                if (tabOpen === null || typeof(tabOpen) === 'undefined') {
+                    toastr.error('Please disable your pop-up blocker and click the link again to copy your Coupon Code', "Disable Pop-Up Blocker!");
+                }
+                else {
+                    tabOpen.focus();
+                    window.location.href = generated_url;
+                }
             });
         };
 

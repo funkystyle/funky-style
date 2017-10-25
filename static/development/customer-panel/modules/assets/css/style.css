@@ -3,6 +3,18 @@
     height: 310px;
     padding: 10px 0;
 }
+#toast-container.toast-top-center .toast {
+    width: 400px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    font-size: 15px;
+}
 .click-link {
     color: #165ba8 !important;
 }
